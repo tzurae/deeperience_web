@@ -1,0 +1,51 @@
+{
+  "name": "pcard",
+  "version": "0.1.0",
+  "description": "",
+  "scripts": {
+    "clean": "gulp clean",
+    "build": "gulp build",
+    "start": "node build/server/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gocreating/pcard.git"
+  },
+  "keywords": [
+    "pcard"
+  ],
+  "bugs": {
+    "url": "https://github.com/gocreating/pcard/issues"
+  },
+  "homepage": "https://github.com/gocreating/pcard",
+  "devDependencies": {
+    "babel-core": "^6.3.15",
+    "babel-loader": "^6.2.0",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.3.13",
+    "babel-preset-react-hmre": "^1.0.0",
+    "babel-preset-stage-0": "^6.5.0",
+    "eventsource-polyfill": "^0.9.6",
+    "express": "^4.13.3",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-changed": "^1.3.0",
+    "gulp-nodemon": "^2.0.6",
+    "gulp-notify": "^2.2.0",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-util": "^3.0.7",
+    "rimraf": "^2.5.2",
+    "webpack": "^1.12.9",
+    "webpack-dev-middleware": "^1.4.0",
+    "webpack-hot-middleware": "^2.6.0"
+  },
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "cookie-parser": "^1.4.1",
+    "morgan": "^1.7.0",
+    "react": "^0.14.3",
+    "react-dom": "^0.14.3",
+    "serve-favicon": "^2.3.0"
+  }
+}
