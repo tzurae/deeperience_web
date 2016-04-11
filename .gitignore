@@ -12,8 +12,9 @@ sftp-configuration.json
 # Log
 *.log
 
-# Build files
+# Generated files
 /build
+/.deploy
 
 # Others
 .DS_Store

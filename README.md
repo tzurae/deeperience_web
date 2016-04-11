@@ -30,10 +30,18 @@ npm start
 npm test
 ```
 
+## Deploy
+
+Please login heroku first, and run the command
+
+```
+gulp deploy [--app=<heroku_app_name>]
+```
+
 ## Roadmap
 
 - [x] Livereload
-- [ ] Heroku Deploy Script
+- [x] Heroku Deploy Script
 - [x] Travis CI
 - [ ] React-Router
 - [ ] SSR

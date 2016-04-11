@@ -11,6 +11,7 @@ var webpack = require('webpack');
 var sourcemaps = require('gulp-sourcemaps');
 var nodemon = require('gulp-nodemon');
 var notify = require('gulp-notify');
+var async = require('async');
 
 // local modules
 var webpackConfig = {
@@ -138,6 +139,65 @@ gulp.task('serve', function(cb) {
   })
   .on('restart', function() {
   });
+});
+
+gulp.task('deploy', function(cb) {
+  var pkg = require('./package.json');
+  var fs = require('fs');
+  var exec = require('child_process').exec;
+  var appName = gutil.env.app || pkg.name;
+
+  gutil.log('Deploy to heroku app:', appName);
+
+  var execCmds = function(cmds, cwd, cbExec) {
+    async.eachSeries(cmds, function(cmd, cbSeries) {
+      var c = exec(cmd, {
+        cwd: cwd? path.join(process.cwd(), cwd): process.cwd(),
+      }, cbSeries);
+      c.stdout.on('data', function(data) {
+        console.log(data);
+      });
+    }, cbExec);
+  };
+
+  if (!fs.existsSync('./.deploy')) {
+    // first deploy
+    async.series([
+      function(cbSeries) {
+        execCmds([
+          'mkdir .deploy',
+        ], null, cbSeries);
+      },
+      function(cbSeries) {
+        execCmds([
+          'heroku create ' + appName,
+          'cp ../config/Procfile ./',
+          'cp ../package.json ./',
+          'cp -r ../build ./',
+          'git init',
+          'heroku git:remote -a ' + appName,
+          'git add . -A',
+          'git commit -m "Deploy"',
+          'git push heroku master -f',
+        ], './.deploy', cbSeries);
+      },
+    ], cb);
+  } else {
+    // continuously deploy
+    async.series([
+      function(cbSeries) {
+        execCmds([
+          'rm -f ./package.json',
+          'rm -rf ./build',
+          'cp ../package.json ./',
+          'cp -r ../build ./',
+          'git add . -A',
+          'git commit -m "Deploy upgrade"',
+          'git push heroku master',
+        ], './.deploy', cbSeries);
+      },
+    ], cb);
+  }
 });
 
 gulp.task('build:production', function() {
