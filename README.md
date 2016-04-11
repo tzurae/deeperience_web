@@ -2,6 +2,10 @@
 
 This is a boilerplate for scaffolding MERN stack projects with livereload feature supported.
 
+## Demo
+
+<https://express-react-hmr-boilerplate.herokuapp.com/>
+
 ## Installation
 
 ```
