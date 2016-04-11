@@ -12,5 +12,6 @@
   },
   "requireCapitalizedComments": null,
   "requireSemicolons": true,
-  "validateQuoteMarks": null
+  "validateQuoteMarks": null,
+  "validateLineBreaks": null
 }
