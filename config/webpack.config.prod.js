@@ -1,12 +1,10 @@
 var path = require('path');
 var webpack = require('webpack');
-var babelConfig = require('./babel.config.dev');
+var babelConfig = require('./babel.config.prod');
 
 module.exports = {
-  devtool: 'cheap-module-eval-source-map',
+  // devtool: 'source-map',
   entry: [
-    'eventsource-polyfill',
-    'webpack-hot-middleware/client',
     path.join(__dirname, '../src/flux/index'),
   ],
   output: {
@@ -19,8 +17,17 @@ module.exports = {
     mongoose: 'mongoose',
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin(),
+    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify('production'),
+      },
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      compressor: {
+        warnings: false,
+      },
+    }),
   ],
   module: {
     loaders: [{
