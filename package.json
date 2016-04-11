@@ -1,23 +1,29 @@
 {
-  "name": "pcard",
+  "name": "express-react-hmr-boilerplate",
   "version": "0.1.0",
   "description": "",
   "scripts": {
+    "test": "npm run jscs",
+    "jscs": "jscs ./src --config=./.jscsrc --verbose",
+    "jscs-auto-fix": "jscs ./src --config=./.jscsrc --verbose --fix",
     "clean": "gulp clean",
     "build": "gulp build",
     "start": "node build/server/server.js"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gocreating/pcard.git"
+    "url": "https://github.com/gocreating/express-react-hmr-boilerplate.git"
   },
   "keywords": [
-    "pcard"
+    "express",
+    "mongo",
+    "react",
+    "node"
   ],
   "bugs": {
-    "url": "https://github.com/gocreating/pcard/issues"
+    "url": "https://github.com/gocreating/express-react-hmr-boilerplate/issues"
   },
-  "homepage": "https://github.com/gocreating/pcard",
+  "homepage": "https://github.com/gocreating/express-react-hmr-boilerplate",
   "devDependencies": {
     "babel-core": "^6.3.15",
     "babel-loader": "^6.2.0",
