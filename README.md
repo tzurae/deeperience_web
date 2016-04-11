@@ -34,7 +34,7 @@ npm test
 
 - [x] Livereload
 - [ ] Heroku Deploy Script
-- [ ] Travis CI
+- [x] Travis CI
 - [ ] React-Router
 - [ ] SSR
 - [ ] Isomorphic
