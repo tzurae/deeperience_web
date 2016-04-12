@@ -34,7 +34,7 @@ npm start
 npm test
 ```
 
-## Deploy
+## Deploy on heroku
 
 Please login heroku first, and run the command
 
