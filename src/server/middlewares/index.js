@@ -6,6 +6,7 @@ import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 // import helperInjector from './helperInjector';
 // import tokenParser from './tokenParser';
+import passport from './passport';
 
 (function addCustomMorganToken() {
   morgan.token('colorStatus', (req, res) => {
@@ -82,6 +83,9 @@ export default ({ app }) => {
 
   // inject helpers
   // app.use(helperInjector());
+
+  // setup passport
+  passport({ app });
 
   // parse application/x-www-form-urlencoded
   app.use(bodyParser.urlencoded({ extended: false }));

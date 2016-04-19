@@ -21,6 +21,10 @@ This is where credentials are stored, so you have to provide your own. Here is t
 ```js
 export default {
   mongoDbUri: 'mongodb://<user>:<password>@<domain>:<port>/<db>',
+  jwt: {
+    secret: '4df5p5xe23',
+    expiresIn: 60 * 60 * 24 * 3, // in seconds
+  },
 };
 ```
 
