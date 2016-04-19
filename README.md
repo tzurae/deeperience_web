@@ -14,6 +14,16 @@ npm install -g jscs
 npm install
 ```
 
+## Add `config/credentials.js`
+
+This is where credentials are stored, so you have to provide your own. Here is the example format:
+
+```js
+export default {
+  mongoDbUri: 'mongodb://<user>:<password>@<domain>:<port>/<db>',
+};
+```
+
 ## Build & Run
 
 For development:
