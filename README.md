@@ -19,7 +19,6 @@ npm install
 For development:
 ```
 gulp
-gulp serve
 ```
 
 For production:
