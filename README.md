@@ -39,8 +39,18 @@ npm test
 Please login heroku first, and run the command
 
 ```
-gulp deploy [--app=<heroku_app_name>]
+gulp deploy [--app=<heroku_app_name>] [--create]
 ```
+
+### Options
+
+- `-a`, `--app`
+  
+  Specify new or existing app name of heroku. Default will be package name inside `package.json`.
+
+- `-c`, `--create`
+  
+  If you want to create new app on heroku, please use this switch.
 
 ## Roadmap
 
