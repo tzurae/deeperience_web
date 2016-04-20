@@ -25,6 +25,8 @@ let User = new mongoose.Schema({
     required: true,
     set: encodePassword,
   },
+}, {
+  versionKey: false,
 });
 
 User.methods.auth = function(password, cb) {
@@ -42,6 +44,12 @@ User.methods.toJwtToken = function(cb) {
     expiresIn: credentials.jwt.expiresIn,
   });
   return token;
+};
+
+User.methods.toJSON = function() {
+  let obj = this.toObject();
+  delete obj.password;
+  return obj;
 };
 
 export default mongoose.model('User', User);
