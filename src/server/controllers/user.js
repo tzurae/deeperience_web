@@ -23,21 +23,22 @@ export default {
     }, handleDbError(res)((user) => {
       if (!user) {
         res.json({
-          success: false,
-          message: 'Authentication failed. User not found.',
+          isError: false,
+          isAuth: false,
         });
       } else {
         user.auth(req.body.password, handleDbError(res)((isAuth) => {
           if (isAuth) {
             const token = user.toJwtToken();
             res.json({
-              success: true,
+              isError: false,
+              isAuth: true,
               token: 'JWT ' + token,
             });
           } else {
             res.json({
-              success: false,
-              message: 'Authentication failed. Passwords did not match.',
+              isError: false,
+              isAuth: false,
             });
           }
         }));
