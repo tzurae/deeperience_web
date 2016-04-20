@@ -22,6 +22,5 @@ passport.use(new JwtStrategy({
   });
 }));
 
-export default ({ app }) => {
-  app.use(passport.initialize());
-};
+const passportMiddleware = passport.initialize();
+export default passportMiddleware;
