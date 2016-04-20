@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 import jwt from 'jsonwebtoken';
 import credentials from '../../../config/credentials';
 
-const encodePassword = (rawPassword) => {
+const hashPassword = (rawPassword = '') => {
   let recursiveLevel = 5;
   while (recursiveLevel) {
     rawPassword = crypto
@@ -23,14 +23,14 @@ let User = new mongoose.Schema({
   password: {
     type: String,
     required: true,
-    set: encodePassword,
+    set: hashPassword,
   },
 }, {
   versionKey: false,
 });
 
 User.methods.auth = function(password, cb) {
-  const isAuthenticated = (this.password === encodePassword(password));
+  const isAuthenticated = (this.password === hashPassword(password));
   cb(null, isAuthenticated);
 };
 
