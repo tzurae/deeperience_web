@@ -1,7 +1,7 @@
 import User from '../models/User';
 
 export default {
-  create: (req, res) => {
+  create(req, res) {
     const user = User({
       name: req.body.name,
       email: req.body.email,
@@ -14,7 +14,8 @@ export default {
       });
     });
   },
-  login: (req, res) => {
+
+  login(req, res) {
     User.findOne({
       email: req.body.email,
     }, (err, user) => {
@@ -44,13 +45,15 @@ export default {
       }
     });
   },
-  logout: (req, res) => {
+
+  logout(req, res) {
     req.logout();
     res.json({
       isError: false,
     });
   },
-  show: (req, res) => {
+
+  show(req, res) {
     res.json(req.user);
   },
 };
