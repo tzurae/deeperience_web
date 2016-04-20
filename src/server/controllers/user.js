@@ -1,3 +1,4 @@
+import { handleDbError } from '../decorators/handleError';
 import User from '../models/User';
 
 export default {
@@ -7,28 +8,26 @@ export default {
       email: req.body.email,
       password: req.body.password,
     });
-    user.save((err, user) => {
+
+    user.save(handleDbError(res)((user) => {
       res.json({
         user: user,
         isError: false,
       });
-    });
+    }));
   },
 
   login(req, res) {
     User.findOne({
       email: req.body.email,
-    }, (err, user) => {
-      if (err) {
-        throw err;
-      }
+    }, handleDbError(res)((user) => {
       if (!user) {
         res.json({
           success: false,
           message: 'Authentication failed. User not found.',
         });
       } else {
-        user.auth(req.body.password, (err, isAuth) => {
+        user.auth(req.body.password, handleDbError(res)((isAuth) => {
           if (isAuth) {
             const token = user.toJwtToken();
             res.json({
@@ -41,9 +40,9 @@ export default {
               message: 'Authentication failed. Passwords did not match.',
             });
           }
-        });
+        }));
       }
-    });
+    }));
   },
 
   logout(req, res) {
