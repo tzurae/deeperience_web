@@ -19,7 +19,7 @@ npm install
 This is where credentials are stored, so you have to provide your own. Here is the example format:
 
 ```js
-export default {
+module.exports = {
   mongoDbUri: 'mongodb://<user>:<password>@<domain>:<port>/<db>',
   jwt: {
     secret: '4df5p5xe23',

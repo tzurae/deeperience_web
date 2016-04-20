@@ -195,7 +195,10 @@ gulp.task('deploy', function(cb) {
       execCmds([
         'rm -f ./package.json',
         'rm -rf ./build',
+        'rm -rf ./config',
+        'mkdir config',
         'cp ../config/Procfile ./',
+        'cp ../config/credentials.js ./config/',
         'cp ../package.json ./',
         'cp -r ../build ./',
       ], './.deploy', cbSeries);
