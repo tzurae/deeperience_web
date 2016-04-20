@@ -4,8 +4,6 @@ import favicon from 'serve-favicon';
 import morgan from 'morgan';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
-// import helperInjector from './helperInjector';
-// import tokenParser from './tokenParser';
 import passport from './passport';
 
 (function addCustomMorganToken() {
@@ -81,9 +79,6 @@ export default ({ app }) => {
   app.use(express.static(
     path.join(__dirname, '../../public')));
 
-  // inject helpers
-  // app.use(helperInjector());
-
   // setup passport
   passport({ app });
 
@@ -95,7 +90,4 @@ export default ({ app }) => {
 
   // cookie parser
   app.use(cookieParser());
-
-  // token parser
-  // app.use(tokenParser());
 };
