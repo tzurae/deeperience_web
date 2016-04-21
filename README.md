@@ -1,5 +1,8 @@
 # Express-React-HMR-Boilerplate
 
+[![Build Status](https://travis-ci.org/gocreating/express-react-hmr-boilerplate.svg?branch=master)](https://travis-ci.org/gocreating/express-react-hmr-boilerplate)
+[![Dependency Status](https://david-dm.org/gocreating/express-react-hmr-boilerplate.svg)](https://david-dm.org/gocreating/express-react-hmr-boilerplate)
+
 This is a boilerplate for scaffolding MERN stack projects with livereload feature supported.
 
 ## Demo
