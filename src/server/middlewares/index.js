@@ -1,3 +1,4 @@
+import env from '../utils/env';
 import path from 'path';
 import express from 'express';
 import favicon from 'serve-favicon';
@@ -8,7 +9,7 @@ import passport from './passport';
 
 export default ({ app }) => {
   // inject livereload feature
-  if (app.get('env') === 'development') {
+  if (env === 'development') {
     console.log('using livereload');
     const webpack = require('webpack');
     const config = require('../../../config/webpack.config.dev');

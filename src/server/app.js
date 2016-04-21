@@ -1,5 +1,4 @@
-process.env.NODE_ENV = process.env.NODE_ENV || 'production';
-
+import env from './utils/env';
 import express from 'express';
 import mongoose from 'mongoose';
 import credentials from '../../config/credentials';
@@ -8,10 +7,10 @@ import routes from './routes';
 
 const appPromise = new Promise((resolve, reject) => {
   const app = express();
-  app.set('env', process.env.NODE_ENV);
+  app.set('env', env);
   // connect to mongolab
   mongoose.connect(
-    credentials.mongoDbUri[app.get('env')],
+    credentials.mongoDbUri[env],
     (err) => {
       if (err) {
         throw err;

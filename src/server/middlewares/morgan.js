@@ -1,3 +1,4 @@
+import env from '../utils/env';
 import morgan from 'morgan';
 import passMiddleware from './pass';
 
@@ -26,7 +27,7 @@ morgan.token('colorStatus', (req, res) => {
 });
 
 let morganMiddleware = null;
-if (process.env.NODE_ENV === 'development') {
+if (env === 'development') {
   morganMiddleware = morgan(
     '\x1b[1;30m' + '[:date[iso]] ' +
     '\x1b[0m'    + ':remote-addr\t' +
@@ -37,9 +38,9 @@ if (process.env.NODE_ENV === 'development') {
     '\x1b[0;36m' + ':response-time ms' +
     '\x1b[0m'
   );
-} else if (process.env.NODE_ENV === 'test') {
+} else if (env === 'test') {
   morganMiddleware = passMiddleware;
-} else if (process.env.NODE_ENV === 'production') {
+} else if (env === 'production') {
   morganMiddleware = morgan(
     '[:date[iso]] ' +
     ':remote-addr\t' +
