@@ -20,7 +20,11 @@ This is where credentials are stored, so you have to provide your own. Here is t
 
 ```js
 module.exports = {
-  mongoDbUri: 'mongodb://<user>:<password>@<domain>:<port>/<db>',
+  mongoDbUri: {
+    development: 'mongodb://<user>:<password>@<domain>:<port>/<db_development>',
+    test: 'mongodb://<user>:<password>@<domain>:<port>/<db_test>',
+    production: 'mongodb://<user>:<password>@<domain>:<port>/<db_production>',
+  },
   jwt: {
     secret: '4df5p5xe23',
     expiresIn: 60 * 60 * 24 * 3, // in seconds
