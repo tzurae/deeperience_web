@@ -16,7 +16,6 @@ var fakeUser = {
 var resUser;
 
 before(function(done) {
-  this.timeout(10000);
   appPromise.then((app) => {
     server = app.listen(PORT, done);
   });
@@ -152,7 +151,6 @@ describe('#APIs', function() {
 });
 
 after(function(done) {
-  this.timeout(10000);
   var removeFakeUser = new Promise((resolve, reject) => {
     if (resUser._id) {
       User.remove({
