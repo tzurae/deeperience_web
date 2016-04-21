@@ -78,6 +78,6 @@ gulp deploy [--app=<heroku_app_name>] [--create]
 - [x] Livereload
 - [x] Heroku Deploy Script
 - [x] Travis CI
-- [ ] React-Router
+- [x] React-Router
 - [ ] SSR
 - [ ] Isomorphic
