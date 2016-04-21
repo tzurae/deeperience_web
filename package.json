@@ -3,11 +3,13 @@
   "version": "0.1.0",
   "description": "",
   "scripts": {
-    "test": "npm run jscs",
+    "pretest": "gulp build:production",
+    "test": "npm run jscs && npm run mocha",
     "jscs": "jscs ./src --config=./.jscsrc --verbose",
     "jscs-auto-fix": "jscs ./src --config=./.jscsrc --verbose --fix",
     "clean": "gulp clean",
     "build": "gulp build",
+    "mocha": "mocha specs/**/*.js",
     "start": "node build/server/server.js"
   },
   "repository": {
@@ -35,6 +37,7 @@
     "babel-preset-react-hmre": "^1.0.0",
     "babel-preset-stage-0": "^6.5.0",
     "babel-register": "^6.7.2",
+    "chai": "^3.5.0",
     "del": "^2.2.0",
     "eventsource-polyfill": "^0.9.6",
     "gulp": "^3.9.1",
@@ -44,6 +47,7 @@
     "gulp-sourcemaps": "^1.6.0",
     "gulp-util": "^3.0.7",
     "rimraf": "^2.5.2",
+    "superagent": "^1.8.3",
     "webpack": "^1.12.9",
     "webpack-dev-middleware": "^1.4.0",
     "webpack-hot-middleware": "^2.6.0"
