@@ -1,10 +1,12 @@
 {
   "preset": "node-style-guide",
-  "esnext": true,
   "fileExtensions": [".js"],
   "excludeFiles": [
+    "src/**"
+  ],
+  "excludeFiles": [
     "node_modules/**",
-    "dist/**"
+    "build/**"
   ],
   "maximumLineLength": {
     "value": 80,
