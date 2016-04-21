@@ -54,6 +54,9 @@ export default {
   },
 
   show(req, res) {
-    res.json(req.user);
+    res.json({
+      isError: false,
+      user: req.user,
+    });
   },
 };
