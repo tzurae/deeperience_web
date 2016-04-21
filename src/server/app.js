@@ -1,15 +1,23 @@
 process.env.NODE_ENV = process.env.NODE_ENV || 'production';
 
 import express from 'express';
+import mongoose from 'mongoose';
+import credentials from '../../config/credentials';
 import middlewares from './middlewares';
 import routes from './routes';
 
-const app = express();
-app.set('env', process.env.NODE_ENV);
-if (app.get('env') === 'development') {
-  require('source-map-support').install();
-}
-middlewares({ app });
-routes({ app });
+const appPromise = new Promise((resolve, reject) => {
+  const app = express();
+  app.set('env', process.env.NODE_ENV);
+  // connect to mongolab
+  mongoose.connect(credentials.mongoDbUri, (err) => {
+    if (err) {
+      throw err;
+    }
+    middlewares({ app });
+    routes({ app });
+    resolve(app);
+  });
+});
 
-export default app;
+export default appPromise;
