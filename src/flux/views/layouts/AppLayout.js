@@ -7,8 +7,8 @@ export default class AppLayout extends React.Component {
   static defaultProps = {
     title: 'Express-React-HMR-Boilerplate',
     scripts: [
-      'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js',
       'https://code.jquery.com/jquery-2.2.3.min.js',
+      'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js',
     ],
     styles: [
       'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css',
@@ -85,7 +85,6 @@ export default class AppLayout extends React.Component {
 
           <div className="collapse navbar-collapse" id="navbar">
             <ul className="nav navbar-nav">
-              <NavLink to="/">Home</NavLink>
               <NavLink to="/does/not/exist">404</NavLink>
             </ul>
 

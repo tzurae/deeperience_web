@@ -19,7 +19,10 @@ let User = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
   name: String,
-  email: String,
+  email: {
+    type: String,
+    required: true,
+  },
   password: {
     type: String,
     required: true,
