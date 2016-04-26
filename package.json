@@ -68,6 +68,7 @@
     "react-dom": "^0.14.3",
     "react-helmet": "^3.0.2",
     "react-router": "^2.3.0",
+    "react-router-active-component": "^4.0.0-rc.0",
     "serve-favicon": "^2.3.0",
     "whatwg-fetch": "^0.11.0"
   }
