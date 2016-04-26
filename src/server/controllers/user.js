@@ -34,6 +34,7 @@ export default {
               isError: false,
               isAuth: true,
               token: 'JWT ' + token,
+              user: user,
             });
           } else {
             res.json({

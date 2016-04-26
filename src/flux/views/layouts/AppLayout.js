@@ -98,7 +98,7 @@ export default class AppLayout extends React.Component {
                   aria-haspopup="true"
                   aria-expanded="false">
                   { !isAuth && 'User'}
-                  { isAuth && (user.name !== ''? user.name: user.email.value)}
+                  { isAuth && (user.name || user.email)}
                   <span className="caret"></span>
                 </a>
                 { !isAuth &&
