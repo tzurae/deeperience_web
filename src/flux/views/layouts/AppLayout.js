@@ -7,7 +7,6 @@ export default class AppLayout extends React.Component {
   static defaultProps = {
     title: 'Express-React-HMR-Boilerplate',
     scripts: [
-      'https://code.jquery.com/jquery-2.2.3.min.js',
       'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js',
     ],
     styles: [
