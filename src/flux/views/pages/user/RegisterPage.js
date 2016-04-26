@@ -1,4 +1,5 @@
 import React from 'react';
+import PageHeader from '../../components/PageHeader';
 import Input from '../../components/Input';
 import userAPI from '../../../api/user';
 
@@ -32,9 +33,7 @@ export default class RegisterPage extends React.Component {
 
   render() {
     return <div className="container">
-      <div className="page-header">
-        <h1>Register</h1>
-      </div>
+      <PageHeader title="Register" />
 
       <form
         className="form-horizontal"
