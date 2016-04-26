@@ -107,6 +107,7 @@ export default class AppLayout extends React.Component {
                   </ul>}
                 { isAuth &&
                   <ul className="dropdown-menu">
+                    <NavLink to="/user/me">My Profile</NavLink>
                     <NavLink to="/user/logout">Logout</NavLink>
                   </ul>}
               </li>
