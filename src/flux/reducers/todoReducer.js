@@ -5,7 +5,7 @@ export default (state = [], action) => {
     case actionTypes.ADD_TODO: {
       return [
         ...state,
-        action.text,
+        action.todo,
       ];
     }
     default: {

@@ -21,7 +21,7 @@ export default class ListPage extends Component {
           console.log(json.errors);
           alert('Create todo fail');
         } else {
-          dispatch(addTodo(json.todo.text));
+          dispatch(addTodo(json.todo));
           this.refs.todotext.value = '';
         }
       });
@@ -34,7 +34,7 @@ export default class ListPage extends Component {
       <button onClick={this._handleBtnClick}>Add Todo</button>
       <ul>
         {this.props.todos.map((todo, index) =>
-          <li key={index}>{todo}</li>)}
+          <li key={index}>{todo.text}</li>)}
       </ul>
     </div>;
   }
