@@ -4,8 +4,7 @@ import Todo from '../models/Todo';
 export default {
   create(req, res) {
     const todo = Todo({
-      title: req.body.title,
-      detail: req.body.detail,
+      text: req.body.text,
     });
 
     todo.save(handleDbError(res)((todo) => {
