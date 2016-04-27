@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PageHeader from '../../components/PageHeader';
+import { addTodo } from '../../../actions/todoActions';
+import todoAPI from '../../../api/todo';
 
 @connect(state => state)
 export default class ListPage extends Component {
@@ -10,6 +12,19 @@ export default class ListPage extends Component {
   }
 
   _handleBtnClick() {
+    const { dispatch } = this.props;
+    const text = this.refs.todotext.value;
+    todoAPI
+      .create({ text })
+      .then((json) => {
+        if (json.isError) {
+          console.log(json.errors);
+          alert('Create todo fail');
+        } else {
+          dispatch(addTodo(json.todo.text));
+          this.refs.todotext.value = '';
+        }
+      });
   }
 
   render() {
