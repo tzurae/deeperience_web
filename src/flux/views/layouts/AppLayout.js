@@ -84,6 +84,7 @@ export default class AppLayout extends React.Component {
 
           <div className="collapse navbar-collapse" id="navbar">
             <ul className="nav navbar-nav">
+              <NavLink to="/todo">Todo</NavLink>
               <NavLink to="/does/not/exist">404</NavLink>
             </ul>
 
