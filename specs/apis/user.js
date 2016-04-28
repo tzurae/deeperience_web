@@ -79,18 +79,6 @@ describe('#user', function() {
             done();
           });
       });
-      it('should reject invalid user', function(done) {
-        request
-          .post(constants.BASE + '/api/user/login')
-          .send({})
-          .end(function(err, res) {
-            expect(res).to.not.be.undefined;
-            expect(res.status).to.equal(200);
-            expect(res.body.isError).to.be.false;
-            expect(res.body.isAuth).to.be.false;
-            done();
-          });
-      });
     });
 
     // GET /api/user/me
