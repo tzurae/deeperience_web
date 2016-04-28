@@ -18,7 +18,8 @@ var webpackConfig = {
   production: require('./config/webpack.config.prod'),
 };
 var babelConfig = {
-  development: require('./config/babel.config.dev'),
+  developmentClient: require('./config/babel.config.dev.client'),
+  developmentServer: require('./config/babel.config.dev.server'),
   production: require('./config/babel.config.prod'),
 };
 
@@ -79,7 +80,7 @@ gulp.task('build:nodejs', function() {
   return _babelStream(
     paths.scripts,
     path.join(paths.targetDir, 'server'),
-    babelConfig.development
+    babelConfig.production
   );
 });
 
@@ -88,7 +89,7 @@ gulp.task('build:reactjs', ['build:nodejs'], function() {
   return _babelStream(
     paths.reacts,
     path.join(paths.targetDir, 'flux'),
-    babelConfig.development
+    babelConfig.production
   );
 });
 
