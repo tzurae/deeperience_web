@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PageHeader from '../../components/PageHeader';
 import { addTodo, setTodo } from '../../../actions/todoActions';
+import TodoItem from '../../components/TodoItem';
 import todoAPI from '../../../api/todo';
 
 @connect(state => state)
@@ -41,6 +42,9 @@ export default class ListPage extends Component {
       });
   }
 
+  _handleRemoveClick(id) {
+  }
+
   render() {
     return <div className="container">
       <PageHeader title="Todo List" />
@@ -48,7 +52,10 @@ export default class ListPage extends Component {
       <button onClick={this._handleBtnClick}>Add Todo</button>
       <ul>
         {this.props.todos.map((todo, index) =>
-          <li key={index}>{todo.text}</li>)}
+          <TodoItem
+            key={index}
+            onRemoveClick={this._handleRemoveClick.bind(this, todo._id)}
+            text={todo.text} />)}
       </ul>
     </div>;
   }
