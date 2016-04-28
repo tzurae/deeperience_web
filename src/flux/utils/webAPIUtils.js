@@ -26,6 +26,15 @@ export default {
       body: JSON.stringify(param),
     }).then((res) => res.json());
   },
+  delete: (path) => {
+    return fetch(path, {
+      method: 'DELETE',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    }).then((res) => res.json());
+  },
   getAuth: (path) => {
     const token = getToken();
     if (!token) {
