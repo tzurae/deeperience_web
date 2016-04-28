@@ -10,5 +10,6 @@ export default ({ app }) => {
   app.get('/api/user/me', authRequired, userController.show);
   app.post('/api/todo', todoController.create);
   app.get('/api/todo', todoController.list);
+  app.delete('/api/todo/:id', todoController.remove);
   app.get('/*', reactController.render);
 };

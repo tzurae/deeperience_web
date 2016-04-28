@@ -23,4 +23,12 @@ export default {
       });
     }));
   },
+
+  remove(req, res) {
+    Todo.remove({_id: req.params.id}, handleDbError(res)(() => {
+      res.json({
+        isError: false,
+      });
+    }));
+  },
 };
