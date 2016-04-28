@@ -13,6 +13,11 @@ export default (state = [], action) => {
         action.todo,
       ];
     }
+    case actionTypes.REMOVE_TODO: {
+      return [
+        ...state.filter(todo => todo._id !== action.id),
+      ];
+    }
     default: {
       return state;
     }

@@ -13,3 +13,10 @@ export const addTodo = (todo) => {
     todo,
   };
 };
+
+export const removeTodo = (id) => {
+  return {
+    type: actionTypes.REMOVE_TODO,
+    id,
+  };
+};

@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PageHeader from '../../components/PageHeader';
-import { addTodo, setTodo } from '../../../actions/todoActions';
 import TodoItem from '../../components/TodoItem';
+import {
+  setTodo,
+  addTodo,
+  removeTodo,
+} from '../../../actions/todoActions';
 import todoAPI from '../../../api/todo';
 
 @connect(state => state)
@@ -43,6 +47,17 @@ export default class ListPage extends Component {
   }
 
   _handleRemoveClick(id) {
+    const { dispatch } = this.props;
+    todoAPI
+      .remove(id)
+      .then((json) => {
+        if (json.isError) {
+          console.log(json.errors);
+          alert('Remove todo fail');
+        } else {
+          dispatch(removeTodo(id));
+        }
+      });
   }
 
   render() {
