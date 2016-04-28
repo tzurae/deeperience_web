@@ -9,7 +9,7 @@
     "jscs-auto-fix": "jscs ./src --config=./.jscsrc --verbose --fix",
     "clean": "gulp clean",
     "build": "gulp build",
-    "mocha": "mocha specs/**/*.js --timeout 10000",
+    "mocha": "mocha specs/index.js --timeout 10000",
     "start": "node build/server/server.js"
   },
   "repository": {
