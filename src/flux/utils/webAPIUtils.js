@@ -1,4 +1,5 @@
-import 'whatwg-fetch';
+require('es6-promise').polyfill();
+require('isomorphic-fetch');
 import getToken from './getToken';
 
 const getUnAuthPromise = () => new Promise((resolve, reject) => {
