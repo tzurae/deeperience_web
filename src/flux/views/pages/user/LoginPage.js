@@ -20,25 +20,24 @@ export default class LoginPage extends React.Component {
         email: this.refs.email.getValue(),
         password: this.refs.password.getValue(),
       })
+      .catch((err) => {
+        alert('Login user fail');
+        throw err;
+      })
       .then((json) => {
-        if (json.isError) {
-          console.log(json.errors);
-          alert('Login fail');
-        } else {
-          if (json.isAuth) {
-            localStorage.setItem('token', json.token);
-            localStorage.setItem('user', JSON.stringify(json.user));
+        if (json.isAuth) {
+          localStorage.setItem('token', json.token);
+          localStorage.setItem('user', JSON.stringify(json.user));
 
-            // redirect to the origin path before logging in
-            const { location } = this.props;
-            if (location.state && location.state.nextPathname) {
-              this.context.router.push(location.state.nextPathname);
-            } else {
-              this.context.router.push('/');
-            }
+          // redirect to the origin path before logging in
+          const { location } = this.props;
+          if (location.state && location.state.nextPathname) {
+            this.context.router.push(location.state.nextPathname);
           } else {
-            alert('wrong email or password');
+            this.context.router.push('/');
           }
+        } else {
+          alert('wrong email or password');
         }
       });
   }

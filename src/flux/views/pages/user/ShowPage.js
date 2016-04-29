@@ -13,15 +13,14 @@ export default class ShowPage extends Component {
   componentDidMount() {
     userAPI
       .show()
+      .catch((err) => {
+        alert('Show user fail');
+        throw err;
+      })
       .then((json) => {
-        if (json.isError) {
-          console.log(json.errors);
-          alert('Show fail');
-        } else {
-          this.setState({
-            user: json.user,
-          });
-        }
+        this.setState({
+          user: json.user,
+        });
       });
   }
 

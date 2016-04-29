@@ -7,9 +7,10 @@ const authRequired = (req, res, next) => {
     }
     if (!user) {
       // custom 401 message
-      return res.status(401).json({
+      return res.json({
         isError: true,
-        info,
+        status: 401,
+        errors: info.toString(),
       });
     }
     req.user = user;

@@ -20,13 +20,12 @@ export default class ListPage extends Component {
     const { dispatch } = this.props;
     todoAPI
       .list()
+      .catch((err) => {
+        alert('List todos fail');
+        throw err;
+      })
       .then((json) => {
-        if (json.isError) {
-          console.log(json.errors);
-          alert('List todos fail');
-        } else {
-          dispatch(setTodo(json.todos));
-        }
+        dispatch(setTodo(json.todos));
       });
   }
 
@@ -35,14 +34,13 @@ export default class ListPage extends Component {
     const text = this.refs.todotext.value;
     todoAPI
       .create({ text })
+      .catch((err) => {
+        alert('Create todo fail');
+        throw err;
+      })
       .then((json) => {
-        if (json.isError) {
-          console.log(json.errors);
-          alert('Create todo fail');
-        } else {
-          dispatch(addTodo(json.todo));
-          this.refs.todotext.value = '';
-        }
+        dispatch(addTodo(json.todo));
+        this.refs.todotext.value = '';
       });
   }
 
@@ -50,13 +48,12 @@ export default class ListPage extends Component {
     const { dispatch } = this.props;
     todoAPI
       .remove(id)
+      .catch((err) => {
+        alert('Remove todo fail');
+        throw err;
+      })
       .then((json) => {
-        if (json.isError) {
-          console.log(json.errors);
-          alert('Remove todo fail');
-        } else {
-          dispatch(removeTodo(id));
-        }
+        dispatch(removeTodo(id));
       });
   }
 

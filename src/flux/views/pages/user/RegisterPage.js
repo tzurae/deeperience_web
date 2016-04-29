@@ -21,13 +21,12 @@ export default class RegisterPage extends React.Component {
         email: this.refs.email.getValue(),
         password: this.refs.password.getValue(),
       })
+      .catch((err) => {
+        alert('Register user fail');
+        throw err;
+      })
       .then((json) => {
-        if (json.isError) {
-          console.log(json.errors);
-          alert('Register fail');
-        } else {
-          this.context.router.push('/');
-        }
+        this.context.router.push('/');
       });
   }
 

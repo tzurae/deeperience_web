@@ -9,15 +9,14 @@ export default class LogoutPage extends React.Component {
   componentWillMount() {
     userAPI
       .logout()
+      .catch((err) => {
+        alert('Logout user fail');
+        throw err;
+      })
       .then((json) => {
-        if (json.isError) {
-          console.log(json.errors);
-          alert('Logout fail');
-        } else {
-          localStorage.removeItem('token');
-          localStorage.removeItem('user');
-          this.context.router.push('/');
-        }
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        this.context.router.push('/');
       });
   }
 

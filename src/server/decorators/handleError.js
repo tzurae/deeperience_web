@@ -7,10 +7,10 @@ const handleError = (res, errorType) => (fn) => (err, ...result) => {
   if (err) {
     let errorResponse = {
       isError: true,
+      status: 400,
       errors: [],
     };
     if (errorType === ErrorTypes.DB) {
-      res.status(400);
       if (err.errors !== undefined) {
         errorResponse.errors.push({
           name: err.name,

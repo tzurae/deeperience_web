@@ -1,9 +1,10 @@
 import appPromise from './app';
+import getPort from './utils/getPort';
 
 appPromise
   .then((app) => {
     // launch server
-    const port = process.env.PORT || process.argv[2] || 3000;
+    const port = getPort();
     app.listen(port, (err) => {
       if (err) {
         throw err;
