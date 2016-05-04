@@ -6,6 +6,7 @@ import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import morgan from './morgan';
 import passport from './passport';
+import mountHelper from './mountHelper';
 
 export default ({ app }) => {
   // inject livereload feature
@@ -44,4 +45,7 @@ export default ({ app }) => {
 
   // cookie parser
   app.use(cookieParser());
+
+  // mount helper functions
+  app.use(mountHelper);
 };

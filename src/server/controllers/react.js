@@ -39,9 +39,8 @@ export default {
       if (renderProps == null) {
         return res.status(404).send('Not found');
       }
-
-      const initialState = {};
-      const store = createStore(rootReducer);
+      const initialState = res.SSRState;
+      const store = createStore(rootReducer, initialState);
       const markup = renderToString(
         <Provider store={store}>
           <RouterContext {...renderProps} />
