@@ -79,5 +79,6 @@ gulp deploy [--app=<heroku_app_name>] [--create]
 - [x] Heroku Deploy Script
 - [x] Travis CI
 - [x] React-Router
-- [ ] SSR
+- [x] SSR
 - [ ] Isomorphic
+- [ ] Refactor File Structure

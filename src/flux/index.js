@@ -6,7 +6,8 @@ import { Router, browserHistory } from 'react-router';
 import rootReducer from './reducers';
 import routes from './routes';
 
-let store = createStore(rootReducer);
+const initialState = window.__INITIAL_STATE__;
+let store = createStore(rootReducer, initialState);
 
 render(
   <Provider store={store}>
