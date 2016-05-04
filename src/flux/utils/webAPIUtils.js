@@ -1,7 +1,7 @@
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
 import getPort from '../../server/utils/getPort';
-import getToken from './getToken';
+import reactCookie from 'react-cookie';
 
 const BASE = process.env.BROWSER? '': `http://localhost:${getPort()}`;
 
@@ -25,6 +25,7 @@ export default {
   get: (path) => {
     return wrapErrorHandler(fetch(BASE + path, {
       method: 'GET',
+      credentials: 'same-origin',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
@@ -34,6 +35,7 @@ export default {
   post: (path, param = {}) => {
     return wrapErrorHandler(fetch(BASE + path, {
       method: 'POST',
+      credentials: 'same-origin',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
@@ -44,6 +46,7 @@ export default {
   delete: (path) => {
     return wrapErrorHandler(fetch(BASE + path, {
       method: 'DELETE',
+      credentials: 'same-origin',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
@@ -51,30 +54,30 @@ export default {
     }).then((res) => res.json()));
   },
   getAuth: (path) => {
-    const token = getToken();
+    const token = reactCookie.load('token');
     if (!token) {
       return getUnAuthPromise();
     }
     return wrapErrorHandler(fetch(BASE + path, {
       method: 'GET',
+      credentials: 'same-origin',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
-        Authorization: token,
       },
     }).then((res) => res.json()));
   },
   postAuth: (path, param = {}) => {
-    const token = getToken();
+    const token = reactCookie.load('token');
     if (!token) {
       return getUnAuthPromise();
     }
     return wrapErrorHandler(fetch(path, {
       method: 'POST',
+      credentials: 'same-origin',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
-        Authorization: token,
       },
       body: JSON.stringify(param),
     }).then((res) => res.json()));

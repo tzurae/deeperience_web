@@ -1,8 +1,8 @@
-import getToken from './getToken';
+import reactCookie from 'react-cookie';
 
 // refer to https://github.com/reactjs/react-router/blob/master/examples%2Fauth-flow%2Fapp.js
 export default (nextState, replace) => {
-  const token = getToken();
+  const token = reactCookie.load('token');
   if (token === null) {
     replace({
       pathname: '/user/login',

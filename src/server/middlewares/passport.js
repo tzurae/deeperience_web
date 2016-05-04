@@ -6,8 +6,16 @@ import {
 import credentials from '../../../config/credentials';
 import User from '../models/User';
 
+const cookieExtractor = (req) => {
+  var token = null;
+  if (req && req.cookies) {
+    token = req.cookies['token'];
+  }
+  return token;
+};
+
 passport.use(new JwtStrategy({
-  jwtFromRequest: ExtractJwt.fromAuthHeader(),
+  jwtFromRequest: cookieExtractor,
   secretOrKey: credentials.jwt.secret,
 }, (jwtPayload, done) => {
   User.findById(jwtPayload._id, (err, user) => {

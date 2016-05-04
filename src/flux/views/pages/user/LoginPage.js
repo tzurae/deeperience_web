@@ -1,4 +1,5 @@
 import React from 'react';
+import reactCookie from 'react-cookie';
 import PageHeader from '../../components/PageHeader';
 import Input from '../../components/Input';
 import userAPI from '../../../api/user';
@@ -10,7 +11,13 @@ export default class LoginPage extends React.Component {
 
   constructor(props) {
     super(props);
+    this._login = ::this._login;
     this._handleSubmit = ::this._handleSubmit;
+  }
+
+  _login(json) {
+    reactCookie.save('token',  json.token);
+    reactCookie.save('user',  json.user);
   }
 
   _handleSubmit(e) {
@@ -26,9 +33,7 @@ export default class LoginPage extends React.Component {
       })
       .then((json) => {
         if (json.isAuth) {
-          localStorage.setItem('token', json.token);
-          localStorage.setItem('user', JSON.stringify(json.user));
-
+          this._login(json);
           // redirect to the origin path before logging in
           const { location } = this.props;
           if (location.state && location.state.nextPathname) {

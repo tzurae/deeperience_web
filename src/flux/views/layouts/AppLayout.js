@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import Helmet from 'react-helmet';
 import activeComponent from 'react-router-active-component';
-import getToken from '../../utils/getToken';
+import reactCookie from 'react-cookie';
 
 export default class AppLayout extends React.Component {
   static defaultProps = {
@@ -28,15 +28,7 @@ export default class AppLayout extends React.Component {
   }
 
   getChildContext() {
-    const token = getToken();
-    let user = {};
-    if (token !== null) {
-      user = JSON.parse(localStorage.getItem('user'));
-    }
     return {
-      isAuth: token !== null,
-      token: token,
-      user: user,
     };
   }
 

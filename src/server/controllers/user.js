@@ -33,7 +33,7 @@ export default {
             res.json({
               isError: false,
               isAuth: true,
-              token: 'JWT ' + token,
+              token: token,
               user: user,
             });
           } else {

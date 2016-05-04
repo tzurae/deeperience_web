@@ -1,10 +1,21 @@
 import React from 'react';
+import reactCookie from 'react-cookie';
 import userAPI from '../../../api/user';
 
 export default class LogoutPage extends React.Component {
   static contextTypes = {
     router: React.PropTypes.any.isRequired,
   };
+
+  constructor(props) {
+    super(props);
+    this._logout = ::this._logout;
+  }
+
+  _logout() {
+    reactCookie.remove('token');
+    reactCookie.remove('user');
+  }
 
   componentWillMount() {
     userAPI
@@ -14,8 +25,7 @@ export default class LogoutPage extends React.Component {
         throw err;
       })
       .then((json) => {
-        localStorage.removeItem('token');
-        localStorage.removeItem('user');
+        this._logout();
         this.context.router.push('/');
       });
   }

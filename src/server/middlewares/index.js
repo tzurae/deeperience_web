@@ -34,9 +34,6 @@ export default ({ app }) => {
   app.use(express.static(
     path.join(__dirname, '../../public')));
 
-  // setup passport
-  app.use(passport);
-
   // parse application/x-www-form-urlencoded
   app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -45,6 +42,9 @@ export default ({ app }) => {
 
   // cookie parser
   app.use(cookieParser());
+
+  // setup passport
+  app.use(passport);
 
   // mount helper functions
   app.use(mountHelper);
