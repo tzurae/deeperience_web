@@ -1,8 +1,8 @@
-import fetch from '../utils/webAPIUtils';
+import api from '../utils/webAPIUtils';
 
 export default {
-  register: (user) => fetch.post('/api/user', user),
-  login: (user) => fetch.post('/api/user/login', user),
-  logout: (user) => fetch.get('/api/user/logout'),
-  show: (user) => fetch.getAuth('/api/user/me'),
+  register: (user) => api.post('/api/user', user),
+  login: (user) => api.post('/api/user/login', user),
+  logout: (user) => api.get('/api/user/logout'),
+  show: (user) => api.getAuth('/api/user/me'),
 };

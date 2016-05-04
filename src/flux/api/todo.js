@@ -1,7 +1,7 @@
-import fetch from '../utils/webAPIUtils';
+import api from '../utils/webAPIUtils';
 
 export default {
-  list: () => fetch.get('/api/todo'),
-  create: (todo) => fetch.post('/api/todo', todo),
-  remove: (id) => fetch.delete(`/api/todo/${id}`),
+  list: () => api.get('/api/todo'),
+  create: (todo) => api.post('/api/todo', todo),
+  remove: (id) => api.delete(`/api/todo/${id}`),
 };
