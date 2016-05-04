@@ -4,6 +4,7 @@ import express from 'express';
 import favicon from 'serve-favicon';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
+import reactCookie from 'react-cookie';
 import morgan from './morgan';
 import passport from './passport';
 import mountHelper from './mountHelper';
@@ -42,6 +43,10 @@ export default ({ app }) => {
 
   // cookie parser
   app.use(cookieParser());
+  app.use((req, res, next) => {
+    reactCookie.setRawCookie(req.headers.cookie);
+    next();
+  });
 
   // setup passport
   app.use(passport);
