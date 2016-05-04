@@ -10,7 +10,7 @@ const authRequired = (req, res, next) => {
       return res.json({
         isError: true,
         status: 401,
-        errors: info.toString(),
+        errors: info && info.toString(),
       });
     }
     req.user = user;
