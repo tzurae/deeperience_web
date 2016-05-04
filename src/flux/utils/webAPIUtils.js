@@ -55,6 +55,7 @@ export default {
   },
   getAuth: (path) => {
     const token = reactCookie.load('token');
+    const user = JSON.stringify(reactCookie.load('user'));
     if (!token) {
       return getUnAuthPromise();
     }
@@ -64,11 +65,13 @@ export default {
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
+        Cookie: `token=${token};user=${user}`,
       },
     }).then((res) => res.json()));
   },
   postAuth: (path, param = {}) => {
     const token = reactCookie.load('token');
+    const user = JSON.stringify(reactCookie.load('user'));
     if (!token) {
       return getUnAuthPromise();
     }
@@ -78,6 +81,7 @@ export default {
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
+        Cookie: `token=${token};user=${user}`,
       },
       body: JSON.stringify(param),
     }).then((res) => res.json()));
