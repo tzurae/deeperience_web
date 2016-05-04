@@ -1,6 +1,6 @@
 import actionTypes from '../constants/actionTypes';
 
-export default (state = {}, action) => {
+export default (state = { token: null, data: {} }, action) => {
   switch (action.type) {
     case actionTypes.LOGIN_USER: {
       return {
