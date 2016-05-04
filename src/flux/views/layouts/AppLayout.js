@@ -1,9 +1,12 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import reactCookie from 'react-cookie';
 import { Link } from 'react-router';
 import Helmet from 'react-helmet';
 import activeComponent from 'react-router-active-component';
-import reactCookie from 'react-cookie';
+import { loginUser } from '../../actions/userActions';
 
+@connect(state => state)
 export default class AppLayout extends React.Component {
   static defaultProps = {
     title: 'Express-React-HMR-Boilerplate',
@@ -25,10 +28,20 @@ export default class AppLayout extends React.Component {
     super(props);
     this._renderHelmet = ::this._renderHelmet;
     this._renderMenu = ::this._renderMenu;
+
+    // initialize user
+    const token = reactCookie.load('token');
+    const data = reactCookie.load('user');
+    if (token) {
+      this.props.dispatch(loginUser({ token, data }));
+    }
   }
 
   getChildContext() {
     return {
+      isAuth: !!this.props.user.token,
+      token: this.props.user.token,
+      user: this.props.user.data,
     };
   }
 

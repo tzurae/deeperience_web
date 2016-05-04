@@ -1,7 +1,10 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import reactCookie from 'react-cookie';
 import userAPI from '../../../api/user';
+import { logoutUser } from '../../../actions/userActions';
 
+@connect(state => state)
 export default class LogoutPage extends React.Component {
   static contextTypes = {
     router: React.PropTypes.any.isRequired,
@@ -13,6 +16,7 @@ export default class LogoutPage extends React.Component {
   }
 
   _logout() {
+    this.props.dispatch(logoutUser());
     reactCookie.remove('token');
     reactCookie.remove('user');
   }
