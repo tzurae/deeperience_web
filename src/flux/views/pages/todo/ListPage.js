@@ -18,15 +18,17 @@ export default class ListPage extends Component {
 
   componentDidMount() {
     const { dispatch } = this.props;
-    todoAPI
-      .list()
-      .catch((err) => {
-        alert('List todos fail');
-        throw err;
-      })
-      .then((json) => {
-        dispatch(setTodo(json.todos));
-      });
+    if (this.props.todos.length == 0) {
+      todoAPI
+        .list()
+        .catch((err) => {
+          alert('List todos fail');
+          throw err;
+        })
+        .then((json) => {
+          dispatch(setTodo(json.todos));
+        });
+    }
   }
 
   _handleAddClick() {
