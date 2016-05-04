@@ -1,4 +1,4 @@
-import todoAPI from '../../flux/api/todo';
+import todoAPI from '../../common/api/todo';
 import wrapTimeout from '../decorators/wrapTimeout';
 
 export default {

@@ -25,7 +25,7 @@ var babelConfig = {
 
 var paths = {
   scripts: './src/server/**/*.js',
-  reacts: './src/flux/**/*.js',
+  reacts: './src/common/**/*.js',
   statics: './src/public/**/*',
   nodemonWatchIgnore: [
     'gulpfile.js',
@@ -33,7 +33,7 @@ var paths = {
     'build/**/*',
     '.deploy/**/*',
     'public/js/bundle.js',
-    'src/flux/**/*',
+    'src/common/**/*',
   ],
   targetDir: 'build',
 };
@@ -88,7 +88,7 @@ gulp.task('build:nodejs', function() {
 gulp.task('build:reactjs', ['build:nodejs'], function() {
   return _babelStream(
     paths.reacts,
-    path.join(paths.targetDir, 'flux'),
+    path.join(paths.targetDir, 'common'),
     babelConfig.production
   );
 });

@@ -5,7 +5,7 @@ var babelConfig = require('./babel.config.prod');
 module.exports = {
   // devtool: 'source-map',
   entry: [
-    path.join(__dirname, '../src/flux/index'),
+    path.join(__dirname, '../src/client/index'),
   ],
   output: {
     path: path.join(__dirname, '../build/public/js'),

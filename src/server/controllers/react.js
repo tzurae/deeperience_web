@@ -4,8 +4,8 @@ import { renderToString } from 'react-dom/server';
 import { match, RouterContext } from 'react-router';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import routes from '../../flux/routes';
-import rootReducer from '../../flux/reducers';
+import routes from '../../common/routes';
+import rootReducer from '../../common/reducers';
 
 const renderFullPage = (markup, initialState) => (
 `<!doctype html>
