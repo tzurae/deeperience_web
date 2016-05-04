@@ -81,4 +81,5 @@ gulp deploy [--app=<heroku_app_name>] [--create]
 - [x] React-Router
 - [x] SSR
 - [x] Isomorphic
-- [ ] Refactor File Structure
+- [x] Refactor File Structure
+- [ ] Style Loader
