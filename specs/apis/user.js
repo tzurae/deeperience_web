@@ -88,7 +88,8 @@ describe('#user', function() {
           .get(constants.BASE + '/api/user/me')
           .end(function(err, res) {
             expect(res).to.not.be.undefined;
-            expect(res.status).to.equal(401);
+            expect(res.status).to.equal(200);
+            expect(res.body.status).to.equal(401);
             done();
           });
       });
