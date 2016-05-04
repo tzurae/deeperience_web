@@ -104,7 +104,7 @@ describe('#user', function() {
           var token = user.toJwtToken();
           request
             .get(constants.BASE + '/api/user/me')
-            .set('Authorization', 'JWT ' + token)
+            .set('Cookie', 'token=' + token)
             .end(function(err, res) {
               expect(res).to.not.be.undefined;
               expect(res.status).to.equal(200);
