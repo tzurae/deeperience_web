@@ -1,5 +1,6 @@
-process.env.NODE_ENV = 'test';
 var constants = require('./constants');
+process.env.NODE_ENV = constants.NODE_ENV;
+process.env.PORT = constants.PORT;
 var appPromise = require('../build/server/app').default;
 var server;
 
