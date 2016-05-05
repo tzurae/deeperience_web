@@ -25,11 +25,11 @@ export default class Input extends React.Component {
   };
 
   getValue() {
-    return this.refs.input.value;
+    return this.input.value;
   }
 
   componentDidMount() {
-    this.refs.input.value = this.props.value;
+    this.input.value = this.props.value;
   }
 
   render() {
@@ -49,7 +49,7 @@ export default class Input extends React.Component {
 
         <div className={inputClass}>
           <input
-            ref="input"
+            ref={input => this.input = input}
             type={this.props.type}
             className="form-control"
             placeholder={this.props.placeholder} />

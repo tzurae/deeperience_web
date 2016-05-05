@@ -31,8 +31,8 @@ export default class LoginPage extends React.Component {
     e.preventDefault();
     userAPI
       .login({
-        email: this.refs.email.getValue(),
-        password: this.refs.password.getValue(),
+        email: this.inputEmail.getValue(),
+        password: this.inputPassword.getValue(),
       })
       .catch((err) => {
         alert('Login user fail');
@@ -63,12 +63,12 @@ export default class LoginPage extends React.Component {
         onSubmit={this._handleSubmit}>
 
         <Input
-          ref="email"
+          ref={input => this.inputEmail = input}
           label="Email"
           placeholder="email" />
 
         <Input
-          ref="password"
+          ref={input => this.inputPassword = input}
           label="Password"
           type="password"
           placeholder="password" />

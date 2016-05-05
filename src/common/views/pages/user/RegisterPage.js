@@ -17,9 +17,9 @@ export default class RegisterPage extends React.Component {
     e.preventDefault();
     userAPI
       .register({
-        name: this.refs.name.getValue(),
-        email: this.refs.email.getValue(),
-        password: this.refs.password.getValue(),
+        name: this.inputName.getValue(),
+        email: this.inputEmail.getValue(),
+        password: this.inputPassword.getValue(),
       })
       .catch((err) => {
         alert('Register user fail');
@@ -39,17 +39,17 @@ export default class RegisterPage extends React.Component {
         onSubmit={this._handleSubmit}>
 
         <Input
-          ref="name"
+          ref={input => this.inputName = input}
           label="Name"
           placeholder="name" />
 
         <Input
-          ref="email"
+          ref={input => this.inputEmail = input}
           label="Email*"
           placeholder="email" />
 
         <Input
-          ref="password"
+          ref={input => this.inputPassword = input}
           label="Password*"
           type="password"
           placeholder="password" />
