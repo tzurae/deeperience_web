@@ -1,3 +1,4 @@
+import reactCookie from 'react-cookie';
 import passport from 'passport';
 import {
   Strategy as JwtStrategy,
@@ -7,11 +8,7 @@ import credentials from '../../../config/credentials';
 import User from '../models/User';
 
 const cookieExtractor = (req) => {
-  var token = null;
-  if (req && req.cookies) {
-    token = req.cookies['token'];
-  }
-  return token;
+  return reactCookie.load('token');
 };
 
 passport.use(new JwtStrategy({

@@ -3,7 +3,6 @@ import path from 'path';
 import express from 'express';
 import favicon from 'serve-favicon';
 import bodyParser from 'body-parser';
-import cookieParser from 'cookie-parser';
 import reactCookie from 'react-cookie';
 import morgan from './morgan';
 import passport from './passport';
@@ -42,7 +41,6 @@ export default ({ app }) => {
   app.use(bodyParser.json());
 
   // cookie parser
-  app.use(cookieParser());
   app.use((req, res, next) => {
     reactCookie.setRawCookie(req.headers.cookie);
     next();

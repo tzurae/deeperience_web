@@ -1,3 +1,4 @@
+import reactCookie from 'react-cookie';
 import todoAPI from '../../common/api/todo';
 import wrapTimeout from '../decorators/wrapTimeout';
 
@@ -5,8 +6,8 @@ export default {
   user: (req, res, next) => {
     res.setSSRState({
       user: {
-        token: req.cookies['token'],
-        data: req.user,
+        token: reactCookie.load('token'),
+        data: reactCookie.load('user'),
       },
     });
     next();
