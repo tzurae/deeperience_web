@@ -23,8 +23,6 @@ export default class LoginPage extends React.Component {
       token: json.token,
       data: json.user,
     }));
-    reactCookie.save('token',  json.token);
-    reactCookie.save('user',  json.user);
   }
 
   _handleSubmit(e) {

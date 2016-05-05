@@ -1,11 +1,31 @@
+import reactCookie from 'react-cookie';
 import actionTypes from '../constants/actionTypes';
 
-export default (state = { token: null, data: {} }, action) => {
+const normalizeUserData = (data) => {
+  let d = {};
+  if (typeof data === 'string') {
+    d = JSON.parse(data);
+  } else if (typeof data === 'object') {
+    d = data;
+  } else if (typeof data === 'undefined') {
+    d = {};
+  } else {
+    throw new TypeError(`Invalid user data type ${typeof data}`);
+  }
+  return d;
+};
+
+const initUser = {
+  token: reactCookie.load('token'),
+  data: normalizeUserData(reactCookie.load('user')),
+};
+
+export default (state = initUser, action) => {
   switch (action.type) {
     case actionTypes.LOGIN_USER: {
       return {
         token: action.token,
-        data: action.data,
+        data: normalizeUserData(action.data),
       };
     }
     case actionTypes.LOGOUT_USER: {
@@ -20,7 +40,7 @@ export default (state = { token: null, data: {} }, action) => {
     case actionTypes.SET_USER_DATA: {
       return {
         ...state,
-        data: action.data,
+        data: normalizeUserData(action.data),
       };
     }
     default: {

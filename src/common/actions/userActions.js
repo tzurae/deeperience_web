@@ -1,6 +1,9 @@
+import reactCookie from 'react-cookie';
 import actionTypes from '../constants/actionTypes';
 
 export const loginUser = ({ token, data }) => {
+  reactCookie.save('token',  token, { path: '/' });
+  reactCookie.save('user',  data, { path: '/' });
   return {
     type: actionTypes.LOGIN_USER,
     token,
@@ -9,6 +12,8 @@ export const loginUser = ({ token, data }) => {
 };
 
 export const logoutUser = () => {
+  reactCookie.remove('token');
+  reactCookie.remove('user');
   return {
     type: actionTypes.LOGOUT_USER,
   };

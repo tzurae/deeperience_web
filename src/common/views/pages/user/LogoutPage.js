@@ -17,8 +17,6 @@ export default class LogoutPage extends React.Component {
 
   _logout() {
     this.props.dispatch(logoutUser());
-    reactCookie.remove('token');
-    reactCookie.remove('user');
   }
 
   componentWillMount() {

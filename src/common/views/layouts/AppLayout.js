@@ -1,10 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import reactCookie from 'react-cookie';
 import { Link } from 'react-router';
 import Helmet from 'react-helmet';
 import activeComponent from 'react-router-active-component';
-import { loginUser } from '../../actions/userActions';
 
 @connect(state => state)
 export default class AppLayout extends React.Component {
@@ -18,31 +16,10 @@ export default class AppLayout extends React.Component {
     ],
   };
 
-  static childContextTypes = {
-    isAuth: React.PropTypes.bool,
-    token: React.PropTypes.string,
-    user: React.PropTypes.object,
-  };
-
   constructor(props) {
     super(props);
     this._renderHelmet = ::this._renderHelmet;
     this._renderMenu = ::this._renderMenu;
-
-    // initialize user
-    const token = reactCookie.load('token');
-    const data = reactCookie.load('user');
-    if (token) {
-      this.props.dispatch(loginUser({ token, data }));
-    }
-  }
-
-  getChildContext() {
-    return {
-      isAuth: !!this.props.user.token,
-      token: this.props.user.token,
-      user: this.props.user.data,
-    };
   }
 
   _renderHelmet() {
@@ -64,10 +41,9 @@ export default class AppLayout extends React.Component {
   }
 
   _renderMenu() {
-    const {
-      isAuth,
-      user,
-    } = this.getChildContext();
+    const isAuth = !!this.props.user.token;
+    const token = this.props.user.token;
+    const user = this.props.user.data;
     const NavLink = activeComponent('li');
 
     return (
