@@ -13,6 +13,7 @@ export default class AppLayout extends React.Component {
     ],
     styles: [
       'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css',
+      '/css/main.css',
     ],
   };
 
