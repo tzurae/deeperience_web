@@ -1,11 +1,8 @@
+// essential polyfill for `require.ensure`
+import '../utils/ensure-polyfill';
 import AppLayout from '../views/layouts/AppLayout';
 import HomePage from '../views/pages/HomePage';
 import notFoundRoute from './notFound';
-
-// polyfill webpack require.ensure
-if (typeof require.ensure !== 'function') {
-  require.ensure = (d, c) => c(require);
-}
 
 export default {
   path: '/',
