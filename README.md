@@ -9,6 +9,22 @@ This is a boilerplate for scaffolding MERN stack projects with livereload featur
 
 <https://express-react-hmr-boilerplate.herokuapp.com/>
 
+## Techniques
+
+- Nodejs + Express
+- Reactjs + Redux + React-Router
+- Mongodb + Mongoose + MongoLab
+- Livereload
+- Server-Side Rendering (SSR) & State Fetching (Isomorphic)
+- Webpack + Code Splitting
+- ES6/7 + Babel
+- Travis CI Template
+- Heroku Deploy Script
+- Examples
+  - CSS Modules
+  - Simple Todo List App
+  - Passport + Jwt Authentication
+
 ## Installation
 
 ```
@@ -75,11 +91,9 @@ gulp deploy [--app=<heroku_app_name>] [--create]
 
 ## Roadmap
 
-- [x] Livereload
-- [x] Heroku Deploy Script
-- [x] Travis CI
-- [x] React-Router
-- [x] SSR
-- [x] Isomorphic
-- [x] Refactor File Structure
-- [ ] Style Loader
+- [ ] Integrate with redux-form
+- [ ] Integrate with form validation
+- [ ] Move imports-/exports-loader to devDependencies
+- [ ] Todo#Update API & Todo#Edit Functionality
+- [ ] File Uploading (e.g. Avatar)
+- [ ] Facebook Login
