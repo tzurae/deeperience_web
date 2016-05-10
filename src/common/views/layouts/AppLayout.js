@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import Helmet from 'react-helmet';
 import activeComponent from 'react-router-active-component';
+import classNames from 'classnames';
 
 @connect(state => state)
 export default class AppLayout extends React.Component {
@@ -19,8 +20,21 @@ export default class AppLayout extends React.Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      css: {},
+    };
     this._renderHelmet = ::this._renderHelmet;
     this._renderMenu = ::this._renderMenu;
+  }
+
+  componentDidMount() {
+    // assign css in componentDidMount lifecycle to prevent components from
+    // rendering different markups on server- and client-side
+    if (process.env.BROWSER) {
+      this.setState({
+        css: require('./AppLayout.css'),
+      });
+    }
   }
 
   _renderHelmet() {
@@ -46,6 +60,7 @@ export default class AppLayout extends React.Component {
     const token = this.props.user.token;
     const user = this.props.user.data;
     const NavLink = activeComponent('li');
+    const logoClass = classNames('navbar-brand', this.state.css.redBorder);
 
     return (
       <nav className="navbar navbar-default navbar-static-top">
@@ -62,7 +77,7 @@ export default class AppLayout extends React.Component {
               <span className="icon-bar"></span>
               <span className="icon-bar"></span>
             </button>
-            <Link className="navbar-brand" to="/">Logo</Link>
+            <Link className={logoClass} to="/" >Logo</Link>
           </div>
 
           <div className="collapse navbar-collapse" id="navbar">
