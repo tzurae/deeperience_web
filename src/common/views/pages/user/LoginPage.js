@@ -1,14 +1,13 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import reactCookie from 'react-cookie';
 import PageHeader from '../../components/PageHeader';
 import Input from '../../components/Input';
 import userAPI from '../../../api/user';
 import { loginUser } from '../../../actions/userActions';
 
-@connect(state => state)
 export default class LoginPage extends React.Component {
   static contextTypes = {
+    store: React.PropTypes.object.isRequired,
     router: React.PropTypes.any.isRequired,
   };
 
@@ -19,7 +18,7 @@ export default class LoginPage extends React.Component {
   }
 
   _login(json) {
-    this.props.dispatch(loginUser({
+    this.context.store.dispatch(loginUser({
       token: json.token,
       data: json.user,
     }));
