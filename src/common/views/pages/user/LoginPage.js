@@ -1,5 +1,4 @@
 import React from 'react';
-import reactCookie from 'react-cookie';
 import PageHeader from '../../components/PageHeader';
 import Input from '../../components/Input';
 import userAPI from '../../../api/user';
