@@ -17,10 +17,26 @@
     "url": "https://github.com/gocreating/express-react-hmr-boilerplate.git"
   },
   "keywords": [
+    "node",
     "express",
-    "mongo",
     "react",
-    "node"
+    "redux",
+    "react-router",
+    "mongo",
+    "mongoose",
+    "mongolab",
+    "livereload",
+    "server side render",
+    "ssr",
+    "isomorphic",
+    "webpack",
+    "code splitting",
+    "es6",
+    "babel",
+    "heroku",
+    "css modules",
+    "todo list",
+    "passport"
   ],
   "bugs": {
     "url": "https://github.com/gocreating/express-react-hmr-boilerplate/issues"
