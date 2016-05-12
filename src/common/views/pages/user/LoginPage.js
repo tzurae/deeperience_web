@@ -1,6 +1,6 @@
 import React from 'react';
 import PageHeader from '../../components/PageHeader';
-import Input from '../../components/Input';
+import LoginForm from '../../components/LoginForm';
 import userAPI from '../../../api/user';
 import { loginUser } from '../../../actions/userActions';
 
@@ -23,13 +23,9 @@ export default class LoginPage extends React.Component {
     }));
   }
 
-  _handleSubmit(e) {
-    e.preventDefault();
+  _handleSubmit(formData) {
     userAPI
-      .login({
-        email: this.inputEmail.getValue(),
-        password: this.inputPassword.getValue(),
-      })
+      .login(formData)
       .catch((err) => {
         alert('Login user fail');
         throw err;
@@ -53,28 +49,7 @@ export default class LoginPage extends React.Component {
   render() {
     return <div className="container">
       <PageHeader title="Login" />
-
-      <form
-        className="form-horizontal"
-        onSubmit={this._handleSubmit}>
-
-        <Input
-          ref={input => this.inputEmail = input}
-          label="Email"
-          placeholder="email" />
-
-        <Input
-          ref={input => this.inputPassword = input}
-          label="Password"
-          type="password"
-          placeholder="password" />
-
-        <div className="form-group">
-          <div className="col-sm-offset-2 col-sm-10">
-            <button type="submit" className="btn btn-default">Login</button>
-          </div>
-        </div>
-      </form>
+      <LoginForm onSubmit={this._handleSubmit} />
     </div>;
   }
 };
