@@ -92,6 +92,7 @@
     "react-router-active-component": "^4.0.0-rc.0",
     "redux": "^3.5.2",
     "redux-form": "^5.2.3",
-    "serve-favicon": "^2.3.0"
+    "serve-favicon": "^2.3.0",
+    "validator": "^5.2.0"
   }
 }
