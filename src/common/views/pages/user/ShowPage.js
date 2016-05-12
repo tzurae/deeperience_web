@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PageHeader from '../../components/PageHeader';
+import BsPageHeader from '../../components/BsPageHeader';
 import userAPI from '../../../api/user';
 
 export default class ShowPage extends Component {
@@ -26,7 +26,7 @@ export default class ShowPage extends Component {
 
   render() {
     return <div className="container">
-      <PageHeader title="My Profile" />
+      <BsPageHeader title="My Profile" />
       {JSON.stringify(this.state.user)}
     </div>;
   }

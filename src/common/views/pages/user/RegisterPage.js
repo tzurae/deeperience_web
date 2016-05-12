@@ -1,5 +1,5 @@
 import React from 'react';
-import PageHeader from '../../components/PageHeader';
+import BsPageHeader from '../../components/BsPageHeader';
 import RegisterForm from '../../components/RegisterForm';
 import userAPI from '../../../api/user';
 
@@ -27,7 +27,7 @@ export default class RegisterPage extends React.Component {
 
   render() {
     return <div className="container">
-      <PageHeader title="Register" />
+      <BsPageHeader title="Register" />
       <RegisterForm onSubmit={this._handleSubmit} />
     </div>;
   }

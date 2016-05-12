@@ -1,5 +1,5 @@
 import React from 'react';
-import PageHeader from '../../components/PageHeader';
+import BsPageHeader from '../../components/BsPageHeader';
 import LoginForm from '../../components/LoginForm';
 import userAPI from '../../../api/user';
 import { loginUser } from '../../../actions/userActions';
@@ -48,7 +48,7 @@ export default class LoginPage extends React.Component {
 
   render() {
     return <div className="container">
-      <PageHeader title="Login" />
+      <BsPageHeader title="Login" />
       <LoginForm onSubmit={this._handleSubmit} />
     </div>;
   }
