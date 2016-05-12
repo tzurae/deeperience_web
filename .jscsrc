@@ -1,18 +1,17 @@
 {
   "preset": "node-style-guide",
   "fileExtensions": [".js"],
+  "esnext": true,
   "excludeFiles": [
-    "src/**"
-  ],
-  "excludeFiles": [
-    "node_modules/**",
-    "build/**"
+    "./node_modules/**",
+    "./build/**"
   ],
   "maximumLineLength": {
     "value": 80,
     "allExcept": ["comments", "urlComments", "require"]
   },
   "requireCapitalizedComments": null,
+  "disallowQuotedKeysInObjects": null,
   "requireSemicolons": true,
   "validateQuoteMarks": null,
   "validateLineBreaks": null
