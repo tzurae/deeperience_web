@@ -1,4 +1,5 @@
 import React from 'react';
+import PageLayout from '../../layouts/PageLayout';
 import BsPageHeader from '../../components/BsPageHeader';
 import LoginForm from '../../components/LoginForm';
 import userAPI from '../../../api/user';
@@ -47,9 +48,11 @@ export default class LoginPage extends React.Component {
   }
 
   render() {
-    return <div className="container">
-      <BsPageHeader title="Login" />
-      <LoginForm onSubmit={this._handleSubmit} />
-    </div>;
+    return (
+      <PageLayout>
+        <BsPageHeader title="Login" />
+        <LoginForm onSubmit={this._handleSubmit} />
+      </PageLayout>
+    );
   }
 };

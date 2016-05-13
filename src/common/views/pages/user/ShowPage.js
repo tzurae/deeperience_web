@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PageLayout from '../../layouts/PageLayout';
 import BsPageHeader from '../../components/BsPageHeader';
 import userAPI from '../../../api/user';
 
@@ -25,9 +26,11 @@ export default class ShowPage extends Component {
   }
 
   render() {
-    return <div className="container">
-      <BsPageHeader title="My Profile" />
-      {JSON.stringify(this.state.user)}
-    </div>;
+    return (
+      <PageLayout>
+        <BsPageHeader title="My Profile" />
+        {JSON.stringify(this.state.user)}
+      </PageLayout>
+    );
   }
 };

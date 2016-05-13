@@ -1,4 +1,5 @@
 import React from 'react';
+import PageLayout from '../../layouts/PageLayout';
 import BsPageHeader from '../../components/BsPageHeader';
 import RegisterForm from '../../components/RegisterForm';
 import userAPI from '../../../api/user';
@@ -26,9 +27,11 @@ export default class RegisterPage extends React.Component {
   }
 
   render() {
-    return <div className="container">
-      <BsPageHeader title="Register" />
-      <RegisterForm onSubmit={this._handleSubmit} />
-    </div>;
+    return (
+      <PageLayout>
+        <BsPageHeader title="Register" />
+        <RegisterForm onSubmit={this._handleSubmit} />
+      </PageLayout>
+    );
   }
 };

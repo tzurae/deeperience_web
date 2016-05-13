@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PageLayout from '../../layouts/PageLayout';
 import { connect } from 'react-redux';
 import BsPageHeader from '../../components/BsPageHeader';
 import TodoItem from '../../components/TodoItem';
@@ -60,17 +61,19 @@ export default class ListPage extends Component {
   }
 
   render() {
-    return <div className="container">
-      <BsPageHeader title="Todo List" />
-      <input type="text" ref="todotext" />
-      <button onClick={this._handleAddClick}>Add Todo</button>
-      <ul>
-        {this.props.todos.map((todo, index) =>
-          <TodoItem
-            key={index}
-            onRemoveClick={this._handleRemoveClick.bind(this, todo._id)}
-            text={todo.text} />)}
-      </ul>
-    </div>;
+    return (
+      <PageLayout>
+        <BsPageHeader title="Todo List" />
+        <input type="text" ref="todotext" />
+        <button onClick={this._handleAddClick}>Add Todo</button>
+        <ul>
+          {this.props.todos.map((todo, index) =>
+            <TodoItem
+              key={index}
+              onRemoveClick={this._handleRemoveClick.bind(this, todo._id)}
+              text={todo.text} />)}
+        </ul>
+      </PageLayout>
+    );
   }
 };
