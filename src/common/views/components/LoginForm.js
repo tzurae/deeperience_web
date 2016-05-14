@@ -1,9 +1,11 @@
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
 // import validator from 'validator';
 import BsHorizontalForm from './BsHorizontalForm';
 import BsFormInput from './BsFormInput';
 import BsFormButton from './BsFormButton';
+import userAPI from '../../api/user';
+import { loginUser } from '../../actions/userActions';
 
 const validate = (values) => {
   const errors = {};
@@ -23,32 +25,75 @@ const validate = (values) => {
   return errors;
 };
 
-const LoginForm = (props) => {
-  const {
-    fields: { email, password },
-    handleSubmit,
-  } = props;
+class LoginForm extends Component {
+  constructor(props) {
+    super(props);
+    this._login = ::this._login;
+    this._handleSubmit = ::this._handleSubmit;
+  }
 
-  return (
-    <BsHorizontalForm onSubmit={handleSubmit}>
-      <BsFormInput
-        label="Email"
-        type="text"
-        placeholder="Email"
-        field={email}
-      />
-      <BsFormInput
-        label="Password"
-        type="password"
-        placeholder="Password"
-        field={password}
-      />
-      <BsFormButton
-        type="submit"
-        title="Login"
-      />
-    </BsHorizontalForm>
-  );
+  _login(json) {
+    this.context.store.dispatch(loginUser({
+      token: json.token,
+      data: json.user,
+    }));
+  }
+
+  _handleSubmit(formData) {
+    userAPI
+      .login(formData)
+      .catch((err) => {
+        alert('Login user fail');
+        throw err;
+      })
+      .then((json) => {
+        if (json.isAuth) {
+          this._login(json);
+          // redirect to the origin path before logging in
+          const { location } = this.props;
+          if (location && location.state && location.state.nextPathname) {
+            this.context.router.push(location.state.nextPathname);
+          } else {
+            this.context.router.push('/');
+          }
+        } else {
+          alert('wrong email or password');
+        }
+      });
+  }
+
+  render() {
+    const {
+      fields: { email, password },
+      handleSubmit,
+    } = this.props;
+
+    return (
+      <BsHorizontalForm onSubmit={handleSubmit(this._handleSubmit)}>
+        <BsFormInput
+          label="Email"
+          type="text"
+          placeholder="Email"
+          field={email}
+        />
+        <BsFormInput
+          label="Password"
+          type="password"
+          placeholder="Password"
+          field={password}
+        />
+        <BsFormButton
+          type="submit"
+          title="Login"
+        />
+      </BsHorizontalForm>
+    );
+  }
+};
+
+LoginForm.contextTypes = {
+  store: React.PropTypes.object.isRequired,
+  router: React.PropTypes.any.isRequired,
 };
 
 LoginForm.propTypes = {

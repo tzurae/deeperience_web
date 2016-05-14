@@ -1,9 +1,10 @@
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
 // import validator from 'validator';
 import BsHorizontalForm from './BsHorizontalForm';
 import BsFormInput from './BsFormInput';
 import BsFormButton from './BsFormButton';
+import userAPI from '../../api/user';
 
 const validate = (values) => {
   const errors = {};
@@ -23,38 +24,61 @@ const validate = (values) => {
   return errors;
 };
 
-const RegisterForm = (props) => {
-  const {
-    fields: { name, email, password },
-    handleSubmit,
-  } = props;
+class RegisterForm extends Component {
+  constructor(props) {
+    super(props);
+    this._handleSubmit = ::this._handleSubmit;
+  }
 
-  return (
-    <BsHorizontalForm onSubmit={handleSubmit}>
-      <BsFormInput
-        label="Name"
-        type="text"
-        placeholder="Name"
-        field={name}
-      />
-      <BsFormInput
-        label="Email"
-        type="text"
-        placeholder="Email"
-        field={email}
-      />
-      <BsFormInput
-        label="Password"
-        type="password"
-        placeholder="Password"
-        field={password}
-      />
-      <BsFormButton
-        type="submit"
-        title="Register"
-      />
-    </BsHorizontalForm>
-  );
+  _handleSubmit(formData) {
+    userAPI
+      .register(formData)
+      .catch((err) => {
+        alert('Register user fail');
+        throw err;
+      })
+      .then((json) => {
+        this.context.router.push('/');
+      });
+  }
+
+  render() {
+    const {
+      fields: { name, email, password },
+      handleSubmit,
+    } = this.props;
+
+    return (
+      <BsHorizontalForm onSubmit={handleSubmit(this._handleSubmit)}>
+        <BsFormInput
+          label="Name"
+          type="text"
+          placeholder="Name"
+          field={name}
+        />
+        <BsFormInput
+          label="Email"
+          type="text"
+          placeholder="Email"
+          field={email}
+        />
+        <BsFormInput
+          label="Password"
+          type="password"
+          placeholder="Password"
+          field={password}
+        />
+        <BsFormButton
+          type="submit"
+          title="Register"
+        />
+      </BsHorizontalForm>
+    );
+  }
+};
+
+RegisterForm.contextTypes = {
+  router: React.PropTypes.any.isRequired,
 };
 
 RegisterForm.propTypes = {
