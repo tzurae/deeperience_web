@@ -1,11 +1,12 @@
 import React from 'react';
 import PageLayout from '../layouts/PageLayout';
+import BsPageHeader from '../components/BsPageHeader';
 
 export default class HomePage extends React.Component {
   render() {
     return (
       <PageLayout>
-        <h1>Express-React-HMR-Boilerplate</h1>
+        <BsPageHeader title="Express-React-HMR-Boilerplate" />
         <p>
           This is the demo site for project
           <a
