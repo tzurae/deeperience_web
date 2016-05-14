@@ -33,5 +33,5 @@ const handleError = (res, errorType) => (fn) => (err, ...result) => {
 
 const handleDbError = (res) => handleError(res, ErrorTypes.DB);
 
-export default handleDbError;
+export default handleError;
 export { ErrorTypes, handleDbError };
