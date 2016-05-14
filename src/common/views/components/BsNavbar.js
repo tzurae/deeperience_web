@@ -1,20 +1,34 @@
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 
-const BsNavbar = ({ fixedTop, staticTop, children, ...rest }) => {
-  const cx = classNames(
-    'navbar',
-    'navbar-default',
-    {
-      'navbar-fixed-top': fixedTop,
-      'navbar-static-top': staticTop,
+class BsNavbar extends Component {
+  componentDidMount() {
+    if (process.env.BROWSER && this.props.fixedTop) {
+      document.body.style.marginTop = '50px';
     }
-  );
-  return (
-    <nav className={cx} {...rest}>
-      {children}
-    </nav>
-  );
+  }
+
+  render() {
+    const {
+      fixedTop,
+      staticTop,
+      children,
+      ...rest,
+    } = this.props;
+    const cx = classNames(
+      'navbar',
+      'navbar-default',
+      {
+        'navbar-fixed-top': fixedTop,
+        'navbar-static-top': staticTop,
+      }
+    );
+    return (
+      <nav className={cx} {...rest}>
+        {children}
+      </nav>
+    );
+  }
 };
 
 const Header = ({ children, ...rest }) => (
