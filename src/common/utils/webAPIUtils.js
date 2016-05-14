@@ -10,6 +10,15 @@ const getUnAuthPromise = () => new Promise((resolve, reject) => {
     'Calling authenticated required api without providing token'));
 });
 
+const getCookie = () => {
+  if (process.env.BROWSER) {
+    return null;
+  }
+  const token = reactCookie.load('token');
+  const user = JSON.stringify(reactCookie.load('user'));
+  return `token=${token};user=${user}`;
+};
+
 const wrapErrorHandler = (fetchPromise) => {
   return fetchPromise
     .then((json) => {
@@ -29,6 +38,7 @@ export default {
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
+        Cookie: getCookie(),
       },
     }).then((res) => res.json()));
   },
@@ -39,6 +49,7 @@ export default {
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
+        Cookie: getCookie(),
       },
       body: JSON.stringify(param),
     }).then((res) => res.json()));
@@ -50,12 +61,12 @@ export default {
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
+        Cookie: getCookie(),
       },
     }).then((res) => res.json()));
   },
   getAuth: (path) => {
     const token = reactCookie.load('token');
-    const user = JSON.stringify(reactCookie.load('user'));
     if (!token) {
       return getUnAuthPromise();
     }
@@ -65,13 +76,12 @@ export default {
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
-        Cookie: `token=${token};user=${user}`,
+        Cookie: getCookie(),
       },
     }).then((res) => res.json()));
   },
   postAuth: (path, param = {}) => {
     const token = reactCookie.load('token');
-    const user = JSON.stringify(reactCookie.load('user'));
     if (!token) {
       return getUnAuthPromise();
     }
@@ -81,7 +91,7 @@ export default {
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
-        Cookie: `token=${token};user=${user}`,
+        Cookie: getCookie(),
       },
       body: JSON.stringify(param),
     }).then((res) => res.json()));
