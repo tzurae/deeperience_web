@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PageLayout from '../../layouts/PageLayout';
 import BsPageHeader from '../../components/BsPageHeader';
+import Time from '../../components/Time';
 import userAPI from '../../../api/user';
 
 export default class ShowPage extends Component {
@@ -26,10 +27,30 @@ export default class ShowPage extends Component {
   }
 
   render() {
+    const { user } = this.state;
     return (
       <PageLayout>
         <BsPageHeader title="My Profile" />
-        {JSON.stringify(this.state.user)}
+        <dl className="dl-horizontal">
+          <dt>_id</dt>
+          <dd>{user._id}</dd>
+          <dt>name</dt>
+          <dd>{user.name}</dd>
+          <dt>email</dt>
+          <dd>{user.email}</dd>
+          <dt>updatedAt</dt>
+          <dd>
+            <Time value={user.updatedAt} format="YYYY-MM-DD" />
+            {' '}(<Time value={user.updatedAt} relative />)
+          </dd>
+          <dt>createdAt</dt>
+          <dd>
+            <Time value={user.createdAt} format="YYYY-MM-DD" />
+            {' '}(<Time value={user.createdAt} relative />)
+          </dd>
+          <dt>raw</dt>
+          <dd><pre>{JSON.stringify(user, null, 2)}</pre></dd>
+        </dl>
       </PageLayout>
     );
   }
