@@ -98,7 +98,10 @@ Nav.propTypes = {
 };
 
 Dropdown.propTypes = {
-  title: PropTypes.string,
+  title: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.element,
+  ]),
 };
 
 BsNavbar.Header = Header;
