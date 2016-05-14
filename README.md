@@ -12,7 +12,7 @@ This is a boilerplate for scaffolding MERN stack projects with livereload featur
 ## Techniques
 
 - Nodejs + Express
-- Reactjs + Redux + React-Router
+- Reactjs + Redux + React-Router + Redux-Form + React-Intl
 - Mongodb + Mongoose + MongoLab
 - Livereload
 - Server-Side Rendering (SSR) & State Fetching (Isomorphic)
@@ -24,6 +24,7 @@ This is a boilerplate for scaffolding MERN stack projects with livereload featur
   - CSS Modules
   - Simple Todo List App
   - Passport + Jwt Authentication
+  - i18n
 
 ## Installation
 
@@ -91,9 +92,10 @@ gulp deploy [--app=<heroku_app_name>] [--create]
 
 ## Roadmap
 
-- [ ] Integrate with redux-form
-- [ ] Integrate with form validation
-- [ ] Move imports-/exports-loader to devDependencies
+- [x] Integrate with redux-form
+- [x] Integrate with form validation
+- [x] Move imports-/exports-loader to devDependencies
+- [x] i18n
 - [ ] Todo#Update API & Todo#Edit Functionality
 - [ ] File Uploading (e.g. Avatar)
 - [ ] Facebook Login
