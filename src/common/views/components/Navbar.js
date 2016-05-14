@@ -79,7 +79,7 @@ class Navbar extends Component {
                 </li>
                 <li>
                   <a
-                    onClick={this._setLanguage.bind(this, 'zh-Tw')}
+                    onClick={this._setLanguage.bind(this, 'zh-tw')}
                     href="#"
                   >
                     繁體中文

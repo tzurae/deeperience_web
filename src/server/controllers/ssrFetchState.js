@@ -19,7 +19,7 @@ export default {
     if (cookieLocale) {
       lang = cookieLocale;
     } else {
-      lang = req.acceptsLanguages('en-us', 'zh-Tw');
+      lang = req.acceptsLanguages('en-us', 'zh-tw');
       reactCookie.save('locale', lang, { path: '/' });
     }
     localeAPI
