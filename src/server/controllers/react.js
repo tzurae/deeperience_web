@@ -4,6 +4,7 @@ import { renderToString } from 'react-dom/server';
 import { match, RouterContext } from 'react-router';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
+import LocaleProvider from '../../common/views/components/LocaleProvider';
 import routes from '../../common/routes';
 import rootReducer from '../../common/reducers';
 
@@ -43,7 +44,9 @@ export default {
       const store = createStore(rootReducer, initialState);
       const markup = renderToString(
         <Provider store={store}>
-          <RouterContext {...renderProps} />
+          <LocaleProvider>
+            <RouterContext {...renderProps} />
+          </LocaleProvider>
         </Provider>
       );
       const finalState = store.getState();
