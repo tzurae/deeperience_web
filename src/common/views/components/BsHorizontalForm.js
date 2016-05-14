@@ -1,8 +1,8 @@
 import React from 'react';
 
-const BsHorizontalForm = (props) => (
-  <form className="form-horizontal" {...props}>
-    {props.children}
+const BsHorizontalForm = ({ children, ...rest }) => (
+  <form className="form-horizontal" {...rest}>
+    {children}
   </form>
 );
 
