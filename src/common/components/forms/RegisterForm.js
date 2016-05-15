@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
 // import validator from 'validator';
 import Form from '../main/Form';
+import Input from '../reduxForm/Input';
 import userAPI from '../../api/user';
 
 const validate = (values) => {
@@ -48,29 +49,23 @@ class RegisterForm extends Component {
 
     return (
       <Form horizontal onSubmit={handleSubmit(this._handleSubmit)}>
-        <Form.Input
+        <Input
           title="Name"
           type="text"
           placeholder="Name"
-          isError={!!(name.touched && name.error)}
-          description={name.touched && name.error? name.error: ''}
-          {...name}
+          field={name}
         />
-        <Form.Input
+        <Input
           title="Email"
           type="text"
           placeholder="Email"
-          isError={!!(email.touched && email.error)}
-          description={email.touched && email.error? email.error: ''}
-          {...email}
+          field={email}
         />
-        <Form.Input
+        <Input
           title="Password"
           type="password"
           placeholder="Password"
-          isError={!!(password.touched && password.error)}
-          description={password.touched && password.error? password.error: ''}
-          {...password}
+          field={password}
         />
         <Form.Button
           type="submit"
