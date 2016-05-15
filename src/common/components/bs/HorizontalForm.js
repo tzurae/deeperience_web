@@ -1,9 +1,9 @@
 import React from 'react';
 
-const BsHorizontalForm = ({ children, ...rest }) => (
+const HorizontalForm = ({ children, ...rest }) => (
   <form className="form-horizontal" {...rest}>
     {children}
   </form>
 );
 
-export default BsHorizontalForm;
+export default HorizontalForm;

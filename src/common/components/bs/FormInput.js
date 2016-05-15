@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 import PureInput from '../PureInput';
 
-const BsInput = ({ label, field, ...rest }) => {
+const Input = ({ label, field, ...rest }) => {
   const cx = classNames(
     'form-group',
     {'has-error': field.touched && field.error}
@@ -25,9 +25,9 @@ const BsInput = ({ label, field, ...rest }) => {
   );
 };
 
-BsInput.propTypes = {
+Input.propTypes = {
   label: PropTypes.string.isRequired,
   field: PropTypes.object.isRequired,
 };
 
-export default BsInput;
+export default Input;

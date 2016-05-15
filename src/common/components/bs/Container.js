@@ -1,9 +1,9 @@
 import React from 'react';
 
-const BsContainer = ({ children, ...rest }) => (
+const Container = ({ children, ...rest }) => (
   <div className="container" {...rest}>
     {children}
   </div>
 );
 
-export default BsContainer;
+export default Container;
