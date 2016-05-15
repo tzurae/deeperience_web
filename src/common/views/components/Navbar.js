@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import classNames from 'classnames';
-import BsNavbar from './BsNavbar';
-import BsContainer from './BsContainer';
+import BsNavbar from './bs/Navbar';
+import BsContainer from './bs/Container';
 import NavLink from './NavLink';
 import AnchorItem from './AnchorItem';
 import Text from '././Text';

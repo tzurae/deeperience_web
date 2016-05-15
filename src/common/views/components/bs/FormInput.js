@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
-import PureInput from './PureInput';
+import PureInput from '../PureInput';
 
 const BsInput = ({ label, field, ...rest }) => {
   const cx = classNames(

@@ -1,6 +1,6 @@
 import React from 'react';
 import PageLayout from '../layouts/PageLayout';
-import BsPageHeader from '../components/BsPageHeader';
+import BsPageHeader from '../components/bs/PageHeader';
 
 const HomePage = (props) => (
   <PageLayout>

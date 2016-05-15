@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PageLayout from '../../layouts/PageLayout';
-import BsPageHeader from '../../components/BsPageHeader';
+import BsPageHeader from '../../components/bs/PageHeader';
 import Time from '../../components/Time';
 import userAPI from '../../../api/user';
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PageLayout from '../../layouts/PageLayout';
 import { connect } from 'react-redux';
-import BsPageHeader from '../../components/BsPageHeader';
+import BsPageHeader from '../../components/bs/PageHeader';
 import TodoItem from '../../components/TodoItem';
 import {
   setTodo,

@@ -1,5 +1,5 @@
 import React from 'react';
-import BsContainer from '../components/BsContainer';
+import BsContainer from '../components/bs/Container';
 
 const PageLayout = ({ children, ...rest }) => (
   <BsContainer {...rest}>
