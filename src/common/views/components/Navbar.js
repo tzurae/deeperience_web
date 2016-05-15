@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import BsNavbar from './BsNavbar';
 import BsContainer from './BsContainer';
 import NavLink from './NavLink';
+import AnchorItem from './AnchorItem';
 import Text from '././Text';
 import localeAPI from '../../api/locale';
 import { updateLocale } from '../../actions/intlActions';
@@ -69,30 +70,18 @@ class Navbar extends Component {
 
             <BsNavbar.Nav right>
               <BsNavbar.Dropdown title={<Text id="nav.language" />}>
-                <li>
-                  <a
-                    onClick={this._setLanguage.bind(this, 'en-us')}
-                    href="#"
-                  >
-                    English
-                  </a>
-                </li>
-                <li>
-                  <a
-                    onClick={this._setLanguage.bind(this, 'zh-tw')}
-                    href="#"
-                  >
-                    繁體中文
-                  </a>
-                </li>
-                <li>
-                  <a
-                    onClick={this._setLanguage.bind(this, 'foo-bar')}
-                    href="#"
-                  >
-                    Not supported
-                  </a>
-                </li>
+                <AnchorItem
+                  title="English"
+                  onClick={this._setLanguage.bind(this, 'en-us')}
+                />
+                <AnchorItem
+                  title="繁體中文"
+                  onClick={this._setLanguage.bind(this, 'zh-tw')}
+                />
+                <AnchorItem
+                  title="Not supported"
+                  onClick={this._setLanguage.bind(this, 'foo-bar')}
+                />
               </BsNavbar.Dropdown>
               <BsNavbar.Dropdown
                 title={
