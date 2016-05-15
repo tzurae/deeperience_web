@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
 // import validator from 'validator';
-import BsHorizontalForm from './bs/HorizontalForm';
-import BsFormInput from './bs/FormInput';
-import BsFormButton from './bs/FormButton';
-import userAPI from '../../api/user';
+import BsHorizontalForm from '../bs/HorizontalForm';
+import BsFormInput from '../bs/FormInput';
+import BsFormButton from '../bs/FormButton';
+import userAPI from '../../../api/user';
 
 const validate = (values) => {
   const errors = {};
