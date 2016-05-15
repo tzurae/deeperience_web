@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import classNames from 'classnames';
-import BsNavbar from './bs/Navbar';
-import BsContainer from './bs/Container';
+import Navbar from './main/Navbar';
+import Container from './main/Container';
 import NavLink from './NavLink';
 import AnchorItem from './AnchorItem';
 import Text from '././Text';
 import localeAPI from '../api/locale';
 import { updateLocale } from '../actions/intlActions';
 
-class Navbar extends Component {
+class Navigation extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -49,14 +49,14 @@ class Navbar extends Component {
     const csLogo = classNames('navbar-brand', this.state.css.redBorder);
 
     return (
-      <BsNavbar staticTop>
-        <BsContainer>
-          <BsNavbar.Header>
+      <Navbar staticTop>
+        <Container>
+          <Navbar.Header>
             <Link className={csLogo} to="/" >Logo</Link>
-          </BsNavbar.Header>
+          </Navbar.Header>
 
-          <BsNavbar.Body>
-            <BsNavbar.Nav>
+          <Navbar.Body>
+            <Navbar.Nav>
               <NavLink to="/" onlyActiveOnIndex>
                 <Text id="nav.home" />
               </NavLink>
@@ -66,10 +66,10 @@ class Navbar extends Component {
               <NavLink to="/does/not/exist">
                 404
               </NavLink>
-            </BsNavbar.Nav>
+            </Navbar.Nav>
 
-            <BsNavbar.Nav right>
-              <BsNavbar.Dropdown title={<Text id="nav.language" />}>
+            <Navbar.Nav right>
+              <Navbar.Dropdown title={<Text id="nav.language" />}>
                 <AnchorItem
                   title="English"
                   onClick={this._setLanguage.bind(this, 'en-us')}
@@ -82,8 +82,8 @@ class Navbar extends Component {
                   title="Not supported"
                   onClick={this._setLanguage.bind(this, 'foo-bar')}
                 />
-              </BsNavbar.Dropdown>
-              <BsNavbar.Dropdown
+              </Navbar.Dropdown>
+              <Navbar.Dropdown
                 title={
                   !isAuth?
                   <Text id="nav.user" />:
@@ -105,17 +105,17 @@ class Navbar extends Component {
                   <NavLink to="/user/logout">
                     <Text id="nav.user.logout" />
                   </NavLink>}
-              </BsNavbar.Dropdown>
-            </BsNavbar.Nav>
-          </BsNavbar.Body>
-        </BsContainer>
-      </BsNavbar>
+              </Navbar.Dropdown>
+            </Navbar.Nav>
+          </Navbar.Body>
+        </Container>
+      </Navbar>
     );
   }
 };
 
-Navbar.contextTypes = {
+Navigation.contextTypes = {
   store: React.PropTypes.object.isRequired,
 };
 
-export default Navbar;
+export default Navigation;

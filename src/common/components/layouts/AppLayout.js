@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Head from '../Head';
-import Navbar from '../Navbar';
+import Navigation from '../Navigation';
 
 const AppLayout = ({ user, children }) => (
   <div>
@@ -26,7 +26,7 @@ const AppLayout = ({ user, children }) => (
         // jscs:enable
       ]}
     />
-    <Navbar user={user} />
+    <Navigation user={user} />
     {children}
   </div>
 );
