@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 
-const AnchorItem = ({ title, href, ...rest }) => (
+const MenuItem = ({ title, href, ...rest }) => (
   <li>
     <a href={href} {...rest}>
       {title}
@@ -8,13 +8,13 @@ const AnchorItem = ({ title, href, ...rest }) => (
   </li>
 );
 
-AnchorItem.propTypes = {
+MenuItem.propTypes = {
   title: PropTypes.string,
   href: PropTypes.string,
 };
 
-AnchorItem.defaultProps = {
+MenuItem.defaultProps = {
   href: '#',
 };
 
-export default AnchorItem;
+export default MenuItem;

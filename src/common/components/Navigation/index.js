@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import classNames from 'classnames';
-import Navbar from './main/Navbar';
-import Container from './main/Container';
-import NavLink from './NavLink';
-import AnchorItem from './AnchorItem';
-import Text from '././Text';
-import localeAPI from '../api/locale';
-import { updateLocale } from '../actions/intlActions';
+import Navbar from '../main/Navbar';
+import Container from '../main/Container';
+import NavLink from '../NavLink';
+import MenuItem from '../MenuItem';
+import Text from '../Text';
+import localeAPI from '../../api/locale';
+import { updateLocale } from '../../actions/intlActions';
 
 class Navigation extends Component {
   constructor(props) {
@@ -22,7 +22,7 @@ class Navigation extends Component {
     // rendering different markups on server- and client-side
     if (process.env.BROWSER) {
       this.setState({
-        css: require('./Navbar.css'),
+        css: require('./component.css'),
       });
     }
   }
@@ -70,15 +70,15 @@ class Navigation extends Component {
 
             <Navbar.Nav right>
               <Navbar.Dropdown title={<Text id="nav.language" />}>
-                <AnchorItem
+                <MenuItem
                   title="English"
                   onClick={this._setLanguage.bind(this, 'en-us')}
                 />
-                <AnchorItem
+                <MenuItem
                   title="繁體中文"
                   onClick={this._setLanguage.bind(this, 'zh-tw')}
                 />
-                <AnchorItem
+                <MenuItem
                   title="Not supported"
                   onClick={this._setLanguage.bind(this, 'foo-bar')}
                 />
