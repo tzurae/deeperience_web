@@ -1,10 +1,10 @@
 import React from 'react';
-import BsContainer from '../components/bs/Container';
+import Container from '../components/main/Container';
 
 const PageLayout = ({ children, ...rest }) => (
-  <BsContainer {...rest}>
+  <Container {...rest}>
     {children}
-  </BsContainer>
+  </Container>
 );
 
 export default PageLayout;

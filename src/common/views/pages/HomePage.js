@@ -1,10 +1,10 @@
 import React from 'react';
 import PageLayout from '../layouts/PageLayout';
-import BsPageHeader from '../components/bs/PageHeader';
+import PageHeader from '../components/main/PageHeader';
 
 const HomePage = (props) => (
   <PageLayout>
-    <BsPageHeader title="Express-React-HMR-Boilerplate" />
+    <PageHeader title="Express-React-HMR-Boilerplate" />
     <p>
       This is the demo site for project
       <a

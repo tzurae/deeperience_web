@@ -1,11 +1,11 @@
 import React from 'react';
 import PageLayout from '../../layouts/PageLayout';
-import BsPageHeader from '../../components/bs/PageHeader';
+import PageHeader from '../../components/main/PageHeader';
 import RegisterForm from '../../components/forms/RegisterForm';
 
 const RegisterPage = (props) => (
   <PageLayout>
-    <BsPageHeader title="Register" />
+    <PageHeader title="Register" />
     <RegisterForm />
   </PageLayout>
 );

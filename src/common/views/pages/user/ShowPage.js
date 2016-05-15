@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PageLayout from '../../layouts/PageLayout';
-import BsPageHeader from '../../components/bs/PageHeader';
+import PageHeader from '../../components/main/PageHeader';
 import Time from '../../components/Time';
 import userAPI from '../../../api/user';
 
@@ -30,7 +30,7 @@ export default class ShowPage extends Component {
     const { user } = this.state;
     return (
       <PageLayout>
-        <BsPageHeader title="My Profile" />
+        <PageHeader title="My Profile" />
         <dl className="dl-horizontal">
           <dt>_id</dt>
           <dd>{user._id}</dd>

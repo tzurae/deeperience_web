@@ -1,11 +1,11 @@
 import React from 'react';
 import PageLayout from '../../layouts/PageLayout';
-import BsPageHeader from '../../components/bs/PageHeader';
+import PageHeader from '../../components/main/PageHeader';
 import LoginForm from '../../components/forms/LoginForm';
 
 const LoginPage = (props) => (
   <PageLayout>
-    <BsPageHeader title="Login" />
+    <PageHeader title="Login" />
     <LoginForm />
   </PageLayout>
 );

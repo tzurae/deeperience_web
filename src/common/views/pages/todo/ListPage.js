@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PageLayout from '../../layouts/PageLayout';
 import { connect } from 'react-redux';
-import BsPageHeader from '../../components/bs/PageHeader';
+import PageHeader from '../../components/main/PageHeader';
 import TodoItem from '../../components/TodoItem';
 import {
   setTodo,
@@ -63,7 +63,7 @@ export default class ListPage extends Component {
   render() {
     return (
       <PageLayout>
-        <BsPageHeader title="Todo List" />
+        <PageHeader title="Todo List" />
         <input type="text" ref="todotext" />
         <button onClick={this._handleAddClick}>Add Todo</button>
         <ul>
