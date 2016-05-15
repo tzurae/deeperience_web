@@ -2,24 +2,18 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import reactCookie from 'react-cookie';
 import { IntlProvider } from 'react-intl';
-import localeAPI from '../api/locale';
 import { updateLocale } from '../actions/intlActions';
 
 class LocaleProvider extends Component {
   componentDidMount() {
-    const cookieLocale = reactCookie.load('locale');
-    let lang = cookieLocale || navigator.language;
-    if (lang !== this.props.intl.locale) {
-      localeAPI
-        .show(lang)
-        .catch((err) => {
-          alert('load locale fail');
-          throw err;
-        })
-        .then((json) => {
-          this.props.dispatch(updateLocale(json));
-        });
-    }
+    let lang = reactCookie.load('locale') || navigator.language;
+    this.props
+      .dispatch(updateLocale(lang))
+      .then(() => {
+        console.log('load locale (automatically) ok');
+      }, (err) => {
+        alert('load locale (automatically) fail');
+      });
   }
 
   render() {

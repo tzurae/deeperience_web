@@ -6,7 +6,6 @@ import Container from '../main/Container';
 import NavLink from '../NavLink';
 import MenuItem from '../MenuItem';
 import Text from '../Text';
-import localeAPI from '../../api/locale';
 import { updateLocale } from '../../actions/intlActions';
 
 class Navigation extends Component {
@@ -28,18 +27,13 @@ class Navigation extends Component {
   }
 
   _setLanguage(lang) {
-    // only download when language changed
-    if (lang !== this.context.store.getState().intl.locale) {
-      localeAPI
-        .show(lang)
-        .catch((err) => {
-          alert('load locale fail');
-          throw err;
-        })
-        .then((json) => {
-          this.context.store.dispatch(updateLocale(json));
-        });
-    }
+    this.context.store
+      .dispatch(updateLocale(lang))
+      .then(() => {
+        console.log('load locale (manually) ok');
+      }, (err) => {
+        alert('load locale (manually) fail');
+      });
   }
 
   render() {
