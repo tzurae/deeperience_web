@@ -4,8 +4,8 @@ import { reduxForm } from 'redux-form';
 import BsHorizontalForm from '../bs/HorizontalForm';
 import BsFormInput from '../bs/FormInput';
 import BsFormButton from '../bs/FormButton';
-import userAPI from '../../../api/user';
-import { loginUser } from '../../../actions/userActions';
+import userAPI from '../../api/user';
+import { loginUser } from '../../actions/userActions';
 
 const validate = (values) => {
   const errors = {};

@@ -1,5 +1,5 @@
 import React from 'react';
-import Container from '../components/main/Container';
+import Container from '../main/Container';
 
 const PageLayout = ({ children, ...rest }) => (
   <Container {...rest}>

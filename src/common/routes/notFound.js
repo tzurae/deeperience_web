@@ -1,4 +1,4 @@
-import NotFoundPage from '../views/pages/NotFoundPage';
+import NotFoundPage from '../components/pages/NotFoundPage';
 
 export default {
   path: '*',

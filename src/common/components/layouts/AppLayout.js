@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Head from '../components/Head';
-import Navbar from '../components/Navbar';
+import Head from '../Head';
+import Navbar from '../Navbar';
 
 const AppLayout = ({ user, children }) => (
   <div>

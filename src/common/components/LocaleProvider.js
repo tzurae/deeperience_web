@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import reactCookie from 'react-cookie';
 import { IntlProvider } from 'react-intl';
-import localeAPI from '../../api/locale';
-import { updateLocale } from '../../actions/intlActions';
+import localeAPI from '../api/locale';
+import { updateLocale } from '../actions/intlActions';
 
 class LocaleProvider extends Component {
   componentDidMount() {

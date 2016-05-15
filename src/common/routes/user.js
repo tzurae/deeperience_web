@@ -4,16 +4,16 @@ export default {
     require.ensure([], (require) => {
       cb(null, [{
         path: 'register',
-        component: require('../views/pages/user/RegisterPage').default,
+        component: require('../components/pages/user/RegisterPage').default,
       }, {
         path: 'login',
-        component: require('../views/pages/user/LoginPage').default,
+        component: require('../components/pages/user/LoginPage').default,
       }, {
         path: 'logout',
-        component: require('../views/pages/user/LogoutPage').default,
+        component: require('../components/pages/user/LogoutPage').default,
       }, {
         path: 'me',
-        component: require('../views/pages/user/ShowPage').default,
+        component: require('../components/pages/user/ShowPage').default,
         onEnter: require('../utils/authRequired').default,
       }, ]);
     });

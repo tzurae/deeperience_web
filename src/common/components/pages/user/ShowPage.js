@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PageLayout from '../../layouts/PageLayout';
-import PageHeader from '../../components/main/PageHeader';
-import Time from '../../components/Time';
+import PageHeader from '../../main/PageHeader';
+import Time from '../../Time';
 import userAPI from '../../../api/user';
 
 export default class ShowPage extends Component {

@@ -6,8 +6,8 @@ import BsContainer from './bs/Container';
 import NavLink from './NavLink';
 import AnchorItem from './AnchorItem';
 import Text from '././Text';
-import localeAPI from '../../api/locale';
-import { updateLocale } from '../../actions/intlActions';
+import localeAPI from '../api/locale';
+import { updateLocale } from '../actions/intlActions';
 
 class Navbar extends Component {
   constructor(props) {

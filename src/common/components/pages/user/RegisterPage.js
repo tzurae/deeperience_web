@@ -1,7 +1,7 @@
 import React from 'react';
 import PageLayout from '../../layouts/PageLayout';
-import PageHeader from '../../components/main/PageHeader';
-import RegisterForm from '../../components/forms/RegisterForm';
+import PageHeader from '../../main/PageHeader';
+import RegisterForm from '../../forms/RegisterForm';
 
 const RegisterPage = (props) => (
   <PageLayout>

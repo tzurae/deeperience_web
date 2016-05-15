@@ -1,4 +1,4 @@
-import ListTodoPage from '../views/pages/todo/ListPage';
+import ListTodoPage from '../components/pages/todo/ListPage';
 
 export default {
   path: 'todo',

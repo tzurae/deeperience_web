@@ -3,7 +3,7 @@ import { render } from 'react-dom';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { match, Router, browserHistory } from 'react-router';
-import LocaleProvider from '../common/views/components/LocaleProvider';
+import LocaleProvider from '../common/components/LocaleProvider';
 import rootReducer from '../common/reducers';
 import routes from '../common/routes';
 import setupLocale from './setupLocale';

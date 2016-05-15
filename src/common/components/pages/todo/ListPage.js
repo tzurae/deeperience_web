@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PageLayout from '../../layouts/PageLayout';
 import { connect } from 'react-redux';
-import PageHeader from '../../components/main/PageHeader';
-import TodoItem from '../../components/TodoItem';
+import PageHeader from '../../main/PageHeader';
+import TodoItem from '../../TodoItem';
 import {
   setTodo,
   addTodo,
