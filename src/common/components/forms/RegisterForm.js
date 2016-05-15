@@ -1,9 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
 // import validator from 'validator';
-import BsHorizontalForm from '../bs/HorizontalForm';
-import BsFormInput from '../bs/FormInput';
-import BsFormButton from '../bs/FormButton';
+import Form from '../main/Form';
 import userAPI from '../../api/user';
 
 const validate = (values) => {
@@ -49,30 +47,36 @@ class RegisterForm extends Component {
     } = this.props;
 
     return (
-      <BsHorizontalForm onSubmit={handleSubmit(this._handleSubmit)}>
-        <BsFormInput
-          label="Name"
+      <Form horizontal onSubmit={handleSubmit(this._handleSubmit)}>
+        <Form.Input
+          title="Name"
           type="text"
           placeholder="Name"
-          field={name}
+          isError={!!(name.touched && name.error)}
+          description={name.touched && name.error? name.error: ''}
+          {...name}
         />
-        <BsFormInput
-          label="Email"
+        <Form.Input
+          title="Email"
           type="text"
           placeholder="Email"
-          field={email}
+          isError={!!(email.touched && email.error)}
+          description={email.touched && email.error? email.error: ''}
+          {...email}
         />
-        <BsFormInput
-          label="Password"
+        <Form.Input
+          title="Password"
           type="password"
           placeholder="Password"
-          field={password}
+          isError={!!(password.touched && password.error)}
+          description={password.touched && password.error? password.error: ''}
+          {...password}
         />
-        <BsFormButton
+        <Form.Button
           type="submit"
           title="Register"
         />
-      </BsHorizontalForm>
+      </Form>
     );
   }
 };
