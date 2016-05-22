@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Head from '../../Head';
 import PageLayout from '../../layouts/PageLayout';
 import PageHeader from '../../main/PageHeader';
 import AvatarForm from '../../forms/AvatarForm';
@@ -31,6 +32,11 @@ export default class ShowPage extends Component {
     const { user } = this.state;
     return (
       <PageLayout>
+        <Head
+          scripts={[
+            'https://www.gstatic.com/firebasejs/live/3.0/firebase.js',
+          ]}
+        />
         <PageHeader title="My Profile" />
         <dl className="dl-horizontal">
           <dt>_id</dt>
