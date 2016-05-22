@@ -11,6 +11,12 @@ const Head = ({ title, metas, links, scripts }) => (
       ({ src: src, type: 'text/javascript' }))} />
 );
 
+Head.defaultProps = {
+  metas: [],
+  links: [],
+  scripts: [],
+};
+
 Head.propTypes = {
   title: PropTypes.string,
   metas: PropTypes.arrayOf(PropTypes.object),
