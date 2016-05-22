@@ -96,4 +96,23 @@ export default {
       body: JSON.stringify(param),
     }).then((res) => res.json()));
   },
+  postFormAuth: (path, param = {}) => {
+    const token = reactCookie.load('token');
+    if (!token) {
+      return getUnAuthPromise();
+    }
+    let data = new FormData();
+    Object.keys(param).forEach((attr) => {
+      data.append(attr, param[attr]);
+    });
+
+    return wrapErrorHandler(fetch(path, {
+      method: 'POST',
+      credentials: 'same-origin',
+      headers: {
+        Cookie: getCookie(),
+      },
+      body: data,
+    }).then((res) => res.json()));
+  },
 };
