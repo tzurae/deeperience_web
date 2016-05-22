@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PageLayout from '../../layouts/PageLayout';
 import PageHeader from '../../main/PageHeader';
+import AvatarForm from '../../forms/AvatarForm';
 import Time from '../../Time';
 import userAPI from '../../../api/user';
 
@@ -34,6 +35,8 @@ export default class ShowPage extends Component {
         <dl className="dl-horizontal">
           <dt>_id</dt>
           <dd>{user._id}</dd>
+          <dt>avatar</dt>
+          <dd><AvatarForm /></dd>
           <dt>name</dt>
           <dd>{user.name}</dd>
           <dt>email</dt>
