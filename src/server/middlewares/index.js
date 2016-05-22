@@ -2,7 +2,6 @@ import env from '../utils/env';
 import path from 'path';
 import express from 'express';
 import favicon from 'serve-favicon';
-import bodyParser from 'body-parser';
 import reactCookie from 'react-cookie';
 import morgan from './morgan';
 import passport from './passport';
@@ -33,12 +32,6 @@ export default ({ app }) => {
   // static files
   app.use(express.static(
     path.join(__dirname, '../../public')));
-
-  // parse application/x-www-form-urlencoded
-  app.use(bodyParser.urlencoded({ extended: false }));
-
-  // parse application/json
-  app.use(bodyParser.json());
 
   // cookie parser
   app.use((req, res, next) => {
