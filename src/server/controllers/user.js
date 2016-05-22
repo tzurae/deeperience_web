@@ -60,4 +60,12 @@ export default {
       user: req.user,
     });
   },
+
+  uploadAvatar(req, res) {
+    // use `req.file` to access the avatar file
+    // and use `req.body` to access other fileds
+    res.json({
+      isError: false,
+    });
+  },
 };
