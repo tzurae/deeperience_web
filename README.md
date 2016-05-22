@@ -52,6 +52,10 @@ module.exports = {
 };
 ```
 
+## Add `config/firebase.json`
+
+TBD
+
 ## Build & Run
 
 For development:

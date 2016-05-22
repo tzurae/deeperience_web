@@ -9,6 +9,7 @@ sftp-configuration.json
 *.pem
 *.ppk
 config/credentials.js
+config/firebase.json
 
 # Log
 *.log
