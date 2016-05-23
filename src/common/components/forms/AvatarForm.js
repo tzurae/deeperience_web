@@ -53,7 +53,8 @@ class AvatarForm extends Component {
 
     // ref: <https://firebase.google.com/docs/storage/web/upload-files#upload_files>
     let storageRef = firebase.storage().ref();
-    let avatarRef = storageRef.child(`${userId}/avatar.jpg`);
+    let avatarRef = storageRef.child(
+      `${process.env.NODE_ENV}/${userId}/avatar.jpg`);
     let uploadTask = avatarRef.put(formData.avatar[0]);
 
     uploadTask.on('state_changed', function(snapshot) {

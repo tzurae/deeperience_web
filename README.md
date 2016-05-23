@@ -84,7 +84,7 @@ Firebase provides 5GB/user file storage for [free](https://firebase.google.com/p
   ```
   service firebase.storage {
     match /b/express-react-hmr-boilerplate.appspot.com/o {
-      match /{userId}/avatar.jpg {
+      match /{env}/{userId}/avatar.jpg {
       	allow read;
         allow write: if request.auth.uid == userId;
       }
