@@ -58,7 +58,24 @@ Firebase provides 5GB/user file storage for [free](https://firebase.google.com/p
 
 1. Follow the doc [Add Firebase to your Server](https://firebase.google.com/docs/server/setup)
 2. Save the credential file to `config/firebase.json`
-3. Setup firebase storage security rule
+3. Update `config/firebase.js`
+
+  - Open [Firebase console](https://console.firebase.google.com/)
+  - Enter your app
+  - Go to `Auth` page
+  - Click on `網路設定`
+  - Replace the following part of `config/firebase.js`
+
+    ```
+    var config = {
+      apiKey: '<your-api-key>',
+      authDomain: '<your-auth-domain>',
+      databaseURL: '<your-database-url>',
+      storageBucket: '<your-storage-bucket>'
+    };
+    ```
+
+4. Setup firebase storage security rule
 
   We follow the doc [Secure User Data](https://firebase.google.com/docs/storage/security/user-security), and use the following rules to restrict user permissions.
 
