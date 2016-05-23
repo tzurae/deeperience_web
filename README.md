@@ -52,9 +52,28 @@ module.exports = {
 };
 ```
 
-## Add `config/firebase.json`
+## Integrate with [Firebase](https://console.firebase.google.com/)
 
-TBD
+Firebase provides 5GB/user file storage for [free](https://firebase.google.com/pricing/) and is backed up by google cloud storage service. Thus we use firebase storage `for free` to host user avatars.
+
+1. Follow the doc [Add Firebase to your Server](https://firebase.google.com/docs/server/setup)
+2. Save the credential file to `config/firebase.json`
+3. Setup firebase storage security rule
+
+  We follow the doc [Secure User Data](https://firebase.google.com/docs/storage/security/user-security), and use the following rules to restrict user permissions.
+
+  > Don't forget to change the project name into your own
+
+  ```
+  service firebase.storage {
+    match /b/express-react-hmr-boilerplate.appspot.com/o {
+      match /{userId}/avatar.jpg {
+      	allow read;
+        allow write: if request.auth.uid == userId;
+      }
+    }
+  }
+  ```
 
 ## Build & Run
 
