@@ -8,6 +8,7 @@ import LocaleProvider from '../../common/components/LocaleProvider';
 import routes from '../../common/routes';
 import rootReducer from '../../common/reducers';
 
+// jscs:disable
 const renderFullPage = (markup, initialState) => (
 `<!doctype html>
 <html lang="utf-8">
@@ -20,9 +21,11 @@ const renderFullPage = (markup, initialState) => (
     window.__INITIAL_STATE__ = ${JSON.stringify(initialState)}
   </script>
   <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+  <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=Intl.~locale.en"></script>
   <script src="/js/bundle.js"></script>
 </body>
 </html>`);
+// jscs:enable
 
 export default {
   render(req, res) {
