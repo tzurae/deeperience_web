@@ -3,6 +3,7 @@ import { reduxForm } from 'redux-form';
 import Form from '../main/Form';
 import Input from '../reduxForm/Input';
 import Image from '../main/Image';
+import firebaseConfig from '../../../../config/firebase';
 import firebaseAPI from '../../api/firebase';
 
 const validate = (values) => {
@@ -33,13 +34,7 @@ class AvatarForm extends Component {
       })
       .then((json) => {
         // Initialize firebase
-        const config = {
-          apiKey: "AIzaSyARRM3F_eEaKVKvupqzD181KI7D_q7ASO0",
-          authDomain: "express-react-hmr-boilerplate.firebaseapp.com",
-          databaseURL: "https://express-react-hmr-boilerplate.firebaseio.com",
-          storageBucket: "express-react-hmr-boilerplate.appspot.com",
-        };
-        firebase.initializeApp(config);
+        firebase.initializeApp(firebaseConfig);
 
         // SignIn firebase
         firebase.auth()
