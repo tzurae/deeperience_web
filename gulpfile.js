@@ -200,6 +200,8 @@ gulp.task('deploy', function(cb) {
         'mkdir config',
         'cp ../config/Procfile ./',
         'cp ../config/credentials.js ./config/',
+        'cp ../config/firebase.json ./config/',
+        'cp ../config/firebase.js ./config/',
         'cp ../package.json ./',
         'cp -r ../build ./',
       ], './.deploy', cbSeries);
