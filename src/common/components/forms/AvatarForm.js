@@ -115,9 +115,21 @@ class AvatarForm extends Component {
         throw err;
       })
       .then((downloadURL) => {
-        this.setState({
-          avatarURL: `${downloadURL}?forceReload=${Math.random()}`,
-        });
+        userAPI
+          .update({
+            avatarURL: downloadURL,
+          })
+          .catch((err) => {
+            alert('update user avatar URL fail');
+            throw err;
+          })
+          .then((json) => {
+            let forceUpdate = (downloadURL.indexOf('?') >= 0?
+              '&': '?') + `forceUpdate=${Math.random()}`;
+            this.setState({
+              avatarURL: downloadURL + forceUpdate,
+            });
+          });
       });
   }
 
@@ -129,6 +141,7 @@ class AvatarForm extends Component {
       },
       handleSubmit,
     } = this.props;
+    const avatarURL = this.state.avatarURL || this.props.avatarURL;
     // use state from redux store instead of reduxForm props
     // to ensure server side render is working
     const avatarForm = this.context.store.getState().form.avatar;
@@ -136,7 +149,7 @@ class AvatarForm extends Component {
 
     return (
       <Form onSubmit={handleSubmit(this._handleSubmit)}>
-        {this.state.avatarURL && <Image thumbnail src={this.state.avatarURL} />}
+        {avatarURL && <Image thumbnail src={avatarURL} />}
         <Input
           type="file"
           placeholder="Avatar"
@@ -177,6 +190,7 @@ class AvatarForm extends Component {
 AvatarForm.propTypes = {
   fields: PropTypes.object.isRequired,
   handleSubmit: PropTypes.func.isRequired,
+  avatarURL: PropTypes.string,
 };
 
 AvatarForm.contextTypes = {

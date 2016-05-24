@@ -42,7 +42,7 @@ export default class ShowPage extends Component {
           <dt>_id</dt>
           <dd>{user._id}</dd>
           <dt>avatar</dt>
-          <dd><AvatarForm /></dd>
+          <dd><AvatarForm avatarURL={user.avatarURL} /></dd>
           <dt>name</dt>
           <dd>{user.name}</dd>
           <dt>email</dt>

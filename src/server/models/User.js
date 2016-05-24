@@ -26,6 +26,7 @@ let User = new mongoose.Schema({
     required: true,
     set: hashPassword,
   },
+  avatarURL: String,
 }, {
   versionKey: false,
   timestamps: {
