@@ -17,6 +17,8 @@ config/firebase.json
 # Generated files
 /build
 /.deploy
+/src/public/uploads
+/src/public/user
 
 # Others
 .DS_Store
