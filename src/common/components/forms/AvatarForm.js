@@ -129,6 +129,9 @@ class AvatarForm extends Component {
       },
       handleSubmit,
     } = this.props;
+    // use state from redux store instead of reduxForm props
+    // to ensure server side render is working
+    const avatarForm = this.context.store.getState().form.avatar;
     const { value: _, ...avatarWithoutValue } = avatar;
 
     return (
@@ -147,7 +150,7 @@ class AvatarForm extends Component {
                 type="radio"
                 {...storage}
                 value="firebase"
-                checked={storage.value === 'firebase'}
+                checked={avatarForm.storage.value === 'firebase'}
               /> Firebase
             </label>
           </div>
@@ -157,7 +160,7 @@ class AvatarForm extends Component {
                 type="radio"
                 {...storage}
                 value="local"
-                checked={storage.value === 'local'}
+                checked={avatarForm.storage.value === 'local'}
               /> Local
             </label>
           </div>
