@@ -5,7 +5,7 @@ import favicon from 'serve-favicon';
 import reactCookie from 'react-cookie';
 import morgan from './morgan';
 import passport from './passport';
-import mountHelper from './mountHelper';
+import mountStore from './mountStore';
 
 export default ({ app }) => {
   // inject livereload feature
@@ -42,6 +42,6 @@ export default ({ app }) => {
   // setup passport
   app.use(passport);
 
-  // mount helper functions
-  app.use(mountHelper);
+  // mount redux store
+  app.use(mountStore);
 };
