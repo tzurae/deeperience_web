@@ -26,6 +26,12 @@ class Form extends Component {
   }
 };
 
+const Field = ({ children, ...rest }) => (
+  <div className="form-group">
+    {children}
+  </div>
+);
+
 const Input = (
   { title, description, isError, className, ...rest },
   { horizontal }
@@ -109,6 +115,7 @@ Button.contextTypes = {
   horizontal: PropTypes.bool,
 };
 
+Form.Field = Field;
 Form.Input = Input;
 Form.Button = Button;
 

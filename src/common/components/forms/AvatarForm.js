@@ -6,6 +6,10 @@ import Image from '../main/Image';
 import firebaseConfig from '../../../../config/firebase';
 import firebaseAPI from '../../api/firebase';
 
+const initialValues = {
+  storage: 'local',
+};
+
 const validate = (values) => {
   const errors = {};
 
@@ -74,7 +78,10 @@ class AvatarForm extends Component {
 
   render() {
     const {
-      fields: { avatar },
+      fields: {
+        avatar,
+        storage,
+      },
       handleSubmit,
     } = this.props;
     const { value: _, ...avatarWithoutValue } = avatar;
@@ -87,6 +94,29 @@ class AvatarForm extends Component {
           placeholder="Avatar"
           field={avatarWithoutValue}
         />
+        <Form.Field>
+          Store avatar into
+          <div className="radio">
+            <label>
+              <input
+                type="radio"
+                {...storage}
+                value="firebase"
+                checked={storage.value === 'firebase'}
+              /> Firebase
+            </label>
+          </div>
+          <div className="radio">
+            <label>
+              <input
+                type="radio"
+                {...storage}
+                value="local"
+                checked={storage.value === 'local'}
+              /> Local
+            </label>
+          </div>
+        </Form.Field>
         <Form.Button
           type="submit"
           title="Upload"
@@ -109,6 +139,8 @@ export default reduxForm({
   form: 'avatar',
   fields: [
     'avatar',
+    'storage',
   ],
+  initialValues,
   validate,
 })(AvatarForm);
