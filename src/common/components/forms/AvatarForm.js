@@ -4,6 +4,7 @@ import Form from '../main/Form';
 import Input from '../reduxForm/Input';
 import Image from '../main/Image';
 import firebaseConfig from '../../../../config/firebase';
+import userAPI from '../../api/user';
 import firebaseAPI from '../../api/firebase';
 
 const initialValues = {
@@ -23,14 +24,31 @@ const validate = (values) => {
 class AvatarForm extends Component {
   constructor(props) {
     super(props);
+    this._uploadToLocal = ::this._uploadToLocal;
+    this._uploadToFirebase = ::this._uploadToFirebase;
+    this._signInFirebase = ::this._signInFirebase;
     this._handleSubmit = ::this._handleSubmit;
     this.state = {
+      isFirebaseInitialized: false,
       avatarURL: null,
     };
   }
 
-  componentDidMount() {
-    firebaseAPI
+  _uploadToLocal(formData) {
+    return userAPI
+      .uploadAvatar({
+        avatar: formData.avatar[0],
+      })
+      .catch((err) => {
+        return Promise.reject(err);
+      })
+      .then((json) => {
+        return Promise.resolve(json.downloadURL);
+      });
+  }
+
+  _signInFirebase() {
+    return firebaseAPI
       .readToken()
       .catch((err) => {
         alert('Read firebase token fail');
@@ -38,10 +56,15 @@ class AvatarForm extends Component {
       })
       .then((json) => {
         // Initialize firebase
-        firebase.initializeApp(firebaseConfig);
+        if (!this.state.isFirebaseInitialized) {
+          firebase.initializeApp(firebaseConfig);
+          this.setState({
+            isFirebaseInitialized: true,
+          });
+        }
 
         // SignIn firebase
-        firebase.auth()
+        return firebase.auth()
           .signInWithCustomToken(json.token)
           .catch(function(err) {
             alert('Sign in firebase fail');
@@ -50,30 +73,52 @@ class AvatarForm extends Component {
       });
   }
 
-  _handleSubmit(formData) {
+  _uploadToFirebase(formData) {
     let _this = this;
     let { store } = this.context;
     let userId = store.getState().user.data._id;
 
-    // ref: <https://firebase.google.com/docs/storage/web/upload-files#upload_files>
-    let storageRef = firebase.storage().ref();
-    let avatarRef = storageRef.child(
-      `${process.env.NODE_ENV}/${userId}/avatar.jpg`);
-    let uploadTask = avatarRef.put(formData.avatar[0]);
+    return new Promise((resolve, reject) => {
+      _this._signInFirebase().then(() => {
+        // ref: <https://firebase.google.com/docs/storage/web/upload-files#upload_files>
+        let storageRef = firebase.storage().ref();
+        let avatarRef = storageRef.child(
+          `${process.env.NODE_ENV}/${userId}/avatar.jpg`);
+        let uploadTask = avatarRef.put(formData.avatar[0]);
 
-    uploadTask.on('state_changed', function(snapshot) {
-      // Observe state change events such as progress, pause, and resume
-      // See below for more detail
-    }, function(error) {
-      // Handle unsuccessful uploads
-    }, function complete() {
-      // Handle successful uploads on complete
-      // For instance, get the download URL: https://firebasestorage.googleapis.com/...
-      let downloadURL = uploadTask.snapshot.downloadURL;
-      _this.setState({
-        avatarURL: downloadURL,
+        uploadTask.on('state_changed', function(snapshot) {
+          // Observe state change events such as progress, pause, and resume
+          // See below for more detail
+        }, function(err) {
+          // Handle unsuccessful uploads
+          return reject(err);
+        }, function complete() {
+          // Handle successful uploads on complete
+          // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+          let downloadURL = uploadTask.snapshot.downloadURL;
+          return resolve(downloadURL);
+        });
       });
     });
+  }
+
+  _handleSubmit(formData) {
+    let uploadProcedure;
+    if (formData.storage === 'firebase') {
+      uploadProcedure = this._uploadToFirebase(formData);
+    } else if (formData.storage === 'local') {
+      uploadProcedure = this._uploadToLocal(formData);
+    }
+    uploadProcedure
+      .catch((err) => {
+        alert('upload fail');
+        throw err;
+      })
+      .then((downloadURL) => {
+        this.setState({
+          avatarURL: `${downloadURL}?forceReload=${Math.random()}`,
+        });
+      });
   }
 
   render() {
