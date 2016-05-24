@@ -1,5 +1,6 @@
 import { handleDbError } from '../decorators/handleError';
 import User from '../models/User';
+import filterAttribute from '../utils/filterAttribute';
 
 export default {
   create(req, res) {
@@ -59,6 +60,17 @@ export default {
       isError: false,
       user: req.user,
     });
+  },
+
+  update(req, res) {
+    let user = filterAttribute(req.body, ['name', 'avatarURL']);
+    User.update({ _id: req.user._id }, user, handleDbError(res)((raw) => {
+      res.json({
+        originAttributes: req.body,
+        updatedAttributes: user,
+        isError: false,
+      });
+    }));
   },
 
   uploadAvatar(req, res) {

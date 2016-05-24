@@ -11,6 +11,7 @@ export default ({ app }) => {
   app.post('/api/user/login', bodyParser.json, userController.login);
   app.get('/api/user/logout', userController.logout);
   app.get('/api/user/me', authRequired, userController.show);
+  app.put('/api/user/me', authRequired, bodyParser.json, userController.update);
   app.get('/api/user/me/firebase/token',
     authRequired, firebaseController.readToken);
   app.post('/api/user/me/avatar',
