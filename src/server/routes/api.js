@@ -15,7 +15,10 @@ export default ({ app }) => {
     authRequired, firebaseController.readToken);
   app.post('/api/user/me/avatar',
     authRequired,
-    fileUpload.memory.single('avatar'),
+    fileUpload.disk({
+      destination: 'user/{userId}',
+      filename: 'avatar.jpg',
+    }).single('avatar'),
     userController.uploadAvatar);
   app.get('/api/locale/:locale', localeController.show);
   app.post('/api/todo', bodyParser.json, todoController.create);
