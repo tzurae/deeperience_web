@@ -16,8 +16,6 @@ const hashPassword = (rawPassword = '') => {
 };
 
 let User = new mongoose.Schema({
-  createdAt: { type: Date, default: Date.now },
-  updatedAt: { type: Date, default: Date.now },
   name: String,
   email: {
     type: String,
@@ -30,6 +28,10 @@ let User = new mongoose.Schema({
   },
 }, {
   versionKey: false,
+  timestamps: {
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+  },
 });
 
 User.methods.auth = function(password, cb) {
