@@ -80,6 +80,22 @@ export default {
       },
     }).then((res) => res.json()));
   },
+  putAuth: (path, param = {}) => {
+    const token = reactCookie.load('token');
+    if (!token) {
+      return getUnAuthPromise();
+    }
+    return wrapErrorHandler(fetch(path, {
+      method: 'PUT',
+      credentials: 'same-origin',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Cookie: getCookie(),
+      },
+      body: JSON.stringify(param),
+    }).then((res) => res.json()));
+  },
   postAuth: (path, param = {}) => {
     const token = reactCookie.load('token');
     if (!token) {
