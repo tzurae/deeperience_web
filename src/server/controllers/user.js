@@ -65,6 +65,7 @@ export default {
     // use `req.file` to access the avatar file
     // and use `req.body` to access other fileds
     res.json({
+      downloadURL: `/user/${req.user._id}/${req.file.filename}`,
       isError: false,
     });
   },
