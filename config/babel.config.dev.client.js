@@ -9,4 +9,5 @@ module.exports = {
     'es2015',
     'react',
   ],
+  cacheDirectory: true,
 };
