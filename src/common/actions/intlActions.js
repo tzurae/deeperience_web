@@ -8,8 +8,8 @@ export const updateLocale = (targetLocale) => {
     if (targetLocale === currentLocale) {
       return Promise.resolve();
     }
-    return localeAPI
-      .show(targetLocale)
+    return localeAPI(getState().apiEngine)
+      .read(targetLocale)
       .then((json) => {
         reactCookie.save('locale', json.locale, { path: '/' });
         dispatch({

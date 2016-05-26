@@ -8,10 +8,15 @@ import LocaleProvider from '../common/components/LocaleProvider';
 import rootReducer from '../common/reducers';
 import getRoutes from '../common/routes';
 import setupLocale from './setupLocale';
+import { setApiEngine } from '../common/actions/apiEngine';
+import ApiEngine from '../common/utils/ApiEngine';
 
 setupLocale();
 const initialState = window.__INITIAL_STATE__;
 let store = createStore(rootReducer, initialState, applyMiddleware(thunk));
+
+let apiEngine = new ApiEngine();
+store.dispatch(setApiEngine(apiEngine));
 
 // refs:
 // - <http://www.jianshu.com/p/b3ff1f53faaf>

@@ -19,7 +19,7 @@ export default class LogoutPage extends React.Component {
   }
 
   componentWillMount() {
-    userAPI
+    userAPI(this.context.store.getState().apiEngine)
       .logout()
       .catch((err) => {
         alert('Logout user fail');

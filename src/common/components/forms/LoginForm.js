@@ -39,7 +39,7 @@ class LoginForm extends Component {
   }
 
   _handleSubmit(formData) {
-    userAPI
+    userAPI(this.context.store.getState().apiEngine)
       .login(formData)
       .catch((err) => {
         alert('Login user fail');

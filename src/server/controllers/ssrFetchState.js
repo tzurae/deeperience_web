@@ -31,7 +31,7 @@ export default {
       });
   }),
   todo: wrapTimeout(3000)((req, res, next) => {
-    todoAPI
+    todoAPI(req.store.getState().apiEngine)
       .list()
       .catch((err) => {
         throw err;
