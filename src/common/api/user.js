@@ -1,10 +1,9 @@
-import api from '../utils/webAPIUtils';
-
-export default {
-  register: (user) => api.post('/api/user', user),
-  login: (user) => api.post('/api/user/login', user),
-  logout: () => api.get('/api/user/logout'),
-  show: () => api.getAuth('/api/user/me'),
-  update: (user) => api.putAuth('/api/user/me', user),
-  uploadAvatar: (avatar) => api.postFormAuth('/api/user/me/avatar', avatar),
-};
+export default (apiEngine) => ({
+  register: (user) => apiEngine.post('/api/user', { data: user }),
+  login: (user) => apiEngine.post('/api/user/login', { data: user }),
+  logout: () => apiEngine.get('/api/user/logout'),
+  show: () => apiEngine.get('/api/user/me'),
+  update: (user) => apiEngine.put('/api/user/me', { data: user }),
+  uploadAvatar: (avatar) =>
+    apiEngine.post('/api/user/me/avatar', { files: { avatar } }),
+});

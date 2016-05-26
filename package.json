@@ -67,7 +67,6 @@
     "imports-loader": "^0.6.5",
     "rimraf": "^2.5.2",
     "style-loader": "^0.13.1",
-    "superagent": "^1.8.3",
     "webpack": "^1.12.9",
     "webpack-dev-middleware": "^1.4.0",
     "webpack-hot-middleware": "^2.6.0"
@@ -98,6 +97,7 @@
     "redux-form": "^5.2.3",
     "redux-thunk": "^2.1.0",
     "serve-favicon": "^2.3.0",
+    "superagent": "^2.0.0-alpha.3",
     "validator": "^5.2.0",
     "whatwg-fetch": "^1.0.0"
   }
