@@ -3,7 +3,7 @@ import { renderToString } from 'react-dom/server';
 import { match, RouterContext } from 'react-router';
 import { Provider } from 'react-redux';
 import LocaleProvider from '../../common/components/LocaleProvider';
-import routes from '../../common/routes';
+import getRoutes from '../../common/routes';
 
 // jscs:disable
 const renderFullPage = (markup, initialState) => (
@@ -26,6 +26,7 @@ const renderFullPage = (markup, initialState) => (
 
 export default {
   render(req, res) {
+    let routes = getRoutes(req.store);
     match({
       routes,
       location: req.url,

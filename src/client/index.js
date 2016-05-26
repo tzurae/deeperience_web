@@ -6,7 +6,7 @@ import thunk from 'redux-thunk';
 import { match, Router, browserHistory } from 'react-router';
 import LocaleProvider from '../common/components/LocaleProvider';
 import rootReducer from '../common/reducers';
-import routes from '../common/routes';
+import getRoutes from '../common/routes';
 import setupLocale from './setupLocale';
 
 setupLocale();
@@ -16,6 +16,7 @@ let store = createStore(rootReducer, initialState, applyMiddleware(thunk));
 // refs:
 // - <http://www.jianshu.com/p/b3ff1f53faaf>
 // - <https://github.com/ryanflorence/example-react-router-server-rendering-lazy-routes>
+let routes = getRoutes(store);
 match({
   history: browserHistory,
   routes,

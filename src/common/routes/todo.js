@@ -1,6 +1,6 @@
 import ListTodoPage from '../components/pages/todo/ListPage';
 
-export default {
+export default (store) => ({
   path: 'todo',
   component: ListTodoPage,
-};
+});
