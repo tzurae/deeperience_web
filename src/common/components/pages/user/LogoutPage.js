@@ -1,5 +1,4 @@
 import React from 'react';
-import reactCookie from 'react-cookie';
 import userAPI from '../../../api/user';
 import { logoutUser } from '../../../actions/userActions';
 

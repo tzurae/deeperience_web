@@ -33,12 +33,12 @@ export default ({ app }) => {
   app.use(express.static(
     path.join(__dirname, '../../public')));
 
-  // setup passport
-  app.use(passport);
-
   // mount redux store
   app.use(mountStore);
 
   // initialize cookie
   app.use(initCookie);
+
+  // setup passport
+  app.use(passport);
 };

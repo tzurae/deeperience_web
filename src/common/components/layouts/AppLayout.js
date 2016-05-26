@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Head from '../Head';
 import Navigation from '../Navigation';
 
-const AppLayout = ({ user, children }) => (
+const AppLayout = ({ cookie, children }) => (
   <div>
     <Head
       title="Express-React-HMR-Boilerplate"
@@ -26,7 +26,7 @@ const AppLayout = ({ user, children }) => (
         // jscs:enable
       ]}
     />
-    <Navigation user={user} />
+    <Navigation cookie={cookie} />
     {children}
   </div>
 );
