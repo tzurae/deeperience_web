@@ -192,7 +192,7 @@ AvatarForm.propTypes = {
 };
 
 AvatarForm.contextTypes = {
-  store: PropTypes.object,
+  store: PropTypes.object.isRequired,
 };
 
 export default reduxForm({

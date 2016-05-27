@@ -92,8 +92,8 @@ class LoginForm extends Component {
 };
 
 LoginForm.contextTypes = {
-  store: React.PropTypes.object.isRequired,
-  router: React.PropTypes.any.isRequired,
+  store: PropTypes.object.isRequired,
+  router: PropTypes.any.isRequired,
 };
 
 LoginForm.propTypes = {

@@ -31,6 +31,6 @@ export default class LogoutPage extends React.Component {
   }
 
   render() {
-    return false;
+    return null;
   }
 };
