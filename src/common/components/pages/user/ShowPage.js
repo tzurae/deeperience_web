@@ -6,7 +6,7 @@ import AvatarForm from '../../forms/AvatarForm';
 import Time from '../../Time';
 import userAPI from '../../../api/user';
 
-export default class ShowPage extends Component {
+class ShowPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -68,3 +68,5 @@ export default class ShowPage extends Component {
 ShowPage.contextTypes = {
   store: React.PropTypes.object.isRequired,
 };
+
+export default ShowPage;

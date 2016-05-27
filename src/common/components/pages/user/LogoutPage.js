@@ -2,12 +2,7 @@ import React from 'react';
 import userAPI from '../../../api/user';
 import { logoutUser } from '../../../actions/userActions';
 
-export default class LogoutPage extends React.Component {
-  static contextTypes = {
-    store: React.PropTypes.object.isRequired,
-    router: React.PropTypes.any.isRequired,
-  };
-
+class LogoutPage extends React.Component {
   constructor(props) {
     super(props);
     this._logout = ::this._logout;
@@ -34,3 +29,10 @@ export default class LogoutPage extends React.Component {
     return null;
   }
 };
+
+LogoutPage.contextTypes = {
+  store: React.PropTypes.object.isRequired,
+  router: React.PropTypes.any.isRequired,
+};
+
+export default LogoutPage;
