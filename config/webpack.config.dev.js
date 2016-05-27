@@ -28,9 +28,6 @@ module.exports = {
       },
     }),
     new webpack.NoErrorsPlugin(),
-    new webpack.ProvidePlugin({
-      fetch: 'imports?this=>global!exports?global.fetch!whatwg-fetch',
-    }),
   ],
   module: {
     loaders: [{
