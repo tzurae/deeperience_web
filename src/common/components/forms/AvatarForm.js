@@ -35,10 +35,8 @@ class AvatarForm extends Component {
   }
 
   _uploadToLocal(formData) {
-    return userAPI
-      .uploadAvatar({
-        avatar: formData.avatar[0],
-      })
+    return userAPI(this.context.store.getState().apiEngine)
+      .uploadAvatar(formData.avatar[0])
       .catch((err) => {
         return Promise.reject(err);
       })
@@ -48,7 +46,7 @@ class AvatarForm extends Component {
   }
 
   _signInFirebase() {
-    return firebaseAPI
+    return firebaseAPI(this.context.store.getState().apiEngine)
       .readToken()
       .catch((err) => {
         alert('Read firebase token fail');
@@ -76,7 +74,7 @@ class AvatarForm extends Component {
   _uploadToFirebase(formData) {
     let _this = this;
     let { store } = this.context;
-    let userId = store.getState().user.data._id;
+    let userId = JSON.parse(store.getState().cookie.user)._id;
 
     return new Promise((resolve, reject) => {
       _this._signInFirebase().then(() => {
@@ -115,7 +113,7 @@ class AvatarForm extends Component {
         throw err;
       })
       .then((downloadURL) => {
-        userAPI
+        userAPI(this.context.store.getState().apiEngine)
           .update({
             avatarURL: downloadURL,
           })

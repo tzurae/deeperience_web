@@ -18,9 +18,9 @@ export default class ListPage extends Component {
   }
 
   componentDidMount() {
-    const { dispatch } = this.props;
+    const { dispatch, apiEngine } = this.props;
     if (this.props.todos.length == 0) {
-      todoAPI
+      todoAPI(apiEngine)
         .list()
         .catch((err) => {
           alert('List todos fail');
@@ -33,9 +33,9 @@ export default class ListPage extends Component {
   }
 
   _handleAddClick() {
-    const { dispatch } = this.props;
+    const { dispatch, apiEngine } = this.props;
     const text = this.refs.todotext.value;
-    todoAPI
+    todoAPI(apiEngine)
       .create({ text })
       .catch((err) => {
         alert('Create todo fail');
@@ -48,8 +48,8 @@ export default class ListPage extends Component {
   }
 
   _handleRemoveClick(id) {
-    const { dispatch } = this.props;
-    todoAPI
+    const { dispatch, apiEngine } = this.props;
+    todoAPI(apiEngine)
       .remove(id)
       .catch((err) => {
         alert('Remove todo fail');

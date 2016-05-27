@@ -32,14 +32,14 @@ class LoginForm extends Component {
   }
 
   _login(json) {
-    this.context.store.dispatch(loginUser({
+    return this.context.store.dispatch(loginUser({
       token: json.token,
       data: json.user,
     }));
   }
 
   _handleSubmit(formData) {
-    userAPI
+    userAPI(this.context.store.getState().apiEngine)
       .login(formData)
       .catch((err) => {
         alert('Login user fail');
@@ -47,14 +47,15 @@ class LoginForm extends Component {
       })
       .then((json) => {
         if (json.isAuth) {
-          this._login(json);
-          // redirect to the origin path before logging in
-          const { location } = this.props;
-          if (location && location.state && location.state.nextPathname) {
-            this.context.router.push(location.state.nextPathname);
-          } else {
-            this.context.router.push('/');
-          }
+          this._login(json).then(() => {
+            // redirect to the origin path before logging in
+            const { location } = this.props;
+            if (location && location.state && location.state.nextPathname) {
+              this.context.router.push(location.state.nextPathname);
+            } else {
+              this.context.router.push('/');
+            }
+          });
         } else {
           alert('wrong email or password');
         }

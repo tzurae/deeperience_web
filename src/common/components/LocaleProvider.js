@@ -1,12 +1,11 @@
-import React, { Component } from 'react';
+import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
-import reactCookie from 'react-cookie';
 import { IntlProvider } from 'react-intl';
 import { updateLocale } from '../actions/intlActions';
 
 class LocaleProvider extends Component {
   componentDidMount() {
-    let lang = reactCookie.load('locale') || navigator.language;
+    let lang = this.context.store.getState().intl.locale || navigator.language;
     this.props
       .dispatch(updateLocale(lang))
       .then(() => {
@@ -24,6 +23,10 @@ class LocaleProvider extends Component {
       </IntlProvider>
     );
   }
+};
+
+LocaleProvider.contextTypes = {
+  store: PropTypes.object.isRequired,
 };
 
 export default connect((state) => state)(LocaleProvider);

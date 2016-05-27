@@ -1,5 +1,4 @@
 import React from 'react';
-import reactCookie from 'react-cookie';
 import userAPI from '../../../api/user';
 import { logoutUser } from '../../../actions/userActions';
 
@@ -19,7 +18,7 @@ export default class LogoutPage extends React.Component {
   }
 
   componentWillMount() {
-    userAPI
+    userAPI(this.context.store.getState().apiEngine)
       .logout()
       .catch((err) => {
         alert('Logout user fail');

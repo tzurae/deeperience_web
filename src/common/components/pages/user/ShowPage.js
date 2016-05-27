@@ -15,7 +15,7 @@ export default class ShowPage extends Component {
   }
 
   componentDidMount() {
-    userAPI
+    userAPI(this.context.store.getState().apiEngine)
       .show()
       .catch((err) => {
         alert('Show user fail');
@@ -63,4 +63,8 @@ export default class ShowPage extends Component {
       </PageLayout>
     );
   }
+};
+
+ShowPage.contextTypes = {
+  store: React.PropTypes.object.isRequired,
 };

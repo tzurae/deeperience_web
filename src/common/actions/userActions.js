@@ -1,34 +1,17 @@
-import reactCookie from 'react-cookie';
-import actionTypes from '../constants/actionTypes';
+import { setCookies, removeCookie } from './cookieActions';
 
 export const loginUser = ({ token, data }) => {
-  reactCookie.save('token',  token, { path: '/' });
-  reactCookie.save('user',  data, { path: '/' });
-  return {
-    type: actionTypes.LOGIN_USER,
-    token,
-    data,
+  return (dispatch) => {
+    return dispatch(setCookies({
+      token,
+      user: data,
+    }));
   };
 };
 
 export const logoutUser = () => {
-  reactCookie.remove('token');
-  reactCookie.remove('user');
-  return {
-    type: actionTypes.LOGOUT_USER,
-  };
-};
-
-export const setUserToken = (token) => {
-  return {
-    type: actionTypes.SET_USER_TOKEN,
-    token,
-  };
-};
-
-export const setUserData = (data) => {
-  return {
-    type: actionTypes.SET_USER_DATA,
-    data,
+  return (dispatch) => {
+    dispatch(removeCookie('token'));
+    dispatch(removeCookie('user'));
   };
 };

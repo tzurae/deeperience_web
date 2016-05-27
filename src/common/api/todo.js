@@ -1,13 +1,10 @@
-import api from '../utils/webAPIUtils';
-
-export default {
-  // below is an example of simulating timeout for `ssr fetch state`
+export default (apiEngine) => ({
   // list: () => new Promise((resolve, reject) => {
   //   setTimeout(() => {
-  //     resolve(api.get('/api/todo'));
+  //     resolve(apiEngine.get('/api/todo'));
   //   }, 5000);
   // }),
-  list: () => api.get('/api/todo'),
-  create: (todo) => api.post('/api/todo', todo),
-  remove: (id) => api.delete(`/api/todo/${id}`),
-};
+  list: () => apiEngine.get('/api/todo'),
+  create: (todo) => apiEngine.post('/api/todo', { data: todo }),
+  remove: (id) => apiEngine.del(`/api/todo/${id}`),
+});

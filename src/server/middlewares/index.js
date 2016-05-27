@@ -2,10 +2,10 @@ import env from '../utils/env';
 import path from 'path';
 import express from 'express';
 import favicon from 'serve-favicon';
-import reactCookie from 'react-cookie';
 import morgan from './morgan';
 import passport from './passport';
-import mountHelper from './mountHelper';
+import mountStore from './mountStore';
+import initCookie from './initCookie';
 
 export default ({ app }) => {
   // inject livereload feature
@@ -33,15 +33,12 @@ export default ({ app }) => {
   app.use(express.static(
     path.join(__dirname, '../../public')));
 
-  // cookie parser
-  app.use((req, res, next) => {
-    reactCookie.setRawCookie(req.headers.cookie);
-    next();
-  });
+  // mount redux store
+  app.use(mountStore);
+
+  // initialize cookie
+  app.use(initCookie);
 
   // setup passport
   app.use(passport);
-
-  // mount helper functions
-  app.use(mountHelper);
 };

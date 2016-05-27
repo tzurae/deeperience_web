@@ -37,9 +37,9 @@ class Navigation extends Component {
   }
 
   render() {
-    const isAuth = !!this.props.user.token;
-    const token = this.props.user.token;
-    const user = this.props.user.data;
+    let { token, user } = this.props.cookie;
+    let isAuth = !!token;
+    user = (user && JSON.parse(user)) || {};
     const csLogo = classNames('navbar-brand', this.state.css.redBorder);
 
     return (

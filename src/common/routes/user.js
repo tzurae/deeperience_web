@@ -1,4 +1,4 @@
-export default {
+export default (store) => ({
   path: 'user',
   getChildRoutes(location, cb) {
     require.ensure([], (require) => {
@@ -14,8 +14,8 @@ export default {
       }, {
         path: 'me',
         component: require('../components/pages/user/ShowPage').default,
-        onEnter: require('../utils/authRequired').default,
+        onEnter: require('../utils/authRequired').default(store),
       }, ]);
     });
   },
-};
+});

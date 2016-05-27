@@ -4,14 +4,14 @@ import AppLayout from '../components/layouts/AppLayout';
 import HomePage from '../components/pages/HomePage';
 import notFoundRoute from './notFound';
 
-export default {
+export default (store) => ({
   path: '/',
   component: AppLayout,
   getChildRoutes(location, cb) {
     require.ensure([], (require) => {
       cb(null, [
-        require('./user').default,
-        require('./todo').default,
+        require('./user').default(store),
+        require('./todo').default(store),
         notFoundRoute,
       ]);
     });
@@ -19,4 +19,4 @@ export default {
   indexRoute: {
     component: HomePage,
   },
-};
+});

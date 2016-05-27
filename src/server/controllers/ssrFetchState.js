@@ -1,47 +1,42 @@
-import reactCookie from 'react-cookie';
-import localeAPI from '../../common/api/locale';
 import todoAPI from '../../common/api/todo';
 import wrapTimeout from '../decorators/wrapTimeout';
+import { loginUser } from '../../common/actions/userActions';
+import { updateLocale } from '../../common/actions/intlActions';
+import { setTodo } from '../../common/actions/todoActions';
 
 export default {
   user: (req, res, next) => {
-    res.setSSRState({
-      user: {
-        token: reactCookie.load('token'),
-        data: reactCookie.load('user'),
-      },
-    });
+    let { cookie } = req.store.getState();
+    req.store.dispatch(loginUser({
+      token: cookie.token,
+      data: cookie.user,
+    }));
     next();
   },
   intl: wrapTimeout(3000)((req, res, next) => {
-    const cookieLocale = reactCookie.load('locale');
+    const cookieLocale = req.store.getState().cookie.locale;
     let lang;
     if (cookieLocale) {
       lang = cookieLocale;
     } else {
       lang = req.acceptsLanguages('en-us', 'zh-tw');
-      reactCookie.save('locale', lang, { path: '/' });
     }
-    localeAPI
-      .show(lang)
-      .catch((err) => {
-        throw err;
-      })
-      .then((json) => {
-        res.setSSRState({
-          intl: json,
-        });
+    req.store
+      .dispatch(updateLocale(lang))
+      .then(() => {
         next();
+      }, (err) => {
+        throw err;
       });
   }),
   todo: wrapTimeout(3000)((req, res, next) => {
-    todoAPI
+    todoAPI(req.store.getState().apiEngine)
       .list()
       .catch((err) => {
         throw err;
       })
       .then((json) => {
-        res.setSSRState({ todos: json.todos });
+        req.store.dispatch(setTodo(json.todos));
         next();
       });
   }),

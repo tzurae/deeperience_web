@@ -1,6 +1,6 @@
-import reactCookie from 'react-cookie';
 import actionTypes from '../constants/actionTypes';
 import localeAPI from '../api/locale';
+import { setCookie } from './cookieActions';
 
 export const updateLocale = (targetLocale) => {
   return (dispatch, getState) => {
@@ -8,17 +8,17 @@ export const updateLocale = (targetLocale) => {
     if (targetLocale === currentLocale) {
       return Promise.resolve();
     }
-    return localeAPI
-      .show(targetLocale)
+    return localeAPI(getState().apiEngine)
+      .read(targetLocale)
       .then((json) => {
-        reactCookie.save('locale', json.locale, { path: '/' });
+        dispatch(setCookie('locale', json.locale));
         dispatch({
           type: actionTypes.UPDATE_LOCALE,
           locale: json.locale,
           messages: json.messages,
         });
       }, (err) => {
-        reactCookie.save('locale', currentLocale, { path: '/' });
+        dispatch(setCookie('locale', currentLocale));
         return Promise.reject(err);
       });
   };

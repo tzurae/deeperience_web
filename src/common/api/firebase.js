@@ -1,5 +1,3 @@
-import api from '../utils/webAPIUtils';
-
-export default {
-  readToken: () => api.getAuth('/api/user/me/firebase/token'),
-};
+export default (apiEngine) => ({
+  readToken: () => apiEngine.get('/api/user/me/firebase/token'),
+});
