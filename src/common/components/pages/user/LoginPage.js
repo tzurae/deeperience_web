@@ -6,7 +6,7 @@ import LoginForm from '../../forms/LoginForm';
 const LoginPage = (props) => (
   <PageLayout>
     <PageHeader title="Login" />
-    <LoginForm />
+    <LoginForm location={props.location} />
   </PageLayout>
 );
 
