@@ -8,9 +8,11 @@ import LocaleProvider from '../common/components/LocaleProvider';
 import rootReducer from '../common/reducers';
 import getRoutes from '../common/routes';
 import setupLocale from './setupLocale';
+import setupNProgress from './setupNProgress';
 import { setApiEngine } from '../common/actions/apiEngine';
 import ApiEngine from '../common/utils/ApiEngine';
 
+setupNProgress();
 setupLocale();
 const initialState = window.__INITIAL_STATE__;
 let store = createStore(rootReducer, initialState, applyMiddleware(thunk));

@@ -11,6 +11,9 @@ const renderFullPage = (markup, initialState) => (
 <html lang="utf-8">
 <head>
   <title>Express-React-HMR-Boilerplate</title>
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  <script src="https://cdn.rawgit.com/jpillora/xhook/gh-pages/dist/xhook.min.js"></script>
 </head>
 <body>
   <div id="root">${markup}</div>
