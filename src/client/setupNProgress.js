@@ -2,19 +2,36 @@
 // - <https://gist.github.com/jgatjens/a08126bbbadb2d6096cb>
 // - <http://stackoverflow.com/questions/3219758/detect-changes-in-the-dom>
 export default () => {
+  class ProgressBar {
+    constructor() {
+      this.ajaxRequestCount = 0;
+    }
+    start() {
+      this.ajaxRequestCount++;
+      if (this.ajaxRequestCount === 1) {
+        NProgress.start();
+      }
+    }
+    done() {
+      this.ajaxRequestCount--;
+      if (this.ajaxRequestCount < 0) {
+        this.ajaxRequestCount = 0;
+      }
+      if (this.ajaxRequestCount === 0) {
+        NProgress.done();
+      }
+    }
+  }
+  let progressBar = new ProgressBar();
   let oldOpen = XMLHttpRequest.prototype.open;
 
   function onStateChange() {
     if (this.readyState === 1) {
-      NProgress.start();
+      progressBar.start();
     } else if (this.readyState === 4) {
-      if (this.status % 100 >= 4) {
-        NProgress.fail();
-      } else {
-        NProgress.done();
-      }
+      progressBar.done();
     } else {
-      NProgress.done();
+      // console.log('[xhr waiting]');
     }
   }
 
@@ -55,10 +72,10 @@ export default () => {
 
   observeDOM(document.head,
     function onStart() {
-      NProgress.start();
+      progressBar.start();
     },
     function onDone() {
-      NProgress.done();
+      progressBar.done();
     }
   );
 };
