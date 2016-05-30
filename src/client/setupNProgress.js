@@ -7,13 +7,14 @@ export default () => {
   function onStateChange() {
     if (this.readyState === 1) {
       NProgress.start();
-    }
-    if (this.readyState === 4) {
+    } else if (this.readyState === 4) {
       if (this.status % 100 >= 4) {
         NProgress.fail();
       } else {
         NProgress.done();
       }
+    } else {
+      NProgress.done();
     }
   }
 
