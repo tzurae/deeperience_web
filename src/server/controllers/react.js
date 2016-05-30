@@ -21,6 +21,9 @@ const renderFullPage = (markup, initialState) => (
   </script>
   <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
   <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=Intl.~locale.en"></script>
+  <!-- [IF IE] -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.35.1/es6-shim.min.js"></script>
+  <!-- [endif] -->
   <script src="/js/bundle.js"></script>
 </body>
 </html>`);
