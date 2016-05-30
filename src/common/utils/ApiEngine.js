@@ -31,7 +31,6 @@ export default class ApiEngine {
           if (files) {
             let formData = new FormData();
             Object.keys(files).forEach((name) => {
-              console.log('files[name]', files[name]);
               formData.append(name, files[name]);
             });
             request.send(formData);
