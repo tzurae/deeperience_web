@@ -1,8 +1,8 @@
 export default (store) => ({
-  path: 'todo',
+  path: 'logout',
   getComponent(nextState, cb) {
     require.ensure([], (require) => {
-      cb(null, require('../components/pages/todo/ListPage').default);
+      cb(null, require('../../components/pages/user/LogoutPage').default);
     });
   },
 });

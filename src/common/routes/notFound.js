@@ -1,6 +1,8 @@
-import NotFoundPage from '../components/pages/NotFoundPage';
-
-export default {
+export default (store) => ({
   path: '*',
-  component: NotFoundPage,
-};
+  getComponent(nextState, cb) {
+    require.ensure([], (require) => {
+      cb(null, require('../components/pages/NotFoundPage').default);
+    });
+  },
+});
