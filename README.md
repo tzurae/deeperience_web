@@ -53,7 +53,7 @@ Most services this boilerplate provides rely on mongoDB. You must config your ow
 
 2. Done
 
-## Integrate with [Firebase](https://console.firebase.google.com/)
+## Integrate with [Firebase](https://console.firebase.google.com/) (Optional)
 
 Firebase provides 5GB/user file storage for [free](https://firebase.google.com/pricing/) and is backed up by google cloud storage service. Thus we use firebase storage `for free` to host user avatars.
 
@@ -75,10 +75,20 @@ Firebase provides 5GB/user file storage for [free](https://firebase.google.com/p
       storageBucket: '<your-storage-bucket>'
     };
     ```
-4. Update `configs/project/server.js`
+4. Update `configs/project/client.js` and `configs/project/server.js`
 
-  Make sure there is a `firebase` entry like below:
+  Make sure there is a `firebase` entry in each file:
   ```js
+  // configs/project/client.js
+  module.exports = {
+    // ...
+    firebase: require('./firebase/client'),
+    // ...
+  };
+  ```
+
+  ```js
+  // configs/project/server.js
   module.exports = {
     // ...
     firebase: require('./firebase/credential.json'),

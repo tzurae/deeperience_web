@@ -161,8 +161,15 @@ class AvatarForm extends Component {
                 type="radio"
                 {...storage}
                 value="firebase"
+                disabled={!!configs.firebase === false}
                 checked={avatarForm.storage.value === 'firebase'}
-              /> Firebase
+              />
+              {configs.firebase?
+                'Firebase':
+                <span>
+                  <s>Firebase</s>{' (Service is disabled)'}
+                </span>
+              }
             </label>
           </div>
           <div className="radio">

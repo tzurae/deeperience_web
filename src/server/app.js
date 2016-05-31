@@ -1,8 +1,8 @@
 import env from './utils/env';
 import express from 'express';
 import mongoose from 'mongoose';
-import firebase from 'firebase';
 import configs from '../../configs/project/server';
+import clientConfigs from '../../configs/project/client';
 import middlewares from './middlewares';
 import routes from './routes';
 
@@ -11,10 +11,16 @@ const appPromise = new Promise((resolve, reject) => {
   app.set('env', env);
 
   // initialize firebase
-  firebase.initializeApp({
-    serviceAccount: configs.firebase,
-    databaseURL: 'https://express-react-hmr-boilerplate.firebaseio.com/',
-  });
+  if (configs.firebase && clientConfigs.firebase) {
+    let firebase = require('firebase');
+    firebase.initializeApp({
+      serviceAccount: configs.firebase,
+      databaseURL: clientConfigs.firebase.databaseURL,
+    });
+    console.log('[Service] [Firebase]\tenabled');
+  } else {
+    console.log('[Service] [Firebase]\tdisabled');
+  }
 
   // connect to mongolab
   if (configs.mongo) {

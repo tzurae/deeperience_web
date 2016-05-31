@@ -1,8 +1,8 @@
+import configs from '../../../configs/project/server';
 import bodyParser from '../middlewares/bodyParser';
 import authRequired from '../middlewares/authRequired';
 import fileUpload from '../middlewares/fileUpload';
 import userController from '../controllers/user';
-import firebaseController from '../controllers/firebase';
 import localeController from '../controllers/locale';
 import todoController from '../controllers/todo';
 
@@ -12,8 +12,11 @@ export default ({ app }) => {
   app.get('/api/user/logout', userController.logout);
   app.get('/api/user/me', authRequired, userController.show);
   app.put('/api/user/me', authRequired, bodyParser.json, userController.update);
-  app.get('/api/user/me/firebase/token',
-    authRequired, firebaseController.readToken);
+  if (configs.firebase) {
+    let firebaseController = require('../controllers/firebase').default;
+    app.get('/api/user/me/firebase/token',
+      authRequired, firebaseController.readToken);
+  }
   app.post('/api/user/me/avatar',
     authRequired,
     fileUpload.disk({
