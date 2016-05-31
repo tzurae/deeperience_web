@@ -14,13 +14,13 @@ var async = require('async');
 
 // local modules
 var webpackConfig = {
-  development: require('./configs/webpack.config.dev'),
-  production: require('./configs/webpack.config.prod'),
+  development: require('./configs/env/webpack.config.dev'),
+  production: require('./configs/env/webpack.config.prod'),
 };
 var babelConfig = {
-  developmentClient: require('./configs/babel.config.dev.client'),
-  developmentServer: require('./configs/babel.config.dev.server'),
-  production: require('./configs/babel.config.prod'),
+  developmentClient: require('./configs/env/babel.config.dev.client'),
+  developmentServer: require('./configs/env/babel.config.dev.server'),
+  production: require('./configs/env/babel.config.prod'),
 };
 
 var paths = {

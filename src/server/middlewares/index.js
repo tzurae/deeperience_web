@@ -12,7 +12,7 @@ export default ({ app }) => {
   if (env === 'development') {
     console.log('using livereload');
     const webpack = require('webpack');
-    const config = require('../../../configs/webpack.config.dev');
+    const config = require('../../../configs/env/webpack.config.dev');
     const compiler = webpack(config);
 
     app.use(require('webpack-dev-middleware')(compiler, {

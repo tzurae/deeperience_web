@@ -1,16 +1,14 @@
 var path = require('path');
 var webpack = require('webpack');
-var babelConfig = require('./babel.config.dev.client');
+var babelConfig = require('./babel.config.prod');
 
 module.exports = {
-  devtool: 'cheap-module-eval-source-map',
+  // devtool: 'source-map',
   entry: [
-    'eventsource-polyfill',
-    'webpack-hot-middleware/client',
-    path.join(__dirname, '../src/client/index'),
+    path.join(__dirname, '../../src/client/index'),
   ],
   output: {
-    path: path.join(__dirname, '../build/public/js'),
+    path: path.join(__dirname, '../../build/public/js'),
     filename: 'bundle.js',
     chunkFilename: '[id].chunk.js',
     publicPath: '/js/',
@@ -20,19 +18,23 @@ module.exports = {
     mongoose: 'mongoose',
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
+    new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
-        NODE_ENV: JSON.stringify('development'),
+        NODE_ENV: JSON.stringify('production'),
         BROWSER: JSON.stringify(true),
       },
     }),
-    new webpack.NoErrorsPlugin(),
+    new webpack.optimize.UglifyJsPlugin({
+      compressor: {
+        warnings: false,
+      },
+    }),
   ],
   module: {
     loaders: [{
       test: /\.jsx?$/,
-      include: path.join(__dirname, '../src'),
+      include: path.join(__dirname, '../../src'),
       loader: 'babel',
       query: babelConfig,
     }, {

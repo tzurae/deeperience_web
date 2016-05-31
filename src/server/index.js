@@ -1,2 +1,2 @@
-require('babel-register')(require('../../configs/babel.config.dev.server'));
+require('babel-register')(require('../../configs/env/babel.config.dev.server'));
 require('./server');
