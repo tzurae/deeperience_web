@@ -17,17 +17,20 @@ const appPromise = new Promise((resolve, reject) => {
   });
 
   // connect to mongolab
-  mongoose.connect(
-    configs.mongo[env],
-    (err) => {
+  if (configs.mongo) {
+    mongoose.connect(configs.mongo[env], (err) => {
       if (err) {
         throw err;
       }
+      console.log('[Service] [Mongo]\tenabled');
       middlewares({ app });
       routes({ app });
-      resolve(app);
-    }
-  );
+      return resolve(app);
+    });
+  } else {
+    console.log('[Service] [Mongo]\tdisabled');
+    return reject(new Error('MongoDB URI is required'));
+  }
 });
 
 export default appPromise;
