@@ -35,37 +35,37 @@ npm install -g jscs
 npm install
 ```
 
-## Add `configs/credentials.js`
+## Integrate with MongoDB (**Required**)
 
-This is where credentials are stored, so you have to provide your own. Here is the example format:
+Most services this boilerplate provides rely on mongoDB. You must config your own mongoDB URIs.
 
-```js
-module.exports = {
-  mongoDbUri: {
+1. Add `configs/project/mongo/credential.js`
+
+  The file is where mongoDB URIs are stored. Here is the example template:
+
+  ```js
+  module.exports = {
     development: 'mongodb://<user>:<password>@<domain>:<port>/<db_development>',
     test: 'mongodb://<user>:<password>@<domain>:<port>/<db_test>',
     production: 'mongodb://<user>:<password>@<domain>:<port>/<db_production>',
-  },
-  jwt: {
-    secret: '4df5p5xe23',
-    expiresIn: 60 * 60 * 24 * 3, // in seconds
-  },
-};
-```
+  };
+  ```
+
+2. Done
 
 ## Integrate with [Firebase](https://console.firebase.google.com/)
 
 Firebase provides 5GB/user file storage for [free](https://firebase.google.com/pricing/) and is backed up by google cloud storage service. Thus we use firebase storage `for free` to host user avatars.
 
 1. Follow the doc [Add Firebase to your Server](https://firebase.google.com/docs/server/setup)
-2. Save the credential file to `configs/firebase.json`
-3. Update `configs/firebase.js`
+2. Save the credential file to `configs/project/firebase/credential.json`
+3. Update `configs/project/firebase/client.js`
 
   - Open [Firebase console](https://console.firebase.google.com/)
   - Enter your app
   - Go to `Auth` page
-  - Click on `網路設定`
-  - Replace the following part of `configs/firebase.js`
+  - Click on `網路設定` and get your configuration
+  - Replace the following part with your configuration
 
     ```
     var config = {
@@ -75,8 +75,17 @@ Firebase provides 5GB/user file storage for [free](https://firebase.google.com/p
       storageBucket: '<your-storage-bucket>'
     };
     ```
+4. Update `configs/project/server.js`
 
-4. Setup firebase storage security rule
+  Make sure there is a `firebase` entry like below:
+  ```js
+  module.exports = {
+    // ...
+    firebase: require('./firebase/credential.json'),
+    // ...
+  };
+  ```
+5. Setup firebase storage security rule
 
   We follow the doc [Secure User Data](https://firebase.google.com/docs/storage/security/user-security), and use the following rules to restrict user permissions.
 
