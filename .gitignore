@@ -1,9 +1,6 @@
 # Dependency directory
 node_modules
 
-# Sublime workspace configuration
-sftp-configuration.json
-
 # Secret
 *.pub
 *.pem
