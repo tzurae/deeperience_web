@@ -14,13 +14,13 @@ var async = require('async');
 
 // local modules
 var webpackConfig = {
-  development: require('./config/webpack.config.dev'),
-  production: require('./config/webpack.config.prod'),
+  development: require('./configs/webpack.config.dev'),
+  production: require('./configs/webpack.config.prod'),
 };
 var babelConfig = {
-  developmentClient: require('./config/babel.config.dev.client'),
-  developmentServer: require('./config/babel.config.dev.server'),
-  production: require('./config/babel.config.prod'),
+  developmentClient: require('./configs/babel.config.dev.client'),
+  developmentServer: require('./configs/babel.config.dev.server'),
+  production: require('./configs/babel.config.prod'),
 };
 
 var paths = {
@@ -196,12 +196,12 @@ gulp.task('deploy', function(cb) {
       execCmds([
         'rm -f ./package.json',
         'rm -rf ./build',
-        'rm -rf ./config',
-        'mkdir config',
-        'cp ../config/Procfile ./',
-        'cp ../config/credentials.js ./config/',
-        'cp ../config/firebase.json ./config/',
-        'cp ../config/firebase.js ./config/',
+        'rm -rf ./configs',
+        'mkdir configs',
+        'cp ../configs/Procfile ./',
+        'cp ../configs/credentials.js ./configs/',
+        'cp ../configs/firebase.json ./configs/',
+        'cp ../configs/firebase.js ./configs/',
         'cp ../package.json ./',
         'cp -r ../build ./',
       ], './.deploy', cbSeries);

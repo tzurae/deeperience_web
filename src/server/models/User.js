@@ -1,7 +1,7 @@
 import crypto from 'crypto';
 import mongoose from 'mongoose';
 import jwt from 'jsonwebtoken';
-import credentials from '../../../config/credentials';
+import credentials from '../../../configs/credentials';
 
 const hashPassword = (rawPassword = '') => {
   let recursiveLevel = 5;

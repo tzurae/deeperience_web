@@ -3,7 +3,7 @@ import {
   Strategy as JwtStrategy,
   ExtractJwt
 } from 'passport-jwt';
-import credentials from '../../../config/credentials';
+import credentials from '../../../configs/credentials';
 import User from '../models/User';
 
 const cookieExtractor = (req) => {

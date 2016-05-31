@@ -3,7 +3,7 @@ import { reduxForm } from 'redux-form';
 import Form from '../main/Form';
 import Input from '../reduxForm/Input';
 import Image from '../main/Image';
-import firebaseConfig from '../../../../config/firebase';
+import firebaseConfig from '../../../../configs/firebase';
 import userAPI from '../../api/user';
 import firebaseAPI from '../../api/firebase';
 

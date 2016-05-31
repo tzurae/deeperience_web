@@ -35,7 +35,7 @@ npm install -g jscs
 npm install
 ```
 
-## Add `config/credentials.js`
+## Add `configs/credentials.js`
 
 This is where credentials are stored, so you have to provide your own. Here is the example format:
 
@@ -58,14 +58,14 @@ module.exports = {
 Firebase provides 5GB/user file storage for [free](https://firebase.google.com/pricing/) and is backed up by google cloud storage service. Thus we use firebase storage `for free` to host user avatars.
 
 1. Follow the doc [Add Firebase to your Server](https://firebase.google.com/docs/server/setup)
-2. Save the credential file to `config/firebase.json`
-3. Update `config/firebase.js`
+2. Save the credential file to `configs/firebase.json`
+3. Update `configs/firebase.js`
 
   - Open [Firebase console](https://console.firebase.google.com/)
   - Enter your app
   - Go to `Auth` page
   - Click on `網路設定`
-  - Replace the following part of `config/firebase.js`
+  - Replace the following part of `configs/firebase.js`
 
     ```
     var config = {
