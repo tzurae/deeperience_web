@@ -3,7 +3,7 @@ import { reduxForm } from 'redux-form';
 import Form from '../main/Form';
 import Input from '../reduxForm/Input';
 import Image from '../main/Image';
-import firebaseConfig from '../../../../configs/firebase';
+import configs from '../../../../configs/project/client';
 import userAPI from '../../api/user';
 import firebaseAPI from '../../api/firebase';
 
@@ -55,7 +55,7 @@ class AvatarForm extends Component {
       .then((json) => {
         // Initialize firebase
         if (!this.state.isFirebaseInitialized) {
-          firebase.initializeApp(firebaseConfig);
+          firebase.initializeApp(configs.firebase);
           this.setState({
             isFirebaseInitialized: true,
           });

@@ -2,7 +2,7 @@ import env from './utils/env';
 import express from 'express';
 import mongoose from 'mongoose';
 import firebase from 'firebase';
-import credentials from '../../configs/credentials';
+import configs from '../../configs/project/server';
 import middlewares from './middlewares';
 import routes from './routes';
 
@@ -12,13 +12,13 @@ const appPromise = new Promise((resolve, reject) => {
 
   // initialize firebase
   firebase.initializeApp({
-    serviceAccount: require('../../configs/firebase.json'),
+    serviceAccount: configs.firebase,
     databaseURL: 'https://express-react-hmr-boilerplate.firebaseio.com/',
   });
 
   // connect to mongolab
   mongoose.connect(
-    credentials.mongoDbUri[env],
+    configs.mongo[env],
     (err) => {
       if (err) {
         throw err;

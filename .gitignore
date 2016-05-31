@@ -5,8 +5,7 @@ node_modules
 *.pub
 *.pem
 *.ppk
-configs/credentials.js
-configs/firebase.json
+configs/**/credential.*
 
 # Log
 *.log

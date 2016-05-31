@@ -3,7 +3,7 @@ import {
   Strategy as JwtStrategy,
   ExtractJwt
 } from 'passport-jwt';
-import credentials from '../../../configs/credentials';
+import configs from '../../../configs/project/server';
 import User from '../models/User';
 
 const cookieExtractor = (req) => {
@@ -12,7 +12,7 @@ const cookieExtractor = (req) => {
 
 passport.use(new JwtStrategy({
   jwtFromRequest: cookieExtractor,
-  secretOrKey: credentials.jwt.secret,
+  secretOrKey: configs.jwt.secret,
 }, (jwtPayload, done) => {
   User.findById(jwtPayload._id, (err, user) => {
     if (err) {

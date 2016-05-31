@@ -1,7 +1,7 @@
 import crypto from 'crypto';
 import mongoose from 'mongoose';
 import jwt from 'jsonwebtoken';
-import credentials from '../../../configs/credentials';
+import configs from '../../../configs/project/server';
 
 const hashPassword = (rawPassword = '') => {
   let recursiveLevel = 5;
@@ -46,8 +46,8 @@ User.methods.toJwtToken = function(cb) {
     name: this.name,
     email: this.email,
   };
-  const token = jwt.sign(user, credentials.jwt.secret, {
-    expiresIn: credentials.jwt.expiresIn,
+  const token = jwt.sign(user, configs.jwt.secret, {
+    expiresIn: configs.jwt.expiresIn,
   });
   return token;
 };
