@@ -26,6 +26,7 @@ This is a boilerplate for scaffolding MERN stack projects with livereload featur
   - Passport + Jwt Authentication
   - i18n
   - Upload avatar
+  - Ajax progress bar
 
 ## Installation
 
@@ -131,7 +132,7 @@ npm start
 npm test
 ```
 
-## Deploy on heroku
+## Deploy on [Heroku](https://www.heroku.com/)
 
 Please login heroku first, and run the command
 
@@ -161,3 +162,4 @@ gulp deploy [--app=<heroku_app_name>] [--create]
 - [ ] Todo#Update API & Todo#Edit Functionality
 - [x] File Uploading (e.g. Avatar)
 - [ ] Facebook Login
+- [x] Ajax progress bar
