@@ -30,7 +30,7 @@ class RegisterForm extends Component {
   }
 
   _handleSubmit(formData) {
-    userAPI
+    userAPI(this.context.store.getState().apiEngine)
       .register(formData)
       .catch((err) => {
         alert('Register user fail');
@@ -77,7 +77,8 @@ class RegisterForm extends Component {
 };
 
 RegisterForm.contextTypes = {
-  router: React.PropTypes.any.isRequired,
+  store: PropTypes.any.isRequired,
+  router: PropTypes.any.isRequired,
 };
 
 RegisterForm.propTypes = {
