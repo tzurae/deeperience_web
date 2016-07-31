@@ -24,10 +24,10 @@ const validate = (values) => {
 class AvatarForm extends Component {
   constructor(props) {
     super(props);
-    this._uploadToLocal = ::this._uploadToLocal;
-    this._uploadToFirebase = ::this._uploadToFirebase;
-    this._signInFirebase = ::this._signInFirebase;
-    this._handleSubmit = ::this._handleSubmit;
+    this._uploadToLocal = this._uploadToLocal.bind(this);
+    this._uploadToFirebase = this._uploadToFirebase.bind(this);
+    this._signInFirebase = this._signInFirebase.bind(this);
+    this._handleSubmit = this._handleSubmit.bind(this);
     this.state = {
       isFirebaseInitialized: false,
       avatarURL: null,
@@ -122,8 +122,8 @@ class AvatarForm extends Component {
             throw err;
           })
           .then((json) => {
-            let forceUpdate = (downloadURL.indexOf('?') >= 0?
-              '&': '?') + `forceUpdate=${Math.random()}`;
+            let forceUpdate = (downloadURL.indexOf('?') >= 0 ?
+              '&' : '?') + `forceUpdate=${Math.random()}`;
             this.setState({
               avatarURL: downloadURL + forceUpdate,
             });
@@ -164,8 +164,8 @@ class AvatarForm extends Component {
                 disabled={!!configs.firebase === false}
                 checked={avatarForm.storage.value === 'firebase'}
               />
-              {configs.firebase?
-                'Firebase':
+              {configs.firebase ?
+                'Firebase' :
                 <span>
                   <s>Firebase</s>{' (Service is disabled)'}
                 </span>

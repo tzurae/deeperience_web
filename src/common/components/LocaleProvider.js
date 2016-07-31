@@ -11,7 +11,7 @@ class LocaleProvider extends Component {
       .then(() => {
         console.log('load locale (automatically) ok');
       }, (err) => {
-        alert('load locale (automatically) fail');
+        alert('load locale (automatically) fail', err);
       });
   }
 

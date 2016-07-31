@@ -14,12 +14,12 @@ import todoAPI from '../../../api/todo';
 export default class ListPage extends Component {
   constructor(props) {
     super(props);
-    this._handleAddClick = ::this._handleAddClick;
+    this._handleAddClick = this._handleAddClick.bind(this);
   }
 
   componentDidMount() {
     const { dispatch, apiEngine } = this.props;
-    if (this.props.todos.length == 0) {
+    if (this.props.todos.length === 0) {
       todoAPI(apiEngine)
         .list()
         .catch((err) => {

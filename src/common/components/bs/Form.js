@@ -38,13 +38,13 @@ const Input = (
 ) => {
   const cxField = classNames(
     'form-group',
-    {'has-error': isError},
+    {'has-error': isError}
   );
   const cxInput = classNames(
     'form-control',
     className
   );
-  return horizontal? (
+  return horizontal ? (
     <div className={cxField}>
       {title &&
         <label className="control-label col-sm-2">
@@ -56,7 +56,7 @@ const Input = (
           <span className="help-block">{description}</span>}
       </div>
     </div>
-  ): (
+  ) : (
     <div className={cxField}>
       {title &&
         <label>
@@ -69,7 +69,7 @@ const Input = (
   );
 };
 
-const Button = ({ title, className, ...rest}, { horizontal }) => {
+const Button = ({ title, className, ...rest }, { horizontal }) => {
   const cx = classNames('btn', 'btn-default', className);
   const btn = (
     <button className={cx} {...rest}>

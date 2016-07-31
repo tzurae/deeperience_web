@@ -27,8 +27,8 @@ const validate = (values) => {
 class LoginForm extends Component {
   constructor(props) {
     super(props);
-    this._login = ::this._login;
-    this._handleSubmit = ::this._handleSubmit;
+    this._login = this._login.bind(this);
+    this._handleSubmit = this._handleSubmit.bind(this);
   }
 
   _login(json) {

@@ -5,7 +5,7 @@ import { logoutUser } from '../../../actions/userActions';
 class LogoutPage extends React.Component {
   constructor(props) {
     super(props);
-    this._logout = ::this._logout;
+    this._logout = this._logout.bind(this);
   }
 
   _logout() {

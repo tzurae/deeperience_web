@@ -2,7 +2,7 @@
 import superagent from 'superagent';
 import getPort from '../../server/utils/getPort';
 
-const BASE = process.env.BROWSER? '': `http://localhost:${getPort()}`;
+const BASE = process.env.BROWSER ? '' : `http://localhost:${getPort()}`;
 const methods = ['get', 'post', 'put', 'patch', 'del'];
 
 function formatUrl(path) {

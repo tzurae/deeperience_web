@@ -11,12 +11,12 @@ class Input extends Component {
     return (
       <Form.Input
         isError={
-          isError !== undefined?
-          isError:
+          isError !== undefined ?
+          isError :
           !!(field.touched && field.error)
         }
         description={
-          (field.touched && field.error)? field.error: (description || '')
+          (field.touched && field.error) ? field.error : (description || '')
         }
         {...field}
         {...rest}

@@ -18,7 +18,7 @@ export default {
         errors: [{
           name: 'Locale is not supported',
           message: 'Locale is not supported',
-        },],
+        }],
         status: 400,
         isError: true,
       });

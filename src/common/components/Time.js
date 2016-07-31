@@ -6,7 +6,7 @@ const Time = ({ value, format, relative }) => {
   let v = null;
   if (value) {
     v = moment(value);
-    v = relative? v.fromNow(): v.format(format);
+    v = relative ? v.fromNow() : v.format(format);
   }
   return (
     <time>{v}</time>

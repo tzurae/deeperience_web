@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
-import classNames from 'classnames';
 import Navbar from './main/Navbar';
 import Container from './main/Container';
 import NavLink from './NavLink';
@@ -15,7 +14,7 @@ class Navigation extends Component {
       .then(() => {
         console.log('load locale (manually) ok');
       }, (err) => {
-        alert('load locale (manually) fail');
+        alert('load locale (manually) fail', err);
       });
   }
 
@@ -63,8 +62,8 @@ class Navigation extends Component {
               </Navbar.Dropdown>
               <Navbar.Dropdown
                 title={
-                  !isAuth?
-                  <Text id="nav.user" />:
+                  !isAuth ?
+                  <Text id="nav.user" /> :
                   (user.name || user.email)}
               >
                 {!isAuth &&
