@@ -1,31 +1,14 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import classNames from 'classnames';
-import Navbar from '../main/Navbar';
-import Container from '../main/Container';
-import NavLink from '../NavLink';
-import MenuItem from '../MenuItem';
-import Text from '../Text';
-import { updateLocale } from '../../actions/intlActions';
+import Navbar from './main/Navbar';
+import Container from './main/Container';
+import NavLink from './NavLink';
+import MenuItem from './MenuItem';
+import Text from './Text';
+import { updateLocale } from '../actions/intlActions';
 
 class Navigation extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      css: {},
-    };
-  }
-
-  componentDidMount() {
-    // assign css in componentDidMount lifecycle to prevent components from
-    // rendering different markups on server- and client-side
-    if (process.env.BROWSER) {
-      this.setState({
-        css: require('./component.css'),
-      });
-    }
-  }
-
   _setLanguage(lang) {
     this.context.store
       .dispatch(updateLocale(lang))
@@ -40,13 +23,14 @@ class Navigation extends Component {
     let { token, user } = this.props.cookie;
     let isAuth = !!token;
     user = (user && JSON.parse(user)) || {};
-    const csLogo = classNames('navbar-brand', this.state.css.redBorder);
 
     return (
       <Navbar staticTop>
         <Container>
           <Navbar.Header>
-            <Link className={csLogo} to="/" >Logo</Link>
+            <Link className="navbar-brand" to="/" >
+              Logo
+            </Link>
           </Navbar.Header>
 
           <Navbar.Body>
