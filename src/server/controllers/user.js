@@ -6,7 +6,9 @@ export default {
   create(req, res) {
     const user = User({
       name: req.body.name,
-      email: req.body.email,
+      email: {
+        value: req.body.email,
+      },
       password: req.body.password,
     });
 
@@ -20,7 +22,7 @@ export default {
 
   login(req, res) {
     User.findOne({
-      email: req.body.email,
+      'email.value': req.body.email,
     }, handleDbError(res)((user) => {
       if (!user) {
         res.json({

@@ -46,7 +46,7 @@ class ShowPage extends Component {
           <dt>name</dt>
           <dd>{user.name}</dd>
           <dt>email</dt>
-          <dd>{user.email}</dd>
+          <dd>{user.email && user.email.value}</dd>
           <dt>updatedAt</dt>
           <dd>
             <Time value={user.updatedAt} format="YYYY-MM-DD" />
