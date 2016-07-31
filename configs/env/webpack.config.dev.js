@@ -1,8 +1,16 @@
 var path = require('path');
 var webpack = require('webpack');
+var WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
+var webpackIsomorphicToolsConfig = require('../project/webpack-isomorphic-tools-configuration');
 var babelConfig = require('./babel.config.dev.client');
 
+var webpackIsomorphicToolsPlugin =
+  new WebpackIsomorphicToolsPlugin(webpackIsomorphicToolsConfig)
+    .development();
+
 module.exports = {
+  // project root, sync with `./webpack.config.prod.js` and `src/webpackIsomorphicToolsInjector.js`
+  context: path.resolve(__dirname, '../../src'),
   devtool: 'cheap-module-eval-source-map',
   entry: [
     'eventsource-polyfill',
@@ -28,6 +36,7 @@ module.exports = {
       },
     }),
     new webpack.NoErrorsPlugin(),
+    webpackIsomorphicToolsPlugin,
   ],
   module: {
     loaders: [{
@@ -36,8 +45,13 @@ module.exports = {
       loader: 'babel',
       query: babelConfig,
     }, {
-      test: /\.css$/,
-      loader: 'style-loader!css-loader',
+      test: webpackIsomorphicToolsPlugin.regular_expression('cssModules'),
+      loaders: [
+        'style-loader',
+        'css-loader?modules&localIdentName=[name]_[local]_[hash:base64:3]',
+        'sass-loader',
+        'postcss-loader',
+      ],
     },],
   },
 };

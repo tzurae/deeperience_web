@@ -16,5 +16,9 @@ configs/**/credential.*
 /src/public/uploads
 /src/public/user
 
+# webpack-isomorphic-tools
+webpack-stats.json
+webpack-assets.json
+
 # Others
 .DS_Store

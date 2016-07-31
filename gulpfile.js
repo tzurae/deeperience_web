@@ -11,6 +11,7 @@ var sourcemaps = require('gulp-sourcemaps');
 var nodemon = require('gulp-nodemon');
 var notify = require('gulp-notify');
 var async = require('async');
+var mergeStream = require('merge-stream');
 
 // local modules
 var webpackConfig = {
@@ -26,6 +27,12 @@ var babelConfig = {
 var paths = {
   scripts: './src/server/**/*.js',
   reacts: './src/common/**/*.js',
+  componentStyles: [
+    './src/common/components/**/*.scss',
+    './src/common/components/**/*.less',
+    './src/common/components/**/*.styl',
+    './src/common/components/**/*.css',
+  ],
   statics: './src/public/**/*',
   nodemonWatchIgnore: [
     'gulpfile.js',
@@ -36,6 +43,7 @@ var paths = {
     'src/common/**/*',
   ],
   targetDir: 'build',
+  isomorphicConfigDir: 'configs/project/isomorphic',
 };
 
 function _babelStream(src, dest, config) {
@@ -72,7 +80,10 @@ function _webpackTask(config, cb) {
 
 // clean build files
 gulp.task('clean', function() {
-  return del.sync(paths.targetDir);
+  return del.sync([
+    paths.targetDir,
+    paths.isomorphicConfigDir,
+  ]);
 });
 
 // build nodejs source files
@@ -100,9 +111,13 @@ gulp.task('webpack:production', ['build:reactjs'], function(cb) {
 
 // copy static files
 gulp.task('copy', function() {
-  return gulp
+  var staticTask = gulp
     .src(paths.statics)
     .pipe(gulp.dest(path.join(paths.targetDir, 'public')));
+  var componentStyleTask = gulp
+    .src(paths.componentStyles)
+    .pipe(gulp.dest(path.join(paths.targetDir, 'common/components')));
+  return mergeStream(staticTask, componentStyleTask);
 });
 
 // launch development server

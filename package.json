@@ -61,13 +61,18 @@
     "css-loader": "^0.23.1",
     "del": "^2.2.0",
     "eventsource-polyfill": "^0.9.6",
+    "extract-text-webpack-plugin": "^1.0.1",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
     "gulp-nodemon": "^2.0.6",
     "gulp-notify": "^2.2.0",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-util": "^3.0.7",
+    "merge-stream": "^1.0.0",
+    "node-sass": "^3.8.0",
+    "postcss-loader": "^0.9.1",
     "rimraf": "^2.5.2",
+    "sass-loader": "^4.0.0",
     "style-loader": "^0.13.1",
     "webpack": "^1.12.9",
     "webpack-dev-middleware": "^1.4.0",
@@ -101,6 +106,7 @@
     "redux-thunk": "^2.1.0",
     "serve-favicon": "^2.3.0",
     "superagent": "^2.0.0-alpha.3",
-    "validator": "^5.2.0"
+    "validator": "^5.2.0",
+    "webpack-isomorphic-tools": "^2.5.6"
   }
 }
