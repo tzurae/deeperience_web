@@ -5,7 +5,7 @@
   "scripts": {
     "pretest": "gulp build:production",
     "test": "npm run jscs && npm run mocha",
-    "jscs": "jscs ./src --config=./.jscsrc --verbose",
+    "jscs": "jscs ./src --config=./.jscsrc --esnext --verbose",
     "jscs-auto-fix": "jscs ./src --config=./.jscsrc --verbose --fix",
     "clean": "gulp clean",
     "build": "gulp build",

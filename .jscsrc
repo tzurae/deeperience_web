@@ -1,7 +1,6 @@
 {
   "preset": "node-style-guide",
   "fileExtensions": [".js"],
-  "esnext": true,
   "excludeFiles": [
     "./node_modules/**",
     "./build/**"
