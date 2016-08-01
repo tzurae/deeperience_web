@@ -159,6 +159,12 @@ gulp deploy [--app=<heroku_app_name>] [--create]
 - [x] i18n
 - [x] Use redux-thunk
 - [x] CookieStore
+- [ ] ES6 test scripts
+- [ ] Mail System
+- [ ] Asynchronous redux-form validation (detect duplicate username/email)
+- [ ] [Error handling](http://goldbergyoni.com/checklist-best-practices-of-node-js-error-handling/)
+- [ ] Pagination
+- [ ] Disable submit button when form submitting
 - [ ] Todo#Update API & Todo#Edit Functionality
 - [x] File Uploading (e.g. Avatar)
 - [ ] Facebook Login
