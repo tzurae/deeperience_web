@@ -18,6 +18,9 @@ describe('#Pages', function() {
 
   before(function(done) {
     User(features.user[0]).save(function(err, user) {
+      if (err) {
+        return done(err);
+      }
       userTokens[0] = user.toJwtToken();
       done();
     });
@@ -76,8 +79,8 @@ describe('#Pages', function() {
   });
 
   after(function(done) {
-    User.remove({email: features.user[0].email}, function(err) {
-      done();
+    User.remove({ 'email.value': features.user[0].email.value }, function(err) {
+      done(err);
     });
   });
 });
