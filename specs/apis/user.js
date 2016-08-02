@@ -3,12 +3,10 @@ var request = require('superagent');
 var expect = chai.expect;
 var constants = require('../constants');
 var User = require('../../build/server/models/User').default;
+var features = require('../features');
 
 describe('#user', function() {
-  var fakeUser = {
-    email: 'fakeuser@gmail.com',
-    password: 'fake',
-  };
+  var fakeUser;
   var resUser;
 
   var validateUser = function(user) {
@@ -23,6 +21,11 @@ describe('#user', function() {
   describe('#Unauthorized User', function() {
     // POST /api/user
     describe('POST /api/user', function() {
+      fakeUser = {
+        name: features.user[0].name,
+        email: features.user[0].email.value,
+        password: features.user[0].password,
+      };
       it('should create user', function(done) {
         request
           .post(constants.BASE + '/api/user')
@@ -36,11 +39,26 @@ describe('#user', function() {
             done();
           });
       });
+      it('should fail when email is duplicate', function(done) {
+        request
+          .post(constants.BASE + '/api/user')
+          .send(fakeUser)
+          .end(function(err, res) {
+            expect(res).to.not.be.undefined;
+            expect(res.status).to.equal(200);
+            expect(res.body.isError).to.be.true;
+            done();
+          });
+      });
     });
 
     // POST /api/user/login
     describe('POST /api/user/login', function() {
       it('should auth valid user', function(done) {
+        fakeUser = {
+          email: features.user[0].email.value,
+          password: features.user[0].password,
+        };
         request
           .post(constants.BASE + '/api/user/login')
           .send(fakeUser)
