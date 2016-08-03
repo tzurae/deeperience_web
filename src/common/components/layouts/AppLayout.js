@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Head from '../Head';
 import Navigation from '../Navigation';
+import ErrorList from '../utils/ErrorList';
 
 const AppLayout = ({ cookie, children }) => (
   <div>
@@ -27,6 +28,7 @@ const AppLayout = ({ cookie, children }) => (
       ]}
     />
     <Navigation cookie={cookie} />
+    <ErrorList />
     {children}
   </div>
 );
