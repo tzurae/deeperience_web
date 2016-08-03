@@ -5,6 +5,16 @@ const authRequired = (req, res, next) => {
     if (err) {
       return next(err);
     }
+    if (info && info.name === 'TokenExpiredError') {
+      return res.json({
+        isError: true,
+        status: 401,
+        errors: [{
+          name: 'Token Expiration',
+          message: 'Your jwt token expired.',
+        }],
+      });
+    }
     if (!user) {
       // custom 401 message
       return res.json({
