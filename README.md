@@ -33,7 +33,6 @@ This is a boilerplate for scaffolding MERN stack projects with livereload featur
 
 ```
 npm install -g gulp
-npm install -g jscs
 npm install
 ```
 
