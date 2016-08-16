@@ -12,7 +12,10 @@
     "start": "node build/server/server.js",
     "android": "npm run native-run-android && npm run native-watch-css",
     "native-run-android": "node ./node_modules/react-native/local-cli/cli.js run-android",
-    "native-watch-css": "./node_modules/react-native-css/bin/react-native-css -i ./src/native/styles/index.scss -o ./src/native/styles/index.js --watch"
+    "native-watch-css": "./node_modules/react-native-css/bin/react-native-css -i ./src/native/styles/index.scss -o ./src/native/styles/index.js --watch",
+    "android-keygen": "keytool -genkey -v -keystore my-release-key.keystore -alias my-key-alias -keyalg RSA -keysize 2048 -validity 10000",
+    "release-android": "cd android && ./gradlew assembleRelease && echo '\n***\nThe generated APK can be found under android/app/build/outputs/apk/app-release.apk\n***'",
+    "install-android": "cd android && ./gradlew installRelease"
   },
   "repository": {
     "type": "git",

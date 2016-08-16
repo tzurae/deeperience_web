@@ -16,6 +16,7 @@ configs/**/credential.*
 /src/public/uploads
 /src/public/user
 /src/native/styles/index.js
+my-release-key.keystore
 
 # webpack-isomorphic-tools
 webpack-stats.json

@@ -27,6 +27,7 @@ This is a boilerplate for scaffolding MERN stack projects with livereload featur
   - i18n
   - Upload avatar
   - Ajax progress bar
+- React Native
 
 ## Installation
 
@@ -150,6 +151,22 @@ gulp deploy [--app=<heroku_app_name>] [--create]
 - `-c`, `--create`
 
   If you want to create new app on heroku, please use this switch.
+
+## React Native
+
+For development, just use:
+
+```bash
+npm run android
+```
+
+For production or distributing APK, please refer to the setup part of [Generating Signed APK](https://facebook.github.io/react-native/docs/signed-apk-android.html). You can use helper scripts below:
+
+```bash
+npm run android-keygen
+npm run release-android
+npm run install-android
+```
 
 ## Roadmap
 
