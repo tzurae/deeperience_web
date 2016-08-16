@@ -15,10 +15,29 @@ configs/**/credential.*
 /.deploy
 /src/public/uploads
 /src/public/user
+/src/native/styles/index.js
+my-release-key.keystore
 
 # webpack-isomorphic-tools
 webpack-stats.json
 webpack-assets.json
+
+# Android/IJ
+*.iml
+.idea
+*.gradle
+local.properties
+/android/build
+/android/app/build
+
+# iOS
+/ios/build
+
+# BUCK
+buck-out/
+\.buckd/
+/android/app/libs
+/android/keystores/debug.keystore
 
 # Others
 .DS_Store
