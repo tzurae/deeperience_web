@@ -15,6 +15,7 @@ configs/**/credential.*
 /.deploy
 /src/public/uploads
 /src/public/user
+/src/native/styles/index.js
 
 # webpack-isomorphic-tools
 webpack-stats.json
