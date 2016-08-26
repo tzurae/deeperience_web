@@ -169,6 +169,8 @@ npm run install-android
 
 ## Setup a new project
 
+Follow the commands below to integrate this boilerplate into your own project as `mirror` branch.
+
 ``` bash
 cd <your_project>
 git flow init -d
@@ -185,6 +187,17 @@ git flow feature finish mirror
 
 git remote add origin <your_project.git>
 git push -u origin master
+```
+
+Once there is a new version of this boilerplate, you can upgrade with the following commands
+
+```
+git checkout mirror
+git pull mirror mirror
+git checkout develop
+git flow feature start upgrade-mirror
+git merge --no-ff --no-edit mirror
+git flow feature finish upgrade-mirror
 ```
 
 ## Roadmap
