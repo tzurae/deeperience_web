@@ -6,7 +6,6 @@ export default {
     let token = firebase.auth().createCustomToken(req.user._id.toString());
     res.json({
       token: token,
-      isError: false,
     });
   },
 };
