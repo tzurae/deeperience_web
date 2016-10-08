@@ -4,6 +4,7 @@ var expect = chai.expect;
 var constants = require('../constants');
 var User = require('../../build/server/models/User').default;
 var features = require('../features');
+var Errors = require('../../build/common/constants/Errors').default;
 
 describe('#user', function() {
   var fakeUser;
@@ -33,7 +34,7 @@ describe('#user', function() {
           .end(function(err, res) {
             expect(res).to.not.be.undefined;
             expect(res.status).to.equal(200);
-            expect(res.body.isError).to.be.false;
+            expect(res.body.errors).to.be.undefined;
             validateUser(res.body.user);
             resUser = res.body.user;
             done();
@@ -46,7 +47,7 @@ describe('#user', function() {
           .end(function(err, res) {
             expect(res).to.not.be.undefined;
             expect(res.status).to.equal(200);
-            expect(res.body.isError).to.be.true;
+            expect(res.body.errors[0].code).to.equal(Errors.USER_CONFLICT.code);
             done();
           });
       });
@@ -65,7 +66,7 @@ describe('#user', function() {
           .end(function(err, res) {
             expect(res).to.not.be.undefined;
             expect(res.status).to.equal(200);
-            expect(res.body.isError).to.be.false;
+            expect(res.body.errors).to.be.undefined;
             expect(res.body.isAuth).to.be.true;
             expect(res.body.token).to.be.a('string');
             done();
@@ -78,7 +79,7 @@ describe('#user', function() {
           .end(function(err, res) {
             expect(res).to.not.be.undefined;
             expect(res.status).to.equal(200);
-            expect(res.body.isError).to.be.false;
+            expect(res.body.errors).to.be.undefined;
             expect(res.body.isAuth).to.be.false;
             done();
           });
@@ -93,7 +94,7 @@ describe('#user', function() {
           .end(function(err, res) {
             expect(res).to.not.be.undefined;
             expect(res.status).to.equal(200);
-            expect(res.body.isError).to.be.false;
+            expect(res.body.errors).to.be.undefined;
             done();
           });
       });
@@ -107,7 +108,7 @@ describe('#user', function() {
           .end(function(err, res) {
             expect(res).to.not.be.undefined;
             expect(res.status).to.equal(200);
-            expect(res.body.status).to.equal(401);
+            expect(res.body.errors[0].code).to.equal(Errors.USER_UNAUTHORIZED.code);
             done();
           });
       });
@@ -126,7 +127,7 @@ describe('#user', function() {
             .end(function(err, res) {
               expect(res).to.not.be.undefined;
               expect(res.status).to.equal(200);
-              expect(res.body.isError).to.be.false;
+              expect(res.body.errors).to.be.undefined;
               validateUser(res.body.user);
               done();
             });

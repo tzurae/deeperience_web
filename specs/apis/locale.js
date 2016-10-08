@@ -3,6 +3,7 @@ var request = require('superagent');
 var expect = chai.expect;
 var async = require('async');
 var constants = require('../constants');
+var Errors = require('../../build/common/constants/Errors').default;
 
 describe('#locale', function() {
   var validLocales = [
@@ -26,7 +27,7 @@ describe('#locale', function() {
             .end(function(err, res) {
               expect(res).to.not.be.undefined;
               expect(res.status).to.equal(200);
-              expect(res.body.isError).to.be.false;
+              expect(res.body.errors).to.be.undefined;
               expect(res.body.locale).to.equal(validLocale);
               expect(res.body.messages).to.be.an('object');
               cb();
@@ -44,7 +45,7 @@ describe('#locale', function() {
             .end(function(err, res) {
               expect(res).to.not.be.undefined;
               expect(res.status).to.equal(200);
-              expect(res.body.status).to.equal(400);
+              expect(res.body.errors[0].code).to.equal(Errors.LOCALE_NOT_SUPPORTED.code);
               cb();
             });
         }, done);
