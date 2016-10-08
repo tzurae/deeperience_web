@@ -1,4 +1,5 @@
 import passport from 'passport';
+import Errors from '../../common/constants/Errors';
 
 const authRequired = (req, res, next) => {
   passport.authenticate('jwt', {session: false}, (err, user, info) => {
@@ -6,22 +7,14 @@ const authRequired = (req, res, next) => {
       return next(err);
     }
     if (info && info.name === 'TokenExpiredError') {
-      return res.json({
-        isError: true,
-        status: 401,
-        errors: [{
-          name: 'Token Expiration',
-          message: 'Your jwt token expired.',
-        }],
-      });
+      return res.errors([Errors.TOKEN_EXPIRATION]);
     }
     if (!user) {
       // custom 401 message
-      return res.json({
-        isError: true,
-        status: 401,
-        errors: info && info.toString(),
+      res.pushError(Errors.USER_UNAUTHORIZED, {
+        detail: info && info.toString(),
       });
+      return res.errors();
     }
     req.user = user;
     next();
