@@ -19,7 +19,7 @@ export const setCookie = (name, value, options) => {
       .then(() => {
         if (process.env.BROWSER) {
           document.cookie = cookie.serialize(
-            name, getState().cookie[name], options);
+            name, getState().cookies[name], options);
         }
         return Promise.resolve();
       });

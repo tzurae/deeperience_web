@@ -4,7 +4,7 @@ import configs from '../../../configs/project/server';
 import User from '../models/User';
 
 const cookieExtractor = (req) => {
-  return req.store.getState().cookie.token;
+  return req.store.getState().cookies.token;
 };
 
 passport.use(new JwtStrategy({

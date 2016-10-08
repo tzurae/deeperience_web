@@ -81,7 +81,7 @@ class AvatarForm extends Component {
   _uploadToFirebase(formData) {
     let _this = this;
     let { store } = this.context;
-    let userId = JSON.parse(store.getState().cookie.user)._id;
+    let userId = JSON.parse(store.getState().cookies.user)._id;
 
     return new Promise((resolve, reject) => {
       _this._signInFirebase().then(() => {

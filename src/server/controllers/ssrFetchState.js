@@ -7,15 +7,15 @@ import { setTodo } from '../../common/actions/todoActions';
 
 export default {
   user: (req, res, next) => {
-    let { cookie } = req.store.getState();
+    let { cookies } = req.store.getState();
     req.store.dispatch(loginUser({
-      token: cookie.token,
-      data: cookie.user,
+      token: cookies.token,
+      data: cookies.user,
     }));
     next();
   },
   intl: wrapTimeout(3000)((req, res, next) => {
-    const cookieLocale = req.store.getState().cookie.locale;
+    const cookieLocale = req.store.getState().cookies.locale;
     let lang;
     if (cookieLocale) {
       lang = cookieLocale;
