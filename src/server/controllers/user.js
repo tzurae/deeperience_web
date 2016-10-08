@@ -1,3 +1,4 @@
+import Errors from '../../common/constants/Errors';
 import { handleDbError } from '../decorators/handleError';
 import User from '../models/User';
 import filterAttribute from '../utils/filterAttribute';
@@ -8,13 +9,7 @@ export default {
       'email.value': req.body.email,
     }, handleDbError(res)((user) => {
       if (user !== null) {
-        res.json({
-          isError: true,
-          errors: [{
-            name: 'Duplicate Email',
-            message: 'Email is already used',
-          }],
-        });
+        res.errors([Errors.USER_CONFLICT]);
       } else {
         const user = User({
           name: req.body.name,
@@ -27,7 +22,6 @@ export default {
         user.save(handleDbError(res)((user) => {
           res.json({
             user: user,
-            isError: false,
           });
         }));
       }
@@ -40,7 +34,6 @@ export default {
     }, handleDbError(res)((user) => {
       if (!user) {
         res.json({
-          isError: false,
           isAuth: false,
         });
       } else {
@@ -48,14 +41,12 @@ export default {
           if (isAuth) {
             const token = user.toJwtToken();
             res.json({
-              isError: false,
               isAuth: true,
               token: token,
               user: user,
             });
           } else {
             res.json({
-              isError: false,
               isAuth: false,
             });
           }
@@ -66,14 +57,11 @@ export default {
 
   logout(req, res) {
     req.logout();
-    res.json({
-      isError: false,
-    });
+    res.json({});
   },
 
   show(req, res) {
     res.json({
-      isError: false,
       user: req.user,
     });
   },
@@ -84,7 +72,6 @@ export default {
       res.json({
         originAttributes: req.body,
         updatedAttributes: user,
-        isError: false,
       });
     }));
   },
@@ -94,7 +81,6 @@ export default {
     // and use `req.body` to access other fileds
     res.json({
       downloadURL: `/user/${req.user._id}/${req.file.filename}`,
-      isError: false,
     });
   },
 };

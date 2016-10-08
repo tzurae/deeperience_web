@@ -30,7 +30,7 @@ describe('#todo', function() {
             .end(function(err, res) {
               expect(res).to.not.be.undefined;
               expect(res.status).to.equal(200);
-              expect(res.body.isError).to.be.false;
+              expect(res.body.errors).to.be.undefined;
               expect(res.body.todo).to.be.an('object');
               expect(res.body.todo.text).to.equal(fakeTodo.text);
               resTodos.push(res.body.todo);
@@ -48,7 +48,7 @@ describe('#todo', function() {
           .end(function(err, res) {
             expect(res).to.not.be.undefined;
             expect(res.status).to.equal(200);
-            expect(res.body.isError).to.be.false;
+            expect(res.body.errors).to.be.undefined;
             expect(res.body.todos).to.be.an('array');
             expect(res.body.todos.length).to.equal(fakeTodos.length);
             done();

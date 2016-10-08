@@ -40,7 +40,7 @@ export default class ApiEngine {
             if (err) {
               return reject(body || err);
             }
-            if (body.isError) {
+            if (body.errors && body.errors.length > 0) {
               return reject(body.errors);
             }
             return resolve(body);

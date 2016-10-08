@@ -1,37 +1,22 @@
-// error types
-const ErrorTypes = {
-  DB: 'Db',
-};
+import ErrorTypes from '../constants/ErrorTypes';
+import Errors from '../../common/constants/Errors';
 
-const handleError = (res, errorType) => (fn) => (err, ...result) => {
+let getErrorHandler = (ErrorType) => (res) => (fn) => (err, ...result) => {
   if (err) {
-    let errorResponse = {
-      isError: true,
-      status: 400,
-      errors: [],
-    };
-    if (errorType === ErrorTypes.DB) {
-      if (err.errors !== undefined) {
-        errorResponse.errors.push({
-          name: err.name,
-          message: err.message,
-          errors: err.errors,
-        });
-      } else {
-        errorResponse.errors.push(err);
+    switch (ErrorType) {
+      case ErrorTypes.ODM_OPERATION: {
+        res.pushError(Errors.ODM_OPERATION_FAIL, err);
+        break;
       }
-    } else {
-      errorResponse.errors.push({
-        name: 'Unknown',
-        message: 'unknown exception',
-      });
+      default: {
+        res.pushError(Errors.UNKNOWN_EXCEPTION, err);
+      }
     }
-    return res.json(errorResponse);
+  } else {
+    fn(...result);
   }
-  fn(...result);
 };
 
-const handleDbError = (res) => handleError(res, ErrorTypes.DB);
+let handleDbError = getErrorHandler(ErrorTypes.ODM_OPERATION);
 
-export default handleError;
-export { ErrorTypes, handleDbError };
+export { handleDbError };

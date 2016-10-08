@@ -1,20 +1,22 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
+import { updateLocale } from '../actions/intlActions';
+import { pushErrors } from '../actions/errorActions';
 import Navbar from './main/Navbar';
 import Container from './main/Container';
 import NavLink from './NavLink';
 import MenuItem from './MenuItem';
 import Text from './Text';
-import { updateLocale } from '../actions/intlActions';
 
 class Navigation extends Component {
   _setLanguage(lang) {
-    this.context.store
+    let { store } = this.context;
+    store
       .dispatch(updateLocale(lang))
       .then(() => {
         console.log('load locale (manually) ok');
       }, (err) => {
-        alert('load locale (manually) fail', err);
+        store.dispatch(pushErrors(err));
       });
   }
 

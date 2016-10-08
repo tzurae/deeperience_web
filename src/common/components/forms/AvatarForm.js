@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
+import { pushErrors } from '../../actions/errorActions';
 import Form from '../main/Form';
 import Input from '../reduxForm/Input';
 import Image from '../main/Image';
@@ -49,7 +50,10 @@ class AvatarForm extends Component {
     return firebaseAPI(this.context.store.getState().apiEngine)
       .readToken()
       .catch((err) => {
-        alert('Read firebase token fail');
+        this.context.store.dispatch(pushErrors([{
+          title: 'Fail To Read Token',
+          detail: 'Read firebase token fail.',
+        }]));
         throw err;
       })
       .then((json) => {
@@ -65,7 +69,10 @@ class AvatarForm extends Component {
         return firebase.auth()
           .signInWithCustomToken(json.token)
           .catch(function(err) {
-            alert('Sign in firebase fail');
+            this.context.store.dispatch(pushErrors([{
+              title: 'Fail To Signin Firebase',
+              detail: 'Signin firebase fail.',
+            }]));
             throw err;
           });
       });
@@ -109,7 +116,11 @@ class AvatarForm extends Component {
     }
     uploadProcedure
       .catch((err) => {
-        alert('upload fail');
+        this.context.store.dispatch(pushErrors([{
+          title: 'Fail To Upload Avatar',
+          detail: 'Upload avatar fail.',
+          meta: err,
+        }]));
         throw err;
       })
       .then((downloadURL) => {
@@ -118,7 +129,11 @@ class AvatarForm extends Component {
             avatarURL: downloadURL,
           })
           .catch((err) => {
-            alert('update user avatar URL fail');
+            this.context.store.dispatch(pushErrors([{
+              title: 'Fail To Update Avatar URL',
+              detail: 'Update user avatar URL fail.',
+              meta: err,
+            }]));
             throw err;
           })
           .then((json) => {

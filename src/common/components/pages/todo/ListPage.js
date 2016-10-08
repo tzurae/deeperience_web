@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
-import PageLayout from '../../layouts/PageLayout';
-import { connect } from 'react-redux';
-import PageHeader from '../../main/PageHeader';
-import TodoItem from '../../TodoItem';
+import todoAPI from '../../../api/todo';
+import { pushErrors } from '../../../actions/errorActions';
 import {
   setTodo,
   addTodo,
   removeTodo,
 } from '../../../actions/todoActions';
-import todoAPI from '../../../api/todo';
+import PageLayout from '../../layouts/PageLayout';
+import { connect } from 'react-redux';
+import PageHeader from '../../main/PageHeader';
+import TodoItem from '../../TodoItem';
 
-@connect(state => state)
-export default class ListPage extends Component {
+class ListPage extends Component {
   constructor(props) {
     super(props);
     this._handleAddClick = this._handleAddClick.bind(this);
@@ -23,7 +23,7 @@ export default class ListPage extends Component {
       todoAPI(apiEngine)
         .list()
         .catch((err) => {
-          alert('List todos fail');
+          dispatch(pushErrors(err));
           throw err;
         })
         .then((json) => {
@@ -38,7 +38,7 @@ export default class ListPage extends Component {
     todoAPI(apiEngine)
       .create({ text })
       .catch((err) => {
-        alert('Create todo fail');
+        dispatch(pushErrors(err));
         throw err;
       })
       .then((json) => {
@@ -52,7 +52,7 @@ export default class ListPage extends Component {
     todoAPI(apiEngine)
       .remove(id)
       .catch((err) => {
-        alert('Remove todo fail');
+        dispatch(pushErrors(err));
         throw err;
       })
       .then((json) => {
@@ -77,3 +77,8 @@ export default class ListPage extends Component {
     );
   }
 };
+
+export default connect(state => ({
+  apiEngine: state.apiEngine,
+  todos: state.todos,
+}))(ListPage);

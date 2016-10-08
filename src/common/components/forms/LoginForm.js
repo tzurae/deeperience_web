@@ -1,10 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
 // import validator from 'validator';
+import { pushErrors } from '../../actions//errorActions';
+import { loginUser } from '../../actions/userActions';
 import Form from '../main/Form';
 import Input from '../reduxForm/Input';
 import userAPI from '../../api/user';
-import { loginUser } from '../../actions/userActions';
 
 const validate = (values) => {
   const errors = {};
@@ -42,7 +43,7 @@ class LoginForm extends Component {
     userAPI(this.context.store.getState().apiEngine)
       .login(formData)
       .catch((err) => {
-        alert('Login user fail');
+        this.context.store.dispatch(pushErrors(err));
         throw err;
       })
       .then((json) => {
@@ -57,7 +58,10 @@ class LoginForm extends Component {
             }
           });
         } else {
-          alert('wrong email or password');
+          this.context.store.dispatch(pushErrors([{
+            title: 'User Not Exists',
+            detail: 'You may type wrong email or password.',
+          }]));
         }
       });
   }

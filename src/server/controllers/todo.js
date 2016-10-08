@@ -10,7 +10,6 @@ export default {
     todo.save(handleDbError(res)((todo) => {
       res.json({
         todo: todo,
-        isError: false,
       });
     }));
   },
@@ -19,16 +18,13 @@ export default {
     Todo.find({}, handleDbError(res)((todos) => {
       res.json({
         todos: todos,
-        isError: false,
       });
     }));
   },
 
   remove(req, res) {
     Todo.remove({_id: req.params.id}, handleDbError(res)(() => {
-      res.json({
-        isError: false,
-      });
+      res.json({});
     }));
   },
 };

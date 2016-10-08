@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
 // import validator from 'validator';
+import { pushErrors } from '../../actions//errorActions';
 import Form from '../main/Form';
 import Input from '../reduxForm/Input';
 import userAPI from '../../api/user';
@@ -33,7 +34,7 @@ class RegisterForm extends Component {
     userAPI(this.context.store.getState().apiEngine)
       .register(formData)
       .catch((err) => {
-        alert('Register user fail');
+        this.context.store.dispatch(pushErrors(err));
         throw err;
       })
       .then((json) => {

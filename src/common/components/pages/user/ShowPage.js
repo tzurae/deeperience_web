@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import userAPI from '../../../api/user';
+import { pushErrors } from '../../../actions/errorActions';
 import Head from '../../Head';
 import PageLayout from '../../layouts/PageLayout';
 import PageHeader from '../../main/PageHeader';
 import AvatarForm from '../../forms/AvatarForm';
 import Time from '../../Time';
-import userAPI from '../../../api/user';
 
 class ShowPage extends Component {
   constructor(props) {
@@ -15,10 +16,11 @@ class ShowPage extends Component {
   }
 
   componentDidMount() {
-    userAPI(this.context.store.getState().apiEngine)
+    let { store } = this.context;
+    userAPI(store.getState().apiEngine)
       .show()
       .catch((err) => {
-        alert('Show user fail');
+        store.dispatch(pushErrors(err));
         throw err;
       })
       .then((json) => {
