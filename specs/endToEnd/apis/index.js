@@ -1,4 +1,4 @@
-describe('#APIs', function() {
+describe('#APIs', () => {
   require('./user');
   require('./locale');
   require('./todo');

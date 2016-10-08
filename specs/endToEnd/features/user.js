@@ -1,4 +1,4 @@
-module.exports = [{
+export default [{
   name: 'test1',
   email: {
     value: 'fakeUser1@gmail.com',
@@ -10,4 +10,4 @@ module.exports = [{
     value: 'fakeUser2@gmail.com',
   },
   password: 'fake123',
-},];
+}];
