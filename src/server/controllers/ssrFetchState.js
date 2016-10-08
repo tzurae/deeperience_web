@@ -36,8 +36,11 @@ export default {
   todo: wrapTimeout(3000)((req, res, next) => {
     todoAPI(req.store.getState().apiEngine)
       .list()
-      .catch((err) => {
-        throw err;
+      .catch(() => {
+        res.pushError(Errors.STATE_PRE_FETCHING_FAIL, {
+          detail: 'Cannot list todos',
+        });
+        next();
       })
       .then((json) => {
         req.store.dispatch(setTodo(json.todos));
