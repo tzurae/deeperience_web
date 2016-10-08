@@ -1,33 +1,34 @@
-var chai = require('chai');
-var request = require('superagent');
-var expect = chai.expect;
-var async = require('async');
-var constants = require('../constants');
-var Todo = require('../../build/server/models/Todo').default;
+import chai from 'chai';
+import request from 'superagent';
+import async from 'async';
+import constants from '../../constants';
+import Todo from '../../../build/server/models/Todo';
+let expect = chai.expect;
 
-describe('#todo', function() {
-  var fakeTodos = [{
+describe('#todo', () => {
+  let fakeTodos = [{
     text: 'this is a fake todo text',
   }, {
     text: 'foo',
   }, {
     text: '~bar~',
-  }, ];
-  var resTodos = [];
+  }];
+  let resTodos = [];
 
-  before(function(done) {
+  before((done) => {
     Todo.remove({}, done);
   });
 
-  describe('#Unauthorized User', function() {
+  describe('#Unauthorized User', () => {
     // POST /api/todo
-    describe('POST /api/todo', function() {
-      it('should create todo', function(done) {
-        async.eachSeries(fakeTodos, function iteratee(fakeTodo, cb) {
+    describe('POST /api/todo', () => {
+      it('should create todo', (done) => {
+        async.eachSeries(fakeTodos, (fakeTodo, cb) => {
           request
             .post(constants.BASE + '/api/todo')
             .send(fakeTodo)
-            .end(function(err, res) {
+            .end((err, res) => {
+              expect(err).to.equal(null);
               expect(res).to.not.be.undefined;
               expect(res.status).to.equal(200);
               expect(res.body.errors).to.be.undefined;
@@ -41,11 +42,12 @@ describe('#todo', function() {
     });
 
     // GET /api/todo
-    describe('GET /api/todo', function() {
-      it('should list todos', function(done) {
+    describe('GET /api/todo', () => {
+      it('should list todos', (done) => {
         request
           .get(constants.BASE + '/api/todo')
-          .end(function(err, res) {
+          .end((err, res) => {
+            expect(err).to.equal(null);
             expect(res).to.not.be.undefined;
             expect(res.status).to.equal(200);
             expect(res.body.errors).to.be.undefined;
@@ -57,7 +59,7 @@ describe('#todo', function() {
     });
   });
 
-  after(function(done) {
+  after((done) => {
     Todo.remove({}, done);
   });
 });

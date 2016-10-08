@@ -1,37 +1,38 @@
-var chai = require('chai');
-var request = require('superagent');
-var expect = chai.expect;
-var constants = require('../constants');
-var User = require('../../build/server/models/User').default;
-var features = require('../features');
-var Errors = require('../../build/common/constants/Errors').default;
+import chai from 'chai';
+import request from 'superagent';
+import constants from '../../constants';
+import User from '../../../build/server/models/User';
+import features from '../features';
+import Errors from '../../../build/common/constants/Errors';
+let expect = chai.expect;
 
-describe('#user', function() {
-  var fakeUser;
-  var resUser;
+describe('#user', () => {
+  let fakeUser;
+  let resUser;
 
-  var validateUser = function(user) {
+  let validateUser = (user) => {
     expect(user).to.contain.all.keys(['_id', 'email']);
     expect(user).to.not.have.any.keys(['password']);
   };
 
-  before(function(done) {
+  before((done) => {
     User.remove({}, done);
   });
 
-  describe('#Unauthorized User', function() {
+  describe('#Unauthorized User', () => {
     // POST /api/user
-    describe('POST /api/user', function() {
+    describe('POST /api/user', () => {
       fakeUser = {
         name: features.user[0].name,
         email: features.user[0].email.value,
         password: features.user[0].password,
       };
-      it('should create user', function(done) {
+      it('should create user', (done) => {
         request
           .post(constants.BASE + '/api/user')
           .send(fakeUser)
-          .end(function(err, res) {
+          .end((err, res) => {
+            expect(err).to.equal(null);
             expect(res).to.not.be.undefined;
             expect(res.status).to.equal(200);
             expect(res.body.errors).to.be.undefined;
@@ -40,11 +41,12 @@ describe('#user', function() {
             done();
           });
       });
-      it('should fail when email is duplicate', function(done) {
+      it('should fail when email is duplicate', (done) => {
         request
           .post(constants.BASE + '/api/user')
           .send(fakeUser)
-          .end(function(err, res) {
+          .end((err, res) => {
+            expect(err).to.equal(null);
             expect(res).to.not.be.undefined;
             expect(res.status).to.equal(200);
             expect(res.body.errors[0].code).to.equal(Errors.USER_CONFLICT.code);
@@ -54,8 +56,8 @@ describe('#user', function() {
     });
 
     // POST /api/user/login
-    describe('POST /api/user/login', function() {
-      it('should auth valid user', function(done) {
+    describe('POST /api/user/login', () => {
+      it('should auth valid user', (done) => {
         fakeUser = {
           email: features.user[0].email.value,
           password: features.user[0].password,
@@ -63,7 +65,8 @@ describe('#user', function() {
         request
           .post(constants.BASE + '/api/user/login')
           .send(fakeUser)
-          .end(function(err, res) {
+          .end((err, res) => {
+            expect(err).to.equal(null);
             expect(res).to.not.be.undefined;
             expect(res.status).to.equal(200);
             expect(res.body.errors).to.be.undefined;
@@ -72,11 +75,12 @@ describe('#user', function() {
             done();
           });
       });
-      it('should reject invalid user', function(done) {
+      it('should reject invalid user', (done) => {
         request
           .post(constants.BASE + '/api/user/login')
           .send({})
-          .end(function(err, res) {
+          .end((err, res) => {
+            expect(err).to.equal(null);
             expect(res).to.not.be.undefined;
             expect(res.status).to.equal(200);
             expect(res.body.errors).to.be.undefined;
@@ -87,11 +91,12 @@ describe('#user', function() {
     });
 
     // GET /api/user/logout
-    describe('GET /api/user/logout', function() {
-      it('should unauth user', function(done) {
+    describe('GET /api/user/logout', () => {
+      it('should unauth user', (done) => {
         request
           .get(constants.BASE + '/api/user/logout')
-          .end(function(err, res) {
+          .end((err, res) => {
+            expect(err).to.equal(null);
             expect(res).to.not.be.undefined;
             expect(res.status).to.equal(200);
             expect(res.body.errors).to.be.undefined;
@@ -101,30 +106,34 @@ describe('#user', function() {
     });
 
     // GET /api/user/me
-    describe('GET /api/user/me', function() {
-      it('should be rejected', function(done) {
+    describe('GET /api/user/me', () => {
+      it('should be rejected', (done) => {
         request
           .get(constants.BASE + '/api/user/me')
-          .end(function(err, res) {
+          .end((err, res) => {
+            expect(err).to.equal(null);
             expect(res).to.not.be.undefined;
             expect(res.status).to.equal(200);
-            expect(res.body.errors[0].code).to.equal(Errors.USER_UNAUTHORIZED.code);
+            expect(res.body.errors[0].code)
+              .to.equal(Errors.USER_UNAUTHORIZED.code);
             done();
           });
       });
     });
   });
 
-  describe('#Authorized User', function() {
+  describe('#Authorized User', () => {
     // GET /api/user/me
-    describe('GET /api/user/me', function() {
-      it('should show user', function(done) {
+    describe('GET /api/user/me', () => {
+      it('should show user', (done) => {
         User.findOne({}, (err, user) => {
-          var token = user.toJwtToken();
+          expect(err).to.equal(null);
+          let token = user.toJwtToken();
           request
             .get(constants.BASE + '/api/user/me')
             .set('Cookie', 'token=' + token)
-            .end(function(err, res) {
+            .end((err, res) => {
+              expect(err).to.equal(null);
               expect(res).to.not.be.undefined;
               expect(res.status).to.equal(200);
               expect(res.body.errors).to.be.undefined;
@@ -136,7 +145,7 @@ describe('#user', function() {
     });
   });
 
-  after(function(done) {
+  after((done) => {
     User.remove({}, done);
   });
 });
