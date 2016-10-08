@@ -4,7 +4,7 @@ import Head from '../Head';
 import Navigation from '../Navigation';
 import ErrorList from '../utils/ErrorList';
 
-const AppLayout = ({ cookie, children }) => (
+const AppLayout = ({ cookies, children }) => (
   <div>
     <Head
       title="Express-React-HMR-Boilerplate"
@@ -27,10 +27,12 @@ const AppLayout = ({ cookie, children }) => (
         // jscs:enable
       ]}
     />
-    <Navigation cookie={cookie} />
+    <Navigation cookies={cookies} />
     <ErrorList />
     {children}
   </div>
 );
 
-export default connect(state => state)(AppLayout);
+export default connect(state => ({
+  cookies: state.cookies,
+}))(AppLayout);

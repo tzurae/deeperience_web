@@ -21,7 +21,7 @@ class Navigation extends Component {
   }
 
   render() {
-    let { token, user } = this.props.cookie;
+    let { token, user } = this.props.cookies;
     let isAuth = !!token;
     user = (user && JSON.parse(user)) || {};
 

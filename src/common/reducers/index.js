@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import cookie from './cookieReducer';
+import cookies from './cookieReducer';
 import errors from './errorReducer';
 import apiEngine from './apiEngineReducer';
 import todos from './todoReducer';
@@ -7,11 +7,11 @@ import form from './formReducer';
 import intl from './intlReducer';
 
 const rootReducer = combineReducers({
-  cookie,
+  cookies,
   errors,
   apiEngine,
   todos,
-  form,
+  form, // must mount as `form` from redux-form's docs
   intl,
 });
 
