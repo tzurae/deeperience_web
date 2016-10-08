@@ -1,3 +1,4 @@
+import Errors from '../../common/constants/Errors';
 import todoAPI from '../../common/api/todo';
 import wrapTimeout from '../decorators/wrapTimeout';
 import { loginUser } from '../../common/actions/userActions';
@@ -25,8 +26,11 @@ export default {
       .dispatch(updateLocale(lang))
       .then(() => {
         next();
-      }, (err) => {
-        throw err;
+      }, () => {
+        res.pushError(Errors.STATE_PRE_FETCHING_FAIL, {
+          detail: 'Cannot setup locale',
+        });
+        next();
       });
   }),
   todo: wrapTimeout(3000)((req, res, next) => {

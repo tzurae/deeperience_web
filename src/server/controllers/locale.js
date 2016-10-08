@@ -1,3 +1,5 @@
+import Errors from '../../common/constants/Errors';
+
 export default {
   show(req, res) {
     try {
@@ -11,17 +13,9 @@ export default {
       res.json({
         locale,
         messages,
-        isError: false,
       });
     } catch (e) {
-      res.json({
-        errors: [{
-          name: 'Locale is not supported',
-          message: 'Locale is not supported',
-        }],
-        status: 400,
-        isError: true,
-      });
+      res.errors([Errors.LOCALE_NOT_SUPPORTED]);
     }
   },
 };
