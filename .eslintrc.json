@@ -12,7 +12,11 @@
   "globals": {
     "NProgress": true,
     "firebase": true,
-    "__webpackIsomorphicTools__": true
+    "__webpackIsomorphicTools__": true,
+    "before": true,
+    "after": true,
+    "describe": true,
+    "it": true
   },
   "parser": "babel-eslint",
   "parserOptions": {
