@@ -11,7 +11,7 @@ const rootReducer = combineReducers({
   errors,
   apiEngine,
   todos,
-  form,
+  form, // must mount as `form` from redux-form's docs
   intl,
 });
 
