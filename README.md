@@ -17,11 +17,11 @@ This is a boilerplate for scaffolding MERN stack projects with livereload featur
 - Livereload
 - Server-Side Rendering (SSR) & State Fetching (Isomorphic)
 - Webpack + Code Splitting
+- CSS Modules
 - ES6/7 + Babel
 - Travis CI Template
 - Heroku Deploy Script
 - Examples
-  - CSS Modules
   - Simple Todo List App
   - Passport + Jwt Authentication
   - i18n
@@ -202,19 +202,16 @@ git flow feature finish upgrade-mirror
 
 ## Roadmap
 
-- [x] Integrate with redux-form
-- [x] Integrate with form validation
-- [x] Move imports-/exports-loader to devDependencies
-- [x] i18n
-- [x] Use redux-thunk
-- [x] CookieStore
-- [ ] ES6 test scripts
-- [ ] Mail System
+### v1.0
+
+- [ ] Travis Testing
 - [ ] Asynchronous redux-form validation (detect duplicate username/email)
+- [ ] Pagination Mechanism
+
+### v1.0+
+
+- [ ] Social Login
 - [ ] [Error handling](http://goldbergyoni.com/checklist-best-practices-of-node-js-error-handling/)
-- [ ] Pagination
 - [ ] Disable submit button when form submitting
 - [ ] Todo#Update API & Todo#Edit Functionality
-- [x] File Uploading (e.g. Avatar)
-- [ ] Facebook Login
-- [x] Ajax progress bar
+- [ ] Mail System
