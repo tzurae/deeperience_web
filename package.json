@@ -79,6 +79,7 @@
     "gulp-notify": "^2.2.0",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-util": "^3.0.7",
+    "jsesc": "^2.2.0",
     "merge-stream": "^1.0.0",
     "node-sass": "^3.8.0",
     "postcss-loader": "^0.9.1",
