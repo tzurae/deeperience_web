@@ -1,11 +1,11 @@
 import React from 'react';
+import PageHeader from 'react-bootstrap/lib/PageHeader';
 import PageLayout from '../../layouts/PageLayout';
-import PageHeader from '../../main/PageHeader';
 import RegisterForm from '../../forms/RegisterForm';
 
 const RegisterPage = (props) => (
   <PageLayout>
-    <PageHeader title="Register" />
+    <PageHeader>Register</PageHeader>
     <RegisterForm />
   </PageLayout>
 );

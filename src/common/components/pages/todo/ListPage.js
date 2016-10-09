@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import PageHeader from 'react-bootstrap/lib/PageHeader';
 import todoAPI from '../../../api/todo';
 import { pushErrors } from '../../../actions/errorActions';
 import {
@@ -7,8 +9,6 @@ import {
   removeTodo,
 } from '../../../actions/todoActions';
 import PageLayout from '../../layouts/PageLayout';
-import { connect } from 'react-redux';
-import PageHeader from '../../main/PageHeader';
 import TodoItem from '../../TodoItem';
 
 class ListPage extends Component {
@@ -63,7 +63,7 @@ class ListPage extends Component {
   render() {
     return (
       <PageLayout>
-        <PageHeader title="Todo List" />
+        <PageHeader>Todo List</PageHeader>
         <input type="text" ref="todotext" />
         <button onClick={this._handleAddClick}>Add Todo</button>
         <ul>
