@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PageHeader from 'react-bootstrap/lib/PageHeader';
 import userAPI from '../../../api/user';
 import { pushErrors } from '../../../actions/errorActions';
-import Head from '../../Head';
+import Head from '../../widgets/Head';
 import PageLayout from '../../layouts/PageLayout';
 import AvatarForm from '../../forms/AvatarForm';
 import Time from '../../Time';
