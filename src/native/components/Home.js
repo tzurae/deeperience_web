@@ -5,7 +5,8 @@ import { connect } from 'react-redux';
 import styles from '../styles';
 
 let Home = ({ routes }) => {
-  const goToLogin = () => Actions.login({text: 'Fuck you'});
+  const goToAbout = () => Actions.about({text: 'Fuck you'});
+  const goToTab1 = () => Actions.tab1();
 
   return (
     <View>
@@ -15,8 +16,11 @@ let Home = ({ routes }) => {
       <Text>
         The current scene is titled {routes.scene.title}.
       </Text>
-      <Text style={styles.red} onPress={goToLogin}>
+      <Text style={styles.red} onPress={goToAbout}>
         Go To About
+      </Text>
+      <Text style={styles.red} onPress={goToTab1}>
+        Go To Tab1
       </Text>
     </View>
   );
