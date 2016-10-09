@@ -1,11 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import Grid from 'react-bootstrap/lib/Grid';
 import Errors from '../../constants/Errors';
 import { removeError } from '../../actions/errorActions';
-import Container from '../main/Container';
 
 let ErrorList = ({ errors, dispatch }) => (
-  <Container>
+  <Grid>
     {errors.map((error) => (
       <div
         key={error.id}
@@ -36,7 +36,7 @@ let ErrorList = ({ errors, dispatch }) => (
         )]}
       </div>
     ))}
-  </Container>
+  </Grid>
 );
 
 export default connect(state => ({
