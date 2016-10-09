@@ -1,6 +1,6 @@
 # Express-React-HMR-Boilerplate
 
-[![Build Status](https://travis-ci.org/gocreating/express-react-hmr-boilerplate.svg?branch=master)](https://travis-ci.org/gocreating/express-react-hmr-boilerplate)
+[![Build Status](https://travis-ci.org/gocreating/express-react-hmr-boilerplate.svg?branch=dev)](https://travis-ci.org/gocreating/express-react-hmr-boilerplate)
 [![Dependency Status](https://david-dm.org/gocreating/express-react-hmr-boilerplate.svg)](https://david-dm.org/gocreating/express-react-hmr-boilerplate)
 
 This is a boilerplate for scaffolding MERN stack projects with livereload feature supported.
@@ -204,7 +204,7 @@ git flow feature finish upgrade-mirror
 
 ### v1.0
 
-- [ ] Travis Testing
+- [x] Travis Testing
 - [ ] Asynchronous redux-form validation (detect duplicate username/email)
 - [ ] Pagination Mechanism
 
