@@ -1,13 +1,14 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { IntlProvider } from 'react-intl';
 import { updateLocale } from '../actions/intlActions';
 
 class LocaleProvider extends Component {
   componentDidMount() {
-    let lang = this.context.store.getState().intl.locale || navigator.language;
-    this.props
-      .dispatch(updateLocale(lang))
+    let { dispatch, intl } = this.props;
+    let lang = intl.locale || navigator.language;
+
+    dispatch(updateLocale(lang))
       .then(() => {
         console.log('load locale (automatically) ok');
       }, (err) => {
@@ -17,6 +18,7 @@ class LocaleProvider extends Component {
 
   render() {
     const { intl, children } = this.props;
+
     return (
       <IntlProvider locale={intl.locale} messages={intl.messages}>
         {children}
@@ -25,8 +27,6 @@ class LocaleProvider extends Component {
   }
 };
 
-LocaleProvider.contextTypes = {
-  store: PropTypes.object.isRequired,
-};
-
-export default connect((state) => state)(LocaleProvider);
+export default connect((state) => ({
+  intl: state.intl,
+}))(LocaleProvider);
