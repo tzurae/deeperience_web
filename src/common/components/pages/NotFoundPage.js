@@ -1,10 +1,10 @@
 import React from 'react';
+import PageHeader from 'react-bootstrap/lib/PageHeader';
 import PageLayout from '../layouts/PageLayout';
-import PageHeader from '../main/PageHeader';
 
 const NotFoundPage = (props) => (
   <PageLayout>
-    <PageHeader title="Page Not Found" />
+    <PageHeader>Page Not Found</PageHeader>
     <p>This is a 404 page.</p>
   </PageLayout>
 );

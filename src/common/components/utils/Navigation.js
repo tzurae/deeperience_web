@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
-import { updateLocale } from '../actions/intlActions';
-import { pushErrors } from '../actions/errorActions';
-import Navbar from './main/Navbar';
-import Container from './main/Container';
+import Grid from 'react-bootstrap/lib/Grid';
+import { updateLocale } from '../../actions/intlActions';
+import { pushErrors } from '../../actions/errorActions';
+import Navbar from './BsNavbar';
 import NavLink from './NavLink';
 import MenuItem from './MenuItem';
-import Text from './Text';
+import Text from '../Text';
 
 class Navigation extends Component {
   _setLanguage(lang) {
@@ -27,7 +27,7 @@ class Navigation extends Component {
 
     return (
       <Navbar staticTop>
-        <Container>
+        <Grid>
           <Navbar.Header>
             <Link className="navbar-brand" to="/" >
               Logo
@@ -87,7 +87,7 @@ class Navigation extends Component {
               </Navbar.Dropdown>
             </Navbar.Nav>
           </Navbar.Body>
-        </Container>
+        </Grid>
       </Navbar>
     );
   }

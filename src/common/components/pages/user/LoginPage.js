@@ -1,11 +1,11 @@
 import React from 'react';
+import PageHeader from 'react-bootstrap/lib/PageHeader';
 import PageLayout from '../../layouts/PageLayout';
-import PageHeader from '../../main/PageHeader';
 import LoginForm from '../../forms/LoginForm';
 
 const LoginPage = (props) => (
   <PageLayout>
-    <PageHeader title="Login" />
+    <PageHeader>Login</PageHeader>
     <LoginForm location={props.location} />
   </PageLayout>
 );

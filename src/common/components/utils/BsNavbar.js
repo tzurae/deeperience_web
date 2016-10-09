@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 
-class Navbar extends Component {
+class BsNavbar extends Component {
   componentDidMount() {
     if (process.env.BROWSER && this.props.fixedTop) {
       document.body.style.marginTop = '50px';
@@ -88,7 +88,7 @@ const Dropdown = ({ title, children }) => (
   </li>
 );
 
-Navbar.propTypes = {
+BsNavbar.propTypes = {
   fixedTop: PropTypes.bool,
   staticTop: PropTypes.bool,
 };
@@ -104,9 +104,9 @@ Dropdown.propTypes = {
   ]),
 };
 
-Navbar.Header = Header;
-Navbar.Body = Body;
-Navbar.Nav = Nav;
-Navbar.Dropdown = Dropdown;
+BsNavbar.Header = Header;
+BsNavbar.Body = Body;
+BsNavbar.Nav = Nav;
+BsNavbar.Dropdown = Dropdown;
 
-export default Navbar;
+export default BsNavbar;

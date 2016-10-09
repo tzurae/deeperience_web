@@ -1,10 +1,10 @@
 import React from 'react';
-import Container from '../main/Container';
+import Grid from 'react-bootstrap/lib/Grid';
 
 const PageLayout = ({ children, ...rest }) => (
-  <Container {...rest}>
+  <Grid {...rest}>
     {children}
-  </Container>
+  </Grid>
 );
 
 export default PageLayout;

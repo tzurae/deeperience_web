@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
+import PageHeader from 'react-bootstrap/lib/PageHeader';
 import userAPI from '../../../api/user';
 import { pushErrors } from '../../../actions/errorActions';
 import Head from '../../Head';
 import PageLayout from '../../layouts/PageLayout';
-import PageHeader from '../../main/PageHeader';
 import AvatarForm from '../../forms/AvatarForm';
 import Time from '../../Time';
 
@@ -39,7 +39,7 @@ class ShowPage extends Component {
             'https://www.gstatic.com/firebasejs/live/3.0/firebase.js',
           ]}
         />
-        <PageHeader title="My Profile" />
+        <PageHeader>My Profile</PageHeader>
         <dl className="dl-horizontal">
           <dt>_id</dt>
           <dd>{user._id}</dd>
