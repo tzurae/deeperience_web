@@ -106,7 +106,7 @@
     "object-assign": "^4.1.0",
     "passport": "^0.3.2",
     "passport-jwt": "^2.0.0",
-    "react": "^15.2.1",
+    "react": "^15.3.2",
     "react-dom": "^15.0.2",
     "react-helmet": "^3.0.2",
     "react-intl": "^2.1.2",
