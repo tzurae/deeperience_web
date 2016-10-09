@@ -1,6 +1,6 @@
 import React from 'react';
 import Head from '../Head';
-import Navigation from '../Navigation';
+import Navigation from '../utils/Navigation';
 import ErrorList from '../utils/ErrorList';
 
 const AppLayout = ({ children }) => (
