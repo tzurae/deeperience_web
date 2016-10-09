@@ -12,6 +12,7 @@ var nodemon = require('gulp-nodemon');
 var notify = require('gulp-notify');
 var async = require('async');
 var mergeStream = require('merge-stream');
+var jsesc = require('jsesc');
 
 // local modules
 var webpackConfig = {
@@ -236,6 +237,17 @@ gulp.task('deploy', function(cb) {
       }
     },
   ], cbCmdDone);
+});
+
+gulp.task('dumpConfigs', function() {
+  var projectServerConfigs = require('./configs/project/server');
+  var dumpValue = jsesc(JSON.stringify(projectServerConfigs), { json: true });
+  console.log(gutil.colors.gray('\n\n======================='));
+  console.log('Please follow the instructions:');
+  console.log('1. Go to `https://travis-ci.org/<owner>/<repo>/settings`');
+  console.log('2. Add new environment variable named `' + gutil.colors.yellow('PROJECT_SERVER_CONFIGS') + '`');
+  console.log('3. Set its value as\n' + gutil.colors.yellow(dumpValue));
+  console.log(gutil.colors.gray('=======================\n\n'));
 });
 
 gulp.task('build:production', function() {
