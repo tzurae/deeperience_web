@@ -1,10 +1,9 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import Head from '../Head';
 import Navigation from '../Navigation';
 import ErrorList from '../utils/ErrorList';
 
-const AppLayout = ({ cookies, children }) => (
+const AppLayout = ({ children }) => (
   <div>
     <Head
       title="Express-React-HMR-Boilerplate"
@@ -27,12 +26,10 @@ const AppLayout = ({ cookies, children }) => (
         // jscs:enable
       ]}
     />
-    <Navigation cookies={cookies} />
+    <Navigation />
     <ErrorList />
     {children}
   </div>
 );
 
-export default connect(state => ({
-  cookies: state.cookies,
-}))(AppLayout);
+export default AppLayout;
