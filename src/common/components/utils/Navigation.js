@@ -6,7 +6,7 @@ import { pushErrors } from '../../actions/errorActions';
 import Navbar from './BsNavbar';
 import NavLink from './NavLink';
 import MenuItem from './MenuItem';
-import Text from '../Text';
+import Text from '../widgets/Text';
 
 class Navigation extends Component {
   _setLanguage(lang) {

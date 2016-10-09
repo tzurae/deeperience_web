@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { IntlProvider } from 'react-intl';
-import { updateLocale } from '../actions/intlActions';
+import { updateLocale } from '../../actions/intlActions';
 
 class LocaleProvider extends Component {
   componentDidMount() {

@@ -4,7 +4,7 @@ import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import { match, Router, browserHistory } from 'react-router';
-import LocaleProvider from '../common/components/LocaleProvider';
+import LocaleProvider from '../common/components/utils/LocaleProvider';
 import rootReducer from '../common/reducers';
 import getRoutes from '../common/routes';
 import setupLocale from './setupLocale';

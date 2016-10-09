@@ -1,5 +1,5 @@
 import React from 'react';
-import Head from '../Head';
+import Head from '../widgets/Head';
 import Navigation from '../utils/Navigation';
 import ErrorList from '../utils/ErrorList';
 

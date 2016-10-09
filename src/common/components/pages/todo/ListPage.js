@@ -9,7 +9,13 @@ import {
   removeTodo,
 } from '../../../actions/todoActions';
 import PageLayout from '../../layouts/PageLayout';
-import TodoItem from '../../TodoItem';
+
+let TodoItem = ({ onRemoveClick, text }) => (
+  <li>
+    <button onClick={onRemoveClick}>x</button>
+    {text}
+  </li>
+);
 
 class ListPage extends Component {
   constructor(props) {
