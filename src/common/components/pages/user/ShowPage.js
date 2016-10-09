@@ -5,7 +5,7 @@ import { pushErrors } from '../../../actions/errorActions';
 import Head from '../../widgets/Head';
 import PageLayout from '../../layouts/PageLayout';
 import AvatarForm from '../../forms/AvatarForm';
-import Time from '../../Time';
+import Time from '../../widgets/Time';
 
 class ShowPage extends Component {
   constructor(props) {
