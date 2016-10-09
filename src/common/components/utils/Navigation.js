@@ -4,8 +4,8 @@ import Grid from 'react-bootstrap/lib/Grid';
 import { updateLocale } from '../../actions/intlActions';
 import { pushErrors } from '../../actions/errorActions';
 import Navbar from './BsNavbar';
-import NavLink from '../NavLink';
-import MenuItem from '../MenuItem';
+import NavLink from './NavLink';
+import MenuItem from './MenuItem';
 import Text from '../Text';
 
 class Navigation extends Component {
