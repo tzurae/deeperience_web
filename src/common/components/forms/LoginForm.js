@@ -40,7 +40,7 @@ class LoginForm extends Component {
   }
 
   _handleSubmit(formData) {
-    userAPI(this.context.store.getState().apiEngine)
+    return userAPI(this.context.store.getState().apiEngine)
       .login(formData)
       .catch((err) => {
         this.context.store.dispatch(pushErrors(err));
@@ -70,6 +70,7 @@ class LoginForm extends Component {
     const {
       handleSubmit,
       pristine,
+      submitting,
       invalid,
     } = this.props;
 
@@ -90,7 +91,7 @@ class LoginForm extends Component {
           placeholder="Password"
         />
         <FormFooter>
-          <Button type="submit" disabled={pristine || invalid}>
+          <Button type="submit" disabled={pristine || submitting || invalid}>
             Login
           </Button>
         </FormFooter>
