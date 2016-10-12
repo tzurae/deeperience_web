@@ -5,6 +5,11 @@ node_js:
   - "5"
   - "6"
 
+# ref : <https://vinta.ws/code/speed-up-python-and-node-js-builds-on-travis-ci.html>
+cache:
+  directories:
+    - node_modules
+
 before_script:
   - npm install -g mocha
   - npm install -g gulp
