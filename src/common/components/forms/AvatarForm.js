@@ -121,7 +121,7 @@ class AvatarForm extends Component {
     } else if (formData.storage === 'local') {
       uploadProcedure = this.uploadToLocal(formData);
     }
-    uploadProcedure
+    return uploadProcedure
       .catch((err) => {
         dispatch(pushErrors([{
           title: 'Fail To Upload Avatar',
@@ -131,7 +131,7 @@ class AvatarForm extends Component {
         throw err;
       })
       .then((downloadURL) => {
-        userAPI(getState().apiEngine)
+        return userAPI(getState().apiEngine)
           .update({
             avatarURL: downloadURL,
           })
@@ -158,6 +158,7 @@ class AvatarForm extends Component {
     const {
       handleSubmit,
       pristine,
+      submitting,
       invalid,
     } = this.props;
     let avatarURL = this.state.avatarURL || this.props.avatarURL;
@@ -184,7 +185,7 @@ class AvatarForm extends Component {
           }]}
         />
         <FormFooter>
-          <Button type="submit" disabled={pristine || invalid}>
+          <Button type="submit" disabled={pristine || submitting || invalid}>
             Upload
           </Button>
         </FormFooter>
