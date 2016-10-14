@@ -1,30 +1,20 @@
-import Errors from '../../common/constants/Errors';
 import { handleDbError } from '../decorators/handleError';
 import User from '../models/User';
 import filterAttribute from '../utils/filterAttribute';
 
 export default {
   create(req, res) {
-    User.findOne({
-      'email.value': req.body.email,
-    }, handleDbError(res)((user) => {
-      if (user !== null) {
-        res.errors([Errors.USER_CONFLICT]);
-      } else {
-        const user = User({
-          name: req.body.name,
-          email: {
-            value: req.body.email,
-          },
-          password: req.body.password,
-        });
-
-        user.save(handleDbError(res)((user) => {
-          res.json({
-            user: user,
-          });
-        }));
-      }
+    const user = User({
+      name: req.body.name,
+      email: {
+        value: req.body.email,
+      },
+      password: req.body.password,
+    });
+    user.save(handleDbError(res)((user) => {
+      res.json({
+        user: user,
+      });
     }));
   },
 
