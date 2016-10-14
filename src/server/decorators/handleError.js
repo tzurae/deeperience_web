@@ -5,7 +5,12 @@ let getErrorHandler = (ErrorType) => (res) => (fn) => (err, ...result) => {
   if (err) {
     switch (ErrorType) {
       case ErrorTypes.ODM_OPERATION: {
-        res.pushError(Errors.ODM_OPERATION_FAIL, err);
+        if (err.name === 'ValidationError') {
+          res.pushError(Errors.ODM_VALIDATION, err);
+          res.errors();
+        } else {
+          res.pushError(Errors.ODM_OPERATION_FAIL, err);
+        }
         break;
       }
       default: {
