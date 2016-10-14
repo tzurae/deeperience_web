@@ -1,22 +1,22 @@
-import actionTypes from '../constants/actionTypes';
+import ActionTypes from '../constants/ActionTypes';
 
 export const setTodo = (todos) => {
   return {
-    type: actionTypes.SET_TODO,
+    type: ActionTypes.SET_TODO,
     todos,
   };
 };
 
 export const addTodo = (todo) => {
   return {
-    type: actionTypes.ADD_TODO,
+    type: ActionTypes.ADD_TODO,
     todo,
   };
 };
 
 export const removeTodo = (id) => {
   return {
-    type: actionTypes.REMOVE_TODO,
+    type: ActionTypes.REMOVE_TODO,
     id,
   };
 };

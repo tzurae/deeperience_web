@@ -1,4 +1,4 @@
-import actionTypes from '../constants/actionTypes';
+import ActionTypes from '../constants/ActionTypes';
 import cookie from 'cookie';
 import assign from 'object-assign';
 
@@ -9,7 +9,7 @@ export const setCookie = (name, value, options) => {
   return (dispatch, getState) => {
     return Promise
       .resolve(dispatch({
-        type: actionTypes.SET_COOKIE,
+        type: ActionTypes.SET_COOKIE,
         cookie: {
           name,
           value,
@@ -40,7 +40,7 @@ export const removeCookie = (name) => {
   return (dispatch, getState) => {
     return Promise
       .resolve(dispatch({
-        type: actionTypes.REMOVE_COOKIE,
+        type: ActionTypes.REMOVE_COOKIE,
         name,
       }))
       .then(() => {

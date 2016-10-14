@@ -1,19 +1,19 @@
-import actionTypes from '../constants/actionTypes';
+import ActionTypes from '../constants/ActionTypes';
 
 export default (state = [], action) => {
   switch (action.type) {
-    case actionTypes.SET_TODO: {
+    case ActionTypes.SET_TODO: {
       return [
         ...action.todos,
       ];
     }
-    case actionTypes.ADD_TODO: {
+    case ActionTypes.ADD_TODO: {
       return [
         ...state,
         action.todo,
       ];
     }
-    case actionTypes.REMOVE_TODO: {
+    case ActionTypes.REMOVE_TODO: {
       return [
         ...state.filter(todo => todo._id !== action.id),
       ];

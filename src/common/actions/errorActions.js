@@ -1,9 +1,9 @@
 import Errors from '../constants/Errors';
-import actionTypes from '../constants/actionTypes';
+import ActionTypes from '../constants/ActionTypes';
 
 export const pushError = (error, meta) => {
   return {
-    type: actionTypes.PUSH_ERRORS,
+    type: ActionTypes.PUSH_ERRORS,
     errors: [{
       ...error,
       meta,
@@ -16,14 +16,14 @@ export const pushErrors = (errors) => {
     return pushError(Errors.UNKNOWN_EXCEPTION, errors);
   }
   return {
-    type: actionTypes.PUSH_ERRORS,
+    type: ActionTypes.PUSH_ERRORS,
     errors,
   };
 };
 
 export const removeError = (id) => {
   return {
-    type: actionTypes.REMOVE_ERROR,
+    type: ActionTypes.REMOVE_ERROR,
     id,
   };
 };

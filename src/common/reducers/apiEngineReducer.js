@@ -1,10 +1,10 @@
-import actionTypes from '../constants/actionTypes';
+import ActionTypes from '../constants/ActionTypes';
 
 let initState = null;
 
 export default (state = initState, action) => {
   switch (action.type) {
-    case actionTypes.SET_API_ENGINE: {
+    case ActionTypes.SET_API_ENGINE: {
       return action.apiEngine;
     }
     default: {

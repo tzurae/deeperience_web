@@ -1,4 +1,4 @@
-import actionTypes from '../constants/actionTypes';
+import ActionTypes from '../constants/ActionTypes';
 
 let initState = [];
 
@@ -7,7 +7,7 @@ export default (state = initState, action) => {
     action.errors = [];
   }
   switch (action.type) {
-    case actionTypes.PUSH_ERRORS: {
+    case ActionTypes.PUSH_ERRORS: {
       return [
         ...state,
         ...action.errors.map((error) => ({
@@ -16,7 +16,7 @@ export default (state = initState, action) => {
         })),
       ];
     }
-    case actionTypes.REMOVE_ERROR: {
+    case ActionTypes.REMOVE_ERROR: {
       return [
         ...state.filter(error => error.id !== action.id),
       ];

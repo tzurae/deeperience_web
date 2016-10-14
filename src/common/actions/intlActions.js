@@ -1,4 +1,4 @@
-import actionTypes from '../constants/actionTypes';
+import ActionTypes from '../constants/ActionTypes';
 import localeAPI from '../api/locale';
 import { setCookie } from './cookieActions';
 
@@ -13,7 +13,7 @@ export const updateLocale = (targetLocale) => {
       .then((json) => {
         dispatch(setCookie('locale', json.locale));
         dispatch({
-          type: actionTypes.UPDATE_LOCALE,
+          type: ActionTypes.UPDATE_LOCALE,
           locale: json.locale,
           messages: json.messages,
         });

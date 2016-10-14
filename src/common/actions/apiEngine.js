@@ -1,8 +1,8 @@
-import actionTypes from '../constants/actionTypes';
+import ActionTypes from '../constants/ActionTypes';
 
 export const setApiEngine = (apiEngine) => {
   return {
-    type: actionTypes.SET_API_ENGINE,
+    type: ActionTypes.SET_API_ENGINE,
     apiEngine,
   };
 };
