@@ -206,12 +206,13 @@ git flow feature finish upgrade-mirror
 
 - [x] Travis Testing
 - [x] Asynchronous redux-form validation (detect duplicate email)
+- [x] Error handling
+  - reference: [Checklist: Best Practices of Node.JS Error Handling](http://goldbergyoni.com/checklist-best-practices-of-node-js-error-handling/)
 - [ ] Pagination Mechanism
 
 ### v1.0+
 
 - [ ] Social Login
-- [ ] [Error handling](http://goldbergyoni.com/checklist-best-practices-of-node-js-error-handling/)
 - [ ] Disable submit button when form submitting
 - [ ] Todo#Update API & Todo#Edit Functionality
 - [ ] Mail System
