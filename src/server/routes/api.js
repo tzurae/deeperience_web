@@ -8,6 +8,7 @@ import localeController from '../controllers/locale';
 import todoController from '../controllers/todo';
 
 export default ({ app }) => {
+  // user
   app.post('/api/user', bodyParser.json, userController.create);
   app.post('/api/user/login', bodyParser.json, userController.login);
   app.get('/api/user/logout', userController.logout);
@@ -25,11 +26,17 @@ export default ({ app }) => {
       filename: 'avatar.jpg',
     }).single('avatar'),
     userController.uploadAvatar);
+
+  // form
   app.post('/api/forms/register/fields/email/validation',
     bodyParser.json,
     formValidationController.register.email
   );
+
+  // locale
   app.get('/api/locale/:locale', localeController.show);
+
+  // todo
   app.post('/api/todo', bodyParser.json, todoController.create);
   app.get('/api/todo', todoController.list);
   app.delete('/api/todo/:id', todoController.remove);
