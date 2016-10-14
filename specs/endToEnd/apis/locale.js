@@ -19,11 +19,11 @@ describe('#locale', () => {
 
   describe('#Unauthorized User', () => {
     // GET /api/locale/{validLocaleName}
-    describe('GET /api/locale/{validLocaleName}', () => {
+    describe('GET /api/locales/{validLocaleName}', () => {
       it('should download valid locale', (done) => {
         async.eachSeries(validLocales,  (validLocale, cb) => {
           request
-            .get(constants.BASE + '/api/locale/' + validLocale)
+            .get(constants.BASE + '/api/locales/' + validLocale)
             .end((err, res) => {
               expect(err).to.equal(null);
               expect(res).to.not.be.undefined;
@@ -38,11 +38,11 @@ describe('#locale', () => {
     });
 
     // GET /api/locale/{invalidLocaleName}
-    describe('GET /api/locale/{invalidLocaleName}', () => {
+    describe('GET /api/locales/{invalidLocaleName}', () => {
       it('should reject invalid locale', (done) => {
         async.eachSeries(invalidLocales, (invalidLocale, cb) => {
           request
-            .get(constants.BASE + '/api/locale/' + invalidLocale)
+            .get(constants.BASE + '/api/locales/' + invalidLocale)
             .end((err, res) => {
               expect(err).to.equal(null);
               expect(res).to.not.be.undefined;

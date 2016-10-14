@@ -4,7 +4,7 @@ export default (apiEngine) => ({
   //     resolve(apiEngine.get('/api/todo'));
   //   }, 5000);
   // }),
-  list: () => apiEngine.get('/api/todo'),
-  create: (todo) => apiEngine.post('/api/todo', { data: todo }),
-  remove: (id) => apiEngine.del(`/api/todo/${id}`),
+  list: () => apiEngine.get('/api/todos'),
+  create: (todo) => apiEngine.post('/api/todos', { data: todo }),
+  remove: (id) => apiEngine.del(`/api/todos/${id}`),
 });

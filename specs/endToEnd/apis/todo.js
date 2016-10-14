@@ -21,11 +21,11 @@ describe('#todo', () => {
 
   describe('#Unauthorized User', () => {
     // POST /api/todo
-    describe('POST /api/todo', () => {
+    describe('POST /api/todos', () => {
       it('should create todo', (done) => {
         async.eachSeries(fakeTodos, (fakeTodo, cb) => {
           request
-            .post(constants.BASE + '/api/todo')
+            .post(constants.BASE + '/api/todos')
             .send(fakeTodo)
             .end((err, res) => {
               expect(err).to.equal(null);
@@ -42,10 +42,10 @@ describe('#todo', () => {
     });
 
     // GET /api/todo
-    describe('GET /api/todo', () => {
+    describe('GET /api/todos', () => {
       it('should list todos', (done) => {
         request
-          .get(constants.BASE + '/api/todo')
+          .get(constants.BASE + '/api/todos')
           .end((err, res) => {
             expect(err).to.equal(null);
             expect(res).to.not.be.undefined;

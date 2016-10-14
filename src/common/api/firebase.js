@@ -1,3 +1,3 @@
 export default (apiEngine) => ({
-  readToken: () => apiEngine.get('/api/user/me/firebase/token'),
+  readToken: () => apiEngine.get('/api/users/me/firebase/token'),
 });

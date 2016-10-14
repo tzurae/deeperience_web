@@ -9,20 +9,24 @@ import todoController from '../controllers/todo';
 
 export default ({ app }) => {
   // user
-  app.post('/api/user', bodyParser.json, userController.create);
-  app.post('/api/user/login', bodyParser.json, userController.login);
-  app.get('/api/user/logout', userController.logout);
-  app.get('/api/user/me', authRequired, userController.show);
-  app.put('/api/user/me', authRequired, bodyParser.json, userController.update);
+  app.post('/api/users', bodyParser.json, userController.create);
+  app.post('/api/users/login', bodyParser.json, userController.login);
+  app.get('/api/users/logout', userController.logout);
+  app.get('/api/users/me', authRequired, userController.show);
+  app.put('/api/users/me',
+    authRequired,
+    bodyParser.json,
+    userController.update
+  );
   if (configs.firebase) {
     let firebaseController = require('../controllers/firebase').default;
-    app.get('/api/user/me/firebase/token',
+    app.get('/api/users/me/firebase/token',
       authRequired, firebaseController.readToken);
   }
-  app.post('/api/user/me/avatar',
+  app.post('/api/users/me/avatar',
     authRequired,
     fileUpload.disk({
-      destination: 'user/{userId}',
+      destination: 'users/{userId}',
       filename: 'avatar.jpg',
     }).single('avatar'),
     userController.uploadAvatar);
@@ -34,10 +38,10 @@ export default ({ app }) => {
   );
 
   // locale
-  app.get('/api/locale/:locale', localeController.show);
+  app.get('/api/locales/:locale', localeController.show);
 
   // todo
-  app.post('/api/todo', bodyParser.json, todoController.create);
-  app.get('/api/todo', todoController.list);
-  app.delete('/api/todo/:id', todoController.remove);
+  app.post('/api/todos', bodyParser.json, todoController.create);
+  app.get('/api/todos', todoController.list);
+  app.delete('/api/todos/:id', todoController.remove);
 };

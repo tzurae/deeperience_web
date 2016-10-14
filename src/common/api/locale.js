@@ -1,3 +1,3 @@
 export default (apiEngine) => ({
-  read: (locale) => apiEngine.get(`/api/locale/${locale}`),
+  read: (locale) => apiEngine.get(`/api/locales/${locale}`),
 });

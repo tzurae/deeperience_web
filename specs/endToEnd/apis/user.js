@@ -21,7 +21,7 @@ describe('#user', () => {
 
   describe('#Unauthorized User', () => {
     // POST /api/user
-    describe('POST /api/user', () => {
+    describe('POST /api/users', () => {
       fakeUser = {
         name: features.user[0].name,
         email: features.user[0].email.value,
@@ -29,7 +29,7 @@ describe('#user', () => {
       };
       it('should create user', (done) => {
         request
-          .post(constants.BASE + '/api/user')
+          .post(constants.BASE + '/api/users')
           .send(fakeUser)
           .end((err, res) => {
             expect(err).to.equal(null);
@@ -43,7 +43,7 @@ describe('#user', () => {
       });
       it('should fail when email is duplicate', (done) => {
         request
-          .post(constants.BASE + '/api/user')
+          .post(constants.BASE + '/api/users')
           .send(fakeUser)
           .end((err, res) => {
             expect(err).to.equal(null);
@@ -57,14 +57,14 @@ describe('#user', () => {
     });
 
     // POST /api/user/login
-    describe('POST /api/user/login', () => {
+    describe('POST /api/users/login', () => {
       it('should auth valid user', (done) => {
         fakeUser = {
           email: features.user[0].email.value,
           password: features.user[0].password,
         };
         request
-          .post(constants.BASE + '/api/user/login')
+          .post(constants.BASE + '/api/users/login')
           .send(fakeUser)
           .end((err, res) => {
             expect(err).to.equal(null);
@@ -78,7 +78,7 @@ describe('#user', () => {
       });
       it('should reject invalid user', (done) => {
         request
-          .post(constants.BASE + '/api/user/login')
+          .post(constants.BASE + '/api/users/login')
           .send({})
           .end((err, res) => {
             expect(err).to.equal(null);
@@ -95,7 +95,7 @@ describe('#user', () => {
     describe('GET /api/user/logout', () => {
       it('should unauth user', (done) => {
         request
-          .get(constants.BASE + '/api/user/logout')
+          .get(constants.BASE + '/api/users/logout')
           .end((err, res) => {
             expect(err).to.equal(null);
             expect(res).to.not.be.undefined;
@@ -107,10 +107,10 @@ describe('#user', () => {
     });
 
     // GET /api/user/me
-    describe('GET /api/user/me', () => {
+    describe('GET /api/users/me', () => {
       it('should be rejected', (done) => {
         request
-          .get(constants.BASE + '/api/user/me')
+          .get(constants.BASE + '/api/users/me')
           .end((err, res) => {
             expect(err).to.equal(null);
             expect(res).to.not.be.undefined;
@@ -125,13 +125,13 @@ describe('#user', () => {
 
   describe('#Authorized User', () => {
     // GET /api/user/me
-    describe('GET /api/user/me', () => {
+    describe('GET /api/users/me', () => {
       it('should show user', (done) => {
         User.findOne({}, (err, user) => {
           expect(err).to.equal(null);
           let token = user.toJwtToken();
           request
-            .get(constants.BASE + '/api/user/me')
+            .get(constants.BASE + '/api/users/me')
             .set('Cookie', 'token=' + token)
             .end((err, res) => {
               expect(err).to.equal(null);
