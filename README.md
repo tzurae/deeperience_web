@@ -205,7 +205,7 @@ git flow feature finish upgrade-mirror
 ### v1.0
 
 - [x] Travis Testing
-- [ ] Asynchronous redux-form validation (detect duplicate username/email)
+- [x] Asynchronous redux-form validation (detect duplicate email)
 - [ ] Pagination Mechanism
 
 ### v1.0+
