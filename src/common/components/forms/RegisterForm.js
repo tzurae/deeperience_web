@@ -3,6 +3,7 @@ import { Field, reduxForm } from 'redux-form';
 import Button from 'react-bootstrap/lib/Button';
 // import validator from 'validator';
 import userAPI from '../../api/user';
+import { validateForm } from '../../actions/formActions';
 import { pushErrors } from '../../actions/errorActions';
 import { Form, FormField, FormFooter } from '../utils/BsForm';
 
@@ -22,6 +23,17 @@ const validate = (values) => {
   }
 
   return errors;
+};
+
+let asyncValidate = (values, dispatch) => {
+  return dispatch(validateForm('register', 'email', values.email))
+    .then((json) => {
+      let validationError = {};
+      if (!json.isPassed) {
+        validationError.email = json.message;
+        throw validationError;
+      }
+    });
 };
 
 class RegisterForm extends Component {
@@ -46,6 +58,7 @@ class RegisterForm extends Component {
     const {
       handleSubmit,
       pristine,
+      asyncValidating,
       submitting,
       invalid,
     } = this.props;
@@ -74,7 +87,10 @@ class RegisterForm extends Component {
           placeholder="Password"
         />
         <FormFooter>
-          <Button type="submit" disabled={pristine || submitting || invalid}>
+          <Button
+            type="submit"
+            disabled={pristine || !!asyncValidating || submitting || invalid}
+          >
             Register
           </Button>
         </FormFooter>
@@ -91,4 +107,6 @@ RegisterForm.contextTypes = {
 export default reduxForm({
   form: 'register',
   validate,
+  asyncValidate,
+  asyncBlurFields: ['email'],
 })(RegisterForm);
