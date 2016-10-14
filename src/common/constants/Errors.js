@@ -9,9 +9,15 @@ export default {
   },
   [ErrorCodes.ODM_OPERATION_FAIL]: {
     code: ErrorCodes.ODM_OPERATION_FAIL,
-    status: 400,
+    status: 500,
     title: 'Database Operation Failed',
     detail: 'Current database operation is invalid.',
+  },
+  [ErrorCodes.ODM_VALIDATION]: {
+    code: ErrorCodes.ODM_VALIDATION,
+    status: 400,
+    title: 'Database Validation Failed',
+    detail: 'The data is invalid.',
   },
   [ErrorCodes.STATE_PRE_FETCHING_FAIL]: {
     code: ErrorCodes.STATE_PRE_FETCHING_FAIL,
@@ -42,11 +48,5 @@ export default {
     status: 401,
     title: 'Token Expired',
     detail: 'Your jwt token expired. Please re-login.',
-  },
-  [ErrorCodes.USER_CONFLICT]: {
-    code: ErrorCodes.USER_CONFLICT,
-    status: 400,
-    title: 'User Already Exists',
-    detail: 'The user already exists.',
   },
 };
