@@ -15,7 +15,7 @@ const hashPassword = (rawPassword = '') => {
   return rawPassword;
 };
 
-let User = new mongoose.Schema({
+let UserSchema = new mongoose.Schema({
   name: String,
   email: {
     value: {
@@ -41,12 +41,18 @@ let User = new mongoose.Schema({
   },
 });
 
-User.methods.auth = function(password, cb) {
+UserSchema.path('email.value').validate(function(value, cb) {
+  User.findOne({ 'email.value': value }, (err, user) => {
+    cb(!err && !user);
+  });
+}, 'This email address is already registered');
+
+UserSchema.methods.auth = function(password, cb) {
   const isAuthenticated = (this.password === hashPassword(password));
   cb(null, isAuthenticated);
 };
 
-User.methods.toJwtToken = function(cb) {
+UserSchema.methods.toJwtToken = function(cb) {
   const user = {
     _id: this._id,
     name: this.name,
@@ -58,10 +64,11 @@ User.methods.toJwtToken = function(cb) {
   return token;
 };
 
-User.methods.toJSON = function() {
+UserSchema.methods.toJSON = function() {
   let obj = this.toObject();
   delete obj.password;
   return obj;
 };
 
-export default mongoose.model('User', User);
+let User = mongoose.model('User', UserSchema);
+export default User;
