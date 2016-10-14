@@ -33,6 +33,12 @@ let ErrorList = ({ errors, dispatch }) => (
           <p key="1">
             {error.meta.path && `(at path '${error.meta.path}')`}
           </p>
+        ), (
+          <p key="2">
+            {error.code === Errors.UNKNOWN_EXCEPTION.code && (
+              <span>{error.meta.toString()}</span>
+            )}
+          </p>
         )]}
       </div>
     ))}
