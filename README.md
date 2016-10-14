@@ -204,15 +204,24 @@ git flow feature finish upgrade-mirror
 
 ### v1.0
 
-- [x] Travis Testing
-- [x] Asynchronous redux-form validation (detect duplicate email)
-- [x] Error handling
+- [x] [Travis Testing](https://github.com/gocreating/express-react-hmr-boilerplate/commit/e5273694dd5a75305e8a778c0ac660d2e7340916)
+- [x] [Disable submit button when form submitting](https://github.com/gocreating/express-react-hmr-boilerplate/commit/88557e47a978238b0a0dee198a7c86f0aa01145a)
+- [x] [Asynchronous redux-form validation (detect duplicate email)](https://github.com/gocreating/express-react-hmr-boilerplate/commit/4eff5b583b6ab3a70f36441d77805550c4224b14)
+- [x] [Error handling](https://github.com/gocreating/express-react-hmr-boilerplate/commit/ca4db0d594e13950e46b32c5458e1a695136c0c3)
   - reference: [Checklist: Best Practices of Node.JS Error Handling](http://goldbergyoni.com/checklist-best-practices-of-node-js-error-handling/)
+- [x] [PM2 Integration](https://github.com/gocreating/express-react-hmr-boilerplate/commit/e427d7c3a9efea971557b0a2d7a6397b43ca4760)
+- [x] [Rename resource as resource`s`](https://github.com/gocreating/express-react-hmr-boilerplate/commit/039baadff0bdb22e5340153a2a9fe1935f87b7d9)
 - [ ] Pagination Mechanism
+- [ ] Google analytics
+- [ ] Add License
+- [ ] User Roles
 
 ### v1.0+
 
 - [ ] Social Login
-- [ ] Disable submit button when form submitting
 - [ ] Todo#Update API & Todo#Edit Functionality
+- [ ] Facebook Messenger Bot Example
+- [ ] [Stripe](https://stripe.com/) Payment System + Donation Button Example
 - [ ] Mail System
+- [ ] Automatically Refresh Token
+- [ ] Admin
