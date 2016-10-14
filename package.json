@@ -10,6 +10,7 @@
     "build": "gulp build",
     "mocha": "mocha specs/index.js --timeout 10000",
     "start": "node build/server/server.js",
+    "pm2": "node ./build/server/pm2Entry.js",
     "android": "npm run native-run-android && npm run native-watch-css",
     "native-run-android": "node ./node_modules/react-native/local-cli/cli.js run-android",
     "native-watch-css": "./node_modules/react-native-css/bin/react-native-css -i ./src/native/styles/index.scss -o ./src/native/styles/index.js --watch",
