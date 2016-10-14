@@ -215,6 +215,7 @@ gulp.task('deploy', function(cb) {
         'rm -rf ./configs',
         'mkdir configs',
         'cp -r ../configs/project ./configs/',
+        'cp ../configs/templates/Procfile ./',
         'cp ../package.json ./',
         'cp -r ../build ./',
       ], './.deploy', cbSeries);
