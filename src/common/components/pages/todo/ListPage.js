@@ -10,32 +10,99 @@ import {
 } from '../../../actions/todoActions';
 import PageLayout from '../../layouts/PageLayout';
 
-let TodoItem = ({ onRemoveClick, text }) => (
-  <li>
-    <button onClick={onRemoveClick}>x</button>
-    {text}
-  </li>
-);
+class TodoItem extends Component {
+  constructor() {
+    super();
+    this.state = {
+      isEditable: false,
+      inputValue: '',
+    };
+  }
+
+  renderInput() {
+    let { inputValue } = this.state;
+
+    return (
+      <input
+        type="text"
+        value={inputValue}
+        onChange={(e) => this.setState({
+          inputValue: e.target.value,
+        })}
+      />
+    );
+  }
+
+  renderControlButtons() {
+    let { text, onSaveClick } = this.props;
+    let { isEditable, inputValue } = this.state;
+
+    return isEditable ? (
+      <span>
+        <button
+          onClick={() => (
+            onSaveClick(inputValue)
+              .then(() => this.setState({ isEditable: false }))
+          )}
+        >
+          Save
+        </button>
+        <button onClick={() => this.setState({ isEditable: false })}>
+          Cancel
+        </button>
+      </span>
+    ) : (
+      <span>
+        <button
+          onClick={() => this.setState({ isEditable: true, inputValue: text })}
+        >
+          Edit
+        </button>
+      </span>
+    );
+  }
+
+  render() {
+    let { onRemoveClick, text } = this.props;
+    let { isEditable } = this.state;
+
+    return (
+      <li>
+        {text}
+        {isEditable && this.renderInput()}
+        {this.renderControlButtons()}
+        <button onClick={onRemoveClick}>x</button>
+      </li>
+    );
+  }
+}
 
 class ListPage extends Component {
   constructor(props) {
     super(props);
-    this._handleAddClick = this._handleAddClick.bind(this);
+    this.handleAddClick = this._handleAddClick.bind(this);
   }
 
   componentDidMount() {
-    const { dispatch, apiEngine } = this.props;
-    if (this.props.todos.length === 0) {
-      todoAPI(apiEngine)
-        .list()
-        .catch((err) => {
-          dispatch(pushErrors(err));
-          throw err;
-        })
-        .then((json) => {
-          dispatch(setTodo(json.todos));
-        });
+    let { todos } = this.props;
+
+    if (todos.length === 0) {
+      this.fetchTodos();
     }
+  }
+
+  fetchTodos() {
+    let { dispatch, apiEngine } = this.props;
+
+    todoAPI(apiEngine)
+      .list()
+      .catch((err) => {
+        dispatch(pushErrors(err));
+        throw err;
+      })
+      .then((json) => {
+        dispatch(setTodo(json.todos));
+      });
   }
 
   _handleAddClick() {
@@ -53,7 +120,21 @@ class ListPage extends Component {
       });
   }
 
-  _handleRemoveClick(id) {
+  handleSaveClick(id, newText) {
+    let { dispatch, apiEngine } = this.props;
+
+    return todoAPI(apiEngine)
+      .update(id, { text: newText })
+      .catch((err) => {
+        dispatch(pushErrors(err));
+        throw err;
+      })
+      .then((json) => {
+        this.fetchTodos();
+      });
+  }
+
+  handleRemoveClick(id) {
     const { dispatch, apiEngine } = this.props;
     todoAPI(apiEngine)
       .remove(id)
@@ -71,12 +152,13 @@ class ListPage extends Component {
       <PageLayout>
         <PageHeader>Todo List</PageHeader>
         <input type="text" ref="todotext" />
-        <button onClick={this._handleAddClick}>Add Todo</button>
+        <button onClick={this.handleAddClick}>Add Todo</button>
         <ul>
-          {this.props.todos.map((todo, index) =>
+          {this.props.todos.map((todo) =>
             <TodoItem
-              key={index}
-              onRemoveClick={this._handleRemoveClick.bind(this, todo._id)}
+              key={todo._id}
+              onRemoveClick={this.handleRemoveClick.bind(this, todo._id)}
+              onSaveClick={this.handleSaveClick.bind(this, todo._id)}
               text={todo.text} />)}
         </ul>
       </PageLayout>
