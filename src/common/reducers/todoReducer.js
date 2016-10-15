@@ -9,8 +9,8 @@ export default (state = [], action) => {
     }
     case ActionTypes.ADD_TODO: {
       return [
-        ...state,
         action.todo,
+        ...state,
       ];
     }
     case ActionTypes.REMOVE_TODO: {
