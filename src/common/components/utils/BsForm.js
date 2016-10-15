@@ -25,7 +25,7 @@ class BsForm extends Component {
       labelDimensions, // hold props to avoid passing down
       fieldDimensions, // hold props to avoid passing down
       children,
-      ...rest,
+      ...rest
     } = this.props;
 
     return (
@@ -58,7 +58,7 @@ BsForm.childContextTypes = {
 };
 
 let BsFormField = ({
-  label, input, type, meta, options, ...rest,
+  label, input, type, meta, options, ...rest
 }, {
   labelDimensions, fieldDimensions, horizontal,
 }) => {

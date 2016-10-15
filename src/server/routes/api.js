@@ -41,7 +41,8 @@ export default ({ app }) => {
   app.get('/api/locales/:locale', localeController.show);
 
   // todo
-  app.post('/api/todos', bodyParser.json, todoController.create);
   app.get('/api/todos', todoController.list);
+  app.post('/api/todos', bodyParser.json, todoController.create);
+  app.put('/api/todos/:id', bodyParser.json, todoController.update);
   app.delete('/api/todos/:id', todoController.remove);
 };
