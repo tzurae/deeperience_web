@@ -35,7 +35,7 @@ export default {
   }),
   todo: wrapTimeout(3000)((req, res, next) => {
     todoAPI(req.store.getState().apiEngine)
-      .list()
+      .list({ page: req.query.page || 1 })
       .catch(() => {
         res.pushError(Errors.STATE_PRE_FETCHING_FAIL, {
           detail: 'Cannot list todos',

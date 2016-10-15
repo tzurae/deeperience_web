@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import paginatePlugin from './plugins/paginate';
 
 let Todo = new mongoose.Schema({
   text: String,
@@ -9,5 +10,7 @@ let Todo = new mongoose.Schema({
     updatedAt: 'updatedAt',
   },
 });
+
+Todo.plugin(paginatePlugin);
 
 export default mongoose.model('Todo', Todo);

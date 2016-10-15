@@ -5,10 +5,21 @@ import Todo from '../models/Todo';
 
 export default {
   list(req, res) {
-    Todo.find({}, handleDbError(res)((todos) => {
-      res.json({
-        todos: todos,
-      });
+    Todo.paginate({
+      page: req.query.page,
+      perPage: 5,
+    }, handleDbError(res)((page) => {
+      Todo
+        .find({})
+        .sort({ createdAt: 'desc' })
+        .limit(page.limit)
+        .skip(page.skip)
+        .exec(handleDbError(res)((todos) => {
+          res.json({
+            todos: todos,
+            page: page,
+          });
+        }));
     }));
   },
 
