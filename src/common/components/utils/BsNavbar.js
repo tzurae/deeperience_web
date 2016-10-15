@@ -13,7 +13,7 @@ class BsNavbar extends Component {
       fixedTop,
       staticTop,
       children,
-      ...rest,
+      ...rest
     } = this.props;
     const cx = classNames(
       'navbar',
