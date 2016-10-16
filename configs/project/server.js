@@ -13,6 +13,6 @@ if (process.env.TRAVIS) {
       expiresIn: 60 * 60 * 24 * 3, // in seconds
     },
     mongo: require('./mongo/credential'),
-    firebase: require('./firebase/credential.json'),
+    // firebase: require('./firebase/credential.json'),
   };
 }
