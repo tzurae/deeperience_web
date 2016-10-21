@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
 import PageHeader from 'react-bootstrap/lib/PageHeader';
+import Resources from '../../../constants/Resources';
 import todoAPI from '../../../api/todo';
 import { pushErrors } from '../../../actions/errorActions';
 import {
@@ -8,7 +10,9 @@ import {
   addTodo,
   removeTodo,
 } from '../../../actions/todoActions';
+import { setCrrentPage, setPage } from '../../../actions/pageActions';
 import PageLayout from '../../layouts/PageLayout';
+import Pagination from '../../utils/BsPagination';
 
 class TodoItem extends Component {
   constructor() {
@@ -84,25 +88,29 @@ class ListPage extends Component {
   }
 
   componentDidMount() {
-    let { todos } = this.props;
-
-    if (todos.length === 0) {
-      this.fetchTodos();
-    }
+    let { dispatch, location } = this.props;
+    dispatch(setCrrentPage(Resources.TODO, location.query.page || 1));
   }
 
-  fetchTodos() {
-    let { dispatch, apiEngine } = this.props;
+  componentDidUpdate(prevProps) {
+    let { dispatch, apiEngine, page, router, location } = this.props;
 
-    todoAPI(apiEngine)
-      .list()
-      .catch((err) => {
-        dispatch(pushErrors(err));
-        throw err;
-      })
-      .then((json) => {
-        dispatch(setTodo(json.todos));
-      });
+    if (prevProps.page.current !== page.current) {
+      todoAPI(apiEngine)
+        .list({ page: page.current })
+        .catch((err) => {
+          dispatch(pushErrors(err));
+          throw err;
+        })
+        .then((json) => {
+          dispatch(setTodo(json.todos));
+          dispatch(setPage(Resources.TODO, json.page));
+          router.push({
+            pathname: location.pathname,
+            query: { page: json.page.current },
+          });
+        });
+    }
   }
 
   _handleAddClick() {
@@ -148,9 +156,11 @@ class ListPage extends Component {
   }
 
   render() {
+    let { page } = this.props;
+
     return (
       <PageLayout>
-        <PageHeader>Todo List</PageHeader>
+        <PageHeader>Todo List ({`${page.current} / ${page.total}`})</PageHeader>
         <input type="text" ref="todotext" />
         <button onClick={this.handleAddClick}>Add Todo</button>
         <ul>
@@ -161,12 +171,14 @@ class ListPage extends Component {
               onSaveClick={this.handleSaveClick.bind(this, todo._id)}
               text={todo.text} />)}
         </ul>
+        <Pagination resourceName={Resources.TODO} />
       </PageLayout>
     );
   }
 };
 
-export default connect(state => ({
+export default withRouter(connect(state => ({
   apiEngine: state.apiEngine,
   todos: state.todos,
-}))(ListPage);
+  page: state.pages[Resources.TODO] || {},
+}))(ListPage));
