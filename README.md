@@ -212,6 +212,10 @@ git flow feature finish upgrade-mirror
 - [x] [PM2 Integration](https://github.com/gocreating/express-react-hmr-boilerplate/commit/e427d7c3a9efea971557b0a2d7a6397b43ca4760)
 - [x] [Rename resource as resource`s`](https://github.com/gocreating/express-react-hmr-boilerplate/commit/039baadff0bdb22e5340153a2a9fe1935f87b7d9)
 - [ ] Pagination Mechanism
+- [x] Bug Fix for Intl
+  - reference:
+    1. [Changing locale and FormattedMessage not updated instantly](https://github.com/yahoo/react-intl/issues/371)
+    2. [react-redux API docs](https://github.com/reactjs/react-redux/blob/master/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options)
 - [ ] Google analytics
 - [ ] Add License
 - [ ] User Roles

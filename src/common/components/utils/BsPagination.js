@@ -83,4 +83,6 @@ Pagination.propTypes = {
 
 export default connect(state => ({
   pages: state.pages,
-}))(Pagination);
+}), null, null, {
+  pure: false,
+})(Pagination);
