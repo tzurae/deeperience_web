@@ -9,11 +9,13 @@ import rootReducer from '../common/reducers';
 import getRoutes from '../common/routes';
 import setupLocale from './setupLocale';
 import setupNProgress from './setupNProgress';
+import setupGA from './setupGA';
 import { setApiEngine } from '../common/actions/apiEngine';
 import ApiEngine from '../common/utils/ApiEngine';
 
 setupNProgress();
 setupLocale();
+let logPageView = setupGA();
 const initialState = window.__INITIAL_STATE__;
 let store = createStore(rootReducer, initialState, applyMiddleware(thunk));
 
@@ -34,7 +36,11 @@ match({
   render(
     <Provider store={store}>
       <LocaleProvider>
-        <Router history={browserHistory} {...renderProps}>
+        <Router
+          history={browserHistory}
+          onUpdate={logPageView}
+          {...renderProps}
+        >
           {routes}
         </Router>
       </LocaleProvider>
