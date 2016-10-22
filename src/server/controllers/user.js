@@ -3,6 +3,22 @@ import User from '../models/User';
 import filterAttribute from '../utils/filterAttribute';
 
 export default {
+  list(req, res) {
+    User.paginate({ page: req.query.page }, handleDbError(res)((page) => {
+      User
+        .find({})
+        .sort({ createdAt: 'desc' })
+        .limit(page.limit)
+        .skip(page.skip)
+        .exec(handleDbError(res)((users) => {
+          res.json({
+            users: users,
+            page: page,
+          });
+        }));
+    }));
+  },
+
   create(req, res) {
     const user = User({
       name: req.body.name,

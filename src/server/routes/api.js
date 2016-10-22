@@ -1,6 +1,8 @@
 import configs from '../../../configs/project/server';
+import Roles from '../../common/constants/Roles';
 import bodyParser from '../middlewares/bodyParser';
 import authRequired from '../middlewares/authRequired';
+import roleRequired from '../middlewares/roleRequired';
 import fileUpload from '../middlewares/fileUpload';
 import userController from '../controllers/user';
 import formValidationController from '../controllers/formValidation';
@@ -9,6 +11,11 @@ import todoController from '../controllers/todo';
 
 export default ({ app }) => {
   // user
+  app.get('/api/users',
+    authRequired,
+    roleRequired([Roles.ADMIN]),
+    userController.list
+  );
   app.post('/api/users', bodyParser.json, userController.create);
   app.post('/api/users/login', bodyParser.json, userController.login);
   app.get('/api/users/logout', userController.logout);
