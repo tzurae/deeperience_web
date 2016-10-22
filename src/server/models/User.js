@@ -2,6 +2,7 @@ import crypto from 'crypto';
 import mongoose from 'mongoose';
 import jwt from 'jsonwebtoken';
 import configs from '../../../configs/project/server';
+import Roles from '../../common/constants/Roles';
 
 const hashPassword = (rawPassword = '') => {
   let recursiveLevel = 5;
@@ -31,6 +32,11 @@ let UserSchema = new mongoose.Schema({
     type: String,
     required: true,
     set: hashPassword,
+  },
+  role: {
+    type: String,
+    enum: Object.keys(Roles).map(r => Roles[r]),
+    default: Roles.USER,
   },
   avatarURL: String,
 }, {
