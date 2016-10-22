@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import jwt from 'jsonwebtoken';
 import configs from '../../../configs/project/server';
 import Roles from '../../common/constants/Roles';
+import paginatePlugin from './plugins/paginate';
 
 const hashPassword = (rawPassword = '') => {
   let recursiveLevel = 5;
@@ -46,6 +47,8 @@ let UserSchema = new mongoose.Schema({
     updatedAt: 'updatedAt',
   },
 });
+
+UserSchema.plugin(paginatePlugin);
 
 UserSchema.path('email.value').validate(function(value, cb) {
   User.findOne({ 'email.value': value }, (err, user) => {
