@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import Grid from 'react-bootstrap/lib/Grid';
+import Roles from '../../constants/Roles';
 import { updateLocale } from '../../actions/intlActions';
 import { pushErrors } from '../../actions/errorActions';
 import Navbar from './BsNavbar';
@@ -24,6 +25,7 @@ class Navigation extends Component {
     let { cookies: { token, user } } = this.context.store.getState();
     let isAuth = !!token;
     user = (user && JSON.parse(user)) || {};
+    let isAdmin = (user.role === Roles.ADMIN);
 
     return (
       <Navbar staticTop>
@@ -75,6 +77,10 @@ class Navigation extends Component {
                 {!isAuth &&
                   <NavLink to="/user/register">
                     <Text id="nav.user.register" />
+                  </NavLink>}
+                {isAuth && isAdmin &&
+                  <NavLink to="/admin">
+                    Admin System
                   </NavLink>}
                 {isAuth &&
                   <NavLink to="/user/me">
