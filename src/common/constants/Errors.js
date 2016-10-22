@@ -31,6 +31,12 @@ export default {
     title: 'User Unauthorized',
     detail: 'Please login to access the resource.',
   },
+  [ErrorCodes.USER_EXISTED]: {
+    code: ErrorCodes.USER_EXISTED,
+    status: 400,
+    title: 'User Existed',
+    detail: 'This user is already registered.',
+  },
   [ErrorCodes.PERMISSION_DENIED]: {
     code: ErrorCodes.PERMISSION_DENIED,
     status: 403,

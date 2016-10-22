@@ -1,3 +1,4 @@
+import Errors from '../../common/constants/Errors';
 import { handleDbError } from '../decorators/handleError';
 import User from '../models/User';
 import filterAttribute from '../utils/filterAttribute';
@@ -20,17 +21,25 @@ export default {
   },
 
   create(req, res) {
-    const user = User({
-      name: req.body.name,
-      email: {
-        value: req.body.email,
-      },
-      password: req.body.password,
-    });
-    user.save(handleDbError(res)((user) => {
-      res.json({
-        user: user,
-      });
+    User.findOne({
+      'email.value': req.body.email,
+    }, handleDbError(res)((user) => {
+      if (user) {
+        res.errors([Errors.USER_EXISTED]);
+      } else {
+        const user = User({
+          name: req.body.name,
+          email: {
+            value: req.body.email,
+          },
+          password: req.body.password,
+        });
+        user.save(handleDbError(res)((user) => {
+          res.json({
+            user: user,
+          });
+        }));
+      }
     }));
   },
 

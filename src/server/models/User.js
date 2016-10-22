@@ -50,12 +50,6 @@ let UserSchema = new mongoose.Schema({
 
 UserSchema.plugin(paginatePlugin);
 
-UserSchema.path('email.value').validate(function(value, cb) {
-  User.findOne({ 'email.value': value }, (err, user) => {
-    cb(!err && !user);
-  });
-}, 'This email address is already registered');
-
 UserSchema.methods.auth = function(password, cb) {
   const isAuthenticated = (this.password === hashPassword(password));
   cb(null, isAuthenticated);
