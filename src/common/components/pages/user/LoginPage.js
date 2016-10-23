@@ -27,6 +27,12 @@ const LoginPage = (props) => (
           >
             <span className="fa fa-facebook"></span>Login with Facebook
           </a>
+          <a
+            href="/auth/linkedin"
+            className="btn btn-block btn-social btn-linkedin"
+          >
+            <span className="fa fa-linkedin"></span>Login with LinkedIn
+          </a>
         </Col>
       </Row>
     </Grid>

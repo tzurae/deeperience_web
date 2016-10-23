@@ -1,6 +1,7 @@
 import passport from 'passport';
 import { Strategy as JwtStrategy } from 'passport-jwt';
 import { Strategy as FacebookStrategy } from 'passport-facebook';
+import { Strategy as OAuthLinkedinStrategy } from 'passport-linkedin-oauth2';
 import configs from '../../../configs/project/server';
 import User from '../models/User';
 
@@ -56,6 +57,25 @@ if (configs.passportStrategy.facebook) {
       user.email.value = user.email.value || profile._json.email;
       user.name = user.name || profile._json.name;
       user.avatarURL = user.avatarURL || profile._json.picture.data.url;
+      done(null, user);
+    });
+  }));
+}
+
+if (configs.passportStrategy.linkedin) {
+  passport.use(new OAuthLinkedinStrategy({
+    ...configs.passportStrategy.linkedin.default,
+    ...configs.passportStrategy.linkedin[process.env.NODE_ENV],
+  }, (req, accessToken, refreshToken, profile, done) => {
+    findOrCreateUser('linkedin', profile._json.emailAddress, (err, user) => {
+      if (err) {
+        return done(err);
+      }
+      // map `linkedin-specific` profile fields to our custom profile fields
+      user.social.profile.linkedin = profile._json;
+      user.email.value = user.email.value || profile._json.emailAddress;
+      user.name = user.name || profile._json.formattedName;
+      user.avatarURL = user.avatarURL || profile._json.pictureUrl;
       done(null, user);
     });
   }));

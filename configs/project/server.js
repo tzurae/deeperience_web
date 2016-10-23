@@ -16,6 +16,7 @@ if (process.env.TRAVIS) {
     firebase: require('./firebase/credential.json'),
     passportStrategy: {
       facebook: require('./passportStrategy/facebook/credential'),
+      linkedin: require('./passportStrategy/linkedin/credential'),
     },
   };
 }

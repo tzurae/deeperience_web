@@ -109,6 +109,7 @@
     "passport": "^0.3.2",
     "passport-facebook": "^2.1.1",
     "passport-jwt": "^2.0.0",
+    "passport-linkedin-oauth2": "^1.4.1",
     "pm2": "^2.0.18",
     "react": "^15.3.2",
     "react-bootstrap": "^0.30.5",

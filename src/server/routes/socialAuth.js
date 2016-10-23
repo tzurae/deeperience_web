@@ -12,4 +12,12 @@ export default ({ app }) => {
       userController.socialLogin
     );
   }
+  // linkedin
+  if (configs.passportStrategy.linkedin) {
+    app.get('/auth/linkedin', socialAuthController.initLinkedin);
+    app.get('/auth/linkedin/callback',
+      passportAuth('linkedin'),
+      userController.socialLogin
+    );
+  }
 };

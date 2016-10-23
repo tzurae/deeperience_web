@@ -44,6 +44,7 @@ let UserSchema = new mongoose.Schema({
   social: {
     profile: {
       facebook: Object,
+      linkedin: Object,
     },
   },
 }, {
