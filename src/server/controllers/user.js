@@ -2,6 +2,7 @@ import Errors from '../../common/constants/Errors';
 import { handleDbError } from '../decorators/handleError';
 import User from '../models/User';
 import filterAttribute from '../utils/filterAttribute';
+import { loginUser } from '../../common/actions/userActions';
 
 export default {
   list(req, res) {
@@ -67,6 +68,26 @@ export default {
           }
         }));
       }
+    }));
+  },
+
+  socialLogin(req, res, next) {
+    let { user } = req;
+    let token = user.toJwtToken();
+
+    user.save(handleDbError(res)(() => {
+      req.store
+        .dispatch(loginUser({
+          token: token,
+          data: user,
+        }))
+        .then(() => {
+          let { token, user } = req.store.getState().cookies;
+
+          res.cookie('token', token);
+          res.cookie('user', user);
+          res.redirect('/');
+        });
     }));
   },
 
