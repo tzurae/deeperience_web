@@ -56,11 +56,14 @@ export default {
         user.auth(req.body.password, handleDbError(res)((isAuth) => {
           if (isAuth) {
             const token = user.toJwtToken();
-            res.json({
-              isAuth: true,
-              token: token,
-              user: user,
-            });
+            user.lastLoggedInAt = new Date();
+            user.save(handleDbError(res)((user) => {
+              res.json({
+                isAuth: true,
+                token: token,
+                user: user,
+              });
+            }));
           } else {
             res.json({
               isAuth: false,
@@ -75,6 +78,7 @@ export default {
     let { user } = req;
     let token = user.toJwtToken();
 
+    user.lastLoggedInAt = new Date();
     user.save(handleDbError(res)(() => {
       req.store
         .dispatch(loginUser({
