@@ -15,7 +15,8 @@ export default {
     let routes = getRoutes(req.store);
     match({
       routes,
-      location: req.url,
+      // we use `history: req.history` instead of `location: req.url` to deal with redirections
+      history: req.history,
     }, (error, redirectLocation, renderProps) => {
       if (error) {
         return res.status(500).send(error.message);
