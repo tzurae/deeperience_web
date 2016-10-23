@@ -42,22 +42,24 @@ function findOrCreateUser(schemaProfileKey, email, cb) {
   });
 }
 
-passport.use(new FacebookStrategy({
-  ...configs.passportStrategy.facebook.default,
-  ...configs.passportStrategy.facebook[process.env.NODE_ENV],
-}, (req, accessToken, refreshToken, profile, done) => {
-  findOrCreateUser('facebook', profile._json.email, (err, user) => {
-    if (err) {
-      return done(err);
-    }
-    // map `facebook-specific` profile fields to our custom profile fields
-    user.social.profile.facebook = profile._json;
-    user.email.value = user.email.value || profile._json.email;
-    user.name = user.name || profile._json.name;
-    user.avatarURL = user.avatarURL || profile._json.picture.data.url;
-    done(null, user);
-  });
-}));
+if (configs.passportStrategy.facebook) {
+  passport.use(new FacebookStrategy({
+    ...configs.passportStrategy.facebook.default,
+    ...configs.passportStrategy.facebook[process.env.NODE_ENV],
+  }, (req, accessToken, refreshToken, profile, done) => {
+    findOrCreateUser('facebook', profile._json.email, (err, user) => {
+      if (err) {
+        return done(err);
+      }
+      // map `facebook-specific` profile fields to our custom profile fields
+      user.social.profile.facebook = profile._json;
+      user.email.value = user.email.value || profile._json.email;
+      user.name = user.name || profile._json.name;
+      user.avatarURL = user.avatarURL || profile._json.picture.data.url;
+      done(null, user);
+    });
+  }));
+}
 
 const passportInitMiddleware = passport.initialize();
 export default passportInitMiddleware;
