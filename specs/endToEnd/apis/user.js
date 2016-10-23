@@ -50,7 +50,7 @@ describe('#user', () => {
             expect(res).to.not.be.undefined;
             expect(res.status).to.equal(200);
             expect(res.body.errors[0].code)
-              .to.equal(Errors.ODM_VALIDATION.code);
+              .to.equal(Errors.USER_EXISTED.code);
             done();
           });
       });

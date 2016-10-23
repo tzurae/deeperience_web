@@ -1,6 +1,8 @@
+import Errors from '../../common/constants/Errors';
 import { handleDbError } from '../decorators/handleError';
 import User from '../models/User';
 import filterAttribute from '../utils/filterAttribute';
+import { loginUser } from '../../common/actions/userActions';
 
 export default {
   list(req, res) {
@@ -20,17 +22,25 @@ export default {
   },
 
   create(req, res) {
-    const user = User({
-      name: req.body.name,
-      email: {
-        value: req.body.email,
-      },
-      password: req.body.password,
-    });
-    user.save(handleDbError(res)((user) => {
-      res.json({
-        user: user,
-      });
+    User.findOne({
+      'email.value': req.body.email,
+    }, handleDbError(res)((user) => {
+      if (user) {
+        res.errors([Errors.USER_EXISTED]);
+      } else {
+        const user = User({
+          name: req.body.name,
+          email: {
+            value: req.body.email,
+          },
+          password: req.body.password,
+        });
+        user.save(handleDbError(res)((user) => {
+          res.json({
+            user: user,
+          });
+        }));
+      }
     }));
   },
 
@@ -58,6 +68,26 @@ export default {
           }
         }));
       }
+    }));
+  },
+
+  socialLogin(req, res, next) {
+    let { user } = req;
+    let token = user.toJwtToken();
+
+    user.save(handleDbError(res)(() => {
+      req.store
+        .dispatch(loginUser({
+          token: token,
+          data: user,
+        }))
+        .then(() => {
+          let { token, user } = req.store.getState().cookies;
+
+          res.cookie('token', token);
+          res.cookie('user', user);
+          res.redirect('/');
+        });
     }));
   },
 

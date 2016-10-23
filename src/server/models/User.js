@@ -31,7 +31,8 @@ let UserSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-    required: true,
+    // there is no password for a social account
+    required: false,
     set: hashPassword,
   },
   role: {
@@ -40,6 +41,12 @@ let UserSchema = new mongoose.Schema({
     default: Roles.USER,
   },
   avatarURL: String,
+  social: {
+    profile: {
+      facebook: Object,
+      linkedin: Object,
+    },
+  },
 }, {
   versionKey: false,
   timestamps: {
@@ -49,12 +56,6 @@ let UserSchema = new mongoose.Schema({
 });
 
 UserSchema.plugin(paginatePlugin);
-
-UserSchema.path('email.value').validate(function(value, cb) {
-  User.findOne({ 'email.value': value }, (err, user) => {
-    cb(!err && !user);
-  });
-}, 'This email address is already registered');
 
 UserSchema.methods.auth = function(password, cb) {
   const isAuthenticated = (this.password === hashPassword(password));
