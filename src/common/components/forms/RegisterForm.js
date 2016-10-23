@@ -1,4 +1,6 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
 import { Field, reduxForm } from 'redux-form';
 import Button from 'react-bootstrap/lib/Button';
 // import validator from 'validator';
@@ -43,14 +45,16 @@ class RegisterForm extends Component {
   }
 
   _handleSubmit(formData) {
-    return userAPI(this.context.store.getState().apiEngine)
+    let { dispatch, apiEngine } = this.props;
+
+    return userAPI(apiEngine)
       .register(formData)
       .catch((err) => {
-        this.context.store.dispatch(pushErrors(err));
+        dispatch(pushErrors(err));
         throw err;
       })
       .then((json) => {
-        this.context.router.push('/');
+        dispatch(push('/'));
       });
   }
 
@@ -99,14 +103,11 @@ class RegisterForm extends Component {
   }
 };
 
-RegisterForm.contextTypes = {
-  store: PropTypes.any.isRequired,
-  router: PropTypes.any.isRequired,
-};
-
 export default reduxForm({
   form: 'register',
   validate,
   asyncValidate,
   asyncBlurFields: ['email'],
-})(RegisterForm);
+})(connect(state => ({
+  apiEngine: state.apiEngine,
+}))(RegisterForm));

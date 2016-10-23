@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router';
+import { push } from 'react-router-redux';
 import PageHeader from 'react-bootstrap/lib/PageHeader';
 import Table from 'react-bootstrap/lib/Table';
 import Resources from '../../../../constants/Resources';
@@ -24,7 +24,7 @@ class ListPage extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    let { dispatch, apiEngine, page, router, location } = this.props;
+    let { dispatch, apiEngine, page, location } = this.props;
 
     if (prevProps.page.current !== page.current) {
       userAPI(apiEngine)
@@ -36,10 +36,10 @@ class ListPage extends Component {
         .then((json) => {
           this.setState({ users: json.users });
           dispatch(setPage(Resources.USER, json.page));
-          router.push({
+          dispatch(push({
             pathname: location.pathname,
             query: { page: json.page.current },
-          });
+          }));
         });
     }
   }
@@ -78,7 +78,7 @@ class ListPage extends Component {
   }
 }
 
-export default withRouter(connect(state => ({
+export default connect(state => ({
   apiEngine: state.apiEngine,
   page: state.pages[Resources.USER] || {},
-}))(ListPage));
+}))(ListPage);

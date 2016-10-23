@@ -1,4 +1,6 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
 import { Field, reduxForm } from 'redux-form';
 import Button from 'react-bootstrap/lib/Button';
 // import validator from 'validator';
@@ -33,17 +35,20 @@ class LoginForm extends Component {
   }
 
   _login(json) {
-    return this.context.store.dispatch(loginUser({
+    return this.props.dispatch(loginUser({
       token: json.token,
       data: json.user,
     }));
   }
 
   _handleSubmit(formData) {
-    return userAPI(this.context.store.getState().apiEngine)
+    // let { store } = this.context;
+    let { dispatch, apiEngine } = this.props;
+
+    return userAPI(apiEngine)
       .login(formData)
       .catch((err) => {
-        this.context.store.dispatch(pushErrors(err));
+        dispatch(pushErrors(err));
         throw err;
       })
       .then((json) => {
@@ -52,13 +57,13 @@ class LoginForm extends Component {
             // redirect to the origin path before logging in
             const { location } = this.props;
             if (location && location.state && location.state.nextPathname) {
-              this.context.router.push(location.state.nextPathname);
+              dispatch(push(location.state.nextPathname));
             } else {
-              this.context.router.push('/');
+              dispatch(push('/'));
             }
           });
         } else {
-          this.context.store.dispatch(pushErrors([{
+          dispatch(pushErrors([{
             title: 'User Not Exists',
             detail: 'You may type wrong email or password.',
           }]));
@@ -100,12 +105,9 @@ class LoginForm extends Component {
   }
 };
 
-LoginForm.contextTypes = {
-  store: PropTypes.object.isRequired,
-  router: PropTypes.any.isRequired,
-};
-
 export default reduxForm({
   form: 'login',
   validate,
-})(LoginForm);
+})(connect(state => ({
+  apiEngine: state.apiEngine,
+}))(LoginForm));
