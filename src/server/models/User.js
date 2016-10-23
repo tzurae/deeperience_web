@@ -31,7 +31,8 @@ let UserSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-    required: true,
+    // there is no password for a social account
+    required: false,
     set: hashPassword,
   },
   role: {
@@ -40,6 +41,11 @@ let UserSchema = new mongoose.Schema({
     default: Roles.USER,
   },
   avatarURL: String,
+  social: {
+    profile: {
+      facebook: Object,
+    },
+  },
 }, {
   versionKey: false,
   timestamps: {
