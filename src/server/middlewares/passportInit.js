@@ -59,5 +59,5 @@ passport.use(new FacebookStrategy({
   });
 }));
 
-const passportMiddleware = passport.initialize();
-export default passportMiddleware;
+const passportInitMiddleware = passport.initialize();
+export default passportInitMiddleware;
