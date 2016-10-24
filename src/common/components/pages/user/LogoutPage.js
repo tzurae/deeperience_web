@@ -5,15 +5,6 @@ import userAPI from '../../../api/user';
 import { logoutUser } from '../../../actions/userActions';
 
 class LogoutPage extends React.Component {
-  constructor(props) {
-    super(props);
-    this._logout = this._logout.bind(this);
-  }
-
-  _logout() {
-    this.props.dispatch(logoutUser());
-  }
-
   componentWillMount() {
     let { dispatch, apiEngine } = this.props;
 
@@ -23,10 +14,8 @@ class LogoutPage extends React.Component {
         alert('Logout user fail');
         throw err;
       })
-      .then((json) => {
-        this._logout();
-        dispatch(push('/'));
-      });
+      .then((json) => dispatch(logoutUser()))
+      .then(() => dispatch(push('/')));
   }
 
   render() {
