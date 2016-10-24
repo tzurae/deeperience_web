@@ -77,6 +77,9 @@ export default {
 
   socialLogin(req, res, next) {
     let { user } = req;
+    if (!user) {
+      return next();
+    }
     let token = user.toJwtToken();
 
     user.lastLoggedInAt = new Date();
