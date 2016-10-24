@@ -1,6 +1,5 @@
 import cookie from 'cookie';
 import ActionTypes from '../constants/ActionTypes';
-import removeByKey from '../utils/removeByKey';
 
 let initCookies = {};
 if (process.env.BROWSER) {
@@ -24,9 +23,6 @@ export default (state = initCookies, action) => {
         ...state,
         ...cookiePair,
       };
-    }
-    case ActionTypes.REMOVE_COOKIE: {
-      return removeByKey(state, action.name);
     }
     default: {
       return state;
