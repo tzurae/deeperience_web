@@ -4,6 +4,8 @@ import BsFormGroup from 'react-bootstrap/lib/FormGroup';
 import Col from 'react-bootstrap/lib/Col';
 import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 import HelpBlock from 'react-bootstrap/lib/HelpBlock';
+import Recaptcha from 'react-google-recaptcha';
+import configs from '../../../../configs/project/client';
 
 class BsForm extends Component {
   getChildContext() {
@@ -65,7 +67,20 @@ let BsFormField = ({
   let isShowError = meta && meta.touched && meta.error;
 
   let formControl = null;
-  if (options) {
+  if (type === 'recaptcha') {
+    // ref:
+    //   - <https://github.com/erikras/redux-form/issues/1880>
+    /* eslint-disable */
+    formControl = configs.recaptcha ? (
+      <Recaptcha
+        sitekey={configs.recaptcha[process.env.NODE_ENV].siteKey}
+        onChange={input.onChange}
+      />
+    ) : (
+      <pre>Recaptcha is disabled</pre>
+    );
+    /* eslint-enable */
+  } else if (options) {
     // ref: <https://github.com/erikras/redux-form/issues/1857#issuecomment-249890206>
     formControl = (
       options.map((option) => (

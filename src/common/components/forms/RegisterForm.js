@@ -8,6 +8,7 @@ import userAPI from '../../api/user';
 import { validateForm } from '../../actions/formActions';
 import { pushErrors } from '../../actions/errorActions';
 import { Form, FormField, FormFooter } from '../utils/BsForm';
+import configs from '../../../../configs/project/client';
 
 const validate = (values) => {
   const errors = {};
@@ -22,6 +23,10 @@ const validate = (values) => {
 
   if (!values.password) {
     errors.password = 'Required';
+  }
+
+  if (configs.recaptcha && !values.recaptcha) {
+    errors.recaptcha = 'Required';
   }
 
   return errors;
@@ -89,6 +94,12 @@ class RegisterForm extends Component {
           component={FormField}
           type="password"
           placeholder="Password"
+        />
+        <Field
+          label=" "
+          name="recaptcha"
+          component={FormField}
+          type="recaptcha"
         />
         <FormFooter>
           <Button
