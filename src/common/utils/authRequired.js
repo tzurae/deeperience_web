@@ -4,8 +4,8 @@ export default (store) => (nextState, replace) => {
   if (!token) {
     replace({
       pathname: '/user/login',
-      state: {
-        nextPathname: nextState.location.pathname,
+      query: {
+        next: nextState.location.pathname,
       },
     });
   }

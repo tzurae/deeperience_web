@@ -3,6 +3,7 @@ import { handleDbError } from '../decorators/handleError';
 import User from '../models/User';
 import filterAttribute from '../utils/filterAttribute';
 import { loginUser } from '../../common/actions/userActions';
+import { redirect } from '../../common/actions/routeActions';
 
 export default {
   list(req, res) {
@@ -87,10 +88,12 @@ export default {
         }))
         .then(() => {
           let { token, user } = req.store.getState().cookies;
+          let state = JSON.parse(req.query.state);
 
           res.cookie('token', token);
           res.cookie('user', user);
-          res.redirect('/');
+          req.store.dispatch(redirect(state.next || '/'));
+          return next();
         });
     }));
   },

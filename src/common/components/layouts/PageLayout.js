@@ -1,16 +1,26 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import Grid from 'react-bootstrap/lib/Grid';
 import Navigation from '../utils/Navigation';
 import ErrorList from '../utils/ErrorList';
 
-const PageLayout = ({ children, ...rest }) => (
+let PageLayout = ({ hasGrid, children, ...rest }) => (
   <div>
     <Navigation />
     <ErrorList />
-    <Grid {...rest}>
-      {children}
-    </Grid>
+    {hasGrid ? (
+      <Grid {...rest}>
+        {children}
+      </Grid>
+    ) : children}
   </div>
 );
+
+PageLayout.propTypes = {
+  hasGrid: PropTypes.bool,
+};
+
+PageLayout.defaultProps = {
+  hasGrid: true,
+};
 
 export default PageLayout;

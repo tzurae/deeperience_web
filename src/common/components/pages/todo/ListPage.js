@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router';
+import { push } from 'react-router-redux';
 import PageHeader from 'react-bootstrap/lib/PageHeader';
 import Resources from '../../../constants/Resources';
 import todoAPI from '../../../api/todo';
@@ -93,7 +93,7 @@ class ListPage extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    let { dispatch, apiEngine, page, router, location } = this.props;
+    let { dispatch, apiEngine, page, location } = this.props;
 
     if (prevProps.page.current !== page.current) {
       todoAPI(apiEngine)
@@ -105,10 +105,10 @@ class ListPage extends Component {
         .then((json) => {
           dispatch(setTodo(json.todos));
           dispatch(setPage(Resources.TODO, json.page));
-          router.push({
+          dispatch(push({
             pathname: location.pathname,
             query: { page: json.page.current },
-          });
+          }));
         });
     }
   }
@@ -177,8 +177,8 @@ class ListPage extends Component {
   }
 };
 
-export default withRouter(connect(state => ({
+export default connect(state => ({
   apiEngine: state.apiEngine,
   todos: state.todos,
   page: state.pages[Resources.TODO] || {},
-}))(ListPage));
+}))(ListPage);
