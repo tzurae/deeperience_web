@@ -1,6 +1,7 @@
 import configs from '../../../configs/project/server';
 import Roles from '../../common/constants/Roles';
 import bodyParser from '../middlewares/bodyParser';
+import verifyRecaptcha from '../middlewares/verifyRecaptcha';
 import authRequired from '../middlewares/authRequired';
 import roleRequired from '../middlewares/roleRequired';
 import fileUpload from '../middlewares/fileUpload';
@@ -16,7 +17,11 @@ export default ({ app }) => {
     roleRequired([Roles.ADMIN]),
     userController.list
   );
-  app.post('/api/users', bodyParser.json, userController.create);
+  app.post('/api/users',
+    bodyParser.json,
+    verifyRecaptcha,
+    userController.create
+  );
   app.post('/api/users/login', bodyParser.json, userController.login);
   app.get('/api/users/logout', userController.logout);
   app.get('/api/users/me', authRequired, userController.show);
