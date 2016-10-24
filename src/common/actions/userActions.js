@@ -10,8 +10,8 @@ export const loginUser = ({ token, data }) => {
 };
 
 export const logoutUser = () => {
-  return (dispatch) => {
-    dispatch(removeCookie('token'));
-    dispatch(removeCookie('user'));
-  };
+  return (dispatch) => Promise.all([
+    dispatch(removeCookie('token')),
+    dispatch(removeCookie('user')),
+  ]);
 };
