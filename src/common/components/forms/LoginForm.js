@@ -55,12 +55,8 @@ class LoginForm extends Component {
         if (json.isAuth) {
           this.login(json).then(() => {
             // redirect to the origin path before logging in
-            const { location } = this.props;
-            if (location && location.state && location.state.nextPathname) {
-              dispatch(push(location.state.nextPathname));
-            } else {
-              dispatch(push('/'));
-            }
+            let { next } = this.props.routing.locationBeforeTransitions.query;
+            dispatch(push(next || '/'));
           });
         } else {
           dispatch(pushErrors([{
@@ -110,4 +106,5 @@ export default reduxForm({
   validate,
 })(connect(state => ({
   apiEngine: state.apiEngine,
+  routing: state.routing,
 }))(LoginForm));
