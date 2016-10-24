@@ -19,6 +19,12 @@ export default {
     title: 'Database Validation Failed',
     detail: 'The data is invalid.',
   },
+  [ErrorCodes.INVALID_RECAPTCHA]: {
+    code: ErrorCodes.INVALID_RECAPTCHA,
+    status: 400,
+    title: 'Invalid Recaptcha',
+    detail: 'The value of recaptcha is invalid.',
+  },
   [ErrorCodes.STATE_PRE_FETCHING_FAIL]: {
     code: ErrorCodes.STATE_PRE_FETCHING_FAIL,
     status: 500,
