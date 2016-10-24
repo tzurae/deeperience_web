@@ -18,5 +18,6 @@ if (process.env.TRAVIS) {
       facebook: require('./passportStrategy/facebook/credential'),
       linkedin: require('./passportStrategy/linkedin/credential'),
     },
+    recaptcha: require('./recaptcha/credential'),
   };
 }

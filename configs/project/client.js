@@ -8,4 +8,5 @@ module.exports = {
       trackingID: 'UA-86112397-1',
     },
   },
+  recaptcha: require('./recaptcha/client'),
 };
