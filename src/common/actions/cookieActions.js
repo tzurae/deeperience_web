@@ -38,18 +38,11 @@ export const setCookies = (cookies) => {
 
 export const removeCookie = (name) => {
   return (dispatch, getState) => {
-    return Promise
-      .resolve(dispatch({
-        type: ActionTypes.REMOVE_COOKIE,
-        name,
-      }))
-      .then(() => {
-        if (process.env.BROWSER) {
-          document.cookie = cookie.serialize(name, '', {
-            expires: new Date(1970, 1, 1, 0, 0, 1),
-          });
-        }
-        return Promise.resolve();
-      });
+    if (process.env.BROWSER) {
+      return dispatch(setCookie(name, '', {
+        expires: new Date(1970, 1, 1, 0, 0, 1),
+      }));
+    }
+    return Promise.resolve();
   };
 };
