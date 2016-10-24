@@ -1,5 +1,6 @@
 import React from 'react';
 import PageHeader from 'react-bootstrap/lib/PageHeader';
+import Alert from 'react-bootstrap/lib/Alert';
 import Grid from 'react-bootstrap/lib/Grid';
 import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
@@ -12,7 +13,7 @@ let LoginPage = ({ location }) => {
   let search = next ? '?next=' + next : '';
 
   return (
-    <PageLayout>
+    <PageLayout hasGrid={false}>
       <Head
         links={[
           'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-social/5.0.0/bootstrap-social.min.css',
@@ -20,6 +21,16 @@ let LoginPage = ({ location }) => {
       />
       <Grid>
         <PageHeader>Login</PageHeader>
+        <Row>
+          <Col md={12}>
+            {next && (
+              <Alert bsStyle="warning">
+                <strong>Authentication Required</strong>
+                {' '}Please login first.
+              </Alert>
+            )}
+          </Col>
+        </Row>
         <Row>
           <Col md={9}>
             <LoginForm />
