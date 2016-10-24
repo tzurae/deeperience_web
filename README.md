@@ -12,21 +12,30 @@ This is a boilerplate for scaffolding MERN stack projects with livereload featur
 ## Techniques
 
 - Nodejs + Express
-- Reactjs + Redux + Redux-Thunk + React-Router + Redux-Form + React-Intl
+- Reactjs + Redux + Redux-Thunk + React-Router + React-Router-Redux + Redux-Form + React-Intl
 - Mongodb + Mongoose + MongoLab
 - Livereload
 - Server-Side Rendering (SSR) & State Fetching (Isomorphic)
 - Webpack + Code Splitting
 - CSS Modules
 - ES6/7 + Babel
-- Travis CI Template
+- Travis CI
 - Heroku Deploy Script
+- PM2 for Production Serving
 - Examples
-  - Simple Todo List App
-  - Passport + Jwt Authentication
+  - Todo List App
+    - List + Paginate
+    - Create
+    - Update
+    - Delete
+  - Passport
+    - Jwt Authentication
+    - Social Authentication
   - i18n
   - Upload avatar
   - Ajax progress bar
+  - Google Analytics
+  - Admin System
 - React Native
 
 ## Installation
@@ -36,25 +45,23 @@ npm install -g gulp
 npm install
 ```
 
-## Integrate with MongoDB (**Required**)
+## Config MongoDB (**Required**)
 
-Most services this boilerplate provides rely on mongoDB. You must config your own mongoDB URIs.
+Most services this boilerplate provides rely on mongoDB. You must config your own mongoDB URIs. The only thing you need to do is create your own `configs/project/mongo/credential.js` based on the provided template `configs/project/mongo/credential.tmpl.js`.
 
-1. Add `configs/project/mongo/credential.js`
+## Config Google Analytics (Optional)
 
-  The file is where mongoDB URIs are stored. Here is the example template:
+TBD
 
-  ```js
-  module.exports = {
-    development: 'mongodb://<user>:<password>@<domain>:<port>/<db_development>',
-    test: 'mongodb://<user>:<password>@<domain>:<port>/<db_test>',
-    production: 'mongodb://<user>:<password>@<domain>:<port>/<db_production>',
-  };
-  ```
+## Config Facebook Login (Optional)
 
-2. Done
+TBD
 
-## Integrate with [Firebase](https://console.firebase.google.com/) (Optional)
+## Config LinkedIn Login (Optional)
+
+TBD
+
+## Config [Firebase](https://console.firebase.google.com/) (Optional)
 
 Firebase provides 5GB/user file storage for [free](https://firebase.google.com/pricing/) and is backed up by google cloud storage service. Thus we use firebase storage `for free` to host user avatars.
 
@@ -128,9 +135,23 @@ npm start
 
 ## Test
 
+### Test on local
+
 ```
 npm test
 ```
+
+### Test on Travis
+
+There are some sensitive configs inside the project, e.g., facebook app secret or firebase token, while we still need Travis to support our testing automation. Try the following command:
+
+```
+gulp dumpConfigs
+```
+
+It will show you a 3-step instruction to setup private Travis environment variables.
+
+> To sync configs on local side and on travis, you need to repeat the steps every time you update configs or tests
 
 ## Deploy on [Heroku](https://www.heroku.com/)
 
@@ -219,9 +240,12 @@ git flow feature finish upgrade-mirror
     2. [react-redux API docs](https://github.com/reactjs/react-redux/blob/master/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options)
 - [x] [User Roles](https://github.com/gocreating/express-react-hmr-boilerplate/commit/1613ea6e4253f8216946ef0fc1f989293ed60e61)
 - [x] [Admin](https://github.com/gocreating/express-react-hmr-boilerplate/commit/4321886d3c9ecfb047013d1daa76c0ee3ca5412c)
-- [ ] Google analytics
-- [ ] Social Login
+- [x] [Google analytics](https://github.com/gocreating/express-react-hmr-boilerplate/commit/9af27196c9bc88764e47a79bd5e0044237c6c5a4)
+- [x] [Social Auth for Facebook And LinkedIn](https://github.com/gocreating/express-react-hmr-boilerplate/commit/ccaaa608e7efa0a0c1693ddd7072c0e4e62d003b)
+- [x] [Reacr-Router-Redux Integration](https://github.com/gocreating/express-react-hmr-boilerplate/commit/5e4306d20a4feed40290739d0ca6f7bda1920df5)
+- [ ] Google Recaptcha
 - [ ] Edit User Profile
+- [ ] Use react-bootstrap in ErrorList
 - [ ] Add License
 
 ### v1.0+
