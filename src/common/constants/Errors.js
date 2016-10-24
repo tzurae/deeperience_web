@@ -55,4 +55,10 @@ export default {
     title: 'Token Expired',
     detail: 'Your jwt token expired. Please re-login.',
   },
+  [ErrorCodes.SOCIAL_AUTH_FAIL]: {
+    code: ErrorCodes.SOCIAL_AUTH_FAIL,
+    status: 400,
+    title: 'Social Authentication Failed',
+    detail: 'Please make sure you authorize email to us.',
+  },
 };
