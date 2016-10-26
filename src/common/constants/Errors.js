@@ -67,4 +67,10 @@ export default {
     title: 'Social Authentication Failed',
     detail: 'Please make sure you authorize email to us.',
   },
+  [ErrorCodes.SEND_EMAIL_FAIL]: {
+    code: ErrorCodes.SEND_EMAIL_FAIL,
+    status: 500,
+    title: 'Email Not Sent',
+    detail: 'Mail service didn\'t send the mail correctly.',
+  },
 };
