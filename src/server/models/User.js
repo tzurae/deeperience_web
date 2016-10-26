@@ -47,6 +47,7 @@ let UserSchema = new mongoose.Schema({
       linkedin: Object,
     },
   },
+  verifiedAt: Date,
   lastLoggedInAt: Date,
 }, {
   versionKey: false,
