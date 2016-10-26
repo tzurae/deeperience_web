@@ -56,7 +56,7 @@ export default {
       } else {
         user.auth(req.body.password, handleDbError(res)((isAuth) => {
           if (isAuth) {
-            const token = user.toJwtToken();
+            const token = user.toAuthenticationToken();
             user.lastLoggedInAt = new Date();
             user.save(handleDbError(res)((user) => {
               res.json({
@@ -80,7 +80,7 @@ export default {
     if (!user) {
       return next();
     }
-    let token = user.toJwtToken();
+    let token = user.toAuthenticationToken();
 
     user.lastLoggedInAt = new Date();
     user.save(handleDbError(res)(() => {

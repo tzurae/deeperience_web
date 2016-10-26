@@ -21,7 +21,7 @@ describe('#Pages', () => {
       if (err) {
         return done(err);
       }
-      userTokens[0] = user.toJwtToken();
+      userTokens[0] = user.toAuthenticationToken();
       done();
     });
   });

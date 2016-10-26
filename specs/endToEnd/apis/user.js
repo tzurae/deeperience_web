@@ -129,7 +129,7 @@ describe('#user', () => {
       it('should show user', (done) => {
         User.findOne({}, (err, user) => {
           expect(err).to.equal(null);
-          let token = user.toJwtToken();
+          let token = user.toAuthenticationToken();
           request
             .get(constants.BASE + '/api/users/me')
             .set('Cookie', 'token=' + token)

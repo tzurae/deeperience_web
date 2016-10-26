@@ -63,14 +63,14 @@ UserSchema.methods.auth = function(password, cb) {
   cb(null, isAuthenticated);
 };
 
-UserSchema.methods.toJwtToken = function(cb) {
+UserSchema.methods.toAuthenticationToken = function(cb) {
   const user = {
     _id: this._id,
     name: this.name,
     email: this.email,
   };
-  const token = jwt.sign(user, configs.jwt.secret, {
-    expiresIn: configs.jwt.expiresIn,
+  const token = jwt.sign(user, configs.jwt.authentication.secret, {
+    expiresIn: configs.jwt.authentication.expiresIn,
   });
   return token;
 };
