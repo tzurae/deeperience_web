@@ -22,7 +22,7 @@ export default {
     }));
   },
 
-  create(req, res) {
+  create(req, res, next) {
     User.findOne({
       'email.value': req.body.email,
     }, handleDbError(res)((user) => {
@@ -37,9 +37,8 @@ export default {
           password: req.body.password,
         });
         user.save(handleDbError(res)((user) => {
-          res.json({
-            user: user,
-          });
+          req.user = user;
+          next();
         }));
       }
     }));
