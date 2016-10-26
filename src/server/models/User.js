@@ -63,6 +63,16 @@ UserSchema.methods.auth = function(password, cb) {
   cb(null, isAuthenticated);
 };
 
+UserSchema.methods.toVerificationToken = function(cb) {
+  const user = {
+    _id: this._id,
+  };
+  const token = jwt.sign(user, configs.jwt.verification.secret, {
+    expiresIn: configs.jwt.verification.expiresIn,
+  });
+  return token;
+};
+
 UserSchema.methods.toAuthenticationToken = function(cb) {
   const user = {
     _id: this._id,
