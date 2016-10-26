@@ -1,3 +1,5 @@
+import jwt from 'jsonwebtoken';
+import configs from '../../../configs/project/server';
 import Errors from '../../common/constants/Errors';
 import { handleDbError } from '../decorators/handleError';
 import User from '../models/User';
@@ -22,7 +24,7 @@ export default {
     }));
   },
 
-  create(req, res) {
+  create(req, res, next) {
     User.findOne({
       'email.value': req.body.email,
     }, handleDbError(res)((user) => {
@@ -37,11 +39,23 @@ export default {
           password: req.body.password,
         });
         user.save(handleDbError(res)((user) => {
-          res.json({
-            user: user,
-          });
+          req.user = user;
+          next();
         }));
       }
+    }));
+  },
+
+  verify(req, res) {
+    let token = req.body.verificationToken;
+    let { _id } = jwt.verify(token, configs.jwt.verification.secret);
+
+    User.findById(_id, handleDbError(res)((user) => {
+      user.email.isVerified = true;
+      user.verifiedAt = new Date();
+      user.save(handleDbError(res)(() => {
+        res.json({});
+      }));
     }));
   },
 
@@ -56,7 +70,7 @@ export default {
       } else {
         user.auth(req.body.password, handleDbError(res)((isAuth) => {
           if (isAuth) {
-            const token = user.toJwtToken();
+            const token = user.toAuthenticationToken();
             user.lastLoggedInAt = new Date();
             user.save(handleDbError(res)((user) => {
               res.json({
@@ -80,7 +94,7 @@ export default {
     if (!user) {
       return next();
     }
-    let token = user.toJwtToken();
+    let token = user.toAuthenticationToken();
 
     user.lastLoggedInAt = new Date();
     user.save(handleDbError(res)(() => {

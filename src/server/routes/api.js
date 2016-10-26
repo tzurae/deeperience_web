@@ -6,6 +6,7 @@ import authRequired from '../middlewares/authRequired';
 import roleRequired from '../middlewares/roleRequired';
 import fileUpload from '../middlewares/fileUpload';
 import userController from '../controllers/user';
+import mailController from '../controllers/mail';
 import formValidationController from '../controllers/formValidation';
 import localeController from '../controllers/locale';
 import todoController from '../controllers/todo';
@@ -20,7 +21,12 @@ export default ({ app }) => {
   app.post('/api/users',
     bodyParser.json,
     verifyRecaptcha,
-    userController.create
+    userController.create,
+    mailController.sendVerification
+  );
+  app.post('/api/users/verification',
+    bodyParser.json,
+    userController.verify
   );
   app.post('/api/users/login', bodyParser.json, userController.login);
   app.get('/api/users/logout', userController.logout);

@@ -11,7 +11,7 @@ const cookieExtractor = (req) => {
 
 passport.use(new JwtStrategy({
   jwtFromRequest: cookieExtractor,
-  secretOrKey: configs.jwt.secret,
+  secretOrKey: configs.jwt.authentication.secret,
 }, (jwtPayload, done) => {
   User.findById(jwtPayload._id, (err, user) => {
     if (err) {
