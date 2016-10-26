@@ -41,6 +41,9 @@ if (process.env.TRAVIS) {
       development: {
         to: 'gocreating@gmail.com',
       },
+      test: {
+        to: 'gocreating@gmail.com',
+      },
     },
   };
 }

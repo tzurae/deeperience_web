@@ -18,7 +18,7 @@ export default (transport = defaultTransport) => {
         mailOptions
       );
       transporter.sendMail(mailOptions, (err, info) => {
-        if (err) {
+        if (process.env.NODE_ENV !== 'test' && err) {
           return reject(err);
         }
         return resolve(info);
