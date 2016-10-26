@@ -19,5 +19,17 @@ if (process.env.TRAVIS) {
       linkedin: require('./passportStrategy/linkedin/credential'),
     },
     recaptcha: require('./recaptcha/credential'),
+    gmail: require('./gmail/credential'),
+    mailOptions: {
+      default: {
+        subject: 'Untitled Mail',
+        from: 'Express-React-Hmr-Boilerplate <no-reply@express-react-hmr-boilerplate.com>',
+        text: 'No Text',
+        html: '<pre>no html content<pre>',
+      },
+      development: {
+        to: 'gocreating@gmail.com',
+      },
+    },
   };
 }
