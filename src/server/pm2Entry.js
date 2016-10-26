@@ -26,6 +26,9 @@ pm2.connect(function() {
 
     // Display logs in standard output
     pm2.launchBus(function(err, bus) {
+      if (err) {
+        throw err;
+      }
       console.log('[PM2] Log streaming started');
 
       bus.on('log:out', function(packet) {

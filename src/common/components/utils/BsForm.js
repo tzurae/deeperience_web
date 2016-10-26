@@ -24,8 +24,10 @@ class BsForm extends Component {
 
   render() {
     let {
-      labelDimensions, // hold props to avoid passing down
-      fieldDimensions, // hold props to avoid passing down
+      /* eslint-disable */
+      // consume props owned by BsForm
+      labelDimensions, fieldDimensions,
+      /* eslint-enable */
       children,
       ...rest
     } = this.props;
