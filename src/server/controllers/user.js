@@ -1,3 +1,5 @@
+import jwt from 'jsonwebtoken';
+import configs from '../../../configs/project/server';
 import Errors from '../../common/constants/Errors';
 import { handleDbError } from '../decorators/handleError';
 import User from '../models/User';
@@ -41,6 +43,19 @@ export default {
           next();
         }));
       }
+    }));
+  },
+
+  verify(req, res) {
+    let token = req.body.verificationToken;
+    let { _id } = jwt.verify(token, configs.jwt.verification.secret);
+
+    User.findById(_id, handleDbError(res)((user) => {
+      user.email.isVerified = true;
+      user.verifiedAt = new Date();
+      user.save(handleDbError(res)(() => {
+        res.json({});
+      }));
     }));
   },
 
