@@ -2,10 +2,10 @@ import assign from 'object-assign';
 import nodemailer from 'nodemailer';
 import configs from '../../../configs/project/server';
 
-let defaultTransport = (
-  `smtps://${configs.gmail[process.env.NODE_ENV].username}%40gmail.com:` +
-  `${configs.gmail[process.env.NODE_ENV].password}@smtp.gmail.com`
-);
+let defaultTransport;
+if (configs.nodemailer) {
+  defaultTransport = configs.nodemailer[process.env.NODE_ENV];
+}
 
 export default (transport = defaultTransport) => {
   let transporter = nodemailer.createTransport(transport);

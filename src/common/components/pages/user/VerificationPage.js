@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import Alert from 'react-bootstrap/lib/Alert';
 import userAPI from '../../../api/user';
+import { pushErrors } from '../../../actions/errorActions';
 import PageLayout from '../../layouts/PageLayout';
 
 class VerificationPage extends React.Component {
@@ -15,23 +16,25 @@ class VerificationPage extends React.Component {
   }
 
   componentWillMount() {
-    let { apiEngine, location } = this.props;
-
-    userAPI(apiEngine)
-      .verify({ token: location.query.token })
-      .catch((err) => {
-        this.setState({
-          isVerifying: false,
-          isFail: true,
+    let { dispatch, apiEngine, location } = this.props;
+    if (process.env.BROWSER) {
+      userAPI(apiEngine)
+        .verify({ token: location.query.token })
+        .catch((err) => {
+          this.setState({
+            isVerifying: false,
+            isFail: true,
+          });
+          dispatch(pushErrors(err));
+          throw err;
+        })
+        .then((json) => {
+          this.setState({
+            isVerifying: false,
+            isFail: false,
+          });
         });
-        throw err;
-      })
-      .then((json) => {
-        this.setState({
-          isVerifying: false,
-          isFail: false,
-        });
-      });
+    }
   }
 
   render() {
@@ -39,7 +42,9 @@ class VerificationPage extends React.Component {
 
     if (isVerifying) {
       return (
-        <p>Please wait for a while...</p>
+        <PageLayout>
+          <p>Please wait for a while...</p>
+        </PageLayout>
       );
     }
 

@@ -40,6 +40,11 @@ export default {
         });
         user.save(handleDbError(res)((user) => {
           req.user = user;
+          if (!configs.nodemailer) {
+            return res.json({
+              user: user,
+            });
+          }
           next();
         }));
       }
