@@ -1,5 +1,5 @@
 import passport from 'passport';
-import handleError, { handleJwtError } from '../decorators/handleError';
+import handleError, { handlePassportError } from '../decorators/handleError';
 import Errors from '../../common/constants/Errors';
 
 const authRequired = (req, res, next) => {
@@ -7,7 +7,7 @@ const authRequired = (req, res, next) => {
     'jwt',
     { session: false },
     handleError(res)((user, info) => {
-      handleJwtError(res)((user) => {
+      handlePassportError(res)((user) => {
         if (!user) {
           res.pushError(Errors.USER_UNAUTHORIZED);
           return res.errors();
