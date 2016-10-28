@@ -25,6 +25,12 @@ export default {
     title: 'Invalid Recaptcha',
     detail: 'The value of recaptcha is invalid.',
   },
+  [ErrorCodes.INVALID_DATA]: {
+    code: ErrorCodes.INVALID_DATA,
+    status: 400,
+    title: 'Invalid Data',
+    detail: 'You are sending invalid data.',
+  },
   [ErrorCodes.STATE_PRE_FETCHING_FAIL]: {
     code: ErrorCodes.STATE_PRE_FETCHING_FAIL,
     status: 500,
