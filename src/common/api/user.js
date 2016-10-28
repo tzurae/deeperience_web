@@ -8,6 +8,12 @@ export default (apiEngine) => ({
   logout: () => apiEngine.get('/api/users/logout'),
   show: () => apiEngine.get('/api/users/me'),
   update: (user) => apiEngine.put('/api/users/me', { data: user }),
+  updateAvatarURL: (form) => apiEngine.put('/api/users/me/avatarURL', {
+    data: form,
+  }),
+  updatePassword: (form) => apiEngine.put('/api/users/me/password', {
+    data: form,
+  }),
   uploadAvatar: (avatar) =>
     apiEngine.post('/api/users/me/avatar', { files: { avatar } }),
 });

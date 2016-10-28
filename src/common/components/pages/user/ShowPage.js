@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router';
 import PageHeader from 'react-bootstrap/lib/PageHeader';
+import Row from 'react-bootstrap/lib/Row';
+import Col from 'react-bootstrap/lib/Col';
+import Button from 'react-bootstrap/lib/Button';
 import userAPI from '../../../api/user';
 import { pushErrors } from '../../../actions/errorActions';
 import Head from '../../widgets/Head';
@@ -39,6 +43,14 @@ class ShowPage extends Component {
             'https://www.gstatic.com/firebasejs/live/3.0/firebase.js',
           ]}
         />
+        <Row>
+          <Col md={12}>
+            <Link to="/user/me/edit">
+              <Button bsStyle="primary">Edit My Profile</Button>
+            </Link>
+          </Col>
+        </Row>
+        <hr />
         <PageHeader>My Profile</PageHeader>
         <dl className="dl-horizontal">
           <dt>_id</dt>

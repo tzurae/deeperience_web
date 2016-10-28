@@ -4,6 +4,7 @@ import bodyParser from '../middlewares/bodyParser';
 import verifyRecaptcha from '../middlewares/verifyRecaptcha';
 import authRequired from '../middlewares/authRequired';
 import roleRequired from '../middlewares/roleRequired';
+import validate from '../middlewares/validate';
 import fileUpload from '../middlewares/fileUpload';
 import userController from '../controllers/user';
 import mailController from '../controllers/mail';
@@ -34,7 +35,19 @@ export default ({ app }) => {
   app.put('/api/users/me',
     authRequired,
     bodyParser.json,
+    validate('user/EditForm'),
     userController.update
+  );
+  app.put('/api/users/me/avatarURL',
+    authRequired,
+    bodyParser.json,
+    userController.updateAvatarURL
+  );
+  app.put('/api/users/me/password',
+    authRequired,
+    bodyParser.json,
+    validate('user/ChangePasswordForm'),
+    userController.updatePassword
   );
   if (configs.firebase) {
     let firebaseController = require('../controllers/firebase').default;

@@ -1,3 +1,4 @@
+import assign from 'object-assign';
 import jwt from 'jsonwebtoken';
 import configs from '../../../configs/project/server';
 import Errors from '../../common/constants/Errors';
@@ -140,12 +141,55 @@ export default {
   },
 
   update(req, res) {
-    let user = filterAttribute(req.body, ['name', 'avatarURL']);
-    User.update({ _id: req.user._id }, user, handleDbError(res)((raw) => {
+    let { user } = req;
+    let modifiedUser = filterAttribute(req.body, [
+      'name',
+      'avatarURL',
+    ]);
+
+    assign(user, modifiedUser);
+    user.save(handleDbError(res)((user) => {
       res.json({
         originAttributes: req.body,
-        updatedAttributes: user,
+        user: user,
       });
+    }));
+  },
+
+  updateAvatarURL(req, res) {
+    let { user } = req;
+    let modifiedUser = filterAttribute(req.body, ['avatarURL']);
+
+    assign(user, modifiedUser);
+    user.save(handleDbError(res)((user) => {
+      res.json({
+        originAttributes: req.body,
+        user: user,
+      });
+    }));
+  },
+
+  updatePassword(req, res) {
+    let { user } = req;
+    let modifiedUser = {
+      password: req.body.newPassword,
+    };
+
+    user.auth(req.body.oldPassword, handleDbError(res)((isAuth) => {
+      if (isAuth) {
+        assign(user, modifiedUser);
+        user.save(handleDbError(res)((user) => {
+          res.json({
+            originAttributes: req.body,
+            isAuth: true,
+            user: user,
+          });
+        }));
+      } else {
+        res.json({
+          isAuth: false,
+        });
+      }
     }));
   },
 

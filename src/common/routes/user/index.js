@@ -6,6 +6,7 @@ export default (store) => ({
         require('./register').default(store),
         require('./verification').default(store),
         require('./login').default(store),
+        require('./edit').default(store),
         require('./logout').default(store),
         require('./me').default(store),
       ]);

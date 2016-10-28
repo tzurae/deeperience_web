@@ -132,7 +132,7 @@ class AvatarForm extends Component {
       })
       .then((downloadURL) => {
         return userAPI(getState().apiEngine)
-          .update({
+          .updateAvatarURL({
             avatarURL: downloadURL,
           })
           .catch((err) => {
