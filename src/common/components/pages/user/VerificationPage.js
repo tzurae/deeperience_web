@@ -42,7 +42,9 @@ class VerificationPage extends React.Component {
 
     if (isVerifying) {
       return (
-        <p>Please wait for a while...</p>
+        <PageLayout>
+          <p>Please wait for a while...</p>
+        </PageLayout>
       );
     }
 
