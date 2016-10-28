@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
-import { Field, reduxForm } from 'redux-form';
+import { Field, reduxForm, SubmissionError } from 'redux-form';
+import Alert from 'react-bootstrap/lib/Alert';
 import Button from 'react-bootstrap/lib/Button';
 // import validator from 'validator';
-import userAPI from '../../api/user';
-import { pushErrors } from '../../actions/errorActions';
-import { loginUser } from '../../actions/userActions';
-import { Form, FormField, FormFooter } from '../utils/BsForm';
+import userAPI from '../../../api/user';
+import { pushErrors } from '../../../actions/errorActions';
+import { loginUser } from '../../../actions/userActions';
+import { Form, FormField, FormFooter } from '../../utils/BsForm';
 
 const validate = (values) => {
   const errors = {};
@@ -59,10 +60,11 @@ class LoginForm extends Component {
             dispatch(push(next || '/'));
           });
         } else {
-          dispatch(pushErrors([{
-            title: 'User Not Exists',
-            detail: 'You may type wrong email or password.',
-          }]));
+          throw new SubmissionError({
+            email: 'You may type wrong email or password',
+            password: 'You may type wrong email or password',
+            _error: 'Login failed',
+          });
         }
       });
   }
@@ -70,6 +72,8 @@ class LoginForm extends Component {
   render() {
     const {
       handleSubmit,
+      submitFailed,
+      error,
       pristine,
       submitting,
       invalid,
@@ -77,6 +81,7 @@ class LoginForm extends Component {
 
     return (
       <Form horizontal onSubmit={handleSubmit(this.handleSubmit)}>
+        {submitFailed && error && (<Alert bsStyle="danger">{error}</Alert>)}
         <Field
           label="Email"
           name="email"

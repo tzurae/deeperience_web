@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import PageHeader from 'react-bootstrap/lib/PageHeader';
 import Row from 'react-bootstrap/lib/Row';
@@ -8,23 +9,24 @@ import userAPI from '../../../api/user';
 import { pushErrors } from '../../../actions/errorActions';
 import Head from '../../widgets/Head';
 import PageLayout from '../../layouts/PageLayout';
-import AvatarForm from '../../forms/AvatarForm';
 import Time from '../../widgets/Time';
+import RefreshImage from '../../utils/RefreshImage';
 
 class ShowPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: {},
+      user: props.initialUser,
     };
   }
 
   componentDidMount() {
-    let { store } = this.context;
-    userAPI(store.getState().apiEngine)
-      .show()
+    let { dispatch, apiEngine } = this.props;
+
+    userAPI(apiEngine)
+      .read()
       .catch((err) => {
-        store.dispatch(pushErrors(err));
+        dispatch(pushErrors(err));
         throw err;
       })
       .then((json) => {
@@ -56,7 +58,9 @@ class ShowPage extends Component {
           <dt>_id</dt>
           <dd>{user._id}</dd>
           <dt>avatar</dt>
-          <dd><AvatarForm avatarURL={user.avatarURL} /></dd>
+          <dd>
+            {user.avatarURL && <RefreshImage thumbnail src={user.avatarURL} />}
+          </dd>
           <dt>name</dt>
           <dd>{user.name}</dd>
           <dt>email</dt>
@@ -79,8 +83,7 @@ class ShowPage extends Component {
   }
 };
 
-ShowPage.contextTypes = {
-  store: React.PropTypes.object.isRequired,
-};
-
-export default ShowPage;
+export default connect(({ apiEngine, cookies: { user } }) => ({
+  apiEngine: apiEngine,
+  initialUser: (user && JSON.parse(user)) || {},
+}))(ShowPage);

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import Grid from 'react-bootstrap/lib/Grid';
+import Image from 'react-bootstrap/lib/Image';
 import Roles from '../../constants/Roles';
 import { updateLocale } from '../../actions/intlActions';
 import { pushErrors } from '../../actions/errorActions';
@@ -67,7 +68,13 @@ class Navigation extends Component {
                 title={
                   !isAuth ?
                   <Text id="nav.user" /> :
-                  (user.name || user.email)}
+                  user.avatarURL ? (
+                    <Image
+                      style={{ height: 18 }}
+                      src={user.avatarURL} rounded
+                    />
+                  ) : (user.name || user.email)
+                }
               >
                 {!isAuth &&
                   <NavLink to="/user/login">
