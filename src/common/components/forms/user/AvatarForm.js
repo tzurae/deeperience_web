@@ -6,6 +6,7 @@ import configs from '../../../../../configs/project/client';
 import firebaseAPI from '../../../api/firebase';
 import userAPI from '../../../api/user';
 import { pushErrors } from '../../../actions/errorActions';
+import { setCookies } from '../../../actions/cookieActions';
 import { Form, FormField, FormFooter } from '../../utils/BsForm';
 import RefreshImage from '../../utils/RefreshImage';
 import toRefreshURL from '../../../utils/toRefreshURL';
@@ -151,6 +152,10 @@ class AvatarForm extends Component {
           })
           .then((json) => {
             let newAvatarURL = toRefreshURL(downloadURL);
+            json.user.avatarURL = newAvatarURL;
+            dispatch(setCookies({
+              user: json.user,
+            }));
             this.setState({
               avatarURL: newAvatarURL,
             });
