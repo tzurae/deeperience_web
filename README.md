@@ -1,9 +1,11 @@
 # Express-React-HMR-Boilerplate
 
-[![Build Status](https://travis-ci.org/gocreating/express-react-hmr-boilerplate.svg?branch=dev)](https://travis-ci.org/gocreating/express-react-hmr-boilerplate)
-[![Dependency Status](https://david-dm.org/gocreating/express-react-hmr-boilerplate.svg)](https://david-dm.org/gocreating/express-react-hmr-boilerplate)
+A boilerplate for scaffolding production-ready MERN stack projects.
 
-This is a boilerplate for scaffolding MERN stack projects with livereload feature supported.
+| | master | dev |
+| --- | --- | --- |
+| Build Status | [![Build Status](https://travis-ci.org/gocreating/express-react-hmr-boilerplate.svg?branch=master)](https://travis-ci.org/gocreating/express-react-hmr-boilerplate) | [![Build Status](https://travis-ci.org/gocreating/express-react-hmr-boilerplate.svg?branch=dev)](https://travis-ci.org/gocreating/express-react-hmr-boilerplate) |
+| Dependency Status | [![Dependency Status](https://david-dm.org/gocreating/express-react-hmr-boilerplate.svg)](https://david-dm.org/gocreating/express-react-hmr-boilerplate) | - |
 
 ## Demo
 
@@ -33,6 +35,7 @@ This is a boilerplate for scaffolding MERN stack projects with livereload featur
     - Social Authentication
   - i18n
   - Upload avatar
+  - Recaptcha
   - Ajax progress bar
   - Google Analytics
   - Admin System
@@ -49,17 +52,39 @@ npm install
 
 Most services this boilerplate provides rely on mongoDB. You must config your own mongoDB URIs. The only thing you need to do is create your own `configs/project/mongo/credential.js` based on the provided template `configs/project/mongo/credential.tmpl.js`.
 
+## Config Nodemailer (Optional)
+
+### Gmail
+
+Here I take the popular gmail service as example.
+
+1. Create your own `configs/project/nodemailer/credential.js`
+
+  You can check all supported services [here](https://github.com/nodemailer/nodemailer-wellknown#supported-services)
+
+2. Fix security issue
+
+  If you are going to run tests on travis or deploy the app on heroku, you might meet the issue that the app cannot login your gmail account from travis/heroku server. You need to manually authorize permissions to your testing/production servers.
+  > This is also documented on [nodemailer](https://github.com/nodemailer/nodemailer#tldr-usage-example)
+
 ## Config Google Analytics (Optional)
 
 TBD
 
-## Config Facebook Login (Optional)
+## Config Social Authentication (Optional)
+
+### Facebook
 
 TBD
 
-## Config LinkedIn Login (Optional)
+### LinkedIn
 
 TBD
+
+## Config ReCAPTCHA (Optional)
+
+1. Get your API keys on [reCAPTCHA](https://www.google.com/recaptcha/admin)
+2. Save keys in  `configs/project/recaptcha/credential.js`.
 
 ## Config [Firebase](https://console.firebase.google.com/) (Optional)
 
@@ -243,14 +268,18 @@ git flow feature finish upgrade-mirror
 - [x] [Google analytics](https://github.com/gocreating/express-react-hmr-boilerplate/commit/9af27196c9bc88764e47a79bd5e0044237c6c5a4)
 - [x] [Social Auth for Facebook And LinkedIn](https://github.com/gocreating/express-react-hmr-boilerplate/commit/ccaaa608e7efa0a0c1693ddd7072c0e4e62d003b)
 - [x] [Reacr-Router-Redux Integration](https://github.com/gocreating/express-react-hmr-boilerplate/commit/5e4306d20a4feed40290739d0ca6f7bda1920df5)
-- [ ] Google Recaptcha
-- [ ] Edit User Profile
-- [ ] Use react-bootstrap in ErrorList
+- [x] [Use react-bootstrap in ErrorList](https://github.com/gocreating/express-react-hmr-boilerplate/commit/e44eb0b078fe7d0610c00a5c63b165f2ed31039f)
+- [x] [Google Recaptcha](https://github.com/gocreating/express-react-hmr-boilerplate/commit/5655a29c74fca6f2af4b75538820470b1cfe9619)
+- [x] [Mail Service](https://github.com/gocreating/express-react-hmr-boilerplate/commit/616ca6edfae5ba4df361d5d6dbef0a28571e9ea2)
+- [x] [Email Verification](https://github.com/gocreating/express-react-hmr-boilerplate/commit/5a6ef757d7499cae71f69b605460ff7868d3a5ec)
+- [x] [Edit User Profile](https://github.com/gocreating/express-react-hmr-boilerplate/commit/3b0b475edc9ba05269a15fec96a61930aa154fcc)
+- [ ] Landing Page
 - [ ] Add License
 
 ### v1.0+
 
-- [ ] Facebook Messenger Bot Example
+- [ ] Disqus Thread
 - [ ] [Stripe](https://stripe.com/) Payment System + Donation Button Example
-- [ ] Mail System
+- [ ] Facebook Messenger Bot Example
+- [ ] Phone Verification
 - [ ] Automatically Refresh Token
