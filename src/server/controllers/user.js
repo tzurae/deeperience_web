@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 import configs from '../../../configs/project/server';
 import Errors from '../../common/constants/Errors';
-import { handleDbError } from '../decorators/handleError';
+import { handleDbError, handleJwtError } from '../decorators/handleError';
 import User from '../models/User';
 import filterAttribute from '../utils/filterAttribute';
 import { loginUser } from '../../common/actions/userActions';
@@ -48,15 +48,23 @@ export default {
 
   verify(req, res) {
     let token = req.body.verificationToken;
-    let { _id } = jwt.verify(token, configs.jwt.verification.secret);
 
-    User.findById(_id, handleDbError(res)((user) => {
-      user.email.isVerified = true;
-      user.verifiedAt = new Date();
-      user.save(handleDbError(res)(() => {
-        res.json({});
-      }));
-    }));
+    jwt.verify(
+      token,
+      configs.jwt.verification.secret,
+      handleJwtError(res)(({ _id }) => {
+        User.findById(_id, handleDbError(res)((user) => {
+          if (user.email.isVerified) {
+            return res.errors([Errors.TOKEN_REUSED]);
+          }
+          user.email.isVerified = true;
+          user.verifiedAt = new Date();
+          user.save(handleDbError(res)(() => {
+            res.json({});
+          }));
+        }));
+      })
+    );
   },
 
   login(req, res) {

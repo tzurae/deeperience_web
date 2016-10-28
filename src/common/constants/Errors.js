@@ -35,13 +35,32 @@ export default {
     code: ErrorCodes.USER_UNAUTHORIZED,
     status: 401,
     title: 'User Unauthorized',
-    detail: 'Please login to access the resource.',
+    detail:
+      'You are a guest or invalid user. Please login to access the resource.',
   },
   [ErrorCodes.USER_EXISTED]: {
     code: ErrorCodes.USER_EXISTED,
     status: 400,
     title: 'User Existed',
     detail: 'This user is already registered.',
+  },
+  [ErrorCodes.TOKEN_REUSED]: {
+    code: ErrorCodes.TOKEN_REUSED,
+    status: 400,
+    title: 'Token Reused',
+    detail: 'The token is reused.',
+  },
+  [ErrorCodes.BAD_TOKEN]: {
+    code: ErrorCodes.BAD_TOKEN,
+    status: 400,
+    title: 'Bad Token',
+    detail: 'Fail to decode the token.',
+  },
+  [ErrorCodes.TOKEN_EXPIRATION]: {
+    code: ErrorCodes.TOKEN_EXPIRATION,
+    status: 401,
+    title: 'Token Expired',
+    detail: 'Your token has expired.',
   },
   [ErrorCodes.PERMISSION_DENIED]: {
     code: ErrorCodes.PERMISSION_DENIED,
@@ -55,17 +74,11 @@ export default {
     title: 'Locale not supported',
     detail: 'We don\'t support this locale.',
   },
-  [ErrorCodes.USER_TOKEN_EXPIRATION]: {
-    code: ErrorCodes.USER_TOKEN_EXPIRATION,
-    status: 401,
-    title: 'Token Expired',
-    detail: 'Your jwt token expired. Please re-login.',
-  },
-  [ErrorCodes.SOCIAL_AUTH_FAIL]: {
-    code: ErrorCodes.SOCIAL_AUTH_FAIL,
+  [ErrorCodes.AUTHORIZATION_FAIL]: {
+    code: ErrorCodes.AUTHORIZATION_FAIL,
     status: 400,
-    title: 'Social Authentication Failed',
-    detail: 'Please make sure you authorize email to us.',
+    title: 'Authorization Failed',
+    detail: 'Please make sure you authorize all required information to us.',
   },
   [ErrorCodes.SEND_EMAIL_FAIL]: {
     code: ErrorCodes.SEND_EMAIL_FAIL,
