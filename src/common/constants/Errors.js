@@ -44,6 +44,12 @@ export default {
     title: 'User Existed',
     detail: 'This user is already registered.',
   },
+  [ErrorCodes.TOKEN_REUSED]: {
+    code: ErrorCodes.TOKEN_REUSED,
+    status: 400,
+    title: 'Token Reused',
+    detail: 'The token is reused.',
+  },
   [ErrorCodes.BAD_TOKEN]: {
     code: ErrorCodes.BAD_TOKEN,
     status: 400,
