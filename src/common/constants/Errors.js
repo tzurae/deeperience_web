@@ -35,7 +35,8 @@ export default {
     code: ErrorCodes.USER_UNAUTHORIZED,
     status: 401,
     title: 'User Unauthorized',
-    detail: 'Please login to access the resource.',
+    detail:
+      'You are a guest or invalid user. Please login to access the resource.',
   },
   [ErrorCodes.USER_EXISTED]: {
     code: ErrorCodes.USER_EXISTED,
@@ -73,11 +74,11 @@ export default {
     title: 'Token Expired',
     detail: 'Your jwt token expired. Please re-login.',
   },
-  [ErrorCodes.SOCIAL_AUTH_FAIL]: {
-    code: ErrorCodes.SOCIAL_AUTH_FAIL,
+  [ErrorCodes.AUTHORIZATION_FAIL]: {
+    code: ErrorCodes.AUTHORIZATION_FAIL,
     status: 400,
-    title: 'Social Authentication Failed',
-    detail: 'Please make sure you authorize email to us.',
+    title: 'Authorization Failed',
+    detail: 'Please make sure you authorize all required information to us.',
   },
   [ErrorCodes.SEND_EMAIL_FAIL]: {
     code: ErrorCodes.SEND_EMAIL_FAIL,
