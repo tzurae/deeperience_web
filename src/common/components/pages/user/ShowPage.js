@@ -22,7 +22,7 @@ class ShowPage extends Component {
   componentDidMount() {
     let { store } = this.context;
     userAPI(store.getState().apiEngine)
-      .show()
+      .read()
       .catch((err) => {
         store.dispatch(pushErrors(err));
         throw err;

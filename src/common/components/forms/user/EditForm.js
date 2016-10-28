@@ -37,7 +37,7 @@ class EditForm extends Component {
     let { dispatch, apiEngine } = this.props;
 
     userAPI(apiEngine)
-      .show()
+      .read()
       .catch((err) => {
         dispatch(pushErrors(err));
         throw err;
