@@ -33,7 +33,9 @@ let getErrorHandler = (ErrorType) => (res) => (fn) => (err, ...result) => {
   }
 };
 
+let handleError = getErrorHandler(null);
 let handleDbError = getErrorHandler(ErrorTypes.ODM_OPERATION);
 let handleJwtError = getErrorHandler(ErrorTypes.JSON_WEB_TOKEN);
 
 export { handleDbError, handleJwtError };
+export default handleError;
