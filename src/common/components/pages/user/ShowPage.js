@@ -8,7 +8,7 @@ import userAPI from '../../../api/user';
 import { pushErrors } from '../../../actions/errorActions';
 import Head from '../../widgets/Head';
 import PageLayout from '../../layouts/PageLayout';
-import AvatarForm from '../../forms/AvatarForm';
+import AvatarForm from '../../forms/user/AvatarForm';
 import Time from '../../widgets/Time';
 
 class ShowPage extends Component {

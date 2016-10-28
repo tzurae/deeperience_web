@@ -4,11 +4,10 @@ import { push } from 'react-router-redux';
 import { Field, reduxForm } from 'redux-form';
 import Button from 'react-bootstrap/lib/Button';
 // import validator from 'validator';
-import userAPI from '../../api/user';
-import { validateForm } from '../../actions/formActions';
-import { pushErrors } from '../../actions/errorActions';
-import { Form, FormField, FormFooter } from '../utils/BsForm';
-import configs from '../../../../configs/project/client';
+import userAPI from '../../../api/user';
+import { pushErrors } from '../../../actions/errorActions';
+import { loginUser } from '../../../actions/userActions';
+import { Form, FormField, FormFooter } from '../../utils/BsForm';
 
 const validate = (values) => {
   const errors = {};
@@ -25,41 +24,46 @@ const validate = (values) => {
     errors.password = 'Required';
   }
 
-  if (configs.recaptcha && !values.recaptcha) {
-    errors.recaptcha = 'Required';
-  }
-
   return errors;
 };
 
-let asyncValidate = (values, dispatch) => {
-  return dispatch(validateForm('register', 'email', values.email))
-    .then((json) => {
-      let validationError = {};
-      if (!json.isPassed) {
-        validationError.email = json.message;
-        throw validationError;
-      }
-    });
-};
-
-class RegisterForm extends Component {
+class LoginForm extends Component {
   constructor(props) {
     super(props);
+    this.login = this._login.bind(this);
     this.handleSubmit = this._handleSubmit.bind(this);
   }
 
+  _login(json) {
+    return this.props.dispatch(loginUser({
+      token: json.token,
+      data: json.user,
+    }));
+  }
+
   _handleSubmit(formData) {
+    // let { store } = this.context;
     let { dispatch, apiEngine } = this.props;
 
     return userAPI(apiEngine)
-      .register(formData)
+      .login(formData)
       .catch((err) => {
         dispatch(pushErrors(err));
         throw err;
       })
       .then((json) => {
-        dispatch(push('/'));
+        if (json.isAuth) {
+          this.login(json).then(() => {
+            // redirect to the origin path before logging in
+            let { next } = this.props.routing.locationBeforeTransitions.query;
+            dispatch(push(next || '/'));
+          });
+        } else {
+          dispatch(pushErrors([{
+            title: 'User Not Exists',
+            detail: 'You may type wrong email or password.',
+          }]));
+        }
       });
   }
 
@@ -67,20 +71,12 @@ class RegisterForm extends Component {
     const {
       handleSubmit,
       pristine,
-      asyncValidating,
       submitting,
       invalid,
     } = this.props;
 
     return (
       <Form horizontal onSubmit={handleSubmit(this.handleSubmit)}>
-        <Field
-          label="Name"
-          name="name"
-          component={FormField}
-          type="text"
-          placeholder="Name"
-        />
         <Field
           label="Email"
           name="email"
@@ -95,18 +91,9 @@ class RegisterForm extends Component {
           type="password"
           placeholder="Password"
         />
-        <Field
-          label=" "
-          name="recaptcha"
-          component={FormField}
-          type="recaptcha"
-        />
         <FormFooter>
-          <Button
-            type="submit"
-            disabled={pristine || !!asyncValidating || submitting || invalid}
-          >
-            Register
+          <Button type="submit" disabled={pristine || submitting || invalid}>
+            Login
           </Button>
         </FormFooter>
       </Form>
@@ -115,10 +102,9 @@ class RegisterForm extends Component {
 };
 
 export default reduxForm({
-  form: 'register',
+  form: 'login',
   validate,
-  asyncValidate,
-  asyncBlurFields: ['email'],
 })(connect(state => ({
   apiEngine: state.apiEngine,
-}))(RegisterForm));
+  routing: state.routing,
+}))(LoginForm));

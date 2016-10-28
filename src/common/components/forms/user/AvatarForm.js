@@ -2,11 +2,11 @@ import React, { Component, PropTypes } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import Image from 'react-bootstrap/lib/Image';
 import Button from 'react-bootstrap/lib/Button';
-import configs from '../../../../configs/project/client';
-import firebaseAPI from '../../api/firebase';
-import userAPI from '../../api/user';
-import { pushErrors } from '../../actions/errorActions';
-import { Form, FormField, FormFooter } from '../utils/BsForm';
+import configs from '../../../../../configs/project/client';
+import firebaseAPI from '../../../api/firebase';
+import userAPI from '../../../api/user';
+import { pushErrors } from '../../../actions/errorActions';
+import { Form, FormField, FormFooter } from '../../utils/BsForm';
 
 const initialValues = {
   storage: 'local',

@@ -6,7 +6,7 @@ import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
 import PageLayout from '../../layouts/PageLayout';
 import Head from '../../widgets/Head';
-import LoginForm from '../../forms/LoginForm';
+import LoginForm from '../../forms/user/LoginForm';
 
 let LoginPage = ({ location }) => {
   let { next } = location.query;
