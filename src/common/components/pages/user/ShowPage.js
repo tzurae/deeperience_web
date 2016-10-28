@@ -9,14 +9,14 @@ import userAPI from '../../../api/user';
 import { pushErrors } from '../../../actions/errorActions';
 import Head from '../../widgets/Head';
 import PageLayout from '../../layouts/PageLayout';
-import AvatarForm from '../../forms/user/AvatarForm';
 import Time from '../../widgets/Time';
+import RefreshImage from '../../utils/RefreshImage';
 
 class ShowPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: {},
+      user: props.initialUser,
     };
   }
 
@@ -58,7 +58,9 @@ class ShowPage extends Component {
           <dt>_id</dt>
           <dd>{user._id}</dd>
           <dt>avatar</dt>
-          <dd><AvatarForm avatarURL={user.avatarURL} /></dd>
+          <dd>
+            {user.avatarURL && <RefreshImage thumbnail src={user.avatarURL} />}
+          </dd>
           <dt>name</dt>
           <dd>{user.name}</dd>
           <dt>email</dt>
@@ -81,6 +83,7 @@ class ShowPage extends Component {
   }
 };
 
-export default connect(state => ({
-  apiEngine: state.apiEngine,
+export default connect(({ apiEngine, cookies: { user } }) => ({
+  apiEngine: apiEngine,
+  initialUser: (user && JSON.parse(user)) || {},
 }))(ShowPage);

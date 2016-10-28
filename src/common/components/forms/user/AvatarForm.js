@@ -1,13 +1,14 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-import Image from 'react-bootstrap/lib/Image';
 import Button from 'react-bootstrap/lib/Button';
 import configs from '../../../../../configs/project/client';
 import firebaseAPI from '../../../api/firebase';
 import userAPI from '../../../api/user';
 import { pushErrors } from '../../../actions/errorActions';
 import { Form, FormField, FormFooter } from '../../utils/BsForm';
+import RefreshImage from '../../utils/RefreshImage';
+import toRefreshURL from '../../../utils/toRefreshURL';
 
 const initialValues = {
   storage: 'local',
@@ -149,10 +150,9 @@ class AvatarForm extends Component {
             throw err;
           })
           .then((json) => {
-            let forceUpdate = (downloadURL.indexOf('?') >= 0 ?
-              '&' : '?') + `forceUpdate=${Math.random()}`;
+            let newAvatarURL = toRefreshURL(downloadURL);
             this.setState({
-              avatarURL: downloadURL + forceUpdate,
+              avatarURL: newAvatarURL,
             });
             this.clearFileField();
           });
@@ -166,11 +166,11 @@ class AvatarForm extends Component {
       submitting,
       invalid,
     } = this.props;
-    let avatarURL = this.state.avatarURL || this.props.avatarURL;
+    let { avatarURL } = this.state;
 
     return (
       <Form onSubmit={handleSubmit(this.handleSubmit)}>
-        {avatarURL && <Image thumbnail src={avatarURL} />}
+        {avatarURL && <RefreshImage thumbnail src={avatarURL} />}
         <Field
           name="avatar"
           component={FormField}
@@ -197,10 +197,6 @@ class AvatarForm extends Component {
       </Form>
     );
   }
-};
-
-AvatarForm.propTypes = {
-  avatarURL: PropTypes.string,
 };
 
 export default reduxForm({
