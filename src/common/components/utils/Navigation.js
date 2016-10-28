@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import Grid from 'react-bootstrap/lib/Grid';
 import Roles from '../../constants/Roles';
@@ -22,9 +23,7 @@ class Navigation extends Component {
   }
 
   render() {
-    let { cookies: { token, user } } = this.context.store.getState();
-    let isAuth = !!token;
-    user = (user && JSON.parse(user)) || {};
+    let { isAuth, user } = this.props;
     let isAdmin = (user.role === Roles.ADMIN);
 
     return (
@@ -103,4 +102,9 @@ Navigation.contextTypes = {
   store: React.PropTypes.object.isRequired,
 };
 
-export default Navigation;
+export default connect(({ cookies: { token, user } }) => ({
+  isAuth: !!token,
+  user: (user && JSON.parse(user)) || {},
+}), null, null, {
+  pure: false,
+})(Navigation);
