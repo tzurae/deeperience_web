@@ -2,25 +2,52 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Grid from 'react-bootstrap/lib/Grid';
 import Alert from 'react-bootstrap/lib/Alert';
-import Errors from '../../constants/Errors';
+import Table from 'react-bootstrap/lib/Table';
 import { removeError } from '../../actions/errorActions';
+import isString from '../../utils/isString';
 
-function renderMeta(error) {
-  let messages = [];
-  if (error.code === Errors.STATE_PRE_FETCHING_FAIL.code) {
-    messages.push(error.meta.detail);
+function renderMetaContent(metaContent) {
+  if (isString(metaContent)) {
+    return metaContent;
   }
-  if (error.meta.path) {
-    messages.push(`(at path '${error.meta.path}')`);
+
+  return (
+    <pre>
+      {JSON.stringify(metaContent, null, 2)}
+    </pre>
+  );
+}
+
+function renderMeta(meta) {
+  if (isString(meta)) {
+    return (
+      <p>
+        {meta}
+      </p>
+    );
   }
-  if (error.code === Errors.UNKNOWN_EXCEPTION.code) {
-    messages.push(error.meta.toString());
-  }
-  return messages.map((message) => (
-    <p key={message}>
-      {message}
-    </p>
-  ));
+
+  return (
+    <Table
+      condensed
+      responsive
+      style={{
+        marginBottom: 0,
+        background: 'white',
+      }}
+    >
+      <tbody>
+        {Object.keys(meta).map((key) => (
+          <tr key={key}>
+            <td>{key}</td>
+            <td>
+              {renderMetaContent(meta[key])}
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </Table>
+  );
 }
 
 let ErrorList = ({ errors, dispatch }) => (
@@ -33,7 +60,7 @@ let ErrorList = ({ errors, dispatch }) => (
       >
         <h4>{error.title}</h4>
         {' ' + error.detail}
-        {error.meta && renderMeta(error)}
+        {error.meta && renderMeta(error.meta)}
       </Alert>
     ))}
   </Grid>
