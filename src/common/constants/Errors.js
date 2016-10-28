@@ -68,12 +68,6 @@ export default {
     title: 'Locale not supported',
     detail: 'We don\'t support this locale.',
   },
-  [ErrorCodes.USER_TOKEN_EXPIRATION]: {
-    code: ErrorCodes.USER_TOKEN_EXPIRATION,
-    status: 401,
-    title: 'Token Expired',
-    detail: 'Your jwt token expired. Please re-login.',
-  },
   [ErrorCodes.AUTHORIZATION_FAIL]: {
     code: ErrorCodes.AUTHORIZATION_FAIL,
     status: 400,
