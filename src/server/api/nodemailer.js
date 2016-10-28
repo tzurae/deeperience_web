@@ -2,7 +2,10 @@ import assign from 'object-assign';
 import nodemailer from 'nodemailer';
 import configs from '../../../configs/project/server';
 
-let defaultTransport = configs.nodemailer[process.env.NODE_ENV];
+let defaultTransport;
+if (configs.nodemailer) {
+  defaultTransport = configs.nodemailer[process.env.NODE_ENV];
+}
 
 export default (transport = defaultTransport) => {
   let transporter = nodemailer.createTransport(transport);
