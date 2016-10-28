@@ -11,6 +11,9 @@ export default (apiEngine) => ({
   updateAvatarURL: (form) => apiEngine.put('/api/users/me/avatarURL', {
     data: form,
   }),
+  updatePassword: (form) => apiEngine.put('/api/users/me/password', {
+    data: form,
+  }),
   uploadAvatar: (avatar) =>
     apiEngine.post('/api/users/me/avatar', { files: { avatar } }),
 });

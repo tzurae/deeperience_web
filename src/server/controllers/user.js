@@ -169,6 +169,30 @@ export default {
     }));
   },
 
+  updatePassword(req, res) {
+    let { user } = req;
+    let modifiedUser = {
+      password: req.body.newPassword,
+    };
+
+    user.auth(req.body.oldPassword, handleDbError(res)((isAuth) => {
+      if (isAuth) {
+        assign(user, modifiedUser);
+        user.save(handleDbError(res)((user) => {
+          res.json({
+            originAttributes: req.body,
+            isAuth: true,
+            user: user,
+          });
+        }));
+      } else {
+        res.json({
+          isAuth: false,
+        });
+      }
+    }));
+  },
+
   uploadAvatar(req, res) {
     // use `req.file` to access the avatar file
     // and use `req.body` to access other fileds

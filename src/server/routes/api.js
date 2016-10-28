@@ -43,6 +43,12 @@ export default ({ app }) => {
     bodyParser.json,
     userController.updateAvatarURL
   );
+  app.put('/api/users/me/password',
+    authRequired,
+    bodyParser.json,
+    validate('user/ChangePasswordForm'),
+    userController.updatePassword
+  );
   if (configs.firebase) {
     let firebaseController = require('../controllers/firebase').default;
     app.get('/api/users/me/firebase/token',
