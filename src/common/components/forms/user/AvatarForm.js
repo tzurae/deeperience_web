@@ -156,9 +156,6 @@ class AvatarForm extends Component {
             dispatch(setCookies({
               user: json.user,
             }));
-            this.setState({
-              avatarURL: newAvatarURL,
-            });
             this.clearFileField();
           });
       });
@@ -166,12 +163,13 @@ class AvatarForm extends Component {
 
   render() {
     const {
+      user,
       handleSubmit,
       pristine,
       submitting,
       invalid,
     } = this.props;
-    let { avatarURL } = this.state;
+    let avatarURL = this.state.avatarURL || user.avatarURL;
 
     return (
       <Form onSubmit={handleSubmit(this.handleSubmit)}>
