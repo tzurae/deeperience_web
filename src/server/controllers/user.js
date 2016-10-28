@@ -149,6 +149,19 @@ export default {
     }));
   },
 
+  updateAvatarURL(req, res) {
+    let { user } = req;
+    let modifiedUser = filterAttribute(req.body, ['avatarURL']);
+
+    assign(user, modifiedUser);
+    user.save(handleDbError(res)((user) => {
+      res.json({
+        originAttributes: req.body,
+        user: user,
+      });
+    }));
+  },
+
   uploadAvatar(req, res) {
     // use `req.file` to access the avatar file
     // and use `req.body` to access other fileds

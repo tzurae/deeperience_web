@@ -36,6 +36,11 @@ export default ({ app }) => {
     bodyParser.json,
     userController.update
   );
+  app.put('/api/users/me/avatarURL',
+    authRequired,
+    bodyParser.json,
+    userController.updateAvatarURL
+  );
   if (configs.firebase) {
     let firebaseController = require('../controllers/firebase').default;
     app.get('/api/users/me/firebase/token',
