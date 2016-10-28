@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import { Field, reduxForm } from 'redux-form';
+import Alert from 'react-bootstrap/lib/Alert';
 import Button from 'react-bootstrap/lib/Button';
 // import validator from 'validator';
 import userAPI from '../../../api/user';
@@ -66,6 +67,8 @@ class RegisterForm extends Component {
   render() {
     const {
       handleSubmit,
+      submitFailed,
+      error,
       pristine,
       asyncValidating,
       submitting,
@@ -74,6 +77,7 @@ class RegisterForm extends Component {
 
     return (
       <Form horizontal onSubmit={handleSubmit(this.handleSubmit)}>
+        {submitFailed && error && (<Alert bsStyle="danger">{error}</Alert>)}
         <Field
           label="Name"
           name="name"
