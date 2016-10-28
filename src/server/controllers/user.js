@@ -1,3 +1,4 @@
+import assign from 'object-assign';
 import jwt from 'jsonwebtoken';
 import configs from '../../../configs/project/server';
 import Errors from '../../common/constants/Errors';
@@ -140,11 +141,17 @@ export default {
   },
 
   update(req, res) {
-    let user = filterAttribute(req.body, ['name', 'avatarURL']);
-    User.update({ _id: req.user._id }, user, handleDbError(res)((raw) => {
+    let { user } = req;
+    let modifiedUser = filterAttribute(req.body, [
+      'name',
+      'avatarURL',
+    ]);
+
+    assign(user, modifiedUser);
+    user.save(handleDbError(res)((user) => {
       res.json({
         originAttributes: req.body,
-        updatedAttributes: user,
+        user: user,
       });
     }));
   },
