@@ -30,7 +30,7 @@ if (process.env.TRAVIS) {
       linkedin: require('./passportStrategy/linkedin/credential'),
     },
     recaptcha: require('./recaptcha/credential'),
-    gmail: require('./gmail/credential'),
+    nodemailer: require('./nodemailer/credential'),
     mailOptions: {
       default: {
         subject: 'Untitled Mail',
@@ -42,7 +42,7 @@ if (process.env.TRAVIS) {
         to: 'gocreating@gmail.com',
       },
       test: {
-        to: 'gocreating@gmail.com',
+        to: 'dont_sent_to_me_when_every_test@gmail.com',
       },
     },
   };
