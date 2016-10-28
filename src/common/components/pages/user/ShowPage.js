@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import PageHeader from 'react-bootstrap/lib/PageHeader';
 import Row from 'react-bootstrap/lib/Row';
@@ -20,11 +21,12 @@ class ShowPage extends Component {
   }
 
   componentDidMount() {
-    let { store } = this.context;
-    userAPI(store.getState().apiEngine)
+    let { dispatch, apiEngine } = this.props;
+
+    userAPI(apiEngine)
       .read()
       .catch((err) => {
-        store.dispatch(pushErrors(err));
+        dispatch(pushErrors(err));
         throw err;
       })
       .then((json) => {
@@ -79,8 +81,6 @@ class ShowPage extends Component {
   }
 };
 
-ShowPage.contextTypes = {
-  store: React.PropTypes.object.isRequired,
-};
-
-export default ShowPage;
+export default connect(state => ({
+  apiEngine: state.apiEngine,
+}))(ShowPage);
