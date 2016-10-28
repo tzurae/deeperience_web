@@ -13,6 +13,17 @@ let getErrorHandler = (ErrorType) => (res) => (fn) => (err, ...result) => {
         }
         break;
       }
+      case ErrorTypes.JSON_WEB_TOKEN: {
+        // ref:
+        //   - <https://github.com/auth0/node-jsonwebtoken#errors--codes>
+        if (err.name === 'JsonWebTokenError') {
+          res.pushError(Errors.BAD_TOKEN, err);
+        } else if (err.name === 'TokenExpiredError') {
+          res.pushError(Errors.TOKEN_EXPIRATION, err);
+        }
+        res.errors();
+        break;
+      }
       default: {
         res.pushError(Errors.UNKNOWN_EXCEPTION, err);
       }
@@ -23,5 +34,6 @@ let getErrorHandler = (ErrorType) => (res) => (fn) => (err, ...result) => {
 };
 
 let handleDbError = getErrorHandler(ErrorTypes.ODM_OPERATION);
+let handleJwtError = getErrorHandler(ErrorTypes.JSON_WEB_TOKEN);
 
-export { handleDbError };
+export { handleDbError, handleJwtError };

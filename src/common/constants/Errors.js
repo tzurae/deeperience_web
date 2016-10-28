@@ -43,6 +43,18 @@ export default {
     title: 'User Existed',
     detail: 'This user is already registered.',
   },
+  [ErrorCodes.BAD_TOKEN]: {
+    code: ErrorCodes.BAD_TOKEN,
+    status: 400,
+    title: 'Bad Token',
+    detail: 'Fail to decode the token.',
+  },
+  [ErrorCodes.TOKEN_EXPIRATION]: {
+    code: ErrorCodes.TOKEN_EXPIRATION,
+    status: 401,
+    title: 'Token Expired',
+    detail: 'Your token has expired.',
+  },
   [ErrorCodes.PERMISSION_DENIED]: {
     code: ErrorCodes.PERMISSION_DENIED,
     status: 403,
