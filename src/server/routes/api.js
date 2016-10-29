@@ -41,6 +41,16 @@ export default ({ app }) => {
     userController.setNonce('password'),
     mailController.sendResetPasswordLink
   );
+  app.put('/api/users/password',
+    bodyParser.json,
+    bodyParser.jwt(
+      'resetPasswordToken',
+      configs.jwt.resetPassword.secret
+    ),
+    validate.verifyUserNonce('password'),
+    validate.form('user/ResetPasswordForm'),
+    userController.resetPassword
+  );
   app.get('/api/users/logout', userController.logout);
   app.get('/api/users/me', authRequired, userController.show);
   app.put('/api/users/me',

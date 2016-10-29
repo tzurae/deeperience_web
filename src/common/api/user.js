@@ -8,6 +8,14 @@ export default (apiEngine) => ({
   requestResetPassword: (form) => (
     apiEngine.post('/api/users/password/request-reset', { data: form })
   ),
+  resetPassword: ({ token, ...form }) => (
+    apiEngine.put('/api/users/password', {
+      data: {
+        resetPasswordToken: token,
+        ...form,
+      },
+    })
+  ),
   logout: () => apiEngine.get('/api/users/logout'),
   read: () => apiEngine.get('/api/users/me'),
   update: (user) => apiEngine.put('/api/users/me', { data: user }),
