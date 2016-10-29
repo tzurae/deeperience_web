@@ -1,8 +1,7 @@
 import assign from 'object-assign';
-import jwt from 'jsonwebtoken';
 import configs from '../../../configs/project/server';
 import Errors from '../../common/constants/Errors';
-import { handleDbError, handleJwtError } from '../decorators/handleError';
+import { handleDbError } from '../decorators/handleError';
 import User from '../models/User';
 import filterAttribute from '../utils/filterAttribute';
 import { loginUser } from '../../common/actions/userActions';
@@ -194,6 +193,20 @@ export default {
           isAuth: false,
         });
       }
+    }));
+  },
+
+  resetPassword(req, res) {
+    let { user } = req;
+    let modifiedUser = {
+      password: req.body.newPassword,
+    };
+    assign(user, modifiedUser);
+    user.save(handleDbError(res)((user) => {
+      res.json({
+        originAttributes: req.body,
+        user: user,
+      });
     }));
   },
 
