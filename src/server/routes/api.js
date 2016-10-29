@@ -34,6 +34,13 @@ export default ({ app }) => {
     userController.verifyEmail
   );
   app.post('/api/users/login', bodyParser.json, userController.login);
+  app.post('/api/users/password/request-reset',
+    bodyParser.json,
+    validate('user/ForgetPasswordForm'),
+    verifyRecaptcha,
+    userController.setNonce('password'),
+    mailController.sendResetPasswordLink
+  );
   app.get('/api/users/logout', userController.logout);
   app.get('/api/users/me', authRequired, userController.show);
   app.put('/api/users/me',
