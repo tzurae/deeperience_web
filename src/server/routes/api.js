@@ -36,7 +36,7 @@ export default ({ app }) => {
   app.post('/api/users/login', bodyParser.json, userController.login);
   app.post('/api/users/password/request-reset',
     bodyParser.json,
-    validate('user/ForgetPasswordForm'),
+    validate.form('user/ForgetPasswordForm'),
     verifyRecaptcha,
     userController.setNonce('password'),
     mailController.sendResetPasswordLink
@@ -46,7 +46,7 @@ export default ({ app }) => {
   app.put('/api/users/me',
     authRequired,
     bodyParser.json,
-    validate('user/EditForm'),
+    validate.form('user/EditForm'),
     userController.update
   );
   app.put('/api/users/me/avatarURL',
@@ -57,7 +57,7 @@ export default ({ app }) => {
   app.put('/api/users/me/password',
     authRequired,
     bodyParser.json,
-    validate('user/ChangePasswordForm'),
+    validate.form('user/ChangePasswordForm'),
     userController.updatePassword
   );
   if (configs.firebase) {
