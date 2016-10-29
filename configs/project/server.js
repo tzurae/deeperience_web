@@ -22,6 +22,10 @@ if (process.env.TRAVIS) {
         secret: 'df5s6sdHdjJdRg56',
         expiresIn: 60 * 60, // in seconds
       },
+      resetPassword: {
+        secret: 'FsgWqLhX0Z6JvJfPYwPZ',
+        expiresIn: 60 * 60, // in seconds
+      },
     },
     mongo: require('./mongo/credential'),
     firebase: require('./firebase/credential.json'),
