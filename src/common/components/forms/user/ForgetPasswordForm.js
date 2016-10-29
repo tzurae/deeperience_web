@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { push } from 'react-router-redux';
+import { Link } from 'react-router';
 import { Field, reduxForm } from 'redux-form';
 import Alert from 'react-bootstrap/lib/Alert';
 import Button from 'react-bootstrap/lib/Button';
@@ -11,8 +11,8 @@ import { pushErrors } from '../../../actions/errorActions';
 import { Form, FormField, FormFooter } from '../../utils/BsForm';
 import configs from '../../../../../configs/project/client';
 
-const validate = (values) => {
-  const errors = {};
+export let validate = (values) => {
+  let errors = {};
 
   // if (values.email && !validator.isEmail(values.email)) {
   //   errors.email = 'Not an email';
@@ -20,10 +20,6 @@ const validate = (values) => {
 
   if (!values.email) {
     errors.email = 'Required';
-  }
-
-  if (!values.password) {
-    errors.password = 'Required';
   }
 
   if (configs.recaptcha && !values.recaptcha) {
@@ -34,7 +30,7 @@ const validate = (values) => {
 };
 
 let asyncValidate = (values, dispatch) => {
-  return dispatch(validateForm('userRegister', 'email', values.email))
+  return dispatch(validateForm('userForgetPassword', 'email', values.email))
     .then((json) => {
       let validationError = {};
       if (!json.isPassed) {
@@ -44,47 +40,45 @@ let asyncValidate = (values, dispatch) => {
     });
 };
 
-class RegisterForm extends Component {
-  constructor(props) {
-    super(props);
+class ForgetPasswordForm extends Component {
+  constructor() {
+    super();
     this.handleSubmit = this._handleSubmit.bind(this);
   }
 
   _handleSubmit(formData) {
-    let { dispatch, apiEngine } = this.props;
+    let { dispatch, apiEngine, initialize } = this.props;
 
     return userAPI(apiEngine)
-      .register(formData)
+      .requestResetPassword(formData)
       .catch((err) => {
         dispatch(pushErrors(err));
         throw err;
       })
       .then((json) => {
-        dispatch(push('/'));
+        initialize({
+          email: '',
+        });
       });
   }
 
   render() {
     const {
       handleSubmit,
+      submitSucceeded,
       submitFailed,
       error,
       pristine,
-      asyncValidating,
       submitting,
       invalid,
     } = this.props;
 
     return (
       <Form horizontal onSubmit={handleSubmit(this.handleSubmit)}>
+        {submitSucceeded && (
+          <Alert bsStyle="success">A reset link is sent</Alert>
+        )}
         {submitFailed && error && (<Alert bsStyle="danger">{error}</Alert>)}
-        <Field
-          label="Name"
-          name="name"
-          component={FormField}
-          type="text"
-          placeholder="Name"
-        />
         <Field
           label="Email"
           name="email"
@@ -93,25 +87,18 @@ class RegisterForm extends Component {
           placeholder="Email"
         />
         <Field
-          label="Password"
-          name="password"
-          component={FormField}
-          type="password"
-          placeholder="Password"
-        />
-        <Field
           label=" "
           name="recaptcha"
           component={FormField}
           type="recaptcha"
         />
         <FormFooter>
-          <Button
-            type="submit"
-            disabled={pristine || !!asyncValidating || submitting || invalid}
-          >
-            Register
+          <Button type="submit" disabled={pristine || submitting || invalid}>
+            Request An Email to Reset My Password
           </Button>
+          <Link to="/user/login">
+            <Button bsStyle="link">Cancel</Button>
+          </Link>
         </FormFooter>
       </Form>
     );
@@ -119,10 +106,10 @@ class RegisterForm extends Component {
 };
 
 export default reduxForm({
-  form: 'userRegister',
+  form: 'userForgetPassword',
   validate,
   asyncValidate,
   asyncBlurFields: ['email'],
 })(connect(state => ({
   apiEngine: state.apiEngine,
-}))(RegisterForm));
+}))(ForgetPasswordForm));

@@ -25,17 +25,38 @@ export default ({ app }) => {
     userController.create,
     mailController.sendVerification
   );
-  app.post('/api/users/verification',
+  app.post('/api/users/email/verify',
     bodyParser.json,
-    userController.verify
+    bodyParser.jwt(
+      'verifyEmailToken',
+      configs.jwt.verifyEmail.secret
+    ),
+    userController.verifyEmail
   );
   app.post('/api/users/login', bodyParser.json, userController.login);
+  app.post('/api/users/password/request-reset',
+    bodyParser.json,
+    validate.form('user/ForgetPasswordForm'),
+    verifyRecaptcha,
+    userController.setNonce('password'),
+    mailController.sendResetPasswordLink
+  );
+  app.put('/api/users/password',
+    bodyParser.json,
+    bodyParser.jwt(
+      'resetPasswordToken',
+      configs.jwt.resetPassword.secret
+    ),
+    validate.verifyUserNonce('password'),
+    validate.form('user/ResetPasswordForm'),
+    userController.resetPassword
+  );
   app.get('/api/users/logout', userController.logout);
   app.get('/api/users/me', authRequired, userController.show);
   app.put('/api/users/me',
     authRequired,
     bodyParser.json,
-    validate('user/EditForm'),
+    validate.form('user/EditForm'),
     userController.update
   );
   app.put('/api/users/me/avatarURL',
@@ -46,7 +67,7 @@ export default ({ app }) => {
   app.put('/api/users/me/password',
     authRequired,
     bodyParser.json,
-    validate('user/ChangePasswordForm'),
+    validate.form('user/ChangePasswordForm'),
     userController.updatePassword
   );
   if (configs.firebase) {
@@ -63,9 +84,13 @@ export default ({ app }) => {
     userController.uploadAvatar);
 
   // form
-  app.post('/api/forms/register/fields/email/validation',
+  app.post('/api/forms/userRegister/fields/email/validation',
     bodyParser.json,
-    formValidationController.register.email
+    formValidationController.userRegister.email
+  );
+  app.post('/api/forms/userForgetPassword/fields/email/validation',
+    bodyParser.json,
+    formValidationController.userForgetPassword.email
   );
 
   // locale

@@ -18,8 +18,12 @@ if (process.env.TRAVIS) {
         secret: '4eO5viHe23',
         expiresIn: 60 * 60 * 24 * 3, // in seconds
       },
-      verification: {
+      verifyEmail: {
         secret: 'df5s6sdHdjJdRg56',
+        expiresIn: 60 * 60, // in seconds
+      },
+      resetPassword: {
+        secret: 'FsgWqLhX0Z6JvJfPYwPZ',
         expiresIn: 60 * 60, // in seconds
       },
     },

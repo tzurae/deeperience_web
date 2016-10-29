@@ -28,6 +28,7 @@ let UserSchema = new mongoose.Schema({
       type: Boolean,
       default: false,
     },
+    verifiedAt: Date,
   },
   password: {
     type: String,
@@ -47,7 +48,9 @@ let UserSchema = new mongoose.Schema({
       linkedin: Object,
     },
   },
-  verifiedAt: Date,
+  nonce: {
+    password: Number,
+  },
   lastLoggedInAt: Date,
 }, {
   versionKey: false,
@@ -64,12 +67,23 @@ UserSchema.methods.auth = function(password, cb) {
   cb(null, isAuthenticated);
 };
 
-UserSchema.methods.toVerificationToken = function(cb) {
+UserSchema.methods.toVerifyEmailToken = function(cb) {
   const user = {
     _id: this._id,
   };
-  const token = jwt.sign(user, configs.jwt.verification.secret, {
-    expiresIn: configs.jwt.verification.expiresIn,
+  const token = jwt.sign(user, configs.jwt.verifyEmail.secret, {
+    expiresIn: configs.jwt.verifyEmail.expiresIn,
+  });
+  return token;
+};
+
+UserSchema.methods.toResetPasswordToken = function(cb) {
+  const user = {
+    _id: this._id,
+    nonce: this.nonce.password,
+  };
+  const token = jwt.sign(user, configs.jwt.resetPassword.secret, {
+    expiresIn: configs.jwt.resetPassword.expiresIn,
   });
   return token;
 };

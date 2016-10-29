@@ -1,8 +1,7 @@
 import assign from 'object-assign';
-import jwt from 'jsonwebtoken';
 import configs from '../../../configs/project/server';
 import Errors from '../../common/constants/Errors';
-import { handleDbError, handleJwtError } from '../decorators/handleError';
+import { handleDbError } from '../decorators/handleError';
 import User from '../models/User';
 import filterAttribute from '../utils/filterAttribute';
 import { loginUser } from '../../common/actions/userActions';
@@ -52,25 +51,17 @@ export default {
     }));
   },
 
-  verify(req, res) {
-    let token = req.body.verificationToken;
-
-    jwt.verify(
-      token,
-      configs.jwt.verification.secret,
-      handleJwtError(res)(({ _id }) => {
-        User.findById(_id, handleDbError(res)((user) => {
-          if (user.email.isVerified) {
-            return res.errors([Errors.TOKEN_REUSED]);
-          }
-          user.email.isVerified = true;
-          user.verifiedAt = new Date();
-          user.save(handleDbError(res)(() => {
-            res.json({});
-          }));
-        }));
-      })
-    );
+  verifyEmail(req, res) {
+    User.findById(req.decodedPayload._id, handleDbError(res)((user) => {
+      if (user.email.isVerified) {
+        return res.errors([Errors.TOKEN_REUSED]);
+      }
+      user.email.isVerified = true;
+      user.email.verifiedAt = new Date();
+      user.save(handleDbError(res)(() => {
+        res.json({});
+      }));
+    }));
   },
 
   login(req, res) {
@@ -100,6 +91,18 @@ export default {
           }
         }));
       }
+    }));
+  },
+
+  setNonce: (nonceKey) => (req, res, next) => {
+    User.findOne({
+      'email.value': req.body.email,
+    }, handleDbError(res)((user) => {
+      user.nonce[nonceKey] = Math.random();
+      user.save(handleDbError(res)((user) => {
+        req.user = user;
+        next();
+      }));
     }));
   },
 
@@ -190,6 +193,20 @@ export default {
           isAuth: false,
         });
       }
+    }));
+  },
+
+  resetPassword(req, res) {
+    let { user } = req;
+    let modifiedUser = {
+      password: req.body.newPassword,
+    };
+    assign(user, modifiedUser);
+    user.save(handleDbError(res)((user) => {
+      res.json({
+        originAttributes: req.body,
+        user: user,
+      });
     }));
   },
 

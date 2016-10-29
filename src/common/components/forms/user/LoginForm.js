@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 import { push } from 'react-router-redux';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
 import Alert from 'react-bootstrap/lib/Alert';
@@ -100,6 +101,9 @@ class LoginForm extends Component {
           <Button type="submit" disabled={pristine || submitting || invalid}>
             Login
           </Button>
+          <Link to="/user/password/forget">
+            <Button bsStyle="link">Forget password?</Button>
+          </Link>
         </FormFooter>
       </Form>
     );
@@ -107,7 +111,7 @@ class LoginForm extends Component {
 };
 
 export default reduxForm({
-  form: 'login',
+  form: 'userLogin',
   validate,
 })(connect(state => ({
   apiEngine: state.apiEngine,
