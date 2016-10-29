@@ -41,7 +41,10 @@ let UserSchema = new mongoose.Schema({
     enum: Object.keys(Roles).map(r => Roles[r]),
     default: Roles.USER,
   },
-  avatarURL: String,
+  avatarURL: {
+    type: String,
+    default: '/img/default-avatar.png',
+  },
   social: {
     profile: {
       facebook: Object,
