@@ -71,6 +71,10 @@ export default ({ app }) => {
     bodyParser.json,
     formValidationController.userRegister.email
   );
+  app.post('/api/forms/userForgetPassword/fields/email/validation',
+    bodyParser.json,
+    formValidationController.userForgetPassword.email
+  );
 
   // locale
   app.get('/api/locales/:locale', localeController.show);

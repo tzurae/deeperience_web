@@ -20,4 +20,23 @@ export default {
       }));
     },
   },
+
+  userForgetPassword: {
+    email(req, res) {
+      User.findOne({
+        'email.value': req.body.value,
+      }, handleDbError(res)((user) => {
+        if (!user) {
+          res.json({
+            isPassed: false,
+            message: 'This is an invalid account',
+          });
+        } else {
+          res.json({
+            isPassed: true,
+          });
+        }
+      }));
+    },
+  },
 };
