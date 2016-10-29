@@ -5,6 +5,7 @@ import { Field, reduxForm } from 'redux-form';
 import Alert from 'react-bootstrap/lib/Alert';
 import Button from 'react-bootstrap/lib/Button';
 // import validator from 'validator';
+import FormNames from '../../../constants/FormNames';
 import userAPI from '../../../api/user';
 import { validateForm } from '../../../actions/formActions';
 import { pushErrors } from '../../../actions/errorActions';
@@ -34,7 +35,7 @@ const validate = (values) => {
 };
 
 let asyncValidate = (values, dispatch) => {
-  return dispatch(validateForm('userRegister', 'email', values.email))
+  return dispatch(validateForm(FormNames.USER_REGISTER, 'email', values.email))
     .then((json) => {
       let validationError = {};
       if (!json.isPassed) {
@@ -60,7 +61,7 @@ class RegisterForm extends Component {
         throw err;
       })
       .then((json) => {
-        dispatch(push('/'));
+        dispatch(push('/user/login'));
       });
   }
 
@@ -119,7 +120,7 @@ class RegisterForm extends Component {
 };
 
 export default reduxForm({
-  form: 'userRegister',
+  form: FormNames.USER_REGISTER,
   validate,
   asyncValidate,
   asyncBlurFields: ['email'],

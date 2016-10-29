@@ -4,6 +4,7 @@ import { Link } from 'react-router';
 import { Field, reduxForm } from 'redux-form';
 import Alert from 'react-bootstrap/lib/Alert';
 import Button from 'react-bootstrap/lib/Button';
+import FormNames from '../../../constants/FormNames';
 import userAPI from '../../../api/user';
 import { pushErrors } from '../../../actions/errorActions';
 import { Form, FormField, FormFooter } from '../../utils/BsForm';
@@ -106,7 +107,7 @@ class ChangePasswordForm extends Component {
 };
 
 export default reduxForm({
-  form: 'userResetPassword',
+  form: FormNames.USER_RESET_PASSWORD,
   validate,
 })(connect(state => ({
   apiEngine: state.apiEngine,

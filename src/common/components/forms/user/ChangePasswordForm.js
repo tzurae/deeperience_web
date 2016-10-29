@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
 import Alert from 'react-bootstrap/lib/Alert';
 import Button from 'react-bootstrap/lib/Button';
+import FormNames from '../../../constants/FormNames';
 import userAPI from '../../../api/user';
 import { pushErrors } from '../../../actions/errorActions';
 import { Form, FormField, FormFooter } from '../../utils/BsForm';
@@ -117,7 +118,7 @@ class ChangePasswordForm extends Component {
 };
 
 export default reduxForm({
-  form: 'userChangePassword',
+  form: FormNames.USER_CHANGE_PASSWORD,
   validate,
 })(connect(state => ({
   apiEngine: state.apiEngine,

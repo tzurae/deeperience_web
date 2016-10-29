@@ -6,6 +6,7 @@ import { Field, reduxForm, SubmissionError } from 'redux-form';
 import Alert from 'react-bootstrap/lib/Alert';
 import Button from 'react-bootstrap/lib/Button';
 // import validator from 'validator';
+import FormNames from '../../../constants/FormNames';
 import userAPI from '../../../api/user';
 import { pushErrors } from '../../../actions/errorActions';
 import { loginUser } from '../../../actions/userActions';
@@ -45,7 +46,7 @@ class LoginForm extends Component {
 
   _handleSubmit(formData) {
     // let { store } = this.context;
-    let { dispatch, apiEngine } = this.props;
+    let { dispatch, apiEngine, change } = this.props;
 
     return userAPI(apiEngine)
       .login(formData)
@@ -61,10 +62,9 @@ class LoginForm extends Component {
             dispatch(push(next || '/'));
           });
         } else {
+          change('password', '');
           throw new SubmissionError({
-            email: 'You may type wrong email or password',
-            password: 'You may type wrong email or password',
-            _error: 'Login failed',
+            _error: 'Login failed. You may type wrong email or password.',
           });
         }
       });
@@ -111,7 +111,7 @@ class LoginForm extends Component {
 };
 
 export default reduxForm({
-  form: 'userLogin',
+  form: FormNames.USER_LOGIN,
   validate,
 })(connect(state => ({
   apiEngine: state.apiEngine,

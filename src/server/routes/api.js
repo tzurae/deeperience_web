@@ -1,7 +1,7 @@
 import configs from '../../../configs/project/server';
 import Roles from '../../common/constants/Roles';
+import FormNames from '../../common/constants/FormNames';
 import bodyParser from '../middlewares/bodyParser';
-import verifyRecaptcha from '../middlewares/verifyRecaptcha';
 import authRequired from '../middlewares/authRequired';
 import roleRequired from '../middlewares/roleRequired';
 import validate from '../middlewares/validate';
@@ -21,7 +21,7 @@ export default ({ app }) => {
   );
   app.post('/api/users',
     bodyParser.json,
-    verifyRecaptcha,
+    validate.recaptcha,
     userController.create,
     mailController.sendVerification
   );
@@ -37,7 +37,7 @@ export default ({ app }) => {
   app.post('/api/users/password/request-reset',
     bodyParser.json,
     validate.form('user/ForgetPasswordForm'),
-    verifyRecaptcha,
+    validate.recaptcha,
     userController.setNonce('password'),
     mailController.sendResetPasswordLink
   );
@@ -84,13 +84,14 @@ export default ({ app }) => {
     userController.uploadAvatar);
 
   // form
-  app.post('/api/forms/userRegister/fields/email/validation',
+  app.post(`/api/forms/${FormNames.USER_REGISTER}/fields/email/validation`,
     bodyParser.json,
-    formValidationController.userRegister.email
+    formValidationController[FormNames.USER_REGISTER].email
   );
-  app.post('/api/forms/userForgetPassword/fields/email/validation',
+  app.post(
+    `/api/forms/${FormNames.USER_FORGET_PASSWORD}/fields/email/validation`,
     bodyParser.json,
-    formValidationController.userForgetPassword.email
+    formValidationController[FormNames.USER_FORGET_PASSWORD].email
   );
 
   // locale

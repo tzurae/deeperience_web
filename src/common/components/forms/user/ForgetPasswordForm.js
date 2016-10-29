@@ -5,6 +5,7 @@ import { Field, reduxForm } from 'redux-form';
 import Alert from 'react-bootstrap/lib/Alert';
 import Button from 'react-bootstrap/lib/Button';
 // import validator from 'validator';
+import FormNames from '../../../constants/FormNames';
 import userAPI from '../../../api/user';
 import { validateForm } from '../../../actions/formActions';
 import { pushErrors } from '../../../actions/errorActions';
@@ -30,14 +31,17 @@ export let validate = (values) => {
 };
 
 let asyncValidate = (values, dispatch) => {
-  return dispatch(validateForm('userForgetPassword', 'email', values.email))
-    .then((json) => {
-      let validationError = {};
-      if (!json.isPassed) {
-        validationError.email = json.message;
-        throw validationError;
-      }
-    });
+  return dispatch(validateForm(
+    FormNames.USER_FORGET_PASSWORD,
+    'email',
+    values.email
+  )).then((json) => {
+    let validationError = {};
+    if (!json.isPassed) {
+      validationError.email = json.message;
+      throw validationError;
+    }
+  });
 };
 
 class ForgetPasswordForm extends Component {
@@ -106,7 +110,7 @@ class ForgetPasswordForm extends Component {
 };
 
 export default reduxForm({
-  form: 'userForgetPassword',
+  form: FormNames.USER_FORGET_PASSWORD,
   validate,
   asyncValidate,
   asyncBlurFields: ['email'],
