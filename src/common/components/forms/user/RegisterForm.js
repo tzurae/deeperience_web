@@ -60,7 +60,7 @@ class RegisterForm extends Component {
         throw err;
       })
       .then((json) => {
-        dispatch(push('/'));
+        dispatch(push('/user/login'));
       });
   }
 
