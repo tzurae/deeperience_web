@@ -8,6 +8,7 @@ export default (store) => ({
         require('./login').default(store),
         require('./edit').default(store),
         require('./forgetPassword').default(store),
+        require('./resetPassword').default(store),
         require('./logout').default(store),
         require('./me').default(store),
       ]);
