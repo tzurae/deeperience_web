@@ -19,7 +19,7 @@ class VerificationPage extends React.Component {
     let { dispatch, apiEngine, location } = this.props;
     if (process.env.BROWSER) {
       userAPI(apiEngine)
-        .verify({ token: location.query.token })
+        .verifyEmail({ token: location.query.token })
         .catch((err) => {
           this.setState({
             isVerifying: false,

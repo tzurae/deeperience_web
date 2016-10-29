@@ -2,12 +2,12 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 import Errors from '../../common/constants/Errors';
 import nodemailerAPI from '../api/nodemailer';
-import VerfificationMail from '../components/VerificationMail';
+import VerifyEmailMail from '../components/VerifyEmailMail';
 
 export default {
   sendVerification(req, res) {
     let { user } = req;
-    let token = user.toVerificationToken();
+    let token = user.toVerifyEmailToken();
 
     nodemailerAPI()
       .sendMail({
@@ -18,7 +18,7 @@ export default {
         ),
         subject: 'Email Verification',
         html: renderToString(
-          <VerfificationMail token={token} />
+          <VerifyEmailMail token={token} />
         ),
       })
       .catch((err) => {

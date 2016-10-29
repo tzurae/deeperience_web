@@ -1,8 +1,8 @@
 export default (apiEngine) => ({
   list: ({ page }) => apiEngine.get('/api/users', { params: { page } }),
   register: (user) => apiEngine.post('/api/users', { data: user }),
-  verify: ({ token }) => apiEngine.post('/api/users/verification', {
-    data: { verificationToken: token },
+  verifyEmail: ({ token }) => apiEngine.post('/api/users/email/verify', {
+    data: { verifyEmailToken: token },
   }),
   login: (user) => apiEngine.post('/api/users/login', { data: user }),
   logout: () => apiEngine.get('/api/users/logout'),

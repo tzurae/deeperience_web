@@ -52,25 +52,17 @@ export default {
     }));
   },
 
-  verify(req, res) {
-    let token = req.body.verificationToken;
-
-    jwt.verify(
-      token,
-      configs.jwt.verification.secret,
-      handleJwtError(res)(({ _id }) => {
-        User.findById(_id, handleDbError(res)((user) => {
-          if (user.email.isVerified) {
-            return res.errors([Errors.TOKEN_REUSED]);
-          }
-          user.email.isVerified = true;
-          user.verifiedAt = new Date();
-          user.save(handleDbError(res)(() => {
-            res.json({});
-          }));
-        }));
-      })
-    );
+  verifyEmail(req, res) {
+    User.findById(req.decodedPayload._id, handleDbError(res)((user) => {
+      if (user.email.isVerified) {
+        return res.errors([Errors.TOKEN_REUSED]);
+      }
+      user.email.isVerified = true;
+      user.email.verifiedAt = new Date();
+      user.save(handleDbError(res)(() => {
+        res.json({});
+      }));
+    }));
   },
 
   login(req, res) {

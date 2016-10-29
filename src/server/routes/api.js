@@ -25,9 +25,13 @@ export default ({ app }) => {
     userController.create,
     mailController.sendVerification
   );
-  app.post('/api/users/verification',
+  app.post('/api/users/email/verify',
     bodyParser.json,
-    userController.verify
+    bodyParser.jwt(
+      'verifyEmailToken',
+      configs.jwt.verifyEmail.secret
+    ),
+    userController.verifyEmail
   );
   app.post('/api/users/login', bodyParser.json, userController.login);
   app.get('/api/users/logout', userController.logout);
