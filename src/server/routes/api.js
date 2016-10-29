@@ -1,5 +1,6 @@
 import configs from '../../../configs/project/server';
 import Roles from '../../common/constants/Roles';
+import FormNames from '../../common/constants/FormNames';
 import bodyParser from '../middlewares/bodyParser';
 import verifyRecaptcha from '../middlewares/verifyRecaptcha';
 import authRequired from '../middlewares/authRequired';
@@ -84,13 +85,14 @@ export default ({ app }) => {
     userController.uploadAvatar);
 
   // form
-  app.post('/api/forms/userRegister/fields/email/validation',
+  app.post(`/api/forms/${FormNames.USER_REGISTER}/fields/email/validation`,
     bodyParser.json,
-    formValidationController.userRegister.email
+    formValidationController[FormNames.USER_REGISTER].email
   );
-  app.post('/api/forms/userForgetPassword/fields/email/validation',
+  app.post(
+    `/api/forms/${FormNames.USER_FORGET_PASSWORD}/fields/email/validation`,
     bodyParser.json,
-    formValidationController.userForgetPassword.email
+    formValidationController[FormNames.USER_FORGET_PASSWORD].email
   );
 
   // locale

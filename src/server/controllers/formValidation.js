@@ -1,8 +1,9 @@
+import FormNames from '../../common/constants/FormNames';
 import { handleDbError } from '../decorators/handleError';
 import User from '../models/User';
 
 export default {
-  userRegister: {
+  [FormNames.USER_REGISTER]: {
     email(req, res) {
       User.findOne({
         'email.value': req.body.value,
@@ -21,7 +22,7 @@ export default {
     },
   },
 
-  userForgetPassword: {
+  [FormNames.USER_FORGET_PASSWORD]: {
     email(req, res) {
       User.findOne({
         'email.value': req.body.value,

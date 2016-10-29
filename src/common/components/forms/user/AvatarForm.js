@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import Button from 'react-bootstrap/lib/Button';
+import FormNames from '../../../constants/FormNames';
 import configs from '../../../../../configs/project/client';
 import firebaseAPI from '../../../api/firebase';
 import userAPI from '../../../api/user';
@@ -203,7 +204,7 @@ class AvatarForm extends Component {
 };
 
 export default reduxForm({
-  form: 'avatar',
+  form: FormNames.USER_AVATAR,
   initialValues,
   validate,
 })(connect(({ apiEngine, cookies: { user } }) => ({

@@ -6,6 +6,7 @@ import { Field, reduxForm, SubmissionError } from 'redux-form';
 import Alert from 'react-bootstrap/lib/Alert';
 import Button from 'react-bootstrap/lib/Button';
 // import validator from 'validator';
+import FormNames from '../../../constants/FormNames';
 import userAPI from '../../../api/user';
 import { pushErrors } from '../../../actions/errorActions';
 import { loginUser } from '../../../actions/userActions';
@@ -110,7 +111,7 @@ class LoginForm extends Component {
 };
 
 export default reduxForm({
-  form: 'userLogin',
+  form: FormNames.USER_LOGIN,
   validate,
 })(connect(state => ({
   apiEngine: state.apiEngine,

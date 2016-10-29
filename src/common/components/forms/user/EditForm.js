@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import Alert from 'react-bootstrap/lib/Alert';
 import Button from 'react-bootstrap/lib/Button';
+import FormNames from '../../../constants/FormNames';
 import userAPI from '../../../api/user';
 import { pushErrors } from '../../../actions/errorActions';
 import { setCookies } from '../../../actions/cookieActions';
@@ -100,7 +101,7 @@ class EditForm extends Component {
 };
 
 export default reduxForm({
-  form: 'userEdit',
+  form: FormNames.USER_EDIT,
   validate,
 })(connect(state => ({
   apiEngine: state.apiEngine,
