@@ -45,7 +45,7 @@ class LoginForm extends Component {
 
   _handleSubmit(formData) {
     // let { store } = this.context;
-    let { dispatch, apiEngine } = this.props;
+    let { dispatch, apiEngine, change } = this.props;
 
     return userAPI(apiEngine)
       .login(formData)
@@ -61,10 +61,9 @@ class LoginForm extends Component {
             dispatch(push(next || '/'));
           });
         } else {
+          change('password', '');
           throw new SubmissionError({
-            email: 'You may type wrong email or password',
-            password: 'You may type wrong email or password',
-            _error: 'Login failed',
+            _error: 'Login failed. You may type wrong email or password.',
           });
         }
       });
