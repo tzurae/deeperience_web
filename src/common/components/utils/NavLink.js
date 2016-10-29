@@ -1,13 +1,13 @@
-import React from 'react';
-import activeComponent from 'react-router-active-component';
+import React from 'react'
+import activeComponent from 'react-router-active-component'
 
 const NavLink = ({ children, ...rest }) => {
-  const ActiveLink = activeComponent('li');
+  const ActiveLink = activeComponent('li')
   return (
     <ActiveLink {...rest}>
       {children}
     </ActiveLink>
-  );
-};
+  )
+}
 
-export default NavLink;
+export default NavLink

@@ -1,21 +1,22 @@
-import crypto from 'crypto';
-import mongoose from 'mongoose';
-import jwt from 'jsonwebtoken';
-import configs from '../../../configs/project/server';
+import crypto from 'crypto'
+import mongoose from 'mongoose'
+import jwt from 'jsonwebtoken'
+import configs from '../../../configs/project/server'
 
 const hashPassword = (rawPassword = '') => {
-  let recursiveLevel = 5;
+  let hashPassword = rawPassword
+  let recursiveLevel = 5
   while (recursiveLevel) {
-    rawPassword = crypto
+    hashPassword = crypto
       .createHash('md5')
-      .update(rawPassword)
-      .digest('hex');
-    recursiveLevel -= 1;
+      .update(hashPassword)
+      .digest('hex')
+    recursiveLevel -= 1
   }
-  return rawPassword;
-};
+  return hashPassword
+}
 
-let UserSchema = new mongoose.Schema({
+const UserSchema = new mongoose.Schema({
   name: String,
   email: {
     value: {
@@ -39,36 +40,36 @@ let UserSchema = new mongoose.Schema({
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
   },
-});
+})
 
-UserSchema.path('email.value').validate(function(value, cb) {
+UserSchema.path('email.value').validate((value, cb) => {
   User.findOne({ 'email.value': value }, (err, user) => {
-    cb(!err && !user);
-  });
-}, 'This email address is already registered');
+    cb(!err && !user)
+  })
+}, 'This email address is already registered')
 
 UserSchema.methods.auth = function(password, cb) {
-  const isAuthenticated = (this.password === hashPassword(password));
-  cb(null, isAuthenticated);
-};
+  const isAuthenticated = (this.password === hashPassword(password))
+  cb(null, isAuthenticated)
+}
 
 UserSchema.methods.toJwtToken = function(cb) {
   const user = {
     _id: this._id,
     name: this.name,
     email: this.email,
-  };
+  }
   const token = jwt.sign(user, configs.jwt.secret, {
     expiresIn: configs.jwt.expiresIn,
-  });
-  return token;
-};
+  })
+  return token
+}
 
 UserSchema.methods.toJSON = function() {
-  let obj = this.toObject();
-  delete obj.password;
-  return obj;
-};
+  const obj = this.toObject()
+  delete obj.password
+  return obj
+}
 
-let User = mongoose.model('User', UserSchema);
-export default User;
+const User = mongoose.model('User', UserSchema)
+export default User

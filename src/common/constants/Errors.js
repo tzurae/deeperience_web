@@ -1,4 +1,4 @@
-import ErrorCodes from './ErrorCodes';
+import ErrorCodes from './ErrorCodes'
 
 export default {
   [ErrorCodes.UNKNOWN_EXCEPTION]: {
@@ -49,4 +49,4 @@ export default {
     title: 'Token Expired',
     detail: 'Your jwt token expired. Please re-login.',
   },
-};
+}

@@ -1,11 +1,11 @@
-import passport from 'passport';
-import { Strategy as JwtStrategy } from 'passport-jwt';
-import configs from '../../../configs/project/server';
-import User from '../models/User';
+import passport from 'passport'
+import { Strategy as JwtStrategy } from 'passport-jwt'
+import configs from '../../../configs/project/server'
+import User from '../models/User'
 
 const cookieExtractor = (req) => {
-  return req.store.getState().cookies.token;
-};
+  return req.store.getState().cookies.token
+}
 
 passport.use(new JwtStrategy({
   jwtFromRequest: cookieExtractor,
@@ -13,15 +13,15 @@ passport.use(new JwtStrategy({
 }, (jwtPayload, done) => {
   User.findById(jwtPayload._id, (err, user) => {
     if (err) {
-      return done(err, false);
+      return done(err, false)
     }
     if (user) {
-      done(null, user);
+      done(null, user)
     } else {
-      done(null, false);
+      done(null, false)
     }
-  });
-}));
+  })
+}))
 
-const passportMiddleware = passport.initialize();
-export default passportMiddleware;
+const passportMiddleware = passport.initialize()
+export default passportMiddleware

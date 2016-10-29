@@ -6,4 +6,4 @@ export default (apiEngine) => ({
   update: (user) => apiEngine.put('/api/users/me', { data: user }),
   uploadAvatar: (avatar) =>
     apiEngine.post('/api/users/me/avatar', { files: { avatar } }),
-});
+})

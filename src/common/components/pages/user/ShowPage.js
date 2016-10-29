@@ -1,37 +1,37 @@
-import React, { Component } from 'react';
-import PageHeader from 'react-bootstrap/lib/PageHeader';
-import userAPI from '../../../api/user';
-import { pushErrors } from '../../../actions/errorActions';
-import Head from '../../widgets/Head';
-import PageLayout from '../../layouts/PageLayout';
-import AvatarForm from '../../forms/AvatarForm';
-import Time from '../../widgets/Time';
+import React, { Component } from 'react'
+import PageHeader from 'react-bootstrap/lib/PageHeader'
+import userAPI from '../../../api/user'
+import { pushErrors } from '../../../actions/errorActions'
+import Head from '../../widgets/Head'
+import PageLayout from '../../layouts/PageLayout'
+import AvatarForm from '../../forms/AvatarForm'
+import Time from '../../widgets/Time'
 
 class ShowPage extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       user: {},
-    };
+    }
   }
 
   componentDidMount() {
-    let { store } = this.context;
+    const { store } = this.context
     userAPI(store.getState().apiEngine)
       .show()
       .catch((err) => {
-        store.dispatch(pushErrors(err));
-        throw err;
+        store.dispatch(pushErrors(err))
+        throw err
       })
       .then((json) => {
         this.setState({
           user: json.user,
-        });
-      });
+        })
+      })
   }
 
   render() {
-    const { user } = this.state;
+    const { user } = this.state
     return (
       <PageLayout>
         <Head
@@ -63,12 +63,12 @@ class ShowPage extends Component {
           <dd><pre>{JSON.stringify(user, null, 2)}</pre></dd>
         </dl>
       </PageLayout>
-    );
+    )
   }
 };
 
 ShowPage.contextTypes = {
   store: React.PropTypes.object.isRequired,
-};
+}
 
-export default ShowPage;
+export default ShowPage

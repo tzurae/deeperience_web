@@ -1,12 +1,12 @@
 // ref: <https://github.com/erikras/react-redux-universal-hot-example/blob/master/src/helpers/ApiClient.js>
-import superagent from 'superagent';
-import getPort from '../../server/utils/getPort';
+import superagent from 'superagent'
+import getPort from '../../server/utils/getPort'
 
-const BASE = process.env.BROWSER ? '' : `http://localhost:${getPort()}`;
-const methods = ['get', 'post', 'put', 'patch', 'del'];
+const BASE = process.env.BROWSER ? '' : `http://localhost:${getPort()}`
+const methods = ['get', 'post', 'put', 'patch', 'del']
 
 function formatUrl(path) {
-  return `${BASE}${path}`;
+  return `${BASE}${path}`
 }
 
 export default class ApiEngine {
@@ -14,40 +14,40 @@ export default class ApiEngine {
     methods.forEach((method) => {
       this[method] = (path, { params, data, files } = {}) => {
         return new Promise((resolve, reject) => {
-          const request = superagent[method](formatUrl(path));
+          const request = superagent[method](formatUrl(path))
 
           if (params) {
-            request.query(params);
+            request.query(params)
           }
 
           if (!process.env.BROWSER && req.get('cookie')) {
-            request.set('cookie', req.get('cookie'));
+            request.set('cookie', req.get('cookie'))
           }
 
           if (data) {
-            request.send(data);
+            request.send(data)
           }
 
           if (files) {
-            let formData = new FormData();
+            const formData = new FormData()
             Object.keys(files).forEach((name) => {
-              formData.append(name, files[name]);
-            });
-            request.send(formData);
+              formData.append(name, files[name])
+            })
+            request.send(formData)
           }
 
           request.end((err, { body } = {}) => {
             if (err) {
-              return reject(body || err);
+              return reject(body || err)
             }
             if (body.errors && body.errors.length > 0) {
-              return reject(body.errors);
+              return reject(body.errors)
             }
-            return resolve(body);
-          });
-        });
-      };
-    });
+            return resolve(body)
+          })
+        })
+      }
+    })
   }
   /*
    * There's a V8 bug where, when using Babel, exporting classes with only

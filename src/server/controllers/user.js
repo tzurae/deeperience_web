@@ -1,6 +1,6 @@
-import { handleDbError } from '../decorators/handleError';
-import User from '../models/User';
-import filterAttribute from '../utils/filterAttribute';
+import { handleDbError } from '../decorators/handleError'
+import User from '../models/User'
+import filterAttribute from '../utils/filterAttribute'
 
 export default {
   create(req, res) {
@@ -10,12 +10,12 @@ export default {
         value: req.body.email,
       },
       password: req.body.password,
-    });
+    })
     user.save(handleDbError(res)((user) => {
       res.json({
-        user: user,
-      });
-    }));
+        user,
+      })
+    }))
   },
 
   login(req, res) {
@@ -25,45 +25,45 @@ export default {
       if (!user) {
         res.json({
           isAuth: false,
-        });
+        })
       } else {
         user.auth(req.body.password, handleDbError(res)((isAuth) => {
           if (isAuth) {
-            const token = user.toJwtToken();
+            const token = user.toJwtToken()
             res.json({
               isAuth: true,
-              token: token,
-              user: user,
-            });
+              token,
+              user,
+            })
           } else {
             res.json({
               isAuth: false,
-            });
+            })
           }
-        }));
+        }))
       }
-    }));
+    }))
   },
 
   logout(req, res) {
-    req.logout();
-    res.json({});
+    req.logout()
+    res.json({})
   },
 
   show(req, res) {
     res.json({
       user: req.user,
-    });
+    })
   },
 
   update(req, res) {
-    let user = filterAttribute(req.body, ['name', 'avatarURL']);
+    const user = filterAttribute(req.body, ['name', 'avatarURL'])
     User.update({ _id: req.user._id }, user, handleDbError(res)((raw) => {
       res.json({
         originAttributes: req.body,
         updatedAttributes: user,
-      });
-    }));
+      })
+    }))
   },
 
   uploadAvatar(req, res) {
@@ -71,6 +71,6 @@ export default {
     // and use `req.body` to access other fileds
     res.json({
       downloadURL: `/users/${req.user._id}/${req.file.filename}`,
-    });
+    })
   },
-};
+}

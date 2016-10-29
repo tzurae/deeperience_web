@@ -4,78 +4,78 @@
 export default () => {
   class ProgressBar {
     constructor() {
-      this.ajaxRequestCount = 0;
+      this.ajaxRequestCount = 0
     }
     start() {
-      this.ajaxRequestCount++;
+      this.ajaxRequestCount++
       if (this.ajaxRequestCount === 1) {
-        NProgress.start();
+        NProgress.start()
       }
     }
     done() {
-      this.ajaxRequestCount--;
+      this.ajaxRequestCount--
       if (this.ajaxRequestCount < 0) {
-        this.ajaxRequestCount = 0;
+        this.ajaxRequestCount = 0
       }
       if (this.ajaxRequestCount === 0) {
-        NProgress.done();
+        NProgress.done()
       }
     }
   }
-  let progressBar = new ProgressBar();
-  let oldOpen = XMLHttpRequest.prototype.open;
+  const progressBar = new ProgressBar()
+  const oldOpen = XMLHttpRequest.prototype.open
 
   function onStateChange() {
     if (this.readyState === 1) {
-      progressBar.start();
+      progressBar.start()
     } else if (this.readyState === 4) {
-      progressBar.done();
+      progressBar.done()
     } else {
       // console.log('[xhr waiting]');
     }
   }
 
-  XMLHttpRequest.prototype.open = function() {
-    this.addEventListener('readystatechange', onStateChange);
-    oldOpen.apply(this, arguments);
-  };
+  XMLHttpRequest.prototype.open = function(...args) {
+    this.addEventListener('readystatechange', onStateChange)
+    oldOpen.apply(this, args)
+  }
 
-  let observeDOM = (function() {
-    let MutationObserver = window.MutationObserver ||
-                           window.WebKitMutationObserver;
-    let eventListenerSupported = window.addEventListener;
+  const observeDOM = (function() {
+    const MutationObserver = window.MutationObserver ||
+                           window.WebKitMutationObserver
+    const eventListenerSupported = window.addEventListener
 
     return function(obj, onStart, onDone) {
-      let caller = function(ele) {
+      const caller = function(ele) {
         if (ele.nodeName === 'SCRIPT') {
-          onStart();
+          onStart()
           ele.onload = function() {
-            ele.onload = null;
-            onDone();
-          };
+            ele.onload = null
+            onDone()
+          }
         }
-      };
-      if (MutationObserver) {
-        let obs = new MutationObserver(function(mutations, observer) {
-          let ele = mutations[0].addedNodes.length &&
-                    mutations[0].addedNodes[0];
-          caller(ele);
-        });
-        obs.observe(obj, { childList: true, subtree: true });
-      } else if (eventListenerSupported) {
-        obj.addEventListener('DOMNodeInserted', function(e) {
-          caller(e.srcElement);
-        }, false);
       }
-    };
-  })();
+      if (MutationObserver) {
+        const obs = new MutationObserver((mutations, observer) => {
+          const ele = mutations[0].addedNodes.length &&
+                    mutations[0].addedNodes[0]
+          caller(ele)
+        })
+        obs.observe(obj, { childList: true, subtree: true })
+      } else if (eventListenerSupported) {
+        obj.addEventListener('DOMNodeInserted', e => {
+          caller(e.srcElement)
+        }, false)
+      }
+    }
+  }())
 
   observeDOM(document.head,
-    function onStart() {
-      progressBar.start();
+    () => {
+      progressBar.start()
     },
-    function onDone() {
-      progressBar.done();
+    () => {
+      progressBar.done()
     }
-  );
-};
+  )
+}

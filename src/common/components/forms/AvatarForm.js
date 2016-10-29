@@ -1,49 +1,49 @@
-import React, { Component, PropTypes } from 'react';
-import { Field, reduxForm } from 'redux-form';
-import Image from 'react-bootstrap/lib/Image';
-import Button from 'react-bootstrap/lib/Button';
-import configs from '../../../../configs/project/client';
-import firebaseAPI from '../../api/firebase';
-import userAPI from '../../api/user';
-import { pushErrors } from '../../actions/errorActions';
-import { Form, FormField, FormFooter } from '../utils/BsForm';
+import React, { Component, PropTypes } from 'react'
+import { Field, reduxForm } from 'redux-form'
+import Image from 'react-bootstrap/lib/Image'
+import Button from 'react-bootstrap/lib/Button'
+import configs from '../../../../configs/project/client'
+import firebaseAPI from '../../api/firebase'
+import userAPI from '../../api/user'
+import { pushErrors } from '../../actions/errorActions'
+import { Form, FormField, FormFooter } from '../utils/BsForm'
 
 const initialValues = {
   storage: 'local',
-};
+}
 
 const validate = (values) => {
-  const errors = {};
+  const errors = {}
   if (!values.avatar || values.avatar.length !== 1) {
-    errors.avatar = 'Required';
+    errors.avatar = 'Required'
   }
 
-  return errors;
-};
+  return errors
+}
 
 class AvatarForm extends Component {
   constructor() {
-    super();
-    this.uploadToLocal = this._uploadToLocal.bind(this);
-    this.uploadToFirebase = this._uploadToFirebase.bind(this);
-    this.signInFirebase = this._signInFirebase.bind(this);
-    this.clearFileField = this._clearFileField.bind(this);
-    this.handleSubmit = this._handleSubmit.bind(this);
+    super()
+    this.uploadToLocal = this._uploadToLocal.bind(this)
+    this.uploadToFirebase = this._uploadToFirebase.bind(this)
+    this.signInFirebase = this._signInFirebase.bind(this)
+    this.clearFileField = this._clearFileField.bind(this)
+    this.handleSubmit = this._handleSubmit.bind(this)
     this.state = {
       isFirebaseInitialized: false,
       avatarURL: null,
-    };
+    }
   }
 
   _uploadToLocal(formData) {
     return userAPI(this.context.store.getState().apiEngine)
       .uploadAvatar(formData.avatar[0])
       .catch((err) => {
-        return Promise.reject(err);
+        return Promise.reject(err)
       })
       .then((json) => {
-        return Promise.resolve(json.downloadURL);
-      });
+        return Promise.resolve(json.downloadURL)
+      })
   }
 
   _signInFirebase() {
@@ -53,16 +53,16 @@ class AvatarForm extends Component {
         this.context.store.dispatch(pushErrors([{
           title: 'Fail To Read Token',
           detail: 'Read firebase token fail.',
-        }]));
-        throw err;
+        }]))
+        throw err
       })
       .then((json) => {
         // Initialize firebase
         if (!this.state.isFirebaseInitialized) {
-          firebase.initializeApp(configs.firebase);
+          firebase.initializeApp(configs.firebase)
           this.setState({
             isFirebaseInitialized: true,
-          });
+          })
         }
 
         // SignIn firebase
@@ -72,54 +72,54 @@ class AvatarForm extends Component {
             this.context.store.dispatch(pushErrors([{
               title: 'Fail To Signin Firebase',
               detail: 'Signin firebase fail.',
-            }]));
-            throw err;
-          });
-      });
+            }]))
+            throw err
+          })
+      })
   }
 
   _uploadToFirebase(formData) {
-    let _this = this;
-    let { store } = this.context;
-    let userId = JSON.parse(store.getState().cookies.user)._id;
+    const _this = this
+    const { store } = this.context
+    const userId = JSON.parse(store.getState().cookies.user)._id
 
     return new Promise((resolve, reject) => {
       _this.signInFirebase().then(() => {
         // ref: <https://firebase.google.com/docs/storage/web/upload-files#upload_files>
-        let storageRef = firebase.storage().ref();
-        let avatarRef = storageRef.child(
-          `${process.env.NODE_ENV}/${userId}/avatar.jpg`);
-        let uploadTask = avatarRef.put(formData.avatar[0]);
+        const storageRef = firebase.storage().ref()
+        const avatarRef = storageRef.child(
+          `${process.env.NODE_ENV}/${userId}/avatar.jpg`)
+        const uploadTask = avatarRef.put(formData.avatar[0])
 
-        uploadTask.on('state_changed', function(snapshot) {
+        uploadTask.on('state_changed', snapshot => {
           // Observe state change events such as progress, pause, and resume
           // See below for more detail
-        }, function(err) {
+        }, err => {
           // Handle unsuccessful uploads
-          return reject(err);
-        }, function complete() {
+          return reject(err)
+        }, () => {
           // Handle successful uploads on complete
           // For instance, get the download URL: https://firebasestorage.googleapis.com/...
-          let downloadURL = uploadTask.snapshot.downloadURL;
-          return resolve(downloadURL);
-        });
-      });
-    });
+          const downloadURL = uploadTask.snapshot.downloadURL
+          return resolve(downloadURL)
+        })
+      })
+    })
   }
 
   _clearFileField() {
-    let { change, untouch } = this.props;
-    change('avatar', '');
-    untouch('avatar');
+    const { change, untouch } = this.props
+    change('avatar', '')
+    untouch('avatar')
   }
 
   _handleSubmit(formData) {
-    let { store: { dispatch, getState } } = this.context;
-    let uploadProcedure;
+    const { store: { dispatch, getState } } = this.context
+    let uploadProcedure
     if (formData.storage === 'firebase') {
-      uploadProcedure = this.uploadToFirebase(formData);
+      uploadProcedure = this.uploadToFirebase(formData)
     } else if (formData.storage === 'local') {
-      uploadProcedure = this.uploadToLocal(formData);
+      uploadProcedure = this.uploadToLocal(formData)
     }
     return uploadProcedure
       .catch((err) => {
@@ -127,8 +127,8 @@ class AvatarForm extends Component {
           title: 'Fail To Upload Avatar',
           detail: 'Upload avatar fail.',
           meta: err,
-        }]));
-        throw err;
+        }]))
+        throw err
       })
       .then((downloadURL) => {
         return userAPI(getState().apiEngine)
@@ -140,18 +140,18 @@ class AvatarForm extends Component {
               title: 'Fail To Update Avatar URL',
               detail: 'Update user avatar URL fail.',
               meta: err,
-            }]));
-            throw err;
+            }]))
+            throw err
           })
           .then((json) => {
-            let forceUpdate = (downloadURL.indexOf('?') >= 0 ?
-              '&' : '?') + `forceUpdate=${Math.random()}`;
+            const forceUpdate =
+              `${downloadURL.indexOf('?') >= 0 ? '&' : '?'}forceUpdate=${Math.random()}`
             this.setState({
               avatarURL: downloadURL + forceUpdate,
-            });
-            this.clearFileField();
-          });
-      });
+            })
+            this.clearFileField()
+          })
+      })
   }
 
   render() {
@@ -160,8 +160,8 @@ class AvatarForm extends Component {
       pristine,
       submitting,
       invalid,
-    } = this.props;
-    let avatarURL = this.state.avatarURL || this.props.avatarURL;
+    } = this.props
+    let avatarURL = this.state.avatarURL || this.props.avatarURL
 
     return (
       <Form onSubmit={handleSubmit(this.handleSubmit)}>
@@ -190,20 +190,20 @@ class AvatarForm extends Component {
           </Button>
         </FormFooter>
       </Form>
-    );
+    )
   }
 };
 
 AvatarForm.propTypes = {
   avatarURL: PropTypes.string,
-};
+}
 
 AvatarForm.contextTypes = {
   store: PropTypes.object.isRequired,
-};
+}
 
 export default reduxForm({
   form: 'avatar',
   initialValues,
   validate,
-})(AvatarForm);
+})(AvatarForm)

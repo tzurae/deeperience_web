@@ -1,7 +1,7 @@
-import React from 'react';
-import PageLayout from '../../layouts/PageLayout';
-import PageHeader from 'react-bootstrap/lib/PageHeader';
-import s from './styles.scss';
+import React from 'react'
+import PageLayout from '../../layouts/PageLayout'
+import PageHeader from 'react-bootstrap/lib/PageHeader'
+import s from './styles.scss'
 
 const HomePage = (props) => (
   <PageLayout>
@@ -13,6 +13,6 @@ const HomePage = (props) => (
       </a>
     </p>
   </PageLayout>
-);
+)
 
-export default HomePage;
+export default HomePage

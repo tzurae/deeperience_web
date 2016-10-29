@@ -1,10 +1,10 @@
-import React from 'react';
-import { Scene } from 'react-native-router-flux';
-import Home from './components/Home';
-import About from './components/About';
-import TabView from './components/TabView';
-import TabIcon from './components/TabIcon';
-import styles from './styles';
+import React from 'react'
+import { Scene } from 'react-native-router-flux'
+import Home from './components/Home'
+import About from './components/About'
+import TabView from './components/TabView'
+import TabIcon from './components/TabIcon'
+import styles from './styles'
 
 export default (
   <Scene key="root">
@@ -36,4 +36,4 @@ export default (
       <Scene key="tab5" component={TabView} title="Tab #5" icon={TabIcon} />
     </Scene>
   </Scene>
-);
+)

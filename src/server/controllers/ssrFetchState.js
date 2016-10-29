@@ -1,37 +1,37 @@
-import Errors from '../../common/constants/Errors';
-import todoAPI from '../../common/api/todo';
-import wrapTimeout from '../decorators/wrapTimeout';
-import { loginUser } from '../../common/actions/userActions';
-import { updateLocale } from '../../common/actions/intlActions';
-import { setTodo } from '../../common/actions/todoActions';
+import Errors from '../../common/constants/Errors'
+import todoAPI from '../../common/api/todo'
+import wrapTimeout from '../decorators/wrapTimeout'
+import { loginUser } from '../../common/actions/userActions'
+import { updateLocale } from '../../common/actions/intlActions'
+import { setTodo } from '../../common/actions/todoActions'
 
 export default {
   user: (req, res, next) => {
-    let { cookies } = req.store.getState();
+    const { cookies } = req.store.getState()
     req.store.dispatch(loginUser({
       token: cookies.token,
       data: cookies.user,
-    }));
-    next();
+    }))
+    next()
   },
   intl: wrapTimeout(3000)((req, res, next) => {
-    const cookieLocale = req.store.getState().cookies.locale;
-    let lang;
+    const cookieLocale = req.store.getState().cookies.locale
+    let lang
     if (cookieLocale) {
-      lang = cookieLocale;
+      lang = cookieLocale
     } else {
-      lang = req.acceptsLanguages('en-us', 'zh-tw');
+      lang = req.acceptsLanguages('en-us', 'zh-tw')
     }
     req.store
       .dispatch(updateLocale(lang))
       .then(() => {
-        next();
+        next()
       }, () => {
         res.pushError(Errors.STATE_PRE_FETCHING_FAIL, {
           detail: 'Cannot setup locale',
-        });
-        next();
-      });
+        })
+        next()
+      })
   }),
   todo: wrapTimeout(3000)((req, res, next) => {
     todoAPI(req.store.getState().apiEngine)
@@ -39,12 +39,12 @@ export default {
       .catch(() => {
         res.pushError(Errors.STATE_PRE_FETCHING_FAIL, {
           detail: 'Cannot list todos',
-        });
-        next();
+        })
+        next()
       })
       .then((json) => {
-        req.store.dispatch(setTodo(json.todos));
-        next();
-      });
+        req.store.dispatch(setTodo(json.todos))
+        next()
+      })
   }),
-};
+}

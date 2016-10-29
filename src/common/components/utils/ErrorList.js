@@ -1,10 +1,10 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import Grid from 'react-bootstrap/lib/Grid';
-import Errors from '../../constants/Errors';
-import { removeError } from '../../actions/errorActions';
+import React from 'react'
+import { connect } from 'react-redux'
+import Grid from 'react-bootstrap/lib/Grid'
+import Errors from '../../constants/Errors'
+import { removeError } from '../../actions/errorActions'
 
-let ErrorList = ({ errors, dispatch }) => (
+const ErrorList = ({ errors, dispatch }) => (
   <Grid>
     {errors.map((error) => (
       <div
@@ -22,7 +22,7 @@ let ErrorList = ({ errors, dispatch }) => (
           <span aria-hidden="true">&times;</span>
         </button>
         <strong>{error.title}</strong>
-        {' ' + error.detail}
+        {` ${error.detail}`}
         {error.meta && [(
           <p key="0">
             {error.code === Errors.STATE_PRE_FETCHING_FAIL.code && (
@@ -43,8 +43,8 @@ let ErrorList = ({ errors, dispatch }) => (
       </div>
     ))}
   </Grid>
-);
+)
 
 export default connect(state => ({
   errors: state.errors,
-}))(ErrorList);
+}))(ErrorList)

@@ -15,4 +15,4 @@ export default {
 
   PUSH_ERRORS: 'PUSH_ERRORS',
   REMOVE_ERROR: 'REMOVE_ERROR',
-};
+}

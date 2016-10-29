@@ -8,4 +8,4 @@ export default {
   'nav.user.register': 'Register',
   'nav.user.profile': 'Profile',
   'nav.user.logout': 'Logout',
-};
+}

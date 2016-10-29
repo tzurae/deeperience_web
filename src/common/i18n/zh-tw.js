@@ -8,4 +8,4 @@ export default {
   'nav.user.register': '註冊',
   'nav.user.profile': '會員中心',
   'nav.user.logout': '登出',
-};
+}

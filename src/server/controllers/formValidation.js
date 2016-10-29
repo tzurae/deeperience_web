@@ -1,5 +1,5 @@
-import { handleDbError } from '../decorators/handleError';
-import User from '../models/User';
+import { handleDbError } from '../decorators/handleError'
+import User from '../models/User'
 
 export default {
   register: {
@@ -11,13 +11,13 @@ export default {
           res.json({
             isPassed: false,
             message: 'The email is already registered',
-          });
+          })
         } else {
           res.json({
             isPassed: true,
-          });
+          })
         }
-      }));
+      }))
     },
   },
-};
+}

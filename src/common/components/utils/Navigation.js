@@ -1,29 +1,30 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router';
-import Grid from 'react-bootstrap/lib/Grid';
-import { updateLocale } from '../../actions/intlActions';
-import { pushErrors } from '../../actions/errorActions';
-import Navbar from './BsNavbar';
-import NavLink from './NavLink';
-import MenuItem from './MenuItem';
-import Text from '../widgets/Text';
+import React, { Component } from 'react'
+import { Link } from 'react-router'
+import Grid from 'react-bootstrap/lib/Grid'
+import { updateLocale } from '../../actions/intlActions'
+import { pushErrors } from '../../actions/errorActions'
+import Navbar from './BsNavbar'
+import NavLink from './NavLink'
+import MenuItem from './MenuItem'
+import Text from '../widgets/Text'
 
 class Navigation extends Component {
   _setLanguage(lang) {
-    let { store } = this.context;
+    const { store } = this.context
     store
       .dispatch(updateLocale(lang))
       .then(() => {
-        console.log('load locale (manually) ok');
+        console.log('load locale (manually) ok')
       }, (err) => {
-        store.dispatch(pushErrors(err));
-      });
+        store.dispatch(pushErrors(err))
+      })
   }
 
   render() {
-    let { cookies: { token, user } } = this.context.store.getState();
-    let isAuth = !!token;
-    user = (user && JSON.parse(user)) || {};
+    const { cookies: { token } } = this.context.store.getState()
+    let { cookies: { user } } = this.context.store.getState()
+    const isAuth = !!token
+    user = (user && JSON.parse(user)) || {}
 
     return (
       <Navbar staticTop>
@@ -89,12 +90,12 @@ class Navigation extends Component {
           </Navbar.Body>
         </Grid>
       </Navbar>
-    );
+    )
   }
 };
 
 Navigation.contextTypes = {
   store: React.PropTypes.object.isRequired,
-};
+}
 
-export default Navigation;
+export default Navigation

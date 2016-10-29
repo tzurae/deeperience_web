@@ -1,26 +1,26 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import PageHeader from 'react-bootstrap/lib/PageHeader';
-import todoAPI from '../../../api/todo';
-import { pushErrors } from '../../../actions/errorActions';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import PageHeader from 'react-bootstrap/lib/PageHeader'
+import todoAPI from '../../../api/todo'
+import { pushErrors } from '../../../actions/errorActions'
 import {
   setTodo,
   addTodo,
   removeTodo,
-} from '../../../actions/todoActions';
-import PageLayout from '../../layouts/PageLayout';
+} from '../../../actions/todoActions'
+import PageLayout from '../../layouts/PageLayout'
 
 class TodoItem extends Component {
   constructor() {
-    super();
+    super()
     this.state = {
       isEditable: false,
       inputValue: '',
-    };
+    }
   }
 
   renderInput() {
-    let { inputValue } = this.state;
+    let { inputValue } = this.state
 
     return (
       <input
@@ -30,12 +30,12 @@ class TodoItem extends Component {
           inputValue: e.target.value,
         })}
       />
-    );
+    )
   }
 
   renderControlButtons() {
-    let { text, onSaveClick } = this.props;
-    let { isEditable, inputValue } = this.state;
+    const { text, onSaveClick } = this.props
+    const { isEditable, inputValue } = this.state
 
     return isEditable ? (
       <span>
@@ -59,12 +59,12 @@ class TodoItem extends Component {
           Edit
         </button>
       </span>
-    );
+    )
   }
 
   render() {
-    let { onRemoveClick, text } = this.props;
-    let { isEditable } = this.state;
+    let { onRemoveClick, text } = this.props
+    const { isEditable } = this.state
 
     return (
       <li>
@@ -73,85 +73,85 @@ class TodoItem extends Component {
         {this.renderControlButtons()}
         <button onClick={onRemoveClick}>x</button>
       </li>
-    );
+    )
   }
 }
 
 class ListPage extends Component {
   constructor(props) {
-    super(props);
-    this.handleAddClick = this._handleAddClick.bind(this);
+    super(props)
+    this.handleAddClick = this._handleAddClick.bind(this)
   }
 
   componentDidMount() {
-    let { todos } = this.props;
+    const { todos } = this.props
 
     if (todos.length === 0) {
-      this.fetchTodos();
+      this.fetchTodos()
     }
   }
 
   fetchTodos() {
-    let { dispatch, apiEngine } = this.props;
+    const { dispatch, apiEngine } = this.props
 
     todoAPI(apiEngine)
       .list()
       .catch((err) => {
-        dispatch(pushErrors(err));
-        throw err;
+        dispatch(pushErrors(err))
+        throw err
       })
       .then((json) => {
-        dispatch(setTodo(json.todos));
-      });
+        dispatch(setTodo(json.todos))
+      })
   }
 
   _handleAddClick() {
-    const { dispatch, apiEngine } = this.props;
-    const text = this.refs.todotext.value;
+    const { dispatch, apiEngine } = this.props
+    const text = this.todotext.value
     todoAPI(apiEngine)
       .create({ text })
       .catch((err) => {
-        dispatch(pushErrors(err));
-        throw err;
+        dispatch(pushErrors(err))
+        throw err
       })
       .then((json) => {
-        dispatch(addTodo(json.todo));
-        this.refs.todotext.value = '';
-      });
+        dispatch(addTodo(json.todo))
+        this.todotext.value = ''
+      })
   }
 
   handleSaveClick(id, newText) {
-    let { dispatch, apiEngine } = this.props;
+    const { dispatch, apiEngine } = this.props
 
     return todoAPI(apiEngine)
       .update(id, { text: newText })
       .catch((err) => {
-        dispatch(pushErrors(err));
-        throw err;
+        dispatch(pushErrors(err))
+        throw err
       })
       .then((json) => {
-        this.fetchTodos();
-      });
+        this.fetchTodos()
+      })
   }
 
   handleRemoveClick(id) {
-    const { dispatch, apiEngine } = this.props;
+    const { dispatch, apiEngine } = this.props
     todoAPI(apiEngine)
       .remove(id)
       .catch((err) => {
-        dispatch(pushErrors(err));
-        throw err;
+        dispatch(pushErrors(err))
+        throw err
       })
       .then((json) => {
-        dispatch(removeTodo(id));
-      });
+        dispatch(removeTodo(id))
+      })
   }
 
   render() {
     return (
       <PageLayout>
         <PageHeader>Todo List</PageHeader>
-        <input type="text" ref="todotext" />
+        <input type="text" ref={todotext => { this.todotext = todotext }} />
         <button onClick={this.handleAddClick}>Add Todo</button>
         <ul>
           {this.props.todos.map((todo) =>
@@ -162,11 +162,11 @@ class ListPage extends Component {
               text={todo.text} />)}
         </ul>
       </PageLayout>
-    );
+    )
   }
 };
 
 export default connect(state => ({
   apiEngine: state.apiEngine,
   todos: state.todos,
-}))(ListPage);
+}))(ListPage)
