@@ -95,6 +95,18 @@ export default {
     }));
   },
 
+  setNonce: (nonceKey) => (req, res, next) => {
+    User.findOne({
+      'email.value': req.body.email,
+    }, handleDbError(res)((user) => {
+      user.nonce[nonceKey] = Math.random();
+      user.save(handleDbError(res)((user) => {
+        req.user = user;
+        next();
+      }));
+    }));
+  },
+
   socialLogin(req, res, next) {
     let { user } = req;
     if (!user) {
