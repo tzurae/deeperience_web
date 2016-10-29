@@ -63,9 +63,9 @@ export default ({ app }) => {
     userController.uploadAvatar);
 
   // form
-  app.post('/api/forms/register/fields/email/validation',
+  app.post('/api/forms/userRegister/fields/email/validation',
     bodyParser.json,
-    formValidationController.register.email
+    formValidationController.userRegister.email
   );
 
   // locale

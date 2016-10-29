@@ -34,7 +34,7 @@ const validate = (values) => {
 };
 
 let asyncValidate = (values, dispatch) => {
-  return dispatch(validateForm('register', 'email', values.email))
+  return dispatch(validateForm('userRegister', 'email', values.email))
     .then((json) => {
       let validationError = {};
       if (!json.isPassed) {
@@ -119,7 +119,7 @@ class RegisterForm extends Component {
 };
 
 export default reduxForm({
-  form: 'register',
+  form: 'userRegister',
   validate,
   asyncValidate,
   asyncBlurFields: ['email'],

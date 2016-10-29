@@ -2,7 +2,7 @@ import { handleDbError } from '../decorators/handleError';
 import User from '../models/User';
 
 export default {
-  register: {
+  userRegister: {
     email(req, res) {
       User.findOne({
         'email.value': req.body.value,

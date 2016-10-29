@@ -107,7 +107,7 @@ class LoginForm extends Component {
 };
 
 export default reduxForm({
-  form: 'login',
+  form: 'userLogin',
   validate,
 })(connect(state => ({
   apiEngine: state.apiEngine,
