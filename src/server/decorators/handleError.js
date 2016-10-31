@@ -40,6 +40,7 @@ let getErrorHandler = (errorTypes) => (res) => (fn) => (err, ...result) => {
         }
         default: {
           res.pushError(Errors.UNKNOWN_EXCEPTION, err);
+          return res.errors();
         }
       }
     });
