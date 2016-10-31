@@ -100,7 +100,7 @@ class VerifyEmailForm extends Component {
     return (
       <Form horizontal onSubmit={handleSubmit(this.handleSubmit)}>
         {submitSucceeded && (
-          <Alert bsStyle="success">A reset link is sent</Alert>
+          <Alert bsStyle="success">A verification link is sent</Alert>
         )}
         {submitFailed && error && (<Alert bsStyle="danger">{error}</Alert>)}
         <Field
