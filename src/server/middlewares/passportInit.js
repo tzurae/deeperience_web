@@ -26,7 +26,9 @@ export default (req, res, next) => {
         return cb(err);
       }
       if (!user) {
-        user = new User();
+        user = new User({
+          avatarURL: '', // overwrite default avatar
+        });
       }
       if (!user.social.profile[schemaProfileKey]) {
         user.social.profile[schemaProfileKey] = {};
