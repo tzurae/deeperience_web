@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import PageHeader from 'react-bootstrap/lib/PageHeader';
+import Modal from 'react-bootstrap/lib/Modal';
 import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
 import Button from 'react-bootstrap/lib/Button';
@@ -11,13 +12,17 @@ import Head from '../../widgets/Head';
 import PageLayout from '../../layouts/PageLayout';
 import Time from '../../widgets/Time';
 import RefreshImage from '../../utils/RefreshImage';
+import VerifyEmailForm from '../../forms/user/VerifyEmailForm';
 
 class ShowPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
       user: props.initialUser,
+      isShowVerifyEmailModal: false,
     };
+    this.openModal = this._openModal.bind(this);
+    this.closeModal = this._closeModal.bind(this);
   }
 
   componentDidMount() {
@@ -36,6 +41,35 @@ class ShowPage extends Component {
       });
   }
 
+  _openModal() {
+    this.setState({ isShowVerifyEmailModal: true });
+  }
+
+  _closeModal() {
+    this.setState({ isShowVerifyEmailModal: false });
+  }
+
+  renderModal() {
+    let { isShowVerifyEmailModal, user } = this.state;
+
+    return (
+      <Modal
+        show={isShowVerifyEmailModal}
+        onHide={this.closeModal}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Send Verification Mail</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <VerifyEmailForm
+            email={user.email && user.email.value}
+            onCancel={this.closeModal}
+          />
+        </Modal.Body>
+      </Modal>
+    );
+  }
+
   render() {
     const { user } = this.state;
     return (
@@ -45,6 +79,7 @@ class ShowPage extends Component {
             'https://www.gstatic.com/firebasejs/live/3.0/firebase.js',
           ]}
         />
+        {this.renderModal()}
         <Row>
           <Col md={12}>
             <Link to="/user/me/edit">
@@ -64,7 +99,14 @@ class ShowPage extends Component {
           <dt>name</dt>
           <dd>{user.name}</dd>
           <dt>email</dt>
-          <dd>{user.email && user.email.value}</dd>
+          <dd>
+            {user.email && user.email.value}
+            {user.email && !user.email.isVerified && (
+              <Button onClick={this.openModal}>
+                Verify Now
+              </Button>
+            )}
+          </dd>
           <dt>updatedAt</dt>
           <dd>
             <Time value={user.updatedAt} format="YYYY-MM-DD" />

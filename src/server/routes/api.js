@@ -31,14 +31,22 @@ export default ({ app }) => {
       'verifyEmailToken',
       configs.jwt.verifyEmail.secret
     ),
+    validate.verifyUserNonce('verifyEmail'),
     userController.verifyEmail
+  );
+  app.post('/api/users/email/request-verify',
+    bodyParser.json,
+    validate.form('user/VerifyEmailForm'),
+    validate.recaptcha,
+    userController.setNonce('verifyEmail'),
+    mailController.sendVerification
   );
   app.post('/api/users/login', bodyParser.json, userController.login);
   app.post('/api/users/password/request-reset',
     bodyParser.json,
     validate.form('user/ForgetPasswordForm'),
     validate.recaptcha,
-    userController.setNonce('password'),
+    userController.setNonce('resetPassword'),
     mailController.sendResetPasswordLink
   );
   app.put('/api/users/password',
@@ -47,7 +55,7 @@ export default ({ app }) => {
       'resetPasswordToken',
       configs.jwt.resetPassword.secret
     ),
-    validate.verifyUserNonce('password'),
+    validate.verifyUserNonce('resetPassword'),
     validate.form('user/ResetPasswordForm'),
     userController.resetPassword
   );
@@ -88,6 +96,11 @@ export default ({ app }) => {
   app.post(`/api/forms/${FormNames.USER_REGISTER}/fields/email/validation`,
     bodyParser.json,
     formValidationController[FormNames.USER_REGISTER].email
+  );
+  app.post(
+    `/api/forms/${FormNames.USER_VERIFY_EMAIL}/fields/email/validation`,
+    bodyParser.json,
+    formValidationController[FormNames.USER_VERIFY_EMAIL].email
   );
   app.post(
     `/api/forms/${FormNames.USER_FORGET_PASSWORD}/fields/email/validation`,

@@ -4,6 +4,9 @@ export default (apiEngine) => ({
   verifyEmail: ({ token }) => apiEngine.post('/api/users/email/verify', {
     data: { verifyEmailToken: token },
   }),
+  requestVerifyEmail: (form) => (
+    apiEngine.post('/api/users/email/request-verify', { data: form })
+  ),
   login: (user) => apiEngine.post('/api/users/login', { data: user }),
   requestResetPassword: (form) => (
     apiEngine.post('/api/users/password/request-reset', { data: form })

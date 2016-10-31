@@ -52,7 +52,8 @@ let UserSchema = new mongoose.Schema({
     },
   },
   nonce: {
-    password: Number,
+    verifyEmail: Number,
+    resetPassword: Number,
   },
   lastLoggedInAt: Date,
 }, {
@@ -73,6 +74,7 @@ UserSchema.methods.auth = function(password, cb) {
 UserSchema.methods.toVerifyEmailToken = function(cb) {
   const user = {
     _id: this._id,
+    nonce: this.nonce.verifyEmail,
   };
   const token = jwt.sign(user, configs.jwt.verifyEmail.secret, {
     expiresIn: configs.jwt.verifyEmail.expiresIn,
@@ -83,7 +85,7 @@ UserSchema.methods.toVerifyEmailToken = function(cb) {
 UserSchema.methods.toResetPasswordToken = function(cb) {
   const user = {
     _id: this._id,
-    nonce: this.nonce.password,
+    nonce: this.nonce.resetPassword,
   };
   const token = jwt.sign(user, configs.jwt.resetPassword.secret, {
     expiresIn: configs.jwt.resetPassword.expiresIn,
