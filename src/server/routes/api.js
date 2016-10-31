@@ -31,6 +31,7 @@ export default ({ app }) => {
       'verifyEmailToken',
       configs.jwt.verifyEmail.secret
     ),
+    validate.verifyUserNonce('verifyEmail'),
     userController.verifyEmail
   );
   app.post('/api/users/login', bodyParser.json, userController.login);

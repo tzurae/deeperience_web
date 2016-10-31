@@ -40,6 +40,9 @@ export default {
             value: req.body.email,
           },
           password: req.body.password,
+          nonce: {
+            verifyEmail: Math.random(),
+          },
         });
         user.save(handleDbError(res)((user) => {
           req.user = user;
@@ -55,15 +58,12 @@ export default {
   },
 
   verifyEmail(req, res) {
-    User.findById(req.decodedPayload._id, handleDbError(res)((user) => {
-      if (user.email.isVerified) {
-        return res.errors([Errors.TOKEN_REUSED]);
-      }
-      user.email.isVerified = true;
-      user.email.verifiedAt = new Date();
-      user.save(handleDbError(res)(() => {
-        res.json({});
-      }));
+    let { user } = req;
+
+    user.email.isVerified = true;
+    user.email.verifiedAt = new Date();
+    user.save(handleDbError(res)(() => {
+      res.json({});
     }));
   },
 
