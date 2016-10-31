@@ -2,6 +2,8 @@ import crypto from 'crypto'
 import mongoose from 'mongoose'
 import jwt from 'jsonwebtoken'
 import configs from '../../../configs/project/server'
+import { SiteSchema } from './Site'
+import { TripSchema } from './Trip'
 
 const hashPassword = (rawPassword = '') => {
   let hashPassword = rawPassword
@@ -34,6 +36,9 @@ const UserSchema = new mongoose.Schema({
     set: hashPassword,
   },
   avatarURL: String,
+  sites: [SiteSchema],
+  ownTrip: [TripSchema],
+  buyTrip: [TripSchema],
 }, {
   versionKey: false,
   timestamps: {
