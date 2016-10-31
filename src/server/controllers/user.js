@@ -1,7 +1,10 @@
+import fs from 'fs';
+import path from 'path';
+import mkdirp from 'mkdirp';
 import assign from 'object-assign';
 import configs from '../../../configs/project/server';
 import Errors from '../../common/constants/Errors';
-import { handleDbError } from '../decorators/handleError';
+import handleError, { handleDbError } from '../decorators/handleError';
 import User from '../models/User';
 import filterAttribute from '../utils/filterAttribute';
 import { loginUser } from '../../common/actions/userActions';
@@ -213,8 +216,19 @@ export default {
   uploadAvatar(req, res) {
     // use `req.file` to access the avatar file
     // and use `req.body` to access other fileds
-    res.json({
-      downloadURL: `/users/${req.user._id}/${req.file.filename}`,
-    });
+    let { filename } = req.files.avatar[0];
+    let tmpPath = req.files.avatar[0].path;
+    let targetDir = path.join(
+      __dirname, '../../public', 'users', req.user._id.toString()
+    );
+    let targetPath = path.join(targetDir, filename);
+
+    mkdirp(targetDir, handleError(res)(() => {
+      fs.rename(tmpPath, targetPath, handleError(res)(() => {
+        res.json({
+          downloadURL: `/users/${req.user._id}/${filename}`,
+        });
+      }));
+    }));
   },
 };

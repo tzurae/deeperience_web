@@ -8,7 +8,10 @@ import User from '../models/User';
 export default {
   form: (formPath, onlyFields = []) => (req, res, next) => {
     let { validate } = require(`../../common/components/forms/${formPath}`);
-    let errors = validate(req.body);
+    let errors = validate({
+      ...req.body,
+      ...req.files,
+    });
 
     if (onlyFields.length > 0) {
       let newErrors = {};
