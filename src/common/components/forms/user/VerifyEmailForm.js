@@ -6,6 +6,7 @@ import Alert from 'react-bootstrap/lib/Alert';
 import Button from 'react-bootstrap/lib/Button';
 // import validator from 'validator';
 import FormNames from '../../../constants/FormNames';
+import userAPI from '../../../api/user';
 import { validateForm } from '../../../actions/formActions';
 import { pushErrors } from '../../../actions/errorActions';
 import { Form, FormField, FormFooter } from '../../utils/BsForm';
@@ -59,6 +60,19 @@ class VerifyEmailForm extends Component {
   }
 
   _handleSubmit(formData) {
+    let { dispatch, apiEngine, initialize } = this.props;
+
+    return userAPI(apiEngine)
+      .requestVerifyEmail(formData)
+      .catch((err) => {
+        dispatch(pushErrors(err));
+        throw err;
+      })
+      .then((json) => {
+        initialize({
+          email: '',
+        });
+      });
   }
 
   _handleCancleClick() {

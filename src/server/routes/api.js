@@ -34,6 +34,13 @@ export default ({ app }) => {
     validate.verifyUserNonce('verifyEmail'),
     userController.verifyEmail
   );
+  app.post('/api/users/email/request-verify',
+    bodyParser.json,
+    validate.form('user/VerifyEmailForm'),
+    validate.recaptcha,
+    userController.setNonce('verifyEmail'),
+    mailController.sendVerification
+  );
   app.post('/api/users/login', bodyParser.json, userController.login);
   app.post('/api/users/password/request-reset',
     bodyParser.json,
