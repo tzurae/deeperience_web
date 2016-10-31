@@ -6,13 +6,14 @@ import Modal from 'react-bootstrap/lib/Modal';
 import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
 import Button from 'react-bootstrap/lib/Button';
+import Image from 'react-bootstrap/lib/Image';
 import userAPI from '../../../api/user';
 import { pushErrors } from '../../../actions/errorActions';
 import Head from '../../widgets/Head';
 import PageLayout from '../../layouts/PageLayout';
 import Time from '../../widgets/Time';
-import RefreshImage from '../../utils/RefreshImage';
 import VerifyEmailForm from '../../forms/user/VerifyEmailForm';
+import toRefreshURL from '../../../utils/toRefreshURL';
 
 class ShowPage extends Component {
   constructor(props) {
@@ -35,6 +36,7 @@ class ShowPage extends Component {
         throw err;
       })
       .then((json) => {
+        json.user.avatarURL = toRefreshURL(json.user.avatarURL);
         this.setState({
           user: json.user,
         });
@@ -94,7 +96,7 @@ class ShowPage extends Component {
           <dd>{user._id}</dd>
           <dt>avatar</dt>
           <dd>
-            {user.avatarURL && <RefreshImage thumbnail src={user.avatarURL} />}
+            {user.avatarURL && <Image thumbnail src={user.avatarURL} />}
           </dd>
           <dt>name</dt>
           <dd>{user.name}</dd>

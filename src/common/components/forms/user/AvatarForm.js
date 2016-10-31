@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import Button from 'react-bootstrap/lib/Button';
+import Image from 'react-bootstrap/lib/Image';
 import FormNames from '../../../constants/FormNames';
 import configs from '../../../../../configs/project/client';
 import firebaseAPI from '../../../api/firebase';
@@ -9,7 +10,6 @@ import userAPI from '../../../api/user';
 import { pushErrors } from '../../../actions/errorActions';
 import { setCookies } from '../../../actions/cookieActions';
 import { Form, FormField, FormFooter } from '../../utils/BsForm';
-import RefreshImage from '../../utils/RefreshImage';
 import toRefreshURL from '../../../utils/toRefreshURL';
 
 const initialValues = {
@@ -187,17 +187,16 @@ class AvatarForm extends Component {
 
   render() {
     const {
-      user,
+      user: { avatarURL },
       handleSubmit,
       pristine,
       submitting,
       invalid,
     } = this.props;
-    let avatarURL = this.state.avatarURL || user.avatarURL;
 
     return (
       <Form onSubmit={handleSubmit(this.handleSubmit)}>
-        {avatarURL && <RefreshImage thumbnail src={avatarURL} />}
+        {avatarURL && <Image thumbnail src={avatarURL} />}
         <Field
           name="avatar"
           component={FormField}
