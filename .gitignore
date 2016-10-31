@@ -14,7 +14,7 @@ configs/**/credential.*
 # Generated files
 /build
 /.deploy
-/src/public/uploads
+/src/public/tmp
 /src/public/users
 /src/native/styles/index.js
 my-release-key.keystore
