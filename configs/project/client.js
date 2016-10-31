@@ -9,4 +9,15 @@ module.exports = {
     },
   },
   recaptcha: require('./recaptcha/client'),
+  fileUpload: {
+    avatar: {
+      maxSize: 1024 * 1024, // in bytes
+      // MIME type
+      validMIMETypes: [
+        'image/jpeg',
+        'image/png',
+        'image/gif',
+      ],
+    },
+  },
 };

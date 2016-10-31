@@ -78,9 +78,10 @@ export default ({ app }) => {
   app.post('/api/users/me/avatar',
     authRequired,
     fileUpload.disk({
-      destination: 'users/{userId}',
+      destination: 'tmp/{userId}',
       filename: 'avatar.jpg',
-    }).single('avatar'),
+    }).fields([{ name: 'avatar' }]),
+    validate.form('user/AvatarForm'),
     userController.uploadAvatar);
 
   // form
