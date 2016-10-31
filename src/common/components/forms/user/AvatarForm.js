@@ -16,10 +16,33 @@ const initialValues = {
   storage: 'local',
 };
 
-const validate = (values) => {
+/**
+ * Test server side validation with Postman:
+ * 1. Setup the method and url `POST http://localhost:3000/api/users/me/avatar`
+ * 2. Select `Body` tab
+ * 3. Select `form-data` type
+ * 4. Add new key `avatar` and select some invalid file on purpose
+ * 5. Send
+ */
+export let validate = (values) => {
   const errors = {};
+
   if (!values.avatar || values.avatar.length !== 1) {
     errors.avatar = 'Required';
+  } else {
+    let { size, type, mimetype } = values.avatar[0];
+    let { maxSize, validMIMETypes } = configs.fileUpload.avatar;
+
+    if (size > maxSize) {
+      errors.avatar = (
+        `Your file(${Math.floor(size / 1024)} Kb) ` +
+        `exceeds the limit size(${Math.floor(maxSize / 1024)} Kb).`
+      );
+    }
+    // we check the key `type` for client side and `mimetype` for server side
+    if (validMIMETypes.indexOf(type || mimetype) < 0) {
+      errors.avatar = 'Invalid type. Please upload .jpg, .png or .gif file.';
+    }
   }
 
   return errors;
