@@ -38,7 +38,7 @@ export default ({ app }) => {
     bodyParser.json,
     validate.form('user/ForgetPasswordForm'),
     validate.recaptcha,
-    userController.setNonce('password'),
+    userController.setNonce('resetPassword'),
     mailController.sendResetPasswordLink
   );
   app.put('/api/users/password',
@@ -47,7 +47,7 @@ export default ({ app }) => {
       'resetPasswordToken',
       configs.jwt.resetPassword.secret
     ),
-    validate.verifyUserNonce('password'),
+    validate.verifyUserNonce('resetPassword'),
     validate.form('user/ResetPasswordForm'),
     userController.resetPassword
   );

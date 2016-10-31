@@ -52,7 +52,7 @@ let UserSchema = new mongoose.Schema({
     },
   },
   nonce: {
-    password: Number,
+    resetPassword: Number,
   },
   lastLoggedInAt: Date,
 }, {
@@ -83,7 +83,7 @@ UserSchema.methods.toVerifyEmailToken = function(cb) {
 UserSchema.methods.toResetPasswordToken = function(cb) {
   const user = {
     _id: this._id,
-    nonce: this.nonce.password,
+    nonce: this.nonce.resetPassword,
   };
   const token = jwt.sign(user, configs.jwt.resetPassword.secret, {
     expiresIn: configs.jwt.resetPassword.expiresIn,
