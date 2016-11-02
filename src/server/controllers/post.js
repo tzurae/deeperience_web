@@ -1,27 +1,31 @@
 import { handleDbError } from '../decorators/handleError'
-import Trip from '../models/Trip'
 import User from '../models/User'
+import Post from '../models/Post'
 import filterAttribute from '../utils/filterAttribute'
 import getSaveObject from '../utils/getSaveObject'
 
-const attributes = ['name', 'allSites', 'backgroundPic', 'dayInfo', 'price',
-  'tags', 'startSite', 'routes']
+const attributes = [
+  'people', 'residentFee', 'tripFee', 'allFee',
+  'foodFee', 'hotelType', 'tripLocation', 'tripElement',
+  'foodElement', 'otherDemand', 'bookHotel', 'bookRestaurant',
+  'startDate', 'endDate',
+]
 
 export default {
   create(req, res) {
-    let trip = {}
+    let post = {}
     attributes.forEach(attr => {
-      trip[attr] = req.body[attr]
+      post[attr] = req.body[attr]
     })
-    trip = Trip({
-      ...trip,
+    post = Post({
+      ...post,
       updatedAt: new Date(),
       createdAt: new Date(),
     })
 
     User.update(
       { _id: req.params.userId },
-      { $addToSet: { own: trip } },
+      { $addToSet: { posts: post } },
       handleDbError(res)((raw) => {
         res.json({
           finish: raw.ok === 1,
@@ -36,10 +40,9 @@ export default {
       ...filterAttribute(req.body, attributes),
       updatedAt: new Date(),
     }
-    console.log(save)
     User.update(
-      { _id: req.params.userId, 'ownTrip._id': req.params.tripId },
-      { $set: getSaveObject(save, 'ownTrip.$.') },
+      { _id: req.params.userId, 'posts._id': req.params.postId },
+      { $set: getSaveObject(save, 'posts.$.') },
       handleDbError(res)((raw) => {
         res.json({
           finish: raw.ok === 1,
@@ -49,11 +52,9 @@ export default {
     )
   },
 
-  listOwnTrip(req, res) {
+  list(req, res) {
   },
 
-  listBuyTrip(req, res) {
-  },
   remove(req, res) {
 
   },

@@ -4,6 +4,7 @@ import jwt from 'jsonwebtoken'
 import configs from '../../../configs/project/server'
 import { SiteSchema } from './Site'
 import { TripSchema } from './Trip'
+import { PostSchema } from './Post'
 
 const hashPassword = (rawPassword = '') => {
   let hashPassword = rawPassword
@@ -39,6 +40,7 @@ const UserSchema = new mongoose.Schema({
   sites: [SiteSchema],
   ownTrip: [TripSchema],
   buyTrip: [TripSchema],
+  posts: [PostSchema],
 }, {
   versionKey: false,
   timestamps: {
