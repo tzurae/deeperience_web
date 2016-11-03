@@ -1,9 +1,9 @@
-import crypto from 'crypto';
-import mongoose from 'mongoose';
-import jwt from 'jsonwebtoken';
-import configs from '../../../configs/project/server';
-import Roles from '../../common/constants/Roles';
-import paginatePlugin from './plugins/paginate';
+import crypto from 'crypto'
+import mongoose from 'mongoose'
+import jwt from 'jsonwebtoken'
+import configs from '../../../configs/project/server'
+import Roles from '../../common/constants/Roles'
+import paginatePlugin from './plugins/paginate'
 
 const hashPassword = (rawPassword = '') => {
   let hashPassword = rawPassword
@@ -65,7 +65,7 @@ const UserSchema = new mongoose.Schema({
   },
 })
 
-UserSchema.plugin(paginatePlugin);
+UserSchema.plugin(paginatePlugin)
 
 UserSchema.methods.auth = function(password, cb) {
   const isAuthenticated = (this.password === hashPassword(password))
@@ -76,35 +76,35 @@ UserSchema.methods.toVerifyEmailToken = function(cb) {
   const user = {
     _id: this._id,
     nonce: this.nonce.verifyEmail,
-  };
+  }
   const token = jwt.sign(user, configs.jwt.verifyEmail.secret, {
     expiresIn: configs.jwt.verifyEmail.expiresIn,
-  });
-  return token;
-};
+  })
+  return token
+}
 
 UserSchema.methods.toResetPasswordToken = function(cb) {
   const user = {
     _id: this._id,
     nonce: this.nonce.resetPassword,
-  };
+  }
   const token = jwt.sign(user, configs.jwt.resetPassword.secret, {
     expiresIn: configs.jwt.resetPassword.expiresIn,
-  });
-  return token;
-};
+  })
+  return token
+}
 
 UserSchema.methods.toAuthenticationToken = function(cb) {
   const user = {
     _id: this._id,
     name: this.name,
     email: this.email,
-  };
+  }
   const token = jwt.sign(user, configs.jwt.authentication.secret, {
     expiresIn: configs.jwt.authentication.expiresIn,
-  });
-  return token;
-};
+  })
+  return token
+}
 
 UserSchema.methods.toJSON = function() {
   const obj = this.toObject()

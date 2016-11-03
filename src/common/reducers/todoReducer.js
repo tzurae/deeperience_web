@@ -11,7 +11,7 @@ export default (state = [], action) => {
       return [
         action.todo,
         ...state,
-      ];
+      ]
     }
     case ActionTypes.REMOVE_TODO: {
       return [

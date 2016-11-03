@@ -42,8 +42,8 @@ export const removeCookie = (name) => {
     if (process.env.BROWSER) {
       return dispatch(setCookie(name, '', {
         expires: new Date(1970, 1, 1, 0, 0, 1),
-      }));
+      }))
     }
-    return Promise.resolve();
-  };
-};
+    return Promise.resolve()
+  }
+}

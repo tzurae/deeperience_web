@@ -1,10 +1,10 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import Head from '../widgets/Head';
+import React from 'react'
+import { connect } from 'react-redux'
+import Head from '../widgets/Head'
 
-let SocialAuthButtonList = ({ routing }) => {
-  let { next } = routing.locationBeforeTransitions.query;
-  let search = next ? '?next=' + next : '';
+const SocialAuthButtonList = ({ routing }) => {
+  const { next } = routing.locationBeforeTransitions.query
+  const search = next ? `?next=${next}` : ''
 
   return (
     <div>
@@ -26,9 +26,9 @@ let SocialAuthButtonList = ({ routing }) => {
         <span className="fa fa-linkedin"></span>Login with LinkedIn
       </a>
     </div>
-  );
-};
+  )
+}
 
 export default connect(state => ({
   routing: state.routing,
-}))(SocialAuthButtonList);
+}))(SocialAuthButtonList)

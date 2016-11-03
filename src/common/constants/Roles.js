@@ -5,4 +5,4 @@ export default {
   ADMIN: 'ADMIN',
   // root
   ROOT: 'ROOT',
-};
+}

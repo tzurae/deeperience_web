@@ -1,11 +1,11 @@
-import React, { PropTypes, Component } from 'react';
-import Form from 'react-bootstrap/lib/Form';
-import BsFormGroup from 'react-bootstrap/lib/FormGroup';
-import Col from 'react-bootstrap/lib/Col';
-import ControlLabel from 'react-bootstrap/lib/ControlLabel';
-import HelpBlock from 'react-bootstrap/lib/HelpBlock';
-import Recaptcha from 'react-google-recaptcha';
-import configs from '../../../../configs/project/client';
+import React, { PropTypes, Component } from 'react'
+import Form from 'react-bootstrap/lib/Form'
+import BsFormGroup from 'react-bootstrap/lib/FormGroup'
+import Col from 'react-bootstrap/lib/Col'
+import ControlLabel from 'react-bootstrap/lib/ControlLabel'
+import HelpBlock from 'react-bootstrap/lib/HelpBlock'
+import Recaptcha from 'react-google-recaptcha'
+import configs from '../../../../configs/project/client'
 
 class BsForm extends Component {
   getChildContext() {
@@ -29,7 +29,7 @@ class BsForm extends Component {
       labelDimensions, fieldDimensions,
       /* eslint-enable */
       children,
-      ...rest,
+      ...rest
     } = this.props
 
     return (
@@ -62,13 +62,13 @@ BsForm.childContextTypes = {
 }
 
 const BsFormField = ({
-  label, input, type, meta, options, ...rest,
+  label, input, type, meta, options, ...rest
 }, {
   labelDimensions, fieldDimensions, horizontal,
 }) => {
   const isShowError = meta && meta.touched && meta.error
 
-  let formControl = null;
+  let formControl = null
   if (type === 'recaptcha') {
     // ref:
     //   - <https://github.com/erikras/redux-form/issues/1880>

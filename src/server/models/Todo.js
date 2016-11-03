@@ -1,5 +1,5 @@
-import mongoose from 'mongoose';
-import paginatePlugin from './plugins/paginate';
+import mongoose from 'mongoose'
+import paginatePlugin from './plugins/paginate'
 
 const Todo = new mongoose.Schema({
   text: String,
@@ -11,6 +11,6 @@ const Todo = new mongoose.Schema({
   },
 })
 
-Todo.plugin(paginatePlugin);
+Todo.plugin(paginatePlugin)
 
-export default mongoose.model('Todo', Todo);
+export default mongoose.model('Todo', Todo)

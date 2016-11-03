@@ -1,6 +1,6 @@
-import FormNames from '../../common/constants/FormNames';
-import { handleDbError } from '../decorators/handleError';
-import User from '../models/User';
+import FormNames from '../../common/constants/FormNames'
+import { handleDbError } from '../decorators/handleError'
+import User from '../models/User'
 
 export default {
   [FormNames.USER_REGISTER]: {
@@ -31,13 +31,13 @@ export default {
           res.json({
             isPassed: false,
             message: 'This is an invalid account',
-          });
+          })
         } else {
           res.json({
             isPassed: true,
-          });
+          })
         }
-      }));
+      }))
     },
   },
 
@@ -50,13 +50,13 @@ export default {
           res.json({
             isPassed: false,
             message: 'This is an invalid account',
-          });
+          })
         } else {
           res.json({
             isPassed: true,
-          });
+          })
         }
-      }));
+      }))
     },
   },
-};
+}

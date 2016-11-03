@@ -3,7 +3,7 @@ import { Text, View } from 'react-native'
 import { Actions } from 'react-native-router-flux'
 
 const TabView = ({ title }) => {
-  let goToHome = () => Actions.home()
+  const goToHome = () => Actions.home()
 
   return (
     <View>

@@ -1,51 +1,51 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { push } from 'react-router-redux';
-import PageHeader from 'react-bootstrap/lib/PageHeader';
-import Table from 'react-bootstrap/lib/Table';
-import Resources from '../../../../constants/Resources';
-import userAPI from '../../../../api/user';
-import { pushErrors } from '../../../../actions/errorActions';
-import { setCrrentPage, setPage } from '../../../../actions/pageActions';
-import PageLayout from '../../../layouts/AdminPageLayout';
-import Pagination from '../../../utils/BsPagination';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { push } from 'react-router-redux'
+import PageHeader from 'react-bootstrap/lib/PageHeader'
+import Table from 'react-bootstrap/lib/Table'
+import Resources from '../../../../constants/Resources'
+import userAPI from '../../../../api/user'
+import { pushErrors } from '../../../../actions/errorActions'
+import { setCrrentPage, setPage } from '../../../../actions/pageActions'
+import PageLayout from '../../../layouts/AdminPageLayout'
+import Pagination from '../../../utils/BsPagination'
 
 class ListPage extends Component {
   constructor() {
-    super();
+    super()
     this.state = {
       users: [],
-    };
+    }
   }
 
   componentDidMount() {
-    let { dispatch, location } = this.props;
-    dispatch(setCrrentPage(Resources.USER, location.query.page || 1));
+    let { dispatch, location } = this.props
+    dispatch(setCrrentPage(Resources.USER, location.query.page || 1))
   }
 
   componentDidUpdate(prevProps) {
-    let { dispatch, apiEngine, page, location } = this.props;
+    let { dispatch, apiEngine, page, location } = this.props
 
     if (prevProps.page.current !== page.current) {
       userAPI(apiEngine)
         .list({ page: page.current })
         .catch((err) => {
-          dispatch(pushErrors(err));
-          throw err;
+          dispatch(pushErrors(err))
+          throw err
         })
         .then((json) => {
-          this.setState({ users: json.users });
-          dispatch(setPage(Resources.USER, json.page));
+          this.setState({ users: json.users })
+          dispatch(setPage(Resources.USER, json.page))
           dispatch(push({
             pathname: location.pathname,
             query: { page: json.page.current },
-          }));
-        });
+          }))
+        })
     }
   }
 
   render() {
-    let { users } = this.state;
+    const { users } = this.state
 
     return (
       <PageLayout>
@@ -74,11 +74,11 @@ class ListPage extends Component {
         </Table>
         <Pagination resourceName={Resources.USER} />
       </PageLayout>
-    );
+    )
   }
 }
 
 export default connect(state => ({
   apiEngine: state.apiEngine,
   page: state.pages[Resources.USER] || {},
-}))(ListPage);
+}))(ListPage)

@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router';
-import Grid from 'react-bootstrap/lib/Grid';
-import Image from 'react-bootstrap/lib/Image';
-import Roles from '../../constants/Roles';
-import { updateLocale } from '../../actions/intlActions';
-import { pushErrors } from '../../actions/errorActions';
-import Navbar from './BsNavbar';
-import NavLink from './NavLink';
-import MenuItem from './MenuItem';
-import Text from '../widgets/Text';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { Link } from 'react-router'
+import Grid from 'react-bootstrap/lib/Grid'
+import Image from 'react-bootstrap/lib/Image'
+import Roles from '../../constants/Roles'
+import { updateLocale } from '../../actions/intlActions'
+import { pushErrors } from '../../actions/errorActions'
+import Navbar from './BsNavbar'
+import NavLink from './NavLink'
+import MenuItem from './MenuItem'
+import Text from '../widgets/Text'
 
 class Navigation extends Component {
   _setLanguage(lang) {
@@ -24,8 +24,8 @@ class Navigation extends Component {
   }
 
   render() {
-    let { isAuth, user } = this.props;
-    let isAdmin = (user.role === Roles.ADMIN);
+    let { isAuth, user } = this.props
+    const isAdmin = (user.role === Roles.ADMIN)
 
     return (
       <Navbar staticTop>
@@ -114,4 +114,4 @@ export default connect(({ cookies: { token, user } }) => ({
   user: (user && JSON.parse(user)) || {},
 }), null, null, {
   pure: false,
-})(Navigation);
+})(Navigation)

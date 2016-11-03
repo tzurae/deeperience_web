@@ -1,14 +1,14 @@
-import fs from 'fs';
-import path from 'path';
-import mkdirp from 'mkdirp';
-import assign from 'object-assign';
-import configs from '../../../configs/project/server';
-import Errors from '../../common/constants/Errors';
-import handleError, { handleDbError } from '../decorators/handleError';
-import User from '../models/User';
-import filterAttribute from '../utils/filterAttribute';
-import { loginUser } from '../../common/actions/userActions';
-import { redirect } from '../../common/actions/routeActions';
+import fs from 'fs'
+import path from 'path'
+import mkdirp from 'mkdirp'
+import assign from 'object-assign'
+import configs from '../../../configs/project/server'
+import Errors from '../../common/constants/Errors'
+import handleError, { handleDbError } from '../decorators/handleError'
+import User from '../models/User'
+import filterAttribute from '../utils/filterAttribute'
+import { loginUser } from '../../common/actions/userActions'
+import { redirect } from '../../common/actions/routeActions'
 
 export default {
   list(req, res) {
@@ -20,11 +20,11 @@ export default {
         .skip(page.skip)
         .exec(handleDbError(res)((users) => {
           res.json({
-            users: users,
-            page: page,
-          });
-        }));
-    }));
+            users,
+            page,
+          })
+        }))
+    }))
   },
 
   create(req, res, next) {
@@ -32,7 +32,7 @@ export default {
       'email.value': req.body.email,
     }, handleDbError(res)((user) => {
       if (user) {
-        res.errors([Errors.USER_EXISTED]);
+        res.errors([Errors.USER_EXISTED])
       } else {
         const user = User({
           name: req.body.name,
@@ -43,28 +43,28 @@ export default {
           nonce: {
             verifyEmail: Math.random(),
           },
-        });
+        })
         user.save(handleDbError(res)((user) => {
-          req.user = user;
+          req.user = user
           if (!configs.nodemailer) {
             return res.json({
-              user: user,
-            });
+              user,
+            })
           }
-          next();
-        }));
+          next()
+        }))
       }
-    }));
+    }))
   },
 
   verifyEmail(req, res) {
-    let { user } = req;
+    const { user } = req
 
-    user.email.isVerified = true;
-    user.email.verifiedAt = new Date();
+    user.email.isVerified = true
+    user.email.verifiedAt = new Date()
     user.save(handleDbError(res)(() => {
-      res.json({});
-    }));
+      res.json({})
+    }))
   },
 
   login(req, res) {
@@ -78,15 +78,15 @@ export default {
       } else {
         user.auth(req.body.password, handleDbError(res)((isAuth) => {
           if (isAuth) {
-            const token = user.toAuthenticationToken();
-            user.lastLoggedInAt = new Date();
+            const token = user.toAuthenticationToken()
+            user.lastLoggedInAt = new Date()
             user.save(handleDbError(res)((user) => {
               res.json({
                 isAuth: true,
-                token: token,
-                user: user,
-              });
-            }));
+                token,
+                user,
+              })
+            }))
           } else {
             res.json({
               isAuth: false,
@@ -101,38 +101,38 @@ export default {
     User.findOne({
       'email.value': req.body.email,
     }, handleDbError(res)((user) => {
-      user.nonce[nonceKey] = Math.random();
+      user.nonce[nonceKey] = Math.random()
       user.save(handleDbError(res)((user) => {
-        req.user = user;
-        next();
-      }));
-    }));
+        req.user = user
+        next()
+      }))
+    }))
   },
 
   socialLogin(req, res, next) {
-    let { user } = req;
+    const { user } = req
     if (!user) {
-      return next();
+      return next()
     }
-    let token = user.toAuthenticationToken();
+    const token = user.toAuthenticationToken()
 
-    user.lastLoggedInAt = new Date();
+    user.lastLoggedInAt = new Date()
     user.save(handleDbError(res)(() => {
       req.store
         .dispatch(loginUser({
-          token: token,
+          token,
           data: user,
         }))
         .then(() => {
-          let { token, user } = req.store.getState().cookies;
-          let state = JSON.parse(req.query.state);
+          let { token, user } = req.store.getState().cookies
+          const state = JSON.parse(req.query.state)
 
-          res.cookie('token', token);
-          res.cookie('user', user);
-          req.store.dispatch(redirect(state.next || '/'));
-          return next();
-        });
-    }));
+          res.cookie('token', token)
+          res.cookie('user', user)
+          req.store.dispatch(redirect(state.next || '/'))
+          return next()
+        })
+    }))
   },
 
   logout(req, res) {
@@ -147,88 +147,88 @@ export default {
   },
 
   update(req, res) {
-    let { user } = req;
-    let modifiedUser = filterAttribute(req.body, [
+    const { user } = req
+    const modifiedUser = filterAttribute(req.body, [
       'name',
       'avatarURL',
-    ]);
+    ])
 
-    assign(user, modifiedUser);
+    assign(user, modifiedUser)
     user.save(handleDbError(res)((user) => {
       res.json({
         originAttributes: req.body,
-        user: user,
-      });
-    }));
+        user,
+      })
+    }))
   },
 
   updateAvatarURL(req, res) {
-    let { user } = req;
-    let modifiedUser = filterAttribute(req.body, ['avatarURL']);
+    const { user } = req
+    const modifiedUser = filterAttribute(req.body, ['avatarURL'])
 
-    assign(user, modifiedUser);
+    assign(user, modifiedUser)
     user.save(handleDbError(res)((user) => {
       res.json({
         originAttributes: req.body,
-        user: user,
-      });
-    }));
+        user,
+      })
+    }))
   },
 
   updatePassword(req, res) {
-    let { user } = req;
-    let modifiedUser = {
+    const { user } = req
+    const modifiedUser = {
       password: req.body.newPassword,
-    };
+    }
 
     user.auth(req.body.oldPassword, handleDbError(res)((isAuth) => {
       if (isAuth) {
-        assign(user, modifiedUser);
+        assign(user, modifiedUser)
         user.save(handleDbError(res)((user) => {
           res.json({
             originAttributes: req.body,
             isAuth: true,
-            user: user,
-          });
-        }));
+            user,
+          })
+        }))
       } else {
         res.json({
           isAuth: false,
-        });
+        })
       }
-    }));
+    }))
   },
 
   resetPassword(req, res) {
-    let { user } = req;
-    let modifiedUser = {
+    const { user } = req
+    const modifiedUser = {
       password: req.body.newPassword,
-    };
-    assign(user, modifiedUser);
+    }
+    assign(user, modifiedUser)
     user.save(handleDbError(res)((user) => {
       res.json({
         originAttributes: req.body,
-        user: user,
-      });
-    }));
+        user,
+      })
+    }))
   },
 
   uploadAvatar(req, res) {
     // use `req.file` to access the avatar file
     // and use `req.body` to access other fileds
-    let { filename } = req.files.avatar[0];
-    let tmpPath = req.files.avatar[0].path;
-    let targetDir = path.join(
+    const { filename } = req.files.avatar[0]
+    const tmpPath = req.files.avatar[0].path
+    const targetDir = path.join(
       __dirname, '../../public', 'users', req.user._id.toString()
-    );
-    let targetPath = path.join(targetDir, filename);
+    )
+    const targetPath = path.join(targetDir, filename)
 
     mkdirp(targetDir, handleError(res)(() => {
       fs.rename(tmpPath, targetPath, handleError(res)(() => {
         res.json({
           downloadURL: `/users/${req.user._id}/${filename}`,
-        });
-      }));
-    }));
+        })
+      }))
+    }))
   },
 }

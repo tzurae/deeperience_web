@@ -1,16 +1,16 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Field, reduxForm } from 'redux-form';
-import Button from 'react-bootstrap/lib/Button';
-import Image from 'react-bootstrap/lib/Image';
-import FormNames from '../../../constants/FormNames';
-import configs from '../../../../../configs/project/client';
-import firebaseAPI from '../../../api/firebase';
-import userAPI from '../../../api/user';
-import { pushErrors } from '../../../actions/errorActions';
-import { setCookies } from '../../../actions/cookieActions';
-import { Form, FormField, FormFooter } from '../../utils/BsForm';
-import toRefreshURL from '../../../utils/toRefreshURL';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { Field, reduxForm } from 'redux-form'
+import Button from 'react-bootstrap/lib/Button'
+import Image from 'react-bootstrap/lib/Image'
+import FormNames from '../../../constants/FormNames'
+import configs from '../../../../../configs/project/client'
+import firebaseAPI from '../../../api/firebase'
+import userAPI from '../../../api/user'
+import { pushErrors } from '../../../actions/errorActions'
+import { setCookies } from '../../../actions/cookieActions'
+import { Form, FormField, FormFooter } from '../../utils/BsForm'
+import toRefreshURL from '../../../utils/toRefreshURL'
 
 const initialValues = {
   storage: 'local',
@@ -24,24 +24,24 @@ const initialValues = {
  * 4. Add new key `avatar` and select some invalid file on purpose
  * 5. Send
  */
-export let validate = (values) => {
-  const errors = {};
+export const validate = (values) => {
+  const errors = {}
 
   if (!values.avatar || values.avatar.length !== 1) {
-    errors.avatar = 'Required';
+    errors.avatar = 'Required'
   } else {
-    let { size, type, mimetype } = values.avatar[0];
-    let { maxSize, validMIMETypes } = configs.fileUpload.avatar;
+    let { size, type, mimetype } = values.avatar[0]
+    let { maxSize, validMIMETypes } = configs.fileUpload.avatar
 
     if (size > maxSize) {
       errors.avatar = (
         `Your file(${Math.floor(size / 1024)} Kb) ` +
         `exceeds the limit size(${Math.floor(maxSize / 1024)} Kb).`
-      );
+      )
     }
     // we check the key `type` for client side and `mimetype` for server side
     if (validMIMETypes.indexOf(type || mimetype) < 0) {
-      errors.avatar = 'Invalid type. Please upload .jpg, .png or .gif file.';
+      errors.avatar = 'Invalid type. Please upload .jpg, .png or .gif file.'
     }
   }
 
@@ -63,7 +63,7 @@ class AvatarForm extends Component {
   }
 
   _uploadToLocal(formData) {
-    let { apiEngine } = this.props;
+    const { apiEngine } = this.props
 
     return userAPI(apiEngine)
       .uploadAvatar(formData.avatar[0])
@@ -76,7 +76,7 @@ class AvatarForm extends Component {
   }
 
   _signInFirebase() {
-    let { dispatch, apiEngine } = this.props;
+    let { dispatch, apiEngine } = this.props
 
     return firebaseAPI(apiEngine)
       .readToken()
@@ -99,7 +99,7 @@ class AvatarForm extends Component {
         // SignIn firebase
         return firebase.auth()
           .signInWithCustomToken(json.token)
-          .catch(function(err) {
+          .catch((err) => {
             dispatch(pushErrors([{
               title: 'Fail To Signin Firebase',
               detail: 'Signin firebase fail.',
@@ -110,16 +110,16 @@ class AvatarForm extends Component {
   }
 
   _uploadToFirebase(formData) {
-    let _this = this;
-    let { user } = this.props;
+    const _this = this
+    const { user } = this.props
 
     return new Promise((resolve, reject) => {
       _this.signInFirebase().then(() => {
         // ref: <https://firebase.google.com/docs/storage/web/upload-files#upload_files>
-        let storageRef = firebase.storage().ref();
-        let avatarRef = storageRef.child(
-          `${process.env.NODE_ENV}/${user._id}/avatar.jpg`);
-        let uploadTask = avatarRef.put(formData.avatar[0]);
+        const storageRef = firebase.storage().ref()
+        const avatarRef = storageRef.child(
+          `${process.env.NODE_ENV}/${user._id}/avatar.jpg`)
+        const uploadTask = avatarRef.put(formData.avatar[0])
 
         uploadTask.on('state_changed', snapshot => {
           // Observe state change events such as progress, pause, and resume
@@ -144,8 +144,8 @@ class AvatarForm extends Component {
   }
 
   _handleSubmit(formData) {
-    let { dispatch, apiEngine } = this.props;
-    let uploadProcedure;
+    let { dispatch, apiEngine } = this.props
+    let uploadProcedure
 
     if (formData.storage === 'firebase') {
       uploadProcedure = this.uploadToFirebase(formData)
@@ -176,14 +176,14 @@ class AvatarForm extends Component {
             throw err
           })
           .then((json) => {
-            let newAvatarURL = toRefreshURL(downloadURL);
-            json.user.avatarURL = newAvatarURL;
+            const newAvatarURL = toRefreshURL(downloadURL)
+            json.user.avatarURL = newAvatarURL
             dispatch(setCookies({
               user: json.user,
-            }));
-            this.clearFileField();
-          });
-      });
+            }))
+            this.clearFileField()
+          })
+      })
   }
 
   render() {
@@ -193,7 +193,7 @@ class AvatarForm extends Component {
       pristine,
       submitting,
       invalid,
-    } = this.props;
+    } = this.props
 
     return (
       <Form onSubmit={handleSubmit(this.handleSubmit)}>
@@ -231,6 +231,6 @@ export default reduxForm({
   initialValues,
   validate,
 })(connect(({ apiEngine, cookies: { user } }) => ({
-  apiEngine: apiEngine,
+  apiEngine,
   user: (user && JSON.parse(user)) || {},
-}))(AvatarForm));
+}))(AvatarForm))

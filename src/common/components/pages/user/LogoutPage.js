@@ -1,12 +1,12 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { push } from 'react-router-redux';
-import userAPI from '../../../api/user';
-import { logoutUser } from '../../../actions/userActions';
+import React from 'react'
+import { connect } from 'react-redux'
+import { push } from 'react-router-redux'
+import userAPI from '../../../api/user'
+import { logoutUser } from '../../../actions/userActions'
 
 class LogoutPage extends React.Component {
   componentWillMount() {
-    let { dispatch, apiEngine } = this.props;
+    let { dispatch, apiEngine } = this.props
 
     userAPI(apiEngine)
       .logout()
@@ -15,7 +15,7 @@ class LogoutPage extends React.Component {
         throw err
       })
       .then((json) => dispatch(logoutUser()))
-      .then(() => dispatch(push('/')));
+      .then(() => dispatch(push('/')))
   }
 
   render() {
@@ -25,4 +25,4 @@ class LogoutPage extends React.Component {
 
 export default connect(state => ({
   apiEngine: state.apiEngine,
-}))(LogoutPage);
+}))(LogoutPage)

@@ -1,16 +1,16 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { push } from 'react-router-redux';
-import { Field, reduxForm } from 'redux-form';
-import Alert from 'react-bootstrap/lib/Alert';
-import Button from 'react-bootstrap/lib/Button';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { push } from 'react-router-redux'
+import { Field, reduxForm } from 'redux-form'
+import Alert from 'react-bootstrap/lib/Alert'
+import Button from 'react-bootstrap/lib/Button'
 // import validator from 'validator';
-import FormNames from '../../../constants/FormNames';
-import userAPI from '../../../api/user';
-import { validateForm } from '../../../actions/formActions';
-import { pushErrors } from '../../../actions/errorActions';
-import { Form, FormField, FormFooter } from '../../utils/BsForm';
-import configs from '../../../../../configs/project/client';
+import FormNames from '../../../constants/FormNames'
+import userAPI from '../../../api/user'
+import { validateForm } from '../../../actions/formActions'
+import { pushErrors } from '../../../actions/errorActions'
+import { Form, FormField, FormFooter } from '../../utils/BsForm'
+import configs from '../../../../../configs/project/client'
 
 const validate = (values) => {
   const errors = {}
@@ -28,13 +28,13 @@ const validate = (values) => {
   }
 
   if (configs.recaptcha && !values.recaptcha) {
-    errors.recaptcha = 'Required';
+    errors.recaptcha = 'Required'
   }
 
-  return errors;
-};
+  return errors
+}
 
-let asyncValidate = (values, dispatch) => {
+const asyncValidate = (values, dispatch) => {
   return dispatch(validateForm(FormNames.USER_REGISTER, 'email', values.email))
     .then((json) => {
       const validationError = {}
@@ -52,17 +52,17 @@ class RegisterForm extends Component {
   }
 
   _handleSubmit(formData) {
-    let { dispatch, apiEngine } = this.props;
+    let { dispatch, apiEngine } = this.props
 
     return userAPI(apiEngine)
       .register(formData)
       .catch((err) => {
-        dispatch(pushErrors(err));
-        throw err;
+        dispatch(pushErrors(err))
+        throw err
       })
       .then((json) => {
-        dispatch(push('/user/login'));
-      });
+        dispatch(push('/user/login'))
+      })
   }
 
   render() {
@@ -126,4 +126,4 @@ export default reduxForm({
   asyncBlurFields: ['email'],
 })(connect(state => ({
   apiEngine: state.apiEngine,
-}))(RegisterForm));
+}))(RegisterForm))

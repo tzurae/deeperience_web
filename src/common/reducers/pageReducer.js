@@ -1,17 +1,17 @@
-import ActionTypes from '../constants/ActionTypes';
+import ActionTypes from '../constants/ActionTypes'
 
-let defaultPage = {
+const defaultPage = {
   skip: 0,
   limit: 20,
   first: 1,
   current: 1,
   last: 1,
   total: 1,
-};
+}
 
-let initState = {
+const initState = {
   default: defaultPage,
-};
+}
 
 export default (state = initState, action) => {
   switch (action.type) {
@@ -19,10 +19,10 @@ export default (state = initState, action) => {
       return {
         ...state,
         [action.resourceName]: action.page || defaultPage,
-      };
+      }
     }
     case ActionTypes.SET_CURRENT_PAGE: {
-      let page = state[action.resourceName];
+      const page = state[action.resourceName]
 
       return {
         ...state,
@@ -30,10 +30,10 @@ export default (state = initState, action) => {
           ...page,
           current: Number(action.currentPage),
         },
-      };
+      }
     }
     default: {
-      return state;
+      return state
     }
   }
-};
+}

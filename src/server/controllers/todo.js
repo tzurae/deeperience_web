@@ -16,11 +16,11 @@ export default {
         .skip(page.skip)
         .exec(handleDbError(res)((todos) => {
           res.json({
-            todos: todos,
-            page: page,
-          });
-        }));
-    }));
+            todos,
+            page,
+          })
+        }))
+    }))
   },
 
   create(req, res) {

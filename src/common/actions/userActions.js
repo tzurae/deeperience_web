@@ -13,5 +13,5 @@ export const logoutUser = () => {
   return (dispatch) => Promise.all([
     dispatch(removeCookie('token')),
     dispatch(removeCookie('user')),
-  ]);
-};
+  ])
+}

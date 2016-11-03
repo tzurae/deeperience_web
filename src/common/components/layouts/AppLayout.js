@@ -1,5 +1,5 @@
-import React from 'react';
-import Head from '../widgets/Head';
+import React from 'react'
+import Head from '../widgets/Head'
 
 const AppLayout = ({ children }) => (
   <div>

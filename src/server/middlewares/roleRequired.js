@@ -1,4 +1,4 @@
-import Errors from '../../common/constants/Errors';
+import Errors from '../../common/constants/Errors'
 
 const roleRequired = (requiredRoles) => (req, res, next) => {
   if ((
@@ -7,10 +7,10 @@ const roleRequired = (requiredRoles) => (req, res, next) => {
   ) || (
     req.user.role === requiredRoles
   )) {
-    next();
+    next()
   } else {
-    return res.errors([Errors.PERMISSION_DENIED]);
+    return res.errors([Errors.PERMISSION_DENIED])
   }
-};
+}
 
-export default roleRequired;
+export default roleRequired

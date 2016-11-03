@@ -1,22 +1,22 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router';
-import Alert from 'react-bootstrap/lib/Alert';
-import userAPI from '../../../api/user';
-import { pushErrors } from '../../../actions/errorActions';
-import PageLayout from '../../layouts/PageLayout';
+import React from 'react'
+import { connect } from 'react-redux'
+import { Link } from 'react-router'
+import Alert from 'react-bootstrap/lib/Alert'
+import userAPI from '../../../api/user'
+import { pushErrors } from '../../../actions/errorActions'
+import PageLayout from '../../layouts/PageLayout'
 
 class VerificationPage extends React.Component {
   constructor() {
-    super();
+    super()
     this.state = {
       isVerifying: true,
       isFail: true,
-    };
+    }
   }
 
   componentWillMount() {
-    let { dispatch, apiEngine, location } = this.props;
+    let { dispatch, apiEngine, location } = this.props
     if (process.env.BROWSER) {
       userAPI(apiEngine)
         .verifyEmail({ token: location.query.token })
@@ -24,28 +24,28 @@ class VerificationPage extends React.Component {
           this.setState({
             isVerifying: false,
             isFail: true,
-          });
-          dispatch(pushErrors(err));
-          throw err;
+          })
+          dispatch(pushErrors(err))
+          throw err
         })
         .then((json) => {
           this.setState({
             isVerifying: false,
             isFail: false,
-          });
-        });
+          })
+        })
     }
   }
 
   render() {
-    let { isVerifying, isFail } = this.state;
+    let { isVerifying, isFail } = this.state
 
     if (isVerifying) {
       return (
         <PageLayout>
           <p>Please wait for a while...</p>
         </PageLayout>
-      );
+      )
     }
 
     if (isFail) {
@@ -55,7 +55,7 @@ class VerificationPage extends React.Component {
             <strong>Verification Failed</strong>
           </Alert>
         </PageLayout>
-      );
+      )
     }
 
     return (
@@ -67,10 +67,10 @@ class VerificationPage extends React.Component {
           </p>
         </Alert>
       </PageLayout>
-    );
+    )
   }
 };
 
 export default connect(state => ({
   apiEngine: state.apiEngine,
-}))(VerificationPage);
+}))(VerificationPage)

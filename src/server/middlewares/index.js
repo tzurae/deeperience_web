@@ -1,12 +1,12 @@
-import env from '../utils/env';
-import path from 'path';
-import express from 'express';
-import favicon from 'serve-favicon';
-import morgan from './morgan';
-import passportInit from './passportInit';
-import mountStore from './mountStore';
-import mountHelper from './mountHelper';
-import initCookie from './initCookie';
+import env from '../utils/env'
+import path from 'path'
+import express from 'express'
+import favicon from 'serve-favicon'
+import morgan from './morgan'
+import passportInit from './passportInit'
+import mountStore from './mountStore'
+import mountHelper from './mountHelper'
+import initCookie from './initCookie'
 
 export default ({ app }) => {
   // inject livereload feature
@@ -44,5 +44,5 @@ export default ({ app }) => {
   app.use(initCookie)
 
   // setup passport
-  app.use(passportInit);
-};
+  app.use(passportInit)
+}

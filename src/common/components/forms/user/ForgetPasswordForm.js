@@ -1,69 +1,69 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router';
-import { Field, reduxForm } from 'redux-form';
-import Alert from 'react-bootstrap/lib/Alert';
-import Button from 'react-bootstrap/lib/Button';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { Link } from 'react-router'
+import { Field, reduxForm } from 'redux-form'
+import Alert from 'react-bootstrap/lib/Alert'
+import Button from 'react-bootstrap/lib/Button'
 // import validator from 'validator';
-import FormNames from '../../../constants/FormNames';
-import userAPI from '../../../api/user';
-import { validateForm } from '../../../actions/formActions';
-import { pushErrors } from '../../../actions/errorActions';
-import { Form, FormField, FormFooter } from '../../utils/BsForm';
-import configs from '../../../../../configs/project/client';
+import FormNames from '../../../constants/FormNames'
+import userAPI from '../../../api/user'
+import { validateForm } from '../../../actions/formActions'
+import { pushErrors } from '../../../actions/errorActions'
+import { Form, FormField, FormFooter } from '../../utils/BsForm'
+import configs from '../../../../../configs/project/client'
 
-export let validate = (values) => {
-  let errors = {};
+export const validate = (values) => {
+  const errors = {}
 
   // if (values.email && !validator.isEmail(values.email)) {
   //   errors.email = 'Not an email';
   // }
 
   if (!values.email) {
-    errors.email = 'Required';
+    errors.email = 'Required'
   }
 
   if (configs.recaptcha && !values.recaptcha) {
-    errors.recaptcha = 'Required';
+    errors.recaptcha = 'Required'
   }
 
-  return errors;
-};
+  return errors
+}
 
-let asyncValidate = (values, dispatch) => {
+const asyncValidate = (values, dispatch) => {
   return dispatch(validateForm(
     FormNames.USER_FORGET_PASSWORD,
     'email',
     values.email
   )).then((json) => {
-    let validationError = {};
+    const validationError = {}
     if (!json.isPassed) {
-      validationError.email = json.message;
-      throw validationError;
+      validationError.email = json.message
+      throw validationError
     }
-  });
-};
+  })
+}
 
 class ForgetPasswordForm extends Component {
   constructor() {
-    super();
-    this.handleSubmit = this._handleSubmit.bind(this);
+    super()
+    this.handleSubmit = this._handleSubmit.bind(this)
   }
 
   _handleSubmit(formData) {
-    let { dispatch, apiEngine, initialize } = this.props;
+    let { dispatch, apiEngine, initialize } = this.props
 
     return userAPI(apiEngine)
       .requestResetPassword(formData)
       .catch((err) => {
-        dispatch(pushErrors(err));
-        throw err;
+        dispatch(pushErrors(err))
+        throw err
       })
       .then((json) => {
         initialize({
           email: '',
-        });
-      });
+        })
+      })
   }
 
   render() {
@@ -75,7 +75,7 @@ class ForgetPasswordForm extends Component {
       pristine,
       submitting,
       invalid,
-    } = this.props;
+    } = this.props
 
     return (
       <Form horizontal onSubmit={handleSubmit(this.handleSubmit)}>
@@ -105,7 +105,7 @@ class ForgetPasswordForm extends Component {
           </Link>
         </FormFooter>
       </Form>
-    );
+    )
   }
 };
 
@@ -116,4 +116,4 @@ export default reduxForm({
   asyncBlurFields: ['email'],
 })(connect(state => ({
   apiEngine: state.apiEngine,
-}))(ForgetPasswordForm));
+}))(ForgetPasswordForm))

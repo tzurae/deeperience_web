@@ -29,22 +29,22 @@
 
 export default (schema, options) => {
   schema.statics.paginate = function paginate(customOpts, cb) {
-    let opts = {};
-    opts.condition = customOpts.condition         || {};
-    opts.perPage = Number(customOpts.perPage)     || 20;
-    opts.firstPage = Number(customOpts.firstPage) || 1;
-    opts.page = Number(customOpts.page)           || 1;
+    const opts = {}
+    opts.condition = customOpts.condition         || {}
+    opts.perPage = Number(customOpts.perPage)     || 20
+    opts.firstPage = Number(customOpts.firstPage) || 1
+    opts.page = Number(customOpts.page)           || 1
 
     this
       .count(opts.condition)
       .exec((err, count) => {
-        let totalPage = Math.ceil(count / opts.perPage);
-        let lastPage = opts.firstPage + totalPage - 1;
+        const totalPage = Math.ceil(count / opts.perPage)
+        const lastPage = opts.firstPage + totalPage - 1
 
         if (opts.page < opts.firstPage) {
-          opts.page = opts.firstPage;
+          opts.page = opts.firstPage
         } else if (lastPage < opts.page) {
-          opts.page = lastPage;
+          opts.page = lastPage
         }
 
         cb(err, {
@@ -54,7 +54,7 @@ export default (schema, options) => {
           current: opts.page,
           last: lastPage,
           total: totalPage,
-        });
-      });
-  };
-};
+        })
+      })
+  }
+}

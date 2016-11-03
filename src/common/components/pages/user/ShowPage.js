@@ -1,19 +1,19 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router';
-import PageHeader from 'react-bootstrap/lib/PageHeader';
-import Modal from 'react-bootstrap/lib/Modal';
-import Row from 'react-bootstrap/lib/Row';
-import Col from 'react-bootstrap/lib/Col';
-import Button from 'react-bootstrap/lib/Button';
-import Image from 'react-bootstrap/lib/Image';
-import userAPI from '../../../api/user';
-import { pushErrors } from '../../../actions/errorActions';
-import Head from '../../widgets/Head';
-import PageLayout from '../../layouts/PageLayout';
-import Time from '../../widgets/Time';
-import VerifyEmailForm from '../../forms/user/VerifyEmailForm';
-import toRefreshURL from '../../../utils/toRefreshURL';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { Link } from 'react-router'
+import PageHeader from 'react-bootstrap/lib/PageHeader'
+import Modal from 'react-bootstrap/lib/Modal'
+import Row from 'react-bootstrap/lib/Row'
+import Col from 'react-bootstrap/lib/Col'
+import Button from 'react-bootstrap/lib/Button'
+import Image from 'react-bootstrap/lib/Image'
+import userAPI from '../../../api/user'
+import { pushErrors } from '../../../actions/errorActions'
+import Head from '../../widgets/Head'
+import PageLayout from '../../layouts/PageLayout'
+import Time from '../../widgets/Time'
+import VerifyEmailForm from '../../forms/user/VerifyEmailForm'
+import toRefreshURL from '../../../utils/toRefreshURL'
 
 class ShowPage extends Component {
   constructor(props) {
@@ -21,22 +21,22 @@ class ShowPage extends Component {
     this.state = {
       user: props.initialUser,
       isShowVerifyEmailModal: false,
-    };
-    this.openModal = this._openModal.bind(this);
-    this.closeModal = this._closeModal.bind(this);
+    }
+    this.openModal = this._openModal.bind(this)
+    this.closeModal = this._closeModal.bind(this)
   }
 
   componentDidMount() {
-    let { dispatch, apiEngine } = this.props;
+    let { dispatch, apiEngine } = this.props
 
     userAPI(apiEngine)
       .read()
       .catch((err) => {
-        dispatch(pushErrors(err));
-        throw err;
+        dispatch(pushErrors(err))
+        throw err
       })
       .then((json) => {
-        json.user.avatarURL = toRefreshURL(json.user.avatarURL);
+        json.user.avatarURL = toRefreshURL(json.user.avatarURL)
         this.setState({
           user: json.user,
         })
@@ -44,15 +44,15 @@ class ShowPage extends Component {
   }
 
   _openModal() {
-    this.setState({ isShowVerifyEmailModal: true });
+    this.setState({ isShowVerifyEmailModal: true })
   }
 
   _closeModal() {
-    this.setState({ isShowVerifyEmailModal: false });
+    this.setState({ isShowVerifyEmailModal: false })
   }
 
   renderModal() {
-    let { isShowVerifyEmailModal, user } = this.state;
+    let { isShowVerifyEmailModal, user } = this.state
 
     return (
       <Modal
@@ -69,7 +69,7 @@ class ShowPage extends Component {
           />
         </Modal.Body>
       </Modal>
-    );
+    )
   }
 
   render() {
@@ -128,6 +128,6 @@ class ShowPage extends Component {
 };
 
 export default connect(({ apiEngine, cookies: { user } }) => ({
-  apiEngine: apiEngine,
+  apiEngine,
   initialUser: (user && JSON.parse(user)) || {},
-}))(ShowPage);
+}))(ShowPage)

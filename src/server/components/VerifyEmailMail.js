@@ -1,8 +1,8 @@
-import React, { PropTypes } from 'react';
-import tokenToURL from '../utils/tokenToURL';
+import React, { PropTypes } from 'react'
+import tokenToURL from '../utils/tokenToURL'
 
-let VerifyEmailMail = ({ token }) => {
-  let url = tokenToURL('/user/email/verify', token);
+const VerifyEmailMail = ({ token }) => {
+  const url = tokenToURL('/user/email/verify', token)
 
   return (
     <div>
@@ -15,11 +15,11 @@ let VerifyEmailMail = ({ token }) => {
         </a>
       </p>
     </div>
-  );
-};
+  )
+}
 
 VerifyEmailMail.propTypes = {
   token: PropTypes.string,
-};
+}
 
-export default VerifyEmailMail;
+export default VerifyEmailMail

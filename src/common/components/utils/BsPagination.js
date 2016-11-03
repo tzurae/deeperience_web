@@ -1,23 +1,23 @@
-import React, { PropTypes } from 'react';
-import { connect } from 'react-redux';
-import cx from 'classnames';
-import { setCrrentPage } from '../../actions/pageActions';
-import Text from '../widgets/Text';
+import React, { PropTypes } from 'react'
+import { connect } from 'react-redux'
+import cx from 'classnames'
+import { setCrrentPage } from '../../actions/pageActions'
+import Text from '../widgets/Text'
 
-let style = {
+const style = {
   cursor: 'pointer',
   margin: 2,
-};
+}
 
-let Pagination = ({ simple, resourceName, pages, dispatch, ...rest }) => {
-  let page = pages[resourceName] || pages.default;
+const Pagination = ({ simple, resourceName, pages, dispatch, ...rest }) => {
+  const page = pages[resourceName] || pages.default
 
   return (
     <nav {...rest}>
       <ul className="pager">
         {!simple && (
           <li
-            className={cx({'disabled': page.current === page.first})}
+            className={cx({ disabled: page.current === page.first })}
             style={style}
           >
             <a
@@ -31,7 +31,7 @@ let Pagination = ({ simple, resourceName, pages, dispatch, ...rest }) => {
           </li>
         )}
         <li
-          className={cx({'disabled': page.current === page.first})}
+          className={cx({ disabled: page.current === page.first })}
           style={style}
         >
           <a
@@ -44,7 +44,7 @@ let Pagination = ({ simple, resourceName, pages, dispatch, ...rest }) => {
           </a>
         </li>
         <li
-          className={cx({'disabled': page.current === page.last})}
+          className={cx({ disabled: page.current === page.last })}
           style={style}
         >
           <a
@@ -58,7 +58,7 @@ let Pagination = ({ simple, resourceName, pages, dispatch, ...rest }) => {
         </li>
         {!simple && (
           <li
-            className={cx({'disabled': page.current === page.last})}
+            className={cx({ disabled: page.current === page.last })}
             style={style}
           >
             <a
@@ -73,16 +73,16 @@ let Pagination = ({ simple, resourceName, pages, dispatch, ...rest }) => {
         )}
       </ul>
     </nav>
-  );
-};
+  )
+}
 
 Pagination.propTypes = {
   resourceName: PropTypes.string.isRequired,
   simple: PropTypes.bool,
-};
+}
 
 export default connect(state => ({
   pages: state.pages,
 }), null, null, {
   pure: false,
-})(Pagination);
+})(Pagination)

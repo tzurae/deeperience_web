@@ -5,7 +5,7 @@ export default (store) => ({
       cb(
         null,
         require('../../components/pages/user/ResetPasswordPage').default
-      );
-    });
+      )
+    })
   },
-});
+})

@@ -6,7 +6,7 @@ import rootReducer from './reducers'
 import Router from './Router'
 import scenes from './scenes'
 
-let store = createStore(rootReducer, applyMiddleware(thunk))
+const store = createStore(rootReducer, applyMiddleware(thunk))
 
 const App = () => (
   <Provider store={store}>

@@ -1,11 +1,11 @@
-import React from 'react';
-import Navbar from 'react-bootstrap/lib/Navbar';
-import Grid from 'react-bootstrap/lib/Grid';
-import Row from 'react-bootstrap/lib/Row';
-import Col from 'react-bootstrap/lib/Col';
-import Nav from 'react-bootstrap/lib/Nav';
-import NavItem from 'react-bootstrap/lib/NavItem';
-import ErrorList from '../utils/ErrorList';
+import React from 'react'
+import Navbar from 'react-bootstrap/lib/Navbar'
+import Grid from 'react-bootstrap/lib/Grid'
+import Row from 'react-bootstrap/lib/Row'
+import Col from 'react-bootstrap/lib/Col'
+import Nav from 'react-bootstrap/lib/Nav'
+import NavItem from 'react-bootstrap/lib/NavItem'
+import ErrorList from '../utils/ErrorList'
 
 const AdminPageLayout = ({ children, ...rest }) => (
   <div>
@@ -34,6 +34,6 @@ const AdminPageLayout = ({ children, ...rest }) => (
       </Row>
     </Grid>
   </div>
-);
+)
 
-export default AdminPageLayout;
+export default AdminPageLayout
