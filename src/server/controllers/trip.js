@@ -21,7 +21,7 @@ export default {
 
     User.update(
       { _id: req.params.userId },
-      { $addToSet: { own: trip } },
+      { $addToSet: { ownTrip: trip } },
       handleDbError(res)((raw) => {
         res.json({
           finish: raw.ok === 1,
@@ -36,7 +36,6 @@ export default {
       ...filterAttribute(req.body, attributes),
       updatedAt: new Date(),
     }
-    console.log(save)
     User.update(
       { _id: req.params.userId, 'ownTrip._id': req.params.tripId },
       { $set: getSaveObject(save, 'ownTrip.$.') },
@@ -50,10 +49,25 @@ export default {
   },
 
   listOwnTrip(req, res) {
+    User.findOne(
+      { _id: req.params.userId },
+      { ownTrip: 1 },
+      handleDbError(res)((raw) => {
+        res.json(raw)
+      })
+    )
   },
 
   listBuyTrip(req, res) {
+    User.findOne(
+      { _id: req.params.userId },
+      { buyTrip: 1 },
+      handleDbError(res)((raw) => {
+        res.json(raw)
+      })
+    )
   },
+
   remove(req, res) {
 
   },

@@ -53,6 +53,13 @@ export default {
   },
 
   list(req, res) {
+    User.findOne(
+      { _id: req.params.userId },
+      { posts: 1 },
+      handleDbError(res)((raw) => {
+        res.json(raw)
+      })
+    )
   },
 
   remove(req, res) {
