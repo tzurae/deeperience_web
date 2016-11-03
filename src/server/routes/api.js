@@ -62,11 +62,11 @@ export default ({ app }) => {
   app.get('/api/sites/:userId', authRequired, siteController.list)
   app.post('/api/sites/:userId', authRequired, bodyParser.json, siteController.create)
   app.put('/api/sites/:userId/:siteId', authRequired, bodyParser.json, siteController.update)
-  app.delete('/api/sites/:userId/:siteId', authRequired, bodyParser.json, siteController.remove)
+  app.delete('/api/sites/:userId/:siteId', authRequired, siteController.remove)
 
   // post
   app.get('/api/posts/:userId', authRequired, postController.list)
   app.post('/api/posts/:userId', authRequired, bodyParser.json, postController.create)
   app.put('/api/posts/:userId/:postId', authRequired, bodyParser.json, postController.update)
-  app.delete('/api/posts/:userId/:postId', authRequired, bodyParser.json, postController.remove)
+  app.delete('/api/posts/:userId/:postId', authRequired, postController.remove)
 }
