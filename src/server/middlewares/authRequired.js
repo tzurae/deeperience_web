@@ -19,4 +19,4 @@ const authRequired = (req, res, next) => {
   )(req, res, next);
 };
 
-export default authRequired;
+export default authRequired

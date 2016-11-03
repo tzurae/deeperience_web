@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from 'react';
 import { render } from 'react-dom';
 import { createStore, applyMiddleware } from 'redux';
@@ -32,8 +33,8 @@ let store = createStore(
   )
 );
 
-let apiEngine = new ApiEngine();
-store.dispatch(setApiEngine(apiEngine));
+const apiEngine = new ApiEngine()
+store.dispatch(setApiEngine(apiEngine))
 
 let { redirect } = store.getState().cookies;
 if (redirect) {
@@ -51,7 +52,7 @@ match({
   routes,
 }, (error, redirectLocation, renderProps) => {
   if (error) {
-    console.log(error);
+    console.log(error)
   }
   render(
     <Provider store={store}>
@@ -65,5 +66,5 @@ match({
         </Router>
       </LocaleProvider>
     </Provider>
-  , document.getElementById('root'));
-});
+  , document.getElementById('root'))
+})

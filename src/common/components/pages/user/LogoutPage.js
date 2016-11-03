@@ -11,15 +11,15 @@ class LogoutPage extends React.Component {
     userAPI(apiEngine)
       .logout()
       .catch((err) => {
-        alert('Logout user fail');
-        throw err;
+        alert('Logout user fail')
+        throw err
       })
       .then((json) => dispatch(logoutUser()))
       .then(() => dispatch(push('/')));
   }
 
   render() {
-    return null;
+    return null
   }
 };
 

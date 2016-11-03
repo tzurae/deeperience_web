@@ -28,7 +28,7 @@ if (process.env.TRAVIS) {
       },
     },
     mongo: require('./mongo/credential'),
-    firebase: require('./firebase/credential.json'),
+    // firebase: require('./firebase/credential.json'),
     passportStrategy: {
       facebook: require('./passportStrategy/facebook/credential'),
       linkedin: require('./passportStrategy/linkedin/credential'),

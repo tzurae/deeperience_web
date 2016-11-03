@@ -12,13 +12,13 @@ export default {
           res.json({
             isPassed: false,
             message: 'The email is already registered',
-          });
+          })
         } else {
           res.json({
             isPassed: true,
-          });
+          })
         }
-      }));
+      }))
     },
   },
 

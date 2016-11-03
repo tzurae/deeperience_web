@@ -30,4 +30,4 @@ export default (apiEngine) => ({
   }),
   uploadAvatar: (avatar) =>
     apiEngine.post('/api/users/me/avatar', { files: { avatar } }),
-});
+})

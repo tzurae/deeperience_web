@@ -50,7 +50,7 @@ function renderMeta(meta) {
   );
 }
 
-let ErrorList = ({ errors, dispatch }) => (
+const ErrorList = ({ errors, dispatch }) => (
   <Grid>
     {errors.map((error) => (
       <Alert
@@ -64,8 +64,8 @@ let ErrorList = ({ errors, dispatch }) => (
       </Alert>
     ))}
   </Grid>
-);
+)
 
 export default connect(state => ({
   errors: state.errors,
-}))(ErrorList);
+}))(ErrorList)

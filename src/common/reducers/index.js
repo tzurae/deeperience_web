@@ -17,6 +17,6 @@ const rootReducer = combineReducers({
   todos,
   form, // must mount as `form` from redux-form's docs
   intl,
-});
+})
 
-export default rootReducer;
+export default rootReducer

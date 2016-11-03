@@ -1,4 +1,4 @@
-import ErrorCodes from './ErrorCodes';
+import ErrorCodes from './ErrorCodes'
 
 export default {
   [ErrorCodes.UNKNOWN_EXCEPTION]: {
@@ -92,4 +92,4 @@ export default {
     title: 'Email Not Sent',
     detail: 'Mail service didn\'t send the mail correctly.',
   },
-};
+}

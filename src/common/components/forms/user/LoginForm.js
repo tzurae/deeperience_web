@@ -13,35 +13,35 @@ import { loginUser } from '../../../actions/userActions';
 import { Form, FormField, FormFooter } from '../../utils/BsForm';
 
 const validate = (values) => {
-  const errors = {};
+  const errors = {}
 
   // if (values.email && !validator.isEmail(values.email)) {
   //   errors.email = 'Not an email';
   // }
 
   if (!values.email) {
-    errors.email = 'Required';
+    errors.email = 'Required'
   }
 
   if (!values.password) {
-    errors.password = 'Required';
+    errors.password = 'Required'
   }
 
-  return errors;
-};
+  return errors
+}
 
 class LoginForm extends Component {
   constructor(props) {
-    super(props);
-    this.login = this._login.bind(this);
-    this.handleSubmit = this._handleSubmit.bind(this);
+    super(props)
+    this.login = this._login.bind(this)
+    this.handleSubmit = this._handleSubmit.bind(this)
   }
 
   _login(json) {
     return this.props.dispatch(loginUser({
       token: json.token,
       data: json.user,
-    }));
+    }))
   }
 
   _handleSubmit(formData) {
@@ -67,7 +67,7 @@ class LoginForm extends Component {
             _error: 'Login failed. You may type wrong email or password.',
           });
         }
-      });
+      })
   }
 
   render() {
@@ -78,7 +78,7 @@ class LoginForm extends Component {
       pristine,
       submitting,
       invalid,
-    } = this.props;
+    } = this.props
 
     return (
       <Form horizontal onSubmit={handleSubmit(this.handleSubmit)}>
@@ -106,7 +106,7 @@ class LoginForm extends Component {
           </Link>
         </FormFooter>
       </Form>
-    );
+    )
   }
 };
 

@@ -18,6 +18,6 @@ const RegisterPage = (props) => (
       </Col>
     </Row>
   </PageLayout>
-);
+)
 
-export default RegisterPage;
+export default RegisterPage

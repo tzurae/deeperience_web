@@ -1,5 +1,5 @@
-import ErrorTypes from '../constants/ErrorTypes';
-import Errors from '../../common/constants/Errors';
+import ErrorTypes from '../constants/ErrorTypes'
+import Errors from '../../common/constants/Errors'
 
 let getErrorHandler = (errorTypes) => (res) => (fn) => (err, ...result) => {
   if (err) {
@@ -45,9 +45,9 @@ let getErrorHandler = (errorTypes) => (res) => (fn) => (err, ...result) => {
       }
     });
   } else {
-    fn(...result);
+    fn(...result)
   }
-};
+}
 
 let handleError = getErrorHandler(null);
 let handleDbError = getErrorHandler(ErrorTypes.ODM_OPERATION);

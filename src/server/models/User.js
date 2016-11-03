@@ -6,18 +6,19 @@ import Roles from '../../common/constants/Roles';
 import paginatePlugin from './plugins/paginate';
 
 const hashPassword = (rawPassword = '') => {
-  let recursiveLevel = 5;
+  let hashPassword = rawPassword
+  let recursiveLevel = 5
   while (recursiveLevel) {
-    rawPassword = crypto
+    hashPassword = crypto
       .createHash('md5')
-      .update(rawPassword)
-      .digest('hex');
-    recursiveLevel -= 1;
+      .update(hashPassword)
+      .digest('hex')
+    recursiveLevel -= 1
   }
-  return rawPassword;
-};
+  return hashPassword
+}
 
-let UserSchema = new mongoose.Schema({
+const UserSchema = new mongoose.Schema({
   name: String,
   email: {
     value: {
@@ -62,14 +63,14 @@ let UserSchema = new mongoose.Schema({
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
   },
-});
+})
 
 UserSchema.plugin(paginatePlugin);
 
 UserSchema.methods.auth = function(password, cb) {
-  const isAuthenticated = (this.password === hashPassword(password));
-  cb(null, isAuthenticated);
-};
+  const isAuthenticated = (this.password === hashPassword(password))
+  cb(null, isAuthenticated)
+}
 
 UserSchema.methods.toVerifyEmailToken = function(cb) {
   const user = {
@@ -106,10 +107,10 @@ UserSchema.methods.toAuthenticationToken = function(cb) {
 };
 
 UserSchema.methods.toJSON = function() {
-  let obj = this.toObject();
-  delete obj.password;
-  return obj;
-};
+  const obj = this.toObject()
+  delete obj.password
+  return obj
+}
 
-let User = mongoose.model('User', UserSchema);
-export default User;
+const User = mongoose.model('User', UserSchema)
+export default User

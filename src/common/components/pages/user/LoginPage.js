@@ -29,6 +29,6 @@ let LoginPage = ({ location }) => (
       </Col>
     </Row>
   </PageLayout>
-);
+)
 
-export default LoginPage;
+export default LoginPage

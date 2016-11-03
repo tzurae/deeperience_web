@@ -16,15 +16,15 @@ import Pagination from '../../utils/BsPagination';
 
 class TodoItem extends Component {
   constructor() {
-    super();
+    super()
     this.state = {
       isEditable: false,
       inputValue: '',
-    };
+    }
   }
 
   renderInput() {
-    let { inputValue } = this.state;
+    let { inputValue } = this.state
 
     return (
       <input
@@ -34,12 +34,12 @@ class TodoItem extends Component {
           inputValue: e.target.value,
         })}
       />
-    );
+    )
   }
 
   renderControlButtons() {
-    let { text, onSaveClick } = this.props;
-    let { isEditable, inputValue } = this.state;
+    const { text, onSaveClick } = this.props
+    const { isEditable, inputValue } = this.state
 
     return isEditable ? (
       <span>
@@ -63,12 +63,12 @@ class TodoItem extends Component {
           Edit
         </button>
       </span>
-    );
+    )
   }
 
   render() {
-    let { onRemoveClick, text } = this.props;
-    let { isEditable } = this.state;
+    let { onRemoveClick, text } = this.props
+    const { isEditable } = this.state
 
     return (
       <li>
@@ -77,14 +77,14 @@ class TodoItem extends Component {
         {this.renderControlButtons()}
         <button onClick={onRemoveClick}>x</button>
       </li>
-    );
+    )
   }
 }
 
 class ListPage extends Component {
   constructor(props) {
-    super(props);
-    this.handleAddClick = this._handleAddClick.bind(this);
+    super(props)
+    this.handleAddClick = this._handleAddClick.bind(this)
   }
 
   componentDidMount() {
@@ -114,45 +114,45 @@ class ListPage extends Component {
   }
 
   _handleAddClick() {
-    const { dispatch, apiEngine } = this.props;
-    const text = this.refs.todotext.value;
+    const { dispatch, apiEngine } = this.props
+    const text = this.todotext.value
     todoAPI(apiEngine)
       .create({ text })
       .catch((err) => {
-        dispatch(pushErrors(err));
-        throw err;
+        dispatch(pushErrors(err))
+        throw err
       })
       .then((json) => {
-        dispatch(addTodo(json.todo));
-        this.refs.todotext.value = '';
-      });
+        dispatch(addTodo(json.todo))
+        this.todotext.value = ''
+      })
   }
 
   handleSaveClick(id, newText) {
-    let { dispatch, apiEngine } = this.props;
+    const { dispatch, apiEngine } = this.props
 
     return todoAPI(apiEngine)
       .update(id, { text: newText })
       .catch((err) => {
-        dispatch(pushErrors(err));
-        throw err;
+        dispatch(pushErrors(err))
+        throw err
       })
       .then((json) => {
-        this.fetchTodos();
-      });
+        this.fetchTodos()
+      })
   }
 
   handleRemoveClick(id) {
-    const { dispatch, apiEngine } = this.props;
+    const { dispatch, apiEngine } = this.props
     todoAPI(apiEngine)
       .remove(id)
       .catch((err) => {
-        dispatch(pushErrors(err));
-        throw err;
+        dispatch(pushErrors(err))
+        throw err
       })
       .then((json) => {
-        dispatch(removeTodo(id));
-      });
+        dispatch(removeTodo(id))
+      })
   }
 
   render() {
@@ -173,7 +173,7 @@ class ListPage extends Component {
         </ul>
         <Pagination resourceName={Resources.TODO} />
       </PageLayout>
-    );
+    )
   }
 };
 

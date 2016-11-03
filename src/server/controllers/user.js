@@ -74,7 +74,7 @@ export default {
       if (!user) {
         res.json({
           isAuth: false,
-        });
+        })
       } else {
         user.auth(req.body.password, handleDbError(res)((isAuth) => {
           if (isAuth) {
@@ -90,11 +90,11 @@ export default {
           } else {
             res.json({
               isAuth: false,
-            });
+            })
           }
-        }));
+        }))
       }
-    }));
+    }))
   },
 
   setNonce: (nonceKey) => (req, res, next) => {
@@ -136,14 +136,14 @@ export default {
   },
 
   logout(req, res) {
-    req.logout();
-    res.json({});
+    req.logout()
+    res.json({})
   },
 
   show(req, res) {
     res.json({
       user: req.user,
-    });
+    })
   },
 
   update(req, res) {
@@ -231,4 +231,4 @@ export default {
       }));
     }));
   },
-};
+}

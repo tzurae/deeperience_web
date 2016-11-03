@@ -61,7 +61,6 @@ export default ({ app }) => {
   );
   app.get('/api/users/logout', userController.logout);
   app.get('/api/users/me', authRequired, userController.show);
-  app.put('/api/users/me',
     authRequired,
     bodyParser.json,
     validate.form('user/EditForm'),
@@ -79,9 +78,9 @@ export default ({ app }) => {
     userController.updatePassword
   );
   if (configs.firebase) {
-    let firebaseController = require('../controllers/firebase').default;
+    const firebaseController = require('../controllers/firebase').default
     app.get('/api/users/me/firebase/token',
-      authRequired, firebaseController.readToken);
+      authRequired, firebaseController.readToken)
   }
   app.post('/api/users/me/avatar',
     authRequired,
@@ -109,11 +108,11 @@ export default ({ app }) => {
   );
 
   // locale
-  app.get('/api/locales/:locale', localeController.show);
+  app.get('/api/locales/:locale', localeController.show)
 
   // todo
-  app.get('/api/todos', todoController.list);
-  app.post('/api/todos', bodyParser.json, todoController.create);
-  app.put('/api/todos/:id', bodyParser.json, todoController.update);
-  app.delete('/api/todos/:id', todoController.remove);
-};
+  app.get('/api/todos', todoController.list)
+  app.post('/api/todos', bodyParser.json, todoController.create)
+  app.put('/api/todos/:id', bodyParser.json, todoController.update)
+  app.delete('/api/todos/:id', todoController.remove)
+}

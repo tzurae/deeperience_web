@@ -9,17 +9,17 @@ import configs from '../../../../configs/project/client';
 
 class BsForm extends Component {
   getChildContext() {
-    let {
+    const {
       labelDimensions,
       fieldDimensions,
       horizontal,
-    } = this.props;
+    } = this.props
 
     return {
       labelDimensions,
       fieldDimensions,
       horizontal,
-    };
+    }
   }
 
   render() {
@@ -29,14 +29,14 @@ class BsForm extends Component {
       labelDimensions, fieldDimensions,
       /* eslint-enable */
       children,
-      ...rest
-    } = this.props;
+      ...rest,
+    } = this.props
 
     return (
       <Form {...rest}>
         {children}
       </Form>
-    );
+    )
   }
 };
 
@@ -47,26 +47,26 @@ BsForm.defaultProps = {
   fieldDimensions: {
     sm: 10,
   },
-};
+}
 
 BsForm.propTypes = {
   labelDimensions: PropTypes.object,
   fieldDimensions: PropTypes.object,
   horizontal: PropTypes.bool,
-};
+}
 
 BsForm.childContextTypes = {
   labelDimensions: PropTypes.object,
   fieldDimensions: PropTypes.object,
   horizontal: PropTypes.bool,
-};
+}
 
-let BsFormField = ({
-  label, input, type, meta, options, ...rest
+const BsFormField = ({
+  label, input, type, meta, options, ...rest,
 }, {
   labelDimensions, fieldDimensions, horizontal,
 }) => {
-  let isShowError = meta && meta.touched && meta.error;
+  const isShowError = meta && meta.touched && meta.error
 
   let formControl = null;
   if (type === 'recaptcha') {
@@ -99,7 +99,7 @@ let BsFormField = ({
           </label>
         </div>
       ))
-    );
+    )
   } else {
     formControl = (
       <input
@@ -108,7 +108,7 @@ let BsFormField = ({
         type={type}
         {...rest}
       />
-    );
+    )
   }
 
   return horizontal ? (
@@ -133,21 +133,21 @@ let BsFormField = ({
         <HelpBlock>{meta.error}</HelpBlock>
       )}
     </BsFormGroup>
-  );
-};
+  )
+}
 
 BsFormField.propTypes = {
   label: PropTypes.string,
   options: PropTypes.arrayOf(PropTypes.object),
-};
+}
 
 BsFormField.contextTypes = {
   labelDimensions: PropTypes.object,
   fieldDimensions: PropTypes.object,
   horizontal: PropTypes.bool,
-};
+}
 
-let BsFormFooter = ({
+const BsFormFooter = ({
   children,
 }, {
   labelDimensions, fieldDimensions, horizontal,
@@ -163,18 +163,18 @@ let BsFormFooter = ({
     <BsFormGroup>
       {children}
     </BsFormGroup>
-  );
-};
+  )
+}
 
 BsFormFooter.contextTypes = {
   labelDimensions: PropTypes.object,
   fieldDimensions: PropTypes.object,
   horizontal: PropTypes.bool,
-};
+}
 
 export {
   BsForm as Form,
   BsFormField as FormField,
   BsFormFooter as FormFooter,
   BsFormGroup as FormGroup,
-};
+}

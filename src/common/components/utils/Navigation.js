@@ -13,14 +13,14 @@ import Text from '../widgets/Text';
 
 class Navigation extends Component {
   _setLanguage(lang) {
-    let { store } = this.context;
+    const { store } = this.context
     store
       .dispatch(updateLocale(lang))
       .then(() => {
-        console.log('load locale (manually) ok');
+        console.log('load locale (manually) ok')
       }, (err) => {
-        store.dispatch(pushErrors(err));
-      });
+        store.dispatch(pushErrors(err))
+      })
   }
 
   render() {
@@ -101,13 +101,13 @@ class Navigation extends Component {
           </Navbar.Body>
         </Grid>
       </Navbar>
-    );
+    )
   }
 };
 
 Navigation.contextTypes = {
   store: React.PropTypes.object.isRequired,
-};
+}
 
 export default connect(({ cookies: { token, user } }) => ({
   isAuth: !!token,

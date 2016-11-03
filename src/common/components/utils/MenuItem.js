@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React, { PropTypes } from 'react'
 
 const MenuItem = ({ title, href, ...rest }) => (
   <li>
@@ -6,15 +6,15 @@ const MenuItem = ({ title, href, ...rest }) => (
       {title}
     </a>
   </li>
-);
+)
 
 MenuItem.propTypes = {
   title: PropTypes.string,
   href: PropTypes.string,
-};
+}
 
 MenuItem.defaultProps = {
   href: '#',
-};
+}
 
-export default MenuItem;
+export default MenuItem

@@ -17,7 +17,7 @@ import toRefreshURL from '../../../utils/toRefreshURL';
 
 class ShowPage extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       user: props.initialUser,
       isShowVerifyEmailModal: false,
@@ -39,8 +39,8 @@ class ShowPage extends Component {
         json.user.avatarURL = toRefreshURL(json.user.avatarURL);
         this.setState({
           user: json.user,
-        });
-      });
+        })
+      })
   }
 
   _openModal() {
@@ -73,7 +73,7 @@ class ShowPage extends Component {
   }
 
   render() {
-    const { user } = this.state;
+    const { user } = this.state
     return (
       <PageLayout>
         <Head
@@ -123,7 +123,7 @@ class ShowPage extends Component {
           <dd><pre>{JSON.stringify(user, null, 2)}</pre></dd>
         </dl>
       </PageLayout>
-    );
+    )
   }
 };
 

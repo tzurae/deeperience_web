@@ -14,7 +14,7 @@ import toRefreshURL from '../../../utils/toRefreshURL';
 
 const initialValues = {
   storage: 'local',
-};
+}
 
 /**
  * Test server side validation with Postman:
@@ -45,21 +45,21 @@ export let validate = (values) => {
     }
   }
 
-  return errors;
-};
+  return errors
+}
 
 class AvatarForm extends Component {
   constructor() {
-    super();
-    this.uploadToLocal = this._uploadToLocal.bind(this);
-    this.uploadToFirebase = this._uploadToFirebase.bind(this);
-    this.signInFirebase = this._signInFirebase.bind(this);
-    this.clearFileField = this._clearFileField.bind(this);
-    this.handleSubmit = this._handleSubmit.bind(this);
+    super()
+    this.uploadToLocal = this._uploadToLocal.bind(this)
+    this.uploadToFirebase = this._uploadToFirebase.bind(this)
+    this.signInFirebase = this._signInFirebase.bind(this)
+    this.clearFileField = this._clearFileField.bind(this)
+    this.handleSubmit = this._handleSubmit.bind(this)
     this.state = {
       isFirebaseInitialized: false,
       avatarURL: null,
-    };
+    }
   }
 
   _uploadToLocal(formData) {
@@ -68,11 +68,11 @@ class AvatarForm extends Component {
     return userAPI(apiEngine)
       .uploadAvatar(formData.avatar[0])
       .catch((err) => {
-        return Promise.reject(err);
+        return Promise.reject(err)
       })
       .then((json) => {
-        return Promise.resolve(json.downloadURL);
-      });
+        return Promise.resolve(json.downloadURL)
+      })
   }
 
   _signInFirebase() {
@@ -84,16 +84,16 @@ class AvatarForm extends Component {
         dispatch(pushErrors([{
           title: 'Fail To Read Token',
           detail: 'Read firebase token fail.',
-        }]));
-        throw err;
+        }]))
+        throw err
       })
       .then((json) => {
         // Initialize firebase
         if (!this.state.isFirebaseInitialized) {
-          firebase.initializeApp(configs.firebase);
+          firebase.initializeApp(configs.firebase)
           this.setState({
             isFirebaseInitialized: true,
-          });
+          })
         }
 
         // SignIn firebase
@@ -103,10 +103,10 @@ class AvatarForm extends Component {
             dispatch(pushErrors([{
               title: 'Fail To Signin Firebase',
               detail: 'Signin firebase fail.',
-            }]));
-            throw err;
-          });
-      });
+            }]))
+            throw err
+          })
+      })
   }
 
   _uploadToFirebase(formData) {
@@ -121,35 +121,36 @@ class AvatarForm extends Component {
           `${process.env.NODE_ENV}/${user._id}/avatar.jpg`);
         let uploadTask = avatarRef.put(formData.avatar[0]);
 
-        uploadTask.on('state_changed', function(snapshot) {
+        uploadTask.on('state_changed', snapshot => {
           // Observe state change events such as progress, pause, and resume
           // See below for more detail
-        }, function(err) {
+        }, err => {
           // Handle unsuccessful uploads
-          return reject(err);
-        }, function complete() {
+          return reject(err)
+        }, () => {
           // Handle successful uploads on complete
           // For instance, get the download URL: https://firebasestorage.googleapis.com/...
-          let downloadURL = uploadTask.snapshot.downloadURL;
-          return resolve(downloadURL);
-        });
-      });
-    });
+          const downloadURL = uploadTask.snapshot.downloadURL
+          return resolve(downloadURL)
+        })
+      })
+    })
   }
 
   _clearFileField() {
-    let { change, untouch } = this.props;
-    change('avatar', '');
-    untouch('avatar');
+    const { change, untouch } = this.props
+    change('avatar', '')
+    untouch('avatar')
   }
 
   _handleSubmit(formData) {
     let { dispatch, apiEngine } = this.props;
     let uploadProcedure;
+
     if (formData.storage === 'firebase') {
-      uploadProcedure = this.uploadToFirebase(formData);
+      uploadProcedure = this.uploadToFirebase(formData)
     } else if (formData.storage === 'local') {
-      uploadProcedure = this.uploadToLocal(formData);
+      uploadProcedure = this.uploadToLocal(formData)
     }
 
     return uploadProcedure
@@ -158,8 +159,8 @@ class AvatarForm extends Component {
           title: 'Fail To Upload Avatar',
           detail: 'Upload avatar fail.',
           meta: err,
-        }]));
-        throw err;
+        }]))
+        throw err
       })
       .then((downloadURL) => {
         return userAPI(apiEngine)
@@ -171,8 +172,8 @@ class AvatarForm extends Component {
               title: 'Fail To Update Avatar URL',
               detail: 'Update user avatar URL fail.',
               meta: err,
-            }]));
-            throw err;
+            }]))
+            throw err
           })
           .then((json) => {
             let newAvatarURL = toRefreshURL(downloadURL);
@@ -221,7 +222,7 @@ class AvatarForm extends Component {
           </Button>
         </FormFooter>
       </Form>
-    );
+    )
   }
 };
 

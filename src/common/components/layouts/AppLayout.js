@@ -6,7 +6,7 @@ const AppLayout = ({ children }) => (
     <Head
       title="Express-React-HMR-Boilerplate"
       metas={[
-        {charset: 'utf-8'},
+        { charset: 'utf-8' },
         {
           name: 'viewport',
           content: 'width=device-width, initial-scale=1.0',
@@ -23,6 +23,6 @@ const AppLayout = ({ children }) => (
     />
     {children}
   </div>
-);
+)
 
-export default AppLayout;
+export default AppLayout
