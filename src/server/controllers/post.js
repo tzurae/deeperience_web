@@ -17,6 +17,13 @@ export default {
     attributes.forEach(attr => {
       post[attr] = req.body[attr]
     })
+    const attrChange = ['hotelType', 'tripElement', 'foodElement', 'otherDemand']
+    attrChange.forEach(attr => {
+      post[attr] = []
+      res.body[attr].forEach((value, index) => {
+        if (value) post[attr].push(index)
+      })
+    })
     post = Post({
       ...post,
       updatedAt: new Date(),
