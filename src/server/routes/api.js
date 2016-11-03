@@ -11,6 +11,8 @@ import mailController from '../controllers/mail'
 import formValidationController from '../controllers/formValidation'
 import localeController from '../controllers/locale'
 import todoController from '../controllers/todo'
+import tripController from '../controllers/trip'
+import siteController from '../controllers/site'
 
 export default ({ app }) => {
   // user
@@ -116,4 +118,17 @@ export default ({ app }) => {
   app.post('/api/todos', bodyParser.json, todoController.create)
   app.put('/api/todos/:id', bodyParser.json, todoController.update)
   app.delete('/api/todos/:id', todoController.remove)
+
+  // trip for customer
+  app.get('/api/trips/buy/:userId', authRequired, tripController.listBuyTrip)
+
+  // trip for guide
+  app.get('/api/trips/own/:userId', authRequired, tripController.listOwnTrip)
+  app.post('/api/trips/:userId', authRequired, bodyParser.json, tripController.create)
+  app.put('/api/trips/:userId/:tripId', authRequired, bodyParser.json, tripController.update)
+
+  // site
+  app.get('/api/sites/:userId', authRequired, siteController.list)
+  app.post('/api/sites/:userId', authRequired, bodyParser.json, siteController.create)
+  app.put('/api/sites/:userId/:siteId', authRequired, bodyParser.json, siteController.update)
 }
