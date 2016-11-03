@@ -49,4 +49,7 @@ export default {
 
   list(req, res) {
   },
+  remove(req, res) {
+
+  },
 }

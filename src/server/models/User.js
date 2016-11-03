@@ -6,6 +6,7 @@ import Roles from '../../common/constants/Roles'
 import paginatePlugin from './plugins/paginate'
 import { SiteSchema } from './Site'
 import { TripSchema } from './Trip'
+import { PostSchema } from './Post'
 
 const hashPassword = (rawPassword = '') => {
   let hashPassword = rawPassword
@@ -62,6 +63,7 @@ const UserSchema = new mongoose.Schema({
   sites: [SiteSchema],
   ownTrip: [TripSchema],
   buyTrip: [TripSchema],
+  posts: [PostSchema],
 }, {
   versionKey: false,
   timestamps: {

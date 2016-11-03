@@ -13,6 +13,7 @@ import localeController from '../controllers/locale'
 import todoController from '../controllers/todo'
 import tripController from '../controllers/trip'
 import siteController from '../controllers/site'
+import postController from '../controllers/post'
 
 export default ({ app }) => {
   // user
@@ -126,9 +127,17 @@ export default ({ app }) => {
   app.get('/api/trips/own/:userId', authRequired, tripController.listOwnTrip)
   app.post('/api/trips/:userId', authRequired, bodyParser.json, tripController.create)
   app.put('/api/trips/:userId/:tripId', authRequired, bodyParser.json, tripController.update)
+  app.delete('/api/trips/:userId/:tripId', authRequired, bodyParser.json, tripController.remove)
 
   // site
   app.get('/api/sites/:userId', authRequired, siteController.list)
   app.post('/api/sites/:userId', authRequired, bodyParser.json, siteController.create)
   app.put('/api/sites/:userId/:siteId', authRequired, bodyParser.json, siteController.update)
+  app.delete('/api/sites/:userId/:siteId', authRequired, bodyParser.json, siteController.remove)
+
+  // post
+  app.get('/api/posts/:userId', authRequired, postController.list)
+  app.post('/api/posts/:userId', authRequired, bodyParser.json, postController.create)
+  app.put('/api/posts/:userId/:postId', authRequired, bodyParser.json, postController.update)
+  app.delete('/api/posts/:userId/:postId', authRequired, bodyParser.json, postController.remove)
 }
