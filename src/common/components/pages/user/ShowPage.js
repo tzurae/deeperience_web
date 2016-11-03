@@ -27,7 +27,7 @@ class ShowPage extends Component {
   }
 
   componentDidMount() {
-    let { dispatch, apiEngine } = this.props
+    const { dispatch, apiEngine } = this.props
 
     userAPI(apiEngine)
       .read()
@@ -52,7 +52,7 @@ class ShowPage extends Component {
   }
 
   renderModal() {
-    let { isShowVerifyEmailModal, user } = this.state
+    const { isShowVerifyEmailModal, user } = this.state
 
     return (
       <Modal

@@ -52,7 +52,7 @@ class VerifyEmailForm extends Component {
   }
 
   componentDidMount() {
-    let { email, initialize } = this.props
+    const { email, initialize } = this.props
 
     if (email) {
       initialize({ email })
@@ -60,7 +60,7 @@ class VerifyEmailForm extends Component {
   }
 
   _handleSubmit(formData) {
-    let { dispatch, apiEngine, initialize } = this.props
+    const { dispatch, apiEngine, initialize } = this.props
 
     return userAPI(apiEngine)
       .requestVerifyEmail(formData)
@@ -76,7 +76,7 @@ class VerifyEmailForm extends Component {
   }
 
   _handleCancleClick() {
-    let { onCancel, dispatch } = this.props
+    const { onCancel, dispatch } = this.props
 
     if (onCancel) {
       onCancel()

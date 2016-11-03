@@ -79,8 +79,6 @@
     "react/no-string-refs":"error",
     "react/self-closing-comp":"error",
     "react/require-render-return":"error",
-    "react/no-is-mounted":"error",
-    "react/no-string-refs": 0,
-    "prefer-const":0
+    "react/no-is-mounted":"error"
   }
 }

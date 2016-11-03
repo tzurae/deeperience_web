@@ -21,9 +21,9 @@ import ApiEngine from '../common/utils/ApiEngine'
 
 setupNProgress()
 setupLocale()
-let logPageView = setupGA()
+const logPageView = setupGA()
 const initialState = window.__INITIAL_STATE__
-let store = createStore(
+const store = createStore(
   rootReducer,
   initialState,
   applyMiddleware(
@@ -35,7 +35,7 @@ let store = createStore(
 const apiEngine = new ApiEngine()
 store.dispatch(setApiEngine(apiEngine))
 
-let { redirect } = store.getState().cookies
+const { redirect } = store.getState().cookies
 if (redirect) {
   store.dispatch(push(redirect))
   store.dispatch(removeCookie('redirect'))
@@ -44,8 +44,8 @@ if (redirect) {
 // refs:
 // - <http://www.jianshu.com/p/b3ff1f53faaf>
 // - <https://github.com/ryanflorence/example-react-router-server-rendering-lazy-routes>
-let history = syncHistoryWithStore(browserHistory, store)
-let routes = getRoutes(store)
+const history = syncHistoryWithStore(browserHistory, store)
+const routes = getRoutes(store)
 match({
   history,
   routes,

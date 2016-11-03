@@ -35,7 +35,7 @@ class EditForm extends Component {
   }
 
   componentDidMount() {
-    let { dispatch, apiEngine } = this.props
+    const { dispatch, apiEngine } = this.props
 
     userAPI(apiEngine)
       .read()
@@ -49,7 +49,7 @@ class EditForm extends Component {
   }
 
   _handleSubmit(formData) {
-    let { dispatch, apiEngine } = this.props
+    const { dispatch, apiEngine } = this.props
 
     return userAPI(apiEngine)
       .update(formData)

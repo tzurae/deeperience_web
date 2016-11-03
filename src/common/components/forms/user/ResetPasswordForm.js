@@ -37,7 +37,7 @@ class ChangePasswordForm extends Component {
   }
 
   _handleSubmit(formData) {
-    let { dispatch, apiEngine, routing, initialize } = this.props
+    const { dispatch, apiEngine, routing, initialize } = this.props
     const location = routing.locationBeforeTransitions
 
     return userAPI(apiEngine)

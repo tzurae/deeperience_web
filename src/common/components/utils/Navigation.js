@@ -24,7 +24,7 @@ class Navigation extends Component {
   }
 
   render() {
-    let { isAuth, user } = this.props
+    const { isAuth, user } = this.props
     const isAdmin = (user.role === Roles.ADMIN)
 
     return (

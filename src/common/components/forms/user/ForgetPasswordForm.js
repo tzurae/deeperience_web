@@ -51,7 +51,7 @@ class ForgetPasswordForm extends Component {
   }
 
   _handleSubmit(formData) {
-    let { dispatch, apiEngine, initialize } = this.props
+    const { dispatch, apiEngine, initialize } = this.props
 
     return userAPI(apiEngine)
       .requestResetPassword(formData)

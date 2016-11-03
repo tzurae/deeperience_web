@@ -30,8 +30,8 @@ export const validate = (values) => {
   if (!values.avatar || values.avatar.length !== 1) {
     errors.avatar = 'Required'
   } else {
-    let { size, type, mimetype } = values.avatar[0]
-    let { maxSize, validMIMETypes } = configs.fileUpload.avatar
+    const { size, type, mimetype } = values.avatar[0]
+    const { maxSize, validMIMETypes } = configs.fileUpload.avatar
 
     if (size > maxSize) {
       errors.avatar = (
@@ -76,7 +76,7 @@ class AvatarForm extends Component {
   }
 
   _signInFirebase() {
-    let { dispatch, apiEngine } = this.props
+    const { dispatch, apiEngine } = this.props
 
     return firebaseAPI(apiEngine)
       .readToken()
@@ -144,7 +144,7 @@ class AvatarForm extends Component {
   }
 
   _handleSubmit(formData) {
-    let { dispatch, apiEngine } = this.props
+    const { dispatch, apiEngine } = this.props
     let uploadProcedure
 
     if (formData.storage === 'firebase') {

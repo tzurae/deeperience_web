@@ -19,12 +19,12 @@ class ListPage extends Component {
   }
 
   componentDidMount() {
-    let { dispatch, location } = this.props
+    const { dispatch, location } = this.props
     dispatch(setCrrentPage(Resources.USER, location.query.page || 1))
   }
 
   componentDidUpdate(prevProps) {
-    let { dispatch, apiEngine, page, location } = this.props
+    const { dispatch, apiEngine, page, location } = this.props
 
     if (prevProps.page.current !== page.current) {
       userAPI(apiEngine)

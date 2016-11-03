@@ -67,7 +67,7 @@ class TodoItem extends Component {
   }
 
   render() {
-    let { onRemoveClick, text } = this.props
+    const { onRemoveClick, text } = this.props
     const { isEditable } = this.state
 
     return (
@@ -88,12 +88,12 @@ class ListPage extends Component {
   }
 
   componentDidMount() {
-    let { dispatch, location } = this.props
+    const { dispatch, location } = this.props
     dispatch(setCrrentPage(Resources.TODO, location.query.page || 1))
   }
 
   componentDidUpdate(prevProps) {
-    let { dispatch, apiEngine, page, location } = this.props
+    const { dispatch, apiEngine, page, location } = this.props
 
     if (prevProps.page.current !== page.current) {
       todoAPI(apiEngine)
@@ -161,7 +161,7 @@ class ListPage extends Component {
     return (
       <PageLayout>
         <PageHeader>Todo List ({`${page.current} / ${page.total}`})</PageHeader>
-        <input type="text" ref="todotext" />
+        <input type="text" ref={todotext => { this.todotext = todotext }} />
         <button onClick={this.handleAddClick}>Add Todo</button>
         <ul>
           {this.props.todos.map((todo) =>

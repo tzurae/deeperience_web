@@ -124,7 +124,7 @@ export default {
           data: user,
         }))
         .then(() => {
-          let { token, user } = req.store.getState().cookies
+          const { token, user } = req.store.getState().cookies
           const state = JSON.parse(req.query.state)
 
           res.cookie('token', token)

@@ -46,7 +46,7 @@ class LoginForm extends Component {
 
   _handleSubmit(formData) {
     // let { store } = this.context;
-    let { dispatch, apiEngine, change } = this.props
+    const { dispatch, apiEngine, change } = this.props
 
     return userAPI(apiEngine)
       .login(formData)

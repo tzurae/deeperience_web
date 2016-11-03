@@ -31,7 +31,7 @@ export default {
   },
 
   verifyUserNonce: (nonceKey) => (req, res, next) => {
-    let { _id, nonce } = req.decodedPayload
+    const { _id, nonce } = req.decodedPayload
     User.findById(_id, handleDbError(res)((user) => {
       if (nonce !== user.nonce[nonceKey]) {
         return res.errors([Errors.TOKEN_REUSED])

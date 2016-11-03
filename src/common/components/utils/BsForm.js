@@ -23,7 +23,7 @@ class BsForm extends Component {
   }
 
   render() {
-    let {
+    const {
       /* eslint-disable */
       // consume props owned by BsForm
       labelDimensions, fieldDimensions,

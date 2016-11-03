@@ -6,7 +6,7 @@ import { logoutUser } from '../../../actions/userActions'
 
 class LogoutPage extends React.Component {
   componentWillMount() {
-    let { dispatch, apiEngine } = this.props
+    const { dispatch, apiEngine } = this.props
 
     userAPI(apiEngine)
       .logout()

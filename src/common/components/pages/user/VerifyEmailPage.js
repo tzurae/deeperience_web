@@ -16,7 +16,7 @@ class VerificationPage extends React.Component {
   }
 
   componentWillMount() {
-    let { dispatch, apiEngine, location } = this.props
+    const { dispatch, apiEngine, location } = this.props
     if (process.env.BROWSER) {
       userAPI(apiEngine)
         .verifyEmail({ token: location.query.token })
@@ -38,7 +38,7 @@ class VerificationPage extends React.Component {
   }
 
   render() {
-    let { isVerifying, isFail } = this.state
+    const { isVerifying, isFail } = this.state
 
     if (isVerifying) {
       return (

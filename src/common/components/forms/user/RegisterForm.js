@@ -52,7 +52,7 @@ class RegisterForm extends Component {
   }
 
   _handleSubmit(formData) {
-    let { dispatch, apiEngine } = this.props
+    const { dispatch, apiEngine } = this.props
 
     return userAPI(apiEngine)
       .register(formData)
