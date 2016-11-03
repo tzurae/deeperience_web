@@ -5,14 +5,14 @@ export const SiteSchema = new mongoose.Schema({
   introduction: { type: String, default: '' },
   audioURL: String,
   mapSite: [{
-    address: String,
-    introduction: String,
+    address: { type: String, default: '' },
+    introduction: { type: String, default: '' },
     name: { type: String, default: '' },
-    placeId: String,
+    placeId: { type: String, default: '', require: true },
     position: {
       type: {
-        lat: Number,
-        lng: Number,
+        lat: { type: Number, default: 0 },
+        lng: { type: Number, default: 0 },
       },
       required: true,
     },

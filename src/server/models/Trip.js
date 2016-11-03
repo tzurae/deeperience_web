@@ -3,15 +3,15 @@ import mongoose from 'mongoose'
 export const TripSchema = new mongoose.Schema({
   name: { type: String, default: '' }, // trip name
   guideId: { type: String, required: true },
-  allSites: [String],
+  allSites: { type: String, default: [] },
   backgroundPic: String,
-  dayInfo: String, // how many days
+  dayInfo: { type: Number, required: 0 }, // how many days
   price: { type: Number, default: 0 },
   purchase: { type: Number, default: 0 },
   star: { type: Number, default: 0 },
   seen: { type: Number, default: 0 },
-  tags: [String],
-  startSite: [String],
+  tags: { type: [Number], default: 0 },
+  startSite: { type: [String], default: 0 },
   routes: [{
     depart: {
       type: {
@@ -42,3 +42,4 @@ export const TripSchema = new mongoose.Schema({
 
 const Trip = mongoose.model('Trip', TripSchema)
 export default Trip
+
