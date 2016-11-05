@@ -1,34 +1,39 @@
 import chai from 'chai';
+import { clearUsers, prepareUsers } from '../utils';
 import request from 'superagent';
 import constants from '../constants';
-import User from '../../build/server/models/User';
-import features from './features';
 let expect = chai.expect;
 
 describe('#Pages', () => {
-  let userTokens = [''];
-  let publicPages = [
-    '/',
-    '/user/register',
-    '/user/login',
-  ];
-  let privatePages = [
-    '/user/me',
-  ];
+  let reqs = {
+    users: [],
+    admins: [],
+  };
+  let pages = {
+    public: [
+      '/',
+      '/user/register',
+      '/user/login',
+      '/user/email/verify',
+      '/user/password/forget',
+      '/user/password/reset',
+    ],
+    normalUserRequired: [
+      '/user/me',
+      '/user/me/edit',
+    ],
+    adminUserRequired: [
+      '/admin/user',
+    ],
+  };
 
   before((done) => {
-    User(features.user[0]).save((err, user) => {
-      if (err) {
-        return done(err);
-      }
-      userTokens[0] = user.toAuthenticationToken();
-      done();
-    });
+    clearUsers(() => prepareUsers(reqs, done));
   });
 
-  describe('#Unauthorized User', () => {
-    publicPages.forEach((page) => {
-      describe('GET ' + page, () => {
+  describe('#Unauth User', () => {
+    pages.public.forEach((page) => {
+      describe(`GET ${page}`, () => {
         it('should access a public page', (cb) => {
           request
             .get(constants.BASE + page)
@@ -42,9 +47,9 @@ describe('#Pages', () => {
       });
     });
 
-    privatePages.forEach((page) => {
-      describe('GET ' + page, () => {
-        it('should redirect from a private page to login page', (cb) => {
+    pages.normalUserRequired.forEach((page) => {
+      describe(`GET ${page}`, () => {
+        it('should be redirected to login page', (cb) => {
           request
             .get(constants.BASE + page)
             .end((err, res) => {
@@ -60,13 +65,31 @@ describe('#Pages', () => {
     });
   });
 
-  describe('#Authorized User', () => {
-    (publicPages.concat(privatePages)).forEach((page) => {
-      describe('GET ' + page, () => {
-        it('should access both public and private pages', (cb) => {
+  describe('#Normal User', () => {
+    (pages.public.concat(pages.normalUserRequired)).forEach((page) => {
+      describe(`GET ${page}`, () => {
+        it('should access both public and normal-user-only pages', (cb) => {
           request
             .get(constants.BASE + page)
-            .set('Cookie', 'token=' + userTokens[0])
+            .set('Cookie', reqs.users[0].get('cookie'))
+            .end((err, res) => {
+              expect(err).to.equal(null);
+              expect(res).to.not.be.undefined;
+              expect(res.status).to.equal(200);
+              cb();
+            });
+        });
+      });
+    });
+  });
+
+  describe('#Admin User', () => {
+    (pages.public.concat(pages.adminUserRequired)).forEach((page) => {
+      describe(`GET ${page}`, () => {
+        it('should access both public and admin-only pages', (cb) => {
+          request
+            .get(constants.BASE + page)
+            .set('Cookie', reqs.users[0].get('cookie'))
             .end((err, res) => {
               expect(err).to.equal(null);
               expect(res).to.not.be.undefined;
@@ -79,8 +102,6 @@ describe('#Pages', () => {
   });
 
   after((done) => {
-    User.remove({ 'email.value': features.user[0].email.value }, (err) => {
-      done(err);
-    });
+    clearUsers(done);
   });
 });
