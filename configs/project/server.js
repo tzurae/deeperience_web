@@ -30,7 +30,7 @@ if (process.env.TRAVIS) {
     mongo: require('./mongo/credential'),
     // firebase: require('./firebase/credential.json'),
     passportStrategy: {
-      // facebook: require('./passportStrategy/facebook/credential'),
+      facebook: require('./passportStrategy/facebook/credential'),
       // linkedin: require('./passportStrategy/linkedin/credential'),
     },
     // recaptcha: require('./recaptcha/credential'),
