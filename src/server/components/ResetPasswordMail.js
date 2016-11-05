@@ -1,8 +1,8 @@
-import React, { PropTypes } from 'react';
-import tokenToURL from '../utils/tokenToURL';
+import React, { PropTypes } from 'react'
+import tokenToURL from '../utils/tokenToURL'
 
-let ResetPasswordMail = ({ requestedAt, token }) => {
-  let url = tokenToURL('/user/password/reset', token);
+const ResetPasswordMail = ({ requestedAt, token }) => {
+  const url = tokenToURL('/user/password/reset', token)
 
   return (
     <div>
@@ -20,12 +20,12 @@ let ResetPasswordMail = ({ requestedAt, token }) => {
         </a>
       </p>
     </div>
-  );
-};
+  )
+}
 
 ResetPasswordMail.propTypes = {
   requestedAt: PropTypes.instanceOf(Date),
   token: PropTypes.string,
-};
+}
 
-export default ResetPasswordMail;
+export default ResetPasswordMail

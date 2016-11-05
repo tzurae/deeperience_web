@@ -1,10 +1,10 @@
-import ActionTypes from '../constants/ActionTypes';
+import ActionTypes from '../constants/ActionTypes'
 
-let initState = [];
+const initState = []
 
 export default (state = initState, action) => {
   if (!action.errors) {
-    action.errors = [];
+    action.errors = []
   }
   switch (action.type) {
     case ActionTypes.PUSH_ERRORS: {
@@ -14,15 +14,15 @@ export default (state = initState, action) => {
           id: Math.random(),
           ...error,
         })),
-      ];
+      ]
     }
     case ActionTypes.REMOVE_ERROR: {
       return [
         ...state.filter(error => error.id !== action.id),
-      ];
+      ]
     }
     default: {
-      return state;
+      return state
     }
   }
-};
+}

@@ -1,56 +1,56 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Field, reduxForm, SubmissionError } from 'redux-form';
-import Alert from 'react-bootstrap/lib/Alert';
-import Button from 'react-bootstrap/lib/Button';
-import FormNames from '../../../constants/FormNames';
-import userAPI from '../../../api/user';
-import { pushErrors } from '../../../actions/errorActions';
-import { Form, FormField, FormFooter } from '../../utils/BsForm';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { Field, reduxForm, SubmissionError } from 'redux-form'
+import Alert from 'react-bootstrap/lib/Alert'
+import Button from 'react-bootstrap/lib/Button'
+import FormNames from '../../../constants/FormNames'
+import userAPI from '../../../api/user'
+import { pushErrors } from '../../../actions/errorActions'
+import { Form, FormField, FormFooter } from '../../utils/BsForm'
 
 export const validate = (values) => {
-  const errors = {};
+  const errors = {}
 
   if (
     values.newPasswordConfirm &&
     values.newPassword !== values.newPasswordConfirm
   ) {
-    errors.newPassword = errors.newPasswordConfirm = 'Password Not Matched';
+    errors.newPassword = errors.newPasswordConfirm = 'Password Not Matched'
   }
 
   if (values.oldPassword === values.newPassword) {
-    errors.newPassword = 'Cannot be same as old password';
+    errors.newPassword = 'Cannot be same as old password'
   }
 
   if (!values.oldPassword) {
-    errors.oldPassword = 'Required';
+    errors.oldPassword = 'Required'
   }
 
   if (!values.newPassword) {
-    errors.newPassword = 'Required';
+    errors.newPassword = 'Required'
   }
 
   if (!values.newPasswordConfirm) {
-    errors.newPasswordConfirm = 'Required';
+    errors.newPasswordConfirm = 'Required'
   }
 
-  return errors;
-};
+  return errors
+}
 
 class ChangePasswordForm extends Component {
   constructor(props) {
-    super(props);
-    this.handleSubmit = this._handleSubmit.bind(this);
+    super(props)
+    this.handleSubmit = this._handleSubmit.bind(this)
   }
 
   _handleSubmit(formData) {
-    let { dispatch, apiEngine, initialize } = this.props;
+    const { dispatch, apiEngine, initialize } = this.props
 
     return userAPI(apiEngine)
       .updatePassword(formData)
       .catch((err) => {
-        dispatch(pushErrors(err));
-        throw err;
+        dispatch(pushErrors(err))
+        throw err
       })
       .then((json) => {
         if (json.isAuth) {
@@ -58,14 +58,14 @@ class ChangePasswordForm extends Component {
             oldPassword: '',
             newPassword: '',
             newPasswordConfirm: '',
-          });
+          })
         } else {
           throw new SubmissionError({
             oldPassword: 'Wrong old password',
             _error: 'Change password failed',
-          });
+          })
         }
-      });
+      })
   }
 
   render() {
@@ -77,7 +77,7 @@ class ChangePasswordForm extends Component {
       pristine,
       submitting,
       invalid,
-    } = this.props;
+    } = this.props
 
     return (
       <Form horizontal onSubmit={handleSubmit(this.handleSubmit)}>
@@ -113,7 +113,7 @@ class ChangePasswordForm extends Component {
           </Button>
         </FormFooter>
       </Form>
-    );
+    )
   }
 };
 
@@ -122,4 +122,4 @@ export default reduxForm({
   validate,
 })(connect(state => ({
   apiEngine: state.apiEngine,
-}))(ChangePasswordForm));
+}))(ChangePasswordForm))

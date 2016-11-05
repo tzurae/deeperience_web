@@ -5,7 +5,7 @@ node_modules
 *.pub
 *.pem
 *.ppk
-configs/**/credential.*
+# configs/**/credential.*
 !configs/**/credential.tmpl.*
 
 # Log

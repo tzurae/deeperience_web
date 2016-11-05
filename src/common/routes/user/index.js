@@ -11,7 +11,7 @@ export default (store) => ({
         require('./resetPassword').default(store),
         require('./logout').default(store),
         require('./me').default(store),
-      ]);
-    });
+      ])
+    })
   },
-});
+})

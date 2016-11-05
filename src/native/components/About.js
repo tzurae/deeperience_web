@@ -1,10 +1,10 @@
-import React from 'react';
-import { Text, View } from 'react-native';
-import { Actions } from 'react-native-router-flux';
-import styles from '../styles';
+import React from 'react'
+import { Text, View } from 'react-native'
+import { Actions } from 'react-native-router-flux'
+import styles from '../styles'
 
-let About = () => {
-  const goToAbout = () => Actions.home();
+const About = () => {
+  const goToAbout = () => Actions.home()
 
   return (
     <View>
@@ -15,7 +15,7 @@ let About = () => {
         Click me to go back to home page.
       </Text>
     </View>
-  );
-};
+  )
+}
 
-export default About;
+export default About

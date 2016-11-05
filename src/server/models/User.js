@@ -1,23 +1,27 @@
-import crypto from 'crypto';
-import mongoose from 'mongoose';
-import jwt from 'jsonwebtoken';
-import configs from '../../../configs/project/server';
-import Roles from '../../common/constants/Roles';
-import paginatePlugin from './plugins/paginate';
+import crypto from 'crypto'
+import mongoose from 'mongoose'
+import jwt from 'jsonwebtoken'
+import configs from '../../../configs/project/server'
+import Roles from '../../common/constants/Roles'
+import paginatePlugin from './plugins/paginate'
+import { SiteSchema } from './Site'
+import { TripSchema } from './Trip'
+import { PostSchema } from './Post'
 
 const hashPassword = (rawPassword = '') => {
-  let recursiveLevel = 5;
+  let hashPassword = rawPassword
+  let recursiveLevel = 5
   while (recursiveLevel) {
-    rawPassword = crypto
+    hashPassword = crypto
       .createHash('md5')
-      .update(rawPassword)
-      .digest('hex');
-    recursiveLevel -= 1;
+      .update(hashPassword)
+      .digest('hex')
+    recursiveLevel -= 1
   }
-  return rawPassword;
-};
+  return hashPassword
+}
 
-let UserSchema = new mongoose.Schema({
+const UserSchema = new mongoose.Schema({
   name: String,
   email: {
     value: {
@@ -56,60 +60,64 @@ let UserSchema = new mongoose.Schema({
     resetPassword: Number,
   },
   lastLoggedInAt: Date,
+  sites: [SiteSchema],
+  ownTrip: [TripSchema],
+  buyTrip: [TripSchema],
+  posts: [PostSchema],
 }, {
   versionKey: false,
   timestamps: {
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
   },
-});
+})
 
-UserSchema.plugin(paginatePlugin);
+UserSchema.plugin(paginatePlugin)
 
 UserSchema.methods.auth = function(password, cb) {
-  const isAuthenticated = (this.password === hashPassword(password));
-  cb(null, isAuthenticated);
-};
+  const isAuthenticated = (this.password === hashPassword(password))
+  cb(null, isAuthenticated)
+}
 
 UserSchema.methods.toVerifyEmailToken = function(cb) {
   const user = {
     _id: this._id,
     nonce: this.nonce.verifyEmail,
-  };
+  }
   const token = jwt.sign(user, configs.jwt.verifyEmail.secret, {
     expiresIn: configs.jwt.verifyEmail.expiresIn,
-  });
-  return token;
-};
+  })
+  return token
+}
 
 UserSchema.methods.toResetPasswordToken = function(cb) {
   const user = {
     _id: this._id,
     nonce: this.nonce.resetPassword,
-  };
+  }
   const token = jwt.sign(user, configs.jwt.resetPassword.secret, {
     expiresIn: configs.jwt.resetPassword.expiresIn,
-  });
-  return token;
-};
+  })
+  return token
+}
 
 UserSchema.methods.toAuthenticationToken = function(cb) {
   const user = {
     _id: this._id,
     name: this.name,
     email: this.email,
-  };
+  }
   const token = jwt.sign(user, configs.jwt.authentication.secret, {
     expiresIn: configs.jwt.authentication.expiresIn,
-  });
-  return token;
-};
+  })
+  return token
+}
 
 UserSchema.methods.toJSON = function() {
-  let obj = this.toObject();
-  delete obj.password;
-  return obj;
-};
+  const obj = this.toObject()
+  delete obj.password
+  return obj
+}
 
-let User = mongoose.model('User', UserSchema);
-export default User;
+const User = mongoose.model('User', UserSchema)
+export default User

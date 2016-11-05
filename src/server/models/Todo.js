@@ -1,7 +1,7 @@
-import mongoose from 'mongoose';
-import paginatePlugin from './plugins/paginate';
+import mongoose from 'mongoose'
+import paginatePlugin from './plugins/paginate'
 
-let Todo = new mongoose.Schema({
+const Todo = new mongoose.Schema({
   text: String,
 }, {
   versionKey: false,
@@ -9,8 +9,8 @@ let Todo = new mongoose.Schema({
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
   },
-});
+})
 
-Todo.plugin(paginatePlugin);
+Todo.plugin(paginatePlugin)
 
-export default mongoose.model('Todo', Todo);
+export default mongoose.model('Todo', Todo)

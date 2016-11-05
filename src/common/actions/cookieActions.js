@@ -1,11 +1,12 @@
-import ActionTypes from '../constants/ActionTypes';
-import cookie from 'cookie';
-import assign from 'object-assign';
+import ActionTypes from '../constants/ActionTypes'
+import cookie from 'cookie'
+import assign from 'object-assign'
 
-export const setCookie = (name, value, options) => {
-  options = assign({
+export const setCookie = (name, value, option) => {
+  const options = assign({
     path: '/',
-  }, options);
+  }, option)
+
   return (dispatch, getState) => {
     return Promise
       .resolve(dispatch({
@@ -19,12 +20,12 @@ export const setCookie = (name, value, options) => {
       .then(() => {
         if (process.env.BROWSER) {
           document.cookie = cookie.serialize(
-            name, getState().cookies[name], options);
+            name, getState().cookies[name], options)
         }
-        return Promise.resolve();
-      });
-  };
-};
+        return Promise.resolve()
+      })
+  }
+}
 
 export const setCookies = (cookies) => {
   return (dispatch) => {
@@ -32,17 +33,17 @@ export const setCookies = (cookies) => {
       Object
         .keys(cookies)
         .map((name) => dispatch(setCookie(name, cookies[name])))
-    );
-  };
-};
+    )
+  }
+}
 
 export const removeCookie = (name) => {
   return (dispatch, getState) => {
     if (process.env.BROWSER) {
       return dispatch(setCookie(name, '', {
         expires: new Date(1970, 1, 1, 0, 0, 1),
-      }));
+      }))
     }
-    return Promise.resolve();
-  };
-};
+    return Promise.resolve()
+  }
+}

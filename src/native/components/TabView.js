@@ -1,9 +1,9 @@
-import React, { PropTypes } from 'react';
-import { Text, View } from 'react-native';
-import { Actions } from 'react-native-router-flux';
+import React, { PropTypes } from 'react'
+import { Text, View } from 'react-native'
+import { Actions } from 'react-native-router-flux'
 
-let TabView = ({ title }) => {
-  let goToHome = () => Actions.home();
+const TabView = ({ title }) => {
+  const goToHome = () => Actions.home()
 
   return (
     <View>
@@ -17,11 +17,11 @@ let TabView = ({ title }) => {
         Go To Home
       </Text>
     </View>
-  );
-};
+  )
+}
 
 TabView.propTypes = {
   title: PropTypes.string,
-};
+}
 
-export default TabView;
+export default TabView

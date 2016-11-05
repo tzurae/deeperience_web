@@ -8,4 +8,4 @@ export default (apiEngine) => ({
   create: (todo) => apiEngine.post('/api/todos', { data: todo }),
   update: (id, todo) => apiEngine.put(`/api/todos/${id}`, { data: todo }),
   remove: (id) => apiEngine.del(`/api/todos/${id}`),
-});
+})

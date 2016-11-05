@@ -1,68 +1,68 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { push } from 'react-router-redux';
-import { Field, reduxForm } from 'redux-form';
-import Alert from 'react-bootstrap/lib/Alert';
-import Button from 'react-bootstrap/lib/Button';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { push } from 'react-router-redux'
+import { Field, reduxForm } from 'redux-form'
+import Alert from 'react-bootstrap/lib/Alert'
+import Button from 'react-bootstrap/lib/Button'
 // import validator from 'validator';
-import FormNames from '../../../constants/FormNames';
-import userAPI from '../../../api/user';
-import { validateForm } from '../../../actions/formActions';
-import { pushErrors } from '../../../actions/errorActions';
-import { Form, FormField, FormFooter } from '../../utils/BsForm';
-import configs from '../../../../../configs/project/client';
+import FormNames from '../../../constants/FormNames'
+import userAPI from '../../../api/user'
+import { validateForm } from '../../../actions/formActions'
+import { pushErrors } from '../../../actions/errorActions'
+import { Form, FormField, FormFooter } from '../../utils/BsForm'
+import configs from '../../../../../configs/project/client'
 
 const validate = (values) => {
-  const errors = {};
+  const errors = {}
 
   // if (values.email && !validator.isEmail(values.email)) {
   //   errors.email = 'Not an email';
   // }
 
   if (!values.email) {
-    errors.email = 'Required';
+    errors.email = 'Required'
   }
 
   if (!values.password) {
-    errors.password = 'Required';
+    errors.password = 'Required'
   }
 
   if (configs.recaptcha && !values.recaptcha) {
-    errors.recaptcha = 'Required';
+    errors.recaptcha = 'Required'
   }
 
-  return errors;
-};
+  return errors
+}
 
-let asyncValidate = (values, dispatch) => {
+const asyncValidate = (values, dispatch) => {
   return dispatch(validateForm(FormNames.USER_REGISTER, 'email', values.email))
     .then((json) => {
-      let validationError = {};
+      const validationError = {}
       if (!json.isPassed) {
-        validationError.email = json.message;
-        throw validationError;
+        validationError.email = json.message
+        throw validationError
       }
-    });
-};
+    })
+}
 
 class RegisterForm extends Component {
   constructor(props) {
-    super(props);
-    this.handleSubmit = this._handleSubmit.bind(this);
+    super(props)
+    this.handleSubmit = this._handleSubmit.bind(this)
   }
 
   _handleSubmit(formData) {
-    let { dispatch, apiEngine } = this.props;
+    const { dispatch, apiEngine } = this.props
 
     return userAPI(apiEngine)
       .register(formData)
       .catch((err) => {
-        dispatch(pushErrors(err));
-        throw err;
+        dispatch(pushErrors(err))
+        throw err
       })
       .then((json) => {
-        dispatch(push('/user/login'));
-      });
+        dispatch(push('/user/login'))
+      })
   }
 
   render() {
@@ -74,7 +74,7 @@ class RegisterForm extends Component {
       asyncValidating,
       submitting,
       invalid,
-    } = this.props;
+    } = this.props
 
     return (
       <Form horizontal onSubmit={handleSubmit(this.handleSubmit)}>
@@ -115,7 +115,7 @@ class RegisterForm extends Component {
           </Button>
         </FormFooter>
       </Form>
-    );
+    )
   }
 };
 
@@ -126,4 +126,4 @@ export default reduxForm({
   asyncBlurFields: ['email'],
 })(connect(state => ({
   apiEngine: state.apiEngine,
-}))(RegisterForm));
+}))(RegisterForm))

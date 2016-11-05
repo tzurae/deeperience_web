@@ -1,5 +1,5 @@
-import Errors from '../constants/Errors';
-import ActionTypes from '../constants/ActionTypes';
+import Errors from '../constants/Errors'
+import ActionTypes from '../constants/ActionTypes'
 
 export const pushError = (error, meta) => {
   return {
@@ -8,22 +8,22 @@ export const pushError = (error, meta) => {
       ...error,
       meta,
     }],
-  };
-};
+  }
+}
 
 export const pushErrors = (errors) => {
   if (errors && errors.length === undefined) {
-    return pushError(Errors.UNKNOWN_EXCEPTION, errors);
+    return pushError(Errors.UNKNOWN_EXCEPTION, errors)
   }
   return {
     type: ActionTypes.PUSH_ERRORS,
     errors,
-  };
-};
+  }
+}
 
 export const removeError = (id) => {
   return {
     type: ActionTypes.REMOVE_ERROR,
     id,
-  };
-};
+  }
+}

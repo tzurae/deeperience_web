@@ -1,6 +1,6 @@
 export default (store) => (requiredRoles) => (nextState, replace) => {
-  let { user } = store.getState().cookies;
-  user = (user && JSON.parse(user)) || {};
+  let { user } = store.getState().cookies
+  user = (user && JSON.parse(user)) || {}
 
   if (!((
     requiredRoles instanceof Array &&
@@ -10,6 +10,6 @@ export default (store) => (requiredRoles) => (nextState, replace) => {
   ))) {
     replace({
       pathname: '/',
-    });
+    })
   }
-};
+}

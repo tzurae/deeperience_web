@@ -2,4 +2,4 @@ export default {
   ODM_OPERATION: 'ODM_OPERATION',
   JSON_WEB_TOKEN: 'JSON_WEB_TOKEN',
   PASSPORT: 'PASSPORT',
-};
+}

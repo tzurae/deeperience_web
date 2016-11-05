@@ -1,4 +1,4 @@
-import passport from 'passport';
+import passport from 'passport'
 
 export default {
   initFacebook: (req, res, next) => (
@@ -15,4 +15,4 @@ export default {
       }),
     })(req, res, next)
   ),
-};
+}

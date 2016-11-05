@@ -1,13 +1,13 @@
-import React from 'react';
-import PageHeader from 'react-bootstrap/lib/PageHeader';
-import Alert from 'react-bootstrap/lib/Alert';
-import Row from 'react-bootstrap/lib/Row';
-import Col from 'react-bootstrap/lib/Col';
-import PageLayout from '../../layouts/PageLayout';
-import LoginForm from '../../forms/user/LoginForm';
-import SocialAuthButtonList from '../../utils/SocialAuthButtonList';
+import React from 'react'
+import PageHeader from 'react-bootstrap/lib/PageHeader'
+import Alert from 'react-bootstrap/lib/Alert'
+import Row from 'react-bootstrap/lib/Row'
+import Col from 'react-bootstrap/lib/Col'
+import PageLayout from '../../layouts/PageLayout'
+import LoginForm from '../../forms/user/LoginForm'
+import SocialAuthButtonList from '../../utils/SocialAuthButtonList'
 
-let LoginPage = ({ location }) => (
+const LoginPage = ({ location }) => (
   <PageLayout>
     <PageHeader>Login</PageHeader>
     <Row>
@@ -29,6 +29,6 @@ let LoginPage = ({ location }) => (
       </Col>
     </Row>
   </PageLayout>
-);
+)
 
-export default LoginPage;
+export default LoginPage

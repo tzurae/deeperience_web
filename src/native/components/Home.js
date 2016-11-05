@@ -1,12 +1,12 @@
-import React, { PropTypes } from 'react';
-import { Text, View } from 'react-native';
-import { Actions } from 'react-native-router-flux';
-import { connect } from 'react-redux';
-import styles from '../styles';
+import React, { PropTypes } from 'react'
+import { Text, View } from 'react-native'
+import { Actions } from 'react-native-router-flux'
+import { connect } from 'react-redux'
+import styles from '../styles'
 
-let Home = ({ routes }) => {
-  const goToAbout = () => Actions.about({text: 'Fuck you'});
-  const goToTab1 = () => Actions.tab1();
+const Home = ({ routes }) => {
+  const goToAbout = () => Actions.about({ text: 'Fuck you' })
+  const goToTab1 = () => Actions.tab1()
 
   return (
     <View>
@@ -23,11 +23,11 @@ let Home = ({ routes }) => {
         Go To Tab1
       </Text>
     </View>
-  );
-};
+  )
+}
 
 Home.propTypes = {
   routes: PropTypes.object,
-};
+}
 
-export default connect(state => state)(Home);
+export default connect(state => state)(Home)

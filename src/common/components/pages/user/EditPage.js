@@ -1,15 +1,15 @@
-import React from 'react';
-import { Link } from 'react-router';
-import PageHeader from 'react-bootstrap/lib/PageHeader';
-import Row from 'react-bootstrap/lib/Row';
-import Col from 'react-bootstrap/lib/Col';
-import Button from 'react-bootstrap/lib/Button';
-import PageLayout from '../../layouts/PageLayout';
-import EditForm from '../../forms/user/EditForm';
-import AvatarForm from '../../forms/user/AvatarForm';
-import ChangePasswordForm from '../../forms/user/ChangePasswordForm';
+import React from 'react'
+import { Link } from 'react-router'
+import PageHeader from 'react-bootstrap/lib/PageHeader'
+import Row from 'react-bootstrap/lib/Row'
+import Col from 'react-bootstrap/lib/Col'
+import Button from 'react-bootstrap/lib/Button'
+import PageLayout from '../../layouts/PageLayout'
+import EditForm from '../../forms/user/EditForm'
+import AvatarForm from '../../forms/user/AvatarForm'
+import ChangePasswordForm from '../../forms/user/ChangePasswordForm'
 
-let EditPage = () => {
+const EditPage = () => {
   return (
     <PageLayout>
       <Row>
@@ -35,7 +35,7 @@ let EditPage = () => {
         </Col>
       </Row>
     </PageLayout>
-  );
-};
+  )
+}
 
-export default EditPage;
+export default EditPage

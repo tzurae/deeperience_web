@@ -1,5 +1,5 @@
-import React, { PropTypes } from 'react';
-import { renderToString } from 'react-dom/server';
+import React, { PropTypes } from 'react'
+import { renderToString } from 'react-dom/server'
 
 // jscs:disable
 const Html = ({ assets, children, initialState }) => (
@@ -49,13 +49,13 @@ const Html = ({ assets, children, initialState }) => (
       )}
     </body>
   </html>
-);
+)
 // jscs:enable
 
 Html.propTypes = {
   assets: PropTypes.object,
   component: PropTypes.object,
   initialState: PropTypes.object,
-};
+}
 
-export default Html;
+export default Html

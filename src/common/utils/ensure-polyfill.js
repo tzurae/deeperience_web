@@ -3,11 +3,11 @@
 if (typeof module !== 'undefined' && module.require) {
   if (typeof require.ensure === 'undefined') {
     // ref: <https://github.com/webpack/webpack/issues/183>@snadn
-    let proto = Object.getPrototypeOf(require);
+    const proto = Object.getPrototypeOf(require)
     Object.defineProperties(proto, {
       ensure: {
         value: function ensure(modules, callback) {
-          callback(this);
+          callback(this)
         },
         writable: false,
       },
@@ -15,6 +15,6 @@ if (typeof module !== 'undefined' && module.require) {
         value: function include() {},
         writable: false,
       },
-    });
+    })
   }
 }

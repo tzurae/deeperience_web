@@ -1,5 +1,5 @@
-import formAPI from '../api/form';
-import { pushErrors } from '../actions/errorActions';
+import formAPI from '../api/form'
+import { pushErrors } from '../actions/errorActions'
 
 export const validateForm = (formName, fieldName, value) => {
   return (dispatch, getState) => {
@@ -8,10 +8,10 @@ export const validateForm = (formName, fieldName, value) => {
       .field(fieldName, value)
       .validate()
       .catch((err) => {
-        let validationError = {};
-        dispatch(pushErrors(err));
-        validationError[fieldName] = 'Unable to validate';
-        throw validationError;
-      });
-  };
-};
+        const validationError = {}
+        dispatch(pushErrors(err))
+        validationError[fieldName] = 'Unable to validate'
+        throw validationError
+      })
+  }
+}

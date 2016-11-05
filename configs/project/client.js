@@ -8,7 +8,7 @@ module.exports = {
       trackingID: 'UA-86112397-1',
     },
   },
-  recaptcha: require('./recaptcha/client'),
+  // recaptcha: require('./recaptcha/client'),
   fileUpload: {
     avatar: {
       maxSize: 1024 * 1024, // in bytes

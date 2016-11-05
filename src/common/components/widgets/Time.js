@@ -1,21 +1,21 @@
 // inspired by <https://github.com/andreypopp/react-time>
-import React, { PropTypes } from 'react';
-import moment from 'moment';
+import React, { PropTypes } from 'react'
+import moment from 'moment'
 
 const Time = ({ value, format, relative }) => {
-  let v = null;
+  let v = null
   if (value) {
-    v = moment(value);
-    v = relative ? v.fromNow() : v.format(format);
+    v = moment(value)
+    v = relative ? v.fromNow() : v.format(format)
   }
   return (
     <time>{v}</time>
-  );
-};
+  )
+}
 
 Time.defaultProps = {
   format: 'YYYY-MM-DD HH:mm:ss',
-};
+}
 
 Time.propTypes = {
   value: PropTypes.oneOfType([
@@ -24,6 +24,6 @@ Time.propTypes = {
   ]),
   format: PropTypes.string,
   relative: PropTypes.bool,
-};
+}
 
-export default Time;
+export default Time

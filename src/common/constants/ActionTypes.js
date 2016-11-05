@@ -17,4 +17,4 @@ export default {
 
   SET_PAGE: 'SET_PAGE',
   SET_CURRENT_PAGE: 'SET_CURRENT_PAGE',
-};
+}

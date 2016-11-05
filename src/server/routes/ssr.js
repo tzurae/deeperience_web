@@ -1,5 +1,5 @@
-import reactController from '../controllers/react';
+import reactController from '../controllers/react'
 
 export default ({ app }) => {
-  app.get('/*', reactController.render);
-};
+  app.get('/*', reactController.render)
+}

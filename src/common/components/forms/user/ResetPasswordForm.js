@@ -1,44 +1,44 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router';
-import { Field, reduxForm } from 'redux-form';
-import Alert from 'react-bootstrap/lib/Alert';
-import Button from 'react-bootstrap/lib/Button';
-import FormNames from '../../../constants/FormNames';
-import userAPI from '../../../api/user';
-import { pushErrors } from '../../../actions/errorActions';
-import { Form, FormField, FormFooter } from '../../utils/BsForm';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { Link } from 'react-router'
+import { Field, reduxForm } from 'redux-form'
+import Alert from 'react-bootstrap/lib/Alert'
+import Button from 'react-bootstrap/lib/Button'
+import FormNames from '../../../constants/FormNames'
+import userAPI from '../../../api/user'
+import { pushErrors } from '../../../actions/errorActions'
+import { Form, FormField, FormFooter } from '../../utils/BsForm'
 
 export const validate = (values) => {
-  const errors = {};
+  const errors = {}
 
   if (
     values.newPasswordConfirm &&
     values.newPassword !== values.newPasswordConfirm
   ) {
-    errors.newPassword = errors.newPasswordConfirm = 'Password Not Matched';
+    errors.newPassword = errors.newPasswordConfirm = 'Password Not Matched'
   }
 
   if (!values.newPassword) {
-    errors.newPassword = 'Required';
+    errors.newPassword = 'Required'
   }
 
   if (!values.newPasswordConfirm) {
-    errors.newPasswordConfirm = 'Required';
+    errors.newPasswordConfirm = 'Required'
   }
 
-  return errors;
-};
+  return errors
+}
 
 class ChangePasswordForm extends Component {
   constructor(props) {
-    super(props);
-    this.handleSubmit = this._handleSubmit.bind(this);
+    super(props)
+    this.handleSubmit = this._handleSubmit.bind(this)
   }
 
   _handleSubmit(formData) {
-    let { dispatch, apiEngine, routing, initialize } = this.props;
-    let location = routing.locationBeforeTransitions;
+    const { dispatch, apiEngine, routing, initialize } = this.props
+    const location = routing.locationBeforeTransitions
 
     return userAPI(apiEngine)
       .resetPassword({
@@ -46,15 +46,15 @@ class ChangePasswordForm extends Component {
         token: location.query.token,
       })
       .catch((err) => {
-        dispatch(pushErrors(err));
-        throw err;
+        dispatch(pushErrors(err))
+        throw err
       })
       .then((json) => {
         initialize({
           newPassword: '',
           newPasswordConfirm: '',
-        });
-      });
+        })
+      })
   }
 
   render() {
@@ -66,7 +66,7 @@ class ChangePasswordForm extends Component {
       pristine,
       submitting,
       invalid,
-    } = this.props;
+    } = this.props
 
     return (
       <Form horizontal onSubmit={handleSubmit(this.handleSubmit)}>
@@ -102,7 +102,7 @@ class ChangePasswordForm extends Component {
           </Button>
         </FormFooter>
       </Form>
-    );
+    )
   }
 };
 
@@ -112,4 +112,4 @@ export default reduxForm({
 })(connect(state => ({
   apiEngine: state.apiEngine,
   routing: state.routing,
-}))(ChangePasswordForm));
+}))(ChangePasswordForm))

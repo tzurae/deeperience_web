@@ -12,4 +12,4 @@ export default {
   'page.prev': 'Previous',
   'page.next': 'Next',
   'page.last': 'Last Page',
-};
+}

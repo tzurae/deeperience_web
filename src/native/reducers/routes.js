@@ -1,8 +1,8 @@
-import { ActionConst } from 'react-native-router-flux';
+import { ActionConst } from 'react-native-router-flux'
 
-let initialState = {
+const initialState = {
   scene: {},
-};
+}
 
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
@@ -11,9 +11,9 @@ export default function reducer(state = initialState, action = {}) {
       return {
         ...state,
         scene: action.scene,
-      };
+      }
 
     default:
-      return state;
+      return state
   }
 };
