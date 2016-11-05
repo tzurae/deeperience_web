@@ -12,6 +12,8 @@ appPromise
       if (err) {
         throw err;
       }
-      console.log('Listening at port', port);
+      if (app.get('env') !== 'test') {
+        console.log('Listening at port', port);
+      }
     });
   });

@@ -4,7 +4,7 @@ let server;
 
 before((done) => {
   appPromise.then((app) => {
-    console.log('starting server on port', constants.PORT, '...');
+    console.log('\nstarting server on port', constants.PORT, '...\n');
     server = app.listen(constants.PORT, done);
   });
 });
@@ -13,7 +13,7 @@ require('./pages');
 require('./apis');
 
 after((done) => {
-  console.log('closing server...');
+  console.log('\nclosing server...\n');
   if (server) {
     server.close();
   }

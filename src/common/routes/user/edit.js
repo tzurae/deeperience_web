@@ -5,4 +5,5 @@ export default (store) => ({
       cb(null, require('../../components/pages/user/EditPage').default);
     });
   },
+  onEnter: require('../../utils/authRequired').default(store),
 });
