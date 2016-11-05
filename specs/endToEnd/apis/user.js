@@ -1,152 +1,148 @@
 import chai from 'chai';
-import request from 'superagent';
-import constants from '../../constants';
-import User from '../../../build/server/models/User';
+import { apiEngine, clearUsers, prepareUsers } from '../../utils';
+import ApiEngine from '../../../build/common/utils/ApiEngine';
+import userAPI from '../../../build/common/api/user';
 import features from '../features';
 import Errors from '../../../build/common/constants/Errors';
 let expect = chai.expect;
 
-describe('#user', () => {
+describe('#userAPI', () => {
+  let reqs = {
+    users: [],
+    admins: [],
+  };
   let fakeUser;
-  let resUser;
-
   let validateUser = (user) => {
     expect(user).to.contain.all.keys(['_id', 'email']);
     expect(user).to.not.have.any.keys(['password']);
   };
 
   before((done) => {
-    User.remove({}, done);
+    clearUsers(() => prepareUsers(reqs, done));
   });
 
-  describe('#Unauthorized User', () => {
-    // POST /api/user
-    describe('POST /api/users', () => {
-      fakeUser = {
-        name: features.user[0].name,
-        email: features.user[0].email.value,
-        password: features.user[0].password,
-      };
-      it('should create user', (done) => {
-        request
-          .post(constants.BASE + '/api/users')
-          .send(fakeUser)
-          .end((err, res) => {
-            expect(err).to.equal(null);
-            expect(res).to.not.be.undefined;
-            expect(res.status).to.equal(200);
-            expect(res.body.errors).to.be.undefined;
-            validateUser(res.body.user);
-            resUser = res.body.user;
-            done();
-          });
-      });
-      it('should fail when email is duplicate', (done) => {
-        request
-          .post(constants.BASE + '/api/users')
-          .send(fakeUser)
-          .end((err, res) => {
-            expect(err).to.equal(null);
-            expect(res).to.not.be.undefined;
-            expect(res.status).to.equal(200);
-            expect(res.body.errors[0].code)
-              .to.equal(Errors.USER_EXISTED.code);
-            done();
-          });
-      });
-    });
-
-    // POST /api/user/login
-    describe('POST /api/users/login', () => {
-      it('should auth valid user', (done) => {
-        fakeUser = {
-          email: features.user[0].email.value,
-          password: features.user[0].password,
-        };
-        request
-          .post(constants.BASE + '/api/users/login')
-          .send(fakeUser)
-          .end((err, res) => {
-            expect(err).to.equal(null);
-            expect(res).to.not.be.undefined;
-            expect(res.status).to.equal(200);
-            expect(res.body.errors).to.be.undefined;
-            expect(res.body.isAuth).to.be.true;
-            expect(res.body.token).to.be.a('string');
-            done();
-          });
-      });
-      it('should reject invalid user', (done) => {
-        request
-          .post(constants.BASE + '/api/users/login')
-          .send({})
-          .end((err, res) => {
-            expect(err).to.equal(null);
-            expect(res).to.not.be.undefined;
-            expect(res.status).to.equal(200);
-            expect(res.body.errors).to.be.undefined;
-            expect(res.body.isAuth).to.be.false;
-            done();
-          });
-      });
-    });
-
-    // GET /api/user/logout
-    describe('GET /api/user/logout', () => {
-      it('should unauth user', (done) => {
-        request
-          .get(constants.BASE + '/api/users/logout')
-          .end((err, res) => {
-            expect(err).to.equal(null);
-            expect(res).to.not.be.undefined;
-            expect(res.status).to.equal(200);
-            expect(res.body.errors).to.be.undefined;
-            done();
-          });
-      });
-    });
-
-    // GET /api/user/me
-    describe('GET /api/users/me', () => {
-      it('should be rejected', (done) => {
-        request
-          .get(constants.BASE + '/api/users/me')
-          .end((err, res) => {
-            expect(err).to.equal(null);
-            expect(res).to.not.be.undefined;
-            expect(res.status).to.equal(200);
-            expect(res.body.errors[0].code)
-              .to.equal(Errors.USER_UNAUTHORIZED.code);
-            done();
-          });
-      });
-    });
-  });
-
-  describe('#Authorized User', () => {
-    // GET /api/user/me
-    describe('GET /api/users/me', () => {
-      it('should show user', (done) => {
-        User.findOne({}, (err, user) => {
-          expect(err).to.equal(null);
-          let token = user.toAuthenticationToken();
-          request
-            .get(constants.BASE + '/api/users/me')
-            .set('Cookie', 'token=' + token)
-            .end((err, res) => {
-              expect(err).to.equal(null);
-              expect(res).to.not.be.undefined;
-              expect(res.status).to.equal(200);
-              expect(res.body.errors).to.be.undefined;
-              validateUser(res.body.user);
-              done();
-            });
+  describe('#list()', () => {
+    it('[unauth user] should be rejected', (done) => {
+      userAPI(apiEngine)
+        .list({ page: 1 })
+        .catch((err) => {
+          expect(err).to.have.lengthOf(1);
+          expect(err[0].code)
+            .to.equal(Errors.USER_UNAUTHORIZED.code);
+          done();
         });
-      });
+    });
+    it('[normal user] should be rejected', (done) => {
+      userAPI(new ApiEngine(reqs.users[0]))
+        .list({ page: 1 })
+        .catch((err) => {
+          expect(err).to.have.lengthOf(1);
+          expect(err[0].code)
+            .to.equal(Errors.PERMISSION_DENIED.code);
+          done();
+        });
+    });
+    it('[admin user] should list all users', (done) => {
+      userAPI(new ApiEngine(reqs.admins[0]))
+        .list({ page: 1 })
+        .then((json) => {
+          expect(json).contain.all.keys(['users', 'page']);
+          done();
+        });
+    });
+  });
+
+  describe('#register()', () => {
+    fakeUser = {
+      name: features.users.users[0].name,
+      email: features.users.users[0].email.value,
+      password: features.users.users[0].password,
+    };
+    before((done) => {
+      clearUsers(done);
+    });
+    it('should create user', (done) => {
+      userAPI(apiEngine)
+        .register(fakeUser)
+        .then((json) => {
+          validateUser(json.user);
+          done();
+        });
+    });
+    it('should fail when email is duplicate', (done) => {
+      userAPI(apiEngine)
+        .register(fakeUser)
+        .catch((err) => {
+          expect(err[0].code)
+            .to.equal(Errors.USER_EXISTED.code);
+          done();
+        });
+    });
+    after((done) => {
+      clearUsers(() => prepareUsers(reqs, done));
+    });
+  });
+
+  describe('#login()', () => {
+    it('should auth valid user', (done) => {
+      fakeUser = {
+        email: features.users.users[0].email.value,
+        password: features.users.users[0].password,
+      };
+      userAPI(apiEngine)
+        .login(fakeUser)
+        .then((json) => {
+          expect(json.isAuth).to.be.true;
+          expect(json.token).to.be.a('string');
+          done();
+        });
+    });
+    it('should reject invalid user', (done) => {
+      userAPI(apiEngine)
+        .login({})
+        .then((json) => {
+          expect(json.isAuth).to.be.false;
+          done();
+        });
+    });
+  });
+
+  describe('#logout()', () => {
+    it('should logout user', (done) => {
+      userAPI(apiEngine)
+        .logout({})
+        .then((json) => {
+          expect(json).to.be.empty;
+          done();
+        });
+    });
+  });
+
+  describe('#read()', () => {
+    before((done) => {
+      clearUsers(() => prepareUsers(reqs, done));
+    });
+    it('[unauth user] should be rejected', (done) => {
+      userAPI(apiEngine)
+        .read()
+        .catch((err) => {
+          expect(err).to.have.lengthOf(1);
+          expect(err[0].code)
+            .to.equal(Errors.USER_UNAUTHORIZED.code);
+          done();
+        });
+    });
+    it('[normal user] should show user detail', (done) => {
+      userAPI(new ApiEngine(reqs.users[0]))
+        .read()
+        .then((json) => {
+          validateUser(json.user);
+          done();
+        });
     });
   });
 
   after((done) => {
-    User.remove({}, done);
+    clearUsers(done);
   });
 });
