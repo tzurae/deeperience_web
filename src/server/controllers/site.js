@@ -19,7 +19,7 @@ export default {
     })
 
     User.update(
-      { _id: req.params.userId },
+      { _id: req.user._Id },
       { $addToSet: { sites: site } },
       handleDbError(res)((raw) => {
         res.json({
@@ -36,7 +36,7 @@ export default {
       updatedAt: new Date(),
     }
     User.update(
-      { _id: req.params.userId, 'sites._id': req.params.siteId },
+      { _id: req.user._id, 'sites._id': req.params.siteId },
       { $set: getSaveObject(save, 'sites.$.') },
       handleDbError(res)((raw) => {
         res.json({
@@ -49,7 +49,7 @@ export default {
 
   list(req, res) {
     User.findOne(
-      { _id: req.params.userId },
+      { _id: req.user._id },
       { sites: 1 },
       handleDbError(res)((raw) => {
         res.json(raw)

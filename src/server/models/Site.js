@@ -11,7 +11,7 @@ export const SiteSchema = new mongoose.Schema({
     introduction: { type: String, default: '' },
     name: { type: String, default: '' },
     website: String,
-    type: { String, default: Sites.Other },
+    siteType: { type: String, default: Sites.Other },
     fee: String,
     recentActivity: [{
       date: Date,

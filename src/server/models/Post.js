@@ -22,7 +22,7 @@ export const PostSchema = new mongoose.Schema({
   tripLocation: Number,
   tripElement: [Number],
   foodElement: [Number],
-  otherDemand: [Number],
+  otherDemand: String,
   bookHotel: Boolean,
   bookRestaurant: Boolean,
   startDate: Date,

@@ -13,17 +13,12 @@ const attributes = [
 
 export default {
   create(req, res) {
+    console.log(req.body)
     let post = {}
     attributes.forEach(attr => {
       post[attr] = req.body[attr]
     })
-    const attrChange = ['hotelType', 'tripElement', 'foodElement', 'otherDemand']
-    attrChange.forEach(attr => {
-      post[attr] = []
-      res.body[attr].forEach((value, index) => {
-        if (value) post[attr].push(index)
-      })
-    })
+
     post = Post({
       ...post,
       updatedAt: new Date(),
@@ -31,7 +26,7 @@ export default {
     })
 
     User.update(
-      { _id: req.params.userId },
+      { _id: req.user._id },
       { $addToSet: { posts: post } },
       handleDbError(res)((raw) => {
         res.json({
@@ -48,7 +43,7 @@ export default {
       updatedAt: new Date(),
     }
     User.update(
-      { _id: req.params.userId, 'posts._id': req.params.postId },
+      { _id: req.user._id, 'posts._id': req.params.postId },
       { $set: getSaveObject(save, 'posts.$.') },
       handleDbError(res)((raw) => {
         res.json({
@@ -61,7 +56,8 @@ export default {
 
   list(req, res) {
     User.findOne(
-      { _id: req.params.userId },
+      { _id: req.user._id },
+
       { posts: 1 },
       handleDbError(res)((raw) => {
         res.json(raw)
