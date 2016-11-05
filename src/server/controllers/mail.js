@@ -29,7 +29,7 @@ export default {
       .then((info) => {
         res.json({
           user: user,
-          email: info.envelope,
+          email: info && info.envelope,
         });
       });
   },
