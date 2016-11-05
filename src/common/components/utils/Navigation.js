@@ -56,10 +56,6 @@ class Navigation extends Component {
                   title="繁體中文"
                   onClick={this._setLanguage.bind(this, 'zh-tw')}
                 />
-                <MenuItem
-                  title="Not supported"
-                  onClick={this._setLanguage.bind(this, 'foo-bar')}
-                />
               </Navbar.Dropdown>
               <Navbar.Dropdown
                 title={
