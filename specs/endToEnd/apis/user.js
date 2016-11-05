@@ -156,6 +156,34 @@ describe('#userAPI', () => {
     });
   });
 
+  describe('#updatePassword()', () => {
+    it('[auth user] should be able to change password', (done) => {
+      let oldPassword = features.users.users[0].password;
+      let newPassword = 'f&o%obar@#$%';
+
+      userAPI(new ApiEngine(reqs.users[0]))
+        .updatePassword({
+          oldPassword: oldPassword,
+          newPassword: newPassword,
+          newPasswordConfirm: newPassword,
+        })
+        .then((json) => {
+          expect(json.isAuth).to.be.true;
+
+          return userAPI(apiEngine)
+            .login({
+              email: json.user.email.value,
+              password: newPassword,
+            });
+        })
+        .then((json) => {
+          expect(json.isAuth).to.be.true;
+          expect(json.token).to.be.a('string');
+          done();
+        });
+    });
+  });
+
   after((done) => {
     clearUsers(done);
   });
