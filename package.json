@@ -1,5 +1,5 @@
 {
-  "name": "express-react-hmr-boilerplate",
+  "name": "deeperience",
   "version": "0.1.0",
   "description": "",
   "scripts": {
@@ -21,7 +21,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gocreating/express-react-hmr-boilerplate.git"
+    "url": "https://gitlab.com/deeperience/deeperience-web.git"
   },
   "keywords": [
     "node",
@@ -49,10 +49,6 @@
     "todo list",
     "passport"
   ],
-  "bugs": {
-    "url": "https://github.com/gocreating/express-react-hmr-boilerplate/issues"
-  },
-  "homepage": "https://github.com/gocreating/express-react-hmr-boilerplate",
   "devDependencies": {
     "async": "^2.0.0-rc.3",
     "babel-core": "^6.3.15",

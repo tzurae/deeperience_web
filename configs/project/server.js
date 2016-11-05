@@ -11,7 +11,7 @@ if (process.env.TRAVIS) {
     host: {
       development: 'http://localhost:3000',
       test: 'http://localhost:5566',
-      production: 'https://express-react-hmr-boilerplate.herokuapp.com',
+      production: 'https://deeperience.herokuapp.com',
     },
     jwt: {
       authentication: {
@@ -38,7 +38,7 @@ if (process.env.TRAVIS) {
     mailOptions: {
       default: {
         subject: 'Untitled Mail',
-        from: 'Express-React-Hmr-Boilerplate <no-reply@express-react-hmr-boilerplate.com>',
+        from: 'Deeperience <no-reply@deeperience.com>',
         text: 'No Text',
         html: '<pre>no html content<pre>',
       },

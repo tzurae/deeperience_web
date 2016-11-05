@@ -32,7 +32,7 @@ class Navigation extends Component {
         <Grid>
           <Navbar.Header>
             <Link className="navbar-brand" to="/" >
-              Logo
+              Deeperience
             </Link>
           </Navbar.Header>
 
