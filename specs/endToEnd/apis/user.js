@@ -142,6 +142,20 @@ describe('#userAPI', () => {
     });
   });
 
+  describe('#update()', () => {
+    it('[auth user] should update user detail', (done) => {
+      let newName = 'foobar';
+      userAPI(new ApiEngine(reqs.users[0]))
+        .update({
+          name: newName,
+        })
+        .then((json) => {
+          expect(json.user.name).to.equal(newName);
+          done();
+        });
+    });
+  });
+
   after((done) => {
     clearUsers(done);
   });
