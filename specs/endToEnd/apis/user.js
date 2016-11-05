@@ -188,6 +188,24 @@ describe('#userAPI', () => {
     });
   });
 
+  describe('#verifyEmail()', () => {
+    it('should be able to verify email', (done) => {
+      userAPI(apiEngine)
+        .verifyEmail({
+          token: userInstances.users[0].toVerifyEmailToken(),
+        })
+        .then((json) => {
+          expect(json).to.be.empty;
+
+          return userAPI(new ApiEngine(reqs.users[0])).read();
+        })
+        .then((json) => {
+          expect(json.user.email.isVerified).to.be.true;
+          done();
+        });
+    });
+  });
+
   describe('#resetPassword()', () => {
     it(
       '[unauth user] should be able to reset password with a token',
