@@ -41,9 +41,6 @@ class Navigation extends Component {
               <NavLink to="/" onlyActiveOnIndex>
                 <Text id="nav.home" />
               </NavLink>
-              <NavLink to="/todo">
-                <Text id="nav.todo" />
-              </NavLink>
               <NavLink to="/does/not/exist">
                 404
               </NavLink>
