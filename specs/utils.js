@@ -21,13 +21,12 @@ export let clearUsers = (cb) => {
   User.remove({}, cb);
 };
 
-export let prepareUsers = (reqs, cb) => {
+export let prepareUsers = (reqs, userInstances, cb) => {
   reqs.users = [];
   reqs.admins = [];
-  let userInstances = {
-    users: [],
-    admins: [],
-  };
+  userInstances.users = [];
+  userInstances.admins = [];
+
   User(features.users.users[0]).save((err, user) => {
     userInstances.users.push(user);
     User(features.users.admins[0]).save((err, user) => {

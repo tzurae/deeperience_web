@@ -11,6 +11,10 @@ describe('#userAPI', () => {
     users: [],
     admins: [],
   };
+  let userInstances = {
+    users: [],
+    admins: [],
+  };
   let fakeUser;
   let validateUser = (user) => {
     expect(user).to.contain.all.keys(['_id', 'email']);
@@ -18,7 +22,7 @@ describe('#userAPI', () => {
   };
 
   before((done) => {
-    clearUsers(() => prepareUsers(reqs, done));
+    clearUsers(() => prepareUsers(reqs, userInstances, done));
   });
 
   describe('#list()', () => {
@@ -79,7 +83,7 @@ describe('#userAPI', () => {
         });
     });
     after((done) => {
-      clearUsers(() => prepareUsers(reqs, done));
+      clearUsers(() => prepareUsers(reqs, userInstances, done));
     });
   });
 
@@ -120,7 +124,7 @@ describe('#userAPI', () => {
 
   describe('#read()', () => {
     before((done) => {
-      clearUsers(() => prepareUsers(reqs, done));
+      clearUsers(() => prepareUsers(reqs, userInstances, done));
     });
     it('[unauth user] should be rejected', (done) => {
       userAPI(apiEngine)

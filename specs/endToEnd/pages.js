@@ -9,6 +9,10 @@ describe('#Pages', () => {
     users: [],
     admins: [],
   };
+  let userInstances = {
+    users: [],
+    admins: [],
+  };
   let pages = {
     public: [
       '/',
@@ -28,7 +32,7 @@ describe('#Pages', () => {
   };
 
   before((done) => {
-    clearUsers(() => prepareUsers(reqs, done));
+    clearUsers(() => prepareUsers(reqs, userInstances, done));
   });
 
   describe('#Unauth User', () => {
