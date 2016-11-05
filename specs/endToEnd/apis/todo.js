@@ -18,31 +18,29 @@ describe('#todoAPI', () => {
     Todo.remove({}, done);
   });
 
-  describe('#Unauthorized User', () => {
-    describe('#create()', () => {
-      it('should create todo', (done) => {
-        async.eachSeries(fakeTodos, (fakeTodo, cb) => {
-          todoAPI(apiEngine)
-            .create(fakeTodo)
-            .then((json) => {
-              expect(json.todo).to.be.an('object');
-              expect(json.todo.text).to.equal(fakeTodo.text);
-              cb();
-            });
-        }, done);
-      });
-    });
-
-    describe('#list()', () => {
-      it('should list todos', (done) => {
+  describe('#create()', () => {
+    it('should create todo', (done) => {
+      async.eachSeries(fakeTodos, (fakeTodo, cb) => {
         todoAPI(apiEngine)
-          .list({ page: 1 })
+          .create(fakeTodo)
           .then((json) => {
-            expect(json.todos).to.be.an('array');
-            expect(json.todos).to.have.lengthOf(fakeTodos.length);
-            done();
+            expect(json.todo).to.be.an('object');
+            expect(json.todo.text).to.equal(fakeTodo.text);
+            cb();
           });
-      });
+      }, done);
+    });
+  });
+
+  describe('#list()', () => {
+    it('should list todos', (done) => {
+      todoAPI(apiEngine)
+        .list({ page: 1 })
+        .then((json) => {
+          expect(json.todos).to.be.an('array');
+          expect(json.todos).to.have.lengthOf(fakeTodos.length);
+          done();
+        });
     });
   });
 
