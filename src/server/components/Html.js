@@ -6,7 +6,7 @@ const Html = ({ assets, children, initialState }) => (
   <html lang="utf-8">
     <head>
       <meta charSet="utf-8"/>
-      <title>Express-React-HMR-Boilerplate</title>
+      <title>Deeperience</title>
       <link
         rel="stylesheet"
         type="text/css"

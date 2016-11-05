@@ -4,7 +4,7 @@ import Head from '../widgets/Head'
 const AppLayout = ({ children }) => (
   <div>
     <Head
-      title="Express-React-HMR-Boilerplate"
+      title="Deeperience"
       metas={[
         { charset: 'utf-8' },
         {

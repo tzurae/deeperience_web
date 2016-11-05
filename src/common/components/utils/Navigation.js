@@ -32,7 +32,7 @@ class Navigation extends Component {
         <Grid>
           <Navbar.Header>
             <Link className="navbar-brand" to="/" >
-              Logo
+              Deeperience
             </Link>
           </Navbar.Header>
 
@@ -40,9 +40,6 @@ class Navigation extends Component {
             <Navbar.Nav>
               <NavLink to="/" onlyActiveOnIndex>
                 <Text id="nav.home" />
-              </NavLink>
-              <NavLink to="/todo">
-                <Text id="nav.todo" />
               </NavLink>
               <NavLink to="/does/not/exist">
                 404
@@ -58,10 +55,6 @@ class Navigation extends Component {
                 <MenuItem
                   title="繁體中文"
                   onClick={this._setLanguage.bind(this, 'zh-tw')}
-                />
-                <MenuItem
-                  title="Not supported"
-                  onClick={this._setLanguage.bind(this, 'foo-bar')}
                 />
               </Navbar.Dropdown>
               <Navbar.Dropdown

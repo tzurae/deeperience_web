@@ -11,7 +11,7 @@ if (process.env.TRAVIS) {
     host: {
       development: 'http://localhost:3000',
       test: 'http://localhost:5566',
-      production: 'https://express-react-hmr-boilerplate.herokuapp.com',
+      production: 'https://deeperience.herokuapp.com',
     },
     jwt: {
       authentication: {
@@ -30,15 +30,15 @@ if (process.env.TRAVIS) {
     mongo: require('./mongo/credential'),
     // firebase: require('./firebase/credential.json'),
     passportStrategy: {
-      // facebook: require('./passportStrategy/facebook/credential'),
+      facebook: require('./passportStrategy/facebook/credential'),
       // linkedin: require('./passportStrategy/linkedin/credential'),
     },
     // recaptcha: require('./recaptcha/credential'),
-    // nodemailer: require('./nodemailer/credential'),
+    nodemailer: require('./nodemailer/credential'),
     mailOptions: {
       default: {
         subject: 'Untitled Mail',
-        from: 'Express-React-Hmr-Boilerplate <no-reply@express-react-hmr-boilerplate.com>',
+        from: 'Deeperience <no-reply@deeperience.com>',
         text: 'No Text',
         html: '<pre>no html content<pre>',
       },

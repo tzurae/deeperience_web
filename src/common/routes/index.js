@@ -10,7 +10,6 @@ export default (store) => ({
       cb(null, [
         require('./admin').default(store),
         require('./user').default(store),
-        require('./todo').default(store),
         require('./notFound').default(store),
       ])
     })

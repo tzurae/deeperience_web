@@ -4,7 +4,7 @@ import { push } from 'react-router-redux'
 import { Field, reduxForm } from 'redux-form'
 import Alert from 'react-bootstrap/lib/Alert'
 import Button from 'react-bootstrap/lib/Button'
-// import validator from 'validator';
+import validator from 'validator'
 import FormNames from '../../../constants/FormNames'
 import userAPI from '../../../api/user'
 import { validateForm } from '../../../actions/formActions'
@@ -15,16 +15,26 @@ import configs from '../../../../../configs/project/client'
 const validate = (values) => {
   const errors = {}
 
-  // if (values.email && !validator.isEmail(values.email)) {
-  //   errors.email = 'Not an email';
-  // }
-
   if (!values.email) {
     errors.email = 'Required'
+  } else {
+    if (!validator.isEmail(values.email)) {
+      errors.email = 'Not an email'
+    } else {
+      const pattern = /^[a-zA-Z0-9]{6,15}$/g
+      if (!pattern.test(values.email.split('@')[0])) {
+        errors.email = '信箱帳號必須為6至15位英文大小寫與數字組合'
+      }
+    }
   }
 
   if (!values.password) {
     errors.password = 'Required'
+  } else {
+    const pattern = /^(?=.*[0-9])(?=.*[a-zA-Z])[a-zA-Z0-9]{6,20}$/g
+    if (!pattern.test(values.password)) {
+      errors.password = '請輸入6至20碼英文大小寫與數字組合'
+    }
   }
 
   if (configs.recaptcha && !values.recaptcha) {
