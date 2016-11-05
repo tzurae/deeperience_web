@@ -32,9 +32,13 @@ const appPromise = new Promise((resolve, reject) => {
       serviceAccount: configs.firebase,
       databaseURL: clientConfigs.firebase.databaseURL,
     });
-    console.log('[Service] [Firebase]\tenabled');
+    if (env !== 'test') {
+      console.log('[Service] [Firebase]\tenabled');
+    }
   } else {
-    console.log('[Service] [Firebase]\tdisabled');
+    if (env !== 'test') {
+      console.log('[Service] [Firebase]\tdisabled');
+    }
   }
 
   // connect to mongolab
@@ -43,7 +47,9 @@ const appPromise = new Promise((resolve, reject) => {
       if (err) {
         throw err;
       }
-      console.log('[Service] [Mongo]\tenabled');
+      if (env !== 'test') {
+        console.log('[Service] [Mongo]\tenabled');
+      }
       middlewares({ app });
       routes({ app });
       // error handler for the current request
@@ -58,7 +64,9 @@ const appPromise = new Promise((resolve, reject) => {
       return resolve(app);
     });
   } else {
-    console.log('[Service] [Mongo]\tdisabled');
+    if (env !== 'test') {
+      console.log('[Service] [Mongo]\tdisabled');
+    }
     return reject(new Error('MongoDB URI is required'));
   }
 });
