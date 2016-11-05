@@ -160,6 +160,21 @@ describe('#userAPI', () => {
     });
   });
 
+  describe('#updateAvatarURL()', () => {
+    it('[auth user] should update user avatar', (done) => {
+      let newAvatarURL = 'http://imgur.com/gallery/A8eQsll';
+
+      userAPI(new ApiEngine(reqs.users[0]))
+        .updateAvatarURL({
+          avatarURL: newAvatarURL,
+        })
+        .then((json) => {
+          expect(json.user.avatarURL).to.equal(newAvatarURL);
+          done();
+        });
+    });
+  });
+
   describe('#updatePassword()', () => {
     it('[auth user] should be able to change password', (done) => {
       let oldPassword = features.users.users[0].password;
