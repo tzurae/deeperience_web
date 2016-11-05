@@ -3,6 +3,7 @@ import mongoose from 'mongoose'
 import jwt from 'jsonwebtoken'
 import configs from '../../../configs/project/server'
 import Roles from '../../common/constants/Roles'
+import Language from '../../common/constants/languages'
 import paginatePlugin from './plugins/paginate'
 import { SiteSchema } from './Site'
 import { TripSchema } from './Trip'
@@ -64,6 +65,27 @@ const UserSchema = new mongoose.Schema({
   ownTrip: [TripSchema],
   buyTrip: [TripSchema],
   posts: [PostSchema],
+  selfInfo: {
+    vocation: String,
+    selfIntro: String,
+    hobby: String,
+    location: {
+      country: String,
+      province: String,
+      city: String,
+    },
+    language: {
+      type: [{
+        languageName: String,
+        level: String,
+      }],
+      default: [{
+        languageName: Language.language.CHINESE,
+        level: Language.level.MEDIUM,
+      }],
+    },
+  },
+  verifiedGuide: Boolean,
 }, {
   versionKey: false,
   timestamps: {
