@@ -1,11 +1,11 @@
 import chai from 'chai';
-import request from 'superagent';
+import { apiEngine } from '../../utils';
+import todoAPI from '../../../build/common/api/todo';
 import async from 'async';
-import constants from '../../constants';
 import Todo from '../../../build/server/models/Todo';
 let expect = chai.expect;
 
-describe('#todo', () => {
+describe('#todoAPI', () => {
   let fakeTodos = [{
     text: 'this is a fake todo text',
   }, {
@@ -13,46 +13,33 @@ describe('#todo', () => {
   }, {
     text: '~bar~',
   }];
-  let resTodos = [];
 
   before((done) => {
     Todo.remove({}, done);
   });
 
   describe('#Unauthorized User', () => {
-    // POST /api/todo
-    describe('POST /api/todos', () => {
+    describe('#create()', () => {
       it('should create todo', (done) => {
         async.eachSeries(fakeTodos, (fakeTodo, cb) => {
-          request
-            .post(constants.BASE + '/api/todos')
-            .send(fakeTodo)
-            .end((err, res) => {
-              expect(err).to.equal(null);
-              expect(res).to.not.be.undefined;
-              expect(res.status).to.equal(200);
-              expect(res.body.errors).to.be.undefined;
-              expect(res.body.todo).to.be.an('object');
-              expect(res.body.todo.text).to.equal(fakeTodo.text);
-              resTodos.push(res.body.todo);
+          todoAPI(apiEngine)
+            .create(fakeTodo)
+            .then((json) => {
+              expect(json.todo).to.be.an('object');
+              expect(json.todo.text).to.equal(fakeTodo.text);
               cb();
             });
         }, done);
       });
     });
 
-    // GET /api/todo
-    describe('GET /api/todos', () => {
+    describe('#list()', () => {
       it('should list todos', (done) => {
-        request
-          .get(constants.BASE + '/api/todos')
-          .end((err, res) => {
-            expect(err).to.equal(null);
-            expect(res).to.not.be.undefined;
-            expect(res.status).to.equal(200);
-            expect(res.body.errors).to.be.undefined;
-            expect(res.body.todos).to.be.an('array');
-            expect(res.body.todos.length).to.equal(fakeTodos.length);
+        todoAPI(apiEngine)
+          .list({ page: 1 })
+          .then((json) => {
+            expect(json.todos).to.be.an('array');
+            expect(json.todos).to.have.lengthOf(fakeTodos.length);
             done();
           });
       });
