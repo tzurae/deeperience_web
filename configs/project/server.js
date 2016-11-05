@@ -34,7 +34,7 @@ if (process.env.TRAVIS) {
       // linkedin: require('./passportStrategy/linkedin/credential'),
     },
     // recaptcha: require('./recaptcha/credential'),
-    // nodemailer: require('./nodemailer/credential'),
+    nodemailer: require('./nodemailer/credential'),
     mailOptions: {
       default: {
         subject: 'Untitled Mail',
