@@ -188,6 +188,36 @@ describe('#userAPI', () => {
     });
   });
 
+  describe('#resetPassword()', () => {
+    it(
+      '[unauth user] should be able to reset password with a token',
+      (done) => {
+        let newPassword = 'SDFGHJGJK';
+
+        userAPI(apiEngine)
+          .resetPassword({
+            token: userInstances.users[0].toResetPasswordToken(),
+            newPassword: newPassword,
+            newPasswordConfirm: newPassword,
+          })
+          .then((json) => {
+            expect(json.user).to.be.an('object');
+
+            return userAPI(apiEngine)
+              .login({
+                email: userInstances.users[0].email.value,
+                password: newPassword,
+              });
+          })
+          .then((json) => {
+            expect(json.isAuth).to.be.true;
+            expect(json.token).to.be.a('string');
+            done();
+          });
+      }
+    );
+  });
+
   after((done) => {
     clearUsers(done);
   });
