@@ -9,7 +9,14 @@ export const TripSchema = new mongoose.Schema({
   coverPic: String,
   treePic: String,
   tags: { type: [Number], default: [] },
-  startSite: { type: [String], default: [] },
+  startSite: { type: [{
+    depart: {
+      day: Number,
+      hour: Number,
+      minute: Number,
+    },
+    from: String,
+  }], default: [] },
   remind: { type: [String], default: [] },
   stats: {
     star: { type: Number, default: 0 },

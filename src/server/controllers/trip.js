@@ -1,5 +1,6 @@
 import { handleDbError } from '../decorators/handleError'
 import Trip, { TripSchema } from '../models/Trip'
+import Site from '../models/Site'
 import User from '../models/User'
 import filterAttribute from '../utils/filterAttribute'
 import getSaveObject from '../utils/getSaveObject'
@@ -64,23 +65,32 @@ const attributes = getAttrFromSchema(TripSchema)
       { buyTrip: 1 },
       handleDbError(res)((raw) => {
         const allTrip = []
-        const tripWithGuide = raw.buyTrip.map(({ guideId }) => {
-          return User.findOne(
-            { _id: guideId },
-            { buyTrip: 0, email: 0, ownTrip: 0, posts: 0 }, // private data should be blocked out
-            handleDbError(res)((raw) => {})
-          )
-        })
+        const allGuide = raw.buyTrip.map(({ guideId }) => guideId)
+        console.log(allGuide)
+        User.find(
+          { _id: { $in: allGuide } },
+          { name: 1, avatarURL: 1, selfInfo: 1 }, // private data should be blocked out
+          handleDbError(res)(guides => {
+            const siteContent = raw.buyTrip.map(({ allSites }) => {
+              return Site.find(
+                { _id: { $in: allSites } },
+                handleDbError(res)(raw => {})
+              )
+            })
 
-        Promise.all(tripWithGuide).then(guides => {
-          raw.buyTrip.forEach(({ _doc }, index) => {
-            allTrip.push({
-              ..._doc,
-              guideInfo: guides[index],
+            Promise.all(siteContent).then(sites => {
+              console.log(sites)
+              raw.buyTrip.forEach(({ _doc }, index) => {
+                allTrip.push({
+                  ..._doc,
+                  guideInfo: guides[index],
+                  sites: sites[index],
+                })
+              })
+              res.json({ buyTrip: allTrip })
             })
           })
-          res.json({ buyTrip: allTrip })
-        })
+        )
       })
     )
   },
