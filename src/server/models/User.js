@@ -5,7 +5,6 @@ import configs from '../../../configs/project/server'
 import Roles from '../../common/constants/Roles'
 import Language from '../../common/constants/languages'
 import paginatePlugin from './plugins/paginate'
-import { SiteSchema } from './Site'
 import { TripSchema } from './Trip'
 import { PostSchema } from './Post'
 
@@ -61,7 +60,6 @@ const UserSchema = new mongoose.Schema({
     resetPassword: Number,
   },
   lastLoggedInAt: Date,
-  sites: [SiteSchema],
   ownTrip: [TripSchema],
   buyTrip: [TripSchema],
   posts: [PostSchema],

@@ -1,15 +1,11 @@
 import { handleDbError } from '../decorators/handleError'
 import User from '../models/User'
-import Post from '../models/Post'
+import Post, { PostSchema } from '../models/Post'
 import filterAttribute from '../utils/filterAttribute'
 import getSaveObject from '../utils/getSaveObject'
+import getAttrFromSchema from '../utils/getAttrFromSchema'
 
-const attributes = [
-  'people', 'residentFee', 'tripFee', 'allFee',
-  'foodFee', 'hotelType', 'tripLocation', 'tripElement',
-  'foodElement', 'otherDemand', 'bookHotel', 'bookRestaurant',
-  'startDate', 'endDate',
-]
+const attributes = getAttrFromSchema(PostSchema)
 
 export default {
   create(req, res) {
@@ -57,7 +53,6 @@ export default {
   list(req, res) {
     User.findOne(
       { _id: req.user._id },
-
       { posts: 1 },
       handleDbError(res)((raw) => {
         res.json(raw)

@@ -16,7 +16,7 @@ if (process.env.TRAVIS) {
     jwt: {
       authentication: {
         secret: '4eO5viHe23',
-        expiresIn: 60 * 60 * 24 * 3, // in seconds
+        expiresIn: 60 * 60 * 24 * 100, // in seconds
       },
       verifyEmail: {
         secret: 'df5s6sdHdjJdRg56',

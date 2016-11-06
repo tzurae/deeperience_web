@@ -2,6 +2,7 @@ import mongoose from 'mongoose'
 import Sites from '../../common/constants/Sites'
 
 export const SiteSchema = new mongoose.Schema({
+  guideId: { type: String, required: true },
   name: { type: String, default: '' }, // site name
   introduction: { type: String, default: '' },
   audioURL: String,

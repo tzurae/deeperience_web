@@ -1,13 +1,13 @@
 import { handleDbError } from '../decorators/handleError'
-import Trip from '../models/Trip'
+import Trip, { TripSchema } from '../models/Trip'
 import User from '../models/User'
 import filterAttribute from '../utils/filterAttribute'
 import getSaveObject from '../utils/getSaveObject'
+import getAttrFromSchema from '../utils/getAttrFromSchema'
 
-const attributes = ['name', 'allSites', 'backgroundPic', 'dayInfo', 'price',
-  'tags', 'startSite', 'routes']
+const attributes = getAttrFromSchema(TripSchema)
 
-export default {
+;export default {
   create(req, res) {
     let trip = {}
     attributes.forEach(attr => {
@@ -63,7 +63,24 @@ export default {
       { _id: req.user._id },
       { buyTrip: 1 },
       handleDbError(res)((raw) => {
-        res.json(raw)
+        const allTrip = []
+        const tripWithGuide = raw.buyTrip.map(({ guideId }) => {
+          return User.findOne(
+            { _id: guideId },
+            { buyTrip: 0, email: 0, ownTrip: 0, posts: 0 }, // private data should be blocked out
+            handleDbError(res)((raw) => {})
+          )
+        })
+
+        Promise.all(tripWithGuide).then(guides => {
+          raw.buyTrip.forEach(({ _doc }, index) => {
+            allTrip.push({
+              ..._doc,
+              guideInfo: guides[index],
+            })
+          })
+          res.json({ buyTrip: allTrip })
+        })
       })
     )
   },
