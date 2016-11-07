@@ -141,6 +141,19 @@ let BsFormField = ({
         </div>
       ))
     );
+  } else if (type === 'select') {
+    formControl = (
+      <select className="form-control" {...input} {...rest}>
+        {options.map((opt) => (
+          <option
+            key={opt.value}
+            value={opt.value}
+          >
+            {opt.label}
+          </option>
+        ))}
+      </select>
+    );
   } else if (type === 'plaintext') {
     formControl = (
       <p>

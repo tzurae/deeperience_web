@@ -122,6 +122,22 @@ class RegisterForm extends Component {
           }]}
         />
         <Field
+          label="Country"
+          name="country"
+          component={FormField}
+          type="select"
+          options={[{
+            label: 'Taiwan',
+            value: 'TW',
+          }, {
+            label: 'Japan',
+            value: 'JP',
+          }, {
+            label: 'United States',
+            value: 'US',
+          }]}
+        />
+        <Field
           label=" "
           name="isAgreeTerms"
           component={FormField}
