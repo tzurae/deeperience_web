@@ -82,7 +82,7 @@ let BsFormField = ({
       <pre>Recaptcha is disabled</pre>
     );
     /* eslint-enable */
-  } else if (options) {
+  } else if (type === 'radiobutton') {
     // ref: <https://github.com/erikras/redux-form/issues/1857#issuecomment-249890206>
     formControl = (
       options.map((option) => (

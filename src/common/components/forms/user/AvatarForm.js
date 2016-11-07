@@ -212,6 +212,7 @@ class AvatarForm extends Component {
           label="Store avatar into"
           name="storage"
           component={FormField}
+          type="radiobutton"
           options={[{
             label: 'Firebase',
             value: 'firebase',
