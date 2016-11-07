@@ -23,7 +23,7 @@ export const TripSchema = new mongoose.Schema({
     seen: { type: Number, default: 0 },
     purchase: { type: Number, default: 0 },
   },
-  period: {
+  period: [{
     start: {
       type: {
         day: { type: Number, default: 0 },
@@ -38,7 +38,7 @@ export const TripSchema = new mongoose.Schema({
         minute: { type: Number, default: 0 },
       },
     },
-  },
+  }],
   routes: [{
     depart: {
       type: {
@@ -48,7 +48,7 @@ export const TripSchema = new mongoose.Schema({
       },
       required: true,
     },
-    from: String,
+    from: { type: String, default: '' },
     nextStopDepart: {
       type: {
         day: { type: Number, default: 0 },
@@ -57,7 +57,7 @@ export const TripSchema = new mongoose.Schema({
       },
       required: true,
     },
-    to: String,
+    to: { type: String, default: '' },
   }],
 }, {
   versionKey: false,

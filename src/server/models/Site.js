@@ -7,6 +7,27 @@ export const SiteSchema = new mongoose.Schema({
   introduction: { type: String, default: '' },
   audioURL: String,
   tags: [Number],
+  fee: String,
+  recentActivity: [{
+    date: String,
+    content: String,
+  }],
+  openPeriod: [{
+    start: {
+      type: {
+        day: { type: Number, default: 0 },
+        hour: { type: Number, default: 0 },
+        minute: { type: Number, default: 0 },
+      },
+    },
+    end: {
+      type: {
+        day: { type: Number, default: 0 },
+        hour: { type: Number, default: 0 },
+        minute: { type: Number, default: 0 },
+      },
+    },
+  }],
   mapSite: [{
     address: { type: String, default: '' },
     introduction: { type: String, default: '' },
@@ -14,10 +35,6 @@ export const SiteSchema = new mongoose.Schema({
     website: String,
     siteType: { type: String, default: Sites.Other },
     fee: String,
-    recentActivity: [{
-      date: Date,
-      content: String,
-    }],
     remind: String,
     phone: String,
     placeId: { type: String, default: '', require: true },
@@ -28,6 +45,22 @@ export const SiteSchema = new mongoose.Schema({
       },
       required: true,
     },
+    openPeriod: [{
+      start: {
+        type: {
+          day: { type: Number, default: 0 },
+          hour: { type: Number, default: 0 },
+          minute: { type: Number, default: 0 },
+        },
+      },
+      end: {
+        type: {
+          day: { type: Number, default: 0 },
+          hour: { type: Number, default: 0 },
+          minute: { type: Number, default: 0 },
+        },
+      },
+    }],
   }],
 }, {
   versionKey: false,

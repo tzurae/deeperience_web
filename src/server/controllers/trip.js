@@ -66,7 +66,6 @@ const attributes = getAttrFromSchema(TripSchema)
       handleDbError(res)((raw) => {
         const allTrip = []
         const allGuide = raw.buyTrip.map(({ guideId }) => guideId)
-        console.log(allGuide)
         User.find(
           { _id: { $in: allGuide } },
           { name: 1, avatarURL: 1, selfInfo: 1 }, // private data should be blocked out
