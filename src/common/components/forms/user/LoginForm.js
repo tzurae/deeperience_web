@@ -84,6 +84,13 @@ class LoginForm extends Component {
       <Form horizontal onSubmit={handleSubmit(this.handleSubmit)}>
         {submitFailed && error && (<Alert bsStyle="danger">{error}</Alert>)}
         <Field
+          label=" "
+          name="plaintext"
+          component={FormField}
+          type="plaintext"
+          text="Welcome to Express-React-HMR-Boilerplate."
+        />
+        <Field
           label="Email"
           name="email"
           component={FormField}

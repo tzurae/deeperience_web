@@ -62,7 +62,7 @@ BsForm.childContextTypes = {
 };
 
 let BsFormField = ({
-  label, input, type, meta, options, ...rest
+  label, input, type, meta, options, text, ...rest
 }, {
   labelDimensions, fieldDimensions, horizontal,
 }) => {
@@ -99,6 +99,12 @@ let BsFormField = ({
           </label>
         </div>
       ))
+    );
+  } else if (type === 'plaintext') {
+    formControl = (
+      <p>
+        {text}
+      </p>
     );
   } else {
     formControl = (
