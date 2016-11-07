@@ -27,6 +27,10 @@ const validate = (values) => {
     errors.password = 'Required';
   }
 
+  if (!values.isAgreeTerms) {
+    errors.isAgreeTerms = 'Required';
+  }
+
   if (configs.recaptcha && !values.recaptcha) {
     errors.recaptcha = 'Required';
   }
@@ -99,6 +103,30 @@ class RegisterForm extends Component {
           component={FormField}
           type="password"
           placeholder="Password"
+        />
+        <Field
+          label="Skills"
+          name="skills"
+          component={FormField}
+          type="checkboxes"
+          style={{float: 'left', paddingRight: 20}}
+          options={[{
+            label: 'Nodejs',
+            value: 'NODEJS',
+          }, {
+            label: 'Reactjs',
+            value: 'REACTJS',
+          }, {
+            label: 'Redux',
+            value: 'REDUX',
+          }]}
+        />
+        <Field
+          label=" "
+          name="isAgreeTerms"
+          component={FormField}
+          type="checkbox"
+          text={<span>I agree the <a href="#">terms</a></span>}
         />
         <Field
           label=" "

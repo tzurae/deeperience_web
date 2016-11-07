@@ -82,6 +82,47 @@ let BsFormField = ({
       <pre>Recaptcha is disabled</pre>
     );
     /* eslint-enable */
+  } else if (type === 'checkbox') {
+    formControl = (
+      <div className="checkbox">
+        <label>
+          <input
+            type="checkbox"
+            {...input}
+            {...rest}
+          /> {text}
+        </label>
+      </div>
+    );
+  } else if (type === 'checkboxes') {
+    // ref:
+    //  - <https://github.com/erikras/redux-form/issues/1037>
+    formControl = (
+      options.map((option, index) => (
+        <div className="checkbox" key={option.value} {...rest}>
+          <label>
+            <input
+              type="checkbox"
+              name={`${input.name}[${index}]`}
+              value={option.value}
+              checked={input.value.indexOf(option.value) !== -1}
+              onChange={event => {
+                let newValue = [...input.value];
+
+                if (event.target.checked) {
+                  newValue.push(option.value);
+                } else {
+                  newValue.splice(newValue.indexOf(option.value), 1);
+                }
+
+                return input.onChange(newValue);
+              }}
+            />
+            {option.label}
+          </label>
+        </div>
+      ))
+    );
   } else if (type === 'radiobutton') {
     // ref: <https://github.com/erikras/redux-form/issues/1857#issuecomment-249890206>
     formControl = (
