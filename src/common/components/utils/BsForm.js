@@ -106,6 +106,14 @@ let BsFormField = ({
         {text}
       </p>
     );
+  } else if (type === 'textarea') {
+    formControl = (
+      <textarea
+        className="form-control"
+        {...input}
+        {...rest}
+      />
+    );
   } else {
     formControl = (
       <input
