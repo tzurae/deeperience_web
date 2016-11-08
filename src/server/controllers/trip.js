@@ -73,12 +73,12 @@ const attributes = getAttrFromSchema(TripSchema)
             const siteContent = raw.buyTrip.map(({ allSites }) => {
               return Site.find(
                 { _id: { $in: allSites } },
+                { updatedAt: 0, createdAt: 0 },
                 handleDbError(res)(raw => {})
               )
             })
 
             Promise.all(siteContent).then(sites => {
-              console.log(sites)
               raw.buyTrip.forEach(({ _doc }, index) => {
                 allTrip.push({
                   ..._doc,
