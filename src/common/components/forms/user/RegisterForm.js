@@ -78,7 +78,6 @@ class RegisterForm extends Component {
       asyncValidating,
       submitting,
       invalid,
-      registerForm: { values },
     } = this.props;
 
     return (
@@ -144,5 +143,4 @@ export default reduxForm({
   asyncBlurFields: ['email'],
 })(connect(state => ({
   apiEngine: state.apiEngine,
-  registerForm: state.form[FormNames.USER_REGISTER],
 }))(RegisterForm));
