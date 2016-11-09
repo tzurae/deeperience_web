@@ -78,6 +78,7 @@ class RegisterForm extends Component {
       asyncValidating,
       submitting,
       invalid,
+      registerForm: { values },
     } = this.props;
 
     return (
@@ -120,6 +121,22 @@ class RegisterForm extends Component {
             label: 'Redux',
             value: 'REDUX',
           }]}
+        />
+        <Field
+          label="Just A Range Slider"
+          name="slide"
+          component={FormField}
+          type="rangeSlider"
+          min={0}
+          max={100}
+          step={5}
+        />
+        <Field
+          label=" "
+          name="_"
+          component={FormField}
+          type="plaintext"
+          text={`slider value is ${values.slide.min} ~ ${values.slide.max}`}
         />
         <Field
           label="Country"
@@ -165,9 +182,16 @@ class RegisterForm extends Component {
 
 export default reduxForm({
   form: FormNames.USER_REGISTER,
+  initialValues: {
+    slide: {
+      min: 30,
+      max: 40,
+    },
+  },
   validate,
   asyncValidate,
   asyncBlurFields: ['email'],
 })(connect(state => ({
   apiEngine: state.apiEngine,
+  registerForm: state.form[FormNames.USER_REGISTER],
 }))(RegisterForm));
