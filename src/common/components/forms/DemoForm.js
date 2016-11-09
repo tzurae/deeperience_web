@@ -136,6 +136,14 @@ class DemoForm extends Component {
           showClearDate
         />
         <Field
+          label="Airbnb Date Range"
+          name="someAirDateRange"
+          component={FormField}
+          type="airDateRange"
+          displayFormat="YYYY/MM/DD"
+          showClearDates
+        />
+        <Field
           label="Select"
           name="someSelect"
           component={FormField}
