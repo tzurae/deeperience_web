@@ -6,6 +6,7 @@ import Alert from 'react-bootstrap/lib/Alert';
 import Button from 'react-bootstrap/lib/Button';
 import FormNames from '../../constants/FormNames';
 import { Form, FormField, FormFooter } from '../utils/BsForm';
+import Head from '../widgets/Head';
 
 class DemoForm extends Component {
   constructor() {
@@ -41,6 +42,11 @@ class DemoForm extends Component {
 
     return (
       <Form horizontal onSubmit={handleSubmit(this.handleSubmit)}>
+        <Head
+          links={[
+            '/css/react-dates.css',
+          ]}
+        />
         {submitFailed && error && (<Alert bsStyle="danger">{error}</Alert>)}
         <Alert bsStyle="info">
           File object is not going to show here.
@@ -120,6 +126,14 @@ class DemoForm extends Component {
             'range slider value is ' +
             `${values.someRangeSlider.min} ~ ${values.someRangeSlider.max}`
           }
+        />
+        <Field
+          label="Airbnb Single Date"
+          name="someAirSingleDate"
+          component={FormField}
+          type="airSingleDate"
+          displayFormat="YYYY/MM/DD"
+          showClearDate
         />
         <Field
           label="Select"

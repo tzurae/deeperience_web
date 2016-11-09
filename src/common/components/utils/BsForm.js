@@ -6,6 +6,7 @@ import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 import HelpBlock from 'react-bootstrap/lib/HelpBlock';
 import Recaptcha from 'react-google-recaptcha';
 import RangeSlider from './RangeSlider.js';
+import AirSingleDate from './AirSingleDate.js';
 import configs from '../../../../configs/project/client';
 
 class BsForm extends Component {
@@ -158,6 +159,13 @@ let BsFormField = ({
   } else if (type === 'rangeSlider') {
     formControl = (
       <RangeSlider
+        {...rest}
+        input={input}
+      />
+    );
+  } else if (type === 'airSingleDate') {
+    formControl = (
+      <AirSingleDate
         {...rest}
         input={input}
       />
