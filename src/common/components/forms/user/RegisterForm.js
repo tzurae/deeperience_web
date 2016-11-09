@@ -106,55 +106,6 @@ class RegisterForm extends Component {
           placeholder="Password"
         />
         <Field
-          label="Skills"
-          name="skills"
-          component={FormField}
-          type="checkboxes"
-          style={{float: 'left', paddingRight: 20}}
-          options={[{
-            label: 'Nodejs',
-            value: 'NODEJS',
-          }, {
-            label: 'Reactjs',
-            value: 'REACTJS',
-          }, {
-            label: 'Redux',
-            value: 'REDUX',
-          }]}
-        />
-        <Field
-          label="Just A Range Slider"
-          name="slide"
-          component={FormField}
-          type="rangeSlider"
-          min={0}
-          max={100}
-          step={5}
-        />
-        <Field
-          label=" "
-          name="_"
-          component={FormField}
-          type="plaintext"
-          text={`slider value is ${values.slide.min} ~ ${values.slide.max}`}
-        />
-        <Field
-          label="Country"
-          name="country"
-          component={FormField}
-          type="select"
-          options={[{
-            label: 'Taiwan',
-            value: 'TW',
-          }, {
-            label: 'Japan',
-            value: 'JP',
-          }, {
-            label: 'United States',
-            value: 'US',
-          }]}
-        />
-        <Field
           label=" "
           name="isAgreeTerms"
           component={FormField}

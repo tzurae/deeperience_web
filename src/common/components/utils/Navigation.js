@@ -44,6 +44,9 @@ class Navigation extends Component {
               <NavLink to="/todo">
                 <Text id="nav.todo" />
               </NavLink>
+              <NavLink to="/demo/form-element">
+                Form Elements
+              </NavLink>
               <NavLink to="/does/not/exist">
                 404
               </NavLink>
