@@ -67,6 +67,12 @@ Here I take the popular gmail service as example.
   If you are going to run tests on travis or deploy the app on heroku, you might meet the issue that the app cannot login your gmail account from travis/heroku server. You need to manually authorize permissions to your testing/production servers.
   > This is also documented on [nodemailer](https://github.com/nodemailer/nodemailer#tldr-usage-example)
 
+  2.1. Turn on [2-step verification](https://www.google.com/landing/2step/)
+
+  2.2. Get [app passwords](https://support.google.com/accounts/answer/185833?hl=en)
+
+  2.3. Replace config's origin password with app password
+
 ## Config Google Analytics (Optional)
 
 TBD
@@ -250,35 +256,47 @@ git flow feature finish upgrade-mirror
 
 ### v1.0
 
-- [x] [Travis Testing](https://github.com/gocreating/express-react-hmr-boilerplate/commit/e5273694dd5a75305e8a778c0ac660d2e7340916)
-- [x] [Disable submit button when form submitting](https://github.com/gocreating/express-react-hmr-boilerplate/commit/88557e47a978238b0a0dee198a7c86f0aa01145a)
-- [x] [Asynchronous redux-form validation (detect duplicate email)](https://github.com/gocreating/express-react-hmr-boilerplate/commit/4eff5b583b6ab3a70f36441d77805550c4224b14)
-- [x] [Error handling](https://github.com/gocreating/express-react-hmr-boilerplate/commit/ca4db0d594e13950e46b32c5458e1a695136c0c3)
+- [x] Travis Testing ([e527369](../../commit/e5273694dd5a75305e8a778c0ac660d2e7340916))
+- [x] Disable submit button when form submitting ([88557e4](../../commit/88557e47a978238b0a0dee198a7c86f0aa01145a))
+- [x] Asynchronous redux-form validation (detect duplicate email) ([4eff5b5](../../commit/4eff5b583b6ab3a70f36441d77805550c4224b14))
+- [x] Error handling ([ca4db0d](../../commit/ca4db0d594e13950e46b32c5458e1a695136c0c3))
   - reference: [Checklist: Best Practices of Node.JS Error Handling](http://goldbergyoni.com/checklist-best-practices-of-node-js-error-handling/)
-- [x] [PM2 Integration](https://github.com/gocreating/express-react-hmr-boilerplate/commit/e427d7c3a9efea971557b0a2d7a6397b43ca4760)
-- [x] [Rename resource as resource`s`](https://github.com/gocreating/express-react-hmr-boilerplate/commit/039baadff0bdb22e5340153a2a9fe1935f87b7d9)
-- [x] [Todo#Update API & Todo#Edit Functionality](https://github.com/gocreating/express-react-hmr-boilerplate/commit/daf1773e9e1bd43f7ce4b0106a77b03b78ae6c0c)
-- [x] [Pagination Mechanism](https://github.com/gocreating/express-react-hmr-boilerplate/commit/9668797568b5d4b6a3c7f6f47e54dff9ed343802)
-- [x] [Bug Fix for Intl](https://github.com/gocreating/express-react-hmr-boilerplate/commit/49f085f51054c7d8f8a7968f616a8ffc01458094)
+- [x] PM2 Integration ([e427d7c](../../commit/e427d7c3a9efea971557b0a2d7a6397b43ca4760))
+- [x] Rename resource as resource`s` ([039baad](../../commit/039baadff0bdb22e5340153a2a9fe1935f87b7d9))
+- [x] Todo#Update API & Todo#Edit Functionality ([daf1773](../../commit/daf1773e9e1bd43f7ce4b0106a77b03b78ae6c0c))
+- [x] Pagination Mechanism ([9668797](../../commit/9668797568b5d4b6a3c7f6f47e54dff9ed343802))
+- [x] Bug Fix for Intl ([49f085f](../../commit/49f085f51054c7d8f8a7968f616a8ffc01458094))
   - reference:
     1. [Changing locale and FormattedMessage not updated instantly](https://github.com/yahoo/react-intl/issues/371)
     2. [react-redux API docs](https://github.com/reactjs/react-redux/blob/master/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options)
-- [x] [User Roles](https://github.com/gocreating/express-react-hmr-boilerplate/commit/1613ea6e4253f8216946ef0fc1f989293ed60e61)
-- [x] [Admin](https://github.com/gocreating/express-react-hmr-boilerplate/commit/4321886d3c9ecfb047013d1daa76c0ee3ca5412c)
-- [x] [Google analytics](https://github.com/gocreating/express-react-hmr-boilerplate/commit/9af27196c9bc88764e47a79bd5e0044237c6c5a4)
-- [x] [Social Auth for Facebook And LinkedIn](https://github.com/gocreating/express-react-hmr-boilerplate/commit/ccaaa608e7efa0a0c1693ddd7072c0e4e62d003b)
-- [x] [Reacr-Router-Redux Integration](https://github.com/gocreating/express-react-hmr-boilerplate/commit/5e4306d20a4feed40290739d0ca6f7bda1920df5)
-- [x] [Use react-bootstrap in ErrorList](https://github.com/gocreating/express-react-hmr-boilerplate/commit/e44eb0b078fe7d0610c00a5c63b165f2ed31039f)
-- [x] [Google Recaptcha](https://github.com/gocreating/express-react-hmr-boilerplate/commit/5655a29c74fca6f2af4b75538820470b1cfe9619)
-- [x] [Mail Service](https://github.com/gocreating/express-react-hmr-boilerplate/commit/616ca6edfae5ba4df361d5d6dbef0a28571e9ea2)
-- [x] [Email Verification](https://github.com/gocreating/express-react-hmr-boilerplate/commit/5a6ef757d7499cae71f69b605460ff7868d3a5ec)
-- [x] [Edit User Profile](https://github.com/gocreating/express-react-hmr-boilerplate/commit/3b0b475edc9ba05269a15fec96a61930aa154fcc)
+- [x] User Roles ([1613ea6](../../commit/1613ea6e4253f8216946ef0fc1f989293ed60e61))
+- [x] Admin ([4321886](../../commit/4321886d3c9ecfb047013d1daa76c0ee3ca5412c))
+- [x] Google analytics ([9af2719](../../commit/9af27196c9bc88764e47a79bd5e0044237c6c5a4))
+- [x] Social Auth for Facebook And LinkedIn ([ccaaa60](../../commit/ccaaa608e7efa0a0c1693ddd7072c0e4e62d003b))
+- [x] Reacr-Router-Redux Integration ([5e4306d](../../commit/5e4306d20a4feed40290739d0ca6f7bda1920df5))
+- [x] Use react-bootstrap in ErrorList ([e44eb0b](../../commit/e44eb0b078fe7d0610c00a5c63b165f2ed31039f))
+- [x] Google Recaptcha ([5655a29](../../commit/5655a29c74fca6f2af4b75538820470b1cfe9619))
+- [x] Mail Service ([616ca6e](../../commit/616ca6edfae5ba4df361d5d6dbef0a28571e9ea2))
+- [x] Email Verification ([5a6ef75](../../commit/5a6ef757d7499cae71f69b605460ff7868d3a5ec))
+- [x] Edit User Profile ([3b0b475](../../commit/3b0b475edc9ba05269a15fec96a61930aa154fcc))
+- [x] Password Recovery ([91f3eb8](../../commit/91f3eb8242b8ecd96c22de4a0b2de68ae57a11bb))
+- [x] Restrict Local Upload File (size and MIME type) ([0c2461f](../../commit/0c2461f27048e5e667fa9d4d806f2fed38dad20c))
+- [x] Resend Verification Email ([013feb4](../../commit/013feb49884de1977afb4efb4114cd14e05ad30c))
+- [x] Improve Testing ([c6a4172](../../commit/c6a4172f57d56632622cc4178474b853bcafa560))
+- [x] Add Checkbox to Agree Terms ([d6b814d](../../commit/d6b814d78185bfa25c26f37df6e4aa1ec338b48a))
+- [x] Add `plaintext`, `checkbox`, `checkboxes`, `textarea`, `select`, `rangeSlider`, `airSingleDate` and `airDateRange` Type Form Fields ([2bbf17d](../../commit/2bbf17d808deb8783cdef2be815eea3a576dcbd1))
+- [x] Add Hint for Disabled Social Auth Service ([813b089](../../commit/813b0896f57f1487f1235fc0797edec18e3b59f3))
 - [ ] Landing Page
-- [ ] Add License
+- [ ] Translate Languages
+- [x] Add MIT License ([43a5267](../../commit/43a526723a8c831fc307e24689206ecce5dab380))
+- [ ] Add Logo
+- [ ] Update Packages
 
 ### v1.0+
 
 - [ ] Disqus Thread
+- [ ] Restrict Firebase Upload File (size and MIME type)
+- [ ] Information List
 - [ ] [Stripe](https://stripe.com/) Payment System + Donation Button Example
 - [ ] Facebook Messenger Bot Example
 - [ ] Phone Verification
