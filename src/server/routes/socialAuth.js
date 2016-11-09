@@ -11,6 +11,8 @@ export default ({ app }) => {
       passportAuth('facebook'),
       userController.socialLogin
     );
+  } else {
+    app.get('/auth/facebook', socialAuthController.setupError);
   }
   // linkedin
   if (configs.passportStrategy.linkedin) {
@@ -19,5 +21,7 @@ export default ({ app }) => {
       passportAuth('linkedin'),
       userController.socialLogin
     );
+  } else {
+    app.get('/auth/linkedin', socialAuthController.setupError);
   }
 };
