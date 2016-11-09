@@ -11,6 +11,7 @@ export default (store) => ({
         require('./admin').default(store),
         require('./user').default(store),
         require('./todo').default(store),
+        require('./demo').default(store),
         require('./notFound').default(store),
       ]);
     });

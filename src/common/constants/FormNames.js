@@ -1,4 +1,5 @@
 export default {
+  DEMO: 'DEMO',
   USER_REGISTER: 'USER_REGISTER',
   USER_LOGIN: 'USER_LOGIN',
   USER_EDIT: 'USER_EDIT',

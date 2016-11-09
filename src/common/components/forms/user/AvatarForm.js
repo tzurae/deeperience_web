@@ -10,6 +10,7 @@ import userAPI from '../../../api/user';
 import { pushErrors } from '../../../actions/errorActions';
 import { setCookies } from '../../../actions/cookieActions';
 import { Form, FormField, FormFooter } from '../../utils/BsForm';
+import Head from '../../widgets/Head';
 import toRefreshURL from '../../../utils/toRefreshURL';
 
 const initialValues = {
@@ -196,6 +197,11 @@ class AvatarForm extends Component {
 
     return (
       <Form onSubmit={handleSubmit(this.handleSubmit)}>
+        <Head
+          scripts={[
+            'https://www.gstatic.com/firebasejs/live/3.0/firebase.js',
+          ]}
+        />
         {avatarURL && <Image thumbnail src={avatarURL} />}
         <Field
           name="avatar"
@@ -206,6 +212,7 @@ class AvatarForm extends Component {
           label="Store avatar into"
           name="storage"
           component={FormField}
+          type="radiobutton"
           options={[{
             label: 'Firebase',
             value: 'firebase',

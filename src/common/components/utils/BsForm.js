@@ -5,6 +5,9 @@ import Col from 'react-bootstrap/lib/Col';
 import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 import HelpBlock from 'react-bootstrap/lib/HelpBlock';
 import Recaptcha from 'react-google-recaptcha';
+import RangeSlider from './RangeSlider.js';
+import AirSingleDate from './AirSingleDate.js';
+import AirDateRange from './AirDateRange.js';
 import configs from '../../../../configs/project/client';
 
 class BsForm extends Component {
@@ -62,7 +65,7 @@ BsForm.childContextTypes = {
 };
 
 let BsFormField = ({
-  label, input, type, meta, options, ...rest
+  label, input, type, meta, options, text, ...rest
 }, {
   labelDimensions, fieldDimensions, horizontal,
 }) => {
@@ -82,7 +85,48 @@ let BsFormField = ({
       <pre>Recaptcha is disabled</pre>
     );
     /* eslint-enable */
-  } else if (options) {
+  } else if (type === 'checkbox') {
+    formControl = (
+      <div className="checkbox">
+        <label>
+          <input
+            type="checkbox"
+            {...input}
+            {...rest}
+          /> {text}
+        </label>
+      </div>
+    );
+  } else if (type === 'checkboxes') {
+    // ref:
+    //  - <https://github.com/erikras/redux-form/issues/1037>
+    formControl = (
+      options.map((option, index) => (
+        <div className="checkbox" key={option.value} {...rest}>
+          <label>
+            <input
+              type="checkbox"
+              name={`${input.name}[${index}]`}
+              value={option.value}
+              checked={input.value.indexOf(option.value) !== -1}
+              onChange={event => {
+                let newValue = [...input.value];
+
+                if (event.target.checked) {
+                  newValue.push(option.value);
+                } else {
+                  newValue.splice(newValue.indexOf(option.value), 1);
+                }
+
+                return input.onChange(newValue);
+              }}
+            />
+            {option.label}
+          </label>
+        </div>
+      ))
+    );
+  } else if (type === 'radiobutton') {
     // ref: <https://github.com/erikras/redux-form/issues/1857#issuecomment-249890206>
     formControl = (
       options.map((option) => (
@@ -99,6 +143,54 @@ let BsFormField = ({
           </label>
         </div>
       ))
+    );
+  } else if (type === 'select') {
+    formControl = (
+      <select className="form-control" {...input} {...rest}>
+        {options.map((opt) => (
+          <option
+            key={opt.value}
+            value={opt.value}
+          >
+            {opt.label}
+          </option>
+        ))}
+      </select>
+    );
+  } else if (type === 'rangeSlider') {
+    formControl = (
+      <RangeSlider
+        {...rest}
+        input={input}
+      />
+    );
+  } else if (type === 'airSingleDate') {
+    formControl = (
+      <AirSingleDate
+        {...rest}
+        input={input}
+      />
+    );
+  } else if (type === 'airDateRange') {
+    formControl = (
+      <AirDateRange
+        {...rest}
+        input={input}
+      />
+    );
+  } else if (type === 'plaintext') {
+    formControl = (
+      <p>
+        {text}
+      </p>
+    );
+  } else if (type === 'textarea') {
+    formControl = (
+      <textarea
+        className="form-control"
+        {...input}
+        {...rest}
+      />
     );
   } else {
     formControl = (

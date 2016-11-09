@@ -27,6 +27,10 @@ const validate = (values) => {
     errors.password = 'Required';
   }
 
+  if (!values.isAgreeTerms) {
+    errors.isAgreeTerms = 'Required';
+  }
+
   if (configs.recaptcha && !values.recaptcha) {
     errors.recaptcha = 'Required';
   }
@@ -74,6 +78,7 @@ class RegisterForm extends Component {
       asyncValidating,
       submitting,
       invalid,
+      registerForm: { values },
     } = this.props;
 
     return (
@@ -102,6 +107,13 @@ class RegisterForm extends Component {
         />
         <Field
           label=" "
+          name="isAgreeTerms"
+          component={FormField}
+          type="checkbox"
+          text={<span>I agree the <a href="#">terms</a></span>}
+        />
+        <Field
+          label=" "
           name="recaptcha"
           component={FormField}
           type="recaptcha"
@@ -121,9 +133,16 @@ class RegisterForm extends Component {
 
 export default reduxForm({
   form: FormNames.USER_REGISTER,
+  initialValues: {
+    slide: {
+      min: 30,
+      max: 40,
+    },
+  },
   validate,
   asyncValidate,
   asyncBlurFields: ['email'],
 })(connect(state => ({
   apiEngine: state.apiEngine,
+  registerForm: state.form[FormNames.USER_REGISTER],
 }))(RegisterForm));
