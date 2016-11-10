@@ -1,17 +1,44 @@
 import mongoose from 'mongoose'
 
 export const TripSchema = new mongoose.Schema({
-  name: { type: String, default: '' }, // trip name
   guideId: { type: String, required: true },
-  allSites: { type: String, default: [] },
-  backgroundPic: String,
-  dayInfo: { type: Number, required: 0 }, // how many days
-  price: { type: Number, default: 0 },
-  purchase: { type: Number, default: 0 },
-  star: { type: Number, default: 0 },
-  seen: { type: Number, default: 0 },
-  tags: { type: [Number], default: 0 },
-  startSite: { type: [String], default: 0 },
+  name: { type: String, default: '' }, // trip name
+  allSites: { type: [String], default: [] },
+  price: { type: Number, default: 0, required: true },
+  dayInfo: { type: Number, required: true }, // how many days
+  coverPic: String,
+  treePic: String,
+  tags: { type: [Number], default: [] },
+  startSite: { type: [{
+    depart: {
+      day: Number,
+      hour: Number,
+      minute: Number,
+    },
+    from: String,
+  }], default: [] },
+  remind: { type: [String], default: [] },
+  stats: {
+    star: { type: Number, default: 0 },
+    seen: { type: Number, default: 0 },
+    purchase: { type: Number, default: 0 },
+  },
+  period: [{
+    start: {
+      type: {
+        day: { type: Number, default: 0 },
+        hour: { type: Number, default: 0 },
+        minute: { type: Number, default: 0 },
+      },
+    },
+    end: {
+      type: {
+        day: { type: Number, default: 0 },
+        hour: { type: Number, default: 0 },
+        minute: { type: Number, default: 0 },
+      },
+    },
+  }],
   routes: [{
     depart: {
       type: {
@@ -21,7 +48,7 @@ export const TripSchema = new mongoose.Schema({
       },
       required: true,
     },
-    from: String,
+    from: { type: String, default: '' },
     nextStopDepart: {
       type: {
         day: { type: Number, default: 0 },
@@ -30,7 +57,7 @@ export const TripSchema = new mongoose.Schema({
       },
       required: true,
     },
-    to: String,
+    to: { type: String, default: '' },
   }],
 }, {
   versionKey: false,

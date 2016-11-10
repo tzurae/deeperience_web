@@ -99,6 +99,7 @@
     "express": "^4.13.4",
     "firebase": "^3.0.2",
     "jsonwebtoken": "^5.7.0",
+    "key-mirror": "^1.0.1",
     "mkdirp": "^0.5.1",
     "moment": "^2.13.0",
     "mongoose": "^4.4.12",

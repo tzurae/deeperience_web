@@ -1,10 +1,8 @@
 import { handleDbError } from '../decorators/handleError'
-import Site from '../models/Site'
-import User from '../models/User'
-import filterAttribute from '../utils/filterAttribute'
-import getSaveObject from '../utils/getSaveObject'
+import Site, { SiteSchema } from '../models/Site'
+import getAttrFromSchema from '../utils/getAttrFromSchema'
 
-const attributes = ['name', 'introduction', 'audioURL', 'mapSite']
+const attributes = getAttrFromSchema(SiteSchema)
 
 export default {
   create(req, res) {
@@ -18,39 +16,21 @@ export default {
       createdAt: new Date(),
     })
 
-    User.update(
-      { _id: req.params.userId },
-      { $addToSet: { sites: site } },
-      handleDbError(res)((raw) => {
+    site.save(
+      handleDbError(res)((site) => {
         res.json({
-          finish: raw.ok === 1,
-          modify: raw.nModified === 1,
+          site,
         })
       })
     )
   },
 
   update(req, res) {
-    const save = {
-      ...filterAttribute(req.body, attributes),
-      updatedAt: new Date(),
-    }
-    User.update(
-      { _id: req.params.userId, 'sites._id': req.params.siteId },
-      { $set: getSaveObject(save, 'sites.$.') },
-      handleDbError(res)((raw) => {
-        res.json({
-          finish: raw.ok === 1,
-          modify: raw.nModified === 1,
-        })
-      })
-    )
   },
 
   list(req, res) {
-    User.findOne(
-      { _id: req.params.userId },
-      { sites: 1 },
+    Site.find(
+      { guideId: req.user._id },
       handleDbError(res)((raw) => {
         res.json(raw)
       })

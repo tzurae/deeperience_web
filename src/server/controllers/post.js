@@ -1,22 +1,20 @@
 import { handleDbError } from '../decorators/handleError'
 import User from '../models/User'
-import Post from '../models/Post'
+import Post, { PostSchema } from '../models/Post'
 import filterAttribute from '../utils/filterAttribute'
 import getSaveObject from '../utils/getSaveObject'
+import getAttrFromSchema from '../utils/getAttrFromSchema'
 
-const attributes = [
-  'people', 'residentFee', 'tripFee', 'allFee',
-  'foodFee', 'hotelType', 'tripLocation', 'tripElement',
-  'foodElement', 'otherDemand', 'bookHotel', 'bookRestaurant',
-  'startDate', 'endDate',
-]
+const attributes = getAttrFromSchema(PostSchema)
 
 export default {
   create(req, res) {
+    console.log(req.body)
     let post = {}
     attributes.forEach(attr => {
       post[attr] = req.body[attr]
     })
+
     post = Post({
       ...post,
       updatedAt: new Date(),
@@ -24,7 +22,7 @@ export default {
     })
 
     User.update(
-      { _id: req.params.userId },
+      { _id: req.user._id },
       { $addToSet: { posts: post } },
       handleDbError(res)((raw) => {
         res.json({
@@ -41,7 +39,7 @@ export default {
       updatedAt: new Date(),
     }
     User.update(
-      { _id: req.params.userId, 'posts._id': req.params.postId },
+      { _id: req.user._id, 'posts._id': req.params.postId },
       { $set: getSaveObject(save, 'posts.$.') },
       handleDbError(res)((raw) => {
         res.json({
@@ -54,7 +52,7 @@ export default {
 
   list(req, res) {
     User.findOne(
-      { _id: req.params.userId },
+      { _id: req.user._id },
       { posts: 1 },
       handleDbError(res)((raw) => {
         res.json(raw)

@@ -1,13 +1,14 @@
 import { handleDbError } from '../decorators/handleError'
-import Trip from '../models/Trip'
+import Trip, { TripSchema } from '../models/Trip'
+import Site from '../models/Site'
 import User from '../models/User'
 import filterAttribute from '../utils/filterAttribute'
 import getSaveObject from '../utils/getSaveObject'
+import getAttrFromSchema from '../utils/getAttrFromSchema'
 
-const attributes = ['name', 'allSites', 'backgroundPic', 'dayInfo', 'price',
-  'tags', 'startSite', 'routes']
+const attributes = getAttrFromSchema(TripSchema)
 
-export default {
+;export default {
   create(req, res) {
     let trip = {}
     attributes.forEach(attr => {
@@ -20,7 +21,7 @@ export default {
     })
 
     User.update(
-      { _id: req.params.userId },
+      { _id: req.user._id },
       { $addToSet: { ownTrip: trip } },
       handleDbError(res)((raw) => {
         res.json({
@@ -37,7 +38,7 @@ export default {
       updatedAt: new Date(),
     }
     User.update(
-      { _id: req.params.userId, 'ownTrip._id': req.params.tripId },
+      { _id: req.user._id, 'ownTrip._id': req.params.tripId },
       { $set: getSaveObject(save, 'ownTrip.$.') },
       handleDbError(res)((raw) => {
         res.json({
@@ -50,7 +51,7 @@ export default {
 
   listOwnTrip(req, res) {
     User.findOne(
-      { _id: req.params.userId },
+      { _id: req.user._id },
       { ownTrip: 1 },
       handleDbError(res)((raw) => {
         res.json(raw)
@@ -60,10 +61,35 @@ export default {
 
   listBuyTrip(req, res) {
     User.findOne(
-      { _id: req.params.userId },
+      { _id: req.user._id },
       { buyTrip: 1 },
       handleDbError(res)((raw) => {
-        res.json(raw)
+        const allTrip = []
+        const allGuide = raw.buyTrip.map(({ guideId }) => guideId)
+        User.find(
+          { _id: { $in: allGuide } },
+          { name: 1, avatarURL: 1, selfInfo: 1 }, // private data should be blocked out
+          handleDbError(res)(guides => {
+            const siteContent = raw.buyTrip.map(({ allSites }) => {
+              return Site.find(
+                { _id: { $in: allSites } },
+                { updatedAt: 0, createdAt: 0 },
+                handleDbError(res)(raw => {})
+              )
+            })
+
+            Promise.all(siteContent).then(sites => {
+              raw.buyTrip.forEach(({ _doc }, index) => {
+                allTrip.push({
+                  ..._doc,
+                  guideInfo: guides[index],
+                  sites: sites[index],
+                })
+              })
+              res.json({ buyTrip: allTrip })
+            })
+          })
+        )
       })
     )
   },

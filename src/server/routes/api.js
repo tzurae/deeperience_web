@@ -121,23 +121,23 @@ export default ({ app }) => {
   app.delete('/api/todos/:id', todoController.remove)
 
   // trip for customer
-  app.get('/api/trips/buy/:userId', authRequired, tripController.listBuyTrip)
+  app.get('/api/trips/buy', authRequired, tripController.listBuyTrip)
 
   // trip for guide
-  app.get('/api/trips/own/:userId', authRequired, tripController.listOwnTrip)
-  app.post('/api/trips/:userId', authRequired, bodyParser.json, tripController.create)
-  app.put('/api/trips/:userId/:tripId', authRequired, bodyParser.json, tripController.update)
-  app.delete('/api/trips/:userId/:tripId', authRequired, bodyParser.json, tripController.remove)
+  app.get('/api/trips/own', authRequired, tripController.listOwnTrip)
+  app.post('/api/trips', authRequired, bodyParser.json, tripController.create)
+  app.put('/api/trips/:tripId', authRequired, bodyParser.json, tripController.update)
+  app.delete('/api/trips/:tripId', authRequired, bodyParser.json, tripController.remove)
 
   // site
-  app.get('/api/sites/:userId', authRequired, siteController.list)
-  app.post('/api/sites/:userId', authRequired, bodyParser.json, siteController.create)
-  app.put('/api/sites/:userId/:siteId', authRequired, bodyParser.json, siteController.update)
-  app.delete('/api/sites/:userId/:siteId', authRequired, siteController.remove)
+  app.get('/api/sites', authRequired, siteController.list)
+  app.post('/api/sites', authRequired, bodyParser.json, siteController.create)
+  app.put('/api/sites/:siteId', authRequired, bodyParser.json, siteController.update)
+  app.delete('/api/sites/:siteId', authRequired, siteController.remove)
 
   // post
-  app.get('/api/posts/:userId', authRequired, postController.list)
-  app.post('/api/posts/:userId', authRequired, bodyParser.json, postController.create)
-  app.put('/api/posts/:userId/:postId', authRequired, bodyParser.json, postController.update)
-  app.delete('/api/posts/:userId/:postId', authRequired, postController.remove)
+  app.get('/api/posts/', authRequired, postController.list)
+  app.post('/api/posts/', authRequired, bodyParser.json, postController.create)
+  app.put('/api/posts/:postId', authRequired, bodyParser.json, postController.update)
+  app.delete('/api/posts/:postId', authRequired, postController.remove)
 }
