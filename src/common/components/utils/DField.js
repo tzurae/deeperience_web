@@ -8,7 +8,7 @@ const style = {
     fontSize: '1.1em',
   },
   field: {
-    marginTop: '2px',
+    marginTop: '-8px',
     width: '20em',
   },
 }
