@@ -13,7 +13,7 @@ import Text from '../widgets/Text'
 
 const style = {
   nav: {
-    backgroundColor: '#4E5865',
+    backgroundColor: 'rgba(78, 88, 101, 0.5)',
     borderWidth: '0px',
   },
   text: {
@@ -106,20 +106,18 @@ class Navigation extends Component {
                   <NavLink to="/user/register">
                     <Text id="nav.user.register" />
                   </NavLink>}
-                {/*
-                  {isAuth && isAdmin &&
-                    <NavLink to="/admin">
-                      Admin System
-                    </NavLink>}
-                  {isAuth &&
-                    <NavLink to="/user/me">
-                      <Text id="nav.user.profile" />
-                    </NavLink>}
-                  {isAuth &&
-                    <NavLink to="/user/logout">
-                      <Text id="nav.user.logout" />
-                    </NavLink>}
-                */}
+                {isAuth && isAdmin &&
+                  <NavLink to="/admin">
+                    Admin System
+                  </NavLink>}
+                {isAuth &&
+                  <NavLink to="/user/me">
+                    <Text id="nav.user.profile" />
+                  </NavLink>}
+                {isAuth &&
+                  <NavLink to="/user/logout">
+                    <Text id="nav.user.logout" />
+                  </NavLink>}
               </Navbar.Dropdown>
             </Navbar.Nav>
           </Navbar.Body>
