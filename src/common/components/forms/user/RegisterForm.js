@@ -5,6 +5,7 @@ import { Field, reduxForm } from 'redux-form'
 import Alert from 'react-bootstrap/lib/Alert'
 import Button from 'react-bootstrap/lib/Button'
 import validator from 'validator'
+import DField from '../../utils/DField'
 import FormNames from '../../../constants/FormNames'
 import userAPI from '../../../api/user'
 import { validateForm } from '../../../actions/formActions'
@@ -41,6 +42,12 @@ const validate = (values) => {
     errors.recaptcha = 'Required'
   }
 
+  if (values.password && values.ensurePassword){
+    if (values.password !== values.ensurePassword){
+      errors.ensurePassword = '確認密碼與密碼不相同'
+    }
+  }
+
   return errors
 }
 
@@ -53,6 +60,32 @@ const asyncValidate = (values, dispatch) => {
         throw validationError
       }
     })
+}
+
+const style = {
+  bg: {
+    paddingTop: '10px',
+    paddingBottom: '10px',
+    borderRadius: '20px',
+    backgroundColor: 'rgba(34, 34, 34, 0.55)',
+  },
+  title: {
+    color: 'white',
+    fontSize: '20px',
+    textAlign: 'center',
+    borderBottom: '1px solid #797D80',
+    marginBottom: '25px',
+    paddingBottom: '10px'
+  },
+  submit: {
+    width: '8em',
+    color: 'white',
+    fontSize: '1.2em',
+    marginTop: '40px',
+    marginLeft: '0.9em',
+    borderRadius: '50px',
+    backgroundColor: '#FF864F',
+  },
 }
 
 class RegisterForm extends Component {
@@ -87,44 +120,61 @@ class RegisterForm extends Component {
     } = this.props
 
     return (
-      <Form horizontal onSubmit={handleSubmit(this.handleSubmit)}>
-        {submitFailed && error && (<Alert bsStyle="danger">{error}</Alert>)}
-        <Field
-          label="Name"
-          name="name"
-          component={FormField}
-          type="text"
-          placeholder="Name"
-        />
-        <Field
-          label="Email"
-          name="email"
-          component={FormField}
-          type="text"
-          placeholder="Email"
-        />
-        <Field
-          label="Password"
-          name="password"
-          component={FormField}
-          type="password"
-          placeholder="Password"
-        />
-        <Field
-          label=" "
-          name="recaptcha"
-          component={FormField}
-          type="recaptcha"
-        />
-        <FormFooter>
-          <Button
-            type="submit"
-            disabled={pristine || !!asyncValidating || submitting || invalid}
-          >
-            Register
-          </Button>
-        </FormFooter>
-      </Form>
+      <div style={style.bg}>
+        <div style={style.title}> 註   冊 </div>
+        <Form horizontal onSubmit={handleSubmit(this.handleSubmit)} style={{marginLeft: '30px'}}>
+          {submitFailed && error && (<Alert bsStyle="danger">{error}</Alert>)}
+          <div style={{paddingLeft: '11px'}}>
+            <DField name="name" />
+            <DField name="email" />
+            <DField name="password" type="password" />
+            <DField name="ensurePassword" type="password" />
+            {/*
+              <Field
+                label="Name"
+                name="name"
+                component={FormField}
+                type="text"
+                placeholder="Name"
+              />
+              <Field
+                label="Email"
+                name="email"
+                component={FormField}
+                type="text"
+                placeholder="Email"
+              />
+              <Field
+                label="Password"
+                name="password"
+                component={FormField}
+                type="password"
+                placeholder="Password"
+              />
+              <Field
+                label=" "
+                name="recaptcha"
+                component={FormField}
+                type="recaptcha"
+              />
+            */}
+            <input type="checkbox" name="memberShip" value="memberShip" />
+            <span style={{color: 'white'}}> 已詳細閱讀 </span>
+            <a href="http://www.w3schools.com/html/">會員條款</a>
+            <br />
+            <FormFooter>
+              <Button
+                type="submit"
+                onClick={this.props.openModal}
+                disabled={pristine || !!asyncValidating || submitting || invalid}
+                style={style.submit}
+              >
+                註冊
+              </Button>
+            </FormFooter>
+          </div>
+        </Form>
+      </div>
     )
   }
 };
