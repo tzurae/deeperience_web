@@ -9,6 +9,12 @@ import RegisterForm from '../../forms/user/RegisterForm'
 import SocialAuthButtonList from '../../utils/SocialAuthButtonList'
 import BackGround from '../../utils/BackGround'
 
+const style = {
+  form: {
+    marginTop: '55px'
+  }
+}
+
 class RegisterPage extends Component {
   constructor(props){
     super(props)
@@ -68,13 +74,14 @@ class RegisterPage extends Component {
     return (
       <PageLayout>
         <BackGround src="/img/river_dark.jpg" />
-        <PageHeader>Register</PageHeader>
         <Row>
           <Col md={4}>
           </Col>
           <Col md={4}>
-            <RegisterForm openModal={this.openModal} />
-            {this.renderModal()}
+            <div style={style.form}>
+              <RegisterForm openModal={this.openModal} />
+              {this.renderModal()}
+            </div>
           </Col>
           <Col md={4}>
           </Col>
