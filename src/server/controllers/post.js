@@ -9,7 +9,6 @@ const attributes = getAttrFromSchema(PostSchema)
 
 export default {
   create(req, res) {
-    console.log(req.body)
     let post = {}
     attributes.forEach(attr => {
       post[attr] = req.body[attr]

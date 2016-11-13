@@ -2,6 +2,7 @@ import passportAuth from '../middlewares/passportAuth'
 import socialAuthController from '../controllers/socialAuth'
 import userController from '../controllers/user'
 import configs from '../../../configs/project/server'
+import bodyParser from '../middlewares/bodyParser'
 
 export default ({ app }) => {
   // facebook
@@ -10,6 +11,11 @@ export default ({ app }) => {
     app.get('/auth/facebook/callback',
       passportAuth('facebook'),
       userController.socialLogin
+    )
+    app.post('/auth/facebook/phone',
+      bodyParser.json,
+      socialAuthController.createUser,
+      userController.socialLoginPhone,
     )
   }
   // linkedin

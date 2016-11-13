@@ -51,7 +51,11 @@ const UserSchema = new mongoose.Schema({
   },
   social: {
     profile: {
-      facebook: Object,
+      facebook: {
+        main: Object,
+        likes: Array,
+        friends: Array,
+      },
       linkedin: Object,
     },
   },
@@ -84,6 +88,11 @@ const UserSchema = new mongoose.Schema({
     },
   },
   verifiedGuide: Boolean,
+  birthday: {
+    year: Number,
+    month: Number,
+    day: Number,
+  },
 }, {
   versionKey: false,
   timestamps: {

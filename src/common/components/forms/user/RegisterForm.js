@@ -20,11 +20,15 @@ const validate = (values) => {
   } else {
     if (!validator.isEmail(values.email)) {
       errors.email = 'Not an email'
-    } else {
-      const pattern = /^[a-zA-Z0-9]{6,15}$/g
-      if (!pattern.test(values.email.split('@')[0])) {
-        errors.email = '信箱帳號必須為6至15位英文大小寫與數字組合'
-      }
+    }
+  }
+
+  if (!values.name) {
+    errors.name = 'Required'
+  } else {
+    const pattern = /^[a-zA-Z0-9]{6,15}$/g
+    if (!pattern.test(values.name)) {
+      errors.name = '暱稱必須為6至15位英文大小寫與數字組合'
     }
   }
 

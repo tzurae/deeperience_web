@@ -135,6 +135,23 @@ export default {
     }))
   },
 
+  socialLoginPhone(req, res) {
+    const { user } = req
+    if (!user) {
+      res.json({
+        modify: false,
+      })
+    }
+
+    user.lastLoggedInAt = new Date()
+    user.save(handleDbError(res)((user) => {
+      res.json({
+        user,
+        modify: true,
+      })
+    }))
+  },
+
   logout(req, res) {
     req.logout()
     res.json({})

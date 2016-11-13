@@ -43,11 +43,11 @@ if (process.env.TRAVIS) {
         html: '<pre>no html content<pre>',
       },
       development: {
-        to: 'gocreating@gmail.com',
+        to: 'i314i@yahoo.com.tw',
       },
       test: {
         to: 'dont_sent_to_me_when_every_test@gmail.com',
       },
     },
-  };
+  }
 }
