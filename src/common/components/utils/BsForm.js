@@ -5,9 +5,9 @@ import Col from 'react-bootstrap/lib/Col';
 import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 import HelpBlock from 'react-bootstrap/lib/HelpBlock';
 import Recaptcha from 'react-google-recaptcha';
-import RangeSlider from './RangeSlider.js';
-import AirSingleDate from './AirSingleDate.js';
-import AirDateRange from './AirDateRange.js';
+import RangeSlider from '../fields/bases/RangeSlider';
+import AirSingleDate from '../fields/bases/AirSingleDate.js';
+import AirDateRange from '../fields/bases/AirDateRange.js';
 import configs from '../../../../configs/project/client';
 
 class BsForm extends Component {
