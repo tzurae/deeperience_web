@@ -6,7 +6,12 @@ import Button from 'react-bootstrap/lib/Button';
 import FormNames from '../../../constants/FormNames';
 import userAPI from '../../../api/user';
 import { pushErrors } from '../../../actions/errorActions';
-import { Form, FormField, FormFooter } from '../../utils/BsForm';
+import { BsInput as Input } from '../../fields/adapters';
+import {
+  BsForm as Form,
+  BsFormFooter as FormFooter,
+  BsField as FormField,
+} from '../../fields/widgets';
 
 export const validate = (values) => {
   const errors = {};
@@ -80,27 +85,35 @@ class ChangePasswordForm extends Component {
     } = this.props;
 
     return (
-      <Form horizontal onSubmit={handleSubmit(this.handleSubmit)}>
+      <Form
+        defaultHorizontal={false}
+        defaultLabelDimensions={{ sm: 12 }}
+        defaultFieldDimensions={{ sm: 12 }}
+        onSubmit={handleSubmit(this.handleSubmit)}
+      >
         {submitSucceeded && (<Alert bsStyle="success">Password Changed</Alert>)}
         {submitFailed && error && (<Alert bsStyle="danger">{error}</Alert>)}
         <Field
-          label="Old Password"
           name="oldPassword"
           component={FormField}
+          label="Old Password"
+          adapter={Input}
           type="password"
           placeholder="Old Password"
         />
         <Field
-          label="New Password"
           name="newPassword"
           component={FormField}
+          label="New Password"
+          adapter={Input}
           type="password"
           placeholder="New Password"
         />
         <Field
-          label="New Password Confirm"
           name="newPasswordConfirm"
           component={FormField}
+          label="New Password Confirm"
+          adapter={Input}
           type="password"
           placeholder="New Password Confirm"
         />
