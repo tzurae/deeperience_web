@@ -9,7 +9,16 @@ import FormNames from '../../../constants/FormNames';
 import userAPI from '../../../api/user';
 import { validateForm } from '../../../actions/formActions';
 import { pushErrors } from '../../../actions/errorActions';
-import { Form, FormField, FormFooter } from '../../utils/BsForm';
+import { Recaptcha } from '../../fields/bases';
+import {
+  BsInput as Input,
+  BsCheckbox as Checkbox,
+} from '../../fields/adapters';
+import {
+  BsForm as Form,
+  BsFormFooter as FormFooter,
+  BsField as FormField,
+} from '../../fields/widgets';
 import configs from '../../../../../configs/project/client';
 
 const validate = (values) => {
@@ -81,41 +90,44 @@ class RegisterForm extends Component {
     } = this.props;
 
     return (
-      <Form horizontal onSubmit={handleSubmit(this.handleSubmit)}>
+      <Form onSubmit={handleSubmit(this.handleSubmit)}>
         {submitFailed && error && (<Alert bsStyle="danger">{error}</Alert>)}
         <Field
-          label="Name"
           name="name"
           component={FormField}
+          label="Name"
+          adapter={Input}
           type="text"
           placeholder="Name"
         />
         <Field
-          label="Email"
           name="email"
           component={FormField}
+          label="Email"
+          adapter={Input}
           type="text"
           placeholder="Email"
         />
         <Field
-          label="Password"
           name="password"
           component={FormField}
+          label="Password"
+          adapter={Input}
           type="password"
           placeholder="Password"
         />
         <Field
-          label=" "
           name="isAgreeTerms"
           component={FormField}
-          type="checkbox"
+          label=""
+          adapter={Checkbox}
           text={<span>I agree the <a href="#">terms</a></span>}
         />
         <Field
-          label=" "
           name="recaptcha"
           component={FormField}
-          type="recaptcha"
+          label=""
+          adapter={Recaptcha}
         />
         <FormFooter>
           <Button
