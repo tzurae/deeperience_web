@@ -10,7 +10,7 @@ const style = {
 }
 
 const BackGround = ({ src, color, children }) => {
-  if(src){
+  if (src) {
     return <img src={src} style={style} />
   } else {
     color = color || 'white'
@@ -18,10 +18,10 @@ const BackGround = ({ src, color, children }) => {
       backgroundColor: color,
     }
     return (
-      <div style={{...style, ...extraStyle}}>
-        {children ? children : null}
+      <div style={{ ...style, ...extraStyle }}>
+        {children}
       </div>
-    ) 
+    )
   }
 }
 

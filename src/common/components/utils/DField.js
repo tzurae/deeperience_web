@@ -13,7 +13,7 @@ const style = {
   },
 }
 
-const DField = ({name, type}) => {
+const DField = ({ name, type }) => {
   return (
     <div style={style.div}>
       <p> {name} </p>

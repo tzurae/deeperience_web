@@ -1,18 +1,18 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
-import PageHeader from 'react-bootstrap/lib/PageHeader'
-import Modal from 'react-bootstrap/lib/Modal'
+// import PageHeader from 'react-bootstrap/lib/PageHeader'
+// import Modal from 'react-bootstrap/lib/Modal'
 import Row from 'react-bootstrap/lib/Row'
 import Col from 'react-bootstrap/lib/Col'
 import Button from 'react-bootstrap/lib/Button'
-import Thumbnail from 'react-bootstrap/lib/Thumbnail'
+// import Thumbnail from 'react-bootstrap/lib/Thumbnail'
 import userAPI from '../../../api/user'
 import { pushErrors } from '../../../actions/errorActions'
 import Head from '../../widgets/Head'
 import PageLayout from '../../layouts/PageLayout'
-import Time from '../../widgets/Time'
-import VerifyEmailForm from '../../forms/user/VerifyEmailForm'
+// import Time from '../../widgets/Time'
+// import VerifyEmailForm from '../../forms/user/VerifyEmailForm'
 import toRefreshURL from '../../../utils/toRefreshURL'
 import BackGround from '../../utils/BackGround'
 
@@ -43,12 +43,12 @@ const style = {
   },
 }
 
-const Info = ({label}) => {
+const Info = ({ label }) => {
   return (
-    <div style={{textAlign: 'center', marginRight: '50px'}}>
-      <div style={{marginLeft: '-25px'}}> {label} </div>
+    <div style={{ textAlign: 'center', marginRight: '50px' }}>
+      <div style={{ marginLeft: '-25px' }}> {label} </div>
       <div>
-        <span style={{marginLeft: '40px', fontSize: '30px'}}> 1份 </span>
+        <span style={{ marginLeft: '40px', fontSize: '30px' }}> 1份 </span>
         <Button disabled={false} style={style.edit}>
           查  看
         </Button>
@@ -59,12 +59,12 @@ const Info = ({label}) => {
 
 const Title = () => {
   return (
-    <div style={{textAlign: 'center'}}>
-      <div style={{fontSize: '30px', marginBottom: '3px'}}> 個人頁面 </div>
-      <div style={{fontSize: '12px', marginBottom: '-8px'}}> Personal Profile </div>
-      <p style={{color: '#FF7155'}}> _______ </p>
+    <div style={{ textAlign: 'center' }}>
+      <div style={{ fontSize: '30px', marginBottom: '3px' }}> 個人頁面 </div>
+      <div style={{ fontSize: '12px', marginBottom: '-8px' }}> Personal Profile </div>
+      <p style={{ color: '#FF7155' }}> _______ </p>
     </div>
-  ) 
+  )
 }
 
 class ShowPage extends Component {
@@ -148,21 +148,19 @@ class ShowPage extends Component {
           */}
         </Row>
         <Row>
-          <Col md={2}>
-          </Col>
+          <Col md={2} />
           <Col md={8}>
             <div style={style.bg}>
               <Row>
-                <Col md={2}>
-                </Col>
+                <Col md={2} />
                 <Col md={4}>
-                  {user.avatarURL && <img src={user.avatarURL} style={{width: '180px', height: '180px'}} />}
+                  {user.avatarURL && <img src={user.avatarURL} style={{ width: '180px', height: '180px' }} />}
                 </Col>
                 <Col md={6}>
-                  <p style={{fontSize: '15px', marginBottom: '-5px'}}>暱稱</p>
-                  <p style={{fontSize: '22px', marginBottom: '25px'}}> {user.name} </p>
-                  <p style={{fontSize: '15px', marginBottom: '-5px'}}>信箱</p>
-                  <p style={{fontSize: '22px', marginBottom: '25px'}}> {user.email.value} </p>
+                  <p style={{ fontSize: '15px', marginBottom: '-5px' }}>暱稱</p>
+                  <p style={{ fontSize: '22px', marginBottom: '25px' }}> {user.name} </p>
+                  <p style={{ fontSize: '15px', marginBottom: '-5px' }}>信箱</p>
+                  <p style={{ fontSize: '22px', marginBottom: '25px' }}> {user.email.value} </p>
                   <Link to="/user/me/edit">
                     <Button disabled={false} style={style.submit}>
                       編  輯
@@ -170,8 +168,8 @@ class ShowPage extends Component {
                   </Link>
                 </Col>
               </Row>
-                <div style={{textAlign: 'center'}}>
-                  <p style={{color: '#FF7155', fontSize: '30px'}}>
+                <div style={{ textAlign: 'center' }}>
+                  <p style={{ color: '#FF7155', fontSize: '30px' }}>
                     ____________________________________________
                   </p>
                 </div>
@@ -188,8 +186,7 @@ class ShowPage extends Component {
               </Row>
             </div>
           </Col>
-          <Col md={2}>
-          </Col>
+          <Col md={2} />
         </Row>
 
 {/*
@@ -223,7 +220,7 @@ class ShowPage extends Component {
             <dt>raw</dt>
             <dd><pre>{JSON.stringify(user, null, 2)}</pre></dd>
           </dl>
-  
+
 */}
 
       </PageLayout>

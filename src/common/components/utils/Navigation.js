@@ -8,7 +8,7 @@ import { updateLocale } from '../../actions/intlActions'
 import { pushErrors } from '../../actions/errorActions'
 import Navbar from './BsNavbar'
 import NavLink from './NavLink'
-import MenuItem from './MenuItem'
+// import MenuItem from './MenuItem'
 import Text from '../widgets/Text'
 
 const style = {
@@ -60,7 +60,6 @@ class Navigation extends Component {
                 </NavLink>
               </Navbar.Nav>
             */}
-            
 
             <Navbar.Nav right>
               {/*

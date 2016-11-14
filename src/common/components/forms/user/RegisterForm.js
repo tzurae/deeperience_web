@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
-import { Field, reduxForm } from 'redux-form'
+// import { Field, reduxForm } from 'redux-form'
+import { reduxForm } from 'redux-form'
 import Alert from 'react-bootstrap/lib/Alert'
 import Button from 'react-bootstrap/lib/Button'
 import validator from 'validator'
@@ -10,7 +11,8 @@ import FormNames from '../../../constants/FormNames'
 import userAPI from '../../../api/user'
 import { validateForm } from '../../../actions/formActions'
 import { pushErrors } from '../../../actions/errorActions'
-import { Form, FormField, FormFooter } from '../../utils/BsForm'
+// import { Form, FormField, FormFooter } from '../../utils/BsForm'
+import { Form, FormFooter } from '../../utils/BsForm'
 import configs from '../../../../../configs/project/client'
 
 const validate = (values) => {
@@ -42,8 +44,8 @@ const validate = (values) => {
     errors.recaptcha = 'Required'
   }
 
-  if (values.password && values.ensurePassword){
-    if (values.password !== values.ensurePassword){
+  if (values.password && values.ensurePassword) {
+    if (values.password !== values.ensurePassword) {
       errors.ensurePassword = '確認密碼與密碼不相同'
     }
   }
@@ -75,7 +77,7 @@ const style = {
     textAlign: 'center',
     borderBottom: '1px solid #797D80',
     marginBottom: '25px',
-    paddingBottom: '10px'
+    paddingBottom: '10px',
   },
   submit: {
     width: '8em',
@@ -122,9 +124,9 @@ class RegisterForm extends Component {
     return (
       <div style={style.bg}>
         <div style={style.title}> 註   冊 </div>
-        <Form horizontal onSubmit={handleSubmit(this.handleSubmit)} style={{marginLeft: '30px'}}>
+        <Form horizontal onSubmit={handleSubmit(this.handleSubmit)} style={{ marginLeft: '30px' }}>
           {submitFailed && error && (<Alert bsStyle="danger">{error}</Alert>)}
-          <div style={{paddingLeft: '11px'}}>
+          <div style={{ paddingLeft: '11px' }}>
             <DField name="name" />
             <DField name="email" />
             <DField name="password" type="password" />
@@ -159,7 +161,7 @@ class RegisterForm extends Component {
               />
             */}
             <input type="checkbox" name="memberShip" value="memberShip" />
-            <span style={{color: 'white'}}> 已詳細閱讀 </span>
+            <span style={{ color: 'white' }}> 已詳細閱讀 </span>
             <a href="http://www.w3schools.com/html/">會員條款</a>
             <br />
             <FormFooter>

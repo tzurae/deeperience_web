@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Field, reduxForm } from 'redux-form'
-import Button from 'react-bootstrap/lib/Button'
-import Image from 'react-bootstrap/lib/Image'
+// import Button from 'react-bootstrap/lib/Button'
+// import Image from 'react-bootstrap/lib/Image'
 import Row from 'react-bootstrap/lib/Row'
 import Col from 'react-bootstrap/lib/Col'
 import FormNames from '../../../constants/FormNames'
@@ -11,9 +11,10 @@ import firebaseAPI from '../../../api/firebase'
 import userAPI from '../../../api/user'
 import { pushErrors } from '../../../actions/errorActions'
 import { setCookies } from '../../../actions/cookieActions'
-import { Form, FormField, FormFooter } from '../../utils/BsForm'
+import { Form, FormField } from '../../utils/BsForm'
+// import { Form, FormField, FormFooter } from '../../utils/BsForm'
 import toRefreshURL from '../../../utils/toRefreshURL'
-import DField from '../../utils/DField'
+// import DField from '../../utils/DField'
 
 const initialValues = {
   storage: 'local',
@@ -205,9 +206,9 @@ class AvatarForm extends Component {
     const {
       user: { avatarURL },
       handleSubmit,
-      pristine,
-      submitting,
-      invalid,
+      //pristine,
+      //submitting,
+      //invalid,
     } = this.props
 
     return (
@@ -235,7 +236,7 @@ class AvatarForm extends Component {
           </Col>
           <Col md={3}>
             {avatarURL && <img src={avatarURL}
-              style={{width: '140px', height: '140px', marginLeft: '10px'}}
+              style={{ width: '140px', height: '140px', marginLeft: '10px' }}
             />}
           </Col>
         </Row>

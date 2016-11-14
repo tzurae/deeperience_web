@@ -1,31 +1,31 @@
 import React, { Component } from 'react'
-import PageHeader from 'react-bootstrap/lib/PageHeader'
+// import PageHeader from 'react-bootstrap/lib/PageHeader'
 import Row from 'react-bootstrap/lib/Row'
 import Col from 'react-bootstrap/lib/Col'
 import Modal from 'react-bootstrap/lib/Modal'
 import Button from 'react-bootstrap/lib/Button'
 import PageLayout from '../../layouts/PageLayout'
 import RegisterForm from '../../forms/user/RegisterForm'
-import SocialAuthButtonList from '../../utils/SocialAuthButtonList'
+// import SocialAuthButtonList from '../../utils/SocialAuthButtonList'
 import BackGround from '../../utils/BackGround'
 
 const style = {
   form: {
-    marginTop: '55px'
-  }
+    marginTop: '55px',
+  },
 }
 
 class RegisterPage extends Component {
-  constructor(props){
+  constructor(props) {
     super(props)
-      this.state = {
-        isShowModal: false
-      }
-      this.openModal = this._openModal.bind(this)
-      this.closeModal = this._closeModal.bind(this)
+    this.state = {
+      isShowModal: false,
+    }
+    this.openModal = this._openModal.bind(this)
+    this.closeModal = this._closeModal.bind(this)
   }
 
-  _openModal(){
+  _openModal() {
     this.setState({ isShowModal: true })
   }
 
@@ -33,7 +33,7 @@ class RegisterPage extends Component {
     this.setState({ isShowModal: false })
   }
 
-  renderModal(){
+  renderModal() {
     const { isShowModal } = this.state
 
     const style = {
@@ -55,8 +55,8 @@ class RegisterPage extends Component {
         aria-labelledby="contained-modal-title-sm"
       >
         <Modal.Body>
-          <div style={{textAlign: 'center'}}>
-            <h3 style={{fontSize: '140%'}}> 確認信已送出！ </h3>
+          <div style={{ textAlign: 'center' }}>
+            <h3 style={{ fontSize: '140%' }}> 確認信已送出！ </h3>
             請至信箱收取會員確認信
             <Button
               style={style.sure}
@@ -70,21 +70,19 @@ class RegisterPage extends Component {
     )
   }
 
-  render(props){
+  render(props) {
     return (
       <PageLayout>
         <BackGround src="/img/river_dark.jpg" />
         <Row>
-          <Col md={4}>
-          </Col>
+          <Col md={4} />
           <Col md={4}>
             <div style={style.form}>
               <RegisterForm openModal={this.openModal} />
               {this.renderModal()}
             </div>
           </Col>
-          <Col md={4}>
-          </Col>
+          <Col md={4} />
           {/*
             <Col md={3}>
               <SocialAuthButtonList />
@@ -95,8 +93,5 @@ class RegisterPage extends Component {
     )
   }
 }
-
-
-
 
 export default RegisterPage
