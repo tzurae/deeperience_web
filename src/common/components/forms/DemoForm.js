@@ -5,8 +5,37 @@ import { Field, reduxForm } from 'redux-form';
 import Alert from 'react-bootstrap/lib/Alert';
 import Button from 'react-bootstrap/lib/Button';
 import FormNames from '../../constants/FormNames';
-import { Form, FormField, FormFooter } from '../utils/BsForm';
 import Head from '../widgets/Head';
+import {
+  RangeSlider,
+  AirSingleDate,
+  AirDateRange,
+  Recaptcha,
+} from '../fields/bases';
+import {
+  BsInput as Input,
+  BsTextarea as Textarea,
+  BsPlaintext as Plaintext,
+  BsSelect as Select,
+  BsCheckbox as Checkbox,
+  BsCheckboxList as CheckboxList,
+  BsRadio as Radio,
+} from '../fields/adapters';
+import {
+  BsForm as Form,
+  BsFormFooter as FormFooter,
+  BsField as FormField,
+} from '../fields/widgets';
+
+let validate = (values) => {
+  let errors = {};
+
+  if (!values.someText) {
+    errors.someText = 'Required';
+  }
+
+  return errors;
+};
 
 class DemoForm extends Component {
   constructor() {
@@ -41,7 +70,12 @@ class DemoForm extends Component {
     } = this.props;
 
     return (
-      <Form horizontal onSubmit={handleSubmit(this.handleSubmit)}>
+      <Form
+        defaultHorizontal={true}
+        defaultLabelDimensions={{ sm: 2 }}
+        defaultFieldDimensions={{ sm: 6 }}
+        onSubmit={handleSubmit(this.handleSubmit)}
+      >
         <Head
           links={[
             '/css/react-dates.css',
@@ -54,100 +88,109 @@ class DemoForm extends Component {
         </Alert>
         <pre>{JSON.stringify(values, null, 2)}</pre>
         <Field
-          label="Text"
           name="someText"
           component={FormField}
+          label="Text"
+          adapter={Input}
           type="text"
           placeholder="Text"
         />
         <Field
-          label="Password"
           name="somePassword"
           component={FormField}
+          label="Password"
+          adapter={Input}
           type="password"
           placeholder="Password"
         />
         <Field
-          label="Number"
           name="someNumber"
           component={FormField}
+          label="Number"
+          adapter={Input}
           type="number"
           placeholder="Number"
         />
         <Field
-          label="Date"
           name="someDate"
           component={FormField}
+          label="Date"
+          fieldDimensions={{ sm: 3 }}
+          adapter={Input}
           type="date"
           placeholder="Date"
         />
         <Field
-          label="Time"
           name="someTime"
           component={FormField}
+          label="Time"
+          fieldDimensions={{ sm: 3 }}
+          adapter={Input}
           type="time"
           placeholder="Time"
         />
         <Field
-          label="File"
           name="someFile"
           component={FormField}
+          label="File"
+          adapter={Input}
           type="file"
         />
         <Field
-          label="Textarea"
           name="someTextarea"
           component={FormField}
-          type="textarea"
+          label="Textarea"
+          adapter={Textarea}
           rows="6"
         />
         <Field
-          label=" "
           name="somePlainText"
           component={FormField}
-          type="plaintext"
+          label=""
+          adapter={Plaintext}
           text="Plain Text"
         />
         <Field
-          label="Range Slider"
           name="someRangeSlider"
           component={FormField}
-          type="rangeSlider"
+          label="Range Slider"
+          adapter={RangeSlider}
           min={0}
           max={100}
           step={5}
         />
         <Field
-          label=" "
           name="_"
           component={FormField}
-          type="plaintext"
+          label=""
+          adapter={Plaintext}
           text={
             'range slider value is ' +
             `${values.someRangeSlider.min} ~ ${values.someRangeSlider.max}`
           }
         />
         <Field
-          label="Airbnb Single Date"
           name="someAirSingleDate"
           component={FormField}
-          type="airSingleDate"
+          label="Airbnb Single Date"
+          adapter={AirSingleDate}
           displayFormat="YYYY/MM/DD"
           showClearDate
         />
         <Field
-          label="Airbnb Date Range"
           name="someAirDateRange"
           component={FormField}
-          type="airDateRange"
+          label="Airbnb Date Range"
+          adapter={AirDateRange}
           displayFormat="YYYY/MM/DD"
-          showClearDates
+          showClearDate
         />
         <Field
-          label="Select"
           name="someSelect"
           component={FormField}
-          type="select"
+          label="Select"
+          fieldDimensions={{ sm: 2 }}
+          adapter={Select}
           options={[{
             label: 'Taiwan',
             value: 'TW',
@@ -155,23 +198,31 @@ class DemoForm extends Component {
             label: 'Japan',
             value: 'JP',
           }, {
+            label: 'China',
+            value: 'CH',
+            disabled: true,
+          }, {
             label: 'United States',
             value: 'US',
           }]}
         />
         <Field
-          label="Checkbox"
           name="someCheckbox"
           component={FormField}
-          type="checkbox"
+          label="Checkbox"
+          adapter={Checkbox}
           text="This is a checkbox"
         />
         <Field
-          label="Checkboxes"
-          name="someInlineCheckboxes"
+          name="someInlineCheckboxList"
           component={FormField}
-          type="checkboxes"
-          style={{float: 'left', paddingRight: 20}}
+          label="CheckboxList"
+          adapter={CheckboxList}
+          style={{
+            float: 'left',
+            paddingRight: 20,
+            marginTop: 10,
+          }}
           options={[{
             label: 'There',
             value: 'VALUE1',
@@ -184,16 +235,22 @@ class DemoForm extends Component {
           }, {
             label: 'inline',
             value: 'VALUE4',
+            disabled: true,
           }, {
             label: 'checkboxes',
             value: 'VALUE5',
           }]}
         />
         <Field
-          label="Radio Button"
-          name="someRadiobutton"
+          name="someInlineRadio"
           component={FormField}
-          type="radiobutton"
+          label="Radio"
+          adapter={Radio}
+          style={{
+            float: 'left',
+            paddingRight: 20,
+            marginTop: 10,
+          }}
           options={[{
             label: 'some',
             value: 'VALUE1',
@@ -207,10 +264,11 @@ class DemoForm extends Component {
           }]}
         />
         <Field
-          label="Recaptcha"
           name="someRecaptcha"
           component={FormField}
-          type="recaptcha"
+          label="Recaptcha"
+          adapter={Recaptcha}
+          disableHint="recaptcha is disabled"
         />
         <FormFooter>
           <Button type="submit" disabled={pristine || submitting || invalid}>
@@ -227,6 +285,7 @@ class DemoForm extends Component {
 
 export default reduxForm({
   form: FormNames.DEMO,
+  validate,
   initialValues: {
     somePassword: 'xxxxxxxxxx',
     someRangeSlider: {
