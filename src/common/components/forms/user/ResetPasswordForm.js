@@ -7,7 +7,12 @@ import Button from 'react-bootstrap/lib/Button';
 import FormNames from '../../../constants/FormNames';
 import userAPI from '../../../api/user';
 import { pushErrors } from '../../../actions/errorActions';
-import { Form, FormField, FormFooter } from '../../utils/BsForm';
+import { BsInput as Input } from '../../fields/adapters';
+import {
+  BsForm as Form,
+  BsFormFooter as FormFooter,
+  BsField as FormField,
+} from '../../fields/widgets';
 
 export const validate = (values) => {
   const errors = {};
@@ -69,7 +74,7 @@ class ChangePasswordForm extends Component {
     } = this.props;
 
     return (
-      <Form horizontal onSubmit={handleSubmit(this.handleSubmit)}>
+      <Form onSubmit={handleSubmit(this.handleSubmit)}>
         {submitSucceeded && (
           <Alert bsStyle="success">
             Password Changed.
@@ -78,17 +83,19 @@ class ChangePasswordForm extends Component {
         )}
         {submitFailed && error && (<Alert bsStyle="danger">{error}</Alert>)}
         <Field
-          label="New Password"
           name="newPassword"
           component={FormField}
+          label="New Password"
+          adapter={Input}
           type="password"
           disabled={submitSucceeded}
           placeholder="New Password"
         />
         <Field
-          label="New Password Confirm"
           name="newPasswordConfirm"
           component={FormField}
+          label="New Password Confirm"
+          adapter={Input}
           type="password"
           disabled={submitSucceeded}
           placeholder="New Password Confirm"

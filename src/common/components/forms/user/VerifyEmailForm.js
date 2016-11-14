@@ -9,7 +9,13 @@ import FormNames from '../../../constants/FormNames';
 import userAPI from '../../../api/user';
 import { validateForm } from '../../../actions/formActions';
 import { pushErrors } from '../../../actions/errorActions';
-import { Form, FormField, FormFooter } from '../../utils/BsForm';
+import { Recaptcha } from '../../fields/bases';
+import { BsInput as Input } from '../../fields/adapters';
+import {
+  BsForm as Form,
+  BsFormFooter as FormFooter,
+  BsField as FormField,
+} from '../../fields/widgets';
 import configs from '../../../../../configs/project/client';
 
 export let validate = (values) => {
@@ -98,24 +104,25 @@ class VerifyEmailForm extends Component {
     } = this.props;
 
     return (
-      <Form horizontal onSubmit={handleSubmit(this.handleSubmit)}>
+      <Form onSubmit={handleSubmit(this.handleSubmit)}>
         {submitSucceeded && (
           <Alert bsStyle="success">A verification link is sent</Alert>
         )}
         {submitFailed && error && (<Alert bsStyle="danger">{error}</Alert>)}
         <Field
-          label="Email"
           name="email"
           component={FormField}
+          label="Email"
+          adapter={Input}
           type="text"
           disabled={Boolean(email)}
           placeholder="Email"
         />
         <Field
-          label=" "
           name="recaptcha"
           component={FormField}
-          type="recaptcha"
+          label=""
+          adapter={Recaptcha}
         />
         <FormFooter>
           <Button

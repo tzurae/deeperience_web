@@ -9,7 +9,15 @@ import firebaseAPI from '../../../api/firebase';
 import userAPI from '../../../api/user';
 import { pushErrors } from '../../../actions/errorActions';
 import { setCookies } from '../../../actions/cookieActions';
-import { Form, FormField, FormFooter } from '../../utils/BsForm';
+import {
+  BsInput as Input,
+  BsRadio as Radio,
+} from '../../fields/adapters';
+import {
+  BsForm as Form,
+  BsFormFooter as FormFooter,
+  BsField as FormField,
+} from '../../fields/widgets';
 import Head from '../../widgets/Head';
 import toRefreshURL from '../../../utils/toRefreshURL';
 
@@ -196,7 +204,11 @@ class AvatarForm extends Component {
     } = this.props;
 
     return (
-      <Form onSubmit={handleSubmit(this.handleSubmit)}>
+      <Form
+        defaultHorizontal={false}
+        defaultFieldDimensions={{ sm: 12 }}
+        onSubmit={handleSubmit(this.handleSubmit)}
+      >
         <Head
           scripts={[
             'https://www.gstatic.com/firebasejs/live/3.0/firebase.js',
@@ -206,13 +218,15 @@ class AvatarForm extends Component {
         <Field
           name="avatar"
           component={FormField}
+          adapter={Input}
           type="file"
         />
         <Field
-          label="Store avatar into"
           name="storage"
           component={FormField}
-          type="radiobutton"
+          labelDimensions={{ sm: 6 }}
+          label="Store avatar into"
+          adapter={Radio}
           options={[{
             label: 'Firebase',
             value: 'firebase',
