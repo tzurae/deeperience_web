@@ -7,8 +7,12 @@ import FormNames from '../../../constants/FormNames';
 import userAPI from '../../../api/user';
 import { pushErrors } from '../../../actions/errorActions';
 import { setCookies } from '../../../actions/cookieActions';
-import { Form, FormField, FormFooter } from '../../utils/BsForm';
-
+import { BsInput as Input } from '../../fields/adapters';
+import {
+  BsForm as Form,
+  BsFormFooter as FormFooter,
+  BsField as FormField,
+} from '../../fields/widgets';
 export const validate = (values) => {
   const errors = {};
 
@@ -77,13 +81,14 @@ class EditForm extends Component {
     } = this.props;
 
     return (
-      <Form horizontal onSubmit={handleSubmit(this.handleSubmit)}>
+      <Form onSubmit={handleSubmit(this.handleSubmit)}>
         {submitSucceeded && (<Alert bsStyle="success">Profile Saved</Alert>)}
         {submitFailed && error && (<Alert bsStyle="danger">{error}</Alert>)}
         <Field
-          label="Name"
           name="name"
           component={FormField}
+          label="Name"
+          adapter={Input}
           type="text"
           placeholder="Name"
         />
