@@ -160,7 +160,7 @@ class ShowPage extends Component {
                   <p style={{ fontSize: '15px', marginBottom: '-5px' }}>暱稱</p>
                   <p style={{ fontSize: '22px', marginBottom: '25px' }}> {user.name} </p>
                   <p style={{ fontSize: '15px', marginBottom: '-5px' }}>信箱</p>
-                  <p style={{ fontSize: '22px', marginBottom: '25px' }}> {user.email.value} </p>
+                  <p style={{ fontSize: '22px', marginBottom: '25px' }}> {user.email ? user.email.value : ''} </p>
                   <Link to="/user/me/edit">
                     <Button disabled={false} style={style.submit}>
                       編  輯
