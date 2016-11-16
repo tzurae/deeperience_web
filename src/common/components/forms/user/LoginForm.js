@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import { push } from 'react-router-redux'
-import { Field, reduxForm, SubmissionError } from 'redux-form'
+// import { Field, reduxForm, SubmissionError } from 'redux-form'
+import { reduxForm, SubmissionError } from 'redux-form'
 import Alert from 'react-bootstrap/lib/Alert'
 import Button from 'react-bootstrap/lib/Button'
 // import validator from 'validator';
@@ -10,7 +11,47 @@ import FormNames from '../../../constants/FormNames'
 import userAPI from '../../../api/user'
 import { pushErrors } from '../../../actions/errorActions'
 import { loginUser } from '../../../actions/userActions'
-import { Form, FormField, FormFooter } from '../../utils/BsForm'
+// import { Form, FormField, FormFooter } from '../../utils/BsForm'
+import { Form, FormFooter } from '../../utils/BsForm'
+import DField from '../../utils/DField'
+
+const style = {
+  bg: {
+    paddingTop: '10px',
+    paddingBottom: '10px',
+    borderRadius: '20px',
+    backgroundColor: 'rgba(34, 34, 34, 0.55)',
+  },
+  title: {
+    color: 'white',
+    fontSize: '20px',
+    textAlign: 'center',
+    borderBottom: '1px solid #797D80',
+    marginBottom: '25px',
+    paddingBottom: '10px',
+  },
+  submit: {
+    width: '7em',
+    color: 'white',
+    fontSize: '1.2em',
+    marginTop: '40px',
+    marginLeft: '6em',
+    borderRadius: '50px',
+    backgroundColor: '#FF864F',
+    position: 'relative',
+  },
+  register: {
+    width: '7em',
+    color: 'white',
+    fontSize: '1.2em',
+    marginTop: '40px',
+    marginLeft: '-3.2em',
+    borderRadius: '50px',
+    backgroundColor: 'transparent',
+    position: 'absolute',
+    border: '2px solid #FF864F',
+  },
+}
 
 const validate = (values) => {
   const errors = {}
@@ -81,31 +122,49 @@ class LoginForm extends Component {
     } = this.props
 
     return (
-      <Form horizontal onSubmit={handleSubmit(this.handleSubmit)}>
-        {submitFailed && error && (<Alert bsStyle="danger">{error}</Alert>)}
-        <Field
-          label="Email"
-          name="email"
-          component={FormField}
-          type="text"
-          placeholder="Email"
-        />
-        <Field
-          label="Password"
-          name="password"
-          component={FormField}
-          type="password"
-          placeholder="Password"
-        />
-        <FormFooter>
-          <Button type="submit" disabled={pristine || submitting || invalid}>
-            Login
-          </Button>
-          <Link to="/user/password/forget">
-            <Button bsStyle="link">Forget password?</Button>
-          </Link>
-        </FormFooter>
-      </Form>
+      <div style={style.bg}>
+        <div style={style.title}> 登   入 </div>
+        <Form horizontal onSubmit={handleSubmit(this.handleSubmit)}>
+          <div style={{ paddingLeft: '40px' }}>
+            {submitFailed && error && (<Alert bsStyle="danger">{error}</Alert>)}
+            <DField name="email" />
+            <DField name="password" type="password" />
+            {/*
+              <Field
+                label="Email"
+                name="email"
+                component={FormField}
+                type="text"
+                placeholder="Email"
+              />
+              <Field
+                label="Password"
+                name="password"
+                component={FormField}
+                type="password"
+                placeholder="Password"
+              />
+            */}
+            <input type="checkbox" name="remember" value="remember" />
+            <span style={{ color: 'white' }}> Remember Me </span>
+            <FormFooter>
+                <Link to="/user/register">
+                  <Button type="submit" disabled={false} style={style.register}>
+                    註冊
+                  </Button>
+                </Link>
+                <Button type="submit" disabled={pristine || submitting || invalid} style={style.submit}>
+                  登入
+                </Button>
+              {/*
+                <Link to="/user/password/forget">
+                  <Button bsStyle="link">Forget password?</Button>
+                </Link>
+              */}
+            </FormFooter>
+          </div>
+        </Form>
+      </div>
     )
   }
 };

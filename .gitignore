@@ -42,3 +42,6 @@ buck-out/
 
 # Others
 .DS_Store
+
+# yarn
+yarn.lock

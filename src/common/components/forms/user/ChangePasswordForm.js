@@ -3,10 +3,33 @@ import { connect } from 'react-redux'
 import { Field, reduxForm, SubmissionError } from 'redux-form'
 import Alert from 'react-bootstrap/lib/Alert'
 import Button from 'react-bootstrap/lib/Button'
+import Row from 'react-bootstrap/lib/Row'
+import Col from 'react-bootstrap/lib/Col'
 import FormNames from '../../../constants/FormNames'
 import userAPI from '../../../api/user'
 import { pushErrors } from '../../../actions/errorActions'
 import { Form, FormField, FormFooter } from '../../utils/BsForm'
+
+const style = {
+  div: {
+    color: 'black',
+    fontSize: '1.1em',
+    marginLeft: '10px',
+  },
+  field: {
+    marginTop: '-5px',
+    width: '20em',
+  },
+  submit: {
+    width: '7em',
+    color: 'white',
+    fontSize: '1.2em',
+    marginTop: '40px',
+    marginLeft: '6em',
+    borderRadius: '50px',
+    backgroundColor: '#FF864F',
+  },
+}
 
 export const validate = (values) => {
   const errors = {}
@@ -83,29 +106,62 @@ class ChangePasswordForm extends Component {
       <Form horizontal onSubmit={handleSubmit(this.handleSubmit)}>
         {submitSucceeded && (<Alert bsStyle="success">Password Changed</Alert>)}
         {submitFailed && error && (<Alert bsStyle="danger">{error}</Alert>)}
-        <Field
-          label="Old Password"
-          name="oldPassword"
-          component={FormField}
-          type="password"
-          placeholder="Old Password"
-        />
-        <Field
-          label="New Password"
-          name="newPassword"
-          component={FormField}
-          type="password"
-          placeholder="New Password"
-        />
-        <Field
-          label="New Password Confirm"
-          name="newPasswordConfirm"
-          component={FormField}
-          type="password"
-          placeholder="New Password Confirm"
-        />
+        <Row>
+          <Col md={9}>
+            <div style={style.div}>
+              <p> 舊密碼 </p>
+              <Field
+                name="oldPassword"
+                component={FormField}
+                type="text"
+                style={style.field}
+              />
+            </div>
+            <div style={style.div}>
+              <p> 新密碼 </p>
+              <Field
+                name="newPassword"
+                component={FormField}
+                type="text"
+                style={style.field}
+              />
+            </div>
+            <div style={style.div}>
+              <p> 新密碼 </p>
+              <Field
+                name="newPasswordConfirm"
+                component={FormField}
+                type="text"
+                style={style.field}
+              />
+            </div>
+          </Col>
+        </Row>
+        {/*
+          <Field
+            label="Old Password"
+            name="oldPassword"
+            component={FormField}
+            type="password"
+            placeholder="Old Password"
+          />
+          <Field
+            label="New Password"
+            name="newPassword"
+            component={FormField}
+            type="password"
+            placeholder="New Password"
+          />
+          <Field
+            label="New Password Confirm"
+            name="newPasswordConfirm"
+            component={FormField}
+            type="password"
+            placeholder="New Password Confirm"
+          />
+        */}
         <FormFooter>
-          <Button type="submit" disabled={pristine || submitting || invalid}>
+          <Button type="submit" disabled={pristine || submitting || invalid} style={style.submit}>
             Change
             {submitting && (
               <i className="fa fa-spinner fa-spin" aria-hidden="true" />

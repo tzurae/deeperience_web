@@ -8,8 +8,21 @@ import { updateLocale } from '../../actions/intlActions'
 import { pushErrors } from '../../actions/errorActions'
 import Navbar from './BsNavbar'
 import NavLink from './NavLink'
-import MenuItem from './MenuItem'
+// import MenuItem from './MenuItem'
 import Text from '../widgets/Text'
+
+const style = {
+  nav: {
+    backgroundColor: 'rgba(78, 88, 101, 0.5)',
+    borderWidth: '0px',
+  },
+  text: {
+    color: 'white',
+  },
+  header: {
+    marginLeft: '150px',
+  },
+}
 
 class Navigation extends Component {
   _setLanguage(lang) {
@@ -28,39 +41,54 @@ class Navigation extends Component {
     const isAdmin = (user.role === Roles.ADMIN)
 
     return (
-      <Navbar staticTop>
+      <Navbar staticTop style={style.nav}>
         <Grid>
-          <Navbar.Header>
-            <Link className="navbar-brand" to="/" >
+          <Navbar.Header style={style.header}>
+            <Link className="navbar-brand" to="/" style={style.text}>
               Deeperience
             </Link>
           </Navbar.Header>
 
           <Navbar.Body>
-            <Navbar.Nav>
-              <NavLink to="/" onlyActiveOnIndex>
-                <Text id="nav.home" />
-              </NavLink>
-              <NavLink to="/does/not/exist">
-                404
-              </NavLink>
-            </Navbar.Nav>
+            {/*
+              <Navbar.Nav>
+                <NavLink to="/" onlyActiveOnIndex>
+                  <Text id="nav.home" />
+                </NavLink>
+                <NavLink to="/does/not/exist">
+                  404
+                </NavLink>
+              </Navbar.Nav>
+            */}
 
             <Navbar.Nav right>
-              <Navbar.Dropdown title={<Text id="nav.language" />}>
-                <MenuItem
-                  title="English"
-                  onClick={this._setLanguage.bind(this, 'en-us')}
-                />
-                <MenuItem
-                  title="繁體中文"
-                  onClick={this._setLanguage.bind(this, 'zh-tw')}
-                />
-              </Navbar.Dropdown>
+              {/*
+                <Navbar.Dropdown title={<Text id="nav.language" />}>
+                  <MenuItem
+                    title="English"
+                    onClick={this._setLanguage.bind(this, 'en-us')}
+                  />
+                  <MenuItem
+                    title="繁體中文"
+                    onClick={this._setLanguage.bind(this, 'zh-tw')}
+                  />
+                </Navbar.Dropdown>
+              */}
+              <Navbar.Nav>
+                <NavLink to="/feature" onlyActiveOnIndex>
+                  <Text id="nav.feature" />
+                </NavLink>
+                <NavLink to="/wonderful">
+                  <Text id="nav.wonderful" />
+                </NavLink>
+                <NavLink to="/customize">
+                  <Text id="nav.customize" />
+                </NavLink>
+              </Navbar.Nav>
               <Navbar.Dropdown
                 title={
                   !isAuth ?
-                  <Text id="nav.user" /> :
+                  <Text id="nav.user.profile" style={style.text} /> :
                   user.avatarURL ? (
                     <Image
                       style={{ height: 18 }}
