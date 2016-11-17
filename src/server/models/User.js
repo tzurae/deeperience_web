@@ -3,10 +3,8 @@ import mongoose from 'mongoose'
 import jwt from 'jsonwebtoken'
 import configs from '../../../configs/project/server'
 import Roles from '../../common/constants/Roles'
-import Language from '../../common/constants/languages'
+import { Languages, Levels } from '../../common/i18n/zh-tw/Languages'
 import paginatePlugin from './plugins/paginate'
-import { TripSchema } from './Trip'
-import { PostSchema } from './Post'
 
 const hashPassword = (rawPassword = '') => {
   let hashPassword = rawPassword
@@ -42,7 +40,7 @@ const UserSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    enum: Object.keys(Roles).map(r => Roles[r]),
+    enum: Object.keys(Roles),
     default: Roles.USER,
   },
   avatarURL: {
@@ -64,30 +62,31 @@ const UserSchema = new mongoose.Schema({
     resetPassword: Number,
   },
   lastLoggedInAt: Date,
-  ownTrip: [TripSchema],
-  buyTrip: [TripSchema],
-  posts: [PostSchema],
+  posts: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Post',
+  }],
+  verifiedGuide: Boolean,
   selfInfo: {
     vocation: String,
     selfIntro: String,
     hobby: String,
     location: {
-      country: String,
-      province: String,
-      city: String,
+      country: String, // TODO make tags
+      province: String, // TODO
+      city: String, // TODO
     },
     language: {
       type: [{
-        languageName: String,
-        level: String,
+        languageName: Object.keys(Languages),
+        level: Object.keys(Levels),
       }],
       default: [{
-        languageName: Language.language.CHINESE,
-        level: Language.level.MEDIUM,
+        languageName: 'CHINESE',
+        level: 'MEDIUM',
       }],
     },
   },
-  verifiedGuide: Boolean,
   birthday: {
     year: Number,
     month: Number,

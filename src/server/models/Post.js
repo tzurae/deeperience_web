@@ -1,32 +1,56 @@
 import mongoose from 'mongoose'
+import { RangeSchema } from './Range'
+import HotelTypes from '../../common/i18n/zh-tw/HotelTypes'
+import TripElements from '../../common/i18n/zh-tw/TripElements'
+import FoodElements from '../../common/i18n/zh-tw/FoodElements'
+import TravelWays from '../../common/i18n/zh-tw/TravelWays'
+import TripLocations from '../../common/i18n/zh-tw/TripLocations'
+import flattenMessages from '../../common/i18n/utils/flattenMessages'
 
-export const PostSchema = new mongoose.Schema({
+const PostSchema = new mongoose.Schema({
   people: { type: Number, default: 1 },
-  residentFee: {
-    type: [Number],
-    validate: [(val) => val.length === 2,
-      'array length not equal to 2!!!'],
+  residentFee: RangeSchema,
+  tripFee: RangeSchema,
+  allFee: RangeSchema,
+  foodFee: Number, // maxmimum
+  hotelType: {
+    value: [{
+      type: String,
+      enum: Object.keys(HotelTypes),
+    }],
+    other: String,
   },
-  tripFee: {
-    type: [Number],
-    validate: [(val) => val.length === 2,
-      'array length not equal to 2!!!'],
+  tripElement: {
+    value: [{
+      type: String,
+      enum: Object.keys(flattenMessages(TripElements)),
+    }],
+    other: String,
   },
-  allFee: {
-    type: [Number],
-    validate: [(val) => val.length === 2,
-      'array length not equal to 2!!!'],
+  foodElement: {
+    value: [{
+      type: String,
+      enum: Object.keys(FoodElements),
+    }],
+    other: String,
   },
-  foodFee: Number,
-  hotelType: [Number],
-  tripLocation: Number,
-  tripElement: [Number],
-  foodElement: [Number],
   otherDemand: String,
+  tripLocation: {
+    type: String,
+    enum: Object.keys(flattenMessages(TripLocations)),
+    // ex: 886.01.01 = 台北      ANY = 嚮導推薦
+  },
   bookHotel: Boolean,
   bookRestaurant: Boolean,
   startDate: Date,
   endDate: Date,
+  travelWay: {
+    value: [{
+      type: String,
+      enum: Object.keys(TravelWays),
+    }],
+    other: String,
+  },
 }, {
   versionKey: false,
   timestamps: {

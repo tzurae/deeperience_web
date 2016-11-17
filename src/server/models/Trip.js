@@ -1,64 +1,54 @@
 import mongoose from 'mongoose'
+import { DailyTripSchema } from './DailyTrip'
+import TripStates from '../../common/constants/TripStates'
+import TripDayInfos from '../../common/i18n/zh-tw/TripDayInfos'
+import TripElements from '../../common/i18n/zh-tw/TripElements'
+import flattenMessages from '../../common/i18n/utils/flattenMessages'
 
 export const TripSchema = new mongoose.Schema({
-  guideId: { type: String, required: true },
-  name: { type: String, default: '' }, // trip name
-  allSites: { type: [String], default: [] },
-  price: { type: Number, default: 0, required: true },
-  dayInfo: { type: Number, required: true }, // how many days
-  coverPic: String,
-  treePic: String,
-  tags: { type: [Number], default: [] },
-  startSite: { type: [{
-    depart: {
-      day: Number,
-      hour: Number,
-      minute: Number,
-    },
-    from: String,
-  }], default: [] },
-  remind: { type: [String], default: [] },
-  stats: {
-    star: { type: Number, default: 0 },
-    seen: { type: Number, default: 0 },
-    purchase: { type: Number, default: 0 },
+  guide: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
   },
-  period: [{
-    start: {
-      type: {
-        day: { type: Number, default: 0 },
-        hour: { type: Number, default: 0 },
-        minute: { type: Number, default: 0 },
-      },
-    },
-    end: {
-      type: {
-        day: { type: Number, default: 0 },
-        hour: { type: Number, default: 0 },
-        minute: { type: Number, default: 0 },
-      },
-    },
-  }],
-  routes: [{
-    depart: {
-      type: {
-        day: { type: Number, default: 0 },
-        hour: { type: Number, default: 0 },
-        minute: { type: Number, default: 0 },
-      },
-      required: true,
-    },
-    from: { type: String, default: '' },
-    nextStopDepart: {
-      type: {
-        day: { type: Number, default: 0 },
-        hour: { type: Number, default: 0 },
-        minute: { type: Number, default: 0 },
-      },
-      required: true,
-    },
-    to: { type: String, default: '' },
-  }],
+  name: {
+    type: String,
+    default: '',
+  },
+  allSites: {
+    type: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'GuideSite',
+    }],
+    default: [],
+  },
+  price: {
+    type: Number,
+    default: 0,
+    required: true,
+  },
+  dayInfo: {
+    type: String,
+    enum: Object.keys(TripDayInfos),
+    required: true,
+  },
+  coverPic: String,
+  tags: {
+    type: [{
+      type: String,
+      enum: Object.keys(flattenMessages(TripElements)),
+    }],
+    default: [],
+  },
+  departDate: Date,
+  dailyTrips: {
+    type: [DailyTripSchema],
+    default: [],
+  },
+  state: {
+    type: String,
+    enum: Object.keys(TripStates),
+    default: TripStates.DRAFT,
+  },
 }, {
   versionKey: false,
   timestamps: {
@@ -69,4 +59,3 @@ export const TripSchema = new mongoose.Schema({
 
 const Trip = mongoose.model('Trip', TripSchema)
 export default Trip
-
