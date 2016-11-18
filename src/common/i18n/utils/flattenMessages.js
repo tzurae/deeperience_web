@@ -9,8 +9,6 @@ const flattenMessages =
       } else {
         Object.assign(messages, flattenMessages(value, prefixedKey))
       }
-      console.log(messages)
-
       return messages
     }, {})
 

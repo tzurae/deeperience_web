@@ -13,6 +13,7 @@ import localeController from '../controllers/locale'
 import todoController from '../controllers/todo'
 import tripController from '../controllers/trip'
 import siteController from '../controllers/site'
+import googleSiteController from '../controllers/googleSite'
 import postController from '../controllers/post'
 
 export default ({ app }) => {
@@ -134,6 +135,9 @@ export default ({ app }) => {
   app.post('/api/sites', authRequired, bodyParser.json, siteController.create)
   app.put('/api/sites/:siteId', authRequired, bodyParser.json, siteController.update)
   app.delete('/api/sites/:siteId', authRequired, siteController.remove)
+
+  // GoogleSite
+  app.post('/api/googleSites', authRequired, bodyParser.json, googleSiteController.create)
 
   // post
   app.get('/api/posts/', authRequired, postController.list)
