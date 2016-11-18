@@ -78,8 +78,14 @@ const UserSchema = new mongoose.Schema({
     },
     language: {
       type: [{
-        languageName: Object.keys(Languages),
-        level: Object.keys(Levels),
+        languageName: {
+          type: String,
+          enum: Object.keys(Languages),
+        },
+        level: {
+          type: String,
+          enum: Object.keys(Levels),
+        },
       }],
       default: [{
         languageName: 'CHINESE',

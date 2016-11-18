@@ -7,7 +7,6 @@ import Button from 'react-bootstrap/lib/Button'
 import PageLayout from '../../layouts/PageLayout'
 import RegisterForm from '../../forms/user/RegisterForm'
 // import SocialAuthButtonList from '../../utils/SocialAuthButtonList'
-import BackGround from '../../utils/BackGround'
 
 const style = {
   form: {
@@ -72,8 +71,7 @@ class RegisterPage extends Component {
 
   render(props) {
     return (
-      <PageLayout>
-        <BackGround src="/img/river_dark.jpg" />
+      <PageLayout src="/img/river_dark.jpg">
         <Row>
           <Col md={4} />
           <Col md={4}>

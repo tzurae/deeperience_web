@@ -14,7 +14,6 @@ import PageLayout from '../../layouts/PageLayout'
 // import Time from '../../widgets/Time'
 // import VerifyEmailForm from '../../forms/user/VerifyEmailForm'
 import toRefreshURL from '../../../utils/toRefreshURL'
-import BackGround from '../../utils/BackGround'
 
 const style = {
   bg: {
@@ -130,7 +129,6 @@ class ShowPage extends Component {
     const { user } = this.state
     return (
       <PageLayout >
-        <BackGround color="#EFEEED" />
         <Head
           scripts={[
             'https://www.gstatic.com/firebasejs/live/3.0/firebase.js',
@@ -169,9 +167,7 @@ class ShowPage extends Component {
                 </Col>
               </Row>
                 <div style={{ textAlign: 'center' }}>
-                  <p style={{ color: '#FF7155', fontSize: '30px' }}>
-                    ____________________________________________
-                  </p>
+                  <div style={{ background: '#FF7155', margin: '30px auto', width: '90%', height: '2px' }}/>
                 </div>
               <Row>
                 <Col md={4}>

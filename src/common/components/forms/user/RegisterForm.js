@@ -128,9 +128,9 @@ class RegisterForm extends Component {
     return (
       <div style={style.bg}>
         <div style={style.title}> 註   冊 </div>
-        <Form horizontal onSubmit={handleSubmit(this.handleSubmit)} style={{ marginLeft: '30px' }}>
+        <Form horizontal onSubmit={handleSubmit(this.handleSubmit)} style={{ margin: '0 30px' }}>
           {submitFailed && error && (<Alert bsStyle="danger">{error}</Alert>)}
-          <div style={{ paddingLeft: '11px' }}>
+          <div style={{ padding: '0 11px' }}>
             <DField name="name" />
             <DField name="email" />
             <DField name="password" type="password" />

@@ -29,6 +29,12 @@ export const GuideSiteSchema = new mongoose.Schema({
   }],
   mainSite: SiteSchema,
   subSites: [SiteSchema],
+}, {
+  versionKey: false,
+  timestamps: {
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+  },
 })
 
 const GuideSite = mongoose.model('GuideSite', GuideSiteSchema)

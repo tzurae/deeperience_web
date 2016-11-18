@@ -6,11 +6,9 @@ import Col from 'react-bootstrap/lib/Col'
 import PageLayout from '../../layouts/PageLayout'
 import LoginForm from '../../forms/user/LoginForm'
 // import SocialAuthButtonList from '../../utils/SocialAuthButtonList'
-import BackGround from '../../utils/BackGround'
 
 const LoginPage = ({ location }) => (
-  <PageLayout>
-    <BackGround src="/img/river_dark.jpg" />
+  <PageLayout src="/img/river_dark.jpg">
     {/*
       <Row>
         <Col md={12}>

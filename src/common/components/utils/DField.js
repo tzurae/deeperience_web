@@ -9,7 +9,7 @@ const style = {
   },
   field: {
     marginTop: '-8px',
-    width: '20em',
+    width: '100%',
   },
 }
 

@@ -1,25 +1,26 @@
 import { handleDbError } from '../decorators/handleError'
-import Site, { SiteSchema } from '../models/Site'
+import Site from '../models/Site'
+import GuideSite, { GuideSiteSchema } from '../models/GuideSite'
 import getAttrFromSchema from '../utils/getAttrFromSchema'
 
-const attributes = getAttrFromSchema(SiteSchema)
+const attributes = getAttrFromSchema(GuideSiteSchema)
 
 export default {
   create(req, res) {
-    let site = {}
+    let guideSite = {}
     attributes.forEach(attr => {
-      site[attr] = req.body[attr]
+      guideSite[attr] = req.body[attr]
     })
-    site = Site({
-      ...site,
+    guideSite = GuideSite({
+      ...guideSite,
       updatedAt: new Date(),
       createdAt: new Date(),
     })
 
-    site.save(
-      handleDbError(res)((site) => {
+    guideSite.save(
+      handleDbError(res)((guideSite) => {
         res.json({
-          site,
+          guideSite,
         })
       })
     )
@@ -28,7 +29,7 @@ export default {
   update(req, res) {
   },
 
-  list(req, res) {
+  list(req, res) { // todo
     Site.find(
       { guideId: req.user._id },
       handleDbError(res)((raw) => {

@@ -9,7 +9,6 @@ import PageLayout from '../../layouts/PageLayout'
 import AvatarForm from '../../forms/user/AvatarForm'
 import ChangePasswordForm from '../../forms/user/ChangePasswordForm'
 // import DField from '../../utils/DField'
-import BackGround from '../../utils/BackGround'
 
 const style = {
   bg: {
@@ -23,7 +22,6 @@ const style = {
 const EditPage = () => {
   return (
     <PageLayout>
-      <BackGround color="#EFEEED" />
       <Row>
         <div style={{ textAlign: 'center' }}>
           <div style={{ fontSize: '30px', marginBottom: '3px' }}> 編輯個人頁面 </div>

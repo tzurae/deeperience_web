@@ -125,7 +125,7 @@ class LoginForm extends Component {
       <div style={style.bg}>
         <div style={style.title}> 登   入 </div>
         <Form horizontal onSubmit={handleSubmit(this.handleSubmit)}>
-          <div style={{ paddingLeft: '40px' }}>
+          <div style={{ padding: '0 40px' }}>
             {submitFailed && error && (<Alert bsStyle="danger">{error}</Alert>)}
             <DField name="email" />
             <DField name="password" type="password" />
