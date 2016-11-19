@@ -1,28 +1,36 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Field, reduxForm } from 'redux-form'
-import Button from 'react-bootstrap/lib/Button'
-import Image from 'react-bootstrap/lib/Image'
+// import Button from 'react-bootstrap/lib/Button'
+// import Image from 'react-bootstrap/lib/Image'
+import Row from 'react-bootstrap/lib/Row'
+import Col from 'react-bootstrap/lib/Col'
 import FormNames from '../../../constants/FormNames'
 import configs from '../../../../../configs/project/client'
 import firebaseAPI from '../../../api/firebase'
 import userAPI from '../../../api/user'
 import { pushErrors } from '../../../actions/errorActions'
 import { setCookies } from '../../../actions/cookieActions'
-import {
-  BsInput as Input,
-  BsRadio as Radio,
-} from '../../fields/adapters'
-import {
-  BsForm as Form,
-  BsFormFooter as FormFooter,
-  BsField as FormField,
-} from '../../fields/widgets'
+import { BsInput as Input } from '../../fields/adapters'
+import { BsForm as Form } from '../../fields/widgets'
 import Head from '../../widgets/Head'
 import toRefreshURL from '../../../utils/toRefreshURL'
+// import DField from '../../utils/DField'
 
 const initialValues = {
   storage: 'local',
+}
+
+const style = {
+  div: {
+    color: 'black',
+    fontSize: '1.1em',
+    marginLeft: '10px',
+  },
+  field: {
+    marginTop: '-26px',
+    width: '20em',
+  },
 }
 
 /**
@@ -199,49 +207,45 @@ class AvatarForm extends Component {
     const {
       user: { avatarURL },
       handleSubmit,
-      pristine,
-      submitting,
-      invalid,
+      //pristine,
+      //submitting,
+      //invalid,
     } = this.props
 
     return (
-      <Form
-        defaultHorizontal={false}
-        defaultFieldDimensions={{ sm: 12 }}
-        onSubmit={handleSubmit(this.handleSubmit)}
-      >
+      <Form onSubmit={handleSubmit(this.handleSubmit)}>
         <Head
           scripts={[
             'https://www.gstatic.com/firebasejs/live/3.0/firebase.js',
           ]}
         />
-        {avatarURL && <Image thumbnail src={avatarURL} />}
-        <Field
-          name="avatar"
-          component={FormField}
-          adapter={Input}
-          type="file"
-        />
-        <Field
-          name="storage"
-          component={FormField}
-          labelDimensions={{ sm: 6 }}
-          label="Store avatar into"
-          adapter={Radio}
-          options={[{
-            label: 'Firebase',
-            value: 'firebase',
-            disabled: !!configs.firebase === false,
-          }, {
-            label: 'Local',
-            value: 'local',
-          }]}
-        />
-        <FormFooter>
-          <Button type="submit" disabled={pristine || submitting || invalid}>
-            Upload
-          </Button>
-        </FormFooter>
+        <Row>
+          <Col md={9}>
+            <div style={style.div}>
+              <p> 暱稱 </p>
+              <Field
+                name="name"
+                component={Input}
+                type="text"
+                style={style.field}
+              />
+            </div>
+            <div style={style.div}>
+              <p> 大頭貼 </p>
+              <Field
+                name="avatar"
+                component={Input}
+                type="file"
+                style={style.field}
+              />
+            </div>
+          </Col>
+          <Col md={3}>
+            {avatarURL && <img src={avatarURL}
+              style={{ width: '140px', height: '140px', marginLeft: '10px' }}
+            />}
+          </Col>
+        </Row>
       </Form>
     )
   }

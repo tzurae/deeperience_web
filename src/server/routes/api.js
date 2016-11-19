@@ -12,7 +12,8 @@ import formValidationController from '../controllers/formValidation'
 import localeController from '../controllers/locale'
 import todoController from '../controllers/todo'
 import tripController from '../controllers/trip'
-import siteController from '../controllers/site'
+import guideSiteController from '../controllers/guideSite'
+import googleSiteController from '../controllers/googleSite'
 import postController from '../controllers/post'
 
 export default ({ app }) => {
@@ -121,23 +122,26 @@ export default ({ app }) => {
   app.delete('/api/todos/:id', todoController.remove)
 
   // trip for customer
-  app.get('/api/trips/buy/:userId', authRequired, tripController.listBuyTrip)
+  app.get('/api/trips/buy', authRequired, tripController.listBuyTrip)
 
   // trip for guide
-  app.get('/api/trips/own/:userId', authRequired, tripController.listOwnTrip)
-  app.post('/api/trips/:userId', authRequired, bodyParser.json, tripController.create)
-  app.put('/api/trips/:userId/:tripId', authRequired, bodyParser.json, tripController.update)
-  app.delete('/api/trips/:userId/:tripId', authRequired, bodyParser.json, tripController.remove)
+  app.get('/api/trips/own', authRequired, tripController.listOwnTrip) // todo
+  app.post('/api/trips', authRequired, bodyParser.json, tripController.create) // todo
+  app.put('/api/trips/:tripId', authRequired, bodyParser.json, tripController.update) // todo
+  app.delete('/api/trips/:tripId', authRequired, bodyParser.json, tripController.remove) // todo
 
   // site
-  app.get('/api/sites/:userId', authRequired, siteController.list)
-  app.post('/api/sites/:userId', authRequired, bodyParser.json, siteController.create)
-  app.put('/api/sites/:userId/:siteId', authRequired, bodyParser.json, siteController.update)
-  app.delete('/api/sites/:userId/:siteId', authRequired, siteController.remove)
+  app.get('/api/guideSites', authRequired, guideSiteController.list) // todo
+  app.post('/api/guideSites', authRequired, bodyParser.json, guideSiteController.create)
+  app.put('/api/guideSites/:guideSiteId', authRequired, bodyParser.json, guideSiteController.update) // todo
+  app.delete('/api/guideSites/:guideSiteId', authRequired, guideSiteController.remove) // todo
+
+  // GoogleSite
+  app.post('/api/googleSites', authRequired, bodyParser.json, googleSiteController.create)
 
   // post
-  app.get('/api/posts/:userId', authRequired, postController.list)
-  app.post('/api/posts/:userId', authRequired, bodyParser.json, postController.create)
-  app.put('/api/posts/:userId/:postId', authRequired, bodyParser.json, postController.update)
-  app.delete('/api/posts/:userId/:postId', authRequired, postController.remove)
+  app.get('/api/posts/', authRequired, postController.list) // todo
+  app.post('/api/posts/', authRequired, bodyParser.json, postController.create) // todo
+  app.put('/api/posts/:postId', authRequired, bodyParser.json, postController.update) // todo
+  app.delete('/api/posts/:postId', authRequired, postController.remove) // todo
 }

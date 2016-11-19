@@ -1,37 +1,54 @@
 import mongoose from 'mongoose'
+import { DailyTripSchema } from './DailyTrip'
+import TripStates from '../../common/constants/TripStates'
+import TripDayInfos from '../../common/i18n/zh-tw/TripDayInfos'
+import TripElements from '../../common/i18n/zh-tw/TripElements'
+import flattenMessages from '../../common/i18n/utils/flattenMessages'
 
 export const TripSchema = new mongoose.Schema({
-  name: { type: String, default: '' }, // trip name
-  guideId: { type: String, required: true },
-  allSites: { type: String, default: [] },
-  backgroundPic: String,
-  dayInfo: { type: Number, required: 0 }, // how many days
-  price: { type: Number, default: 0 },
-  purchase: { type: Number, default: 0 },
-  star: { type: Number, default: 0 },
-  seen: { type: Number, default: 0 },
-  tags: { type: [Number], default: 0 },
-  startSite: { type: [String], default: 0 },
-  routes: [{
-    depart: {
-      type: {
-        day: { type: Number, default: 0 },
-        hour: { type: Number, default: 0 },
-        minute: { type: Number, default: 0 },
-      },
-      required: true,
-    },
-    from: String,
-    nextStopDepart: {
-      type: {
-        day: { type: Number, default: 0 },
-        hour: { type: Number, default: 0 },
-        minute: { type: Number, default: 0 },
-      },
-      required: true,
-    },
-    to: String,
-  }],
+  guide: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+  },
+  name: {
+    type: String,
+    default: '',
+  },
+  allSites: {
+    type: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'GuideSite',
+    }],
+    default: [],
+  },
+  price: {
+    type: Number,
+    default: 0,
+    required: true,
+  },
+  dayInfo: {
+    type: String,
+    enum: Object.keys(TripDayInfos),
+    required: true,
+  },
+  coverPic: String,
+  tags: {
+    type: [{
+      type: String,
+      enum: Object.keys(flattenMessages(TripElements)),
+    }],
+    default: [],
+  },
+  departDate: Date,
+  dailyTrips: {
+    type: [DailyTripSchema],
+    default: [],
+  },
+  state: {
+    type: String,
+    enum: Object.keys(TripStates),
+    default: TripStates.DRAFT,
+  },
 }, {
   versionKey: false,
   timestamps: {
@@ -42,4 +59,3 @@ export const TripSchema = new mongoose.Schema({
 
 const Trip = mongoose.model('Trip', TripSchema)
 export default Trip
-

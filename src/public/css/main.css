@@ -1,5 +1,27 @@
-.navbar-brand {
-  color: blue !important;
+/*
+.navbar-text {
+  color: white !important;
+}
+*/
+
+html, body, #root {
+  height: 100%;
+}
+
+.navbar {
+  margin-bottom: 0px;
+}
+
+ul.navbar-nav > li.active > a {
+  background: transparent !important;
+}
+
+.caret {
+  color: white !important;
+}
+
+.navbar-nav>.open>a {
+  background: transparent !important;
 }
 .slider {
   height: 5px;

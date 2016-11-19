@@ -1,11 +1,19 @@
 import React, { PropTypes } from 'react'
 import Grid from 'react-bootstrap/lib/Grid'
 import Navigation from '../utils/Navigation'
+import Navigation2 from '../utils/Navigation2'
 import ErrorList from '../utils/ErrorList'
 
-const PageLayout = ({ hasGrid, children, ...rest }) => (
-  <div>
+const PageLayout = ({ hasGrid, children, bgColor, src, tripTabActive, ...rest }) => (
+  <div
+    style={{
+      height: '100%',
+      backgroundColor: bgColor,
+      backgroundImage: `url(${src})`,
+      backgroundSize: 'contain',
+    }}>
     <Navigation />
+    {tripTabActive ? <Navigation2 tripTabActive={tripTabActive}/> : null}
     <ErrorList />
     {hasGrid ? (
       <Grid {...rest}>
@@ -17,10 +25,12 @@ const PageLayout = ({ hasGrid, children, ...rest }) => (
 
 PageLayout.propTypes = {
   hasGrid: PropTypes.bool,
+  bgColor: PropTypes.string,
 }
 
 PageLayout.defaultProps = {
   hasGrid: true,
+  bgColor: '#EFEEED',
 }
 
 export default PageLayout

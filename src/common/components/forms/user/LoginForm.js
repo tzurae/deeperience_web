@@ -5,7 +5,6 @@ import { push } from 'react-router-redux'
 import { Field, reduxForm, SubmissionError } from 'redux-form'
 import Alert from 'react-bootstrap/lib/Alert'
 import Button from 'react-bootstrap/lib/Button'
-// import validator from 'validator';
 import FormNames from '../../../constants/FormNames'
 import userAPI from '../../../api/user'
 import { pushErrors } from '../../../actions/errorActions'
@@ -14,8 +13,46 @@ import { BsInput as Input } from '../../fields/adapters'
 import {
   BsForm as Form,
   BsFormFooter as FormFooter,
-  BsField as FormField,
+  DField,
 } from '../../fields/widgets'
+
+const style = {
+  bg: {
+    paddingTop: '10px',
+    paddingBottom: '10px',
+    borderRadius: '20px',
+    backgroundColor: 'rgba(34, 34, 34, 0.55)',
+  },
+  title: {
+    color: 'white',
+    fontSize: '20px',
+    textAlign: 'center',
+    borderBottom: '1px solid #797D80',
+    marginBottom: '25px',
+    paddingBottom: '10px',
+  },
+  submit: {
+    width: '7em',
+    color: 'white',
+    fontSize: '1.2em',
+    marginTop: '40px',
+    marginLeft: '6em',
+    borderRadius: '50px',
+    backgroundColor: '#FF864F',
+    position: 'relative',
+  },
+  register: {
+    width: '7em',
+    color: 'white',
+    fontSize: '1.2em',
+    marginTop: '40px',
+    marginLeft: '-3.2em',
+    borderRadius: '50px',
+    backgroundColor: 'transparent',
+    position: 'absolute',
+    border: '2px solid #FF864F',
+  },
+}
 
 const validate = (values) => {
   const errors = {}
@@ -86,33 +123,42 @@ class LoginForm extends Component {
     } = this.props
 
     return (
-      <Form onSubmit={handleSubmit(this.handleSubmit)}>
-        {submitFailed && error && (<Alert bsStyle="danger">{error}</Alert>)}
-        <Field
-          name="email"
-          component={FormField}
-          label="Email"
-          adapter={Input}
-          type="text"
-          placeholder="Email"
-        />
-        <Field
-          name="password"
-          component={FormField}
-          label="Password"
-          adapter={Input}
-          type="password"
-          placeholder="Password"
-        />
-        <FormFooter>
-          <Button type="submit" disabled={pristine || submitting || invalid}>
-            Login
-          </Button>
-          <Link to="/user/password/forget">
-            <Button bsStyle="link">Forget password?</Button>
-          </Link>
-        </FormFooter>
-      </Form>
+      <div style={style.bg}>
+        <div style={style.title}> 登   入 </div>
+        <Form onSubmit={handleSubmit(this.handleSubmit)}>
+          <div style={{ padding: '0 40px' }}>
+            {submitFailed && error && (<Alert bsStyle="danger">{error}</Alert>)}
+            <Field
+              name="email"
+              component={DField}
+              label="信箱"
+              adapter={Input}
+              type="text"
+              placeholder="信箱"
+            />
+            <Field
+              name="password"
+              component={DField}
+              label="密碼"
+              adapter={Input}
+              type="password"
+              placeholder="密碼"
+            />
+            <input type="checkbox" name="remember" value="remember" />
+            <span style={{ color: 'white' }}> Remember Me </span>
+            <FormFooter>
+              <Link to="/user/register">
+                <Button type="submit" disabled={false} style={style.register}>
+                  註冊
+                </Button>
+              </Link>
+              <Button type="submit" disabled={pristine || submitting || invalid} style={style.submit}>
+                登入
+              </Button>
+            </FormFooter>
+          </div>
+        </Form>
+      </div>
     )
   }
 };

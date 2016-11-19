@@ -3,10 +3,8 @@ import mongoose from 'mongoose'
 import jwt from 'jsonwebtoken'
 import configs from '../../../configs/project/server'
 import Roles from '../../common/constants/Roles'
+import { Languages, Levels } from '../../common/i18n/zh-tw/Languages'
 import paginatePlugin from './plugins/paginate'
-import { SiteSchema } from './Site'
-import { TripSchema } from './Trip'
-import { PostSchema } from './Post'
 
 const hashPassword = (rawPassword = '') => {
   let hashPassword = rawPassword
@@ -42,7 +40,7 @@ const UserSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    enum: Object.keys(Roles).map(r => Roles[r]),
+    enum: Object.keys(Roles),
     default: Roles.USER,
   },
   avatarURL: {
@@ -51,7 +49,11 @@ const UserSchema = new mongoose.Schema({
   },
   social: {
     profile: {
-      facebook: Object,
+      facebook: {
+        main: Object,
+        likes: Array,
+        friends: Array,
+      },
       linkedin: Object,
     },
   },
@@ -60,10 +62,42 @@ const UserSchema = new mongoose.Schema({
     resetPassword: Number,
   },
   lastLoggedInAt: Date,
-  sites: [SiteSchema],
-  ownTrip: [TripSchema],
-  buyTrip: [TripSchema],
-  posts: [PostSchema],
+  posts: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Post',
+  }],
+  verifiedGuide: Boolean,
+  selfInfo: {
+    vocation: String,
+    selfIntro: String,
+    hobby: String,
+    location: {
+      country: String, // TODO make tags
+      province: String, // TODO
+      city: String, // TODO
+    },
+    language: {
+      type: [{
+        languageName: {
+          type: String,
+          enum: Object.keys(Languages),
+        },
+        level: {
+          type: String,
+          enum: Object.keys(Levels),
+        },
+      }],
+      default: [{
+        languageName: 'CHINESE',
+        level: 'MEDIUM',
+      }],
+    },
+  },
+  birthday: {
+    year: Number,
+    month: Number,
+    day: Number,
+  },
 }, {
   versionKey: false,
   timestamps: {

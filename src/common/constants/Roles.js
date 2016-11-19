@@ -1,8 +1,10 @@
-export default {
+import keyMirror from 'key-mirror'
+
+export default keyMirror({
   // end user
-  USER: 'USER',
+  USER: null,
   // system administrator
-  ADMIN: 'ADMIN',
+  ADMIN: null,
   // root
-  ROOT: 'ROOT',
-}
+  ROOT: null,
+})

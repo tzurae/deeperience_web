@@ -9,15 +9,11 @@ import FormNames from '../../../constants/FormNames'
 import userAPI from '../../../api/user'
 import { validateForm } from '../../../actions/formActions'
 import { pushErrors } from '../../../actions/errorActions'
-import { Recaptcha } from '../../fields/bases'
-import {
-  BsInput as Input,
-  BsCheckbox as Checkbox,
-} from '../../fields/adapters'
+import { BsInput as Input } from '../../fields/adapters'
 import {
   BsForm as Form,
   BsFormFooter as FormFooter,
-  BsField as FormField,
+  DField,
 } from '../../fields/widgets'
 import configs from '../../../../../configs/project/client'
 
@@ -29,11 +25,15 @@ const validate = (values) => {
   } else {
     if (!validator.isEmail(values.email)) {
       errors.email = 'Not an email'
-    } else {
-      const pattern = /^[a-zA-Z0-9]{6,15}$/g
-      if (!pattern.test(values.email.split('@')[0])) {
-        errors.email = '信箱帳號必須為6至15位英文大小寫與數字組合'
-      }
+    }
+  }
+
+  if (!values.name) {
+    errors.name = 'Required'
+  } else {
+    const pattern = /^[a-zA-Z0-9]{6,15}$/g
+    if (!pattern.test(values.name)) {
+      errors.name = '暱稱必須為6至15位英文大小寫與數字組合'
     }
   }
 
@@ -54,6 +54,12 @@ const validate = (values) => {
     errors.recaptcha = 'Required'
   }
 
+  if (values.password && values.ensurePassword) {
+    if (values.password !== values.ensurePassword) {
+      errors.ensurePassword = '確認密碼與密碼不相同'
+    }
+  }
+
   return errors
 }
 
@@ -66,6 +72,32 @@ const asyncValidate = (values, dispatch) => {
         throw validationError
       }
     })
+}
+
+const style = {
+  bg: {
+    paddingTop: '10px',
+    paddingBottom: '10px',
+    borderRadius: '20px',
+    backgroundColor: 'rgba(34, 34, 34, 0.55)',
+  },
+  title: {
+    color: 'white',
+    fontSize: '20px',
+    textAlign: 'center',
+    borderBottom: '1px solid #797D80',
+    marginBottom: '25px',
+    paddingBottom: '10px',
+  },
+  submit: {
+    width: '8em',
+    color: 'white',
+    fontSize: '1.2em',
+    marginTop: '40px',
+    marginLeft: '0.9em',
+    borderRadius: '50px',
+    backgroundColor: '#FF864F',
+  },
 }
 
 class RegisterForm extends Component {
@@ -100,54 +132,60 @@ class RegisterForm extends Component {
     } = this.props
 
     return (
-      <Form onSubmit={handleSubmit(this.handleSubmit)}>
-        {submitFailed && error && (<Alert bsStyle="danger">{error}</Alert>)}
-        <Field
-          name="name"
-          component={FormField}
-          label="Name"
-          adapter={Input}
-          type="text"
-          placeholder="Name"
-        />
-        <Field
-          name="email"
-          component={FormField}
-          label="Email"
-          adapter={Input}
-          type="text"
-          placeholder="Email"
-        />
-        <Field
-          name="password"
-          component={FormField}
-          label="Password"
-          adapter={Input}
-          type="password"
-          placeholder="Password"
-        />
-        <Field
-          name="isAgreeTerms"
-          component={FormField}
-          label=""
-          adapter={Checkbox}
-          text={<span>I agree the <a href="#">terms</a></span>}
-        />
-        <Field
-          name="recaptcha"
-          component={FormField}
-          label=""
-          adapter={Recaptcha}
-        />
-        <FormFooter>
-          <Button
-            type="submit"
-            disabled={pristine || !!asyncValidating || submitting || invalid}
-          >
-            Register
-          </Button>
-        </FormFooter>
-      </Form>
+      <div style={style.bg}>
+        <div style={style.title}> 註   冊 </div>
+        <Form horizontal onSubmit={handleSubmit(this.handleSubmit)} style={{ margin: '0 30px' }}>
+          {submitFailed && error && (<Alert bsStyle="danger">{error}</Alert>)}
+          <div style={{ padding: '0 11px' }}>
+            <Field
+              name="name"
+              component={DField}
+              label="Name"
+              adapter={Input}
+              type="text"
+              placeholder="Name"
+            />
+            <Field
+              name="email"
+              component={DField}
+              label="Email"
+              adapter={Input}
+              type="text"
+              placeholder="Email"
+            />
+            <Field
+              name="password"
+              component={DField}
+              label="Password"
+              adapter={Input}
+              type="password"
+              placeholder="Password"
+            />
+            <Field
+              name="ensurePassword"
+              component={DField}
+              label="Repeat Password"
+              adapter={Input}
+              type="password"
+              placeholder="Repeat Password"
+            />
+            <input type="checkbox" name="memberShip" value="memberShip" />
+            <span style={{ color: 'white' }}> 已詳細閱讀 </span>
+            <a href="http://www.w3schools.com/html/">會員條款</a>
+            <br />
+            <FormFooter>
+              <Button
+                type="submit"
+                onClick={this.props.openModal}
+                disabled={pristine || !!asyncValidating || submitting || invalid}
+                style={style.submit}
+              >
+                註冊
+              </Button>
+            </FormFooter>
+          </div>
+        </Form>
+      </div>
     )
   }
 };

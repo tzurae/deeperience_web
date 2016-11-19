@@ -18,4 +18,4 @@ module.exports = {
     clientSecret: 'abcedfghi123456789abcdefghi12345',
     callbackURL: 'https://express-react-hmr-boilerplate.herokuapp.com/auth/facebook/callback',
   },
-};
+}

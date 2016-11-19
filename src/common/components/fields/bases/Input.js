@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 
-const Input = ({ input, type, ...rest }) => (
+const Input = ({ input, meta, type, ...rest }) => (
   <input
     {...input}
     type={type}

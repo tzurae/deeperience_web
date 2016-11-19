@@ -16,7 +16,7 @@ if (process.env.TRAVIS) {
     jwt: {
       authentication: {
         secret: '4eO5viHe23',
-        expiresIn: 60 * 60 * 24 * 3, // in seconds
+        expiresIn: 60 * 60 * 24 * 100, // in seconds
       },
       verifyEmail: {
         secret: 'df5s6sdHdjJdRg56',
@@ -43,11 +43,11 @@ if (process.env.TRAVIS) {
         html: '<pre>no html content<pre>',
       },
       development: {
-        to: 'gocreating@gmail.com',
+        to: 'i314i@yahoo.com.tw',
       },
       test: {
         to: 'dont_sent_to_me_when_every_test@gmail.com',
       },
     },
-  };
+  }
 }

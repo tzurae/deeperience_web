@@ -3,6 +3,7 @@ var webpack = require('webpack');
 var WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
 var webpackIsomorphicToolsConfig = require('../project/webpack-isomorphic-tools-configuration');
 var babelConfig = require('./babel.config.dev.client');
+// var babelpolyfill = require('babel-polyfill'); // for generator function usage
 
 var webpackIsomorphicToolsPlugin =
   new WebpackIsomorphicToolsPlugin(webpackIsomorphicToolsConfig)
