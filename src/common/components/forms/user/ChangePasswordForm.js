@@ -12,7 +12,6 @@ import { BsInput as Input } from '../../fields/adapters'
 import {
   BsForm as Form,
   BsFormFooter as FormFooter,
-  BsField as FormField,
 } from '../../fields/widgets'
 
 const style = {
@@ -157,84 +156,6 @@ class ChangePasswordForm extends Component {
         </FormFooter>
       </Form>
     )
-
-//     return (
-//       <Form
-//         defaultHorizontal={false}
-//         defaultLabelDimensions={{ sm: 12 }}
-//         defaultFieldDimensions={{ sm: 12 }}
-//         onSubmit={handleSubmit(this.handleSubmit)}
-//       >
-//         {submitSucceeded && (<Alert bsStyle="success">Password Changed</Alert>)}
-//         {submitFailed && error && (<Alert bsStyle="danger">{error}</Alert>)}
-// <<<<<<< HEAD
-//         <Field
-//           name="oldPassword"
-//           component={FormField}
-//           label="Old Password"
-//           adapter={Input}
-//           type="password"
-//           placeholder="Old Password"
-//         />
-//         <Field
-//           name="newPassword"
-//           component={FormField}
-//           label="New Password"
-//           adapter={Input}
-//           type="password"
-//           placeholder="New Password"
-//         />
-//         <Field
-//           name="newPasswordConfirm"
-//           component={FormField}
-//           label="New Password Confirm"
-//           adapter={Input}
-//           type="password"
-//           placeholder="New Password Confirm"
-//         />
-// =======
-//         <Row>
-//           <Col md={9}>
-//             <div style={style.div}>
-//               <p> 舊密碼 </p>
-//               <Field
-//                 name="oldPassword"
-//                 component={FormField}
-//                 type="text"
-//                 style={style.field}
-//               />
-//             </div>
-//             <div style={style.div}>
-//               <p> 新密碼 </p>
-//               <Field
-//                 name="newPassword"
-//                 component={FormField}
-//                 type="text"
-//                 style={style.field}
-//               />
-//             </div>
-//             <div style={style.div}>
-//               <p> 新密碼 </p>
-//               <Field
-//                 name="newPasswordConfirm"
-//                 component={FormField}
-//                 type="text"
-//                 style={style.field}
-//               />
-//             </div>
-//           </Col>
-//         </Row>
-// >>>>>>> origin/dev
-//         <FormFooter>
-//           <Button type="submit" disabled={pristine || submitting || invalid} style={style.submit}>
-//             Change
-//             {submitting && (
-//               <i className="fa fa-spinner fa-spin" aria-hidden="true" />
-//             )}
-//           </Button>
-//         </FormFooter>
-//       </Form>
-//     )
   }
 };
 
