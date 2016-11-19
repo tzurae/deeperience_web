@@ -10,14 +10,16 @@ import Navbar from './BsNavbar'
 import NavLink from './NavLink'
 // import MenuItem from './MenuItem'
 import Text from '../widgets/Text'
+import styles from '../../styles'
 
 const style = {
   nav: {
-    backgroundColor: 'rgba(78, 88, 101, 0.5)',
+    backgroundColor: styles.color.navbarGrey,
     borderWidth: '0px',
   },
   text: {
     color: 'white',
+    fontSize: styles.font.medium,
   },
   header: {
     marginLeft: '25px',
@@ -76,20 +78,20 @@ class Navigation extends Component {
               */}
               <Navbar.Nav>
                 <NavLink to="/feature" onlyActiveOnIndex>
-                  <Text id="nav.feature" />
+                  <Text id="nav.feature" style={style.text}/>
                 </NavLink>
                 <NavLink to="/wonderful">
-                  <Text id="nav.wonderful" />
+                  <Text id="nav.wonderful" style={style.text}/>
                 </NavLink>
                 <NavLink to="/customize">
-                  <Text id="nav.customize" />
+                  <Text id="nav.customize" style={style.text}/>
                 </NavLink>
               </Navbar.Nav>
               <Navbar.Dropdown
-                title={<Text id="nav.trip"/>}
+                title={<Text id="nav.trip" style={{ ...style.text, display: 'inline' }}/>}
               >
-                <NavLink to="/trip/createTrip/1">
-                  <Text id="nav.trip.createSite"/>
+                <NavLink to="/trip/createTrip">
+                  <Text id="nav.trip.createTrip"/>
                 </NavLink>
               </Navbar.Dropdown>
               <Navbar.Dropdown

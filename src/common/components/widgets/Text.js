@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl'
 
 const Text = ({ style, ...props }) => (
   style ?
-    <p style={{ margin: 0, ...style }}><FormattedMessage {...props} /></p> :
+    <p style={{ margin: '0px', ...style }}><FormattedMessage {...props} /></p> :
     <FormattedMessage {...props} />
 )
 

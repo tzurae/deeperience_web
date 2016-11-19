@@ -12,6 +12,14 @@ html, body, #root {
   margin-bottom: 0px;
 }
 
-/*.navbar-default .navbar-nav>li>a {*/
-    /*color: white;*/
-/*}*/
+ul.navbar-nav > li.active > a {
+  background: transparent !important;
+}
+
+.caret {
+  color: white !important;
+}
+
+.navbar-nav>.open>a {
+  background: transparent !important;
+}

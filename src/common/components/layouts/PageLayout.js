@@ -4,7 +4,7 @@ import Navigation from '../utils/Navigation'
 import Navigation2 from '../utils/Navigation2'
 import ErrorList from '../utils/ErrorList'
 
-const PageLayout = ({ hasGrid, children, bgColor, src, trip, ...rest }) => (
+const PageLayout = ({ hasGrid, children, bgColor, src, tripTabActive, ...rest }) => (
   <div
     style={{
       height: '100%',
@@ -13,7 +13,7 @@ const PageLayout = ({ hasGrid, children, bgColor, src, trip, ...rest }) => (
       backgroundSize: 'contain',
     }}>
     <Navigation />
-    {trip ? <Navigation2/> : null}
+    {tripTabActive ? <Navigation2 tripTabActive={tripTabActive}/> : null}
     <ErrorList />
     {hasGrid ? (
       <Grid {...rest}>

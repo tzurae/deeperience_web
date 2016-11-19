@@ -1,21 +1,9 @@
-
-const setCreateTripPath = (store, path, component) => ({
-  path,
+export default (store) => ({
+  path: 'createTrip',
   getComponent(nextState, cb) {
     require.ensure([], (require) => {
-      cb(null, require(`../../components/pages/trip/CreateTrip/${component}`).default)
+      cb(null, require('../../components/pages/trip/CreateTrip/TripIntroPage').default)
     })
   },
   onEnter: require('../../utils/authRequired').default(store),
-})
-
-export default (store) => ({
-  path: 'createTrip',
-  getChildRoutes(location, cb) {
-    require.ensure([], (require) => {
-      cb(null, [
-        setCreateTripPath(store, '1', 'TripIntroPage'),
-      ])
-    })
-  },
 })

@@ -9,5 +9,6 @@ export default {
     orange: '#F78B6D',
     weedGreen: '#32A69E',
     borderGrey: '#CCC',
+    navbarGrey: '#666',
   },
 }

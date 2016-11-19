@@ -16,7 +16,7 @@ const TripIntroPage = () => {
 
   return (
     <PageLayout
-      trip={true}
+      tripTabActive={3}
     >
       <PanelContainer>
         <LeftPanel
