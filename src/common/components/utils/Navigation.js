@@ -20,7 +20,7 @@ const style = {
     color: 'white',
   },
   header: {
-    marginLeft: '150px',
+    marginLeft: '25px',
   },
 }
 
@@ -86,9 +86,16 @@ class Navigation extends Component {
                 </NavLink>
               </Navbar.Nav>
               <Navbar.Dropdown
+                title={<Text id="nav.trip"/>}
+              >
+                <NavLink to="/trip/createTrip/1">
+                  <Text id="nav.trip.createSite"/>
+                </NavLink>
+              </Navbar.Dropdown>
+              <Navbar.Dropdown
                 title={
                   !isAuth ?
-                  <Text id="nav.user.profile" style={style.text} /> :
+                  <Text id="nav.user.profile"/> :
                   user.avatarURL ? (
                     <Image
                       style={{ height: 18 }}

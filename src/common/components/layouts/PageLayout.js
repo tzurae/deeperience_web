@@ -1,9 +1,10 @@
 import React, { PropTypes } from 'react'
 import Grid from 'react-bootstrap/lib/Grid'
 import Navigation from '../utils/Navigation'
+import Navigation2 from '../utils/Navigation2'
 import ErrorList from '../utils/ErrorList'
 
-const PageLayout = ({ hasGrid, children, bgColor, src, ...rest }) => (
+const PageLayout = ({ hasGrid, children, bgColor, src, trip, ...rest }) => (
   <div
     style={{
       height: '100%',
@@ -12,6 +13,7 @@ const PageLayout = ({ hasGrid, children, bgColor, src, ...rest }) => (
       backgroundSize: 'contain',
     }}>
     <Navigation />
+    {trip ? <Navigation2/> : null}
     <ErrorList />
     {hasGrid ? (
       <Grid {...rest}>
@@ -23,7 +25,7 @@ const PageLayout = ({ hasGrid, children, bgColor, src, ...rest }) => (
 
 PageLayout.propTypes = {
   hasGrid: PropTypes.bool,
-  bgColor: PropTypes.String,
+  bgColor: PropTypes.string,
 }
 
 PageLayout.defaultProps = {

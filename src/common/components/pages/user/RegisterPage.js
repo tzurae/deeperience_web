@@ -69,7 +69,7 @@ class RegisterPage extends Component {
     )
   }
 
-  render(props) {
+  render() {
     return (
       <PageLayout src="/img/river_dark.jpg">
         <Row>

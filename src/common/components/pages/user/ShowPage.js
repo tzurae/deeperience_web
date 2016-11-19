@@ -166,9 +166,7 @@ class ShowPage extends Component {
                   </Link>
                 </Col>
               </Row>
-                <div style={{ textAlign: 'center' }}>
-                  <div style={{ background: '#FF7155', margin: '30px auto', width: '90%', height: '2px' }}/>
-                </div>
+              <div style={{ background: '#FF7155', margin: '30px auto', width: '90%', height: '2px' }}/>
               <Row>
                 <Col md={4}>
                   <Info label="已購買旅程" />
