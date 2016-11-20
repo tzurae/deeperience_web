@@ -3,7 +3,7 @@ import PageLayout from '../../../layouts/PageLayout'
 import PanelContainer from '../../../utils/Panel/PanelContainer'
 import MainPanel from '../../../utils/Panel/MainPanel'
 import LeftPanel from '../../../utils/Panel/LeftPanel'
-// import RightPanel from '../../../utils/Panel/RightPanel'
+import RightPanel from '../../../utils/Panel/RightPanel'
 import PhaseBranch from '../../../utils/PhaseBranch'
 
 const TripIntroPage = () => {
@@ -30,6 +30,11 @@ const TripIntroPage = () => {
         <MainPanel
           title="trip.createTrip.title1"
         />
+        <RightPanel
+          title="trip.createTrip.help"
+        >
+
+        </RightPanel>
       </PanelContainer>
     </PageLayout>
   )

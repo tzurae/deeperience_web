@@ -28,7 +28,7 @@ const Navigation2 = ({ tripTabActive }) => (
       <Navbar staticTop style={style.nav}>
         <Grid>
           <Navbar.Body>
-            <Navbar.Nav left style={style.header}>
+            <Navbar.Nav style={style.header}>
               <Navbar.Nav>
                 <NavLink to="#" onlyActiveOnIndex>
                   {tripTabActive === 1 ?

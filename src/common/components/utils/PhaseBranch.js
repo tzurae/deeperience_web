@@ -35,7 +35,7 @@ const style = {
   },
 }
 
-const PhaseBranch = ({ nodes, active, children }) => {
+const PhaseBranch = ({ nodes, active }) => {
   return (
     <div style={style.nodeDiv}>
       <div style={{ flex: 3, paddingRight: '15px' }}>
