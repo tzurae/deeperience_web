@@ -1,13 +1,14 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import Col from 'react-bootstrap/lib/Col'
 import PageLayout from '../../layouts/PageLayout'
-import PanelContainer from '../../utils/Panel/PanelContainer'
-import MainPanel from '../../utils/Panel/MainPanel'
-import LeftPanel from '../../utils/Panel/LeftPanel'
-import RightPanel from '../../utils/Panel/RightPanel'
+import PanelContainer from '../../utils/PanelContainer'
+import Panel from '../../utils/Panel1'
 import PhaseBranch from '../../utils/PhaseBranch'
 import CreateTripForm from '../../forms/trip/CreateTripForm'
+import styles from '../../../styles'
 
-const CreateTripPage = () => {
+const CreateTripPage = ({ page }) => {
   const nodes = [
     'trip.createTrip.title1',
     'trip.createTrip.title2',
@@ -20,25 +21,46 @@ const CreateTripPage = () => {
       tripTabActive={3}
     >
       <PanelContainer>
-        <LeftPanel
-          title="trip.createTrip"
-        >
-          <PhaseBranch
-            nodes={nodes}
-            active={0}
+        <Col md={2}>
+          <Panel
+            title="trip.createTrip"
+            underlineStyle={{ background: styles.color.borderGrey }}
+          >
+            <PhaseBranch
+              nodes={nodes}
+              active={page}
+            />
+          </Panel>
+        </Col>
+        <Col md={7}>
+          <Panel
+            title={nodes[page]}
+            underlineStyle={{ background: styles.color.orange,
+              height: '3px' }}
+            titleStyle={{ textAlign: 'left' }}
+            contentDivStyle={{ padding: '20px 30px' }}
+          >
+            <CreateTripForm/>
+          </Panel>
+        </Col>
+        <Col md={3}>
+          <Panel
+            title="trip.createTrip.help"
+            isUnderline={false}
           />
-        </LeftPanel>
-        <MainPanel
-          title="trip.createTrip.title1"
-        >
-          <CreateTripForm/>
-        </MainPanel>
-        <RightPanel
-          title="trip.createTrip.help"
-        />
+          {
+            page === 0 &&
+            <Panel
+              title="trip.createTrip.mySite"
+              isUnderline={false}
+            />
+          }
+        </Col>
       </PanelContainer>
     </PageLayout>
   )
 }
 
-export default CreateTripPage
+export default connect(state => ({
+  page: state.createTrip.page,
+}))(CreateTripPage)

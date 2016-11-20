@@ -9,6 +9,7 @@ const btnStyle = {
   width: '100px',
   borderRadius: '50px',
   border: '0',
+  margin: '0 20px',
 }
 
 const FormButton = ({ children, style, ...props }) => (

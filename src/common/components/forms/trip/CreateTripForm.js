@@ -70,8 +70,17 @@ class CreateTripForm extends React.Component {
     return (
       <div>
         <pre>{JSON.stringify(values, null, 2)}</pre>
-        {page === 0 && <CreateTripFormPage1 onSubmit={this.nextPage} {...this.props}/>}
-        {page === 1 && <CreateTripFormPage2 onSubmit={this.nextPage} {...this.props}/>}
+        {page === 0 &&
+        <CreateTripFormPage1
+          onSubmit={this.nextPage}
+          {...this.props}/>
+        }
+        {page === 1 &&
+        <CreateTripFormPage2
+          onSubmit={this.nextPage}
+          previousPage={this.previousPage}
+          {...this.props}/>
+        }
       </div>
     )
   }

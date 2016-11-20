@@ -20,6 +20,7 @@ const CreateTripFormPage1 = ({ handleSubmit, ...props }) => {
     pristine,
     submitting,
     invalid,
+    previousPage,
   } = props
 
   return (
@@ -34,6 +35,9 @@ const CreateTripFormPage1 = ({ handleSubmit, ...props }) => {
         fieldDimensions={{ sm: 12 }}
         style={{ textAlign: 'center' }}
       >
+        <FormButton type="button" onClick={previousPage}>
+          {I18n('trip.createTrip.form.previousStep')}
+        </FormButton>
         <FormButton type="submit" disabled={pristine || submitting || invalid}>
           {I18n('trip.createTrip.form.nextStep')}
         </FormButton>

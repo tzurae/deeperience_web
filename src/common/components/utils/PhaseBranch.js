@@ -18,13 +18,11 @@ const style = {
   nodeLabel: {
     textAlign: 'right',
     fontSize: styles.font.medium,
-    color: styles.color.borderGrey,
   },
   dot: {
     width: 12,
     height: 12,
     borderRadius: '50%',
-    backgroundColor: styles.color.borderGrey,
   },
   stick: {
     width: '3px',
@@ -40,32 +38,37 @@ const PhaseBranch = ({ nodes, active }) => {
     <div style={style.nodeDiv}>
       <div style={{ flex: 3, paddingRight: '15px' }}>
         {nodes.map((node, index) => (
-          active === index ?
-            (<div key={index} style={{ height: 50 }}>
-              <Text
-                style={{ ...style.nodeLabel, color: styles.color.orange }}
-                id={node}
-              />
-            </div>) :
-            (<div key={index} style={{ height: 50 }}>
-              <Text
-                style={style.nodeLabel}
-                id={node}
-              />
-            </div>)
+          <div
+            key={index}
+            style={{ height: index === nodes.length - 1 ? 20 : 50 }}>
+            <Text
+              style={{
+                ...style.nodeLabel,
+                color: active === index ?
+                  styles.color.orange :
+                  styles.color.borderGrey,
+              }}
+              id={node}
+            />
+          </div>
         ))}
       </div>
       <div style={{ flex: 1, position: 'relative', top: '5px' }}>
         <div style={{ height: `${nodes.length * 50 - 50}px`, ...style.stick }}/>
         <div style={{ position: 'absolute' }}>
           {nodes.map((node, index) => (
-            active === index ?
-              (<div key={index} style={{ height: 50 }}>
-                <div style={{ ...style.dot, backgroundColor: styles.color.orange }}/>
-              </div>) :
-              (<div key={index} style={{ height: 50 }}>
-                <div style={style.dot}/>
-              </div>)
+              <div
+                key={index}
+                style={{ height: index === nodes.length - 1 ? 20 : 50 }}>
+                <div
+                  style={{
+                    ...style.dot,
+                    backgroundColor: active === index ?
+                      styles.color.orange :
+                      styles.color.borderGrey,
+                  }}
+                />
+              </div>
           ))}
         </div>
       </div>
