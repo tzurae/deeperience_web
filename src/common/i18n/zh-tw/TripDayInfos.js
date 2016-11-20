@@ -10,5 +10,5 @@ export default {
   EIGHT_DAY: '八天七夜',
   NINE_DAY: '九天八夜',
   TEN_DAY: '十天九夜',
-  LONGER_THAN_TEN: '十天以上',
+  LONGER_THAN_TEN_DAY: '十天以上',
 }

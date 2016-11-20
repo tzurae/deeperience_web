@@ -26,8 +26,8 @@ const MainPanel = ({ title, children }) => {
     <Col md={7}>
       <div style={style.container}>
         <Title title={title}/>
+        {children}
       </div>
-      {children}
     </Col>
   )
 }

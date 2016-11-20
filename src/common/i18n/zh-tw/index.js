@@ -7,7 +7,7 @@ import TripDayInfos from './TripDayInfos'
 import { Languages, Levels } from './Languages'
 import flattenMessages from '../utils/flattenMessages'
 
-export default{
+export default {
   parentLocale: 'zh',
   'nav.home': '首頁',
   'nav.todo': '待辦',
@@ -36,6 +36,10 @@ export default{
   'trip.createTrip.title4': '預覽',
   'trip.createTrip.title5': '完成',
   'trip.createTrip.help': '貼心小建議',
+  'trip.createTrip.form.name': '旅程名稱',
+  'trip.createTrip.form.price': '服務費',
+  'trip.createTrip.form.dayInfo': '天數',
+  'trip.createTrip.form.nextStep': '下一步',
   ...flattenMessages(HotelTypes, 'HotelTypes'),
   ...flattenMessages(TripElements, 'TripElements'),
   ...flattenMessages(FoodElements, 'FoodElements'),

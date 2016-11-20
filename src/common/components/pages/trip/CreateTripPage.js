@@ -1,12 +1,13 @@
 import React from 'react'
-import PageLayout from '../../../layouts/PageLayout'
-import PanelContainer from '../../../utils/Panel/PanelContainer'
-import MainPanel from '../../../utils/Panel/MainPanel'
-import LeftPanel from '../../../utils/Panel/LeftPanel'
-import RightPanel from '../../../utils/Panel/RightPanel'
-import PhaseBranch from '../../../utils/PhaseBranch'
+import PageLayout from '../../layouts/PageLayout'
+import PanelContainer from '../../utils/Panel/PanelContainer'
+import MainPanel from '../../utils/Panel/MainPanel'
+import LeftPanel from '../../utils/Panel/LeftPanel'
+import RightPanel from '../../utils/Panel/RightPanel'
+import PhaseBranch from '../../utils/PhaseBranch'
+import CreateTripForm from '../../forms/trip/CreateTripForm'
 
-const TripIntroPage = () => {
+const CreateTripPage = () => {
   const nodes = [
     'trip.createTrip.title1',
     'trip.createTrip.title2',
@@ -29,15 +30,15 @@ const TripIntroPage = () => {
         </LeftPanel>
         <MainPanel
           title="trip.createTrip.title1"
-        />
+        >
+          <CreateTripForm/>
+        </MainPanel>
         <RightPanel
           title="trip.createTrip.help"
-        >
-
-        </RightPanel>
+        />
       </PanelContainer>
     </PageLayout>
   )
 }
 
-export default TripIntroPage
+export default CreateTripPage
