@@ -9,6 +9,7 @@ import FormNames from '../../../constants/FormNames'
 import userAPI from '../../../api/user'
 import { pushErrors } from '../../../actions/errorActions'
 import { loginUser } from '../../../actions/userActions'
+import Text from '../../widgets/Text'
 import { BsInput as Input } from '../../fields/adapters'
 import {
   BsForm as Form,
@@ -56,10 +57,6 @@ const style = {
 
 const validate = (values) => {
   const errors = {}
-
-  // if (values.email && !validator.isEmail(values.email)) {
-  //   errors.email = 'Not an email';
-  // }
 
   if (!values.email) {
     errors.email = 'Required'
@@ -124,7 +121,9 @@ class LoginForm extends Component {
 
     return (
       <div style={style.bg}>
-        <div style={style.title}> 登   入 </div>
+        <div style={style.title}>
+          <Text id="nav.user.login" style={style.title} />
+        </div>
         <Form onSubmit={handleSubmit(this.handleSubmit)}>
           <div style={{ padding: '0 40px' }}>
             {submitFailed && error && (<Alert bsStyle="danger">{error}</Alert>)}
@@ -145,15 +144,17 @@ class LoginForm extends Component {
               placeholder="密碼"
             />
             <input type="checkbox" name="remember" value="remember" />
-            <span style={{ color: 'white' }}> Remember Me </span>
+            <span style={{ color: 'white', marginLeft: '6px' }}>
+              <Text id="login.rememberMe" />
+            </span>
             <FormFooter>
               <Link to="/user/register">
                 <Button type="submit" disabled={false} style={style.register}>
-                  註冊
+                  <Text id="nav.user.register" />
                 </Button>
               </Link>
               <Button type="submit" disabled={pristine || submitting || invalid} style={style.submit}>
-                登入
+                <Text id="nav.user.login" />
               </Button>
             </FormFooter>
           </div>

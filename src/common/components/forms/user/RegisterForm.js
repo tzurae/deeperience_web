@@ -16,6 +16,7 @@ import {
   DField,
 } from '../../fields/widgets'
 import configs from '../../../../../configs/project/client'
+import Text from '../../widgets/Text'
 
 const validate = (values) => {
   const errors = {}
@@ -133,7 +134,9 @@ class RegisterForm extends Component {
 
     return (
       <div style={style.bg}>
-        <div style={style.title}> 註   冊 </div>
+        <div style={style.title}>
+          <Text id="nav.user.register" />
+        </div>
         <Form horizontal onSubmit={handleSubmit(this.handleSubmit)} style={{ margin: '0 30px' }}>
           {submitFailed && error && (<Alert bsStyle="danger">{error}</Alert>)}
           <div style={{ padding: '0 11px' }}>
@@ -170,8 +173,12 @@ class RegisterForm extends Component {
               placeholder="Repeat Password"
             />
             <input type="checkbox" name="memberShip" value="memberShip" />
-            <span style={{ color: 'white' }}> 已詳細閱讀 </span>
-            <a href="http://www.w3schools.com/html/">會員條款</a>
+            <span style={{ color: 'white' }}>
+              <Text id="register.hasRead" />
+            </span>
+            <a href="http://www.w3schools.com/html/">
+              <Text id="register.memberShip" />
+            </a>
             <br />
             <FormFooter>
               <Button
@@ -180,7 +187,7 @@ class RegisterForm extends Component {
                 disabled={pristine || !!asyncValidating || submitting || invalid}
                 style={style.submit}
               >
-                註冊
+                <Text id="register.register" />
               </Button>
             </FormFooter>
           </div>
