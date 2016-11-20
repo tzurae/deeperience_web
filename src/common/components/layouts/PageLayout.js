@@ -7,13 +7,13 @@ import ErrorList from '../utils/ErrorList'
 const PageLayout = ({ hasGrid, children, bgColor, src, tripTabActive, ...rest }) => (
   <div
     style={{
-      height: '100%',
+      minHeight: '100%',
       backgroundColor: bgColor,
       backgroundImage: `url(${src})`,
       backgroundSize: 'contain',
     }}>
     <Navigation />
-    {tripTabActive ? <Navigation2 tripTabActive={tripTabActive}/> : null}
+    {tripTabActive && <Navigation2 tripTabActive={tripTabActive}/>}
     <ErrorList />
     {hasGrid ? (
       <Grid {...rest}>
@@ -26,11 +26,15 @@ const PageLayout = ({ hasGrid, children, bgColor, src, tripTabActive, ...rest })
 PageLayout.propTypes = {
   hasGrid: PropTypes.bool,
   bgColor: PropTypes.string,
-}
+  src: PropTypes.string,
+  tripTabActive: PropTypes.number,
+},
 
 PageLayout.defaultProps = {
   hasGrid: true,
   bgColor: '#EFEEED',
+  src: '',
+  tripTabActive: 0,
 }
 
 export default PageLayout

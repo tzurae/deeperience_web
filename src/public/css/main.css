@@ -44,8 +44,14 @@ table {
 /*reset css*/
 
 
-html, body, #root {
+html, body {
   height: 100%;
+  background: #EFEEED;
+}
+
+#root {
+  height: 100%;
+  min-height: 100%;
 }
 
 .navbar {
