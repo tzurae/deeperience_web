@@ -8,6 +8,7 @@ import PageLayout from '../../layouts/PageLayout'
 import RegisterForm from '../../forms/user/RegisterForm'
 // import SocialAuthButtonList from '../../utils/SocialAuthButtonList'
 import BackGround from '../../utils/BackGround'
+import Text from '../../widgets/Text'
 
 const style = {
   form: {
@@ -56,13 +57,15 @@ class RegisterPage extends Component {
       >
         <Modal.Body>
           <div style={{ textAlign: 'center' }}>
-            <h3 style={{ fontSize: '140%' }}> 確認信已送出！ </h3>
-            請至信箱收取會員確認信
+            <h3 style={{ fontSize: '140%' }}>
+              <Text id="register.mailHasSent" />
+            </h3>
+            <Text id="register.pleaseReceive" />
             <Button
               style={style.sure}
               onClick={this.closeModal}
             >
-              確認
+              <Text id="register.sure" />
             </Button>
           </div>
         </Modal.Body>

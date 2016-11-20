@@ -9,6 +9,7 @@ import FormNames from '../../../constants/FormNames'
 import userAPI from '../../../api/user'
 import { pushErrors } from '../../../actions/errorActions'
 import { Form, FormField, FormFooter } from '../../utils/BsForm'
+import Text from '../../widgets/Text'
 
 const style = {
   div: {
@@ -109,7 +110,7 @@ class ChangePasswordForm extends Component {
         <Row>
           <Col md={9}>
             <div style={style.div}>
-              <p> 舊密碼 </p>
+              <Text id="memberCenter.oldPassword" />
               <Field
                 name="oldPassword"
                 component={FormField}
@@ -118,7 +119,7 @@ class ChangePasswordForm extends Component {
               />
             </div>
             <div style={style.div}>
-              <p> 新密碼 </p>
+              <Text id="memberCenter.newPassword" />
               <Field
                 name="newPassword"
                 component={FormField}
@@ -127,7 +128,7 @@ class ChangePasswordForm extends Component {
               />
             </div>
             <div style={style.div}>
-              <p> 新密碼 </p>
+              <Text id="memberCenter.newPassword" />
               <Field
                 name="newPasswordConfirm"
                 component={FormField}
@@ -162,7 +163,7 @@ class ChangePasswordForm extends Component {
         */}
         <FormFooter>
           <Button type="submit" disabled={pristine || submitting || invalid} style={style.submit}>
-            Change
+            <Text id="register.sure" />
             {submitting && (
               <i className="fa fa-spinner fa-spin" aria-hidden="true" />
             )}

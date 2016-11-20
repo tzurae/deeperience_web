@@ -14,6 +14,7 @@ import { pushErrors } from '../../../actions/errorActions'
 // import { Form, FormField, FormFooter } from '../../utils/BsForm'
 import { Form, FormFooter } from '../../utils/BsForm'
 import configs from '../../../../../configs/project/client'
+import Text from '../../widgets/Text'
 
 const validate = (values) => {
   const errors = {}
@@ -127,14 +128,16 @@ class RegisterForm extends Component {
 
     return (
       <div style={style.bg}>
-        <div style={style.title}> 註   冊 </div>
+        <div style={style.title}>
+          <Text id="nav.user.register" />
+        </div>
         <Form horizontal onSubmit={handleSubmit(this.handleSubmit)} style={{ marginLeft: '30px' }}>
           {submitFailed && error && (<Alert bsStyle="danger">{error}</Alert>)}
           <div style={{ paddingLeft: '11px' }}>
-            <DField name="name" />
-            <DField name="email" />
-            <DField name="password" type="password" />
-            <DField name="ensurePassword" type="password" />
+            <DField name="name" id="user.name" />
+            <DField name="email" id="login.email" />
+            <DField name="password" type="password" id="login.password" />
+            <DField name="ensurePassword" type="password" id="login.ensurePassword" />
             {/*
               <Field
                 label="Name"
@@ -165,8 +168,12 @@ class RegisterForm extends Component {
               />
             */}
             <input type="checkbox" name="memberShip" value="memberShip" />
-            <span style={{ color: 'white' }}> 已詳細閱讀 </span>
-            <a href="http://www.w3schools.com/html/">會員條款</a>
+            <span style={{ color: 'white' }}>
+              <Text id="register.hasRead" />
+            </span>
+            <a href="http://www.w3schools.com/html/">
+              <Text id="register.memberShip" />
+            </a>
             <br />
             <FormFooter>
               <Button
@@ -175,7 +182,7 @@ class RegisterForm extends Component {
                 disabled={pristine || !!asyncValidating || submitting || invalid}
                 style={style.submit}
               >
-                註冊
+                <Text id="register.register" />
               </Button>
             </FormFooter>
           </div>

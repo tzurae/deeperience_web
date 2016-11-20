@@ -15,6 +15,7 @@ import PageLayout from '../../layouts/PageLayout'
 // import VerifyEmailForm from '../../forms/user/VerifyEmailForm'
 import toRefreshURL from '../../../utils/toRefreshURL'
 import BackGround from '../../utils/BackGround'
+import Text from '../../widgets/Text.js'
 
 const style = {
   bg: {
@@ -43,14 +44,18 @@ const style = {
   },
 }
 
-const Info = ({ label }) => {
+const Info = ({ name }) => {
   return (
     <div style={{ textAlign: 'center', marginRight: '50px' }}>
-      <div style={{ marginLeft: '-25px' }}> {label} </div>
+      <div style={{ marginLeft: '-25px' }}>
+        <Text id={name} />
+      </div>
       <div>
-        <span style={{ marginLeft: '40px', fontSize: '30px' }}> 1份 </span>
+        <span style={{ marginLeft: '40px', fontSize: '30px' }}>
+          1 <Text id="memberCenter.piece" />
+        </span>
         <Button disabled={false} style={style.edit}>
-          查  看
+          <Text id="memberCenter.look" />
         </Button>
       </div>
     </div>
@@ -60,7 +65,9 @@ const Info = ({ label }) => {
 const Title = () => {
   return (
     <div style={{ textAlign: 'center' }}>
-      <div style={{ fontSize: '30px', marginBottom: '3px' }}> 個人頁面 </div>
+      <div style={{ fontSize: '30px', marginBottom: '3px' }}>
+        <Text id="memberCenter.personalPage" />
+      </div>
       <div style={{ fontSize: '12px', marginBottom: '-8px' }}> Personal Profile </div>
       <p style={{ color: '#FF7155' }}> _______ </p>
     </div>
@@ -157,13 +164,17 @@ class ShowPage extends Component {
                   {user.avatarURL && <img src={user.avatarURL} style={{ width: '180px', height: '180px' }} />}
                 </Col>
                 <Col md={6}>
-                  <p style={{ fontSize: '15px', marginBottom: '-5px' }}>暱稱</p>
+                  <span style={{ fontSize: '15px', marginBottom: '-5px' }}>
+                    <Text id="user.name" />
+                  </span>
                   <p style={{ fontSize: '22px', marginBottom: '25px' }}> {user.name} </p>
-                  <p style={{ fontSize: '15px', marginBottom: '-5px' }}>信箱</p>
+                  <span style={{ fontSize: '15px', marginBottom: '-5px' }}>
+                      <Text id="login.email" />
+                  </span>
                   <p style={{ fontSize: '22px', marginBottom: '25px' }}> {user.email ? user.email.value : ''} </p>
                   <Link to="/user/me/edit">
                     <Button disabled={false} style={style.submit}>
-                      編  輯
+                      <Text id="memberCenter.edit" />
                     </Button>
                   </Link>
                 </Col>
@@ -175,13 +186,13 @@ class ShowPage extends Component {
                 </div>
               <Row>
                 <Col md={4}>
-                  <Info label="已購買旅程" />
+                  <Info name="memberCenter.buyTrip" />
                 </Col>
                 <Col md={4}>
-                  <Info label="已新增旅程" />
+                  <Info name="memberCenter.addTrip" />
                 </Col>
                 <Col md={4}>
-                  <Info label="已新增景點" />
+                  <Info name="memberCenter.addSite" />
                 </Col>
               </Row>
             </div>

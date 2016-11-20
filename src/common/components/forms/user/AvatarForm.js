@@ -14,6 +14,7 @@ import { setCookies } from '../../../actions/cookieActions'
 import { Form, FormField } from '../../utils/BsForm'
 // import { Form, FormField, FormFooter } from '../../utils/BsForm'
 import toRefreshURL from '../../../utils/toRefreshURL'
+import Text from '../../widgets/Text'
 // import DField from '../../utils/DField'
 
 const initialValues = {
@@ -216,7 +217,7 @@ class AvatarForm extends Component {
         <Row>
           <Col md={9}>
             <div style={style.div}>
-              <p> 暱稱 </p>
+              <Text id="user.name" />
               <Field
                 name="name"
                 component={FormField}
@@ -225,7 +226,7 @@ class AvatarForm extends Component {
               />
             </div>
             <div style={style.div}>
-              <p> 大頭貼 </p>
+              <Text id="memberCenter.avatar" />
               <Field
                 name="avatar"
                 component={FormField}

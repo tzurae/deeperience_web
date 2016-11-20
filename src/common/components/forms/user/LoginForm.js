@@ -14,6 +14,7 @@ import { loginUser } from '../../../actions/userActions'
 // import { Form, FormField, FormFooter } from '../../utils/BsForm'
 import { Form, FormFooter } from '../../utils/BsForm'
 import DField from '../../utils/DField'
+import Text from '../../widgets/Text'
 
 const style = {
   bg: {
@@ -123,12 +124,14 @@ class LoginForm extends Component {
 
     return (
       <div style={style.bg}>
-        <div style={style.title}> 登   入 </div>
+        <div style={style.title}>
+          <Text id="nav.user.login" style={style.title} />
+        </div>
         <Form horizontal onSubmit={handleSubmit(this.handleSubmit)}>
           <div style={{ paddingLeft: '40px' }}>
             {submitFailed && error && (<Alert bsStyle="danger">{error}</Alert>)}
-            <DField name="email" />
-            <DField name="password" type="password" />
+            <DField name="email" id="login.email" />
+            <DField name="password" type="password" id="login.password" />
             {/*
               <Field
                 label="Email"
@@ -146,15 +149,17 @@ class LoginForm extends Component {
               />
             */}
             <input type="checkbox" name="remember" value="remember" />
-            <span style={{ color: 'white' }}> Remember Me </span>
+            <span style={{ color: 'white', marginLeft: '6px' }}>
+              <Text id="login.rememberMe" />
+            </span>
             <FormFooter>
                 <Link to="/user/register">
                   <Button type="submit" disabled={false} style={style.register}>
-                    註冊
+                    <Text id="nav.user.register" />
                   </Button>
                 </Link>
                 <Button type="submit" disabled={pristine || submitting || invalid} style={style.submit}>
-                  登入
+                    <Text id="nav.user.login" />
                 </Button>
               {/*
                 <Link to="/user/password/forget">

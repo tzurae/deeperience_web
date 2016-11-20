@@ -10,6 +10,7 @@ import AvatarForm from '../../forms/user/AvatarForm'
 import ChangePasswordForm from '../../forms/user/ChangePasswordForm'
 // import DField from '../../utils/DField'
 import BackGround from '../../utils/BackGround'
+import Text from '../../widgets/Text'
 
 const style = {
   bg: {
@@ -26,8 +27,10 @@ const EditPage = () => {
       <BackGround color="#EFEEED" />
       <Row>
         <div style={{ textAlign: 'center' }}>
-          <div style={{ fontSize: '30px', marginBottom: '3px' }}> 編輯個人頁面 </div>
-          <div style={{ fontSize: '12px', marginBottom: '-8px' }}> Edit Personal Profile </div>
+          <div style={{ fontSize: '30px', marginBottom: '0px' }}>
+            <Text id="memberCenter.editPersonalProfile" />
+          </div>
+          <div style={{ fontSize: '12px', marginBottom: '0px' }}> Edit Personal Profile </div>
           <p style={{ color: '#FF7155' }}> _______ </p>
         </div>
         {/*
@@ -45,7 +48,9 @@ const EditPage = () => {
             <Row>
               <Col md={1} />
               <Col md={9}>
-                <p style={{ fontSize: '20px', marginBottom: '-25px' }}> 個人資料 </p>
+                <p style={{ fontSize: '20px', marginBottom: '-25px' }}>
+                  <Text id="memberCenter.personalData" />
+                </p>
                 <p style={{ color: '#FF7155', fontSize: '30px', marginTop: '-30px' }}>
                   _______________________________
                 </p>
@@ -55,7 +60,9 @@ const EditPage = () => {
                   </Col>
                   <Col md={1} />
                 </Row>
-                <p style={{ fontSize: '20px', marginBottom: '-25px' }}> 修改密碼 </p>
+                <p style={{ fontSize: '20px', marginBottom: '-25px' }}>
+                  <Text id="memberCenter.editPassword" />
+                </p>
                 <p style={{ color: '#FF7155', fontSize: '30px', marginTop: '-30px' }}>
                   _______________________________
                 </p>

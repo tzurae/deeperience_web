@@ -7,6 +7,7 @@ import PageLayout from '../../layouts/PageLayout'
 import LoginForm from '../../forms/user/LoginForm'
 // import SocialAuthButtonList from '../../utils/SocialAuthButtonList'
 import BackGround from '../../utils/BackGround'
+import Text from '../../widgets/Text'
 
 const LoginPage = ({ location }) => (
   <PageLayout>
@@ -28,7 +29,9 @@ const LoginPage = ({ location }) => (
       <Col md={4}>
         <div style={{ textAlign: 'center', color: 'white', marginBottom: '40px', marginTop: '20px' }}>
           <div style={{ fontSize: '38px', marginBottom: '10px' }}> Deeperience </div>
-          <div style={{ fontSize: '18px' }}> 完美客製化旅程，旅程規劃零負擔 </div>
+          <div style={{ fontSize: '18px' }}>
+            <Text id="login.title" />
+          </div>
         </div>
       </Col>
       <Col md={4} />

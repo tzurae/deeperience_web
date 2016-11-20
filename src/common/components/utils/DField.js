@@ -1,6 +1,7 @@
 import React from 'react'
 import { Field } from 'redux-form'
 import { FormField } from './BsForm'
+import Text from './../widgets/Text'
 
 const style = {
   div: {
@@ -8,15 +9,14 @@ const style = {
     fontSize: '1.1em',
   },
   field: {
-    marginTop: '-8px',
     width: '20em',
   },
 }
 
-const DField = ({ name, type }) => {
+const DField = ({ name, type, id }) => {
   return (
     <div style={style.div}>
-      <p> {name} </p>
+      <Text id={id} />
       <Field
         name={name}
         component={FormField}
