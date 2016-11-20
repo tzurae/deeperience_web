@@ -84,6 +84,7 @@
     "node-sass": "^3.8.0",
     "postcss-loader": "^0.9.1",
     "react-native-css": "^1.2.44",
+    "redux-logger": "^2.7.4",
     "rimraf": "^2.5.2",
     "sass-loader": "^4.0.0",
     "style-loader": "^0.13.1",

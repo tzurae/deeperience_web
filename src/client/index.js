@@ -18,6 +18,33 @@ import setupGA from './setupGA'
 import { setApiEngine } from '../common/actions/apiEngine'
 import { removeCookie } from '../common/actions/cookieActions'
 import ApiEngine from '../common/utils/ApiEngine'
+import createLoggerMiddleware from 'redux-logger'
+import LoggerSettings from '../../configs/env/logger'
+
+const logger = createLoggerMiddleware({
+  collapsed: true,
+  stateTransformer: state => JSON.parse(JSON.stringify(state)),
+  predicate: (getState, action) => {
+    let val = true
+    LoggerSettings.remove.some(value => {
+      if (value.test(action.type)) {
+        val = false
+        return true
+      }
+      return false
+    })
+    return val
+  },
+})
+
+let middlewares = [
+  routerMiddleware(browserHistory),
+  thunk,
+]
+
+if (process.env.NODE_ENV !== 'production') {
+  middlewares = [...middlewares, logger]
+}
 
 setupNProgress()
 setupLocale()
@@ -27,8 +54,7 @@ const store = createStore(
   rootReducer,
   initialState,
   applyMiddleware(
-    routerMiddleware(browserHistory),
-    thunk
+    ...middlewares
   )
 )
 

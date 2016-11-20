@@ -1,3 +1,6 @@
+# custom redux-logger settings
+logger.js
+
 # Dependency directory
 node_modules
 
