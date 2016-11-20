@@ -16,6 +16,9 @@ export default {
   'page.next': 'Next',
   'page.last': 'Last Page',
   'user.name': 'name',
+  'register.hasRead': 'I have read',
+  'register.memberShip': 'member ship',
+  'register.register': 'Register',
   'login.email': 'email',
   'login.password': 'password',
   'login.rememberMe': 'remember me',
@@ -31,4 +34,7 @@ export default {
   'memberCenter.newPassword': 'new password',
   'memberCenter.ensurePassword': 'ensure password',
   'memberCenter.look': 'look',
+  'memberCenter.personalPage': 'Personal Page',
+  'memberCenter.piece': 'piece',
+
 }
