@@ -7,6 +7,7 @@ import pages from './pageReducer'
 import todos from './todoReducer'
 import form from './formReducer'
 import intl from './intlReducer'
+import createTrip from './createTripReducer'
 
 const rootReducer = combineReducers({
   routing,
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   todos,
   form, // must mount as `form` from redux-form's docs
   intl,
+  createTrip,
 })
 
 export default rootReducer

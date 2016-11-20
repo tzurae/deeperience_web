@@ -1,20 +1,26 @@
-export default {
-  SET_COOKIE: 'SET_COOKIE',
+import keyMirror from 'key-mirror'
 
-  SET_API_ENGINE: 'SET_API_ENGINE',
+export default keyMirror({
+  SET_COOKIE: null,
 
-  SET_TODO: 'SET_TODO',
-  ADD_TODO: 'ADD_TODO',
-  REMOVE_TODO: 'REMOVE_TODO',
+  SET_API_ENGINE: null,
 
-  LOGIN_USER: 'LOGIN_USER',
-  LOGOUT_USER: 'LOGOUT_USER',
+  SET_TODO: null,
+  ADD_TODO: null,
+  REMOVE_TODO: null,
 
-  UPDATE_LOCALE: 'UPDATE_LOCALE',
+  LOGIN_USER: null,
+  LOGOUT_USER: null,
 
-  PUSH_ERRORS: 'PUSH_ERRORS',
-  REMOVE_ERROR: 'REMOVE_ERROR',
+  UPDATE_LOCALE: null,
 
-  SET_PAGE: 'SET_PAGE',
-  SET_CURRENT_PAGE: 'SET_CURRENT_PAGE',
-}
+  PUSH_ERRORS: null,
+  REMOVE_ERROR: null,
+
+  SET_PAGE: null,
+  SET_CURRENT_PAGE: null,
+
+  CREATE_TRIP_NEXT_PAGE: null,
+  CREATE_TRIP_PREVIOUS_PAGE: null,
+  CREATE_TRIP_SET_PAGE: null,
+})

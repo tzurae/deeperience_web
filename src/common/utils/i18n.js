@@ -5,7 +5,6 @@
  * but it does work right now without changing locale
  */
 
-
 import React from 'react'
 import { FormattedMessage } from 'react-intl'
 import Immutable from 'immutable'

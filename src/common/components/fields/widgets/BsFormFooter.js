@@ -5,7 +5,7 @@ import Col from 'react-bootstrap/lib/Col'
 import ControlLabel from 'react-bootstrap/lib/ControlLabel'
 
 const BsFormFooter = ({
-  horizontal, labelDimensions, fieldDimensions, showLabel, label, children,
+  horizontal, labelDimensions, fieldDimensions, showLabel, label, children, style,
 }, {
   defaultHorizontal, defaultLabelDimensions, defaultFieldDimensions,
 }) => {
@@ -14,7 +14,7 @@ const BsFormFooter = ({
   fieldDimensions = assign({}, defaultFieldDimensions, fieldDimensions || {})
 
   return horizontal ? (
-    <BsFormGroup>
+    <BsFormGroup style={style}>
       {showLabel && (
         <Col componentClass={ControlLabel} {...labelDimensions}>
           {label}
