@@ -138,29 +138,6 @@ class ChangePasswordForm extends Component {
             </div>
           </Col>
         </Row>
-        {/*
-          <Field
-            label="Old Password"
-            name="oldPassword"
-            component={FormField}
-            type="password"
-            placeholder="Old Password"
-          />
-          <Field
-            label="New Password"
-            name="newPassword"
-            component={FormField}
-            type="password"
-            placeholder="New Password"
-          />
-          <Field
-            label="New Password Confirm"
-            name="newPasswordConfirm"
-            component={FormField}
-            type="password"
-            placeholder="New Password Confirm"
-          />
-        */}
         <FormFooter>
           <Button type="submit" disabled={pristine || submitting || invalid} style={style.submit}>
             <Text id="register.sure" />

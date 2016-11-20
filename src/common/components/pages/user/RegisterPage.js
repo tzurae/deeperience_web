@@ -6,7 +6,6 @@ import Modal from 'react-bootstrap/lib/Modal'
 import Button from 'react-bootstrap/lib/Button'
 import PageLayout from '../../layouts/PageLayout'
 import RegisterForm from '../../forms/user/RegisterForm'
-// import SocialAuthButtonList from '../../utils/SocialAuthButtonList'
 import BackGround from '../../utils/BackGround'
 import Text from '../../widgets/Text'
 
@@ -86,11 +85,6 @@ class RegisterPage extends Component {
             </div>
           </Col>
           <Col md={4} />
-          {/*
-            <Col md={3}>
-              <SocialAuthButtonList />
-            </Col>
-          */}
         </Row>
       </PageLayout>
     )

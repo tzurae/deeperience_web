@@ -2,16 +2,13 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import { push } from 'react-router-redux'
-// import { Field, reduxForm, SubmissionError } from 'redux-form'
 import { reduxForm, SubmissionError } from 'redux-form'
 import Alert from 'react-bootstrap/lib/Alert'
 import Button from 'react-bootstrap/lib/Button'
-// import validator from 'validator';
 import FormNames from '../../../constants/FormNames'
 import userAPI from '../../../api/user'
 import { pushErrors } from '../../../actions/errorActions'
 import { loginUser } from '../../../actions/userActions'
-// import { Form, FormField, FormFooter } from '../../utils/BsForm'
 import { Form, FormFooter } from '../../utils/BsForm'
 import DField from '../../utils/DField'
 import Text from '../../widgets/Text'
@@ -56,10 +53,6 @@ const style = {
 
 const validate = (values) => {
   const errors = {}
-
-  // if (values.email && !validator.isEmail(values.email)) {
-  //   errors.email = 'Not an email';
-  // }
 
   if (!values.email) {
     errors.email = 'Required'
@@ -132,22 +125,6 @@ class LoginForm extends Component {
             {submitFailed && error && (<Alert bsStyle="danger">{error}</Alert>)}
             <DField name="email" id="login.email" />
             <DField name="password" type="password" id="login.password" />
-            {/*
-              <Field
-                label="Email"
-                name="email"
-                component={FormField}
-                type="text"
-                placeholder="Email"
-              />
-              <Field
-                label="Password"
-                name="password"
-                component={FormField}
-                type="password"
-                placeholder="Password"
-              />
-            */}
             <input type="checkbox" name="remember" value="remember" />
             <span style={{ color: 'white', marginLeft: '6px' }}>
               <Text id="login.rememberMe" />
@@ -161,11 +138,6 @@ class LoginForm extends Component {
                 <Button type="submit" disabled={pristine || submitting || invalid} style={style.submit}>
                     <Text id="nav.user.login" />
                 </Button>
-              {/*
-                <Link to="/user/password/forget">
-                  <Button bsStyle="link">Forget password?</Button>
-                </Link>
-              */}
             </FormFooter>
           </div>
         </Form>

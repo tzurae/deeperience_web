@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
-// import { Field, reduxForm } from 'redux-form'
 import { reduxForm } from 'redux-form'
 import Alert from 'react-bootstrap/lib/Alert'
 import Button from 'react-bootstrap/lib/Button'
@@ -11,7 +10,6 @@ import FormNames from '../../../constants/FormNames'
 import userAPI from '../../../api/user'
 import { validateForm } from '../../../actions/formActions'
 import { pushErrors } from '../../../actions/errorActions'
-// import { Form, FormField, FormFooter } from '../../utils/BsForm'
 import { Form, FormFooter } from '../../utils/BsForm'
 import configs from '../../../../../configs/project/client'
 import Text from '../../widgets/Text'
@@ -138,35 +136,6 @@ class RegisterForm extends Component {
             <DField name="email" id="login.email" />
             <DField name="password" type="password" id="login.password" />
             <DField name="ensurePassword" type="password" id="login.ensurePassword" />
-            {/*
-              <Field
-                label="Name"
-                name="name"
-                component={FormField}
-                type="text"
-                placeholder="Name"
-              />
-              <Field
-                label="Email"
-                name="email"
-                component={FormField}
-                type="text"
-                placeholder="Email"
-              />
-              <Field
-                label="Password"
-                name="password"
-                component={FormField}
-                type="password"
-                placeholder="Password"
-              />
-              <Field
-                label=" "
-                name="recaptcha"
-                component={FormField}
-                type="recaptcha"
-              />
-            */}
             <input type="checkbox" name="memberShip" value="memberShip" />
             <span style={{ color: 'white' }}>
               <Text id="register.hasRead" />

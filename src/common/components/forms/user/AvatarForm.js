@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Field, reduxForm } from 'redux-form'
-// import Button from 'react-bootstrap/lib/Button'
-// import Image from 'react-bootstrap/lib/Image'
 import Row from 'react-bootstrap/lib/Row'
 import Col from 'react-bootstrap/lib/Col'
 import FormNames from '../../../constants/FormNames'
@@ -12,10 +10,8 @@ import userAPI from '../../../api/user'
 import { pushErrors } from '../../../actions/errorActions'
 import { setCookies } from '../../../actions/cookieActions'
 import { Form, FormField } from '../../utils/BsForm'
-// import { Form, FormField, FormFooter } from '../../utils/BsForm'
 import toRefreshURL from '../../../utils/toRefreshURL'
 import Text from '../../widgets/Text'
-// import DField from '../../utils/DField'
 
 const initialValues = {
   storage: 'local',
@@ -207,9 +203,6 @@ class AvatarForm extends Component {
     const {
       user: { avatarURL },
       handleSubmit,
-      //pristine,
-      //submitting,
-      //invalid,
     } = this.props
 
     return (
@@ -241,13 +234,6 @@ class AvatarForm extends Component {
             />}
           </Col>
         </Row>
-        {/*
-          <FormFooter>
-            <Button type="submit" disabled={pristine || submitting || invalid}>
-              Upload
-            </Button>
-          </FormFooter>
-        */}
       </Form>
     )
   }

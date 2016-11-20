@@ -1,18 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
-// import PageHeader from 'react-bootstrap/lib/PageHeader'
-// import Modal from 'react-bootstrap/lib/Modal'
 import Row from 'react-bootstrap/lib/Row'
 import Col from 'react-bootstrap/lib/Col'
 import Button from 'react-bootstrap/lib/Button'
-// import Thumbnail from 'react-bootstrap/lib/Thumbnail'
 import userAPI from '../../../api/user'
 import { pushErrors } from '../../../actions/errorActions'
 import Head from '../../widgets/Head'
 import PageLayout from '../../layouts/PageLayout'
-// import Time from '../../widgets/Time'
-// import VerifyEmailForm from '../../forms/user/VerifyEmailForm'
 import toRefreshURL from '../../../utils/toRefreshURL'
 import BackGround from '../../utils/BackGround'
 import Text from '../../widgets/Text.js'
@@ -79,10 +74,7 @@ class ShowPage extends Component {
     super(props)
     this.state = {
       user: props.initialUser,
-      // isShowVerifyEmailModal: false,
     }
-    // this.openModal = this._openModal.bind(this)
-    // this.closeModal = this._closeModal.bind(this)
   }
 
   componentDidMount() {
@@ -102,37 +94,6 @@ class ShowPage extends Component {
       })
   }
 
-/*
-  _openModal() {
-    this.setState({ isShowVerifyEmailModal: true })
-  }
-
-  _closeModal() {
-    this.setState({ isShowVerifyEmailModal: false })
-  }
-
-  renderModal() {
-    const { isShowVerifyEmailModal, user } = this.state
-
-    return (
-      <Modal
-        show={isShowVerifyEmailModal}
-        onHide={this.closeModal}
-      >
-        <Modal.Header closeButton>
-          <Modal.Title>Send Verification Mail</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <VerifyEmailForm
-            email={user.email && user.email.value}
-            onCancel={this.closeModal}
-          />
-        </Modal.Body>
-      </Modal>
-    )
-  }
-*/
-
   render() {
     const { user } = this.state
     return (
@@ -146,13 +107,6 @@ class ShowPage extends Component {
         {/* this.renderModal() */}
         <Row>
           <Title />
-          {/*
-            <Col md={12}>
-              <Link to="/user/me/edit">
-                <Button bsStyle="primary">Edit My Profile</Button>
-              </Link>
-            </Col>
-          */}
         </Row>
         <Row>
           <Col md={2} />
@@ -199,41 +153,6 @@ class ShowPage extends Component {
           </Col>
           <Col md={2} />
         </Row>
-
-{/*
-          <dl className="dl-horizontal">
-            <dt>_id</dt>
-            <dd>{user._id}</dd>
-            <dt>avatar</dt>
-            <dd>
-            </dd>
-            <dt>name</dt>
-            <dd>{user.name}</dd>
-            <dt>email</dt>
-            <dd>
-              {user.email && user.email.value}
-              {user.email && !user.email.isVerified && (
-                <Button onClick={this.openModal}>
-                  Verify Now
-                </Button>
-              )}
-            </dd>
-            <dt>updatedAt</dt>
-            <dd>
-              <Time value={user.updatedAt} format="YYYY-MM-DD" />
-              {' '}(<Time value={user.updatedAt} relative />)
-            </dd>
-            <dt>createdAt</dt>
-            <dd>
-              <Time value={user.createdAt} format="YYYY-MM-DD" />
-              {' '}(<Time value={user.createdAt} relative />)
-            </dd>
-            <dt>raw</dt>
-            <dd><pre>{JSON.stringify(user, null, 2)}</pre></dd>
-          </dl>
-
-*/}
-
       </PageLayout>
     )
   }
