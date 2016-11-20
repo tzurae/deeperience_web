@@ -1,18 +1,20 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
-// import { Field, reduxForm } from 'redux-form'
-import { reduxForm } from 'redux-form'
+import { Field, reduxForm } from 'redux-form'
 import Alert from 'react-bootstrap/lib/Alert'
 import Button from 'react-bootstrap/lib/Button'
 import validator from 'validator'
-import DField from '../../utils/DField'
 import FormNames from '../../../constants/FormNames'
 import userAPI from '../../../api/user'
 import { validateForm } from '../../../actions/formActions'
 import { pushErrors } from '../../../actions/errorActions'
-// import { Form, FormField, FormFooter } from '../../utils/BsForm'
-import { Form, FormFooter } from '../../utils/BsForm'
+import { BsInput as Input } from '../../fields/adapters'
+import {
+  BsForm as Form,
+  BsFormFooter as FormFooter,
+  DField,
+} from '../../fields/widgets'
 import configs from '../../../../../configs/project/client'
 
 const validate = (values) => {
@@ -42,6 +44,10 @@ const validate = (values) => {
     if (!pattern.test(values.password)) {
       errors.password = '請輸入6至20碼英文大小寫與數字組合'
     }
+  }
+
+  if (!values.isAgreeTerms) {
+    errors.isAgreeTerms = 'Required'
   }
 
   if (configs.recaptcha && !values.recaptcha) {
@@ -131,39 +137,38 @@ class RegisterForm extends Component {
         <Form horizontal onSubmit={handleSubmit(this.handleSubmit)} style={{ margin: '0 30px' }}>
           {submitFailed && error && (<Alert bsStyle="danger">{error}</Alert>)}
           <div style={{ padding: '0 11px' }}>
-            <DField name="name" />
-            <DField name="email" />
-            <DField name="password" type="password" />
-            <DField name="ensurePassword" type="password" />
-            {/*
-              <Field
-                label="Name"
-                name="name"
-                component={FormField}
-                type="text"
-                placeholder="Name"
-              />
-              <Field
-                label="Email"
-                name="email"
-                component={FormField}
-                type="text"
-                placeholder="Email"
-              />
-              <Field
-                label="Password"
-                name="password"
-                component={FormField}
-                type="password"
-                placeholder="Password"
-              />
-              <Field
-                label=" "
-                name="recaptcha"
-                component={FormField}
-                type="recaptcha"
-              />
-            */}
+            <Field
+              name="name"
+              component={DField}
+              label="Name"
+              adapter={Input}
+              type="text"
+              placeholder="Name"
+            />
+            <Field
+              name="email"
+              component={DField}
+              label="Email"
+              adapter={Input}
+              type="text"
+              placeholder="Email"
+            />
+            <Field
+              name="password"
+              component={DField}
+              label="Password"
+              adapter={Input}
+              type="password"
+              placeholder="Password"
+            />
+            <Field
+              name="ensurePassword"
+              component={DField}
+              label="Repeat Password"
+              adapter={Input}
+              type="password"
+              placeholder="Repeat Password"
+            />
             <input type="checkbox" name="memberShip" value="memberShip" />
             <span style={{ color: 'white' }}> 已詳細閱讀 </span>
             <a href="http://www.w3schools.com/html/">會員條款</a>
@@ -187,6 +192,12 @@ class RegisterForm extends Component {
 
 export default reduxForm({
   form: FormNames.USER_REGISTER,
+  initialValues: {
+    slide: {
+      min: 30,
+      max: 40,
+    },
+  },
   validate,
   asyncValidate,
   asyncBlurFields: ['email'],

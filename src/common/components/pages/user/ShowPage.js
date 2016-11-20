@@ -9,7 +9,6 @@ import Button from 'react-bootstrap/lib/Button'
 // import Thumbnail from 'react-bootstrap/lib/Thumbnail'
 import userAPI from '../../../api/user'
 import { pushErrors } from '../../../actions/errorActions'
-import Head from '../../widgets/Head'
 import PageLayout from '../../layouts/PageLayout'
 // import Time from '../../widgets/Time'
 // import VerifyEmailForm from '../../forms/user/VerifyEmailForm'
@@ -129,11 +128,6 @@ class ShowPage extends Component {
     const { user } = this.state
     return (
       <PageLayout >
-        <Head
-          scripts={[
-            'https://www.gstatic.com/firebasejs/live/3.0/firebase.js',
-          ]}
-        />
         {/* this.renderModal() */}
         <Row>
           <Title />

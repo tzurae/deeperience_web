@@ -3,6 +3,12 @@ import User from '../models/User'
 import { handleDbError } from '../decorators/handleError'
 
 export default {
+  setupError: (req, res) => {
+    res.send(
+      'Please setup and turn on `passportStrategy.&lt;social provider&gt;` ' +
+      'of config file `configs/project/server.js`'
+    )
+  },
   initFacebook: (req, res, next) => (
     passport.authenticate('facebook', {
       scope: ['public_profile', 'email', 'user_friends', 'user_birthday', 'user_likes'],

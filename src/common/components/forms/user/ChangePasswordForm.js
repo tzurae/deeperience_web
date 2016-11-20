@@ -8,7 +8,11 @@ import Col from 'react-bootstrap/lib/Col'
 import FormNames from '../../../constants/FormNames'
 import userAPI from '../../../api/user'
 import { pushErrors } from '../../../actions/errorActions'
-import { Form, FormField, FormFooter } from '../../utils/BsForm'
+import { BsInput as Input } from '../../fields/adapters'
+import {
+  BsForm as Form,
+  BsFormFooter as FormFooter,
+} from '../../fields/widgets'
 
 const style = {
   div: {
@@ -103,7 +107,12 @@ class ChangePasswordForm extends Component {
     } = this.props
 
     return (
-      <Form horizontal onSubmit={handleSubmit(this.handleSubmit)}>
+      <Form
+        defaultHorizontal={false}
+        defaultLabelDimensions={{ sm: 12 }}
+        defaultFieldDimensions={{ sm: 12 }}
+        onSubmit={handleSubmit(this.handleSubmit)}
+      >
         {submitSucceeded && (<Alert bsStyle="success">Password Changed</Alert>)}
         {submitFailed && error && (<Alert bsStyle="danger">{error}</Alert>)}
         <Row>
@@ -112,8 +121,8 @@ class ChangePasswordForm extends Component {
               <p> 舊密碼 </p>
               <Field
                 name="oldPassword"
-                component={FormField}
-                type="text"
+                component={Input}
+                type="password"
                 style={style.field}
               />
             </div>
@@ -121,8 +130,8 @@ class ChangePasswordForm extends Component {
               <p> 新密碼 </p>
               <Field
                 name="newPassword"
-                component={FormField}
-                type="text"
+                component={Input}
+                type="password"
                 style={style.field}
               />
             </div>
@@ -130,36 +139,13 @@ class ChangePasswordForm extends Component {
               <p> 新密碼 </p>
               <Field
                 name="newPasswordConfirm"
-                component={FormField}
-                type="text"
+                component={Input}
+                type="password"
                 style={style.field}
               />
             </div>
           </Col>
         </Row>
-        {/*
-          <Field
-            label="Old Password"
-            name="oldPassword"
-            component={FormField}
-            type="password"
-            placeholder="Old Password"
-          />
-          <Field
-            label="New Password"
-            name="newPassword"
-            component={FormField}
-            type="password"
-            placeholder="New Password"
-          />
-          <Field
-            label="New Password Confirm"
-            name="newPasswordConfirm"
-            component={FormField}
-            type="password"
-            placeholder="New Password Confirm"
-          />
-        */}
         <FormFooter>
           <Button type="submit" disabled={pristine || submitting || invalid} style={style.submit}>
             Change

@@ -11,8 +11,9 @@ import firebaseAPI from '../../../api/firebase'
 import userAPI from '../../../api/user'
 import { pushErrors } from '../../../actions/errorActions'
 import { setCookies } from '../../../actions/cookieActions'
-import { Form, FormField } from '../../utils/BsForm'
-// import { Form, FormField, FormFooter } from '../../utils/BsForm'
+import { BsInput as Input } from '../../fields/adapters'
+import { BsForm as Form } from '../../fields/widgets'
+import Head from '../../widgets/Head'
 import toRefreshURL from '../../../utils/toRefreshURL'
 // import DField from '../../utils/DField'
 
@@ -213,13 +214,18 @@ class AvatarForm extends Component {
 
     return (
       <Form onSubmit={handleSubmit(this.handleSubmit)}>
+        <Head
+          scripts={[
+            'https://www.gstatic.com/firebasejs/live/3.0/firebase.js',
+          ]}
+        />
         <Row>
           <Col md={9}>
             <div style={style.div}>
               <p> 暱稱 </p>
               <Field
                 name="name"
-                component={FormField}
+                component={Input}
                 type="text"
                 style={style.field}
               />
@@ -228,7 +234,7 @@ class AvatarForm extends Component {
               <p> 大頭貼 </p>
               <Field
                 name="avatar"
-                component={FormField}
+                component={Input}
                 type="file"
                 style={style.field}
               />
@@ -240,13 +246,6 @@ class AvatarForm extends Component {
             />}
           </Col>
         </Row>
-        {/*
-          <FormFooter>
-            <Button type="submit" disabled={pristine || submitting || invalid}>
-              Upload
-            </Button>
-          </FormFooter>
-        */}
       </Form>
     )
   }

@@ -2,18 +2,19 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import { push } from 'react-router-redux'
-// import { Field, reduxForm, SubmissionError } from 'redux-form'
-import { reduxForm, SubmissionError } from 'redux-form'
+import { Field, reduxForm, SubmissionError } from 'redux-form'
 import Alert from 'react-bootstrap/lib/Alert'
 import Button from 'react-bootstrap/lib/Button'
-// import validator from 'validator';
 import FormNames from '../../../constants/FormNames'
 import userAPI from '../../../api/user'
 import { pushErrors } from '../../../actions/errorActions'
 import { loginUser } from '../../../actions/userActions'
-// import { Form, FormField, FormFooter } from '../../utils/BsForm'
-import { Form, FormFooter } from '../../utils/BsForm'
-import DField from '../../utils/DField'
+import { BsInput as Input } from '../../fields/adapters'
+import {
+  BsForm as Form,
+  BsFormFooter as FormFooter,
+  DField,
+} from '../../fields/widgets'
 
 const style = {
   bg: {
@@ -124,43 +125,36 @@ class LoginForm extends Component {
     return (
       <div style={style.bg}>
         <div style={style.title}> 登   入 </div>
-        <Form horizontal onSubmit={handleSubmit(this.handleSubmit)}>
+        <Form onSubmit={handleSubmit(this.handleSubmit)}>
           <div style={{ padding: '0 40px' }}>
             {submitFailed && error && (<Alert bsStyle="danger">{error}</Alert>)}
-            <DField name="email" />
-            <DField name="password" type="password" />
-            {/*
-              <Field
-                label="Email"
-                name="email"
-                component={FormField}
-                type="text"
-                placeholder="Email"
-              />
-              <Field
-                label="Password"
-                name="password"
-                component={FormField}
-                type="password"
-                placeholder="Password"
-              />
-            */}
+            <Field
+              name="email"
+              component={DField}
+              label="信箱"
+              adapter={Input}
+              type="text"
+              placeholder="信箱"
+            />
+            <Field
+              name="password"
+              component={DField}
+              label="密碼"
+              adapter={Input}
+              type="password"
+              placeholder="密碼"
+            />
             <input type="checkbox" name="remember" value="remember" />
             <span style={{ color: 'white' }}> Remember Me </span>
             <FormFooter>
-                <Link to="/user/register">
-                  <Button type="submit" disabled={false} style={style.register}>
-                    註冊
-                  </Button>
-                </Link>
-                <Button type="submit" disabled={pristine || submitting || invalid} style={style.submit}>
-                  登入
+              <Link to="/user/register">
+                <Button type="submit" disabled={false} style={style.register}>
+                  註冊
                 </Button>
-              {/*
-                <Link to="/user/password/forget">
-                  <Button bsStyle="link">Forget password?</Button>
-                </Link>
-              */}
+              </Link>
+              <Button type="submit" disabled={pristine || submitting || invalid} style={style.submit}>
+                登入
+              </Button>
             </FormFooter>
           </div>
         </Form>
