@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Field, reduxForm } from 'redux-form'
-// import Button from 'react-bootstrap/lib/Button'
-// import Image from 'react-bootstrap/lib/Image'
 import Row from 'react-bootstrap/lib/Row'
 import Col from 'react-bootstrap/lib/Col'
 import FormNames from '../../../constants/FormNames'
@@ -15,7 +13,7 @@ import { BsInput as Input } from '../../fields/adapters'
 import { BsForm as Form } from '../../fields/widgets'
 import Head from '../../widgets/Head'
 import toRefreshURL from '../../../utils/toRefreshURL'
-// import DField from '../../utils/DField'
+import Text from '../../widgets/Text'
 
 const initialValues = {
   storage: 'local',
@@ -207,9 +205,6 @@ class AvatarForm extends Component {
     const {
       user: { avatarURL },
       handleSubmit,
-      //pristine,
-      //submitting,
-      //invalid,
     } = this.props
 
     return (
@@ -222,7 +217,7 @@ class AvatarForm extends Component {
         <Row>
           <Col md={9}>
             <div style={style.div}>
-              <p> 暱稱 </p>
+              <Text id="user.name" />
               <Field
                 name="name"
                 component={Input}
@@ -231,7 +226,7 @@ class AvatarForm extends Component {
               />
             </div>
             <div style={style.div}>
-              <p> 大頭貼 </p>
+              <Text id="memberCenter.avatar" />
               <Field
                 name="avatar"
                 component={Input}

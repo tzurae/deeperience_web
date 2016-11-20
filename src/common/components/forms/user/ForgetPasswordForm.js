@@ -4,7 +4,6 @@ import { Link } from 'react-router'
 import { Field, reduxForm } from 'redux-form'
 import Alert from 'react-bootstrap/lib/Alert'
 import Button from 'react-bootstrap/lib/Button'
-// import validator from 'validator';
 import FormNames from '../../../constants/FormNames'
 import userAPI from '../../../api/user'
 import { validateForm } from '../../../actions/formActions'
@@ -20,10 +19,6 @@ import configs from '../../../../../configs/project/client'
 
 export const validate = (values) => {
   const errors = {}
-
-  // if (values.email && !validator.isEmail(values.email)) {
-  //   errors.email = 'Not an email';
-  // }
 
   if (!values.email) {
     errors.email = 'Required'

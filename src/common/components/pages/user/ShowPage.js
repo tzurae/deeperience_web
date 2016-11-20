@@ -1,18 +1,14 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
-// import PageHeader from 'react-bootstrap/lib/PageHeader'
-// import Modal from 'react-bootstrap/lib/Modal'
 import Row from 'react-bootstrap/lib/Row'
 import Col from 'react-bootstrap/lib/Col'
 import Button from 'react-bootstrap/lib/Button'
-// import Thumbnail from 'react-bootstrap/lib/Thumbnail'
 import userAPI from '../../../api/user'
 import { pushErrors } from '../../../actions/errorActions'
 import PageLayout from '../../layouts/PageLayout'
-// import Time from '../../widgets/Time'
-// import VerifyEmailForm from '../../forms/user/VerifyEmailForm'
 import toRefreshURL from '../../../utils/toRefreshURL'
+import Text from '../../widgets/Text.js'
 
 const style = {
   bg: {
@@ -41,14 +37,18 @@ const style = {
   },
 }
 
-const Info = ({ label }) => {
+const Info = ({ name }) => {
   return (
     <div style={{ textAlign: 'center', marginRight: '50px' }}>
-      <div style={{ marginLeft: '-25px' }}> {label} </div>
+      <div style={{ marginLeft: '-25px' }}>
+        <Text id={name} />
+      </div>
       <div>
-        <span style={{ marginLeft: '40px', fontSize: '30px' }}> 1份 </span>
+        <span style={{ marginLeft: '40px', fontSize: '30px' }}>
+          1 <Text id="memberCenter.piece" />
+        </span>
         <Button disabled={false} style={style.edit}>
-          查  看
+          <Text id="memberCenter.look" />
         </Button>
       </div>
     </div>
@@ -58,7 +58,9 @@ const Info = ({ label }) => {
 const Title = () => {
   return (
     <div style={{ textAlign: 'center' }}>
-      <div style={{ fontSize: '30px', marginBottom: '3px' }}> 個人頁面 </div>
+      <div style={{ fontSize: '30px', marginBottom: '3px' }}>
+        <Text id="memberCenter.personalPage" />
+      </div>
       <div style={{ fontSize: '12px', marginBottom: '-8px' }}> Personal Profile </div>
       <p style={{ color: '#FF7155' }}> _______ </p>
     </div>
@@ -70,10 +72,7 @@ class ShowPage extends Component {
     super(props)
     this.state = {
       user: props.initialUser,
-      // isShowVerifyEmailModal: false,
     }
-    // this.openModal = this._openModal.bind(this)
-    // this.closeModal = this._closeModal.bind(this)
   }
 
   componentDidMount() {
@@ -93,37 +92,6 @@ class ShowPage extends Component {
       })
   }
 
-/*
-  _openModal() {
-    this.setState({ isShowVerifyEmailModal: true })
-  }
-
-  _closeModal() {
-    this.setState({ isShowVerifyEmailModal: false })
-  }
-
-  renderModal() {
-    const { isShowVerifyEmailModal, user } = this.state
-
-    return (
-      <Modal
-        show={isShowVerifyEmailModal}
-        onHide={this.closeModal}
-      >
-        <Modal.Header closeButton>
-          <Modal.Title>Send Verification Mail</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <VerifyEmailForm
-            email={user.email && user.email.value}
-            onCancel={this.closeModal}
-          />
-        </Modal.Body>
-      </Modal>
-    )
-  }
-*/
-
   render() {
     const { user } = this.state
     return (
@@ -131,13 +99,6 @@ class ShowPage extends Component {
         {/* this.renderModal() */}
         <Row>
           <Title />
-          {/*
-            <Col md={12}>
-              <Link to="/user/me/edit">
-                <Button bsStyle="primary">Edit My Profile</Button>
-              </Link>
-            </Col>
-          */}
         </Row>
         <Row>
           <Col md={2} />
@@ -149,13 +110,17 @@ class ShowPage extends Component {
                   {user.avatarURL && <img src={user.avatarURL} style={{ width: '180px', height: '180px' }} />}
                 </Col>
                 <Col md={6}>
-                  <p style={{ fontSize: '15px', marginBottom: '-5px' }}>暱稱</p>
+                  <span style={{ fontSize: '15px', marginBottom: '-5px' }}>
+                    <Text id="user.name" />
+                  </span>
                   <p style={{ fontSize: '22px', marginBottom: '25px' }}> {user.name} </p>
-                  <p style={{ fontSize: '15px', marginBottom: '-5px' }}>信箱</p>
+                  <span style={{ fontSize: '15px', marginBottom: '-5px' }}>
+                      <Text id="login.email" />
+                  </span>
                   <p style={{ fontSize: '22px', marginBottom: '25px' }}> {user.email ? user.email.value : ''} </p>
                   <Link to="/user/me/edit">
                     <Button disabled={false} style={style.submit}>
-                      編  輯
+                      <Text id="memberCenter.edit" />
                     </Button>
                   </Link>
                 </Col>
@@ -163,54 +128,19 @@ class ShowPage extends Component {
               <div style={{ background: '#FF7155', margin: '30px auto', width: '90%', height: '2px' }}/>
               <Row>
                 <Col md={4}>
-                  <Info label="已購買旅程" />
+                  <Info name="memberCenter.buyTrip" />
                 </Col>
                 <Col md={4}>
-                  <Info label="已新增旅程" />
+                  <Info name="memberCenter.addTrip" />
                 </Col>
                 <Col md={4}>
-                  <Info label="已新增景點" />
+                  <Info name="memberCenter.addSite" />
                 </Col>
               </Row>
             </div>
           </Col>
           <Col md={2} />
         </Row>
-
-{/*
-          <dl className="dl-horizontal">
-            <dt>_id</dt>
-            <dd>{user._id}</dd>
-            <dt>avatar</dt>
-            <dd>
-            </dd>
-            <dt>name</dt>
-            <dd>{user.name}</dd>
-            <dt>email</dt>
-            <dd>
-              {user.email && user.email.value}
-              {user.email && !user.email.isVerified && (
-                <Button onClick={this.openModal}>
-                  Verify Now
-                </Button>
-              )}
-            </dd>
-            <dt>updatedAt</dt>
-            <dd>
-              <Time value={user.updatedAt} format="YYYY-MM-DD" />
-              {' '}(<Time value={user.updatedAt} relative />)
-            </dd>
-            <dt>createdAt</dt>
-            <dd>
-              <Time value={user.createdAt} format="YYYY-MM-DD" />
-              {' '}(<Time value={user.createdAt} relative />)
-            </dd>
-            <dt>raw</dt>
-            <dd><pre>{JSON.stringify(user, null, 2)}</pre></dd>
-          </dl>
-
-*/}
-
       </PageLayout>
     )
   }
