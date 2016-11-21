@@ -4,6 +4,7 @@ export default (store) => ({
     require.ensure([], (require) => {
       cb(null, [
         require('./createTrip').default(store),
+        require('./presentTrip').default(store),
       ])
     })
   },
