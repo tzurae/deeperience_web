@@ -13,7 +13,7 @@ const PageLayout = ({ hasGrid, children, bgColor, src, tripTabActive, ...rest })
       backgroundSize: 'contain',
     }}>
     <Navigation />
-    {tripTabActive && <Navigation2 tripTabActive={tripTabActive}/>}
+    {tripTabActive !== 0 && <Navigation2 tripTabActive={tripTabActive}/>}
     <ErrorList />
     {hasGrid ? (
       <Grid {...rest}>

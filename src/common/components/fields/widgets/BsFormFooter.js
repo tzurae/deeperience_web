@@ -36,7 +36,6 @@ BsFormFooter.propTypes = {
   labelDimensions: PropTypes.object,
   fieldDimensions: PropTypes.object,
   showLabel: PropTypes.bool,
-  label: PropTypes.string,
 }
 
 BsFormFooter.contextTypes = {

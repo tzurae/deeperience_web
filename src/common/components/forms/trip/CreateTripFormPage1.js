@@ -1,11 +1,9 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 import FormNames from '../../../constants/FormNames'
-import I18n from '../../../utils/i18n'
 import FormButton from '../../utils/FormButton'
 import validate from './createTripValidate'
-
-import getOptions from '../../../utils/getOptions'
+import Text from '../../widgets/Text'
 import {
   BsInput as Input,
   BsSelect as Select,
@@ -18,13 +16,12 @@ import {
 } from '../../fields/widgets'
 
 const CreateTripFormPage1 = ({ handleSubmit, ...props }) => {
-  const { tripDayInfos, tripElements } = getOptions(['TripDayInfos', 'TripElements'])
-  tripElements.splice(0, 1) // remove ANY
-
   const {
     pristine,
     submitting,
     invalid,
+    tripDayInfos,
+    tripElements,
   } = props
 
   return (
@@ -37,7 +34,7 @@ const CreateTripFormPage1 = ({ handleSubmit, ...props }) => {
       <Field
         name="name"
         component={FormField}
-        label={I18n('trip.createTrip.form.name')}
+        label={<Text id={'trip.createTrip.form.name'}/>}
         adapter={Input}
         type="text"
         placeholder="Text"
@@ -45,7 +42,7 @@ const CreateTripFormPage1 = ({ handleSubmit, ...props }) => {
       <Field
         name="price"
         component={FormField}
-        label={I18n('trip.createTrip.form.price')}
+        label={<Text id={'trip.createTrip.form.price'}/>}
         adapter={Input}
         type="number"
         placeholder="Number"
@@ -53,7 +50,7 @@ const CreateTripFormPage1 = ({ handleSubmit, ...props }) => {
       <Field
         name="dayInfo"
         component={FormField}
-        label={I18n('trip.createTrip.form.dayInfo')}
+        label={<Text id={'trip.createTrip.form.dayInfo'}/>}
         fieldDimensions={{ sm: 6 }}
         adapter={Select}
         options={tripDayInfos}
@@ -65,7 +62,7 @@ const CreateTripFormPage1 = ({ handleSubmit, ...props }) => {
             key={element.label}
             name="tags"
             component={FormField}
-            label={I18n(element.label)}
+            label={<Text id={element.label}/>}
             adapter={CheckboxList}
             style={{
               float: 'left',
@@ -81,7 +78,7 @@ const CreateTripFormPage1 = ({ handleSubmit, ...props }) => {
         style={{ textAlign: 'center' }}
       >
         <FormButton type="submit" disabled={pristine || submitting || invalid}>
-          {I18n('trip.createTrip.form.nextStep')}
+          <Text id={'trip.createTrip.form.nextStep'}/>
         </FormButton>
       </FormFooter>
     </Form>

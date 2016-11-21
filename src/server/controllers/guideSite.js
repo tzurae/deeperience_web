@@ -1,5 +1,4 @@
 import { handleDbError } from '../decorators/handleError'
-import Site from '../models/Site'
 import GuideSite, { GuideSiteSchema } from '../models/GuideSite'
 import getAttrFromSchema from '../utils/getAttrFromSchema'
 
@@ -29,9 +28,9 @@ export default {
   update(req, res) {
   },
 
-  list(req, res) { // todo
-    Site.find(
-      { guideId: req.user._id },
+  list(req, res) {
+    GuideSite.find(
+      { guide: req.user._id },
       handleDbError(res)((raw) => {
         res.json(raw)
       })
