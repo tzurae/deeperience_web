@@ -45,3 +45,6 @@ buck-out/
 
 # yarn
 yarn.lock
+
+# VSCode
+.vscode/
