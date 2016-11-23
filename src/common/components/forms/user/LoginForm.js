@@ -10,6 +10,7 @@ import userAPI from '../../../api/user'
 import { pushErrors } from '../../../actions/errorActions'
 import { loginUser } from '../../../actions/userActions'
 import Text from '../../widgets/Text'
+import styles from '../../../styles'
 import { BsInput as Input } from '../../fields/adapters'
 import {
   BsForm as Form,
@@ -52,6 +53,14 @@ const style = {
     backgroundColor: 'transparent',
     position: 'absolute',
     border: '2px solid #FF864F',
+  },
+  label: {
+    color: 'white',
+    fontSize: styles.font.medium
+  },
+  field: {
+    marginTop: '5px',
+    marginBottom: '15px',
   },
 }
 
@@ -122,26 +131,28 @@ class LoginForm extends Component {
     return (
       <div style={style.bg}>
         <div style={style.title}>
-          <Text id="nav.user.login" style={style.title} />
+          <Text id="nav.user.login"/>
         </div>
         <Form onSubmit={handleSubmit(this.handleSubmit)}>
           <div style={{ padding: '0 40px' }}>
             {submitFailed && error && (<Alert bsStyle="danger">{error}</Alert>)}
+            <Text id="login.email" style={style.label} />
             <Field
               name="email"
               component={DField}
-              label="信箱"
               adapter={Input}
               type="text"
               placeholder="信箱"
+              style={style.field}
             />
+            <Text id="login.password" style={style.label} />
             <Field
               name="password"
               component={DField}
-              label="密碼"
               adapter={Input}
               type="password"
               placeholder="密碼"
+              style={style.field}
             />
             <input type="checkbox" name="remember" value="remember" />
             <span style={{ color: 'white', marginLeft: '6px' }}>
