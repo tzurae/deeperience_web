@@ -88,6 +88,9 @@ class Navigation extends Component {
               <Navbar.Dropdown
                 title={<Text id="nav.trip" style={{ ...style.text, display: 'inline' }}/>}
               >
+                <NavLink to="/trip/createSite">
+                  <Text id="nav.trip.createSite"/>
+                </NavLink>
                 <NavLink to="/trip/createTrip">
                   <Text id="nav.trip.createTrip"/>
                 </NavLink>

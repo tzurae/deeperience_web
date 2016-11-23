@@ -30,7 +30,7 @@ const Navigation2 = ({ tripTabActive }) => (
           <Navbar.Body>
             <Navbar.Nav style={style.header}>
               <Navbar.Nav>
-                <NavLink to="#" onlyActiveOnIndex>
+                <NavLink to="/trip/createSite" onlyActiveOnIndex>
                   {tripTabActive === 1 ?
                     <Text style={style.textActive} id="nav.trip.createSite"/> :
                       <Text style={style.text} id="nav.trip.createSite" />}
