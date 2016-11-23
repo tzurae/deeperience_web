@@ -28,6 +28,9 @@ const style = {
         flexGrow: '1',
         textAlign: 'center',
     },
+    explain: {
+        height: '45px',
+    },
     divide: {
         width: '2px',
         height: '200px',
@@ -40,41 +43,48 @@ const style = {
         width: '120px',
         height: '30px',
         borderRadius: '20px',
+        border: '0',
     }
 }
 
 const TripArea = () => {
     const imgSize = 120;
     return (
-        <div style={{display: 'flex', marginTop: '120px'}}>
-            <div style={style.tripBlock}>
-                <img src="/img/icon01.png" width={imgSize} />
-                <p><Text id="presentTrip.addSite.explain" /></p>
-                <button style={style.button}>
-                    <Text id="presentTrip.addSite" />
-                </button>
-            </div>
+        <Row style={{marginTop: '120px'}}>
+            <Col md={4}>
+                <div style={style.tripBlock}>
+                    <img src="/img/icon01.png" width={imgSize} />
+                    <p style={style.explain}><Text id="presentTrip.addSite.explain" /></p>
+                    <button style={style.button}>
+                        <Text id="presentTrip.addSite" />
+                    </button>
+                </div>
+            </Col>
 
-            <div style={style.divide} />
+            <Col 
+                md={4} 
+                style={{borderRight: '2px solid #D4D4D4', borderLeft: '2px solid #D4D4D4'}}
+            >
+                <div style={style.tripBlock}>
+                    <img src="/img/icon02.png" width={imgSize} />
+                    <p style={style.explain}><Text id="presentTrip.addTrip.explain" /></p>
+                    <button style={style.button}>
+                        <Text id="presentTrip.addTrip" />
+                    </button>
+                </div>
+            </Col>
 
-            <div style={style.tripBlock}>
-                <img src="/img/icon02.png" width={imgSize} />
-                <p><Text id="presentTrip.addTrip.explain" /></p>
-                <button style={style.button}>
-                    <Text id="presentTrip.addTrip" />
-                </button>
-            </div>
 
-            <div style={style.divide} />
-
-            <div style={style.tripBlock}>
-                <img src="/img/icon03.png" width={imgSize} />
-                <p><Text id="presentTrip.manageTrip.explain" /></p>
-                <button style={style.button}>
-                    <Text id="presentTrip.manageTrip" />
-                </button>
-            </div>
-        </div>
+            <Col md={4}>
+                <div style={style.tripBlock}>
+                    <img src="/img/icon03.png" width={imgSize} />
+                    <p style={style.explain}><Text id="presentTrip.manageTrip.explain" /></p>
+                    <button style={style.button}>
+                        <Text id="presentTrip.manageTrip" />
+                    </button>
+                </div>
+            </Col>
+        </Row>
     )
 }
 
