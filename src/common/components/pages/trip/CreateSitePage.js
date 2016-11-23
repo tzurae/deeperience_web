@@ -8,13 +8,14 @@ import PhaseBranch from '../../utils/PhaseBranch'
 import CreateTripForm from '../../forms/trip/CreateTripForm'
 import styles from '../../../styles'
 
-const CreateTripPage = ({ page }) => {
+const CreateSitePage = ({ page }) => {
   const nodes = [
-    'trip.createTrip.title1',
-    'trip.createTrip.title2',
-    'trip.createTrip.title3',
-    'trip.createTrip.title4',
-    'trip.createTrip.title5']
+    'trip.createSite.title1',
+    'trip.createSite.title2',
+    'trip.createSite.title3',
+    'trip.createSite.title4',
+    'trip.createSite.title5',
+  ]
 
   return (
     <PageLayout
@@ -23,7 +24,7 @@ const CreateTripPage = ({ page }) => {
       <PanelContainer>
         <Col md={2}>
           <Panel
-            title="trip.createTrip"
+            title="nav.trip.createSite"
             underlineStyle={{ background: styles.color.borderGrey }}
           >
             <PhaseBranch
@@ -62,5 +63,5 @@ const CreateTripPage = ({ page }) => {
 }
 
 export default connect(state => ({
-  page: state.createTrip.page,
-}))(CreateTripPage)
+  page: state.createSite.page,
+}))(CreateSitePage)
