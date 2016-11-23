@@ -38,20 +38,16 @@ const style = {
     color: 'white',
     fontSize: '1.2em',
     marginTop: '40px',
-    marginLeft: '6em',
     borderRadius: '50px',
     backgroundColor: '#FF864F',
-    position: 'relative',
   },
   register: {
     width: '7em',
     color: 'white',
     fontSize: '1.2em',
     marginTop: '40px',
-    marginLeft: '-3.2em',
     borderRadius: '50px',
     backgroundColor: 'transparent',
-    position: 'absolute',
     border: '2px solid #FF864F',
   },
   label: {
@@ -158,16 +154,24 @@ class LoginForm extends Component {
             <span style={{ color: 'white', marginLeft: '6px' }}>
               <Text id="login.rememberMe" />
             </span>
-            <FormFooter>
-              <Link to="/user/register">
-                <Button type="submit" disabled={false} style={style.register}>
-                  <Text id="nav.user.register" />
-                </Button>
-              </Link>
-              <Button type="submit" disabled={pristine || submitting || invalid} style={style.submit}>
-                <Text id="nav.user.login" />
-              </Button>
-            </FormFooter>
+            <div style={{marginRight: '135px'}}>
+              <FormFooter>
+                <div style={{display: 'flex'}}>
+                  <div style={{ flexGrow: '1', order: '2', marginLeft: '10px' }}>
+                    <Button type="submit" disabled={pristine || submitting || invalid} style={style.submit}>
+                      <Text id="nav.user.login" />
+                    </Button>
+                  </div>
+                  <div style={{ flexGrow: '1', order: '1', marginRight: '10px' }}>
+                    <Link to="/user/register">
+                      <Button type="submit" disabled={false} style={style.register}>
+                        <Text id="nav.user.register" />
+                      </Button>
+                    </Link>
+                  </div>
+                </div>
+              </FormFooter>
+            </div>
           </div>
         </Form>
       </div>
