@@ -2,6 +2,7 @@ import React from 'react'
 import Grid from 'react-bootstrap/lib/Grid'
 import Row from 'react-bootstrap/lib/Row'
 import Col from 'react-bootstrap/lib/Col'
+import {Link} from 'react-router'
 import PageLayout from '../../../layouts/PageLayout'
 import styles from '../../../../styles'
 import Text from '../../../widgets/Text'
@@ -68,9 +69,11 @@ const TripArea = () => {
                 <div style={style.tripBlock}>
                     <img src="/img/icon02.png" width={imgSize} />
                     <p style={style.explain}><Text id="presentTrip.addTrip.explain" /></p>
-                    <button style={style.button}>
-                        <Text id="presentTrip.addTrip" />
-                    </button>
+                    <Link to="/trip/createTrip">
+                        <button style={style.button}>
+                            <Text id="presentTrip.addTrip" />
+                        </button>
+                    </Link>
                 </div>
             </Col>
 
