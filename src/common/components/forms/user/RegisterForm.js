@@ -10,6 +10,7 @@ import userAPI from '../../../api/user'
 import { validateForm } from '../../../actions/formActions'
 import { pushErrors } from '../../../actions/errorActions'
 import { BsInput as Input } from '../../fields/adapters'
+import styles from '../../../styles'
 import {
   BsForm as Form,
   BsFormFooter as FormFooter,
@@ -99,6 +100,14 @@ const style = {
     borderRadius: '50px',
     backgroundColor: '#FF864F',
   },
+  label: {
+    color: 'white',
+    fontSize: styles.font.medium,
+  },
+  field: {
+    marginTop: '5px',
+    marginBottom: '15px',
+  },
 }
 
 class RegisterForm extends Component {
@@ -140,43 +149,47 @@ class RegisterForm extends Component {
         <Form horizontal onSubmit={handleSubmit(this.handleSubmit)} style={{ margin: '0 30px' }}>
           {submitFailed && error && (<Alert bsStyle="danger">{error}</Alert>)}
           <div style={{ padding: '0 11px' }}>
+            <Text id="user.name" style={style.label} />
             <Field
               name="name"
               component={DField}
-              label="Name"
               adapter={Input}
               type="text"
               placeholder="Name"
+              style={style.field}
             />
+            <Text id="login.email" style={style.label} />
             <Field
               name="email"
               component={DField}
-              label="Email"
               adapter={Input}
               type="text"
               placeholder="Email"
+              style={style.field}
             />
+            <Text id="login.password" style={style.label} />
             <Field
               name="password"
               component={DField}
-              label="Password"
               adapter={Input}
               type="password"
               placeholder="Password"
+              style={style.field}
             />
+            <Text id="login.ensurePassword" style={style.label} />
             <Field
               name="ensurePassword"
               component={DField}
-              label="Repeat Password"
               adapter={Input}
               type="password"
               placeholder="Repeat Password"
+              style={style.field}
             />
             <input type="checkbox" name="memberShip" value="memberShip" />
             <span style={{ color: 'white' }}>
               <Text id="register.hasRead" />
             </span>
-            <a href="http://www.w3schools.com/html/">
+            <a href="http://www.w3schools.com/html/" target="_blank">
               <Text id="register.memberShip" />
             </a>
             <br />
