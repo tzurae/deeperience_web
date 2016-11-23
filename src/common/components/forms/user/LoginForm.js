@@ -52,7 +52,7 @@ const style = {
   },
   label: {
     color: 'white',
-    fontSize: styles.font.medium
+    fontSize: styles.font.medium,
   },
   field: {
     marginTop: '5px',
@@ -154,9 +154,9 @@ class LoginForm extends Component {
             <span style={{ color: 'white', marginLeft: '6px' }}>
               <Text id="login.rememberMe" />
             </span>
-            <div style={{marginRight: '135px'}}>
+            <div style={{ marginRight: '135px' }}>
               <FormFooter>
-                <div style={{display: 'flex'}}>
+                <div style={{ display: 'flex' }}>
                   <div style={{ flexGrow: '1', order: '2', marginLeft: '10px' }}>
                     <Button type="submit" disabled={pristine || submitting || invalid} style={style.submit}>
                       <Text id="nav.user.login" />

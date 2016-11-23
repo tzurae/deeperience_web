@@ -61,7 +61,7 @@ export default{
   'memberCenter.ensurePassword': '確認密碼',
   'memberCenter.look': '查看',
   'memberCenter.editPersonalProfile': '編輯個人頁面',
-  'presentTrip': '提供旅程',
+  presentTrip: '提供旅程',
   'presentTrip.slogan': '身為導遊的你，透過Deeperience，立即創立您精美的旅程，賺取費用！',
   'presentTrip.addSite': '建立景點',
   'presentTrip.addSite.explain': '在規劃您的旅程前，請先建立屬於你的景點清單',

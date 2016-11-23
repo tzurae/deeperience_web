@@ -102,7 +102,7 @@ const style = {
   },
   label: {
     color: 'white',
-    fontSize: styles.font.medium
+    fontSize: styles.font.medium,
   },
   field: {
     marginTop: '5px',
