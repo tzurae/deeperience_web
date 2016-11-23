@@ -21,4 +21,7 @@ export default keyMirror({
   SET_CURRENT_PAGE: null,
 
   SET_OWN_SITE: null,
+  SET_CREATE_TRIP_DATA: null,
+  RESET_CREATE_TRIP_DATA: null,
+  CREATE_TRIP_ERROR: null,
 })

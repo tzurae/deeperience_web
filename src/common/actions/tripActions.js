@@ -6,3 +6,23 @@ export const setOwnSite = (sites) => {
     payload: sites,
   }
 }
+
+export const setCreateTripData = (data) => {
+  return {
+    type: ActionTypes.SET_CREATE_TRIP_DATA,
+    payload: data,
+  }
+}
+
+export const resetCreateTripData = () => {
+  return {
+    type: ActionTypes.RESET_CREATE_TRIP_DATA,
+  }
+}
+
+export const createTripError = (error) => {
+  return {
+    type: ActionTypes.CREATE_TRIP_ERROR,
+    payload: error,
+  }
+}

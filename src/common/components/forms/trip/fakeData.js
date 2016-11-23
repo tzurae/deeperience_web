@@ -5,53 +5,34 @@ const uuid2 = uuid()
 const uuid3 = uuid()
 const uuid4 = uuid()
 export const startSites = [
-  {
-    uuid: uuid1,
-    guideSiteId: '582e68a14fc07cada5235edc',
-  },
+  uuid1,
 ]
 
 export const routes = [
   [
     {
-      from: {
-        uuid: uuid1,
-        guideSiteId: '582e68a14fc07cada5235edc',
-      },
-      to: {
-        uuid: uuid2,
-        guideSiteId: '5832939fdb52b9081000c26b',
-      },
+      from: uuid1,
+      to: uuid2,
     },
     {
-      from: {
-        uuid: uuid1,
-        guideSiteId: '582e68a14fc07cada5235edc',
-      },
-      to: {
-        uuid: uuid3,
-        guideSiteId: '58329706db52b9081000c272',
-      },
+      from: uuid1,
+      to: uuid3,
     },
     {
-      from: {
-        uuid: uuid2,
-        guideSiteId: '5832939fdb52b9081000c26b',
-      },
-      to: {
-        uuid: uuid4,
-        guideSiteId: '583297c8db52b9081000c275',
-      },
+      from: uuid2,
+      to: uuid4,
     },
     {
-      from: {
-        uuid: uuid3,
-        guideSiteId: '58329706db52b9081000c272',
-      },
-      to: {
-        uuid: uuid4,
-        guideSiteId: '583297c8db52b9081000c275',
-      },
+      from: uuid3,
+      to: uuid4,
     },
   ],
 ]
+
+export const uuid2gid = {
+  [uuid1]: '582e68a14fc07cada5235edc',
+  [uuid2]: '5832939fdb52b9081000c26b',
+  [uuid3]: '58329706db52b9081000c272',
+  [uuid4]: '583297c8db52b9081000c275',
+}
+

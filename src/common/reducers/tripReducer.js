@@ -1,7 +1,23 @@
 import ActionTypes from '../constants/ActionTypes'
+import uuid from 'uuid'
 
+const uid = uuid()
 const initialState = {
   ownSites: [],
+  tripInfo: [{
+    ylayer: [1],
+    sites: [{
+      pos: { xpos: 0, ypos: 0 },
+      uuid: uid,
+    }],
+    routes: [],
+  }],
+  routes: [[]],
+  startSites: [uid],
+  uuid2gid: {
+    [uid]: '',
+  },
+  error: null,
 }
 
 export default (state = initialState, action) => {
@@ -11,8 +27,37 @@ export default (state = initialState, action) => {
         ...state,
         ownSites: action.payload,
       }
-    default: {
+    case ActionTypes.SET_CREATE_TRIP_DATA:
+      return {
+        ...state,
+        tripInfo: action.payload.tripInfo || state.tripInfo,
+        routes: action.payload.routes || state.routes,
+        startSites: action.payload.startSites || state.startSites,
+      }
+    case ActionTypes.RESET_CREATE_TRIP_DATA:
+      const uid = uuid()
+      return {
+        ...state,
+        tripInfo: [{
+          ylayer: [1],
+          sites: [{
+            pos: { xpos: 0, ypos: 0 },
+            uuid: uid,
+          }],
+          routes: [],
+        }],
+        routes: [[]],
+        startSites: [uid],
+        uuid2gid: {
+          [uid]: '',
+        },
+      }
+    case ActionTypes.CREATE_TRIP_ERROR:
+      return {
+        ...state,
+        error: action.payload,
+      }
+    default:
       return state
-    }
   }
 }
