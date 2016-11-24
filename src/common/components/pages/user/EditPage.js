@@ -5,8 +5,29 @@ import PageLayout from '../../layouts/PageLayout'
 import AvatarForm from '../../forms/user/AvatarForm'
 import ChangePasswordForm from '../../forms/user/ChangePasswordForm'
 import Text from '../../widgets/Text'
+import styles from '../../../styles'
 
 const style = {
+  title: {
+    fontSize: styles.font.large,
+    marginTop: '60px',
+  },
+  subTitle: {
+    fontSize: styles.font.small,
+    marginTop: '10px',
+  },
+  underline: {
+    margin: '10px auto',
+    borderBottom: '3px solid #FF7155',
+    width: '40px',
+    marginBottom: '30px',
+  },
+  underline2: {
+    margin: '10px auto',
+    width: '115%',
+    borderBottom: '2px solid #FF7155',
+    marginBottom: '5px',
+  },
   bg: {
     borderRadius: '20px',
     backgroundColor: 'white',
@@ -20,11 +41,13 @@ const EditPage = () => {
     <PageLayout>
       <Row>
         <div style={{ textAlign: 'center' }}>
-          <div style={{ fontSize: '30px', marginBottom: '0px' }}>
+          <div style={style.title}>
             <Text id="memberCenter.editPersonalProfile" />
           </div>
-          <div style={{ fontSize: '12px', marginBottom: '0px' }}> Edit Personal Profile </div>
-          <p style={{ color: '#FF7155' }}> _______ </p>
+          <div style={style.subTitle}>
+            Edit Personal Profile
+          </div>
+          <div style={style.underline} />
         </div>
       </Row>
       <Row>
@@ -34,24 +57,20 @@ const EditPage = () => {
             <Row>
               <Col md={1} />
               <Col md={9}>
-                <p style={{ fontSize: '20px', marginBottom: '-25px' }}>
+                <p style={{ fontSize: '20px'}}>
                   <Text id="memberCenter.personalData" />
                 </p>
-                <p style={{ color: '#FF7155', fontSize: '30px', marginTop: '-30px' }}>
-                  _______________________________
-                </p>
+                <div style={style.underline2} />
                 <Row>
                   <Col md={11}>
                     <AvatarForm />
                   </Col>
                   <Col md={1} />
                 </Row>
-                <p style={{ fontSize: '20px', marginBottom: '-25px' }}>
+                <p style={{ fontSize: '20px'}}>
                   <Text id="memberCenter.editPassword" />
                 </p>
-                <p style={{ color: '#FF7155', fontSize: '30px', marginTop: '-30px' }}>
-                  _______________________________
-                </p>
+                <div style={style.underline2} />
                 <ChangePasswordForm />
 
               </Col>
