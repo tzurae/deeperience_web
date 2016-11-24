@@ -57,7 +57,7 @@ const EditPage = () => {
             <Row>
               <Col md={1} />
               <Col md={9}>
-                <p style={{ fontSize: '20px'}}>
+                <p style={{ fontSize: '20px' }}>
                   <Text id="memberCenter.personalData" />
                 </p>
                 <div style={style.underline2} />
@@ -67,7 +67,7 @@ const EditPage = () => {
                   </Col>
                   <Col md={1} />
                 </Row>
-                <p style={{ fontSize: '20px'}}>
+                <p style={{ fontSize: '20px' }}>
                   <Text id="memberCenter.editPassword" />
                 </p>
                 <div style={style.underline2} />
