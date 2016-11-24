@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/lib/Button'
 import Jumbotron from 'react-bootstrap/lib/Jumbotron'
 import Text from '../../widgets/Text'
 import { FBEmbedPost } from 'facebook-plugins'
+import Footer from '../../utils/Footer'
 import s from './styles.scss'
 
 const FBposts = [
@@ -28,6 +29,7 @@ const HomePage = () => (
     <Jum/>
     <Feature />
     <UserReviews/>
+    <Footer/>
   </PageLayout>
 )
 
