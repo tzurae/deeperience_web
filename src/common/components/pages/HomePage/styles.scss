@@ -1,8 +1,116 @@
-.redBorder {
-  border: 1px solid red;
+$fontFamily: monospace, serif, sans-serif, cursive, fantasy;
+
+@mixin center {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+@mixin jumbotronFontColorNFamily {
+  color: white;
+  font-family: $fontFamily;
 }
 
 .jumbotron {
-  background-image: url(../../../../public/img/river_dark.jpg);
-  background-size: contain;
+  @include center;
+  min-height: 100vh;
+  background: #ffffff url(../../../../public/img/river_dark.jpg) no-repeat top center ;
+  background-size: cover;
+  margin-bottom: 0 !important; // react-boostrap default :50px
+}
+
+.companyName {
+  padding-top: 35vh;
+  @include jumbotronFontColorNFamily;
+  font-size: 4vw !important;
+}
+
+.companySlogan {
+  @include jumbotronFontColorNFamily;
+  font-size: 2vw !important;
+  padding-bottom: 40px;
+}
+
+.produceTrip {
+  @include jumbotronFontColorNFamily;
+  padding-top: 13px;
+}
+
+.produceTripButton {
+  background-color: #FF7744;
+  padding: 1px 40px;
+  border-radius: 300px;
+  border: none;
+}
+
+.productFeature {
+  background-color: #FFFAF0;
+  height: 40vh;
+}
+
+.productFeatureHeadline {
+  @include center;
+  padding-top: 5vh;
+  font-weight: bold;
+  font-size: 1.5vw;
+  font-family: $fontFamily;
+}
+
+.features {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.feature {
+  @include center;
+  width: 20vw;
+}
+
+.featureHeadline {
+  font-size: 20px;
+  font-weight: bold;
+  padding-bottom: 5px;
+}
+
+.featureIntro {
+  width: 175px;
+  line-height: 1.5em;
+  text-align: center;
+}
+
+.hr {
+  display: block;
+  border-color: #FF7744;
+  border-width: 3px;
+  width: 2%;
+}
+
+.img {
+  width:30%;
+  padding-bottom: 1vh;
+}
+
+.userReviews {
+  min-height: 70vh;
+  background: #ffffff url(../../../../public/img/HomePage/night.jpg) ;
+  background-size: 100%;
+}
+
+.userReviewsHeadline {
+  font-size: 20px;
+  font-weight: bold;
+  padding-bottom: 5px;
+}
+
+.posts {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 30px;
+}
+
+.post {
+  padding: 5px;
 }

@@ -3,6 +3,7 @@ import Grid from 'react-bootstrap/lib/Grid'
 import Navigation from '../utils/Navigation'
 import Navigation2 from '../utils/Navigation2'
 import ErrorList from '../utils/ErrorList'
+import Footer from '../utils/Footer'
 
 const PageLayout = ({ hasGrid, children, bgColor, src, tripTabActive, ...rest }) => (
   <div
@@ -11,15 +12,17 @@ const PageLayout = ({ hasGrid, children, bgColor, src, tripTabActive, ...rest })
       backgroundColor: bgColor,
       backgroundImage: `url(${src})`,
       backgroundSize: 'contain',
+      padding: '0',
     }}>
     <Navigation />
-    {tripTabActive && <Navigation2 tripTabActive={tripTabActive}/>}
+    {tripTabActive !== 0 && <Navigation2 tripTabActive={tripTabActive}/>}
     <ErrorList />
     {hasGrid ? (
       <Grid {...rest}>
         {children}
       </Grid>
     ) : children}
+    <Footer/>
   </div>
 )
 
