@@ -39,5 +39,8 @@ module.exports = {
         }
       }
     },
+    images: {
+      extensions: ['png', 'jpg', 'gif', 'ico', 'svg'],
+    },
   },
 };

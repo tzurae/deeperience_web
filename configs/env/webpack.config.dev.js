@@ -53,6 +53,9 @@ module.exports = {
         'sass-loader',
         'postcss-loader',
       ],
-    },],
+    }, {
+      test: webpackIsomorphicToolsPlugin.regular_expression('images'),
+      loader: 'url-loader?limit=10240',
+    }],
   },
 };

@@ -37,6 +37,7 @@ const Html = ({ assets, children, initialState }) => (
         }}
       />
 
+      <div id="fb-root"></div>
       <script
         dangerouslySetInnerHTML={{
           __html: `window.__INITIAL_STATE__=${JSON.stringify(initialState)};`,
