@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import Col from 'react-bootstrap/lib/Col'
 import PageLayout from '../../layouts/PageLayout'
 import PanelContainer from '../../utils/PanelContainer'
-import Panel from '../../utils/Panel1'
+import Panel from '../../utils/Panel'
 import PhaseBranch from '../../utils/PhaseBranch'
 import CreateTripForm from '../../forms/trip/CreateTripForm'
 import styles from '../../../styles'
@@ -49,7 +49,7 @@ const CreateTripPage = ({ page }) => {
             isUnderline={false}
           />
           {
-            page === 0 &&
+            page === 1 &&
             <Panel
               title="trip.createTrip.mySite"
               isUnderline={false}

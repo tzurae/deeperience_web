@@ -20,9 +20,10 @@ const style = {
     color: 'black',
     fontSize: '1.1em',
     marginLeft: '10px',
+    marginTop: '10px',
   },
   field: {
-    marginTop: '-5px',
+    marginTop: '5px',
     width: '20em',
   },
   submit: {

@@ -4,7 +4,7 @@ import { reduxForm } from 'redux-form'
 import FormNames from '../../../constants/FormNames'
 import FormButton from '../../utils/FormButton'
 import validate from './createTripValidate'
-import I18n from '../../../utils/i18n'
+import Text from '../../widgets/Text'
 
 // import {
 //   BsInput as Input,
@@ -36,10 +36,10 @@ const CreateTripFormPage1 = ({ handleSubmit, ...props }) => {
         style={{ textAlign: 'center' }}
       >
         <FormButton type="button" onClick={previousPage}>
-          {I18n('trip.createTrip.form.previousStep')}
+          <Text id={'trip.createTrip.form.previousStep'}/>
         </FormButton>
         <FormButton type="submit" disabled={pristine || submitting || invalid}>
-          {I18n('trip.createTrip.form.nextStep')}
+          <Text id={'trip.createTrip.form.nextStep'}/>
         </FormButton>
       </FormFooter>
     </Form>

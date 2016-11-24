@@ -8,7 +8,7 @@ import { updateLocale } from '../../actions/intlActions'
 import { pushErrors } from '../../actions/errorActions'
 import Navbar from './BsNavbar'
 import NavLink from './NavLink'
-// import MenuItem from './MenuItem'
+import MenuItem from './MenuItem'
 import Text from '../widgets/Text'
 import styles from '../../styles'
 
@@ -64,25 +64,23 @@ class Navigation extends Component {
             */}
 
             <Navbar.Nav right>
-              {/*
-                <Navbar.Dropdown title={<Text id="nav.language" />}>
-                  <MenuItem
-                    title="English"
-                    onClick={this._setLanguage.bind(this, 'en-us')}
-                  />
-                  <MenuItem
-                    title="繁體中文"
-                    onClick={this._setLanguage.bind(this, 'zh-tw')}
-                  />
-                </Navbar.Dropdown>
-              */}
+              <Navbar.Dropdown title={<Text id="nav.language" />}>
+                <MenuItem
+                  title="English"
+                  onClick={this._setLanguage.bind(this, 'en-us')}
+                />
+                <MenuItem
+                  title="繁體中文"
+                  onClick={this._setLanguage.bind(this, 'zh-tw')}
+                />
+              </Navbar.Dropdown>
               <Navbar.Nav>
-                <NavLink to="/feature" onlyActiveOnIndex>
-                  <Text id="nav.feature" style={style.text}/>
-                </NavLink>
-                <NavLink to="/wonderful">
-                  <Text id="nav.wonderful" style={style.text}/>
-                </NavLink>
+                {/* <NavLink to="/feature" onlyActiveOnIndex>*/}
+                  {/* <Text id="nav.feature" style={style.text}/>*/}
+                {/* </NavLink>*/}
+                {/* <NavLink to="/wonderful">*/}
+                  {/* <Text id="nav.wonderful" style={style.text}/>*/}
+                {/* </NavLink>*/}
                 <NavLink to="/customize">
                   <Text id="nav.customize" style={style.text}/>
                 </NavLink>

@@ -45,10 +45,10 @@ const Panel = ({
 
 Panel.propTypes = {
   title: PropTypes.string,
-  titleStyle: PropTypes.style,
-  underlineStyle: PropTypes.style,
+  titleStyle: PropTypes.object,
+  underlineStyle: PropTypes.object,
   isUnderline: PropTypes.bool,
-  contentDivStyle: PropTypes.style,
+  contentDivStyle: PropTypes.object,
 }
 
 Panel.defaultProps = {

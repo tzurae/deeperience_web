@@ -9,8 +9,23 @@ import { pushErrors } from '../../../actions/errorActions'
 import PageLayout from '../../layouts/PageLayout'
 import toRefreshURL from '../../../utils/toRefreshURL'
 import Text from '../../widgets/Text.js'
+import styles from '../../../styles'
 
 const style = {
+  title: {
+    fontSize: styles.font.large,
+    marginTop: '60px',
+  },
+  subTitle: {
+    fontSize: styles.font.small,
+    marginTop: '10px',
+  },
+  underline: {
+    margin: '10px auto',
+    borderBottom: '2px solid #FF7155',
+    width: '40px',
+    marginBottom: '30px',
+  },
   bg: {
     borderRadius: '20px',
     backgroundColor: 'white',
@@ -58,11 +73,11 @@ const Info = ({ name }) => {
 const Title = () => {
   return (
     <div style={{ textAlign: 'center' }}>
-      <div style={{ fontSize: '30px', marginBottom: '3px' }}>
+      <div style={style.title}>
         <Text id="memberCenter.personalPage" />
       </div>
-      <div style={{ fontSize: '12px', marginBottom: '-8px' }}> Personal Profile </div>
-      <p style={{ color: '#FF7155' }}> _______ </p>
+      <div style={style.subTitle}> Personal Profile </div>
+      <div style={style.underline} />
     </div>
   )
 }
@@ -96,7 +111,6 @@ class ShowPage extends Component {
     const { user } = this.state
     return (
       <PageLayout >
-        {/* this.renderModal() */}
         <Row>
           <Title />
         </Row>

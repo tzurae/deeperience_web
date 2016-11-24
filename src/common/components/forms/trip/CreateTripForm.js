@@ -4,23 +4,12 @@ import FormNames from '../../../constants/FormNames'
 import CreateTripFormPage1 from './CreateTripFormPage1'
 import CreateTripFormPage2 from './CreateTripFormPage2'
 import { setPage, nextPage, previousPage } from '../../../actions/createTripActions'
-
-// import {
-//   BsInput as Input,
-//   BsSelect as Select,
-//   BsCheckboxList as CheckboxList,
-// } from '../../fields/adapters'
-// import {
-//   BsForm as Form,
-//   BsFormFooter as FormFooter,
-//   BsField as FormField,
-// } from '../../fields/widgets'
+import getOptions from '../../../utils/getOptions'
 
 // http://redux-form.com/6.2.0/examples/wizard/
 class CreateTripForm extends React.Component {
   constructor() {
     super()
-    this.handleSubmit = this._handleSubmit.bind(this)
     this.nextPage = this.nextPage.bind(this)
     this.previousPage = this.previousPage.bind(this)
   }
@@ -28,21 +17,6 @@ class CreateTripForm extends React.Component {
   componentWillMount() {
     const { dispatch } = this.props
     dispatch(setPage(0))
-  }
-
-  _handleSubmit(formData) {
-    console.log('formData', formData)
-    // let { dispatch, apiEngine } = this.props;
-    //
-    // return someAPI(apiEngine)
-    //   .doSomething(formData)
-    //   .catch((err) => {
-    //     dispatch(pushErrors(err));
-    //     throw err;
-    //   })
-    //   .then((json) => {
-    //     console.log('json', json);
-    //   });
   }
 
   nextPage() {
@@ -58,7 +32,11 @@ class CreateTripForm extends React.Component {
   render() {
     const {
       page,
+      messages,
     } = this.props
+
+    const { tripDayInfos, tripElements } = getOptions(messages, ['TripDayInfos', 'TripElements'])
+    tripElements.splice(0, 1) // remove ANY
 
     let values
 
@@ -73,7 +51,10 @@ class CreateTripForm extends React.Component {
         {page === 0 &&
         <CreateTripFormPage1
           onSubmit={this.nextPage}
-          {...this.props}/>
+          {...this.props}
+          tripDayInfos={tripDayInfos}
+          tripElements={tripElements}
+        />
         }
         {page === 1 &&
         <CreateTripFormPage2
@@ -90,4 +71,5 @@ export default connect(state => ({
   apiEngine: state.apiEngine,
   page: state.createTrip.page,
   createTripForm: state.form[FormNames.TRIP_CREATE_TRIP],
+  messages: state.intl.messages,
 }))(CreateTripForm)

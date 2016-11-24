@@ -1,4 +1,5 @@
 import React from 'react'
+import { Button } from 'react-bootstrap'
 import Text from '../widgets/Text'
 import styles from '../../styles'
 
@@ -23,6 +24,8 @@ const style = {
     width: 12,
     height: 12,
     borderRadius: '50%',
+    border: 0,
+    padding: 0,
   },
   stick: {
     width: '3px',
@@ -33,7 +36,7 @@ const style = {
   },
 }
 
-const PhaseBranch = ({ nodes, active }) => {
+const PhaseBranch = ({ nodes, active, cb }) => {
   return (
     <div style={style.nodeDiv}>
       <div style={{ flex: 3, paddingRight: '15px' }}>
@@ -53,22 +56,23 @@ const PhaseBranch = ({ nodes, active }) => {
           </div>
         ))}
       </div>
-      <div style={{ flex: 1, position: 'relative', top: '5px' }}>
+      <div style={{ flex: 1, position: 'relative' }}>
         <div style={{ height: `${nodes.length * 50 - 50}px`, ...style.stick }}/>
         <div style={{ position: 'absolute' }}>
           {nodes.map((node, index) => (
-              <div
-                key={index}
-                style={{ height: index === nodes.length - 1 ? 20 : 50 }}>
-                <div
-                  style={{
-                    ...style.dot,
-                    backgroundColor: active === index ?
-                      styles.color.orange :
-                      styles.color.borderGrey,
-                  }}
-                />
-              </div>
+            <div
+              key={index}
+              style={{ height: index === nodes.length - 1 ? 20 : 50 }}>
+              <Button
+                onClick={cb && cb[index]}
+                style={{
+                  ...style.dot,
+                  backgroundColor: active === index ?
+                    styles.color.orange :
+                    styles.color.borderGrey,
+                }}
+              />
+            </div>
           ))}
         </div>
       </div>

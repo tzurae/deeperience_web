@@ -10,6 +10,7 @@ import userAPI from '../../../api/user'
 import { pushErrors } from '../../../actions/errorActions'
 import { loginUser } from '../../../actions/userActions'
 import Text from '../../widgets/Text'
+import styles from '../../../styles'
 import { BsInput as Input } from '../../fields/adapters'
 import {
   BsForm as Form,
@@ -37,21 +38,25 @@ const style = {
     color: 'white',
     fontSize: '1.2em',
     marginTop: '40px',
-    marginLeft: '6em',
     borderRadius: '50px',
     backgroundColor: '#FF864F',
-    position: 'relative',
   },
   register: {
     width: '7em',
     color: 'white',
     fontSize: '1.2em',
     marginTop: '40px',
-    marginLeft: '-3.2em',
     borderRadius: '50px',
     backgroundColor: 'transparent',
-    position: 'absolute',
     border: '2px solid #FF864F',
+  },
+  label: {
+    color: 'white',
+    fontSize: styles.font.medium,
+  },
+  field: {
+    marginTop: '5px',
+    marginBottom: '15px',
   },
 }
 
@@ -122,41 +127,51 @@ class LoginForm extends Component {
     return (
       <div style={style.bg}>
         <div style={style.title}>
-          <Text id="nav.user.login" style={style.title} />
+          <Text id="nav.user.login"/>
         </div>
         <Form onSubmit={handleSubmit(this.handleSubmit)}>
           <div style={{ padding: '0 40px' }}>
             {submitFailed && error && (<Alert bsStyle="danger">{error}</Alert>)}
+            <Text id="login.email" style={style.label} />
             <Field
               name="email"
               component={DField}
-              label="信箱"
               adapter={Input}
               type="text"
               placeholder="信箱"
+              style={style.field}
             />
+            <Text id="login.password" style={style.label} />
             <Field
               name="password"
               component={DField}
-              label="密碼"
               adapter={Input}
               type="password"
               placeholder="密碼"
+              style={style.field}
             />
             <input type="checkbox" name="remember" value="remember" />
             <span style={{ color: 'white', marginLeft: '6px' }}>
               <Text id="login.rememberMe" />
             </span>
-            <FormFooter>
-              <Link to="/user/register">
-                <Button type="submit" disabled={false} style={style.register}>
-                  <Text id="nav.user.register" />
-                </Button>
-              </Link>
-              <Button type="submit" disabled={pristine || submitting || invalid} style={style.submit}>
-                <Text id="nav.user.login" />
-              </Button>
-            </FormFooter>
+            <div style={{ marginRight: '135px' }}>
+              <FormFooter>
+                <div style={{ display: 'flex' }}>
+                  <div style={{ flexGrow: '1', order: '2', marginLeft: '10px' }}>
+                    <Button type="submit" disabled={pristine || submitting || invalid} style={style.submit}>
+                      <Text id="nav.user.login" />
+                    </Button>
+                  </div>
+                  <div style={{ flexGrow: '1', order: '1', marginRight: '10px' }}>
+                    <Link to="/user/register">
+                      <Button type="submit" disabled={false} style={style.register}>
+                        <Text id="nav.user.register" />
+                      </Button>
+                    </Link>
+                  </div>
+                </div>
+              </FormFooter>
+            </div>
           </div>
         </Form>
       </div>
