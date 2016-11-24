@@ -12,7 +12,7 @@ const style = {
 }
 
 const Footer = () => (
-  <section style={{ padding: '30px', ibackgroundColor: '#003D79', minHeight: '15vh' }}>
+  <section style={{ padding: '30px', backgroundColor: '#003D79', minHeight: '15vh' }}>
     <Row>
       <Col md={3}>
         <ul>
