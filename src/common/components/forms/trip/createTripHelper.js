@@ -1,7 +1,7 @@
 'use strict'
 import _ from 'underscore'
 
-export function calculateTripInfo(routes, startSites, allSites, uuid2gid) {
+export function calculateTripInfo(routes, startSites, allSites, uuid2data) {
   const allInfo = [] // array by day
   startSites.forEach((startSiteuuid, dayIndex) => {  // can have many days
     // frontQueue: {uuid: node uuid, xpos, ypos}
@@ -71,7 +71,7 @@ export function calculateTripInfo(routes, startSites, allSites, uuid2gid) {
     _.each(dailyPos, (value, key) => {
       sites.push({
         pos: { xpos: value.xpos, ypos: value.ypos },
-        content: uuid2gid[key] && allSiteData[uuid2gid[key].gid],
+        content: uuid2data[key] && allSiteData[uuid2data[key].gid],
         uuid: key,
       })
     })

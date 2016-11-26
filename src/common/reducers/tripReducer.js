@@ -14,7 +14,7 @@ const initialState = {
   }],
   routes: [[]],
   startSites: [uid],
-  uuid2gid: {
+  uuid2data: {
     [uid]: {
       gid: '',
     },
@@ -50,7 +50,7 @@ export default (state = initialState, action) => {
         }],
         routes: [[]],
         startSites: [uid],
-        uuid2gid: {
+        uuid2data: {
           [uid]: {
             gid: '',
           },

@@ -87,11 +87,19 @@ const CreateTripFormPage1 = ({ handleSubmit, ...props }) => {
 
 export default reduxForm({
   form: FormNames.TRIP_CREATE_TRIP,
-  destroyOnUnmount: false,     // <------ preserve form data
+  destroyOnUnmount: false,
   validate,
   initialValues: {
     name: '',
     tags: [],
-    remind: [],
+    dayInfo: 'TripDayInfos.HALF_DAY',
+    dailyTrips: [{
+      remind: '',
+      period: {
+        start: '08:00',
+        end: '21:00',
+      },
+    }],
+    uuid2data: [],
   },
 })(CreateTripFormPage1)

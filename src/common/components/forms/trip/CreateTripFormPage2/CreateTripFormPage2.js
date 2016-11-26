@@ -1,6 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Field, reduxForm, FieldArray } from 'redux-form'
+import {
+  Field,
+  reduxForm,
+  arrayPush,
+  arrayRemove,
+} from 'redux-form'
 import uuid from 'uuid'
 import FormNames from '../../../../constants/FormNames'
 import FormButton from '../../../utils/FormButton'
@@ -29,7 +34,7 @@ import {
 } from '../../../fields/widgets'
 
 const siteDivWidth = 150
-const siteDivHeight = 70
+const siteDivHeight = 100
 const scrollbarShift = -6
 
 const style = {
@@ -51,7 +56,7 @@ const style = {
     borderWidth: '2px',
     borderStyle: 'solid',
     borderRadius: '5px',
-    padding: '10px',
+    padding: '5px 10px',
     background: 'white',
     fontWeight: 'bold',
   },
@@ -63,6 +68,9 @@ const style = {
   siteDivBtn: {
     display: 'inline-block',
     margin: '0 3px',
+  },
+  siteDivMsg: {
+    margin: '3px 0',
   },
   siteDivBtnDiv: {
     position: 'absolute',
@@ -129,11 +137,12 @@ class CreateTripFormPage2 extends React.Component {
     this.props.dispatch(resetCreateTripData())
     this.state = {
       day: 0,
-      floatList: {
+      floatWindow: {
         top: 0,
         left: 500,
-        show: false,
         uuid: '',
+        floatListShow: false,
+        floatInfoShow: true,
       },
       totalDay: 1,
     }
@@ -149,46 +158,58 @@ class CreateTripFormPage2 extends React.Component {
         })
         .then(json => {
           dispatch(setOwnSite(json))
-
-          const { routes, startSites, uuid2gid } = this.props
-
-          const tripInfo = calculateTripInfo(routes, startSites, json, uuid2gid)
-          dispatch(setCreateTripData({ tripInfo }))
+          const { routes, startSites, uuid2data } = this.props
+          dispatch(setCreateTripData({
+            tripInfo: calculateTripInfo(routes, startSites, json, uuid2data),
+          }))
         })
     }
   }
 
-  addGuideSite(addSite) {
-    const { floatList: { uuid } } = this.state
-    const { routes, startSites, allSites, uuid2gid } = this.props
-
-    uuid2gid[uuid].gid = addSite._id
-
-    this.props.dispatch(setCreateTripData({
-      uuid2gid,
-      tripInfo: calculateTripInfo(routes, startSites, allSites, uuid2gid),
-    }))
-
+  addSiteInfoClick(uuid, top, left) {
     this.setState({
-      floatList: {
-        show: false,
+      floatWindow: {
+        top,
+        left,
+        floatListShow: false,
+        floatInfoShow: true,
+        uuid,
       },
     })
   }
 
-  addSiteInfoClick(uuid, top, left) {
+  addGuideSite(addSite) {
+    const { floatWindow: { uuid } } = this.state
+    const { routes, startSites, allSites, uuid2data } = this.props
+
+    uuid2data[uuid].gid = addSite._id
+
+    this.props.dispatch(setCreateTripData({
+      uuid2data,
+      tripInfo: calculateTripInfo(routes, startSites, allSites, uuid2data),
+    }))
+    console.log('asdasd')
     this.setState({
-      floatList: {
+      floatWindow: {
+        floatListShow: false,
+      },
+    })
+  }
+
+  addGuideSiteClick(uuid, top, left) {
+    this.setState({
+      floatWindow: {
         top,
         left,
-        show: true,
+        floatListShow: true,
+        floatInfoShow: false,
         uuid,
       },
     })
   }
 
   deleteSite(uuid, day) {
-    const { routes, startSites, allSites, uuid2gid } = this.props
+    const { routes, startSites, allSites, uuid2data } = this.props
     let isLeaf = true
     routes[day].some((route, index) => {
       if (route.from === uuid) {
@@ -200,7 +221,8 @@ class CreateTripFormPage2 extends React.Component {
 
     if (!isLeaf) return this.props.dispatch(createTripError('請先刪除子景點'))
 
-    uuid2gid[uuid].gid = ''
+    if (uuid2data[uuid]) uuid2data[uuid].gid = ''
+
     routes[day].forEach((route, index) => {
       if (route.from === uuid || route.to === uuid) {
         routes[day].splice(index, 1)
@@ -208,14 +230,14 @@ class CreateTripFormPage2 extends React.Component {
     })
 
     this.props.dispatch(setCreateTripData({
-      tripInfo: calculateTripInfo(routes, startSites, allSites, uuid2gid),
+      tripInfo: calculateTripInfo(routes, startSites, allSites, uuid2data),
       routes,
     }))
   }
 
   addChildSite(id, day) {
-    const { routes, startSites, allSites, uuid2gid } = this.props
-    if (!this.props.uuid2gid[id].gid) return this.props.dispatch(createTripError('請填入景點後，再加入子景點'))
+    const { routes, startSites, allSites, uuid2data } = this.props
+    if (!this.props.uuid2data[id].gid) return this.props.dispatch(createTripError('請填入景點後，再加入子景點'))
 
     routes[day].push({
       from: id,
@@ -223,51 +245,72 @@ class CreateTripFormPage2 extends React.Component {
     })
 
     this.props.dispatch(setCreateTripData({
-      tripInfo: calculateTripInfo(routes, startSites, allSites, uuid2gid),
+      tripInfo: calculateTripInfo(routes, startSites, allSites, uuid2data),
       routes,
     }))
   }
 
   closeFloatSiteList() {
     this.setState({
-      floatList: {
-        show: false,
+      floatWindow: {
+        floatListShow: false,
+      },
+    })
+  }
+  closeFloatInfo() {
+    this.setState({
+      floatWindow: {
+        floatInfoShow: false,
       },
     })
   }
 
   addDay() {
-    this.setState({
-      totalDay: this.state.totalDay + 1,
-    })
-    const { routes, startSites, allSites, uuid2gid } = this.props
+    const { routes, startSites, allSites, uuid2data } = this.props
 
     const newuuid = uuid()
-    uuid2gid[newuuid].gid = ''
+    uuid2data[newuuid] = {
+      gid: '',
+    }
     startSites.push(newuuid)
     routes.push([])
 
+    console.log(arrayPush)
+
+    this.props.dispatch(arrayPush(FormNames.TRIP_CREATE_TRIP, 'dailyTrips', {
+      remind: '',
+      period: {
+        start: '08:00',
+        end: '21:00',
+      },
+    }))
+
+    this.setState({
+      totalDay: this.state.totalDay + 1,
+    })
     this.props.dispatch(setCreateTripData({
-      tripInfo: calculateTripInfo(routes, startSites, allSites, uuid2gid),
+      tripInfo: calculateTripInfo(routes, startSites, allSites, uuid2data),
       routes,
       startSites,
-      uuid2gid,
+      uuid2data,
     }))
   }
 
   deleteDay(day) {
     if (this.state.totalDay === 1) return
-    const { routes, startSites, allSites, uuid2gid } = this.props
+    const { routes, startSites, allSites, uuid2data } = this.props
 
     startSites.splice(day, 1)
     routes.splice(day, 1)
+
+    this.props.dispatch(arrayRemove(FormNames.TRIP_CREATE_TRIP, 'dailyTrips', day))
 
     this.setState({
       day: this.state.totalDay - 1 === day ? this.state.totalDay - 2 : day,
       totalDay: this.state.totalDay - 1,
     })
     this.props.dispatch(setCreateTripData({
-      tripInfo: calculateTripInfo(routes, startSites, allSites, uuid2gid),
+      tripInfo: calculateTripInfo(routes, startSites, allSites, uuid2data),
       routes,
       startSites,
     }))
@@ -302,42 +345,84 @@ class CreateTripFormPage2 extends React.Component {
             </p>
           </div>
           <span>
-            <IconBtn
-              btnStyle={{ ...style.dayDivBtn, alighSelf: 'flex-end' }}
-              name="plus"
-              onClick={this.addDay.bind(this)}
-            />
-            <IconBtn
-              btnStyle={{ ...style.dayDivBtn, alighSelf: 'flex-end' }}
-              name="minus"
-              onClick={this.deleteDay.bind(this, this.state.day)}
-            />
-          </span>
+          <IconBtn
+            btnStyle={style.dayDivBtn}
+            name="plus"
+            onClick={this.addDay.bind(this)}
+          />
+          <IconBtn
+            btnStyle={style.dayDivBtn}
+            name="minus"
+            onClick={this.deleteDay.bind(this, this.state.day)}
+          />
+      </span>
         </div>
+        <Form
+          defaultHorizontal={true}
+          defaultLabelDimensions={{ sm: 2 }}
+          defaultFieldDimensions={{ sm: 6 }}
+          onSubmit={() => {}}
+        >
+          {
+            Array(...{ length: this.state.totalDay })
+              .map(Number.call, Number)
+              .map((value, index) => {
+                if (this.state.day !== index) return null
+                return (
+                  <div key={index}>
+                    <Field
+                      name={`dailyTrips.${value}.remind`}
+                      component={FormField}
+                      label="每日提醒"
+                      labelDimensions={{ sm: 2 }}
+                      fieldDimensions={{ sm: 10 }}
+                      adapter={Textarea}
+                      rows="3"
+                    />
+                    <Field
+                      name={`dailyTrips.${value}.period.start`}
+                      component={FormField}
+                      label="出發時間"
+                      fieldDimensions={{ sm: 6 }}
+                      adapter={Input}
+                      type="time"
+                    />
+                    <Field
+                      name={`dailyTrips.${value}.period.end`}
+                      component={FormField}
+                      label="結束時間"
+                      fieldDimensions={{ sm: 6 }}
+                      adapter={Input}
+                      type="time"
+                    />
+                  </div>
+                )
+              })
+          }
+        </Form>
         <div style={{ position: 'relative' }}>
           {
-            this.state.floatList.show &&
+            this.state.floatWindow.floatListShow &&
             <FloatSiteList
-              top={this.state.floatList.top}
-              left={this.state.floatList.left}
+              title={'選擇地點'}
+              top={this.state.floatWindow.top}
+              left={this.state.floatWindow.left}
               siteList={this.props.allSites}
               onClick={this.addGuideSite.bind(this)}
               onClose={this.closeFloatSiteList.bind(this)}
             />
           }
-          <Form
-            defaultHorizontal={true}
-            defaultLabelDimensions={{ sm: 2 }}
-            defaultFieldDimensions={{ sm: 6 }}
-            onSubmit={() => {}}
-          >
-            <FieldArray
-              name="dailyTrips"
-              component={RenderDailyTrip}
-              day={this.state.day}
-              totalDay={this.state.totalDay}
+          {
+            this.state.floatWindow.floatInfoShow &&
+            <FloatInfo
+              title={'填寫出發與結束時間'}
+              top={this.state.floatWindow.top}
+              left={this.state.floatWindow.left}
+              uuid={this.state.floatWindow.uuid}
+              onClose={this.closeFloatInfo.bind(this)}
+              input={blur}
             />
-          </Form>
+          }
           {
             Array(...{ length: this.state.totalDay })
               .map(Number.call, Number)
@@ -364,13 +449,13 @@ class CreateTripFormPage2 extends React.Component {
                           (dailyTrip.ylayer[route.from.ypos] + 1) *
                           width +
                           scrollbarShift
-                        const ypos1 = route.from.ypos * 100 + 50 + siteDivHeight / 2
+                        const ypos1 = route.from.ypos * 130 + 50 + siteDivHeight / 2
                         const xpos2 =
                           (route.to.xpos + 1) /
                           (dailyTrip.ylayer[route.to.ypos] + 1) *
                           width +
                           scrollbarShift
-                        const ypos2 = route.to.ypos * 100 + 50 + siteDivHeight / 2
+                        const ypos2 = route.to.ypos * 130 + 50 + siteDivHeight / 2
 
                         return (
                           <path
@@ -388,18 +473,22 @@ class CreateTripFormPage2 extends React.Component {
                   {
                     dailyTrip.sites.map(site => {
                       const { xpos, ypos } = site.pos
-                      const top = `${ypos * 100 + 50}px`
+                      const top = `${ypos * 130 + 50}px`
                       const left = `calc(${(xpos + 1) / (dailyTrip.ylayer[ypos] + 1) * 100}% - ${siteDivWidth / 2}px)`
                       const floatListLeft =
                         `calc(${(xpos + 1) / (dailyTrip.ylayer[ypos] + 1) * 100}% + ${siteDivWidth / 2 + 10}px)`
+                      const uuidData = values.uuid2data[site.uuid]
                       return (
                         <SiteDiv
                           top={top}
                           left={left}
                           key={`${xpos}-${ypos}`}
                           site={site}
-                          addInfo={this.addSiteInfoClick.bind(this, site.uuid, top, floatListLeft)}
-                          addSite={this.addChildSite.bind(this, site.uuid, this.state.day)}
+                          startTime={uuidData && uuidData.startTime || ''}
+                          endTime={uuidData && uuidData.endTime || ''}
+                          addSiteInfo={this.addSiteInfoClick.bind(this, site.uuid, top, floatListLeft)}
+                          addSite={this.addGuideSiteClick.bind(this, site.uuid, top, floatListLeft)}
+                          addChildSite={this.addChildSite.bind(this, site.uuid, this.state.day)}
                           deleteSite={this.deleteSite.bind(this, site.uuid, this.state.day)}
                         />
                       )
@@ -415,54 +504,18 @@ class CreateTripFormPage2 extends React.Component {
   }
 }
 
-const RenderDailyTrip = ({
-  day,
-  totalDay,
-  meta: { touched, error },
+const SiteDiv = ({
+  top,
+  left,
+  site,
+  startTime,
+  endTime,
+  addSiteInfo,
+  addSite,
+  addChildSite,
+  deleteSite,
+  ...props
 }) => {
-  return (
-    <ul>
-      {
-        Array(...{ length: totalDay })
-          .map(Number.call, Number)
-          .map((value, index) => {
-            if (day !== index) return null
-            return (
-              <div key={index}>
-                <Field
-                  name={`dailyTrips.${value}.remind`}
-                  component={FormField}
-                  label="每日提醒"
-                  labelDimensions={{ sm: 2 }}
-                  fieldDimensions={{ sm: 10 }}
-                  adapter={Textarea}
-                  rows="3"
-                />
-                <Field
-                  name={`dailyTrips.${value}.period.start`}
-                  component={FormField}
-                  label="出發時間"
-                  fieldDimensions={{ sm: 6 }}
-                  adapter={Input}
-                  type="time"
-                />
-                <Field
-                  name={`dailyTrips.${value}.period.end`}
-                  component={FormField}
-                  label="結束時間"
-                  fieldDimensions={{ sm: 6 }}
-                  adapter={Input}
-                  type="time"
-                />
-              </div>
-            )
-          })
-      }
-    </ul>
-  )
-}
-
-const SiteDiv = ({ top, left, site, addInfo, addSite, deleteSite, ...props }) => {
   return (
     <div
       style={{
@@ -472,23 +525,26 @@ const SiteDiv = ({ top, left, site, addInfo, addSite, deleteSite, ...props }) =>
       }}
       {...props}
     >
-      <p>{site.content && site.content.name || ''}</p>
+      <p style={style.siteDivMsg}>{site.content && site.content.name || ''}</p>
+      <p style={style.siteDivMsg}>{`始：${startTime}`}</p>
+      <p style={style.siteDivMsg}>{`離：${endTime}`}</p>
       <div style={style.siteDivBtnDiv}>
-        <IconBtn btnStyle={style.siteDivBtn} name="pencil" onClick={addInfo}/>
-        <IconBtn btnStyle={style.siteDivBtn} name="plus" onClick={addSite}/>
+        <IconBtn btnStyle={style.siteDivBtn} name="pencil" onClick={addSiteInfo}/>
+        <IconBtn btnStyle={style.siteDivBtn} name="map-marker" onClick={addSite}/>
+        <IconBtn btnStyle={style.siteDivBtn} name="plus" onClick={addChildSite}/>
         <IconBtn btnStyle={style.siteDivBtn} name="times" onClick={deleteSite}/>
       </div>
     </div>
   )
 }
-
-const FloatSiteList = ({ top, left, siteList, onClick, onClose, ...props }) => {
+const FloatList = ({ title, top, left, children, onClose, outterStyle, ...props }) => {
   return (
     <div
       style={{
         ...style.floatSiteList,
         top,
         left,
+        ...outterStyle,
       }}
       {...props}
     >
@@ -501,7 +557,7 @@ const FloatSiteList = ({ top, left, siteList, onClick, onClose, ...props }) => {
         }}
       >
         <p style={{ fontSize: styles.font.medium, flex: 1, marginLeft: '5px' }}>
-          {'選擇地點'}
+          {title}
         </p>
         <IconBtn
           name="times"
@@ -515,6 +571,14 @@ const FloatSiteList = ({ top, left, siteList, onClick, onClose, ...props }) => {
           }}
         />
       </div>
+      {children}
+    </div>
+  )
+}
+
+const FloatSiteList = ({ siteList, onClick, ...props }) => {
+  return (
+    <FloatList {...props}>
       {siteList.map((site, index) => (
         <FloatSiteListItem
           key={index}
@@ -522,7 +586,7 @@ const FloatSiteList = ({ top, left, siteList, onClick, onClose, ...props }) => {
           onClick={onClick}
         />
       ))}
-    </div>
+    </FloatList>
   )
 }
 
@@ -539,6 +603,40 @@ const FloatSiteListItem = ({ site, onClick, ...props }) => {
       />
       <p style={style.floatSiteListItemName}>{site.name}</p>
     </div>
+  )
+}
+
+const FloatInfo = ({ uuid, ...props }) => {
+  return (
+    <FloatList outterStyle={{ overflow: 'hidden' }} {...props}>
+      <Form
+        defaultHorizontal={true}
+        defaultLabelDimensions={{ sm: 2 }}
+        defaultFieldDimensions={{ sm: 6 }}
+        onSubmit={() => {}}
+      >
+        <p style={{ fontSize: styles.font.medium, flex: 1, marginLeft: '5px' }}>
+          {'預估出發時間'}
+        </p>
+        <Field
+          name={`uuid2data.${uuid}.startTime`}
+          component={FormField}
+          fieldDimensions={{ sm: 12 }}
+          adapter={Input}
+          type="time"
+        />
+        <p style={{ fontSize: styles.font.medium, flex: 1, marginLeft: '5px' }}>
+          {'預估離開時間'}
+        </p>
+        <Field
+          name={`uuid2data.${uuid}.endTime`}
+          component={FormField}
+          fieldDimensions={{ sm: 12 }}
+          adapter={Input}
+          type="time"
+        />
+      </Form>
+    </FloatList>
   )
 }
 
@@ -573,7 +671,7 @@ const FloatSiteListItem = ({ site, onClick, ...props }) => {
 
 export default reduxForm({
   form: FormNames.TRIP_CREATE_TRIP,
-  destroyOnUnmount: false,     // <------ preserve form data
+  destroyOnUnmount: false,
   validate,
   initialValues: {
     name: '',
@@ -586,13 +684,15 @@ export default reduxForm({
         end: '21:00',
       },
     }],
+    uuid2data: [],
   },
 })(connect(state => ({
+  createTripForm: state.form[FormNames.TRIP_CREATE_TRIP],
   apiEngine: state.apiEngine,
   allSites: state.trip.ownSites,
   tripInfo: state.trip.tripInfo,
   routes: state.trip.routes,
   startSites: state.trip.startSites,
-  uuid2gid: state.trip.uuid2gid,
+  uuid2data: state.trip.uuid2data,
   error: state.trip.error,
 }))(CreateTripFormPage2))
