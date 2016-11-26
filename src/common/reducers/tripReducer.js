@@ -15,7 +15,9 @@ const initialState = {
   routes: [[]],
   startSites: [uid],
   uuid2gid: {
-    [uid]: '',
+    [uid]: {
+      gid: '',
+    },
   },
   error: null,
 }
@@ -49,7 +51,9 @@ export default (state = initialState, action) => {
         routes: [[]],
         startSites: [uid],
         uuid2gid: {
-          [uid]: '',
+          [uid]: {
+            gid: '',
+          },
         },
       }
     case ActionTypes.CREATE_TRIP_ERROR:

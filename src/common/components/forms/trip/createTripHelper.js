@@ -20,7 +20,6 @@ export function calculateTripInfo(routes, startSites, allSites, uuid2gid) {
 
       filterRoutes.forEach((filterRoute) => {
         const destuuid = filterRoute.to
-        // const destgid = uuid2gid[filterRoute.to.uuid]
         const xpos = layerArray[ypos] + 1
 
         if (dailyPos[destuuid] === undefined) {
@@ -72,7 +71,7 @@ export function calculateTripInfo(routes, startSites, allSites, uuid2gid) {
     _.each(dailyPos, (value, key) => {
       sites.push({
         pos: { xpos: value.xpos, ypos: value.ypos },
-        content: allSiteData[uuid2gid[key]],
+        content: uuid2gid[key] && allSiteData[uuid2gid[key].gid],
         uuid: key,
       })
     })

@@ -137,10 +137,6 @@ class CreateTripFormPage2 extends React.Component {
       },
       totalDay: 1,
     }
-    this.addChildSite = this.addChildSite.bind(this)
-    this.deleteSite = this.deleteSite.bind(this)
-    this.addSiteInfoClick = this.addSiteInfoClick.bind(this)
-    this.addGuideSite = this.addGuideSite.bind(this)
   }
 
   componentWillMount() {
@@ -166,7 +162,7 @@ class CreateTripFormPage2 extends React.Component {
     const { floatList: { uuid } } = this.state
     const { routes, startSites, allSites, uuid2gid } = this.props
 
-    uuid2gid[uuid] = addSite._id
+    uuid2gid[uuid].gid = addSite._id
 
     this.props.dispatch(setCreateTripData({
       uuid2gid,
@@ -204,7 +200,7 @@ class CreateTripFormPage2 extends React.Component {
 
     if (!isLeaf) return this.props.dispatch(createTripError('請先刪除子景點'))
 
-    this.props.uuid2gid[uuid] = ''
+    uuid2gid[uuid].gid = ''
     routes[day].forEach((route, index) => {
       if (route.from === uuid || route.to === uuid) {
         routes[day].splice(index, 1)
@@ -218,10 +214,8 @@ class CreateTripFormPage2 extends React.Component {
   }
 
   addChildSite(id, day) {
-    console.log(day)
-    if (!this.props.uuid2gid[id]) return this.props.dispatch(createTripError('請填入景點後，再加入子景點'))
-
     const { routes, startSites, allSites, uuid2gid } = this.props
+    if (!this.props.uuid2gid[id].gid) return this.props.dispatch(createTripError('請填入景點後，再加入子景點'))
 
     routes[day].push({
       from: id,
@@ -249,7 +243,7 @@ class CreateTripFormPage2 extends React.Component {
     const { routes, startSites, allSites, uuid2gid } = this.props
 
     const newuuid = uuid()
-    uuid2gid[newuuid] = ''
+    uuid2gid[newuuid].gid = ''
     startSites.push(newuuid)
     routes.push([])
 
@@ -341,63 +335,18 @@ class CreateTripFormPage2 extends React.Component {
               name="dailyTrips"
               component={RenderDailyTrip}
               day={this.state.day}
-              tripInfo={this.props.tripInfo}
-              addInfo={this.addSiteInfoClick}
-              addSite={this.addChildSite}
-              deleteSite={this.deleteSite}
+              totalDay={this.state.totalDay}
             />
           </Form>
-        </div>
-      </div>
-    )
-  }
-}
+          {
+            Array(...{ length: this.state.totalDay })
+              .map(Number.call, Number)
+              .map((value, index) => {
+                if (this.state.day !== index) return null
 
-const RenderDailyTrip = ({
-  tripInfo,
-  addInfo,
-  addSite,
-  deleteSite,
-  day,
-  fields,
-  meta: { touched, error },
-}) => {
-  return (
-    <ul>
-      {
-        Array(...{ length: tripInfo.length })
-          .map(Number.call, Number)
-          .map((value, index) => {
-            if (day !== index) return
+                const dailyTrip = tripInfo[index] // sites ylayer routes
 
-            const dailyTrip = tripInfo[index] // sites ylayer routes
-            return (
-              <div key={index}>
-                <Field
-                  name={`dailyTrips.${value}.remind`}
-                  component={FormField}
-                  label="每日提醒"
-                  labelDimensions={{ sm: 2 }}
-                  fieldDimensions={{ sm: 10 }}
-                  adapter={Textarea}
-                  rows="3"
-                />
-                <Field
-                  name={`dailyTrips.${value}.period.start`}
-                  component={FormField}
-                  label="出發時間"
-                  fieldDimensions={{ sm: 6 }}
-                  adapter={Input}
-                  type="time"
-                />
-                <Field
-                  name={`dailyTrips.${value}.period.end`}
-                  component={FormField}
-                  label="結束時間"
-                  fieldDimensions={{ sm: 6 }}
-                  adapter={Input}
-                  type="time"
-                />
+                return (
                 <div
                   key={`day${value}`}
                   style={style.container}
@@ -449,15 +398,62 @@ const RenderDailyTrip = ({
                           left={left}
                           key={`${xpos}-${ypos}`}
                           site={site}
-                          day={0}
-                          addInfo={addInfo.bind(this, site.uuid, top, floatListLeft)}
-                          addSite={addSite.bind(this, site.uuid, day)}
-                          deleteSite={deleteSite.bind(this, site.uuid, day)}
+                          addInfo={this.addSiteInfoClick.bind(this, site.uuid, top, floatListLeft)}
+                          addSite={this.addChildSite.bind(this, site.uuid, this.state.day)}
+                          deleteSite={this.deleteSite.bind(this, site.uuid, this.state.day)}
                         />
                       )
                     })
                   }
                 </div>
+                )
+              })
+          }
+        </div>
+      </div>
+    )
+  }
+}
+
+const RenderDailyTrip = ({
+  day,
+  totalDay,
+  meta: { touched, error },
+}) => {
+  return (
+    <ul>
+      {
+        Array(...{ length: totalDay })
+          .map(Number.call, Number)
+          .map((value, index) => {
+            if (day !== index) return null
+            return (
+              <div key={index}>
+                <Field
+                  name={`dailyTrips.${value}.remind`}
+                  component={FormField}
+                  label="每日提醒"
+                  labelDimensions={{ sm: 2 }}
+                  fieldDimensions={{ sm: 10 }}
+                  adapter={Textarea}
+                  rows="3"
+                />
+                <Field
+                  name={`dailyTrips.${value}.period.start`}
+                  component={FormField}
+                  label="出發時間"
+                  fieldDimensions={{ sm: 6 }}
+                  adapter={Input}
+                  type="time"
+                />
+                <Field
+                  name={`dailyTrips.${value}.period.end`}
+                  component={FormField}
+                  label="結束時間"
+                  fieldDimensions={{ sm: 6 }}
+                  adapter={Input}
+                  type="time"
+                />
               </div>
             )
           })
@@ -466,7 +462,7 @@ const RenderDailyTrip = ({
   )
 }
 
-const SiteDiv = ({ top, left, site, day, addInfo, addSite, deleteSite, ...props }) => {
+const SiteDiv = ({ top, left, site, addInfo, addSite, deleteSite, ...props }) => {
   return (
     <div
       style={{
