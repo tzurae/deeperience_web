@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import FormNames from '../../../constants/FormNames'
 import CreateTripFormPage1 from './CreateTripFormPage1'
-import CreateTripFormPage2 from './CreateTripFormPage2'
+import CreateTripFormPage2 from './CreateTripFormPage2/CreateTripFormPage2'
 import getOptions from '../../../utils/getOptions'
 
 // http://redux-form.com/6.2.0/examples/wizard/

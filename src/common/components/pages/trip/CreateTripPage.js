@@ -86,13 +86,6 @@ class CreateTripPage extends React.Component {
               title="trip.createTrip.help"
               isUnderline={false}
             />
-            {
-              page === 1 &&
-              <Panel
-                title="trip.createTrip.mySite"
-                isUnderline={false}
-              />
-            }
           </Col>
         </PanelContainer>
       </PageLayout>

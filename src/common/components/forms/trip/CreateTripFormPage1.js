@@ -92,5 +92,6 @@ export default reduxForm({
   initialValues: {
     name: '',
     tags: [],
+    remind: [],
   },
 })(CreateTripFormPage1)

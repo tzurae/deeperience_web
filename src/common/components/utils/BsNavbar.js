@@ -69,8 +69,8 @@ const Nav = ({ right, children, ...rest }) => {
   )
 }
 
-const Dropdown = ({ title, children }) => (
-  <li className="dropdown">
+const Dropdown = ({ title, children, style }) => (
+  <li className="dropdown" style={style}>
     <a
       href="#"
       className="dropdown-toggle"
