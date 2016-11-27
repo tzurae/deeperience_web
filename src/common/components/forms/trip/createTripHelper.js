@@ -71,7 +71,7 @@ export function calculateTripInfo(routes, startSites, allSites, uuid2data) {
     _.each(dailyPos, (value, key) => {
       sites.push({
         pos: { xpos: value.xpos, ypos: value.ypos },
-        content: uuid2data[key] && allSiteData[uuid2data[key].gid],
+        content: uuid2data[key] ? allSiteData[uuid2data[key].gid] : null,
         uuid: key,
       })
     })

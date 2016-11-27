@@ -5,6 +5,7 @@ import {
   reduxForm,
   arrayPush,
   arrayRemove,
+  arraySplice,
 } from 'redux-form'
 import uuid from 'uuid'
 import FormNames from '../../../../constants/FormNames'
@@ -12,7 +13,6 @@ import FormButton from '../../../utils/FormButton'
 import validate from '../createTripValidate'
 import Text from '../../../widgets/Text'
 import styles from '../../../../styles'
-import { routes as fakeRoutes, startSites as fakeStartSites } from '../fakeData'
 import { calculateTripInfo } from '../createTripHelper'
 import tripAPI from '../../../../api/trip'
 import {
@@ -133,7 +133,6 @@ const style = {
 class CreateTripFormPage2 extends React.Component {
   constructor(props) {
     super(props)
-    // const tripInfo = calculateTripInfo([], fakeStartSites, this.props.allSites)
     this.props.dispatch(resetCreateTripData())
     this.state = {
       day: 0,
@@ -142,10 +141,13 @@ class CreateTripFormPage2 extends React.Component {
         left: 500,
         uuid: '',
         floatListShow: false,
-        floatInfoShow: true,
+        floatInfoShow: false,
       },
       totalDay: 1,
+      submitError: '',
     }
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.validateForm = this.validateForm.bind(this)
   }
 
   componentWillMount() {
@@ -166,6 +168,98 @@ class CreateTripFormPage2 extends React.Component {
     }
   }
 
+  handleSubmit() {
+    if (!this.validateForm(true)) return
+
+    // split uuid2data into each day
+
+    const { startSites, routes, uuid2data } = this.props
+    const { createTripForm: { values: { dailyTrips, uuid2data: time } } } = this.props
+
+    dailyTrips.forEach((trip, index) => {
+      const uuidDataArr = []
+
+      if (routes[index].length === 0) {
+        uuidDataArr.push(startSites[index])
+      } else {
+        routes[index].forEach(({ from, to }) => {
+          if (uuidDataArr.indexOf(from) === -1) uuidDataArr.push(from)
+          if (uuidDataArr.indexOf(to) === -1) uuidDataArr.push(to)
+        })
+      }
+
+      this.props.dispatch(
+        arraySplice(FormNames.TRIP_CREATE_TRIP, 'dailyTrips', index, 1, {
+          ...trip,
+          startSite: startSites[index],
+          routes: routes[index],
+          uuid2data: uuidDataArr.map(key => ({
+            uuid: key,
+            gid: uuid2data[key].gid,
+            startTime: time[key].startTime,
+            endTime: time[key].endTime,
+          })),
+        }))
+    })
+
+    this.props.nextPage()
+  }
+
+  validateForm(submit = false) {
+    // 1. dailyTrips, sites, routes, startSites has length = totalDay
+    // 2. every props in dailyTrip has filled
+    // 3. every props in routes has filled
+    // 4. every uuid of startSites, routes has match gid
+    try {
+      let submitError = ''
+      const { routes, startSites, uuid2data } = this.props
+      const { totalDay } = this.state
+      const { createTripForm: { values: { dailyTrips, uuid2data: time } } } = this.props
+
+      if (routes.length !== totalDay ||
+        startSites.length !== totalDay ||
+        dailyTrips.length !== totalDay) {
+        return false
+      }
+
+      if (dailyTrips.some(({ remind, period: { start, end } }) => !remind || !start || !end)) {
+        submitError = '記得填寫每日提醒、出發和結束時間喔！'
+      }
+
+      if (
+        routes.some(dailyRoute =>
+          dailyRoute.some(
+            ({ from, to }) => {
+              if (!time[from] || !time[to] || !uuid2data[from] || !uuid2data[to]) return true
+
+              const { gid: gidf } = uuid2data[from]
+              const { gid: gidt } = uuid2data[to]
+              const { startTime: startTimef, endTime: endTimef } = time[from]
+              const { startTime: startTimet, endTime: endTimet } = time[to]
+              return !gidf || !startTimef || !endTimef ||
+                      !gidt || !startTimet || !endTimet
+            })
+        ) ||
+        startSites.some(value => {
+          if (!time[value]) return true
+
+          const { gid } = uuid2data[value]
+          const { startTime, endTime } = time[value]
+          return !gid || !startTime || !endTime
+        })
+      ) {
+        submitError = '記得填寫景點、開始時間和離開時間喔！'
+      }
+
+      if (submit) this.setState({ submitError })
+
+      return submitError === ''
+    } catch (err) {
+      console.log(err)
+      return false
+    }
+  }
+
   addSiteInfoClick(uuid, top, left) {
     this.setState({
       floatWindow: {
@@ -182,13 +276,14 @@ class CreateTripFormPage2 extends React.Component {
     const { floatWindow: { uuid } } = this.state
     const { routes, startSites, allSites, uuid2data } = this.props
 
-    uuid2data[uuid].gid = addSite._id
+    uuid2data[uuid] = {
+      gid: addSite._id,
+    }
 
     this.props.dispatch(setCreateTripData({
       uuid2data,
       tripInfo: calculateTripInfo(routes, startSites, allSites, uuid2data),
     }))
-    console.log('asdasd')
     this.setState({
       floatWindow: {
         floatListShow: false,
@@ -237,7 +332,10 @@ class CreateTripFormPage2 extends React.Component {
 
   addChildSite(id, day) {
     const { routes, startSites, allSites, uuid2data } = this.props
-    if (!this.props.uuid2data[id].gid) return this.props.dispatch(createTripError('請填入景點後，再加入子景點'))
+    if (!this.props.uuid2data[id] ||
+      !this.props.uuid2data[id].gid) {
+      return this.props.dispatch(createTripError('請填入景點後，再加入子景點'))
+    }
 
     routes[day].push({
       from: id,
@@ -274,8 +372,6 @@ class CreateTripFormPage2 extends React.Component {
     }
     startSites.push(newuuid)
     routes.push([])
-
-    console.log(arrayPush)
 
     this.props.dispatch(arrayPush(FormNames.TRIP_CREATE_TRIP, 'dailyTrips', {
       remind: '',
@@ -318,7 +414,11 @@ class CreateTripFormPage2 extends React.Component {
 
   render() {
     const {
+      pristine,
+      submitting,
+      invalid,
       tripInfo,
+      previousPage,
       createTripForm: { values },
     } = this.props
     return (
@@ -332,8 +432,9 @@ class CreateTripFormPage2 extends React.Component {
               {
                 Array(...{ length: this.state.totalDay })
                   .map(Number.call, Number)
-                  .map(value => (
+                  .map((value, index) => (
                     <MenuItem
+                      key={index}
                       title={`第${value + 1}天`}
                       onClick={() => this.setState({ day: value })}
                     />
@@ -345,17 +446,17 @@ class CreateTripFormPage2 extends React.Component {
             </p>
           </div>
           <span>
-          <IconBtn
-            btnStyle={style.dayDivBtn}
-            name="plus"
-            onClick={this.addDay.bind(this)}
-          />
-          <IconBtn
-            btnStyle={style.dayDivBtn}
-            name="minus"
-            onClick={this.deleteDay.bind(this, this.state.day)}
-          />
-      </span>
+            <IconBtn
+              btnStyle={style.dayDivBtn}
+              name="plus"
+              onClick={this.addDay.bind(this)}
+            />
+            <IconBtn
+              btnStyle={style.dayDivBtn}
+              name="minus"
+              onClick={this.deleteDay.bind(this, this.state.day)}
+            />
+          </span>
         </div>
         <Form
           defaultHorizontal={true}
@@ -420,7 +521,6 @@ class CreateTripFormPage2 extends React.Component {
               left={this.state.floatWindow.left}
               uuid={this.state.floatWindow.uuid}
               onClose={this.closeFloatInfo.bind(this)}
-              input={blur}
             />
           }
           {
@@ -498,6 +598,18 @@ class CreateTripFormPage2 extends React.Component {
                 )
               })
           }
+        </div>
+        <div style={{ margin: '20px 0 0', display: 'flex', justifyContent: 'center' }}>
+          <FormButton type="button" onClick={previousPage}>
+            <Text id={'trip.createTrip.form.previousStep'}/>
+          </FormButton>
+          <FormButton
+            type="button"
+            onClick={this.handleSubmit}
+            disabled={pristine || submitting || invalid || !this.validateForm(false)}>
+            <Text id={'trip.createTrip.form.nextStep'}/>
+          </FormButton>
+          <p style={{ ...style.errorMsg, float: 'right' }}>{this.state.submitError}</p>
         </div>
       </div>
     )
@@ -640,35 +752,6 @@ const FloatInfo = ({ uuid, ...props }) => {
   )
 }
 
-// const CreateTripFormPage2 = ({ handleSubmit, ...props }) => {
-//   const {
-//     // pristine,
-//     // submitting,
-//     // invalid,
-//     // previousPage,
-//   } = props
-//
-// }
-/* <Form
- defaultHorizontal={true}
- defaultLabelDimensions={{ sm: 2 }}
- defaultFieldDimensions={{ sm: 6 }}
- onSubmit={handleSubmit}
- >
- <FormFooter
- labelDimensions={{ sm: 0 }}
- fieldDimensions={{ sm: 12 }}
- style={{ textAlign: 'center' }}
- >
- <FormButton type="button" onClick={previousPage}>
- <Text id={'trip.createTrip.form.previousStep'}/>
- </FormButton>
- <FormButton type="submit" disabled={pristine || submitting || invalid}>
- <Text id={'trip.createTrip.form.nextStep'}/>
- </FormButton>
- </FormFooter>
- </Form> */
-
 export default reduxForm({
   form: FormNames.TRIP_CREATE_TRIP,
   destroyOnUnmount: false,
@@ -684,7 +767,7 @@ export default reduxForm({
         end: '21:00',
       },
     }],
-    uuid2data: [],
+    uuid2data: {},
   },
 })(connect(state => ({
   createTripForm: state.form[FormNames.TRIP_CREATE_TRIP],

@@ -35,6 +35,7 @@ export default (state = initialState, action) => {
         tripInfo: action.payload.tripInfo || state.tripInfo,
         routes: action.payload.routes || state.routes,
         startSites: action.payload.startSites || state.startSites,
+        uuid2data: action.payload.uuid2data || state.uuid2data,
       }
     case ActionTypes.RESET_CREATE_TRIP_DATA:
       const uid = uuid()

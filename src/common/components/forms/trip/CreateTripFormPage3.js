@@ -15,13 +15,12 @@ import {
   BsField as FormField,
 } from '../../fields/widgets'
 
-const CreateTripFormPage1 = ({ handleSubmit, ...props }) => {
+const CreateTripFormPage3 = ({ handleSubmit, ...props }) => {
   const {
     pristine,
     submitting,
     invalid,
-    tripDayInfos,
-    tripElements,
+    previousPage,
   } = props
 
   return (
@@ -31,52 +30,14 @@ const CreateTripFormPage1 = ({ handleSubmit, ...props }) => {
       defaultFieldDimensions={{ sm: 6 }}
       onSubmit={handleSubmit}
     >
-      <Field
-        name="name"
-        component={FormField}
-        label={<Text id={'trip.createTrip.form.name'}/>}
-        adapter={Input}
-        type="text"
-        placeholder="Text"
-      />
-      <Field
-        name="price"
-        component={FormField}
-        label={<Text id={'trip.createTrip.form.price'}/>}
-        adapter={Input}
-        type="number"
-        placeholder="Number"
-      />
-      <Field
-        name="dayInfo"
-        component={FormField}
-        label={<Text id={'trip.createTrip.form.dayInfo'}/>}
-        fieldDimensions={{ sm: 6 }}
-        adapter={Select}
-        options={tripDayInfos}
-      />
-      {
-        tripElements.map(element =>
-          <Field
-            fieldDimensions={{ sm: 10 }}
-            key={element.label}
-            name="tags"
-            component={FormField}
-            label={<Text id={element.label}/>}
-            adapter={CheckboxList}
-            style={{
-              float: 'left',
-              paddingRight: 10,
-            }}
-            options={element.value}
-          />
-        )
-      }
       <FormFooter
         labelDimensions={{ sm: 0 }}
         fieldDimensions={{ sm: 12 }}
         style={{ textAlign: 'center' }}
       >
+        <FormButton type="button" onClick={previousPage}>
+          <Text id={'trip.createTrip.form.previousStep'}/>
+        </FormButton>
         <FormButton type="submit" disabled={pristine || submitting || invalid}>
           <Text id={'trip.createTrip.form.nextStep'}/>
         </FormButton>
@@ -102,4 +63,4 @@ export default reduxForm({
     }],
     uuid2data: {},
   },
-})(CreateTripFormPage1)
+})(CreateTripFormPage3)
