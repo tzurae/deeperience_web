@@ -6,6 +6,7 @@ import TripLocations from './TripLocations'
 import TripDayInfos from './TripDayInfos'
 import { Languages, Levels } from './Languages'
 import flattenMessages from '../utils/flattenMessages'
+import SiteElements from './SiteElements'
 
 export default {
   parentLocale: 'zh',
@@ -47,6 +48,7 @@ export default {
   'trip.createSite.title3': '景點資訊',
   'trip.createSite.title4': '周邊景點',
   'trip.createSite.title5': '完成',
+  'trip.createSite.form.name': '景點名稱',
   'login.email': '信箱',
   'login.password': '密碼',
   'login.rememberMe': '記住我',
@@ -83,6 +85,7 @@ export default {
   'presentTrip.manageTrip.explain': '輕鬆管理所有您建立的旅程和交易',
   ...flattenMessages(HotelTypes, 'HotelTypes'),
   ...flattenMessages(TripElements, 'TripElements'),
+  ...flattenMessages(SiteElements, 'SiteElements'),
   ...flattenMessages(FoodElements, 'FoodElements'),
   ...flattenMessages(TravelWays, 'TravelWays'),
   ...flattenMessages(TripDayInfos, 'TripDayInfos'),

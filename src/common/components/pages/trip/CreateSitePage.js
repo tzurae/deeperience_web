@@ -5,7 +5,7 @@ import PageLayout from '../../layouts/PageLayout'
 import PanelContainer from '../../utils/PanelContainer'
 import Panel from '../../utils/Panel'
 import PhaseBranch from '../../utils/PhaseBranch'
-import CreateTripForm from '../../forms/trip/CreateTripForm'
+import CreateSiteForm from '../../forms/trip/CreateSiteForm'
 import styles from '../../../styles'
 
 const CreateSitePage = ({ page }) => {
@@ -41,7 +41,7 @@ const CreateSitePage = ({ page }) => {
             titleStyle={{ textAlign: 'left' }}
             contentDivStyle={{ padding: '20px 30px' }}
           >
-            <CreateTripForm/>
+            <CreateSiteForm/>
           </Panel>
         </Col>
         <Col md={3}>
