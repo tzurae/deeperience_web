@@ -15,7 +15,7 @@ import {
   // BsField as FormField,
 } from '../../fields/widgets'
 
-const CreateTripFormPage1 = ({ handleSubmit, ...props }) => {
+const CreateTripFormPage2 = ({ handleSubmit, ...props }) => {
   const {
     pristine,
     submitting,
@@ -54,4 +54,4 @@ export default reduxForm({
     name: '',
     tags: [],
   },
-})(CreateTripFormPage1)
+})(CreateTripFormPage2)
