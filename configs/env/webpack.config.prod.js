@@ -58,6 +58,9 @@ module.exports = {
         'style',
         'css?modules&localIdentName=[name]_[local]_[hash:base64:3]!sass?outputStyle=expanded&sourceMap=true&sourceMapContents=true'
       ),
-    },],
+    }, {
+      test: webpackIsomorphicToolsPlugin.regular_expression('images'),
+      loader: 'url-loader?limit=10240',
+    }],
   },
 };

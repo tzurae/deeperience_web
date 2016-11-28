@@ -38,6 +38,7 @@ $fontFamily: monospace, serif, sans-serif, cursive, fantasy;
 }
 
 .produceTripButton {
+  @add-mixin noSelect;
   background-color: #FF7744;
   padding: 1px 40px;
   border-radius: 300px;
@@ -94,7 +95,7 @@ $fontFamily: monospace, serif, sans-serif, cursive, fantasy;
 
 .userReviews {
   min-height: 70vh;
-  background: #ffffff url(../../../../public/img/HomePage/night.jpg) ;
+  background: #ffffff url(../../../../public/img/homepage/night.jpg);
   background-size: 100%;
 }
 

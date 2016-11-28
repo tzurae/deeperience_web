@@ -95,7 +95,7 @@ export default {
   'footer.tourismBureauNumber': '交觀甲xxx號',
   'footer.companyAddress': '新竹市中華路2段48號3樓',
   'footer.establishedPeriod': '2015-2016 Deeperience Inc.',
-  'presentTrip': '提供旅程',
+  presentTrip: '提供旅程',
   'presentTrip.slogan': '身為導遊的你，透過Deeperience，立即創立您精美的旅程，賺取費用！',
   'presentTrip.addSite': '建立景點',
   'presentTrip.addSite.explain': '在規劃您的旅程前，請先建立屬於你的景點清單',

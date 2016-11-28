@@ -6,7 +6,7 @@ import Jumbotron from 'react-bootstrap/lib/Jumbotron'
 import Text from '../../widgets/Text'
 import { FBEmbedPost } from 'facebook-plugins'
 import Footer from '../../utils/Footer'
-import s from './styles.scss'
+import styles from './styles.scss'
 
 const FBposts = [
   'https://www.facebook.com/allrover/posts/1344736492224624',
@@ -34,15 +34,15 @@ const HomePage = () => (
 )
 
 const Jum = () => (
-  <Jumbotron className={s.jumbotron}>
-    <p className={s.companyName}>
+  <Jumbotron className={styles.jumbotron}>
+    <p className={styles.companyName}>
       <Text id="company.name" />
     </p>
-    <p className={s.companySlogan}>
+    <p className={styles.companySlogan}>
       <Text id="company.slogan"/>
     </p>
-    <Button bsClass={s.produceTripButton}>
-      <p className={s.produceTrip}>
+    <Button bsClass={styles.produceTripButton}>
+      <p className={styles.produceTrip}>
         <Text id="produce.trip"/>
       </p>
     </Button>
@@ -50,39 +50,39 @@ const Jum = () => (
 )
 
 const Feature = () => (
-  <section className={s.productFeature}>
+  <section className={styles.productFeature}>
     <Row>
-      <p className={s.productFeatureHeadline}>
+      <p className={styles.productFeatureHeadline}>
         <Text id="product.feature.headline"/>
       </p>
-      <hr className={s.hr}/>
+      <hr className={styles.hr}/>
     </Row>
     <Row>
-      <div className={s.features}>
-        <div className={s.feature}>
-          <img src={require('../../../../public/img/HomePage/icon01.png')} className={s.img}/>
-          <h2 className={s.featureHeadline}>
+      <div className={styles.features}>
+        <div className={styles.feature}>
+          <img src={require('../../../../public/img/homepage/icon01.png')} className={styles.img}/>
+          <h2 className={styles.featureHeadline}>
             <Text id="features.trip.planning.slogan"/>
           </h2>
-          <p className={s.featureIntro}>
+          <p className={styles.featureIntro}>
             <Text id="features.trip.planning.introduction"/>
           </p>
         </div>
-        <div className={s.feature}>
-          <img src={require('../../../../public/img/HomePage/icon02.png')} className={s.img}/>
-          <h2 className={s.featureHeadline}>
+        <div className={styles.feature}>
+          <img src={require('../../../../public/img/homepage/icon02.png')} className={styles.img}/>
+          <h2 className={styles.featureHeadline}>
             <Text id="features.video.planning.slogan"/>
           </h2>
-          <p className={s.featureIntro}>
+          <p className={styles.featureIntro}>
             <Text id="features.video.planning.introduction"/>
           </p>
         </div>
-        <div className={s.feature}>
-          <img src={require('../../../../public/img/HomePage/icon03.png')} className={s.img}/>
-          <h2 className={s.featureHeadline}>
+        <div className={styles.feature}>
+          <img src={require('../../../../public/img/homepage/icon03.png')} className={styles.img}/>
+          <h2 className={styles.featureHeadline}>
             <Text id="features.trip.customized.slogan"/>
           </h2>
-          <p className={s.featureIntro}>
+          <p className={styles.featureIntro}>
             <Text id="features.trip.customized.introduction"/>
           </p>
         </div>
@@ -92,17 +92,17 @@ const Feature = () => (
 )
 
 const UserReviews = () => (
-  <section className={s.userReviews}>
+  <section className={styles.userReviews}>
     <Row>
-      <p className={s.productFeatureHeadline}>
+      <p className={styles.productFeatureHeadline}>
         <Text id="userReviews.headline"/>
       </p>
-      <hr className={s.hr}/>
+      <hr className={styles.hr}/>
     </Row>
     <Row>
-      <div className={s.posts}>
-        {FBposts.map(post =>
-          <div className={s.post}>
+      <div className={styles.posts}>
+        {FBposts.map((post, index) =>
+          <div key={index} className={styles.post}>
             <FBEmbedPost appId="1752027395060427"
                          href={post}
                          width={350}
