@@ -2,7 +2,7 @@ import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 import FormNames from '../../../constants/FormNames'
 import FormButton from '../../utils/FormButton'
-import validate from './createTripValidate'
+import validate from './createSiteValidate'
 import Text from '../../widgets/Text'
 import {
   BsInput as Input,
@@ -62,7 +62,7 @@ const CreateSiteFormPage1 = ({ handleSubmit, ...props }) => {
         style={{ textAlign: 'center' }}
       >
         <FormButton type="submit" disabled={pristine || submitting || invalid}>
-          <Text id={'trip.createTrip.form.nextStep'}/>
+          <Text id={'trip.createSite.form.nextStep'}/>
         </FormButton>
       </FormFooter>
     </Form>
@@ -70,7 +70,7 @@ const CreateSiteFormPage1 = ({ handleSubmit, ...props }) => {
 }
 
 export default reduxForm({
-  form: FormNames.TRIP_CREATE_TRIP,
+  form: FormNames.TRIP_CREATE_SITE,
   destroyOnUnmount: false,     // <------ preserve form data
   validate,
   initialValues: {

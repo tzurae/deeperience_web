@@ -10,4 +10,5 @@ export default keyMirror({
   USER_FORGET_PASSWORD: null,
   USER_RESET_PASSWORD: null,
   TRIP_CREATE_TRIP: null,
+  TRIP_CREATE_SITE: null,
 })

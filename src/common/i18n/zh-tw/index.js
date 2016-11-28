@@ -49,6 +49,8 @@ export default {
   'trip.createSite.title4': '周邊景點',
   'trip.createSite.title5': '完成',
   'trip.createSite.form.name': '景點名稱',
+  'trip.createSite.form.previousStep': '上一步',
+  'trip.createSite.form.nextStep': '下一步',
   'login.email': '信箱',
   'login.password': '密碼',
   'login.rememberMe': '記住我',

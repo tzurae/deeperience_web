@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import FormNames from '../../../constants/FormNames'
 import CreateSiteFormPage1 from './CreateSiteFormPage1'
 import CreateTripFormPage2 from './CreateTripFormPage2'
-import { setPage, nextPage, previousPage } from '../../../actions/createTripActions'
+import { setPage, nextPage, previousPage } from '../../../actions/createSiteActions'
 import getOptions from '../../../utils/getOptions'
 
 // http://redux-form.com/6.2.0/examples/wizard/
