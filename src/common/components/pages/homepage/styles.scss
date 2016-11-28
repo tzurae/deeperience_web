@@ -1,3 +1,5 @@
+@import "../../../styles/index";
+
 $fontFamily: monospace, serif, sans-serif, cursive, fantasy;
 
 @mixin center {
@@ -27,8 +29,9 @@ $fontFamily: monospace, serif, sans-serif, cursive, fantasy;
 }
 
 .companySlogan {
+  @include fontSize(20);
   @include jumbotronFontColorNFamily;
-  font-size: 2vw !important;
+  //font-size: 2vw !important;
   padding-bottom: 40px;
 }
 
@@ -38,7 +41,6 @@ $fontFamily: monospace, serif, sans-serif, cursive, fantasy;
 }
 
 .produceTripButton {
-  @add-mixin noSelect;
   background-color: #FF7744;
   padding: 1px 40px;
   border-radius: 300px;
