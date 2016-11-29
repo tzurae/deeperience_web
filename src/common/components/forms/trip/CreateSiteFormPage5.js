@@ -1,21 +1,14 @@
 import React from 'react'
 import { Link } from 'react-router'
-import { Field, reduxForm } from 'redux-form'
+import { reduxForm } from 'redux-form'
 import FormNames from '../../../constants/FormNames'
 import FormButton from '../../utils/FormButton'
 import validate from './createSiteValidate'
 import Text from '../../widgets/Text'
-import Textarea from '../../fields/adapters/BsTextarea'
 import styles from '../../../styles'
-import {
-  BsInput as Input,
-  BsSelect as Select,
-  BsCheckboxList as CheckboxList,
-} from '../../fields/adapters'
 import {
   BsForm as Form,
   BsFormFooter as FormFooter,
-  BsField as FormField,
 } from '../../fields/widgets'
 
 const CreateSiteFormPage5 = ({ handleSubmit, ...props }) => {
@@ -32,11 +25,11 @@ const CreateSiteFormPage5 = ({ handleSubmit, ...props }) => {
       onSubmit={handleSubmit}
     >
 
-      <div style={{textAlign: 'center'}}>
-        <img src="/img/icon_finish.png" width="200px" /> 
-        <div style={{marginBottom: '50px'}}>
-          <Text id="trip.createSite.form.congratulation" 
-            style={{fontSize: styles.font.big}}
+      <div style={{ textAlign: 'center' }}>
+        <img src="/img/icon_finish.png" width="200px" />
+        <div style={{ marginBottom: '50px' }}>
+          <Text id="trip.createSite.form.congratulation"
+            style={{ fontSize: styles.font.big }}
           />
         </div>
       </div>
@@ -48,8 +41,7 @@ const CreateSiteFormPage5 = ({ handleSubmit, ...props }) => {
       >
         <Link to="/trip/manageSite">
           <FormButton type="submit" disabled={pristine || invalid}>
-            <Text id={'nav.trip.manageSite'}>
-            </Text>
+            <Text id={'nav.trip.manageSite'} />
           </FormButton>
         </Link>
       </FormFooter>

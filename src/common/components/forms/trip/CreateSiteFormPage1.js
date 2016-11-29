@@ -6,7 +6,6 @@ import validate from './createSiteValidate'
 import Text from '../../widgets/Text'
 import {
   BsInput as Input,
-  BsSelect as Select,
   BsCheckboxList as CheckboxList,
 } from '../../fields/adapters'
 import {
@@ -20,7 +19,6 @@ const CreateSiteFormPage1 = ({ handleSubmit, ...props }) => {
     pristine,
     submitting,
     invalid,
-    tripDayInfos,
     siteElements,
   } = props
 

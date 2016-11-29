@@ -6,11 +6,6 @@ import validate from './createSiteValidate'
 import Text from '../../widgets/Text'
 import Textarea from '../../fields/adapters/BsTextarea'
 import {
-  BsInput as Input,
-  BsSelect as Select,
-  BsCheckboxList as CheckboxList,
-} from '../../fields/adapters'
-import {
   BsForm as Form,
   BsFormFooter as FormFooter,
   BsField as FormField,
