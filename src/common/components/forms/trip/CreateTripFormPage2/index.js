@@ -254,7 +254,6 @@ class CreateTripFormPage2 extends React.Component {
       routes,
     }))
   }
-
   closeFloatSiteList() {
     this.setState({
       floatWindow: {
