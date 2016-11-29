@@ -17,7 +17,7 @@ $fontFamily: monospace, serif, sans-serif, cursive, fantasy;
 .jumbotron {
   @include center;
   min-height: 100vh;
-  background: #ffffff url(../../../../public/img/river_dark.jpg) no-repeat top center ;
+  background: #ffffff url(../../../../public/img/homepage/river_dark.jpg) no-repeat top center ;
   background-size: cover;
   margin-bottom: 0 !important; // react-boostrap default :50px
 }

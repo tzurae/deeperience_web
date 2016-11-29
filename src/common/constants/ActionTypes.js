@@ -20,7 +20,8 @@ export default keyMirror({
   SET_PAGE: null,
   SET_CURRENT_PAGE: null,
 
-  CREATE_TRIP_NEXT_PAGE: null,
-  CREATE_TRIP_PREVIOUS_PAGE: null,
-  CREATE_TRIP_SET_PAGE: null,
+  SET_OWN_SITE: null,
+  SET_CREATE_TRIP_DATA: null,
+  RESET_CREATE_TRIP_DATA: null,
+  CREATE_TRIP_ERROR: null,
 })

@@ -13,7 +13,6 @@ export default {
     attributes.forEach(attr => {
       post[attr] = req.body[attr]
     })
-
     post = Post({
       ...post,
       updatedAt: new Date(),

@@ -14,7 +14,7 @@
 
 .title {
   padding: 20px 30px;
-  @extend .font-size-big;
+  @include font-size-big;
   color: $color-main;
   text-align: center;
 }

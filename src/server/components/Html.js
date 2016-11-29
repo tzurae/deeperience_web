@@ -12,13 +12,13 @@ const Html = ({ assets, children, initialState }) => (
         type="text/css"
         href="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css"
       />
+      <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"
+      />
       <link
         rel="stylesheet"
         type="text/css"
         href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
-      />
-      <script
-        src="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"
       />
       {Object.keys(assets.styles).map((style, i) =>
         <link

@@ -1,9 +1,8 @@
 import ActionTypes from '../constants/ActionTypes'
-import messages from '../i18n/en-us'
 
 const initLocale = {
-  locale: 'en-us',
-  messages,
+  locale: '',
+  messages: '',
 }
 
 export default (state = initLocale, action) => {

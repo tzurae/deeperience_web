@@ -1,0 +1,16 @@
+@import "../../../styles/index";
+
+.btn {
+  height: 26px;
+  width: 26px;
+  padding: 0;
+  @include fontSize(15);
+  background-color: $color-main;
+  color: white;
+  border: 0;
+  border-radius: 13px;
+}
+
+.icon {
+  background-color: $color-main;
+}

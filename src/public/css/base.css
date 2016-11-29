@@ -5,7 +5,8 @@ html, body {
   background: #EFEEED;
   font-family: Roboto, Helvetica Neue, Helvetica, Arial,
           PingFang TC, 黑體-繁, Heiti TC, 蘋果儷中黑,
-        Apple LiGothic Medium, 微軟正黑體, Microsoft JhengHei, sans-serif
+        Apple LiGothic Medium, 微軟正黑體, Microsoft JhengHei, sans-serif;
+  color: #333;
 }
 
 #root {
@@ -23,3 +24,12 @@ label {
   font-size: 1.125rem;
   margin: 0 0 0 -20px;
 }
+
+input[disabled], button[disabled] {
+  cursor: no-drop;
+}
+
+button[disabled] {
+  opacity: 0.5;
+}
+

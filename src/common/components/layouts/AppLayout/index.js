@@ -15,7 +15,7 @@ const AppLayout = ({ children }) => (
       ]}
       links={[
         'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css',
-        'https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css',
+        'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css',
         '/css/main.css',
         '/css/base.css',
       ]}

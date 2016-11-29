@@ -1,7 +1,7 @@
 @import "../../../styles/index";
 
 .btn {
-  @extend .font-size-medium;
+  @include font-size-medium;
   width: 100px;
   border-radius: 50px;
   border: 2px solid $color-main;

@@ -11,7 +11,7 @@
 
 .node-label {
   text-align: right;
-  @extend .font-size-medium;
+  @include font-size-medium;
 }
 
 .node-label-active {

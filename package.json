@@ -142,6 +142,8 @@
     "redux-thunk": "^2.1.0",
     "serve-favicon": "^2.3.0",
     "superagent": "^2.0.0-alpha.3",
+    "underscore": "^1.8.3",
+    "uuid": "^3.0.0",
     "validator": "^5.2.0",
     "webpack-isomorphic-tools": "^2.5.6"
   }
