@@ -14,7 +14,7 @@ const BsFormFooter = ({
   fieldDimensions = assign({}, defaultFieldDimensions, fieldDimensions || {})
 
   return horizontal ? (
-    <BsFormGroup style={style}>
+    <BsFormGroup style={{ textAlign: 'center', ...style }}>
       {showLabel && (
         <Col componentClass={ControlLabel} {...labelDimensions}>
           {label}

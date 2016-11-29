@@ -5,8 +5,8 @@ import PageLayout from '../../../layouts/PageLayout'
 import PanelContainer from '../../../utils/PanelContainer'
 import Panel from '../../../utils/Panel'
 import PhaseBranch from '../../../utils/PhaseBranch/index'
-import CreateTripForm from '../../../forms/trip/CreateTripForm'
-import styles from '../../../../styles'
+import CreateTripForm from '../../../forms/trip/CreateTripForm/index'
+import MainStyles from '../../../../styles'
 
 const CreateTripPage = ({ page }) => {
   const nodes = [
@@ -25,7 +25,7 @@ const CreateTripPage = ({ page }) => {
         <Col md={2}>
           <Panel
             title="trip.createTrip"
-            underlineStyle={{ background: styles.color.border }}
+            underlineStyle={{ background: MainStyles.color.border }}
           >
             <PhaseBranch
               nodes={nodes}
@@ -36,7 +36,7 @@ const CreateTripPage = ({ page }) => {
         <Col md={7}>
           <Panel
             title={nodes[page]}
-            underlineStyle={{ background: styles.color.main, height: '3px' }}
+            underlineStyle={{ background: MainStyles.color.main, height: '3px' }}
             titleStyle={{ textAlign: 'left' }}
             contentDivStyle={{ padding: '20px 30px' }}
           >

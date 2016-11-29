@@ -1,19 +1,19 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
-import FormNames from '../../../constants/FormNames'
-import FormButton from '../../utils/FormButton'
-import validate from './createTripValidate'
-import Text from '../../widgets/Text'
+import FormNames from '../../../../constants/FormNames'
+import FormButton from '../../../utils/FormButton'
+import validate from '../createTripValidate'
+import Text from '../../../widgets/Text'
 import {
   BsInput as Input,
   BsSelect as Select,
   BsCheckboxList as CheckboxList,
-} from '../../fields/adapters'
+} from '../../../fields/adapters'
 import {
   BsForm as Form,
   BsFormFooter as FormFooter,
   BsField as FormField,
-} from '../../fields/widgets'
+} from '../../../fields/widgets'
 
 const CreateTripFormPage1 = ({ handleSubmit, ...props }) => {
   const {

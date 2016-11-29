@@ -1,23 +1,19 @@
 import React from 'react'
 import Text from '../../widgets/Text'
-import MainStyles from '../../../styles'
 import styles from './styles.scss'
 
 const PhaseBranch = ({ nodes, active, cb }) => {
   return (
-    <div className={styles.nodeDiv}>
+    <div className={styles.nodeWrapper}>
       <div style={{ flex: 3, paddingRight: '15px' }}>
         {nodes.map((node, index) => (
           <div
             key={index}
             style={{ height: index === nodes.length - 1 ? 20 : 50 }}>
             <Text
-              className={styles.nodeLabel}
-              style={{
-                color: active === index ?
-                  MainStyles.color.orange :
-                  MainStyles.color.borderGrey,
-              }}
+              className={
+                active === index ?
+                  styles.nodeLabelActive : styles.nodeLabelInactive}
               id={node}
             />
           </div>
@@ -35,12 +31,7 @@ const PhaseBranch = ({ nodes, active, cb }) => {
               style={{ height: index === nodes.length - 1 ? 20 : 50 }}>
               <button
                 onClick={cb && cb[index]}
-                className={styles.dot}
-                style={{
-                  backgroundColor: active === index ?
-                    MainStyles.color.orange :
-                    MainStyles.color.borderGrey,
-                }}
+                className={active === index ? styles.btnActive : styles.btnInactive}
               />
             </div>
           ))}

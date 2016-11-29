@@ -1,6 +1,6 @@
 @import "../../../styles/index";
 
-.nodeDiv {
+.node-wrapper {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -9,17 +9,38 @@
   padding: 10px 0 10px 10px;
 }
 
-.nodeLabel {
+.node-label {
   text-align: right;
   @extend .font-size-medium;
 }
 
-.dot {
+.node-label-active {
+  @extend .node-label;
+  color: $color-main;
+}
+
+.node-label-inactive {
+  @extend .node-label;
+  color: $color-border;
+}
+
+.btn {
   width: 12px;
   height: 12px;
   border-radius: 50%;
   border: 0;
   padding: 0;
+  background-color: $color-border;
+}
+
+.btn-inactive {
+  @extend .btn;
+  background-color: $color-border;
+}
+
+.btn-active {
+  @extend .btn;
+  background-color: $color-main;
 }
 
 .stick {

@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react'
 import Grid from 'react-bootstrap/lib/Grid'
-import Navigation from '../utils/Navigation'
-import Navigation2 from '../utils/Navigation2'
-import ErrorList from '../utils/ErrorList'
+import Navigation from '../../utils/Navigation'
+import Navigation2 from '../../utils/Navigation2'
+import ErrorList from '../../utils/ErrorList'
 
 const PageLayout = ({ hasGrid, children, bgColor, src, tripTabActive, ...rest }) => (
   <div

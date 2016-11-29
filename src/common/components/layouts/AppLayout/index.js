@@ -1,8 +1,9 @@
 import React from 'react'
-import Head from '../widgets/Head'
+import Head from '../../widgets/Head'
+import styles from './styles.scss'
 
 const AppLayout = ({ children }) => (
-  <div style={{ height: '100%' }}>
+  <div className={styles.root}>
     <Head
       title="Deeperience"
       metas={[
@@ -16,6 +17,7 @@ const AppLayout = ({ children }) => (
         'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css',
         'https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css',
         '/css/main.css',
+        '/css/base.css',
       ]}
       scripts={[
         'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js',

@@ -1,6 +1,6 @@
 $image-path: '../../public/img' !default;
 
-%clearfix {
+.clearfix {
   *zoom: 1;
   &:after {
     content: "";
@@ -63,7 +63,7 @@ $image-path: '../../public/img' !default;
   }
 }
 
-%visuallyhidden {
+.visuallyhidden {
   margin: -1px;
   padding: 0;
   width: 1px;

@@ -1,10 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import FormNames from '../../../constants/FormNames'
-import CreateTripFormPage1 from './CreateTripFormPage1'
-import CreateTripFormPage2 from './CreateTripFormPage2'
-import { setPage, nextPage, previousPage } from '../../../actions/createTripActions'
-import getOptions from '../../../utils/getOptions'
+import FormNames from '../../../../constants/FormNames'
+import CreateTripFormPage1 from '../CreateTripFormPage1'
+import CreateTripFormPage2 from '../CreateTripFormPage2'
+import { setPage, nextPage, previousPage } from '../../../../actions/createTripActions'
+import getOptions from '../../../../utils/getOptions'
 
 // http://redux-form.com/6.2.0/examples/wizard/
 class CreateTripForm extends React.Component {

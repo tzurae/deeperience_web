@@ -1,10 +1,10 @@
 import React from 'react'
 // import { Field, reduxForm } from 'redux-form'
 import { reduxForm } from 'redux-form'
-import FormNames from '../../../constants/FormNames'
-import FormButton from '../../utils/FormButton'
-import validate from './createTripValidate'
-import Text from '../../widgets/Text'
+import FormNames from '../../../../constants/FormNames'
+import FormButton from '../../../utils/FormButton'
+import validate from '../createTripValidate'
+import Text from '../../../widgets/Text'
 
 // import {
 //   BsInput as Input,
@@ -13,7 +13,7 @@ import {
   BsForm as Form,
   BsFormFooter as FormFooter,
   // BsField as FormField,
-} from '../../fields/widgets'
+} from '../../../fields/widgets'
 
 const CreateTripFormPage1 = ({ handleSubmit, ...props }) => {
   const {
@@ -33,7 +33,6 @@ const CreateTripFormPage1 = ({ handleSubmit, ...props }) => {
       <FormFooter
         labelDimensions={{ sm: 0 }}
         fieldDimensions={{ sm: 12 }}
-        style={{ textAlign: 'center' }}
       >
         <FormButton type="button" onClick={previousPage}>
           <Text id={'trip.createTrip.form.previousStep'}/>
