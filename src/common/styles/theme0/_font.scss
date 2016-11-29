@@ -1,21 +1,21 @@
 @import "../mixin";
 
-%font-size-tiny {
+.font-size-tiny {
   @include fontSize(10);
 }
 
-%font-size-small {
+.font-size-small {
   @include fontSize(12);
 }
 
-%font-size-medium {
+.font-size-medium {
   @include fontSize(16);
 }
 
-%font-size-big {
+.font-size-big {
   @include fontSize(20);
 }
 
-%font-size-large {
+.font-size-large {
   @include fontSize(24);
 }

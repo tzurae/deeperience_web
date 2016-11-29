@@ -1,15 +1,10 @@
 import React from 'react'
 import Row from 'react-bootstrap/lib/Row'
-
-const style = {
-  container: {
-    padding: 25,
-  },
-}
+import styles from './styles.scss'
 
 const PanelContainer = ({ children }) => {
   return (
-    <Row style={style.container}>
+    <Row className={styles.container}>
       {children}
     </Row>
   )

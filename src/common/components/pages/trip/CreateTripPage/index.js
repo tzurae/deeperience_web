@@ -1,12 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Col from 'react-bootstrap/lib/Col'
-import PageLayout from '../../layouts/PageLayout'
-import PanelContainer from '../../utils/PanelContainer'
-import Panel from '../../utils/Panel'
-import PhaseBranch from '../../utils/PhaseBranch'
-import CreateTripForm from '../../forms/trip/CreateTripForm'
-import styles from '../../../styles'
+import PageLayout from '../../../layouts/PageLayout'
+import PanelContainer from '../../../utils/PanelContainer'
+import Panel from '../../../utils/Panel'
+import PhaseBranch from '../../../utils/PhaseBranch/index'
+import CreateTripForm from '../../../forms/trip/CreateTripForm'
+import styles from '../../../../styles'
 
 const CreateTripPage = ({ page }) => {
   const nodes = [
@@ -14,7 +14,8 @@ const CreateTripPage = ({ page }) => {
     'trip.createTrip.title2',
     'trip.createTrip.title3',
     'trip.createTrip.title4',
-    'trip.createTrip.title5']
+    'trip.createTrip.title5',
+  ]
 
   return (
     <PageLayout
@@ -24,7 +25,7 @@ const CreateTripPage = ({ page }) => {
         <Col md={2}>
           <Panel
             title="trip.createTrip"
-            underlineStyle={{ background: styles.color.borderGrey }}
+            underlineStyle={{ background: styles.color.border }}
           >
             <PhaseBranch
               nodes={nodes}
@@ -35,8 +36,7 @@ const CreateTripPage = ({ page }) => {
         <Col md={7}>
           <Panel
             title={nodes[page]}
-            underlineStyle={{ background: styles.color.orange,
-              height: '3px' }}
+            underlineStyle={{ background: styles.color.main, height: '3px' }}
             titleStyle={{ textAlign: 'left' }}
             contentDivStyle={{ padding: '20px 30px' }}
           >
