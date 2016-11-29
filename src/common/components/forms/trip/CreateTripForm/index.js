@@ -3,36 +3,18 @@ import { connect } from 'react-redux'
 import FormNames from '../../../../constants/FormNames'
 import CreateTripFormPage1 from '../CreateTripFormPage1'
 import CreateTripFormPage2 from '../CreateTripFormPage2'
-import { setPage, nextPage, previousPage } from '../../../../actions/createTripActions'
+import CreateTripFormPage3 from '../CreateTripFormPage3'
 import getOptions from '../../../../utils/getOptions'
 
 // http://redux-form.com/6.2.0/examples/wizard/
 class CreateTripForm extends React.Component {
-  constructor() {
-    super()
-    this.nextPage = this.nextPage.bind(this)
-    this.previousPage = this.previousPage.bind(this)
-  }
-
-  componentWillMount() {
-    const { dispatch } = this.props
-    dispatch(setPage(0))
-  }
-
-  nextPage() {
-    const { dispatch } = this.props
-    dispatch(nextPage())
-  }
-
-  previousPage() {
-    const { dispatch } = this.props
-    dispatch(previousPage())
-  }
 
   render() {
     const {
       page,
       messages,
+      nextPage,
+      previousPage,
     } = this.props
 
     const { tripDayInfos, tripElements } = getOptions(messages, ['TripDayInfos', 'TripElements'])
@@ -47,10 +29,10 @@ class CreateTripForm extends React.Component {
 
     return (
       <div>
-        <pre>{JSON.stringify(values, null, 2)}</pre>
+        {page === 0 && <pre>{JSON.stringify(values, null, 2)}</pre>}
         {page === 0 &&
         <CreateTripFormPage1
-          onSubmit={this.nextPage}
+          onSubmit={nextPage}
           {...this.props}
           tripDayInfos={tripDayInfos}
           tripElements={tripElements}
@@ -58,8 +40,14 @@ class CreateTripForm extends React.Component {
         }
         {page === 1 &&
         <CreateTripFormPage2
-          onSubmit={this.nextPage}
-          previousPage={this.previousPage}
+          nextPage={nextPage}
+          previousPage={previousPage}
+          {...this.props}/>
+        }
+        {page === 2 &&
+        <CreateTripFormPage3
+          onSubmit={nextPage}
+          previousPage={previousPage}
           {...this.props}/>
         }
       </div>
@@ -69,7 +57,6 @@ class CreateTripForm extends React.Component {
 
 export default connect(state => ({
   apiEngine: state.apiEngine,
-  page: state.createTrip.page,
   createTripForm: state.form[FormNames.TRIP_CREATE_TRIP],
   messages: state.intl.messages,
 }))(CreateTripForm)

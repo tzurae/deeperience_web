@@ -1,6 +1,6 @@
 $image-path: '../../public/img' !default;
 
-.clearfix {
+@mixin clearfix {
   *zoom: 1;
   &:after {
     content: "";
@@ -14,6 +14,12 @@ $image-path: '../../public/img' !default;
 }
 
 @mixin fontSize ($size: 16) {
+  font-size: $size + px;
+  font-size: $size/16 + rem;
+}
+
+// for important usage, use fontSize instead except some certain situation
+@mixin fontSizeI ($size: 16) {
   font-size: $size + px !important;
   font-size: $size/16 + rem !important;
 }
@@ -63,7 +69,7 @@ $image-path: '../../public/img' !default;
   }
 }
 
-.visuallyhidden {
+@mixin visually-hidden {
   margin: -1px;
   padding: 0;
   width: 1px;
@@ -72,4 +78,20 @@ $image-path: '../../public/img' !default;
   clip: rect(0 0 0 0);
   clip: rect(0, 0, 0, 0);
   position: absolute;
+}
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
 }

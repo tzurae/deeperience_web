@@ -7,16 +7,14 @@ const PhaseBranch = ({ nodes, active, cb }) => {
     <div className={styles.nodeWrapper}>
       <div style={{ flex: 3, paddingRight: '15px' }}>
         {nodes.map((node, index) => (
-          <div
+          <Text
             key={index}
-            style={{ height: index === nodes.length - 1 ? 20 : 50 }}>
-            <Text
-              className={
-                active === index ?
-                  styles.nodeLabelActive : styles.nodeLabelInactive}
-              id={node}
+            style={{ height: index === nodes.length - 1 ? 20 : 50 }}
+            className={
+            active === index ?
+              styles.nodeLabelActive : styles.nodeLabelInactive}
+            id={node}
             />
-          </div>
         ))}
       </div>
       <div style={{ flex: 1, position: 'relative' }}>

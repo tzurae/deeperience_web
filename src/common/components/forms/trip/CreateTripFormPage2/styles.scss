@@ -1,0 +1,139 @@
+@import "../../../../styles/index";
+
+.container {
+  width: 100%;
+  height: 600px;
+  border-radius: 10px;
+  border: 2px solid $color-border;
+  position: relative;
+  overflow-y: scroll;
+}
+
+.site-div {
+  position: absolute;
+  border: 2px solid $tundora;
+  border-radius: 5px;
+  padding: 5px 10px;
+  background: white;
+  font-weight: bold;
+}
+
+.msg-error {
+  color: $red;
+  @include font-size-medium;
+  margin: -5px 0 15px 0;
+}
+
+.site-div-btn {
+  display: inline-block;
+  margin: 0 3px;
+}
+
+.site-div-msg {
+  margin: 3px 0;
+}
+
+.site-div-btn-div {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+}
+
+.float-site-list-container {
+  height: 26px;
+  flex-direction: row;
+  align-items: center;
+  display: flex;
+}
+
+.float-site-list {
+  position: absolute;
+  border: 10px solid $boulder;
+  border-radius: 10px;
+  padding: 5px;
+  width: 240px;
+  height: 320px;
+  z-index: 100;
+  background: white;
+  overflow-y: scroll;
+}
+
+.float-site-list-item {
+  border: 1px none $color-border;
+  border-bottom-style: solid;
+  padding: 5px;
+  width: 100%;
+  height: 50px;
+  overflow-x: hidden;
+  justify-content: flex-start;
+  align-content: center;
+  flex-direction: row;
+  display: flex;
+  align-items: center;
+}
+
+.float-site-list-item-name {
+  @include font-size-medium;
+}
+
+.float-site-list-item-icon {
+  margin-right: 10px;
+  @include font-size-medium;
+}
+
+.float-site-list-title-div {
+  height: 26px;
+  flex-direction: row;
+  align-items: center;
+  display: flex;
+}
+
+.float-site-list-title {
+  @include font-size-medium;
+  flex: 1;
+  margin-left: 5px;
+}
+
+.float-site-list-icon {
+  color: $boulder !important;
+  background-color: $white !important;
+  float: right;
+  @include fontSizeI(22);
+}
+
+.dropdown {
+  @include font-size-big;
+  list-style: none;
+}
+
+.day-div {
+  flex-direction: row;
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+  justify-content: space-between;
+}
+
+.day-div-btn {
+  display: inline-block;
+  margin: 0 6px;
+}
+
+.footer {
+  margin: 20px 0 0;
+  @include flex-center;
+}
+
+.floatInfoSubtitle {
+  @include font-size-medium;
+  flex: 1;
+  margin-left: 5px;
+}
+
+.which-day {
+  @include font-size-big;
+}
+
+.choose-day-div {
+  @include flex-row;
+}
