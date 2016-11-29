@@ -33,7 +33,6 @@ const CreateTripFormPage1 = ({ handleSubmit, ...props }) => {
       <FormFooter
         labelDimensions={{ sm: 0 }}
         fieldDimensions={{ sm: 12 }}
-        style={{ textAlign: 'center' }}
       >
         <FormButton type="button" onClick={previousPage}>
           <Text id={'trip.createTrip.form.previousStep'}/>
