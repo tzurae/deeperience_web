@@ -2,7 +2,10 @@ import React from 'react'
 import { connect } from 'react-redux'
 import FormNames from '../../../constants/FormNames'
 import CreateSiteFormPage1 from './CreateSiteFormPage1'
-import CreateTripFormPage2 from './CreateTripFormPage2'
+import CreateSiteFormPage2 from './CreateSiteFormPage2'
+import CreateSiteFormPage3 from './CreateSiteFormPage3'
+import CreateSiteFormPage4 from './CreateSiteFormPage4'
+import CreateSiteFormPage5 from './CreateSiteFormPage5'
 import { setPage, nextPage, previousPage } from '../../../actions/createSiteActions'
 import getOptions from '../../../utils/getOptions'
 
@@ -56,9 +59,25 @@ class CreateSiteForm extends React.Component {
         />
         }
         {page === 1 &&
-        <CreateTripFormPage2
+        <CreateSiteFormPage2
           onSubmit={this.nextPage}
           previousPage={this.previousPage}
+          {...this.props}/>
+        }
+        {page === 2 &&
+        <CreateSiteFormPage3
+          onSubmit={this.nextPage}
+          previousPage={this.previousPage}
+          {...this.props}/>
+        }
+        {page === 3 &&
+        <CreateSiteFormPage4
+          onSubmit={this.nextPage}
+          previousPage={this.previousPage}
+          {...this.props}/>
+        }
+        {page === 4 &&
+        <CreateSiteFormPage5
           {...this.props}/>
         }
       </div>
