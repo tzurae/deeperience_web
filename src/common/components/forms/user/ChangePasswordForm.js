@@ -7,7 +7,7 @@ import Row from 'react-bootstrap/lib/Row'
 import Col from 'react-bootstrap/lib/Col'
 import FormNames from '../../../constants/FormNames'
 import userAPI from '../../../api/user'
-import { pushErrors } from '../../../actions/errorActions'
+import { pushErrors } from '../../../reducers/error/errorActions'
 import Text from '../../widgets/Text'
 import { BsInput as Input } from '../../fields/adapters'
 import {

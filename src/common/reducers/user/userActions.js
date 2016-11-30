@@ -1,4 +1,4 @@
-import { setCookies, removeCookie } from './cookieActions'
+import { setCookies, removeCookie } from '../cookie/cookieActions'
 
 export const loginUser = ({ token, data }) => {
   return (dispatch) => {

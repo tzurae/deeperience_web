@@ -1,5 +1,5 @@
-import Errors from '../constants/Errors'
-import ActionTypes from '../constants/ActionTypes'
+import Errors from '../../constants/Errors'
+import ActionTypes from '../../constants/ActionTypes'
 
 export const pushError = (error, meta) => {
   return {

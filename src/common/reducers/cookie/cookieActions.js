@@ -1,4 +1,4 @@
-import ActionTypes from '../constants/ActionTypes'
+import ActionTypes from '../../constants/ActionTypes'
 import cookie from 'cookie'
 import assign from 'object-assign'
 

@@ -1,13 +1,13 @@
 import { combineReducers } from 'redux'
-import routing from './routerReducer'
-import cookies from './cookieReducer'
-import errors from './errorReducer'
-import apiEngine from './apiEngineReducer'
-import pages from './pageReducer'
-import todos from './todoReducer'
-import form from './formReducer'
-import intl from './intlReducer'
-import trip from './tripReducer'
+import routing from './router/routerReducer'
+import cookies from './cookie/cookieReducer'
+import errors from './error/errorReducer'
+import apiEngine from './apiEngine/apiEngineReducer'
+import pages from './page/pageReducer'
+import todos from './todo/todoReducer'
+import form from './form/formReducer'
+import intl from './intl/intlReducer'
+import trip from './trip/tripReducer'
 
 const rootReducer = combineReducers({
   routing,

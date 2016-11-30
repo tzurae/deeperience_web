@@ -4,13 +4,13 @@ import { push } from 'react-router-redux'
 import PageHeader from 'react-bootstrap/lib/PageHeader'
 import Resources from '../../../constants/Resources'
 import todoAPI from '../../../api/todo'
-import { pushErrors } from '../../../actions/errorActions'
+import { pushErrors } from '../../../reducers/error/errorActions'
 import {
   setTodo,
   addTodo,
   removeTodo,
-} from '../../../actions/todoActions'
-import { setCrrentPage, setPage } from '../../../actions/pageActions'
+} from '../../../reducers/todo/todoActions'
+import { setCrrentPage, setPage } from '../../../reducers/page/pageActions'
 import PageLayout from '../../layouts/PageLayout'
 import Pagination from '../../utils/BsPagination'
 

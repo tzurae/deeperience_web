@@ -8,7 +8,7 @@ import PhaseBranch from '../../../utils/PhaseBranch'
 import CreateTripForm from '../../../forms/trip/CreateTripForm'
 import styles from '../../../../styles'
 import tripAPI from '../../../../api/trip'
-import { setOwnSite } from '../../../../actions/tripActions'
+import { setOwnSite } from '../../../../reducers/trip/tripActions'
 
 class CreateTripPage extends React.Component {
   constructor(props) {

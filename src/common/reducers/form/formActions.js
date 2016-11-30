@@ -1,5 +1,5 @@
-import formAPI from '../api/form'
-import { pushErrors } from '../actions/errorActions'
+import formAPI from '../../api/form'
+import { pushErrors } from '../error/errorActions'
 
 export const validateForm = (formName, fieldName, value) => {
   return (dispatch, getState) => {

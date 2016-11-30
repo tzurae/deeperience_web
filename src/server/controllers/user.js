@@ -7,8 +7,8 @@ import Errors from '../../common/constants/Errors'
 import handleError, { handleDbError } from '../decorators/handleError'
 import User from '../models/User'
 import filterAttribute from '../utils/filterAttribute'
-import { loginUser } from '../../common/actions/userActions'
-import { redirect } from '../../common/actions/routeActions'
+import { loginUser } from '../../common/reducers/user/userActions'
+import { redirect } from '../../common/reducers/router/routerActions'
 
 export default {
   list(req, res) {

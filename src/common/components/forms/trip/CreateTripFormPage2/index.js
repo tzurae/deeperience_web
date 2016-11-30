@@ -1,12 +1,10 @@
 import React from 'react'
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import {
-  Field,
-  reduxForm,
-  arrayPush,
-  arrayRemove,
-  arraySplice,
-} from 'redux-form'
+import { Map } from 'immutable'
+import * as tripActions from '../../../../reducers/trip/tripActions'
+import * as reduxFormActions from '../../../../reducers/form/reduxFormActions'
+import { Field, reduxForm } from 'redux-form'
 import uuid from 'uuid'
 import FormNames from '../../../../constants/FormNames'
 import FormButton from '../../../utils/FormButton'
@@ -15,12 +13,6 @@ import Text from '../../../widgets/Text'
 import styles from './styles.scss'
 import { calculateTripInfo } from '../createTripHelper'
 import tripAPI from '../../../../api/trip'
-import {
-  setOwnSite,
-  setCreateTripData,
-  resetCreateTripData,
-  createTripError,
-} from '../../../../actions/tripActions'
 import Navbar from '../../../utils/BsNavbar'
 import MenuItem from '../../../utils/MenuItem'
 import IconBtn from '../../../utils/IconBtn'
@@ -33,6 +25,36 @@ import {
   BsField as FormField,
 } from '../../../fields/widgets'
 
+const actions = [
+  tripActions,
+  reduxFormActions,
+]
+
+const mapStateToProps = state => {
+  return {
+    createTripForm: state.form[FormNames.TRIP_CREATE_TRIP],
+    apiEngine: state.apiEngine,
+    allSites: state.trip.ownSites,
+    tripInfo: state.trip.tripInfo,
+    routes: state.trip.routes,
+    startSites: state.trip.startSites,
+    uuid2data: state.trip.uuid2data,
+    error: state.trip.error,
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  const creators = Map()
+    .merge(...actions)
+    .filter(value => typeof value === 'function')
+    .toObject()
+
+  return {
+    actions: bindActionCreators(creators, dispatch),
+    dispatch,
+  }
+}
+
 const siteDivWidth = 150
 const siteDivHeight = 100
 const scrollbarShift = -6
@@ -40,7 +62,7 @@ const scrollbarShift = -6
 class CreateTripFormPage2 extends React.Component {
   constructor(props) {
     super(props)
-    this.props.dispatch(resetCreateTripData())
+    this.props.actions.resetCreateTripData()
     this.state = {
       day: 0,
       floatWindow: {
@@ -58,19 +80,18 @@ class CreateTripFormPage2 extends React.Component {
   }
 
   componentWillMount() {
-    const { dispatch, apiEngine } = this.props
     if (process.env.BROWSER) {
-      tripAPI(apiEngine)
+      tripAPI(this.props.apiEngine)
         .listGuideSites()
         .catch(err => {
           throw err
         })
         .then(json => {
-          dispatch(setOwnSite(json))
+          this.props.actions.setOwnSite(json)
           const { routes, startSites, uuid2data } = this.props
-          dispatch(setCreateTripData({
+          this.props.actions.setCreateTripData({
             tripInfo: calculateTripInfo(routes, startSites, json, uuid2data),
-          }))
+          })
         })
     }
   }
@@ -95,18 +116,17 @@ class CreateTripFormPage2 extends React.Component {
         })
       }
 
-      this.props.dispatch(
-        arraySplice(FormNames.TRIP_CREATE_TRIP, 'dailyTrips', index, 1, {
-          ...trip,
-          startSite: startSites[index],
-          routes: routes[index],
-          uuid2data: uuidDataArr.map(key => ({
-            uuid: key,
-            gid: uuid2data[key].gid,
-            startTime: time[key].startTime,
-            endTime: time[key].endTime,
-          })),
-        }))
+      this.props.actions.arraySplice(FormNames.TRIP_CREATE_TRIP, 'dailyTrips', index, 1, {
+        ...trip,
+        startSite: startSites[index],
+        routes: routes[index],
+        uuid2data: uuidDataArr.map(key => ({
+          uuid: key,
+          gid: uuid2data[key].gid,
+          startTime: time[key].startTime,
+          endTime: time[key].endTime,
+        })),
+      })
     })
 
     this.props.nextPage()
@@ -187,10 +207,10 @@ class CreateTripFormPage2 extends React.Component {
       gid: addSite._id,
     }
 
-    this.props.dispatch(setCreateTripData({
+    this.props.actions.setCreateTripData({
       uuid2data,
       tripInfo: calculateTripInfo(routes, startSites, allSites, uuid2data),
-    }))
+    })
     this.setState({
       floatWindow: {
         floatListShow: false,
@@ -221,7 +241,7 @@ class CreateTripFormPage2 extends React.Component {
       return false
     })
 
-    if (!isLeaf) return this.props.dispatch(createTripError('請先刪除子景點'))
+    if (!isLeaf) return this.props.actions.createTripError('請先刪除子景點')
 
     if (uuid2data[uuid]) uuid2data[uuid].gid = ''
 
@@ -231,17 +251,17 @@ class CreateTripFormPage2 extends React.Component {
       }
     })
 
-    this.props.dispatch(setCreateTripData({
+    this.props.actions.setCreateTripData({
       tripInfo: calculateTripInfo(routes, startSites, allSites, uuid2data),
       routes,
-    }))
+    })
   }
 
   addChildSite(id, day) {
     const { routes, startSites, allSites, uuid2data } = this.props
     if (!this.props.uuid2data[id] ||
       !this.props.uuid2data[id].gid) {
-      return this.props.dispatch(createTripError('請填入景點後，再加入子景點'))
+      return this.props.actions.createTripError('請填入景點後，再加入子景點')
     }
 
     routes[day].push({
@@ -249,10 +269,10 @@ class CreateTripFormPage2 extends React.Component {
       to: uuid(),
     })
 
-    this.props.dispatch(setCreateTripData({
+    this.props.actions.setCreateTripData({
       tripInfo: calculateTripInfo(routes, startSites, allSites, uuid2data),
       routes,
-    }))
+    })
   }
   closeFloatSiteList() {
     this.setState({
@@ -279,23 +299,23 @@ class CreateTripFormPage2 extends React.Component {
     startSites.push(newuuid)
     routes.push([])
 
-    this.props.dispatch(arrayPush(FormNames.TRIP_CREATE_TRIP, 'dailyTrips', {
+    this.props.actions.arrayPush(FormNames.TRIP_CREATE_TRIP, 'dailyTrips', {
       remind: '',
       period: {
         start: '08:00',
         end: '21:00',
       },
-    }))
+    })
 
     this.setState({
       totalDay: this.state.totalDay + 1,
     })
-    this.props.dispatch(setCreateTripData({
+    this.props.actions.setCreateTripData({
       tripInfo: calculateTripInfo(routes, startSites, allSites, uuid2data),
       routes,
       startSites,
       uuid2data,
-    }))
+    })
   }
 
   deleteDay(day) {
@@ -305,17 +325,17 @@ class CreateTripFormPage2 extends React.Component {
     startSites.splice(day, 1)
     routes.splice(day, 1)
 
-    this.props.dispatch(arrayRemove(FormNames.TRIP_CREATE_TRIP, 'dailyTrips', day))
+    this.props.actions.arrayRemove(FormNames.TRIP_CREATE_TRIP, 'dailyTrips', day)
 
     this.setState({
       day: this.state.totalDay - 1 === day ? this.state.totalDay - 2 : day,
       totalDay: this.state.totalDay - 1,
     })
-    this.props.dispatch(setCreateTripData({
+    this.props.actions.setCreateTripData({
       tripInfo: calculateTripInfo(routes, startSites, allSites, uuid2data),
       routes,
       startSites,
-    }))
+    })
   }
 
   render() {
@@ -487,7 +507,7 @@ class CreateTripFormPage2 extends React.Component {
             className={styles.msgError}
             style={{ float: 'right' }}>
             {this.state.submitError}
-            </p>
+          </p>
         </div>
       </div>
     )
@@ -668,13 +688,4 @@ export default reduxForm({
     }],
     uuid2data: {},
   },
-})(connect(state => ({
-  createTripForm: state.form[FormNames.TRIP_CREATE_TRIP],
-  apiEngine: state.apiEngine,
-  allSites: state.trip.ownSites,
-  tripInfo: state.trip.tripInfo,
-  routes: state.trip.routes,
-  startSites: state.trip.startSites,
-  uuid2data: state.trip.uuid2data,
-  error: state.trip.error,
-}))(CreateTripFormPage2))
+})(connect(mapStateToProps, mapDispatchToProps)(CreateTripFormPage2))

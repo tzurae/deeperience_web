@@ -1,5 +1,5 @@
 import cookie from 'cookie'
-import { setCookies } from '../../common/actions/cookieActions'
+import { setCookies } from '../../common/reducers/cookie/cookieActions'
 
 export default (req, res, next) => {
   if (req.headers.cookie !== undefined) {

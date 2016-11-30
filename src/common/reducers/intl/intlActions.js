@@ -1,6 +1,6 @@
-import ActionTypes from '../constants/ActionTypes'
-import localeAPI from '../api/locale'
-import { setCookie } from './cookieActions'
+import ActionTypes from '../../constants/ActionTypes'
+import localeAPI from '../../api/locale'
+import { setCookie } from '../cookie/cookieActions'
 
 export const updateLocale = (targetLocale) => {
   return (dispatch, getState) => {

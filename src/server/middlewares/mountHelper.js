@@ -1,4 +1,4 @@
-import { pushErrors } from '../../common/actions/errorActions'
+import { pushErrors } from '../../common/reducers/error/errorActions'
 
 export default (req, res, next) => {
   res.pushError = (error, meta) => {

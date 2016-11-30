@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import cx from 'classnames'
-import { setCrrentPage } from '../../actions/pageActions'
+import { setCrrentPage } from '../../reducers/page/pageActions'
 import Text from '../widgets/Text'
 
 const style = {

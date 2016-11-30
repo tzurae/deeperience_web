@@ -7,8 +7,8 @@ import Button from 'react-bootstrap/lib/Button'
 // import validator from 'validator';
 import FormNames from '../../../constants/FormNames'
 import userAPI from '../../../api/user'
-import { validateForm } from '../../../actions/formActions'
-import { pushErrors } from '../../../actions/errorActions'
+import { validateForm } from '../../../reducers/form/formActions'
+import { pushErrors } from '../../../reducers/error/errorActions'
 import { Recaptcha } from '../../fields/bases'
 import { BsInput as Input } from '../../fields/adapters'
 import {

@@ -5,8 +5,8 @@ import Alert from 'react-bootstrap/lib/Alert'
 import Button from 'react-bootstrap/lib/Button'
 import FormNames from '../../../constants/FormNames'
 import userAPI from '../../../api/user'
-import { pushErrors } from '../../../actions/errorActions'
-import { setCookies } from '../../../actions/cookieActions'
+import { pushErrors } from '../../../reducers/error/errorActions'
+import { setCookies } from '../../../reducers/cookie/cookieActions'
 import { BsInput as Input } from '../../fields/adapters'
 import {
   BsForm as Form,

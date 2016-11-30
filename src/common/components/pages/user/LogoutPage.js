@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import userAPI from '../../../api/user'
-import { logoutUser } from '../../../actions/userActions'
+import { logoutUser } from '../../../reducers/user/userActions'
 
 class LogoutPage extends React.Component {
   componentWillMount() {

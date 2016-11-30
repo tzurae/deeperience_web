@@ -1,5 +1,5 @@
 import { push } from 'react-router-redux'
-import { setCookie } from './cookieActions'
+import { setCookie } from '../cookie/cookieActions'
 
 export const redirect = (path) => {
   return (dispatch) => {

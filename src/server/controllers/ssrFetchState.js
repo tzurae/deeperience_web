@@ -2,10 +2,10 @@ import Errors from '../../common/constants/Errors'
 import Resources from '../../common/constants/Resources'
 import todoAPI from '../../common/api/todo'
 import wrapTimeout from '../decorators/wrapTimeout'
-import { loginUser } from '../../common/actions/userActions'
-import { updateLocale } from '../../common/actions/intlActions'
-import { setTodo } from '../../common/actions/todoActions'
-import { setPage } from '../../common/actions/pageActions'
+import { loginUser } from '../../common/reducers/user/userActions'
+import { updateLocale } from '../../common/reducers/intl/intlActions'
+import { setTodo } from '../../common/reducers/todo/todoActions'
+import { setPage } from '../../common/reducers/page/pageActions'
 
 export default {
   user: (req, res, next) => {

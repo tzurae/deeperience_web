@@ -1,5 +1,5 @@
 import cookie from 'cookie'
-import ActionTypes from '../constants/ActionTypes'
+import ActionTypes from '../../constants/ActionTypes'
 
 let initCookies = {}
 if (process.env.BROWSER) {

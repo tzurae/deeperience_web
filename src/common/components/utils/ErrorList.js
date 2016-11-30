@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import Grid from 'react-bootstrap/lib/Grid'
 import Alert from 'react-bootstrap/lib/Alert'
 import Table from 'react-bootstrap/lib/Table'
-import { removeError } from '../../actions/errorActions'
+import { removeError } from '../../reducers/error/errorActions'
 import isString from '../../utils/isString'
 
 function renderMetaContent(metaContent) {
