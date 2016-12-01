@@ -1,5 +1,7 @@
 import cookie from 'cookie'
-import ActionTypes from '../../constants/ActionTypes'
+import {
+  SET_COOKIE,
+} from '../../constants/ActionTypes'
 
 let initCookies = {}
 if (process.env.BROWSER) {
@@ -10,7 +12,7 @@ if (process.env.BROWSER) {
 
 export default (state = initCookies, action) => {
   switch (action.type) {
-    case ActionTypes.SET_COOKIE: {
+    case SET_COOKIE: {
       const cookiePair = {}
       let value = action.cookie.value
       if (typeof action.cookie.value === 'string') {
@@ -24,8 +26,7 @@ export default (state = initCookies, action) => {
         ...cookiePair,
       }
     }
-    default: {
+    default:
       return state
-    }
   }
 }
