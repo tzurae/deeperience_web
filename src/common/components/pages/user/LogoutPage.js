@@ -24,5 +24,5 @@ class LogoutPage extends React.Component {
 };
 
 export default connect(state => ({
-  apiEngine: state.apiEngine,
+  apiEngine: state.global.apiEngine,
 }))(LogoutPage)

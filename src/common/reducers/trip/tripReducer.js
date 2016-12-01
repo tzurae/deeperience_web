@@ -1,67 +1,54 @@
-import ActionTypes from '../../constants/ActionTypes'
+import InitialState from './tripInitialState'
 import uuid from 'uuid'
+const {
+  SET_OWN_SITE,
+  SET_CREATE_TRIP_DATA,
+  RESET_CREATE_TRIP_DATA,
+  CREATE_TRIP_ERROR,
+} = require('../../constants/ActionTypes').default
 
-const uid = uuid()
-const initialState = {
-  ownSites: [],
-  tripInfo: [{
-    ylayer: [1],
-    sites: [{
-      pos: { xpos: 0, ypos: 0 },
-      uuid: uid,
-    }],
-    routes: [],
-  }],
-  routes: [[]],
-  startSites: [uid],
-  uuid2data: {
-    [uid]: {
-      gid: '',
-    },
-  },
-  error: null,
-}
+const initialState = new InitialState()
 
 export default (state = initialState, action) => {
+  if (!(state instanceof InitialState)) return initialState.mergeDeep(state)
+
   switch (action.type) {
-    case ActionTypes.SET_OWN_SITE:
-      return {
-        ...state,
-        ownSites: action.payload,
-      }
-    case ActionTypes.SET_CREATE_TRIP_DATA:
-      return {
-        ...state,
-        tripInfo: action.payload.tripInfo || state.tripInfo,
-        routes: action.payload.routes || state.routes,
-        startSites: action.payload.startSites || state.startSites,
-        uuid2data: action.payload.uuid2data || state.uuid2data,
-      }
-    case ActionTypes.RESET_CREATE_TRIP_DATA:
+    case SET_OWN_SITE:
+      return state.set('ownSites', action.payload)
+
+    case SET_CREATE_TRIP_DATA:
+      const { tripInfo, routes, startSites, uuid2data } = action.payload
+      return state.set('tripInfo', tripInfo || state.get('tripInfo'))
+                  .set('routes', routes || state.get('routes'))
+                  .set('startSites', startSites || state.get('startSites'))
+                  .set('uuid2data', uuid2data || state.get('uuid2data'))
+
+    case RESET_CREATE_TRIP_DATA: {
       const uid = uuid()
-      return {
-        ...state,
-        tripInfo: [{
-          ylayer: [1],
-          sites: [{
-            pos: { xpos: 0, ypos: 0 },
-            uuid: uid,
-          }],
-          routes: [],
+      const tripInfo = [{
+        ylayer: [1],
+        sites: [{
+          pos: { xpos: 0, ypos: 0 },
+          uuid: uid,
         }],
-        routes: [[]],
-        startSites: [uid],
-        uuid2data: {
-          [uid]: {
-            gid: '',
-          },
+        routes: [],
+      }]
+      const routes = [[]]
+      const startSites = [uid]
+      const uuid2data = {
+        [uid]: {
+          gid: '',
         },
       }
-    case ActionTypes.CREATE_TRIP_ERROR:
-      return {
-        ...state,
-        error: action.payload,
-      }
+      return new InitialState().set('ownSites', state.get('ownSites'))
+        .set('tripInfo', tripInfo)
+        .set('routes', routes)
+        .set('startSites', startSites)
+        .set('uuid2data', uuid2data)
+    }
+    case CREATE_TRIP_ERROR:
+      return state.set('error', action.payload)
+
     default:
       return state
   }

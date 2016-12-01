@@ -3,7 +3,7 @@ import { pushErrors } from '../error/errorActions'
 
 export const validateForm = (formName, fieldName, value) => {
   return (dispatch, getState) => {
-    return formAPI(getState().apiEngine)
+    return formAPI(getState().global.apiEngine)
       .form(formName)
       .field(fieldName, value)
       .validate()

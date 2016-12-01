@@ -294,6 +294,6 @@ export default reduxForm({
     },
   },
 })(connect(state => ({
-  apiEngine: state.apiEngine,
+  apiEngine: state.global.apiEngine,
   demoForm: state.form[FormNames.DEMO],
 }))(DemoForm))

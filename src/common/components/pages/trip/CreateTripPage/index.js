@@ -1,5 +1,7 @@
 import React from 'react'
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import { Map } from 'immutable'
 import Col from 'react-bootstrap/lib/Col'
 import PageLayout from '../../../layouts/PageLayout'
 import PanelContainer from '../../../utils/PanelContainer'
@@ -8,7 +10,29 @@ import PhaseBranch from '../../../utils/PhaseBranch'
 import CreateTripForm from '../../../forms/trip/CreateTripForm'
 import styles from '../../../../styles'
 import tripAPI from '../../../../api/trip'
-import { setOwnSite } from '../../../../reducers/trip/tripActions'
+import * as tripActions from '../../../../reducers/trip/tripActions'
+
+const actions = [
+  tripActions,
+]
+
+const mapStateToProps = state => {
+  return {
+    apiEngine: state.global.apiEngine,
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  const creators = Map()
+    .merge(...actions)
+    .filter(value => typeof value === 'function')
+    .toObject()
+
+  return {
+    actions: bindActionCreators(creators, dispatch),
+    dispatch,
+  }
+}
 
 class CreateTripPage extends React.Component {
   constructor(props) {
@@ -35,15 +59,16 @@ class CreateTripPage extends React.Component {
   }
 
   componentWillMount() {
-    const { dispatch, apiEngine } = this.props
+    console.log(this.props.apiEngine)
     if (process.env.BROWSER) {
-      tripAPI(apiEngine)
+      tripAPI(this.props.apiEngine)
         .listGuideSites()
         .catch(err => {
           throw err
         })
         .then(json => {
-          dispatch(setOwnSite(json))
+          console.log(json)
+          this.props.actions.setOwnSite(json)
         })
     }
   }
@@ -92,6 +117,4 @@ class CreateTripPage extends React.Component {
   }
 }
 
-export default connect(state => ({
-  apiEngine: state.apiEngine,
-}))(CreateTripPage)
+export default connect(mapStateToProps, mapDispatchToProps)(CreateTripPage)

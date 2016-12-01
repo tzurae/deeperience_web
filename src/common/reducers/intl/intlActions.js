@@ -8,7 +8,8 @@ export const updateLocale = (targetLocale) => {
     if (targetLocale === currentLocale) {
       return Promise.resolve()
     }
-    return localeAPI(getState().apiEngine)
+    console.log(getState())
+    return localeAPI(getState().global.apiEngine)
       .read(targetLocale)
       .then((json) => {
         dispatch(setCookie('locale', json.locale))

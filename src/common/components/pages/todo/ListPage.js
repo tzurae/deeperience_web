@@ -178,7 +178,7 @@ class ListPage extends Component {
 };
 
 export default connect(state => ({
-  apiEngine: state.apiEngine,
+  apiEngine: state.global.apiEngine,
   todos: state.todos,
   page: state.pages[Resources.TODO] || {},
 }))(ListPage)

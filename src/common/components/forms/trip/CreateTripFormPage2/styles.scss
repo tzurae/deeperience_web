@@ -103,15 +103,15 @@
 
 .dropdown {
   @include font-size-big;
+  position: relative;
   list-style: none;
 }
 
 .day-div {
-  flex-direction: row;
-  display: flex;
+  @include flex-row;
+  justify-content: space-between;
   align-items: center;
   margin: 10px 0;
-  justify-content: space-between;
 }
 
 .day-div-btn {

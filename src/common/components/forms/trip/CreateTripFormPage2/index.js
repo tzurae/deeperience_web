@@ -32,8 +32,9 @@ const actions = [
 
 const mapStateToProps = state => {
   return {
+    store: state,
     createTripForm: state.form[FormNames.TRIP_CREATE_TRIP],
-    apiEngine: state.apiEngine,
+    apiEngine: state.global.apiEngine,
     allSites: state.trip.ownSites,
     tripInfo: state.trip.tripInfo,
     routes: state.trip.routes,
@@ -347,6 +348,9 @@ class CreateTripFormPage2 extends React.Component {
       previousPage,
       createTripForm: { values },
     } = this.props
+    // console.log(this.props.tripInfo)
+    // console.log(this.props.uuid2data)
+    // console.log(this.props.ownSites)
     return (
       <div>
         <pre>{JSON.stringify(tripInfo, null, 2)}</pre>
@@ -425,6 +429,10 @@ class CreateTripFormPage2 extends React.Component {
 
                 const dailyTrip = tripInfo[index] // sites ylayer routes
 
+                if (!dailyTrip)                  {
+                  return <div key={`day${value}`} className={styles.container}/>
+                }
+
                 return (
                 <div
                   key={`day${value}`}
@@ -436,6 +444,7 @@ class CreateTripFormPage2 extends React.Component {
                     style={{ position: 'absolute' }}
                   >
                     {
+                      dailyTrip.routes != null &&
                       dailyTrip.routes.map(route => {
                         const width = 560
                         const xpos1 =

@@ -110,5 +110,5 @@ export default reduxForm({
   form: FormNames.USER_EDIT,
   validate,
 })(connect(state => ({
-  apiEngine: state.apiEngine,
+  apiEngine: state.global.apiEngine,
 }))(EditForm))

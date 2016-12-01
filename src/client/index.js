@@ -10,12 +10,12 @@ import {
   push,
 } from 'react-router-redux'
 import LocaleProvider from '../common/components/utils/LocaleProvider'
-import rootReducer from '../common/reducers'
+import { rootReducer } from '../common/reducers'
 import getRoutes from '../common/routes'
 import setupLocale from './setupLocale'
 import setupNProgress from './setupNProgress'
 import setupGA from './setupGA'
-import { setApiEngine } from '../common/reducers/apiEngine/apiEngineActions'
+import { setApiEngine } from '../common/reducers/global/globalActions'
 import { removeCookie } from '../common/reducers/cookie/cookieActions'
 import ApiEngine from '../common/utils/ApiEngine'
 import createLoggerMiddleware from 'redux-logger'
@@ -44,6 +44,9 @@ let middlewares = [
 
 if (process.env.NODE_ENV !== 'production') {
   middlewares = [...middlewares, logger]
+  const immutable = require('immutable')
+  const installDevTools = require('immutable-devtools')
+  installDevTools(immutable)
 }
 
 setupNProgress()

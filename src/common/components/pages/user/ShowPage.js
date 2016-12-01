@@ -160,7 +160,7 @@ class ShowPage extends Component {
   }
 };
 
-export default connect(({ apiEngine, cookies: { user } }) => ({
+export default connect(({ global: { apiEngine }, cookies: { user } }) => ({
   apiEngine,
   initialUser: (user && JSON.parse(user)) || {},
 }))(ShowPage)

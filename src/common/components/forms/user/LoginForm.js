@@ -183,6 +183,6 @@ export default reduxForm({
   form: FormNames.USER_LOGIN,
   validate,
 })(connect(state => ({
-  apiEngine: state.apiEngine,
+  apiEngine: state.global.apiEngine,
   routing: state.routing,
 }))(LoginForm))
