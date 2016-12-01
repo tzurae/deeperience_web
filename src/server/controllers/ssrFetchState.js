@@ -3,7 +3,7 @@ import Resources from '../../common/constants/Resources'
 import todoAPI from '../../common/api/todo'
 import wrapTimeout from '../decorators/wrapTimeout'
 import { loginUser } from '../../common/reducers/user/userActions'
-import { updateLocale } from '../../common/reducers/intl/intlActions'
+import { updateLocale } from '../../common/reducers/global/globalActions'
 import { setTodo } from '../../common/reducers/todo/todoActions'
 import { setPage } from '../../common/reducers/page/pageActions'
 
@@ -24,6 +24,7 @@ export default {
     } else {
       lang = req.acceptsLanguages('en-us', 'zh-tw')
     }
+
     req.store
       .dispatch(updateLocale(lang))
       .then(() => {

@@ -32,7 +32,6 @@ const actions = [
 
 const mapStateToProps = state => {
   return {
-    store: state,
     createTripForm: state.form[FormNames.TRIP_CREATE_TRIP],
     apiEngine: state.global.apiEngine,
     allSites: state.trip.ownSites,
@@ -348,9 +347,6 @@ class CreateTripFormPage2 extends React.Component {
       previousPage,
       createTripForm: { values },
     } = this.props
-    // console.log(this.props.tripInfo)
-    // console.log(this.props.uuid2data)
-    // console.log(this.props.ownSites)
     return (
       <div>
         <pre>{JSON.stringify(tripInfo, null, 2)}</pre>

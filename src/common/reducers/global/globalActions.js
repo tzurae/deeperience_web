@@ -1,10 +1,35 @@
+import localeAPI from '../../api/locale'
+import { setCookie } from '../cookie/cookieActions'
 const {
   SET_API_ENGINE,
+  UPDATE_LOCALE,
 } =  require('../../constants/ActionTypes').default
 
 export const setApiEngine = apiEngine => {
   return {
     type: SET_API_ENGINE,
     apiEngine,
+  }
+}
+
+export const updateLocale = (targetLocale) => {
+  return (dispatch, getState) => {
+    const currentLocale = getState().global.locale
+    if (targetLocale === currentLocale) {
+      return Promise.resolve()
+    }
+    return localeAPI(getState().global.apiEngine)
+      .read(targetLocale)
+      .then((json) => {
+        dispatch(setCookie('locale', json.locale))
+        dispatch({
+          type: UPDATE_LOCALE,
+          locale: json.locale,
+          messages: json.messages,
+        })
+      }, (err) => {
+        dispatch(setCookie('locale', currentLocale))
+        return Promise.reject(err)
+      })
   }
 }

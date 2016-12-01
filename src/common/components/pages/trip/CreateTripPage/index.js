@@ -59,7 +59,6 @@ class CreateTripPage extends React.Component {
   }
 
   componentWillMount() {
-    console.log(this.props.apiEngine)
     if (process.env.BROWSER) {
       tripAPI(this.props.apiEngine)
         .listGuideSites()
@@ -67,7 +66,6 @@ class CreateTripPage extends React.Component {
           throw err
         })
         .then(json => {
-          console.log(json)
           this.props.actions.setOwnSite(json)
         })
     }

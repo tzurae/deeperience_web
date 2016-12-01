@@ -58,5 +58,5 @@ class CreateTripForm extends React.Component {
 export default connect(state => ({
   apiEngine: state.global.apiEngine,
   createTripForm: state.form[FormNames.TRIP_CREATE_TRIP],
-  messages: state.intl.messages,
+  messages: state.global.messages,
 }))(CreateTripForm)
