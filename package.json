@@ -127,6 +127,7 @@
     "react-bootstrap": "^0.30.5",
     "react-dates": "^4.0.0",
     "react-dom": "^15.0.2",
+    "react-fontawesome": "^1.4.0",
     "react-ga": "^2.1.2",
     "react-google-recaptcha": "^0.5.4",
     "react-helmet": "^3.0.2",

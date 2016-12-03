@@ -23,9 +23,9 @@ $fontFamily: monospace, serif, sans-serif, cursive, fantasy;
 }
 
 .companyName {
-  padding-top: 35vh;
+  @include fontSizeI(60);
   @include jumbotronFontColorNFamily;
-  font-size: 4vw !important;
+  padding-top: 35vh;
 }
 
 .companySlogan {

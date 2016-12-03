@@ -27,7 +27,7 @@ const FBposts = [
 const HomePage = () => (
   <PageLayout hasGrid={null}>
     <Jum/>
-    <Feature />
+    <Features />
     <UserReviews/>
     <Footer/>
   </PageLayout>
@@ -35,68 +35,56 @@ const HomePage = () => (
 
 const Jum = () => (
   <Jumbotron className={styles.jumbotron}>
-    <p className={styles.companyName}>
-      <Text id="company.name" />
-    </p>
-    <p className={styles.companySlogan}>
-      <Text id="company.slogan"/>
-    </p>
+    <Text id="company.name" className={styles.companyName}/>
+    <Text id="company.slogan" className={styles.companySlogan}/>
     <Button bsClass={styles.produceTripButton}>
-      <p className={styles.produceTrip}>
-        <Text id="produce.trip"/>
-      </p>
+      <Text id="produce.trip" className={styles.produceTrip}/>
     </Button>
   </Jumbotron>
 )
 
-const Feature = () => (
+const Features = () => (
   <section className={styles.productFeature}>
     <Row>
-      <p className={styles.productFeatureHeadline}>
-        <Text id="product.feature.headline"/>
-      </p>
+      <Text id="product.feature.headline" className={styles.productFeatureHeadline}/>
       <hr className={styles.hr}/>
     </Row>
     <Row>
       <div className={styles.features}>
-        <div className={styles.feature}>
-          <img src={require('../../../../public/img/homepage/icon01.png')} className={styles.img}/>
-          <h2 className={styles.featureHeadline}>
-            <Text id="features.trip.planning.slogan"/>
-          </h2>
-          <p className={styles.featureIntro}>
-            <Text id="features.trip.planning.introduction"/>
-          </p>
-        </div>
-        <div className={styles.feature}>
-          <img src={require('../../../../public/img/homepage/icon02.png')} className={styles.img}/>
-          <h2 className={styles.featureHeadline}>
-            <Text id="features.video.planning.slogan"/>
-          </h2>
-          <p className={styles.featureIntro}>
-            <Text id="features.video.planning.introduction"/>
-          </p>
-        </div>
-        <div className={styles.feature}>
-          <img src={require('../../../../public/img/homepage/icon03.png')} className={styles.img}/>
-          <h2 className={styles.featureHeadline}>
-            <Text id="features.trip.customized.slogan"/>
-          </h2>
-          <p className={styles.featureIntro}>
-            <Text id="features.trip.customized.introduction"/>
-          </p>
-        </div>
+        <Feature
+          href={require('../../../../public/img/homepage/icon01.png')}
+          slogan="features.trip.planning.slogan"
+          intro="features.trip.planning.introduction"
+        />
+        <Feature
+          href={require('../../../../public/img/homepage/icon02.png')}
+          slogan="features.video.planning.slogan"
+          intro="features.video.planning.introduction"
+        />
+        <Feature
+          href={require('../../../../public/img/homepage/icon03.png')}
+          slogan="features.trip.customized.slogan"
+          intro="features.trip.customized.introduction"
+        />
       </div>
     </Row>
   </section>
 )
 
+const Feature = ({ href, slogan, intro }) => (
+  <div className={styles.feature}>
+    <img src={href} className={styles.img}/>
+    <h2>
+      <Text id={slogan} className={styles.featureHeadline}/>
+    </h2>
+    <Text id={intro} className={styles.featureIntro}/>
+  </div>
+)
+
 const UserReviews = () => (
   <section className={styles.userReviews}>
     <Row>
-      <p className={styles.productFeatureHeadline}>
-        <Text id="userReviews.headline"/>
-      </p>
+      <Text id="userReviews.headline" className={styles.productFeatureHeadline}/>
       <hr className={styles.hr}/>
     </Row>
     <Row>

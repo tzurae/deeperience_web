@@ -71,9 +71,7 @@ const Footer = () => (
       </Col>
     </Row>
     <Row>
-      <p style={style}>
-        <Text id="footer.establishedPeriod"/>
-      </p>
+      <Text id="footer.establishedPeriod" style={style}/>
     </Row>
   </section>
 )
