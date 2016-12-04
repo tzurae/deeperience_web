@@ -14,7 +14,7 @@ const Panel = ({
     <div className={styles.container}>
       <Text className={styles.title} style={titleStyle} id={title}/>
       {isUnderline && <div className={styles.underline} style={underlineStyle}/>}
-      <div className={styles.content-div} style={contentDivStyle}>
+      <div className={styles.contentDiv} style={contentDivStyle}>
         {children}
       </div>
     </div>
