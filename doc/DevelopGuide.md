@@ -22,10 +22,22 @@
 - 有 merge 權限的人，請直接 merge 回去，沒有權限的人，請發個 PR。
 - commit 之前，請先跑一次 ```npm run pretest```
 - commit message 最多一行，大寫開頭，一段話結尾。如果沒有辦法一句話解決，請 rebase 你的 code。```一次commit，一個feature！```
-
+- 目前有加上 precommit ，在 commit 之前，會先做一次測試，如果沒問題的話，才會 commit。不過如果很確定自己的 code 會過，就測 ```eslint``` 和 ```stylelint``` 後，打 ```git commit -n```，即可不用跑 build 和 mocha。
 ## 安裝 package
 
 請一定要加上 ```--save``` 或 ```-dev``` 。例如：```npm install --save-dev eslint``` 或者 ```npm install --save underscore```。
+
+## JavaScript Coding Style
+
+#### 設計風格
+
+JacaScript coding style 原則上參照 [Airbnb JavaScript Style](https://github.com/airbnb/javascript)﹐小部分為了適應專案，有做修改。
+
+#### Script
+
+1. 測試：```npm run eslint```。
+
+2. 修復：```npm run fix-eslint```。
 
 ## 檔案命名
 
@@ -218,7 +230,17 @@ export default reduxForm(formProperty)(connect(mapStateToProps, mapDispatchToPro
 /src/common/styles/themeX/ <- theme
 ```
 
-#### css 寫法
+#### 設計風格
+
+大部分參照 [這篇文章](http://codeguide.bootcss.com/#css)。
+
+#### Script
+
+1. 測試： ```npm run stylelint```
+
+2. 修復： ```npm run fix-stylelint```，基本上除了命名問題之外，其它問題都可以修復。記得在 ```commit``` 之前，一定要修復一下。
+
+#### css 整體寫法
 
 1. 暫定使用[這一套](http://codeguide.bootcss.com/#css)，等待之後把 postcss 的 linter 加上之後，再把這個章節補上。
 
