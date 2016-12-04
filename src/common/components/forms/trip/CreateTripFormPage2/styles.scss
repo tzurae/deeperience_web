@@ -1,4 +1,4 @@
-@import "../../../../styles/index";
+@import '../../../../styles/index';
 
 .container {
   width: 100%;
@@ -124,7 +124,7 @@
   @include flex-center;
 }
 
-.floatInfoSubtitle {
+.float-info-subtitle {
   @include font-size-medium;
   flex: 1;
   margin-left: 5px;

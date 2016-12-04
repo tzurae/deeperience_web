@@ -1,5 +1,4 @@
-@import "../../../styles/index";
-
+@import '../../../styles/index';
 $fontFamily: monospace, serif, sans-serif, cursive, fantasy;
 
 @mixin center {
@@ -9,7 +8,7 @@ $fontFamily: monospace, serif, sans-serif, cursive, fantasy;
   justify-content: flex-start;
 }
 
-@mixin jumbotronFontColorNFamily {
+@mixin jumbotron-font-color-family {
   color: white;
   font-family: $fontFamily;
 }
@@ -17,42 +16,41 @@ $fontFamily: monospace, serif, sans-serif, cursive, fantasy;
 .jumbotron {
   @include center;
   min-height: 100vh;
-  background: #ffffff url(../../../../public/img/homepage/river_dark.jpg) no-repeat top center ;
+  background: #ffffff url(../../../../public/img/homepage/river_dark.jpg) no-repeat top center;
   background-size: cover;
   margin-bottom: 0 !important; // react-boostrap default :50px
 }
 
-.companyName {
+.company-name {
   @include fontSizeI(60);
-  @include jumbotronFontColorNFamily;
+  @include jumbotron-font-color-family;
   padding-top: 35vh;
 }
 
-.companySlogan {
+.company-slogan {
   @include fontSize(20);
-  @include jumbotronFontColorNFamily;
-  //font-size: 2vw !important;
+  @include jumbotron-font-color-family;
   padding-bottom: 40px;
 }
 
-.produceTrip {
-  @include jumbotronFontColorNFamily;
+.produce-trip {
+  @include jumbotron-font-color-family;
   padding-top: 13px;
 }
 
-.produceTripButton {
-  background-color: #FF7744;
+.produce-trip-button {
+  background-color: #ff7744;
   padding: 1px 40px;
   border-radius: 300px;
   border: none;
 }
 
-.productFeature {
-  background-color: #FFFAF0;
+.product-feature {
+  background-color: #fffaf0;
   height: 40vh;
 }
 
-.productFeatureHeadline {
+.product-feature-headline {
   @include center;
   padding-top: 5vh;
   font-weight: bold;
@@ -71,13 +69,13 @@ $fontFamily: monospace, serif, sans-serif, cursive, fantasy;
   width: 20vw;
 }
 
-.featureHeadline {
+.feature-headline {
   font-size: 20px;
   font-weight: bold;
   padding-bottom: 5px;
 }
 
-.featureIntro {
+.feature-intro {
   width: 175px;
   line-height: 1.5em;
   text-align: center;
@@ -85,23 +83,23 @@ $fontFamily: monospace, serif, sans-serif, cursive, fantasy;
 
 .hr {
   display: block;
-  border-color: #FF7744;
+  border-color: #ff7744;
   border-width: 3px;
   width: 2%;
 }
 
 .img {
-  width:30%;
+  width: 30%;
   padding-bottom: 1vh;
 }
 
-.userReviews {
+.user-reviews {
   min-height: 70vh;
   background: #ffffff url(../../../../public/img/homepage/night.jpg);
   background-size: 100%;
 }
 
-.userReviewsHeadline {
+.user-reviews-headline {
   font-size: 20px;
   font-weight: bold;
   padding-bottom: 5px;

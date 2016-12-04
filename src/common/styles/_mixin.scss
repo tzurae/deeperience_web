@@ -2,68 +2,70 @@ $image-path: '../../public/img' !default;
 
 @mixin clearfix {
   *zoom: 1;
+
   &:after {
-    content: "";
+    content: '';
     display: table;
     clear: both;
   }
+
   &:before {
-    content: "";
+    content: '';
     display: table;
   }
 }
 
-@mixin fontSize ($size: 16) {
+@mixin fontSize($size: 16) {
   font-size: $size + px;
-  font-size: $size/16 + rem;
+  font-size: $size / 16 + rem;
 }
 
 // for important usage, use fontSize instead except some certain situation
-@mixin fontSizeI ($size: 16) {
+
+@mixin fontSizeI($size: 16) {
   font-size: $size + px !important;
-  font-size: $size/16 + rem !important;
+  font-size: $size / 16 + rem !important;
 }
 
 @mixin breakpoint($point) {
   @if $point == large {
     @media only screen and (max-width: 1200px) {
-      @content
+      @content;
     }
   }
   @else if $point == pc {
     @media only screen and (max-width: 992px) {
-      @content
+      @content;
     }
   }
   @else if $point == pad {
     @media only screen and (max-width: 768px) {
-      @content
+      @content;
     }
   }
   @else if $point == mobile {
     @media only screen and (max-width: 480px) {
-      @content
+      @content;
     }
   }
   @else {
     @media only screen and (max-width: $point) {
-      @content
+      @content;
     }
   }
 }
 
 // http://zerosixthree.se/8-sass-mixins-you-must-have-in-your-toolbox/
-@mixin background-image($path, $name, $size:false){
+
+@mixin background-image($path, $name, $size: false) {
   background-image: url(#{$image-path}/#{$path}/#{$name}.svg);
-  @if($size){
+  @if ($size) {
     background-size: $size;
   }
-  .no-svg &{
+
+  .no-svg & {
     background-image: url(#{$image-path}/#{$path}/#{$name}.#{$fallback-extension});
-    @media only screen and (-moz-min-device-pixel-ratio: 1.5),
-            only screen and (-o-min-device-pixel-ratio: 3/2),
-            only screen and (-webkit-min-device-pixel-ratio: 1.5),
-            only screen and (min-device-pixel-ratio: 1.5) {
+    @media only screen and (-moz-min-device-pixel-ratio: 1.5), only screen and (-o-min-device-pixel-ratio: 3/2), only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-device-pixel-ratio: 1.5) {
       background-image: url(#{$image-path}/#{$path}/#{$name}#{$retina-suffix}.#{$fallback-extension});
     }
   }
