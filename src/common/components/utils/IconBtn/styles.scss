@@ -1,14 +1,14 @@
 @import '../../../styles/index';
 
 .btn {
-  height: 26px;
-  width: 26px;
-  padding: 0;
   @include fontSize(15);
-  background-color: $color-main;
+  width: 26px;
+  height: 26px;
+  padding: 0;
   color: white;
   border: 0;
   border-radius: 13px;
+  background-color: $color-main;
 }
 
 .icon {

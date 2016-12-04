@@ -4,14 +4,14 @@ $image-path: '../../public/img' !default;
   *zoom: 1;
 
   &:after {
-    content: '';
     display: table;
     clear: both;
+    content: '';
   }
 
   &:before {
-    content: '';
     display: table;
+    content: '';
   }
 }
 
@@ -32,23 +32,19 @@ $image-path: '../../public/img' !default;
     @media only screen and (max-width: 1200px) {
       @content;
     }
-  }
-  @else if $point == pc {
+  } @else if $point == pc {
     @media only screen and (max-width: 992px) {
       @content;
     }
-  }
-  @else if $point == pad {
+  } @else if $point == pad {
     @media only screen and (max-width: 768px) {
       @content;
     }
-  }
-  @else if $point == mobile {
+  } @else if $point == mobile {
     @media only screen and (max-width: 480px) {
       @content;
     }
-  }
-  @else {
+  } @else {
     @media only screen and (max-width: $point) {
       @content;
     }
@@ -59,12 +55,14 @@ $image-path: '../../public/img' !default;
 
 @mixin background-image($path, $name, $size: false) {
   background-image: url(#{$image-path}/#{$path}/#{$name}.svg);
+
   @if ($size) {
     background-size: $size;
   }
 
   .no-svg & {
     background-image: url(#{$image-path}/#{$path}/#{$name}.#{$fallback-extension});
+
     @media only screen and (-moz-min-device-pixel-ratio: 1.5), only screen and (-o-min-device-pixel-ratio: 3/2), only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-device-pixel-ratio: 1.5) {
       background-image: url(#{$image-path}/#{$path}/#{$name}#{$retina-suffix}.#{$fallback-extension});
     }
@@ -72,18 +70,19 @@ $image-path: '../../public/img' !default;
 }
 
 @mixin visually-hidden {
-  margin: -1px;
-  padding: 0;
-  width: 1px;
-  height: 1px;
+  position: absolute;
   overflow: hidden;
   clip: rect(0 0 0 0);
   clip: rect(0, 0, 0, 0);
-  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
 }
 
 @mixin flex-center {
   display: flex;
+
   align-items: center;
   justify-content: center;
 }

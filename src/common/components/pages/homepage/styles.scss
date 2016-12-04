@@ -3,27 +3,28 @@ $fontFamily: monospace, serif, sans-serif, cursive, fantasy;
 
 @mixin center {
   display: flex;
-  align-items: center;
   flex-direction: column;
+
+  align-items: center;
   justify-content: flex-start;
 }
 
 @mixin jumbotronFontColorNFamily {
-  color: white;
   font-family: $fontFamily;
+  color: white;
 }
 
 .jumbotron {
   @include center;
   min-height: 100vh;
+  margin-bottom: 0 !important; // react-boostrap default :50px
   background: #ffffff url(../../../../public/img/homepage/river_dark.jpg) no-repeat top center;
   background-size: cover;
-  margin-bottom: 0 !important; // react-boostrap default :50px
 }
 
 .company-name {
-  padding-top: 35vh;
   @include jumbotronFontColorNFamily;
+  padding-top: 35vh;
   font-size: 4vw !important;
 }
 
@@ -40,23 +41,23 @@ $fontFamily: monospace, serif, sans-serif, cursive, fantasy;
 }
 
 .produce-trip-button {
-  background-color: #ff7744;
   padding: 1px 40px;
-  border-radius: 300px;
   border: none;
+  border-radius: 300px;
+  background-color: #ff7744;
 }
 
 .product-feature {
-  background-color: #fffaf0;
   height: 40vh;
+  background-color: #fffaf0;
 }
 
 .product-feature-headline {
   @include center;
   padding-top: 5vh;
-  font-weight: bold;
-  font-size: 1.5vw;
   font-family: $fontFamily;
+  font-size: 1.5vw;
+  font-weight: bold;
 }
 
 .features {
@@ -71,9 +72,9 @@ $fontFamily: monospace, serif, sans-serif, cursive, fantasy;
 }
 
 .feature-headline {
+  padding-bottom: 5px;
   font-size: 20px;
   font-weight: bold;
-  padding-bottom: 5px;
 }
 
 .feature-intro {
@@ -84,9 +85,9 @@ $fontFamily: monospace, serif, sans-serif, cursive, fantasy;
 
 .hr {
   display: block;
-  border-color: #ff7744;
-  border-width: 3px;
   width: 2%;
+  border-width: 3px;
+  border-color: #ff7744;
 }
 
 .img {
@@ -101,16 +102,16 @@ $fontFamily: monospace, serif, sans-serif, cursive, fantasy;
 }
 
 .user-reviews-headline {
+  padding-bottom: 5px;
   font-size: 20px;
   font-weight: bold;
-  padding-bottom: 5px;
 }
 
 .posts {
   display: flex;
+  padding: 30px;
   flex-wrap: wrap;
   justify-content: center;
-  padding: 30px;
 }
 
 .post {
