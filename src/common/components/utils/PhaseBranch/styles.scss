@@ -3,50 +3,54 @@
 .node-wrapper {
   display: flex;
   flex-direction: row;
+  padding: 10px 0 10px 10px;
   justify-content: center;
   align-content: center;
   align-items: flex-start;
-  padding: 10px 0 10px 10px;
 }
 
 .node-label {
-  text-align: right;
   @include font-size-medium;
+  text-align: right;
 }
 
 .node-label-active {
-  @extend .node-label;
   color: $color-main;
+
+  @extend .node-label;
 }
 
 .node-label-inactive {
-  @extend .node-label;
   color: $color-border;
+
+  @extend .node-label;
 }
 
 .btn {
   width: 12px;
   height: 12px;
-  border-radius: 50%;
-  border: 0;
   padding: 0;
+  border: 0;
+  border-radius: 50%;
   background-color: $color-border;
 }
 
 .btn-inactive {
-  @extend .btn;
   background-color: $color-border;
+
+  @extend .btn;
 }
 
 .btn-active {
-  @extend .btn;
   background-color: $color-main;
+
+  @extend .btn;
 }
 
 .stick {
-  width: 3px;
-  background-color: $color-border;
   position: absolute;
   top: 5px;
   left: 5px;
+  width: 3px;
+  background-color: $color-border;
 }

@@ -1,27 +1,27 @@
 @import '../../../../styles/index';
 
 .container {
-  width: 100%;
-  height: 600px;
-  border-radius: 10px;
-  border: 2px solid $color-border;
   position: relative;
   overflow-y: scroll;
+  width: 100%;
+  height: 600px;
+  border: 2px solid $color-border;
+  border-radius: 10px;
 }
 
 .site-div {
   position: absolute;
+  padding: 5px 10px;
+  font-weight: bold;
   border: 2px solid $tundora;
   border-radius: 5px;
-  padding: 5px 10px;
   background: white;
-  font-weight: bold;
 }
 
 .msg-error {
-  color: $red;
   @include font-size-medium;
   margin: -5px 0 15px 0;
+  color: $red;
 }
 
 .site-div-btn {
@@ -35,40 +35,40 @@
 
 .site-div-btn-div {
   position: absolute;
-  bottom: 5px;
   right: 5px;
+  bottom: 5px;
 }
 
 .float-site-list-container {
-  height: 26px;
-  flex-direction: row;
-  align-items: center;
   display: flex;
+  flex-direction: row;
+  height: 26px;
+  align-items: center;
 }
 
 .float-site-list {
   position: absolute;
-  border: 10px solid $boulder;
-  border-radius: 10px;
-  padding: 5px;
+  z-index: 100;
+  overflow-y: scroll;
   width: 240px;
   height: 320px;
-  z-index: 100;
+  padding: 5px;
+  border: 10px solid $boulder;
+  border-radius: 10px;
   background: white;
-  overflow-y: scroll;
 }
 
 .float-site-list-item {
-  border: 1px none $color-border;
-  border-bottom-style: solid;
-  padding: 5px;
+  display: flex;
+  overflow-x: hidden;
+  flex-direction: row;
   width: 100%;
   height: 50px;
-  overflow-x: hidden;
+  padding: 5px;
+  border: 1px none $color-border;
+  border-bottom-style: solid;
   justify-content: flex-start;
   align-content: center;
-  flex-direction: row;
-  display: flex;
   align-items: center;
 }
 
@@ -77,15 +77,15 @@
 }
 
 .float-site-list-item-icon {
-  margin-right: 10px;
   @include font-size-medium;
+  margin-right: 10px;
 }
 
 .float-site-list-title-div {
-  height: 26px;
-  flex-direction: row;
-  align-items: center;
   display: flex;
+  flex-direction: row;
+  height: 26px;
+  align-items: center;
 }
 
 .float-site-list-title {
@@ -95,10 +95,10 @@
 }
 
 .float-site-list-icon {
+  @include fontSizeI(22);
+  float: right;
   color: $boulder !important;
   background-color: $white !important;
-  float: right;
-  @include fontSizeI(22);
 }
 
 .dropdown {
@@ -109,9 +109,9 @@
 
 .day-div {
   @include flex-row;
+  margin: 10px 0;
   justify-content: space-between;
   align-items: center;
-  margin: 10px 0;
 }
 
 .day-div-btn {
@@ -120,8 +120,8 @@
 }
 
 .footer {
-  margin: 20px 0 0;
   @include flex-center;
+  margin: 20px 0 0;
 }
 
 .float-info-subtitle {

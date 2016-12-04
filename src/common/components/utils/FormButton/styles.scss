@@ -3,20 +3,22 @@
 .btn {
   @include font-size-medium;
   width: 100px;
-  border-radius: 50px;
-  border: 2px solid $color-main;
   margin: 0 20px;
   padding: 8px 0;
+  border: 2px solid $color-main;
+  border-radius: 50px;
 }
 
 .btn-submit {
-  @extend .btn;
-  background: $color-main;
   color: white;
+  background: $color-main;
+
+  @extend .btn;
 }
 
 .btn-button {
-  @extend .btn;
   color: $color-main;
   background: white;
+
+  @extend .btn;
 }
