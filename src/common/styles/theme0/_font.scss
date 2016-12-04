@@ -1,4 +1,4 @@
-@import "../mixin";
+@import '../mixin';
 
 @mixin font-size-tiny {
   @include fontSize(10);
@@ -19,4 +19,3 @@
 @mixin font-size-large {
   @include fontSize(24);
 }
-
