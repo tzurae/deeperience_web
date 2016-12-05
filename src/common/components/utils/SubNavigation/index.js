@@ -1,3 +1,21 @@
+/**
+ * ## Edit by: noootown
+ *
+ * ## SubNavigation
+ *
+ * @props
+ * activeTab:
+ *    0
+ * tabText:
+ *    ['nav.customize.customize', 'nav.customize.myCustomTrip']
+ * tabLink: link of each tab
+ *    ['#', '/trip/myCustomTrip']
+ *
+ * @export
+ *    default: subnavbar
+ *
+ */
+
 import React, { PropTypes } from 'react'
 import Grid from 'react-bootstrap/lib/Grid'
 import Navbar from '../BsNavbar'

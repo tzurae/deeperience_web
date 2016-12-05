@@ -1,3 +1,15 @@
+/**
+ * ## Edit by: noootown
+ *
+ * ## SubNavigation
+ *
+ * @props
+ *
+ * @export
+ *    default: default Panel
+ *    else: each kind of custom Panel
+ *
+ */
 import Panel from './defaultPanel'
 
 export { default as Panel1 } from './Panel1'

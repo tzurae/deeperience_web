@@ -1,9 +1,9 @@
 import React, { PropTypes } from 'react'
 import Grid from 'react-bootstrap/lib/Grid'
-import Navigation from '../../utils/Navigation'
+import Navigation from '../../utils/Navigation/index'
 import ErrorList from '../../utils/ErrorList'
 
-const PageLayout = ({ hasGrid, children, bgColor, src, subNav, ...rest }) => (
+const PageLayout = ({ hasGrid, bgColor, src, subNav, children, ...rest }) => (
   <div
     style={{
       minHeight: '100%',
@@ -27,12 +27,14 @@ PageLayout.propTypes = {
   hasGrid: PropTypes.bool,
   bgColor: PropTypes.string,
   src: PropTypes.string,
+  subNav: PropTypes.element,
 },
 
 PageLayout.defaultProps = {
   hasGrid: true,
   bgColor: '#EFEEED',
   src: '',
+  subNav: null,
 }
 
 export default PageLayout

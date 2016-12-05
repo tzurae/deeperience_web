@@ -3,28 +3,15 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import Grid from 'react-bootstrap/lib/Grid'
 import Image from 'react-bootstrap/lib/Image'
-import Roles from '../../constants/Roles'
-import { updateLocale } from '../../reducers/global/globalActions'
-import { pushErrors } from '../../reducers/error/errorActions'
-import Navbar from './BsNavbar'
-import NavLink from './NavLink'
-import MenuItem from './MenuItem'
-import Text from './Text'
-import styles from '../../styles'
-
-const style = {
-  nav: {
-    backgroundColor: styles.color.navbarGrey,
-    borderWidth: '0px',
-  },
-  text: {
-    color: 'white',
-    fontSize: styles.font.medium,
-  },
-  header: {
-    marginLeft: '25px',
-  },
-}
+import Roles from '../../../constants/Roles'
+import { updateLocale } from '../../../reducers/global/globalActions'
+import { pushErrors } from '../../../reducers/error/errorActions'
+import Navbar from '../BsNavbar'
+import NavLink from '../NavLink'
+import MenuItem from '../MenuItem'
+import Text from '../Text'
+import styles from './styles.scss'
+import classname from 'classnames'
 
 class Navigation extends Component {
   _setLanguage(lang) {
@@ -43,10 +30,10 @@ class Navigation extends Component {
     const isAdmin = (user.role === Roles.ADMIN)
 
     return (
-      <Navbar staticTop style={style.nav}>
+      <Navbar staticTop className={styles.nav}>
         <Grid>
-          <Navbar.Header style={style.header}>
-            <Link className="navbar-brand" to="/" style={style.text}>
+          <Navbar.Header className={styles.header}>
+            <Link className={classname('navbar-brand', styles.text)} to="/">
               Deeperience
             </Link>
           </Navbar.Header>
@@ -64,7 +51,8 @@ class Navigation extends Component {
             */}
 
             <Navbar.Nav right>
-              <Navbar.Dropdown title={<Text id="nav.language" />}>
+              <Navbar.Dropdown
+                title={<Text id="nav.language" className={styles.dropdownText}/>}>
                 <MenuItem
                   title="English"
                   onClick={this._setLanguage.bind(this, 'en-us')}
@@ -76,7 +64,7 @@ class Navigation extends Component {
               </Navbar.Dropdown>
 
               <Navbar.Dropdown
-                title={<Text id="nav.customize" style={{ ...style.text, display: 'inline' }}/>}
+                title={<Text id="nav.customize" className={styles.dropdownText}/>}
               >
                 <NavLink to="/trip/customize">
                   <Text id="nav.customize.customize"/>
@@ -87,7 +75,7 @@ class Navigation extends Component {
               </Navbar.Dropdown>
 
               <Navbar.Dropdown
-                title={<Text id="nav.trip" style={{ ...style.text, display: 'inline' }}/>}
+                title={<Text id="nav.trip" className={styles.dropdownText}/>}
               >
                 <NavLink to="/trip/createTrip">
                   <Text id="nav.trip.createTrip"/>
@@ -97,10 +85,10 @@ class Navigation extends Component {
               <Navbar.Dropdown
                 title={
                   !isAuth ?
-                    <Text id="nav.user.profile"/> :
+                    <Text id="nav.user.profile" className={styles.dropdownText}/> :
                     user.avatarURL ? (
                       <Image
-                        style={{ height: 18 }}
+                        className={styles.avatar}
                         src={user.avatarURL} rounded
                       />
                     ) : (user.name || user.email)
