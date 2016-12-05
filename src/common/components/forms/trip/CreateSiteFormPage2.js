@@ -5,6 +5,7 @@ import FormButton from '../../utils/FormButton'
 import validate from './createSiteValidate'
 import Text from '../../widgets/Text'
 import Textarea from '../../fields/adapters/BsTextarea'
+import Editor from './Editor'
 import {
   BsForm as Form,
   BsFormFooter as FormFooter,
@@ -26,7 +27,10 @@ const CreateSiteFormPage2 = ({ handleSubmit, ...props }) => {
       defaultFieldDimensions={{ sm: 6 }}
       onSubmit={handleSubmit}
     >
+      <Editor />
 
+{/* 
+  
       <Field
         name="introduction"
         component={FormField}
@@ -34,6 +38,8 @@ const CreateSiteFormPage2 = ({ handleSubmit, ...props }) => {
         adapter={Textarea}
         rows="20"
       />
+
+*/}
       <FormFooter
         labelDimensions={{ sm: 0 }}
         fieldDimensions={{ sm: 12 }}
