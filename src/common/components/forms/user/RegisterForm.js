@@ -17,7 +17,7 @@ import {
   DField,
 } from '../../fields/widgets'
 import configs from '../../../../../configs/project/client'
-import Text from '../../widgets/Text'
+import Text from '../../utils/Text'
 
 const validate = (values) => {
   const errors = {}

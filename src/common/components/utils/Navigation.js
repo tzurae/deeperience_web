@@ -9,7 +9,7 @@ import { pushErrors } from '../../reducers/error/errorActions'
 import Navbar from './BsNavbar'
 import NavLink from './NavLink'
 import MenuItem from './MenuItem'
-import Text from '../widgets/Text'
+import Text from './Text'
 import styles from '../../styles'
 
 const style = {

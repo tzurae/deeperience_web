@@ -1,5 +1,5 @@
 import React from 'react'
-import Head from '../../widgets/Head'
+import Head from '../../utils/Head'
 import styles from './styles.scss'
 
 const AppLayout = ({ children }) => (

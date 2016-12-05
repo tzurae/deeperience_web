@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-import Text from '../../widgets/Text'
+import Text from '../Text'
 import styles from './styles.scss'
 
 const Panel = ({

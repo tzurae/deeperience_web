@@ -2,7 +2,7 @@ import React from 'react'
 import Grid from 'react-bootstrap/lib/Grid'
 import Navbar from './BsNavbar'
 import NavLink from './NavLink'
-import Text from '../widgets/Text'
+import Text from './Text'
 import styles from '../../styles'
 
 const style = {

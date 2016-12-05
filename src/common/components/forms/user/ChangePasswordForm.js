@@ -8,7 +8,7 @@ import Col from 'react-bootstrap/lib/Col'
 import FormNames from '../../../constants/FormNames'
 import userAPI from '../../../api/user'
 import { pushErrors } from '../../../reducers/error/errorActions'
-import Text from '../../widgets/Text'
+import Text from '../../utils/Text'
 import { BsInput as Input } from '../../fields/adapters'
 import {
   BsForm as Form,

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Field } from 'redux-form'
 import { FormField } from './BsForm'
-import Text from './../widgets/Text'
+import Text from './Text'
 
 const style = {
   div: {
