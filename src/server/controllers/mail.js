@@ -12,11 +12,12 @@ export default {
 
     nodemailerAPI()
       .sendMail({
-        ...(
-          process.env.NODE_ENV === 'production' ?
-          { to: user.email.value } :
-          {}
-        ),
+        to: user.email.value,
+        // ...(
+        //   process.env.NODE_ENV === 'production' ?
+        //   { to: user.email.value } :
+        //   {}
+        // )
         subject: 'Email Verification',
         html: renderToString(
           <VerifyEmailMail token={token} />

@@ -52,8 +52,8 @@ module.exports = {
       loaders: [
         'style-loader',
         'css-loader?modules&localIdentName=[name]_[local]_[hash:base64:3]&camelCase',
-        'sass-loader',
         'postcss-loader',
+        'sass-loader',
       ],
     },
       {

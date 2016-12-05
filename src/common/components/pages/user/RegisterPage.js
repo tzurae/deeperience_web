@@ -72,7 +72,7 @@ class RegisterPage extends Component {
 
   render() {
     return (
-      <PageLayout src="/img/river_dark.jpg">
+      <PageLayout src="/img/homepage/river_dark.jpg">
         <Row>
           <Col md={4} />
           <Col md={4}>
