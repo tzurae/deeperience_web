@@ -15,7 +15,7 @@ export default {
   'nav.feature': '產品特色',
   'nav.wonderful': '精采案例',
   'nav.customize': '客製旅程',
-  'nav.customize.customize': '我的旅程',
+  'nav.customize.customize': '客製旅程',
   'nav.customize.myCustomTrip': '我的旅程',
   'nav.user': '會員',
   'nav.user.login': '登入',

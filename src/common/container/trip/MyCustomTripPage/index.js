@@ -5,9 +5,8 @@ import { Map } from 'immutable'
 import Col from 'react-bootstrap/lib/Col'
 import PageLayout from '../../../components/layouts/PageLayout'
 import PanelContainer from '../../../components/utils/PanelContainer'
-import Panel from '../../../components/utils/Panel'
+import { Panel1 } from '../../../components/utils/Panel'
 // import PhaseBranch from '../../../components/utils/PhaseBranch'
-import styles from '../../../styles'
 import * as tripActions from '../../../reducers/trip/tripActions'
 import SubNavigation from '../../../components/utils/SubNavigation'
 
@@ -39,23 +38,20 @@ class MyCustomTripPage extends React.Component {
       <PageLayout
         subNav={
           <SubNavigation
-            activeTab={0}
+            activeTab={1}
             tabText={['nav.customize.customize', 'nav.customize.myCustomTrip']}
             tabLink={['#', '/trip/myCustomTrip']}
           />
         }
       >
         <PanelContainer>
-          <Col md={3}/>
-          <Col md={6}>
-            <Panel
-              title={'管理旅程'}
-              underlineStyle={{ background: styles.color.orange, height: '3px' }}
-              titleStyle={{ textAlign: 'left' }}
-              contentDivStyle={{ padding: '20px 30px' }}
+          <Col md={2}/>
+          <Col md={8}>
+            <Panel1
+              title={'nav.customize.myCustomTrip'}
             />
           </Col>
-          <Col md={3}/>
+          <Col md={2}/>
         </PanelContainer>
       </PageLayout>
     )

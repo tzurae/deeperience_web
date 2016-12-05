@@ -13,7 +13,11 @@ const SubNavigation = ({ activeTab, tabText, tabLink }) => (
           <Navbar.Nav>
             {
               tabText.map((text, index) => (
-                <NavLink to={tabLink[index]} onlyActiveOnIndex>
+                <NavLink
+                  key={index}
+                  to={tabLink[index]}
+                  onlyActiveOnIndex
+                >
                   <Text
                     className={activeTab === index ? styles.textActive : styles.textInactive}
                     id={text}/>
@@ -28,12 +32,12 @@ const SubNavigation = ({ activeTab, tabText, tabLink }) => (
 )
 
 SubNavigation.propTypes = {
-  activeTab: PropTypes.Number,
+  activeTab: PropTypes.number,
   tabText: PropTypes.arrayOf(PropTypes.string),
   tabLink: PropTypes.arrayOf(PropTypes.string),
 }
 
-SubNavigation.propTypes = {
+SubNavigation.defaultProps = {
   activeTab: 0,
   tabText: [],
   tabLink: [],

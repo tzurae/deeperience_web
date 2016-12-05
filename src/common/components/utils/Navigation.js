@@ -76,13 +76,13 @@ class Navigation extends Component {
               </Navbar.Dropdown>
 
               <Navbar.Dropdown
-                title={<Text id="nav.custom" style={{ ...style.text, display: 'inline' }}/>}
+                title={<Text id="nav.customize" style={{ ...style.text, display: 'inline' }}/>}
               >
                 <NavLink to="/trip/customize">
-                  <Text id="nav.customize"/>
+                  <Text id="nav.customize.customize"/>
                 </NavLink>
                 <NavLink to="/trip/myCustomTrip">
-                  <Text id="nav.myCustomTrip"/>
+                  <Text id="nav.customize.myCustomTrip"/>
                 </NavLink>
               </Navbar.Dropdown>
 
