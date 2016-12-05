@@ -10,7 +10,6 @@ $fontFamily: monospace, serif, sans-serif, cursive, fantasy;
 }
 
 @mixin jumbotron-font-color-family {
-  color: white;
   font-family: $fontFamily;
   color: white;
 }
@@ -109,8 +108,8 @@ $fontFamily: monospace, serif, sans-serif, cursive, fantasy;
 
 .posts {
   display: flex;
-  padding: 30px;
   flex-wrap: wrap;
+  padding: 30px;
   justify-content: center;
 }
 

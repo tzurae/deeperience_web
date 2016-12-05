@@ -115,6 +115,7 @@
         "clip",
         "zoom",
         "flex-direction",
+        "flex-wrap",
         "flex-order",
         "flex-pack",
         "flex-align",

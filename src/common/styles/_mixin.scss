@@ -27,6 +27,7 @@ $image-path: '../../public/img' !default;
   font-size: $size / 16 + rem !important;
 }
 
+/* stylelint-disable */
 @mixin breakpoint($point) {
   @if $point == large {
     @media only screen and (max-width: 1200px) {
@@ -50,6 +51,7 @@ $image-path: '../../public/img' !default;
     }
   }
 }
+/* stylelint-enable */
 
 // http://zerosixthree.se/8-sass-mixins-you-must-have-in-your-toolbox/
 

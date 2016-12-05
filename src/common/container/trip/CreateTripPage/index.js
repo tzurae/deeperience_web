@@ -11,6 +11,7 @@ import CreateTripForm from '../../../components/forms/trip/CreateTripForm'
 import styles from '../../../styles'
 import tripAPI from '../../../api/trip'
 import * as tripActions from '../../../reducers/trip/tripActions'
+import SubNavigation from '../../../components/utils/SubNavigation'
 
 const actions = [
   tripActions,
@@ -75,7 +76,13 @@ class CreateTripPage extends React.Component {
     const { page } = this.state
     return (
       <PageLayout
-        tripTabActive={3}
+        subNav={
+          <SubNavigation
+            activeTab={2}
+            tabText={['nav.trip.createSite', 'nav.trip.manageSite', 'nav.trip.createTrip', 'nav.trip.manageTrip']}
+            tabLink={['#', '#', '/trip/createTrip', '#']}
+          />
+        }
       >
         <PanelContainer>
           <Col md={2}>
