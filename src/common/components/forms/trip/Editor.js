@@ -13,8 +13,8 @@ class SiteEditor extends React.Component {
             this.setState({ editorState });
             let state = editorState.getCurrentContent()
             console.log(stateToHTML(state))
-            this.addImage()
-        } 
+            // this.addImage()
+        }
 
         this.handleKeyCommand = (command) => this._handleKeyCommand(command);
         this.onTab = (e) => this._onTab(e);
@@ -211,14 +211,14 @@ const BlockStyleControls = (props) => {
     );
 };
 
-var INLINE_STYLES = [
+const INLINE_STYLES = [
     { label: '粗體', style: 'BOLD' },
     { label: '斜體', style: 'ITALIC' },
     { label: '底線', style: 'UNDERLINE' },
 ];
 
 const InlineStyleControls = (props) => {
-    var currentStyle = props.editorState.getCurrentInlineStyle();
+    let currentStyle = props.editorState.getCurrentInlineStyle();
     return (
         <div className="RichEditor-controls">
             {INLINE_STYLES.map(type =>
