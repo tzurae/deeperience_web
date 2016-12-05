@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Head from '../widgets/Head'
+import Text from '../widgets/Text'
 
 const SocialAuthButtonList = ({ routing }) => {
   const { next } = routing.locationBeforeTransitions.query
@@ -17,13 +18,8 @@ const SocialAuthButtonList = ({ routing }) => {
         href={`/auth/facebook${search}`}
         className="btn btn-block btn-social btn-facebook"
       >
-        <span className="fa fa-facebook"></span>Login with Facebook
-      </a>
-      <a
-        href={`/auth/linkedin${search}`}
-        className="btn btn-block btn-social btn-linkedin"
-      >
-        <span className="fa fa-linkedin"></span>Login with LinkedIn
+        <span className="fa fa-facebook"></span>
+        <Text id='register.facebook'/>
       </a>
     </div>
   )

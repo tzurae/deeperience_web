@@ -4,8 +4,8 @@ module.exports = {
     profileFields: ['id', 'displayName', 'email', 'picture'],
   },
   development: {
-    clientID: '1752027395060427',
-    clientSecret: 'bbda6432fad50440ca94cfb7bb041e33',
+    clientID: '1693011551024058',
+    clientSecret: '4b51b74254c5d5df1a0dea2f5a9bc6a8',
     callbackURL: 'http://localhost:3000/auth/facebook/callback',
   },
   test: {
