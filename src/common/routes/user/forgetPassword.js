@@ -4,7 +4,7 @@ export default (store) => ({
     require.ensure([], (require) => {
       cb(
         null,
-        require('../../components/pages/user/ForgetPasswordPage').default
+        require('../../container/user/ForgetPasswordPage').default
       )
     })
   },

@@ -1,7 +1,7 @@
 import React from 'react'
 import PageHeader from 'react-bootstrap/lib/PageHeader'
-import PageLayout from '../../layouts/PageLayout'
-import ResetPasswordForm from '../../forms/user/ResetPasswordForm'
+import PageLayout from '../../components/layouts/PageLayout'
+import ResetPasswordForm from '../../components/forms/user/ResetPasswordForm'
 
 const ResetPasswordPage = (props) => (
   <PageLayout>

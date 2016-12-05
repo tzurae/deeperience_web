@@ -1,11 +1,11 @@
 import React from 'react'
-import PageLayout from '../../layouts/PageLayout'
+import PageLayout from '../../components/layouts/PageLayout'
 import Row from 'react-bootstrap/lib/Row'
 import Button from 'react-bootstrap/lib/Button'
 import Jumbotron from 'react-bootstrap/lib/Jumbotron'
-import Text from '../../widgets/Text'
+import Text from '../../components/widgets/Text'
 import { FBEmbedPost } from 'facebook-plugins'
-import Footer from '../../utils/Footer'
+import Footer from '../../components/utils/Footer'
 import styles from './styles.scss'
 
 const FBposts = [
@@ -52,17 +52,17 @@ const Features = () => (
     <Row>
       <div className={styles.features}>
         <Feature
-          href={require('../../../../public/img/homepage/icon01.png')}
+          href={require('../../../public/img/homepage/icon01.png')}
           slogan="features.trip.planning.slogan"
           intro="features.trip.planning.introduction"
         />
         <Feature
-          href={require('../../../../public/img/homepage/icon02.png')}
+          href={require('../../../public/img/homepage/icon02.png')}
           slogan="features.video.planning.slogan"
           intro="features.video.planning.introduction"
         />
         <Feature
-          href={require('../../../../public/img/homepage/icon03.png')}
+          href={require('../../../public/img/homepage/icon03.png')}
           slogan="features.trip.customized.slogan"
           intro="features.trip.customized.introduction"
         />

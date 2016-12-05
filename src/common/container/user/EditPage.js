@@ -1,11 +1,11 @@
 import React from 'react'
 import Row from 'react-bootstrap/lib/Row'
 import Col from 'react-bootstrap/lib/Col'
-import PageLayout from '../../layouts/PageLayout'
-import AvatarForm from '../../forms/user/AvatarForm'
-import ChangePasswordForm from '../../forms/user/ChangePasswordForm'
-import Text from '../../widgets/Text'
-import styles from '../../../styles'
+import PageLayout from '../../components/layouts/PageLayout'
+import AvatarForm from '../../components/forms/user/AvatarForm'
+import ChangePasswordForm from '../../components/forms/user/ChangePasswordForm'
+import Text from '../../components/widgets/Text'
+import styles from '../../styles'
 
 const style = {
   title: {

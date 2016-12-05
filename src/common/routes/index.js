@@ -19,7 +19,7 @@ export default (store) => ({
   getIndexRoute(location, cb) {
     require.ensure([], (require) => {
       cb(null, {
-        component: require('../components/pages/homepage').default,
+        component: require('../container/homepage').default,
       })
     })
   },

@@ -3,9 +3,9 @@ import Grid from 'react-bootstrap/lib/Grid'
 import Row from 'react-bootstrap/lib/Row'
 import Col from 'react-bootstrap/lib/Col'
 import { Link } from 'react-router'
-import PageLayout from '../../../layouts/PageLayout'
-import styles from '../../../../styles'
-import Text from '../../../widgets/Text'
+import PageLayout from '../../../components/layouts/PageLayout'
+import styles from '../../../styles'
+import Text from '../../../components/widgets/Text'
 
 const style = {
   title: {

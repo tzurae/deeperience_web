@@ -72,7 +72,7 @@ describe('#Pages', () => {
   describe('#Normal User', () => {
     (pages.public.concat(pages.normalUserRequired)).forEach((page) => {
       describe(`GET ${page}`, () => {
-        it('should access both public and normal-user-only pages', (cb) => {
+        it('should access both public and normal-user-only container', (cb) => {
           request
             .get(constants.BASE + page)
             .set('Cookie', reqs.users[0].get('cookie'))
@@ -90,7 +90,7 @@ describe('#Pages', () => {
   describe('#Admin User', () => {
     (pages.public.concat(pages.adminUserRequired)).forEach((page) => {
       describe(`GET ${page}`, () => {
-        it('should access both public and admin-only pages', (cb) => {
+        it('should access both public and admin-only container', (cb) => {
           request
             .get(constants.BASE + page)
             .set('Cookie', reqs.users[0].get('cookie'))

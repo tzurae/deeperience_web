@@ -4,12 +4,12 @@ import { Link } from 'react-router'
 import Row from 'react-bootstrap/lib/Row'
 import Col from 'react-bootstrap/lib/Col'
 import Button from 'react-bootstrap/lib/Button'
-import userAPI from '../../../api/user'
-import { pushErrors } from '../../../reducers/error/errorActions'
-import PageLayout from '../../layouts/PageLayout'
-import toRefreshURL from '../../../utils/toRefreshURL'
-import Text from '../../widgets/Text.js'
-import styles from '../../../styles'
+import userAPI from '../../api/user'
+import { pushErrors } from '../../reducers/error/errorActions'
+import PageLayout from '../../components/layouts/PageLayout'
+import toRefreshURL from '../../utils/toRefreshURL'
+import Text from '../../components/widgets/Text.js'
+import styles from '../../styles'
 
 const style = {
   title: {

@@ -1,6 +1,6 @@
 import React from 'react'
 import PageHeader from 'react-bootstrap/lib/PageHeader'
-import PageLayout from '../layouts/PageLayout'
+import PageLayout from '../components/layouts/PageLayout'
 
 const NotFoundPage = (props) => (
   <PageLayout>

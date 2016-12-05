@@ -7,7 +7,7 @@ export default (store) => ({
     require.ensure([], (require) => {
       cb(null, {
         component:
-          require('../../components/pages/admin/user/ListPage').default,
+          require('../../container/admin/user/ListPage').default,
       })
     })
   },

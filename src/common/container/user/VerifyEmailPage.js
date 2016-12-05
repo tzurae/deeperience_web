@@ -2,9 +2,9 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import Alert from 'react-bootstrap/lib/Alert'
-import userAPI from '../../../api/user'
-import { pushErrors } from '../../../reducers/error/errorActions'
-import PageLayout from '../../layouts/PageLayout'
+import userAPI from '../../api/user'
+import { pushErrors } from '../../reducers/error/errorActions'
+import PageLayout from '../../components/layouts/PageLayout'
 
 class VerificationPage extends React.Component {
   constructor() {

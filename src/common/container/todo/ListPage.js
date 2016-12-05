@@ -2,17 +2,17 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import PageHeader from 'react-bootstrap/lib/PageHeader'
-import Resources from '../../../constants/Resources'
-import todoAPI from '../../../api/todo'
-import { pushErrors } from '../../../reducers/error/errorActions'
+import Resources from '../../constants/Resources'
+import todoAPI from '../../api/todo'
+import { pushErrors } from '../../reducers/error/errorActions'
 import {
   setTodo,
   addTodo,
   removeTodo,
-} from '../../../reducers/todo/todoActions'
-import { setCrrentPage, setPage } from '../../../reducers/page/pageActions'
-import PageLayout from '../../layouts/PageLayout'
-import Pagination from '../../utils/BsPagination'
+} from '../../reducers/todo/todoActions'
+import { setCrrentPage, setPage } from '../../reducers/page/pageActions'
+import PageLayout from '../../components/layouts/PageLayout'
+import Pagination from '../../components/utils/BsPagination'
 
 class TodoItem extends Component {
   constructor() {

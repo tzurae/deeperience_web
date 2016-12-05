@@ -1,9 +1,9 @@
 import React from 'react'
 import Row from 'react-bootstrap/lib/Row'
 import Col from 'react-bootstrap/lib/Col'
-import PageLayout from '../../layouts/PageLayout'
-import LoginForm from '../../forms/user/LoginForm'
-import Text from '../../widgets/Text'
+import PageLayout from '../../components/layouts/PageLayout'
+import LoginForm from '../../components/forms/user/LoginForm'
+import Text from '../../components/widgets/Text'
 
 const LoginPage = ({ location }) => (
   <PageLayout src="/img/homepage/river_dark.jpg">

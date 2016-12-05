@@ -3,12 +3,12 @@ import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import PageHeader from 'react-bootstrap/lib/PageHeader'
 import Table from 'react-bootstrap/lib/Table'
-import Resources from '../../../../constants/Resources'
-import userAPI from '../../../../api/user'
-import { pushErrors } from '../../../../reducers/error/errorActions'
-import { setCrrentPage, setPage } from '../../../../reducers/page/pageActions'
-import PageLayout from '../../../layouts/AdminPageLayout'
-import Pagination from '../../../utils/BsPagination'
+import Resources from '../../../constants/Resources'
+import userAPI from '../../../api/user'
+import { pushErrors } from '../../../reducers/error/errorActions'
+import { setCrrentPage, setPage } from '../../../reducers/page/pageActions'
+import PageLayout from '../../../components/layouts/AdminPageLayout'
+import Pagination from '../../../components/utils/BsPagination'
 
 class ListPage extends Component {
   constructor() {

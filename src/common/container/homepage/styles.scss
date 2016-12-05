@@ -1,4 +1,4 @@
-@import '../../../styles/index';
+@import '../../styles/index';
 $fontFamily: monospace, serif, sans-serif, cursive, fantasy;
 
 @mixin center {
@@ -19,7 +19,7 @@ $fontFamily: monospace, serif, sans-serif, cursive, fantasy;
   @include center;
   min-height: 100vh;
   margin-bottom: 0 !important; // react-boostrap default :50px
-  background: #ffffff url(../../../../public/img/homepage/river_dark.jpg) no-repeat top center;
+  background: #ffffff url(../../../public/img/homepage/river_dark.jpg) no-repeat top center;
   background-size: cover;
 }
 
@@ -97,7 +97,7 @@ $fontFamily: monospace, serif, sans-serif, cursive, fantasy;
 
 .user-reviews {
   min-height: 70vh;
-  background: #ffffff url(../../../../public/img/homepage/night.jpg);
+  background: #ffffff url(../../../public/img/homepage/night.jpg);
   background-size: 100%;
 }
 

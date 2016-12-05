@@ -1,7 +1,7 @@
 import React from 'react'
 import PageHeader from 'react-bootstrap/lib/PageHeader'
-import PageLayout from '../../layouts/PageLayout'
-import ForgetPasswordForm from '../../forms/user/ForgetPasswordForm'
+import PageLayout from '../../components/layouts/PageLayout'
+import ForgetPasswordForm from '../../components/forms/user/ForgetPasswordForm'
 
 const ForgetPasswordPage = () => (
   <PageLayout>

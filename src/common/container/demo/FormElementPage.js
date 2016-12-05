@@ -1,7 +1,7 @@
 import React from 'react'
 import PageHeader from 'react-bootstrap/lib/PageHeader'
-import PageLayout from '../../layouts/PageLayout'
-import DemoForm from '../../forms/DemoForm'
+import PageLayout from '../../components/layouts/PageLayout'
+import DemoForm from '../../components/forms/DemoForm'
 
 const FormElementPage = (props) => (
   <PageLayout>
