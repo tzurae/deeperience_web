@@ -61,7 +61,7 @@ const SubNavigation = ({ activeTab, tabText, tabLink }) => (
 
 ## Initial state
 
-在reducers資料夾底下，會有很多的initialstate 檔案。因為註action、註reducer，個人認為沒有多大意義，而且也很難一個標準的註法，不如直接註 initialstate。
+在reducers資料夾底下，會有很多的initialstate 檔案。因為註reducer，個人認為沒有多大意義，而且也很難有一個標準的註法，不如直接註 initialstate。
 
 直接註在state後面，註解法如下：
 
@@ -75,9 +75,44 @@ const InitialState = Record({
 
 export default InitialState
 ```
+## action creator
 
+目前使用 flow 來標註 ```action creator``` 的 ```arguments```。不過因為我們沒有直接呼叫 action creator，而是把它 bind 在 dispatch 上呼叫，所以 ```flow``` 不會檢查到。因此，在我們這邊只是用一個標註的功能。
 
+寫法如下，參考 [文章](https://flowtype.org/docs/builtins.html#_)：
 
+```
+// @flow <- 一定要標註
+
+export const createTripError = (error: string) => {
+  return {
+    type: CREATE_TRIP_ERROR,
+    payload: {
+      error,
+    },
+  }
+}
+
+```
+
+如果傳進的參數很多，且可有可無，寫成一個一個參數不方便，非得要傳一個物件，請照以下方式寫。注意！因為不這樣寫，eslint 會跳錯，所以一定要用這種方式寫。參考 [flow Objects](https://flowtype.org/docs/objects.html) 。
+
+```
+type tripType = {
+  tripInfo: any,
+  routes: any,
+  startSites: Array<string>,
+  uuid2data: any,
+};
+
+// see components/forms/trip/fakeData
+export const setCreateTripData = (data: tripType) => {
+  return {
+    type: SET_CREATE_TRIP_DATA,
+    payload: data,
+  }
+}
+```
 
 
 

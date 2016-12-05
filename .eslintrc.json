@@ -27,7 +27,6 @@
     }
   },
   "rules": {
-    "strict": ["error", "safe"],
     "semi": ["error", "never"],
     "max-len": ["error", { "code": 120, "ignoreComments": true, "ignoreUrls": true }],
     "space-before-function-paren": ["error", "never"],
