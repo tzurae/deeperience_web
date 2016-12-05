@@ -1,3 +1,17 @@
+/**
+ * ## Edit by: noootown
+ *
+ * ## CreateTripForm
+ * @usage
+ *    整個 createTrip 的 form
+ *
+ * @props
+ * page: 目前是createtrip第幾頁
+ *    0
+ * nextPage: 下一頁的 function
+ * previousPage: 前一頁的 function
+ *
+ */
 import React from 'react'
 import { connect } from 'react-redux'
 import FormNames from '../../../../constants/FormNames'
@@ -5,6 +19,13 @@ import CreateTripFormPage1 from '../CreateTripFormPage1'
 import CreateTripFormPage2 from '../CreateTripFormPage2'
 import CreateTripFormPage3 from '../CreateTripFormPage3'
 import getOptions from '../../../../utils/getOptions'
+
+const mapStateToProps = state => {
+  return {
+    createTripForm: state.form[FormNames.TRIP_CREATE_TRIP],
+    messages: state.global.messages,
+  }
+}
 
 // http://redux-form.com/6.2.0/examples/wizard/
 class CreateTripForm extends React.Component {
@@ -15,6 +36,7 @@ class CreateTripForm extends React.Component {
       messages,
       nextPage,
       previousPage,
+      createTripForm,
     } = this.props
 
     const { tripDayInfos, tripElements } = getOptions(messages, ['TripDayInfos', 'TripElements'])
@@ -23,8 +45,8 @@ class CreateTripForm extends React.Component {
     let values
 
     // debug usage
-    if (this.props.createTripForm) {
-      values = this.props.createTripForm.values
+    if (createTripForm) {
+      values = createTripForm.values
     }
 
     return (
@@ -55,8 +77,4 @@ class CreateTripForm extends React.Component {
   }
 }
 
-export default connect(state => ({
-  apiEngine: state.global.apiEngine,
-  createTripForm: state.form[FormNames.TRIP_CREATE_TRIP],
-  messages: state.global.messages,
-}))(CreateTripForm)
+export default connect(mapStateToProps)(CreateTripForm)

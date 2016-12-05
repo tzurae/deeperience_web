@@ -96,6 +96,14 @@ class CreateTripFormPage2 extends React.Component {
     }
   }
 
+  /**
+   * ## handleSubmit
+   * @usage
+   * @param
+   *
+   * @return
+   */
+
   handleSubmit() {
     if (!this.validateForm(true)) return
 
@@ -132,6 +140,12 @@ class CreateTripFormPage2 extends React.Component {
     this.props.nextPage()
   }
 
+  /**
+   * ##
+   * @usage
+   * @param
+   * @return
+   */
   validateForm(submit = false) {
     // 1. dailyTrips, sites, routes, startSites has length = totalDay
     // 2. every props in dailyTrip has filled

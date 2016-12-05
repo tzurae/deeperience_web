@@ -2,17 +2,16 @@
  * ## Edit by: noootown
  *
  * ## SubNavigation
+ * @usage
+ *  Just a sub navbar, under the main navbar.
  *
  * @props
  * activeTab:
  *    0
- * tabText:
+ * tabText: I18n id of each tab
  *    ['nav.customize.customize', 'nav.customize.myCustomTrip']
  * tabLink: link of each tab
  *    ['#', '/trip/myCustomTrip']
- *
- * @export
- *    default: subnavbar
  *
  */
 
