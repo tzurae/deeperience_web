@@ -14,7 +14,7 @@ export default (state = initialState, action) => {
 
   switch (action.type) {
     case SET_OWN_SITE:
-      return state.set('ownSites', action.payload)
+      return state.set('ownSites', action.payload.sites)
 
     case SET_CREATE_TRIP_DATA:
       const { tripInfo, routes, startSites, uuid2data } = action.payload
@@ -47,7 +47,7 @@ export default (state = initialState, action) => {
         .set('uuid2data', uuid2data)
     }
     case CREATE_TRIP_ERROR:
-      return state.set('error', action.payload)
+      return state.set('error', action.payload.error)
 
     default:
       return state

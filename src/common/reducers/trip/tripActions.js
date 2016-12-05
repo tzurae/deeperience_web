@@ -8,14 +8,16 @@ const {
 export const setOwnSite = (sites) => {
   return {
     type: SET_OWN_SITE,
-    payload: sites,
+    payload: {
+      sites,
+    }
   }
 }
 
 export const setCreateTripData = (data) => {
   return {
     type: SET_CREATE_TRIP_DATA,
-    payload: data,
+    payload: data, // data is a object like this { tripInfo, routes, startSites, uuid2data }
   }
 }
 
@@ -28,6 +30,8 @@ export const resetCreateTripData = () => {
 export const createTripError = (error) => {
   return {
     type: CREATE_TRIP_ERROR,
-    payload: error,
+    payload: {
+      error,
+    },
   }
 }

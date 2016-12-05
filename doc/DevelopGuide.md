@@ -126,6 +126,7 @@ const actions = [
 ]
 
 ```
+
 #### redux
 
 1. 全部專案的 state，請用 redux 處理，不要使用 local state。
@@ -165,7 +166,20 @@ class CreateTripPage extends React.Component {
 
 export connect(mapStateToProps, mapDispatchToProps)(CreateTripPage)
 ```
+#### redux action
 
+action 請統一寫成以下形式，一個type，搭配一個 payload 物件。 
+
+```
+export const setOwnSite = (sites) => {
+  return {
+    type: SET_OWN_SITE,
+    payload: {
+		sites,
+	}
+  }
+}
+```
 
 #### redux form
 
