@@ -1,25 +1,33 @@
 import keyMirror from 'key-mirror'
 
 export default keyMirror({
-  SET_COOKIE: null,
-
+  // ------ global ------
   SET_API_ENGINE: null,
 
+  // ------ cookie ------
+  SET_COOKIE: null,
+
+  // ------ todoaction ------
   SET_TODO: null,
   ADD_TODO: null,
   REMOVE_TODO: null,
 
+  // ------ user ------
   LOGIN_USER: null,
   LOGOUT_USER: null,
 
+  // ------ intl ------
   UPDATE_LOCALE: null,
 
+  // ------ error ------
   PUSH_ERRORS: null,
   REMOVE_ERROR: null,
 
+  // ------ page ------
   SET_PAGE: null,
   SET_CURRENT_PAGE: null,
 
+  // ------ trip ------
   SET_OWN_SITE: null,
   SET_CREATE_TRIP_DATA: null,
   RESET_CREATE_TRIP_DATA: null,

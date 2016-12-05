@@ -1,4 +1,4 @@
-'use strict'
+
 import _ from 'underscore'
 
 export function calculateTripInfo(routes, startSites, allSites, uuid2data) {
