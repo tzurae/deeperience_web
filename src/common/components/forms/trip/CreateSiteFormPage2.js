@@ -29,8 +29,8 @@ const CreateSiteFormPage2 = ({ handleSubmit, ...props }) => {
     >
       <Editor />
 
-{/* 
-  
+{/*
+
       <Field
         name="introduction"
         component={FormField}
