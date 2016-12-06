@@ -15,7 +15,7 @@ import {
   DField,
 } from '../../fields/widgets'
 import configs from '../../../../../configs/project/client'
-import Text from '../../widgets/Text'
+import Text from '../../utils/Text'
 import SocialLoginList from '../../utils/SocialAuthButtonList'
 import Button from '../../utils/FormButton'
 

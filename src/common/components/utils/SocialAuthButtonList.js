@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import Head from '../widgets/Head'
-import Text from '../widgets/Text'
+import Head from '../utils/Head'
+import Text from '../utils/Text'
 
 const SocialAuthButtonList = ({ routing, login }) => {
   const { next } = routing.locationBeforeTransitions.query

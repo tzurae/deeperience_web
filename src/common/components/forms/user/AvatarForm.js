@@ -11,9 +11,9 @@ import { pushErrors } from '../../../reducers/error/errorActions'
 import { setCookies } from '../../../reducers/cookie/cookieActions'
 import { BsInput as Input } from '../../fields/adapters'
 import { BsForm as Form } from '../../fields/widgets'
-import Head from '../../widgets/Head'
+import Head from '../../utils/Head'
 import toRefreshURL from '../../../utils/toRefreshURL'
-import Text from '../../widgets/Text'
+import Text from '../../utils/Text'
 
 const initialValues = {
   storage: 'local',

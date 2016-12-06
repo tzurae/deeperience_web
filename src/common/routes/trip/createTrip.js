@@ -5,5 +5,5 @@ export default (store) => ({
       cb(null, require('../../container/trip/CreateTripPage/').default)
     })
   },
-  onEnter: require('../../utils/authRequired').default(store),
+  // onEnter: require('../../utils/authRequired').default(store),
 })

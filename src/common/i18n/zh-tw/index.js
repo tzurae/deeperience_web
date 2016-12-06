@@ -6,6 +6,7 @@ import TripLocations from './TripLocations'
 import TripDayInfos from './TripDayInfos'
 import { Languages, Levels } from './Languages'
 import flattenMessages from '../utils/flattenMessages'
+import SiteElements from './SiteElements'
 
 export default {
   parentLocale: 'zh',
@@ -14,7 +15,9 @@ export default {
   'nav.language': '語言',
   'nav.feature': '產品特色',
   'nav.wonderful': '精采案例',
-  'nav.customize': '客製行程',
+  'nav.customize': '客製旅程',
+  'nav.customize.customize': '客製旅程',
+  'nav.customize.myCustomTrip': '我的旅程',
   'nav.user': '會員',
   'nav.user.login': '登入',
   'nav.user.register': '註冊',
@@ -42,6 +45,16 @@ export default {
   'trip.createTrip.form.dayInfo': '天數',
   'trip.createTrip.form.previousStep': '上一步',
   'trip.createTrip.form.nextStep': '下一步',
+  'trip.createSite.title1': '景點名稱',
+  'trip.createSite.title2': '景點簡介',
+  'trip.createSite.title3': '景點資訊',
+  'trip.createSite.title4': '周邊景點',
+  'trip.createSite.title5': '完成',
+  'trip.createSite.form.name': '景點名稱',
+  'trip.createSite.form.previousStep': '上一步',
+  'trip.createSite.form.nextStep': '下一步',
+  'trip.createSite.form.congratulation': '恭喜！您已建立完成您的專屬行程',
+  'trip.createSite.form.finish': '完成',
   'login.email': '信箱',
   'login.password': '密碼',
   'login.rememberMe': '記住我',
@@ -107,6 +120,7 @@ export default {
   'presentTrip.manageTrip.explain': '輕鬆管理所有您建立的旅程和交易',
   ...flattenMessages(HotelTypes, 'HotelTypes'),
   ...flattenMessages(TripElements, 'TripElements'),
+  ...flattenMessages(SiteElements, 'SiteElements'),
   ...flattenMessages(FoodElements, 'FoodElements'),
   ...flattenMessages(TravelWays, 'TravelWays'),
   ...flattenMessages(TripDayInfos, 'TripDayInfos'),

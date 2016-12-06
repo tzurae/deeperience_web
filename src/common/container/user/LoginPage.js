@@ -3,7 +3,7 @@ import Row from 'react-bootstrap/lib/Row'
 import Col from 'react-bootstrap/lib/Col'
 import PageLayout from '../../components/layouts/PageLayout'
 import LoginForm from '../../components/forms/user/LoginForm'
-import Text from '../../components/widgets/Text'
+import Text from '../../components/utils/Text'
 
 const style = {
   form: {

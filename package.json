@@ -114,6 +114,8 @@
     "body-parser": "^1.15.0",
     "classnames": "^2.2.3",
     "cookie": "^0.2.4",
+    "draft-js": "^0.9.1",
+    "draft-js-export-html": "^0.5.2",
     "es6-promise": "^3.1.2",
     "express": "^4.13.4",
     "facebook-plugins": "^1.0.5",

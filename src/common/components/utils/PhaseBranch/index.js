@@ -1,5 +1,5 @@
 import React from 'react'
-import Text from '../../widgets/Text'
+import Text from '../Text'
 import styles from './styles.scss'
 
 const PhaseBranch = ({ nodes, active, cb }) => {

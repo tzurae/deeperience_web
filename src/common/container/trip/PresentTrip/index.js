@@ -5,7 +5,7 @@ import Col from 'react-bootstrap/lib/Col'
 import { Link } from 'react-router'
 import PageLayout from '../../../components/layouts/PageLayout'
 import styles from '../../../styles'
-import Text from '../../../components/widgets/Text'
+import Text from '../../../components/utils/Text'
 
 const style = {
   title: {

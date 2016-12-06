@@ -1,0 +1,27 @@
+@import '../../../styles/index';
+
+.nav {
+  z-index: 0;
+  border-width: 0;
+  background-color: $white;
+}
+
+.header {
+  margin-left: 20px;
+}
+
+.text {
+  @include font-size-medium;
+}
+
+.text-active {
+  color: $color-main;
+
+  @extend .text;
+}
+
+.text-inactive {
+  color: $black;
+
+  @extend .text;
+}

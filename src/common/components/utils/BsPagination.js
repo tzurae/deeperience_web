@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import cx from 'classnames'
 import { setCrrentPage } from '../../reducers/page/pageActions'
-import Text from '../widgets/Text'
+import Text from './Text'
 
 const style = {
   cursor: 'pointer',

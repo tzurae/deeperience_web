@@ -5,7 +5,7 @@ import Modal from 'react-bootstrap/lib/Modal'
 import Button from 'react-bootstrap/lib/Button'
 import PageLayout from '../../components/layouts/PageLayout'
 import RegisterForm from '../../components/forms/user/RegisterForm'
-import Text from '../../components/widgets/Text'
+import Text from '../../components/utils/Text'
 
 const style = {
   form: {

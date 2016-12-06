@@ -5,12 +5,12 @@ import { Map } from 'immutable'
 import Col from 'react-bootstrap/lib/Col'
 import PageLayout from '../../../components/layouts/PageLayout'
 import PanelContainer from '../../../components/utils/PanelContainer'
-import Panel from '../../../components/utils/Panel'
+import { Panel1, Panel2 } from '../../../components/utils/Panel'
 import PhaseBranch from '../../../components/utils/PhaseBranch'
 import CreateTripForm from '../../../components/forms/trip/CreateTripForm'
-import styles from '../../../styles'
 import tripAPI from '../../../api/trip'
 import * as tripActions from '../../../reducers/trip/tripActions'
+import SubNavigation from '../../../components/utils/SubNavigation'
 
 const actions = [
   tripActions,
@@ -75,40 +75,33 @@ class CreateTripPage extends React.Component {
     const { page } = this.state
     return (
       <PageLayout
-        tripTabActive={3}
+        subNav={
+          <SubNavigation
+            activeTab={2}
+            tabText={['nav.trip.createSite', 'nav.trip.manageSite', 'nav.trip.createTrip', 'nav.trip.manageTrip']}
+            tabLink={['#', '#', '/trip/createTrip', '#']}
+          />
+        }
       >
         <PanelContainer>
           <Col md={2}>
-            <Panel
-              title="trip.createTrip"
-              underlineStyle={{ background: styles.color.borderGrey }}
-            >
+            <Panel2 title="trip.createTrip">
               <PhaseBranch
                 nodes={this.nodes}
                 active={page}
               />
-            </Panel>
+            </Panel2>
           </Col>
           <Col md={7}>
-            <Panel
-              title={this.nodes[page]}
-              underlineStyle={{ background: styles.color.orange, height: '3px' }}
-              titleStyle={{ textAlign: 'left' }}
-              contentDivStyle={{ padding: '20px 30px' }}
-            >
+            <Panel1 title={this.nodes[page]}>
               <CreateTripForm
                 page={page}
                 nextPage={this.nextPage}
                 previousPage={this.previousPage}
               />
-            </Panel>
+            </Panel1>
           </Col>
-          <Col md={3}>
-            <Panel
-              title="trip.createTrip.help"
-              isUnderline={false}
-            />
-          </Col>
+          <Col md={3}/>
         </PanelContainer>
       </PageLayout>
     )

@@ -3,7 +3,7 @@ import { Field, reduxForm } from 'redux-form'
 import FormNames from '../../../../constants/FormNames'
 import FormButton from '../../../utils/FormButton'
 import validate from '../createTripValidate'
-import Text from '../../../widgets/Text'
+import Text from '../../../utils/Text'
 import {
   BsInput as Input,
   BsSelect as Select,

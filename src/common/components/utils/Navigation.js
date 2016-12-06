@@ -9,7 +9,7 @@ import { pushErrors } from '../../reducers/error/errorActions'
 import Navbar from './BsNavbar'
 import NavLink from './NavLink'
 import MenuItem from './MenuItem'
-import Text from '../widgets/Text'
+import Text from './Text'
 import styles from '../../styles'
 
 const style = {
@@ -74,34 +74,39 @@ class Navigation extends Component {
                   onClick={this._setLanguage.bind(this, 'zh-tw')}
                 />
               </Navbar.Dropdown>
-              <Navbar.Nav>
-                {/* <NavLink to="/feature" onlyActiveOnIndex>*/}
-                  {/* <Text id="nav.feature" style={style.text}/>*/}
-                {/* </NavLink>*/}
-                {/* <NavLink to="/wonderful">*/}
-                  {/* <Text id="nav.wonderful" style={style.text}/>*/}
-                {/* </NavLink>*/}
-                <NavLink to="/customize">
-                  <Text id="nav.customize" style={style.text}/>
+
+              <Navbar.Dropdown
+                title={<Text id="nav.customize" style={{ ...style.text, display: 'inline' }}/>}
+              >
+                <NavLink to="/trip/customize">
+                  <Text id="nav.customize.customize"/>
                 </NavLink>
-              </Navbar.Nav>
+                <NavLink to="/trip/myCustomTrip">
+                  <Text id="nav.customize.myCustomTrip"/>
+                </NavLink>
+              </Navbar.Dropdown>
+
               <Navbar.Dropdown
                 title={<Text id="nav.trip" style={{ ...style.text, display: 'inline' }}/>}
               >
+                <NavLink to="/trip/createSite">
+                  <Text id="nav.trip.createSite"/>
+                </NavLink>
                 <NavLink to="/trip/createTrip">
                   <Text id="nav.trip.createTrip"/>
                 </NavLink>
               </Navbar.Dropdown>
+
               <Navbar.Dropdown
                 title={
                   !isAuth ?
-                  <Text id="nav.user.profile"/> :
-                  user.avatarURL ? (
-                    <Image
-                      style={{ height: 18 }}
-                      src={user.avatarURL} rounded
-                    />
-                  ) : (user.name || user.email)
+                    <Text id="nav.user.profile"/> :
+                    user.avatarURL ? (
+                      <Image
+                        style={{ height: 18 }}
+                        src={user.avatarURL} rounded
+                      />
+                    ) : (user.name || user.email)
                 }
               >
                 {!isAuth &&

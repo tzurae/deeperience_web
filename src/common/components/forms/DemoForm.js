@@ -5,7 +5,7 @@ import { Field, reduxForm } from 'redux-form'
 import Alert from 'react-bootstrap/lib/Alert'
 import Button from 'react-bootstrap/lib/Button'
 import FormNames from '../../constants/FormNames'
-import Head from '../widgets/Head'
+import Head from '../utils/Head'
 import {
   RangeSlider,
   AirSingleDate,

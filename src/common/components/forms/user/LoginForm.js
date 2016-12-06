@@ -7,7 +7,7 @@ import FormNames from '../../../constants/FormNames'
 import userAPI from '../../../api/user'
 import { pushErrors } from '../../../reducers/error/errorActions'
 import { loginUser } from '../../../reducers/user/userActions'
-import Text from '../../widgets/Text'
+import Text from '../../utils/Text'
 import styles from '../../../styles'
 import { BsInput as Input, BsCheckbox as Checkbox } from '../../fields/adapters'
 import {

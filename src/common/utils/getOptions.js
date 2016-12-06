@@ -43,5 +43,36 @@ export default (messages, options) => {
     }
   }
 
+  if (options.indexOf('SiteElements') !== -1) {
+    const siteElements = {}
+    option.siteElements = []
+
+    Object.keys(Options)
+      .filter(value => value.indexOf('SiteElements') === 0)
+      .forEach(value => {
+        const arr = value.split('.')
+
+        if (!siteElements[arr[1]]) {
+          siteElements[arr[1]] = {
+            label: '',
+            value: [],
+          }
+        }
+
+        if (arr[2] === 'label') {
+          siteElements[arr[1]].label = value
+        } else {
+          siteElements[arr[1]].value.push({
+            label: messages[value],
+            value,
+          })
+        }
+      })
+
+    for (const element in siteElements) {
+      option.siteElements.push(siteElements[element])
+    }
+  }
+
   return option
 }
