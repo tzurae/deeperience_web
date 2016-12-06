@@ -1,22 +1,21 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router'
 import { push } from 'react-router-redux'
 import { Field, reduxForm, SubmissionError } from 'redux-form'
 import Alert from 'react-bootstrap/lib/Alert'
-import Button from 'react-bootstrap/lib/Button'
 import FormNames from '../../../constants/FormNames'
 import userAPI from '../../../api/user'
 import { pushErrors } from '../../../reducers/error/errorActions'
 import { loginUser } from '../../../reducers/user/userActions'
 import Text from '../../widgets/Text'
 import styles from '../../../styles'
-import { BsInput as Input } from '../../fields/adapters'
+import { BsInput as Input, BsCheckbox as Checkbox } from '../../fields/adapters'
 import {
   BsForm as Form,
-  BsFormFooter as FormFooter,
   DField,
 } from '../../fields/widgets'
+import Button from '../../utils/FormButton'
+import SocialLoginList from '../../utils/SocialAuthButtonList'
 
 const style = {
   bg: {
@@ -37,7 +36,7 @@ const style = {
     width: '7em',
     color: 'white',
     fontSize: '1.2em',
-    marginTop: '40px',
+    margin: '0',
     borderRadius: '50px',
     backgroundColor: '#FF864F',
   },
@@ -45,10 +44,9 @@ const style = {
     width: '7em',
     color: 'white',
     fontSize: '1.2em',
-    marginTop: '40px',
+    margin: '0',
     borderRadius: '50px',
     backgroundColor: 'transparent',
-    border: '2px solid #FF864F',
   },
   label: {
     color: 'white',
@@ -131,6 +129,8 @@ class LoginForm extends Component {
         <Form onSubmit={handleSubmit(this.handleSubmit)}>
           <div style={{ padding: '0 40px' }}>
             {submitFailed && error && (<Alert bsStyle="danger">{error}</Alert>)}
+            <SocialLoginList login/>
+            <hr/>
             <Text id="login.email" style={style.label} />
             <Field
               name="email"
@@ -149,27 +149,17 @@ class LoginForm extends Component {
               placeholder="密碼"
               style={style.field}
             />
-            <input type="checkbox" name="remember" value="remember" />
-            <span style={{ color: 'white', marginLeft: '6px' }}>
-              <Text id="login.rememberMe" />
-            </span>
-            <div style={{ marginRight: '135px' }}>
-              <FormFooter>
-                <div style={{ display: 'flex' }}>
-                  <div style={{ flexGrow: '1', order: '2', marginLeft: '10px' }}>
-                    <Button type="submit" disabled={pristine || submitting || invalid} style={style.submit}>
-                      <Text id="nav.user.login" />
-                    </Button>
-                  </div>
-                  <div style={{ flexGrow: '1', order: '1', marginRight: '10px' }}>
-                    <Link to="/user/register">
-                      <Button type="submit" disabled={false} style={style.register}>
-                        <Text id="nav.user.register" />
-                      </Button>
-                    </Link>
-                  </div>
-                </div>
-              </FormFooter>
+            <Field
+              name="rememberMe"
+              component={DField}
+              adapter={Checkbox}
+              type="checkbox"
+              text={<Text id="login.rememberMe" style={{color: 'white'}} isSpan={true}/>}
+            />
+            <div style={{ display:'flex', justifyContent:'center',paddingTop: '10px' }}>
+              <Button type="submit" disabled={pristine || submitting || invalid} style={style.submit}>
+                <Text id="nav.user.login" />
+              </Button>
             </div>
           </div>
         </Form>

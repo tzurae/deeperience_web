@@ -3,11 +3,12 @@ import { connect } from 'react-redux'
 import Head from '../widgets/Head'
 import Text from '../widgets/Text'
 
-const SocialAuthButtonList = ({ routing }) => {
+const SocialAuthButtonList = ({ routing, login }) => {
   const { next } = routing.locationBeforeTransitions.query
   const search = next ? `?next=${next}` : ''
 
   return (
+    login ? (
     <div>
       <Head
         links={[
@@ -19,9 +20,25 @@ const SocialAuthButtonList = ({ routing }) => {
         className="btn btn-block btn-social btn-facebook"
       >
         <span className="fa fa-facebook"></span>
-        <Text id='register.facebook'/>
+        <Text id='login.facebook'/>
       </a>
     </div>
+    ) : (
+      <div>
+        <Head
+          links={[
+          'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-social/5.0.0/bootstrap-social.min.css',
+        ]}
+        />
+        <a
+          href={`/auth/facebook${search}`}
+          className="btn btn-block btn-social btn-facebook"
+        >
+          <span className="fa fa-facebook"></span>
+          <Text id='register.facebook'/>
+        </a>
+      </div>
+    )
   )
 }
 

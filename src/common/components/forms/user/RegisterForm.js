@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import { Field, reduxForm } from 'redux-form'
 import Alert from 'react-bootstrap/lib/Alert'
-import Button from 'react-bootstrap/lib/Button'
 import validator from 'validator'
 import FormNames from '../../../constants/FormNames'
 import userAPI from '../../../api/user'
@@ -13,12 +12,12 @@ import { BsInput as Input, BsCheckbox as Checkbox } from '../../fields/adapters'
 import styles from '../../../styles'
 import {
   BsForm as Form,
-  BsFormFooter as FormFooter,
   DField,
 } from '../../fields/widgets'
 import configs from '../../../../../configs/project/client'
 import Text from '../../widgets/Text'
 import SocialLoginList from '../../utils/SocialAuthButtonList'
+import Button from '../../utils/FormButton'
 
 const validate = (values) => {
   const errors = {}
@@ -113,8 +112,9 @@ const style = {
     marginBottom: '15px',
   },
   button: {
+    display: 'flex',
+    justifyContent: 'center',
     paddingTop:'10px',
-    width: '100% !important',
   }
 }
 
@@ -201,9 +201,8 @@ class RegisterForm extends Component {
               adapter={Checkbox}
               type="checkbox"
               text={<Text id="register.hasRead" style={{color: 'white' }} isSpan={true}/>}
-              style={{border:'1px solid red'}}
             />
-            <FormFooter style={style.button}>
+            <div style={style.button}>
               <Button
                 type="submit"
                 onClick={valid?this.props.openModal:null}
@@ -212,7 +211,7 @@ class RegisterForm extends Component {
               >
                 <Text id="register.register" />
               </Button>
-            </FormFooter>
+            </div>
           </div>
         </Form>
       </div>
