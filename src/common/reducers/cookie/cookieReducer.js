@@ -1,7 +1,8 @@
 import cookie from 'cookie'
-import {
+
+const {
   SET_COOKIE,
-} from '../../constants/ActionTypes'
+} = require('../../constants/ActionTypes').default
 
 let initCookies = {}
 if (process.env.BROWSER) {
