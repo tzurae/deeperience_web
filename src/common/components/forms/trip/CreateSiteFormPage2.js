@@ -1,5 +1,5 @@
 import React from 'react'
-import { reduxForm } from 'redux-form'
+import { Field, reduxForm } from 'redux-form'
 import FormNames from '../../../constants/FormNames'
 import FormButton from '../../utils/FormButton'
 import validate from './createSiteValidate'
@@ -25,19 +25,13 @@ const CreateSiteFormPage2 = ({ handleSubmit, ...props }) => {
       defaultFieldDimensions={{ sm: 6 }}
       onSubmit={handleSubmit}
     >
-      <Editor />
-
-{/*
-
-      <Field
-        name="introduction"
-        component={FormField}
-        fieldDimensions={{ sm: 12 }}
-        adapter={Textarea}
-        rows="20"
+      <Field 
+        name="editor"
+        component={Editor}
+        type="text"
+        onChange={onChange}
       />
 
-*/}
       <FormFooter
         labelDimensions={{ sm: 0 }}
         fieldDimensions={{ sm: 12 }}

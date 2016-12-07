@@ -21,8 +21,6 @@ class CreateSiteForm extends React.Component {
 
     const { tripDayInfos, siteElements } = getOptions(messages, ['TripDayInfos', 'SiteElements'])
 
-    console.log(siteElements)
-
     let values
 
     // debug usage

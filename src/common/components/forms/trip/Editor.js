@@ -1,7 +1,11 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { change, Field } from 'redux-form'
+import { stateToHTML } from 'draft-js-export-html'
+import { BsInput as Input } from '../../fields/adapters'
 import { Editor, EditorState, RichUtils, Entity, AtomicBlockUtils } from 'draft-js'
 // import { Editor, EditorState, RichUtils, convertToRaw, Entity, AtomicBlockUtils } from 'draft-js'
-import { stateToHTML } from 'draft-js-export-html'
+import { BsField as FormField } from '../../fields/widgets'
 
 class SiteEditor extends React.Component {
   constructor(props) {
@@ -11,16 +15,24 @@ class SiteEditor extends React.Component {
     this.focus = () => this.refs.editor.focus()
     this.onChange = (editorState) => {
       this.setState({ editorState })
-      const state = editorState.getCurrentContent()
-      console.log(stateToHTML(state))
+      let state = editorState.getCurrentContent()
+      let htmlStr = stateToHTML(state)
+      this.props.dispatch(change('TRIP_CREATE_SITE', 'introduce', htmlStr))
             // this.addImage()
+
     }
 
+    this.onImageUpload = (e) => this._onImageUpload(e)
     this.handleKeyCommand = (command) => this._handleKeyCommand(command)
     this.onTab = (e) => this._onTab(e)
     this.toggleBlockType = (type) => this._toggleBlockType(type)
     this.toggleInlineStyle = (style) => this._toggleInlineStyle(style)
     this.addImage = () => this._addImage()
+  }
+
+  _onImageUpload(e){
+    console.log(e.target.value)
+    console.log(e)
   }
 
   _handleKeyCommand(command) {
@@ -57,15 +69,6 @@ class SiteEditor extends React.Component {
   }
 
   _addImage() {
-        /*
-        this.setState({
-            showURLInput: true,
-            urlValue: '',
-            urlType: 'image',
-        }, () => {
-            setTimeout(() => this.refs.url.focus(), 0);
-        });
-        */
     const urlValue = 'http://i.imgur.com/Ceihz91.png'
     const urlType = 'image'
     const { editorState } = this.state
@@ -94,28 +97,31 @@ class SiteEditor extends React.Component {
     }
 
     return (
-            <div className="RichEditor-root">
-                <BlockStyleControls
+      <div>
+          <div className="RichEditor-root">
+            <input type="file" onChange={this.onImageUpload} name="test" />
+            <BlockStyleControls
+                editorState={editorState}
+                onToggle={this.toggleBlockType}
+                />
+            <InlineStyleControls
+                editorState={editorState}
+                onToggle={this.toggleInlineStyle}
+                />
+            <div className={className} onClick={this.focus}>
+                <Editor
+                    blockRendererFn={mediaBlockRenderer}
+                    blockStyleFn={getBlockStyle}
                     editorState={editorState}
-                    onToggle={this.toggleBlockType}
-                    />
-                <InlineStyleControls
-                    editorState={editorState}
-                    onToggle={this.toggleInlineStyle}
-                    />
-                <div className={className} onClick={this.focus}>
-                    <Editor
-                        blockRendererFn={mediaBlockRenderer}
-                        blockStyleFn={getBlockStyle}
-                        editorState={editorState}
-                        handleKeyCommand={this.handleKeyCommand}
-                        onChange={this.onChange}
-                        onTab={this.onTab}
-                        ref="editor"
-                        spellCheck={true}
-                    />
-                </div>
+                    handleKeyCommand={this.handleKeyCommand}
+                    onChange={this.onChange}
+                    onTab={this.onTab}
+                    ref="editor"
+                    spellCheck={true}
+                />
             </div>
+          </div>
+      </div>
     )
   }
 }
@@ -233,4 +239,8 @@ const InlineStyleControls = (props) => {
   )
 }
 
-export default SiteEditor
+const mapDispatchToProps = (dispatch) => ({
+  dispatch
+})
+
+export default connect(null, mapDispatchToProps)(SiteEditor)
