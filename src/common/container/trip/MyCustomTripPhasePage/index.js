@@ -11,7 +11,6 @@ import * as tripActions from '../../../reducers/trip/tripActions'
 import SubNavigation from '../../../components/utils/SubNavigation'
 import fakeData from './fakeData'
 import PhaseChooseGuide from '../../../components/custom/CustomTripPhaseChooseGuide'
-import { getValue } from '../../../utils/getI18nValue'
 import styles from './styles.scss'
 
 const actions = [
@@ -39,6 +38,8 @@ const mapDispatchToProps = dispatch => {
 class MyCustomTripPhasePage extends React.Component {
   constructor(props) {
     super(props)
+
+    // temp for quick demo
     this.state = {
       page: 1,
     }
@@ -52,6 +53,14 @@ class MyCustomTripPhasePage extends React.Component {
       'trip.customize.balance',
       'trip.customize.travel',
     ]
+    this.cb = [0, 1, 2, 3, 4, 5, 6, 7].map(page => () => this.setPage(page))
+  }
+  // tempeorary for quick demo
+
+  setPage(page) {
+    this.setState({
+      page
+    })
   }
 
   render() {
@@ -72,6 +81,7 @@ class MyCustomTripPhasePage extends React.Component {
               <PhaseBranch
                 nodes={this.nodes}
                 active={page}
+                cb={this.cb}
               />
             </Panel2>
           </Col>

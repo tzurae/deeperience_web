@@ -31,7 +31,7 @@ const CustomTripMenuItem = ({ title, guideName, dayInfo, phaseText, phase, onCli
     <button
       className={styles.btn}
     >
-      <Link to="/trip/customize">
+      <Link to="/trip/myCustomTripPhase/">
         <div className={styles.container}>
           <div className={styles.infoDiv}>
             <h4 className={styles.title}>

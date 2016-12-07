@@ -39,7 +39,7 @@ class CreateTripForm extends React.Component {
       createTripForm,
     } = this.props
 
-    const { tripDayInfos, tripElements } = getOptions(messages, ['TripDayInfos', 'TripElements'])
+    const { tripDayInfos, tripElements } = getOptions(messages.toJS(), ['TripDayInfos', 'TripElements'])
     tripElements.splice(0, 1) // remove ANY
 
     let values

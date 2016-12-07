@@ -1,5 +1,5 @@
 export default (store) => ({
-  path: 'customize',
+  path: 'myCustomTripPhase',
   getComponent(nextState, cb) {
     require.ensure([], (require) => {
       cb(null, require('../../container/trip/MyCustomTripPhasePage').default)

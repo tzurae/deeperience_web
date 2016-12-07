@@ -32,14 +32,14 @@
   align-items: center;
 }
 
-.guideInfo {
+.guide-info {
   display: flex;
   flex: 1;
   color: $black;
   align-items: center;
 }
 
-.guideName {
+.guide-name {
   @include font-size-medium;
   margin-left: 15px;
 }
@@ -52,7 +52,7 @@
   background-size: contain;
 }
 
-.dayInfo {
+.day-info {
   @include font-size-small;
   margin-left: 15px;
   padding: 2px;

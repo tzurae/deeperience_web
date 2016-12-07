@@ -7,7 +7,7 @@ import CreateSiteFormPage3 from './CreateSiteFormPage3'
 import CreateSiteFormPage4 from './CreateSiteFormPage4'
 import CreateSiteFormPage5 from './CreateSiteFormPage5'
 import { setPage, nextPage, previousPage } from '../../../actions/createSiteActions'
-import getOptions from '../../../utils/getOptions'
+import { getOptions } from '../../../utils/getI18nValue'
 
 // http://redux-form.com/6.2.0/examples/wizard/
 class CreateSiteForm extends React.Component {
@@ -38,7 +38,7 @@ class CreateSiteForm extends React.Component {
       messages,
     } = this.props
 
-    const { tripDayInfos, siteElements } = getOptions(messages, ['TripDayInfos', 'SiteElements'])
+    const { tripDayInfos, siteElements } = getOptions(messages.toJS(), ['TripDayInfos', 'SiteElements'])
 
     let values
 
