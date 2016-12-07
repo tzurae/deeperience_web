@@ -29,7 +29,6 @@ const CreateSiteFormPage2 = ({ handleSubmit, ...props }) => {
         name="editor"
         component={Editor}
         type="text"
-        onChange={onChange}
       />
 
       <FormFooter
