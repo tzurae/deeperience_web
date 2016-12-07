@@ -7,6 +7,7 @@ import TripDayInfos from './TripDayInfos'
 import { Languages, Levels } from './Languages'
 import flattenMessages from '../utils/flattenMessages'
 import CustomPhases from './CustomPhases'
+import SiteElements from './SiteElements'
 
 export default {
   parentLocale: 'zh',
@@ -53,16 +54,28 @@ export default {
   'trip.customize.video': '視訊討論',
   'trip.customize.balance': '完成付款',
   'trip.customize.travel': '出遊',
+  'trip.createSite.title1': '景點名稱',
+  'trip.createSite.title2': '景點簡介',
+  'trip.createSite.title3': '景點資訊',
+  'trip.createSite.title4': '周邊景點',
+  'trip.createSite.title5': '完成',
+  'trip.createSite.form.name': '景點名稱',
+  'trip.createSite.form.previousStep': '上一步',
+  'trip.createSite.form.nextStep': '下一步',
+  'trip.createSite.form.congratulation': '恭喜！您已建立完成您的專屬行程',
+  'trip.createSite.form.finish': '完成',
   'login.email': '信箱',
   'login.password': '密碼',
   'login.rememberMe': '記住我',
   'login.ensurePassword': '確認密碼',
+  'login.facebook':'使用Facebook帳號登入',
   'login.title': '完美客製化旅程，旅程規劃零負擔',
   'register.mailHasSent': '確認信已送出！',
+  'register.facebook': '使用Facebook帳戶註冊',
   'register.pleaseReceive': '請至信箱收取會員確認信',
   'register.sure': '確認',
-  'register.hasRead': '已詳細閱讀',
-  'register.memberShip': '會員條款',
+  'register.hasRead': '註冊會員表示您同意遵守服務條款',
+  'register.memberShip': '服務條款',
   'register.register': '註冊',
   'user.name': '暱稱',
   'memberCenter.personalPage': '個人頁面',
@@ -116,6 +129,7 @@ export default {
   'presentTrip.manageTrip.explain': '輕鬆管理所有您建立的旅程和交易',
   ...flattenMessages(HotelTypes, 'HotelTypes'),
   ...flattenMessages(TripElements, 'TripElements'),
+  ...flattenMessages(SiteElements, 'SiteElements'),
   ...flattenMessages(FoodElements, 'FoodElements'),
   ...flattenMessages(TravelWays, 'TravelWays'),
   ...flattenMessages(TripDayInfos, 'TripDayInfos'),

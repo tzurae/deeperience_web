@@ -20,6 +20,7 @@ import { removeCookie } from '../common/reducers/cookie/cookieActions'
 import ApiEngine from '../common/utils/ApiEngine'
 import createLoggerMiddleware from 'redux-logger'
 import LoggerSettings from '../../configs/env/logger'
+import { composeWithDevTools } from 'redux-devtools-extension'
 
 const logger = createLoggerMiddleware({
   collapsed: true,
@@ -56,9 +57,8 @@ const initialState = window.__INITIAL_STATE__
 const store = createStore(
   rootReducer,
   initialState,
-  applyMiddleware(
-    ...middlewares
-  )
+  composeWithDevTools(
+  applyMiddleware(...middlewares))
 )
 
 const apiEngine = new ApiEngine()

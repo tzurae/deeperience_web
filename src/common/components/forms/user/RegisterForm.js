@@ -3,21 +3,21 @@ import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import { Field, reduxForm } from 'redux-form'
 import Alert from 'react-bootstrap/lib/Alert'
-import Button from 'react-bootstrap/lib/Button'
 import validator from 'validator'
 import FormNames from '../../../constants/FormNames'
 import userAPI from '../../../api/user'
 import { validateForm } from '../../../reducers/form/formActions'
 import { pushErrors } from '../../../reducers/error/errorActions'
-import { BsInput as Input } from '../../fields/adapters'
+import { BsInput as Input, BsCheckbox as Checkbox } from '../../fields/adapters'
 import styles from '../../../styles'
 import {
   BsForm as Form,
-  BsFormFooter as FormFooter,
   DField,
 } from '../../fields/widgets'
 import configs from '../../../../../configs/project/client'
 import Text from '../../utils/Text'
+import SocialLoginList from '../../utils/SocialAuthButtonList'
+import Button from '../../utils/FormButton'
 
 const validate = (values) => {
   const errors = {}
@@ -48,6 +48,18 @@ const validate = (values) => {
     }
   }
 
+  if(!values.ensurePassword) {
+    errors.ensurePassword = ' Required'
+  } else {
+    if (values.password && values.ensurePassword) {
+      if (values.password !== values.ensurePassword) {
+        errors.ensurePassword = '確認密碼與密碼不相同'
+      }
+    }
+  }
+
+  if(!values.membershi)
+
   if (!values.isAgreeTerms) {
     errors.isAgreeTerms = 'Required'
   }
@@ -55,13 +67,6 @@ const validate = (values) => {
   if (configs.recaptcha && !values.recaptcha) {
     errors.recaptcha = 'Required'
   }
-
-  if (values.password && values.ensurePassword) {
-    if (values.password !== values.ensurePassword) {
-      errors.ensurePassword = '確認密碼與密碼不相同'
-    }
-  }
-
   return errors
 }
 
@@ -95,8 +100,6 @@ const style = {
     width: '8em',
     color: 'white',
     fontSize: '1.2em',
-    marginTop: '40px',
-    marginLeft: '0.9em',
     borderRadius: '50px',
     backgroundColor: '#FF864F',
   },
@@ -108,6 +111,11 @@ const style = {
     marginTop: '5px',
     marginBottom: '15px',
   },
+  button: {
+    display: 'flex',
+    justifyContent: 'center',
+    paddingTop:'10px',
+  }
 }
 
 class RegisterForm extends Component {
@@ -117,8 +125,8 @@ class RegisterForm extends Component {
   }
 
   _handleSubmit(formData) {
-    const { dispatch, apiEngine } = this.props
 
+    const { dispatch, apiEngine } = this.props
     return userAPI(apiEngine)
       .register(formData)
       .catch((err) => {
@@ -126,7 +134,7 @@ class RegisterForm extends Component {
         throw err
       })
       .then((json) => {
-        dispatch(push('/user/login'))
+        setTimeout(dispatch(push('/user/login')),5000);
       })
   }
 
@@ -139,8 +147,8 @@ class RegisterForm extends Component {
       asyncValidating,
       submitting,
       invalid,
+      valid,
     } = this.props
-
     return (
       <div style={style.bg}>
         <div style={style.title}>
@@ -149,6 +157,8 @@ class RegisterForm extends Component {
         <Form horizontal onSubmit={handleSubmit(this.handleSubmit)} style={{ margin: '0 30px' }}>
           {submitFailed && error && (<Alert bsStyle="danger">{error}</Alert>)}
           <div style={{ padding: '0 11px' }}>
+            <SocialLoginList/>
+            <hr />
             <Text id="user.name" style={style.label} />
             <Field
               name="name"
@@ -185,24 +195,23 @@ class RegisterForm extends Component {
               placeholder="Repeat Password"
               style={style.field}
             />
-            <input type="checkbox" name="memberShip" value="memberShip" />
-            <span style={{ color: 'white' }}>
-              <Text id="register.hasRead" />
-            </span>
-            <a href="http://www.w3schools.com/html/" target="_blank">
-              <Text id="register.memberShip" />
-            </a>
-            <br />
-            <FormFooter>
+            <Field
+              name="memberShip"
+              component={DField}
+              adapter={Checkbox}
+              type="checkbox"
+              text={<Text id="register.hasRead" style={{color: 'white' }} isSpan={true}/>}
+            />
+            <div style={style.button}>
               <Button
                 type="submit"
-                onClick={this.props.openModal}
+                onClick={valid?this.props.openModal:null}
                 disabled={pristine || !!asyncValidating || submitting || invalid}
                 style={style.submit}
               >
                 <Text id="register.register" />
               </Button>
-            </FormFooter>
+            </div>
           </div>
         </Form>
       </div>

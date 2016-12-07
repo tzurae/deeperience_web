@@ -100,7 +100,6 @@ export default (req, res, next) => {
               })
             })
             const data = await Promise.all([likesPromise, friendsPromise, birthdayPromise])
-            console.log(data)
             user.social.profile.facebook.likes = data[0]
             user.social.profile.facebook.friends = data[1]
             user.birthday.day = Number(data[2].birthday.substr(3, 2))

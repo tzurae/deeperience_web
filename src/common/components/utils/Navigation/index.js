@@ -77,6 +77,9 @@ class Navigation extends Component {
               <Navbar.Dropdown
                 title={<Text id="nav.trip" className={styles.dropdownText}/>}
               >
+                <NavLink to="/trip/createSite">
+                  <Text id="nav.trip.createSite"/>
+                </NavLink>
                 <NavLink to="/trip/createTrip">
                   <Text id="nav.trip.createTrip"/>
                 </NavLink>

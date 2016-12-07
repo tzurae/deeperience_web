@@ -10,7 +10,7 @@ export const setCookie = (name, value, option) => {
   return (dispatch, getState) => {
     return Promise
       .resolve(dispatch({
-        type: ActionTypes.SET_COOKIE,
+        type: 'SET_COOKIE',
         cookie: {
           name,
           value,

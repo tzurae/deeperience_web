@@ -20,14 +20,4 @@ export default ({ app }) => {
   } else {
     app.get('/auth/facebook', socialAuthController.setupError)
   }
-  // linkedin
-  if (configs.passportStrategy.linkedin) {
-    app.get('/auth/linkedin', socialAuthController.initLinkedin)
-    app.get('/auth/linkedin/callback',
-      passportAuth('linkedin'),
-      userController.socialLogin
-    )
-  } else {
-    app.get('/auth/linkedin', socialAuthController.setupError)
-  }
 }
