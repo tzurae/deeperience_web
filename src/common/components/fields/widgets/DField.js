@@ -14,12 +14,12 @@ const style = {
     width: '100%',
     textAlign: 'center',
     paddingBottom: '10px',
-  }
+  },
 }
 
 const DField = ({ label, meta, adapter, ...rest }) => {
   const Adapter = adapter
-  const { touched, error, warning } = meta
+  const { touched, error } = meta
   const renderedFormControl = (
     <Adapter
       style={style.field}

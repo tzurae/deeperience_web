@@ -84,9 +84,8 @@ $image-path: '../../public/img' !default;
 
 @mixin flex-center {
   display: flex;
-
-  align-items: center;
   justify-content: center;
+  align-items: center;
 }
 
 @mixin flex-row {
@@ -97,4 +96,14 @@ $image-path: '../../public/img' !default;
 @mixin flex-column {
   display: flex;
   flex-direction: column;
+}
+
+@mixin flex-vert-center {
+  display: flex;
+  align-items: center;
+}
+
+@mixin flex-vert-end {
+  display: flex;
+  align-items: flex-end;
 }

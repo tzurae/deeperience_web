@@ -1,0 +1,11 @@
+@import '../../../styles/index';
+
+.starList {
+  @include flex-row;
+}
+
+.star {
+  width: 16px;
+  height: 16px;
+  margin: 0 2px;
+}

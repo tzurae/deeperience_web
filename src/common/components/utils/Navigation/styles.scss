@@ -15,9 +15,8 @@
 }
 
 .dropdown-text {
-  display: inline;
-
   @extend .text;
+  display: inline;
 }
 
 .avatar {

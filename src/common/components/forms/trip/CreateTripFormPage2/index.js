@@ -608,7 +608,7 @@ const FloatSiteListItem = ({ site, onClick, ...props }) => {
   return (
     <div className={styles.floatSiteListItem} {...props}>
       <IconBtn
-        btnStyle={{ marginRight: '10px' }}
+        btnStyle={styles.floatSiteListItemIcon}
         name="check"
         onClick={() => onClick(site)}
       />

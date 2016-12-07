@@ -5,8 +5,7 @@ const Text = ({ style, className, isSpan = false, ...props }) => (
   isSpan ?
     <span className={className} style={style}>
       <FormattedMessage {...props} />
-    </span>
-    :
+    </span> :
     <p className={className} style={style}>
       <FormattedMessage {...props} />
     </p>

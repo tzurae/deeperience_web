@@ -4,9 +4,8 @@ $fontFamily: monospace, serif, sans-serif, cursive, fantasy;
 @mixin center {
   display: flex;
   flex-direction: column;
-
-  align-items: center;
   justify-content: flex-start;
+  align-items: center;
 }
 
 @mixin jumbotron-font-color-family {
@@ -109,8 +108,8 @@ $fontFamily: monospace, serif, sans-serif, cursive, fantasy;
 .posts {
   display: flex;
   flex-wrap: wrap;
-  padding: 30px;
   justify-content: center;
+  padding: 30px;
 }
 
 .post {

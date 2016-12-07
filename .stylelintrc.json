@@ -97,6 +97,7 @@
     "declaration-block-properties-order": [
       [
         "@include",
+        "@extend",
         "position",
         "top",
         "right",
@@ -116,10 +117,19 @@
         "zoom",
         "flex-direction",
         "flex-wrap",
+        "flex-flow",
         "flex-order",
         "flex-pack",
         "flex-align",
         "flex",
+        "justify-content",
+        "align-items",
+        "align-content",
+        "order",
+        "flex-grow",
+        "flex-shrink",
+        "flex-basis",
+        "align-self",
 
         "box-sizing",
         "width",

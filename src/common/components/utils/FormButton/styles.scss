@@ -10,15 +10,13 @@
 }
 
 .btn-submit {
+  @extend .btn;
   color: white;
   background: $color-main;
-
-  @extend .btn;
 }
 
 .btn-button {
+  @extend .btn;
   color: $color-main;
   background: white;
-
-  @extend .btn;
 }

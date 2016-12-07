@@ -3,10 +3,10 @@
 .node-wrapper {
   display: flex;
   flex-direction: row;
-  padding: 10px 0 10px 10px;
   justify-content: center;
-  align-content: center;
   align-items: flex-start;
+  align-content: center;
+  padding: 10px 0 10px 10px;
 }
 
 .node-label {
@@ -15,15 +15,13 @@
 }
 
 .node-label-active {
-  color: $color-main;
-
   @extend .node-label;
+  color: $color-main;
 }
 
 .node-label-inactive {
-  color: $color-border;
-
   @extend .node-label;
+  color: $color-border;
 }
 
 .btn {
@@ -36,15 +34,13 @@
 }
 
 .btn-inactive {
-  background-color: $color-border;
-
   @extend .btn;
+  background-color: $color-border;
 }
 
 .btn-active {
-  background-color: $color-main;
-
   @extend .btn;
+  background-color: $color-main;
 }
 
 .stick {

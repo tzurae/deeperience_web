@@ -1,0 +1,19 @@
+@import '../../../styles/index';
+
+.btn {
+  @include fontSize(14);
+  @include flex-row;
+  justify-content: space-between;
+  width: 110px;
+  height: 34px;
+  padding: 5px 10px 5px 12px;
+  color: $white;
+  letter-spacing: 2px;
+  border: 0;
+  border-radius: 3px;
+  background-color: $color-main;
+}
+
+.icon {
+  background-color: transparent;
+}

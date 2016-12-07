@@ -9,9 +9,8 @@ import { Panel1 } from '../../../components/utils/Panel'
 import * as tripActions from '../../../reducers/trip/tripActions'
 import SubNavigation from '../../../components/utils/SubNavigation'
 import fakeData from './fakeData'
-import CustomTripMenuItem from '../../../components/custom/CustomTripMenuItem'
+import MenuItem from '../../../components/custom/MenuItem'
 import { getValue } from '../../../utils/getI18nValue'
-import styles from './styles.scss'
 
 const actions = [
   tripActions,
@@ -63,14 +62,11 @@ class MyCustomTripPage extends React.Component {
       >
         <PanelContainer>
           <Col md={2}/>
-          <Col md={8}>
-            <Panel1
-              title={'nav.customize.myCustomTrip'}
-              className={styles.panel}
-            >
+          <Col md={7}>
+            <Panel1 title={'nav.customize.myCustomTrip'}>
               {
                 fakeData.map((data, index) => (
-                  <CustomTripMenuItem
+                  <MenuItem
                     key={index}
                     onClick={this.renderPost}
                     title={data.title}
@@ -83,7 +79,7 @@ class MyCustomTripPage extends React.Component {
               }
             </Panel1>
           </Col>
-          <Col md={2}/>
+          <Col md={3}/>
         </PanelContainer>
       </PageLayout>
     )

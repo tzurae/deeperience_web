@@ -5,12 +5,13 @@ import { Map } from 'immutable'
 import Col from 'react-bootstrap/lib/Col'
 import PageLayout from '../../../components/layouts/PageLayout'
 import PanelContainer from '../../../components/utils/PanelContainer'
-import { Panel1, Panel2 } from '../../../components/utils/Panel'
+import { Panel2, PanelWithWord } from '../../../components/utils/Panel'
 import PhaseBranch from '../../../components/utils/PhaseBranch'
 import * as tripActions from '../../../reducers/trip/tripActions'
 import SubNavigation from '../../../components/utils/SubNavigation'
 import fakeData from './fakeData'
-import PhaseChooseGuide from '../../../components/custom/CustomTripPhaseChooseGuide'
+import PhaseChooseGuide from '../../../components/custom/PhaseChooseGuide'
+import IconRectBtn from '../../../components/utils/IconRectBtn'
 import styles from './styles.scss'
 
 const actions = [
@@ -59,7 +60,7 @@ class MyCustomTripPhasePage extends React.Component {
 
   setPage(page) {
     this.setState({
-      page
+      page,
     })
   }
 
@@ -85,15 +86,22 @@ class MyCustomTripPhasePage extends React.Component {
               />
             </Panel2>
           </Col>
-          <Col md={8}>
-            <Panel1
-              title={'nav.customize.myCustomTrip'}
-              className={styles.panel}
+          <Col md={7}>
+            <PanelWithWord
+              title="trip.customize.chooseGuide"
+              comment="trip.customize.chooseGuide.comment"
             >
-              {page === 0 && <PhaseChooseGuide/>}
-            </Panel1>
+              {page === 1 && <PhaseChooseGuide guideData={fakeData}/>}
+              {page === 1 &&
+              <IconRectBtn
+                name="check"
+                textId="trip.customize.chooseGuide.confirm"
+                className={styles.btnConfirm}
+              />
+              }
+            </PanelWithWord>
           </Col>
-          <Col md={2}/>
+          <Col md={3}/>
         </PanelContainer>
       </PageLayout>
     )
