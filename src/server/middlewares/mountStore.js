@@ -11,7 +11,6 @@ const getInitialState = () => ({
   global: new GlobalInitialState(),
 })
 
-
 export default (req, res, next) => {
   // ref:
   //  - <https://github.com/reactjs/react-router-redux/issues/182#issuecomment-178701502>

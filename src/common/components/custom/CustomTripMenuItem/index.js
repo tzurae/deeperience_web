@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react'
 import styles from './styles.scss'
+import { Link } from 'react-router'
 
 const CustomTripMenuItem = ({ title, guideName, dayInfo, phaseText, phase, onClick }) => {
   let phaseClass
@@ -27,22 +28,26 @@ const CustomTripMenuItem = ({ title, guideName, dayInfo, phaseText, phase, onCli
   }
 
   return (
-    <button className={styles.btn} onClick={onClick}>
-      <div className={styles.container}>
-        <div className={styles.infoDiv}>
-          <h4 className={styles.title}>
-            {title}
-            <span className={styles.dayInfo}>{dayInfo}</span>
-          </h4>
-          <div className={styles.guideInfo}>
-            <div className={styles.avatar}/>
-            <p className={styles.guideName}>{guideName}</p>
+    <button
+      className={styles.btn}
+    >
+      <Link to="/trip/customize">
+        <div className={styles.container}>
+          <div className={styles.infoDiv}>
+            <h4 className={styles.title}>
+              {title}
+              <span className={styles.dayInfo}>{dayInfo}</span>
+            </h4>
+            <div className={styles.guideInfo}>
+              <div className={styles.avatar}/>
+              <p className={styles.guideName}>{guideName}</p>
+            </div>
+          </div>
+          <div className={styles.phaseDiv}>
+            <h5 className={phaseClass}>{phaseText}</h5>
           </div>
         </div>
-        <div className={styles.phaseDiv}>
-          <h5 className={phaseClass}>{phaseText}</h5>
-        </div>
-      </div>
+      </Link>
     </button>
   )
 }

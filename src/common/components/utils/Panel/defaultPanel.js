@@ -13,7 +13,7 @@ const Panel = ({
   className,
 }) => {
   return (
-    <div className={classname(styles.container,className)}>
+    <div className={classname(styles.container, className)}>
       <Text className={classname(styles.title, titleClass)} id={title}/>
       {isUnderline && <div className={classname(styles.underline, underlineClass)}/>}
       <div className={classname(styles.contentDiv, contentDivClass)}>

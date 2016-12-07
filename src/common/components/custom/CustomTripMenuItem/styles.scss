@@ -1,14 +1,14 @@
-@import '../../styles/index';
+@import '../../../styles/index';
 
 .btn {
   width: 100%;
   height: 90px;
-  box-shadow: 3px 3px 8px 0 #cccccc;
-  background-color: $white;
   margin: 10px 0;
-  border: 0;
   padding: 0;
   text-align: left;
+  border: 0;
+  background-color: $white;
+  box-shadow: 3px 3px 8px 0 #cccccc;
 }
 
 .container {
@@ -27,16 +27,16 @@
 .title {
   @include fontSize(18);
   display: flex;
-  align-items: center;
   flex: 1;
   color: $black;
+  align-items: center;
 }
 
 .guideInfo {
   display: flex;
-  align-items: center;
   flex: 1;
   color: $black;
+  align-items: center;
 }
 
 .guideName {
@@ -45,63 +45,69 @@
 }
 
 .avatar {
-  height: 32px;
   width: 32px;
-  background: #ffffff url(../../../public/img/avatar.jpg) no-repeat center center;
-  background-size: contain;
+  height: 32px;
   border-radius: 16px;
+  background: #ffffff url(../../../../public/img/avatar.jpg) no-repeat center center;
+  background-size: contain;
 }
 
 .dayInfo {
   @include font-size-small;
-  border: 1px solid grey;
   margin-left: 15px;
   padding: 2px;
+  border: 1px solid grey;
 }
 
 .phase-div {
+  position: relative;
   width: 110px;
   height: 100%;
-  position: relative;
 }
 
 .phase {
   @include fontSize(14);
   position: absolute;
   top: 15px;
-  right: 0px;
+  right: 0;
+  width: 100%;
+  padding: 8px;
   color: #f0f0f0;
   letter-spacing: 2px;
-  padding: 8px;
-  width: 100%;
 }
 
 .phase-guide-confirm {
-  @extend .phase;
   background-color: $color-phase-guide-confirm;
+
+  @extend .phase;
 }
 
 .phase-deposit {
-  @extend .phase;
   background-color: $color-phase-deposit;
+
+  @extend .phase;
 }
 
 .phase-time-confirm {
-  @extend .phase;
   background-color: $color-phase-time-confirm;
+
+  @extend .phase;
 }
 
 .phase-video-wait {
-  @extend .phase;
   background-color: $color-phase-video-wait;
+
+  @extend .phase;
 }
 
 .phase-balance {
-  @extend .phase;
   background-color: $color-phase-balance;
+
+  @extend .phase;
 }
 
 .phase-buy {
-  @extend .phase;
   background-color: $color-phase-buy;
+
+  @extend .phase;
 }

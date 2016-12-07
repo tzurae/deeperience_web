@@ -6,6 +6,7 @@ export default (store) => ({
         require('./createTrip').default(store),
         require('./presentTrip').default(store),
         require('./myCustomTrip').default(store),
+        require('./customize').default(store),
       ])
     })
   },
