@@ -3,7 +3,7 @@ import { setCookie } from '../cookie/cookieActions'
 const {
   SET_API_ENGINE,
   UPDATE_LOCALE,
-} =  require('../../constants/ActionTypes').default
+} = require('../../constants/ActionTypes').default
 
 export const setApiEngine = apiEngine => {
   return {

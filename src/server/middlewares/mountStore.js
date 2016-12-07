@@ -5,6 +5,12 @@ import { syncHistoryWithStore, routerMiddleware } from 'react-router-redux'
 import { rootReducer } from '../../common/reducers'
 import ApiEngine from '../../common/utils/ApiEngine'
 import { setApiEngine } from '../../common/reducers/global/globalActions'
+import GlobalInitialState from '../../common/reducers/global/globalInitialState'
+
+const getInitialState = () => ({
+  global: new GlobalInitialState(),
+})
+
 
 export default (req, res, next) => {
   // ref:
@@ -14,6 +20,7 @@ export default (req, res, next) => {
   const memoryHistory = useRouterHistory(createMemoryHistory)(req.url)
   const store = createStore(
     rootReducer,
+    getInitialState(),
     applyMiddleware(
       routerMiddleware(memoryHistory),
       thunk

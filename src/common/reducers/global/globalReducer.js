@@ -1,4 +1,6 @@
+import { Map } from 'immutable'
 import InitialState from './globalInitialState'
+
 const {
   SET_API_ENGINE,
   UPDATE_LOCALE,
@@ -15,7 +17,7 @@ export default (state = initialState, action) => {
 
     case UPDATE_LOCALE:
       return state.set('locale', action.locale)
-                  .set('messages', action.messages)
+                  .set('messages', new Map(action.messages))
     default:
       return state
   }

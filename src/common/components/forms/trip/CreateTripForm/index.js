@@ -18,7 +18,7 @@ import FormNames from '../../../../constants/FormNames'
 import CreateTripFormPage1 from '../CreateTripFormPage1'
 import CreateTripFormPage2 from '../CreateTripFormPage2'
 import CreateTripFormPage3 from '../CreateTripFormPage3'
-import getOptions from '../../../../utils/getOptions'
+import { getOptions } from '../../../../utils/getI18nValue'
 
 const mapStateToProps = state => {
   return {

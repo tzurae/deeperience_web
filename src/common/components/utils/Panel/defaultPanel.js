@@ -10,9 +10,10 @@ const Panel = ({
   isUnderline,
   children,
   contentDivClass,
+  className,
 }) => {
   return (
-    <div className={styles.container}>
+    <div className={classname(styles.container,className)}>
       <Text className={classname(styles.title, titleClass)} id={title}/>
       {isUnderline && <div className={classname(styles.underline, underlineClass)}/>}
       <div className={classname(styles.contentDiv, contentDivClass)}>
@@ -28,6 +29,7 @@ Panel.propTypes = {
   underlineClass: PropTypes.string,
   isUnderline: PropTypes.bool,
   contentDivClass: PropTypes.string,
+  className: PropTypes.string,
 }
 
 Panel.defaultProps = {
@@ -36,6 +38,7 @@ Panel.defaultProps = {
   underlineClass: '',
   isUnderline: true,
   contentDivClass: '',
+  className: null,
 }
 
 export default Panel

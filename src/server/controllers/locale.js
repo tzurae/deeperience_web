@@ -1,4 +1,5 @@
 import Errors from '../../common/constants/Errors'
+import { Map } from 'immutable'
 
 export default {
   show(req, res) {

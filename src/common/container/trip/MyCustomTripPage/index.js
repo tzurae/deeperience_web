@@ -6,9 +6,12 @@ import Col from 'react-bootstrap/lib/Col'
 import PageLayout from '../../../components/layouts/PageLayout'
 import PanelContainer from '../../../components/utils/PanelContainer'
 import { Panel1 } from '../../../components/utils/Panel'
-// import PhaseBranch from '../../../components/utils/PhaseBranch'
 import * as tripActions from '../../../reducers/trip/tripActions'
 import SubNavigation from '../../../components/utils/SubNavigation'
+import fakeData from './fakeData'
+import CustomTripMenuItem from '../../../components/custom/CustomTripMenuItem'
+import { getValue } from '../../../utils/getI18nValue'
+import styles from './styles.scss'
 
 const actions = [
   tripActions,
@@ -16,7 +19,7 @@ const actions = [
 
 const mapStateToProps = state => {
   return {
-    apiEngine: state.global.apiEngine,
+    messages: state.global.messages,
   }
 }
 
@@ -33,7 +36,21 @@ const mapDispatchToProps = dispatch => {
 }
 
 class MyCustomTripPage extends React.Component {
+  constructor(props) {
+    super(props)
+    this.renderPost = this.renderPost.bind(this)
+  }
+
+  renderPost() {
+
+  }
+
   render() {
+    const {
+      messages,
+    } = this.props
+    const { CustomPhases, TripDayInfos } = getValue(messages.toJS(), ['CustomPhases', 'TripDayInfos'])
+
     return (
       <PageLayout
         subNav={
@@ -49,7 +66,22 @@ class MyCustomTripPage extends React.Component {
           <Col md={8}>
             <Panel1
               title={'nav.customize.myCustomTrip'}
-            />
+              className={styles.panel}
+            >
+              {
+                fakeData.map((data, index) => (
+                  <CustomTripMenuItem
+                    key={index}
+                    onClick={this.renderPost}
+                    title={data.title}
+                    guideName={data.guideName}
+                    dayInfo={TripDayInfos[data.dayInfo]}
+                    phase={data.customPhase}
+                    phaseText={CustomPhases[data.customPhase]}
+                  />
+                ))
+              }
+            </Panel1>
           </Col>
           <Col md={2}/>
         </PanelContainer>

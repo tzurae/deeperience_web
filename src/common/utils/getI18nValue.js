@@ -1,6 +1,6 @@
 import Options from '../i18n/zh-tw'
 
-export default (messages, options) => {
+export const getOptions = (messages, options) => {
   const option = {}
   if (options.indexOf('TripDayInfos') !== -1) {
     option.tripDayInfos =
@@ -42,6 +42,21 @@ export default (messages, options) => {
       option.tripElements.push(tripElements[element])
     }
   }
-
   return option
+}
+
+export const getValue = (messages, options) => {
+  const i18nArr = ['CustomPhases', 'TripDayInfos']
+  const i18nValue = {}
+  i18nArr.forEach(i18nTag => {
+    if (options.indexOf(i18nTag) !== -1) {
+      i18nValue[i18nTag] = {}
+      Object.keys(Options)
+        .filter(value => value.indexOf(i18nTag) === 0)
+        .forEach(value => {
+          i18nValue[i18nTag][value.substring(i18nTag.length + 1)] = messages[value]
+        })
+    }
+  })
+  return i18nValue
 }

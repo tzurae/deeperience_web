@@ -9,6 +9,7 @@ const actions = [globalActions]
 
 const mapStateToProps = state => {
   return {
+    state,
     locale: state.global.locale,
     messages: state.global.messages,
   }
@@ -40,14 +41,9 @@ class LocaleProvider extends Component {
 
   render() {
     const { children, locale, messages } = this.props
-    // hacky code don't know why intl didn't transfer to normal object
-    // and is still an immutable object
-    let message
-    if (messages.toJS) message = messages.toJS()
-    else message = messages
 
     return (
-      <IntlProvider locale={locale} messages={message}>
+      <IntlProvider locale={locale} messages={messages.toJS()}>
         {children}
       </IntlProvider>
     )

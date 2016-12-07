@@ -6,6 +6,7 @@ import TripLocations from './TripLocations'
 import TripDayInfos from './TripDayInfos'
 import { Languages, Levels } from './Languages'
 import flattenMessages from '../utils/flattenMessages'
+import CustomPhases from './CustomPhases'
 
 export default {
   parentLocale: 'zh',
@@ -113,5 +114,6 @@ export default {
   ...flattenMessages(TripLocations, 'TripLocations'),
   ...flattenMessages(Languages, 'Languages'),
   ...flattenMessages(Levels, 'Levels'),
+  ...flattenMessages(CustomPhases, 'CustomPhases'),
 }
 

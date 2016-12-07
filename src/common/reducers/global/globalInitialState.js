@@ -1,8 +1,8 @@
-import { Record } from 'immutable'
+import { Record, Map } from 'immutable'
 const InitialState = Record({
   apiEngine: null,
   locale: '', // intl locale
-  messages: {}, // intl messages
+  messages: new Map({}), // intl messages
 })
 
 export default InitialState
