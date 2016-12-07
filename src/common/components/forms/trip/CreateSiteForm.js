@@ -6,45 +6,28 @@ import CreateSiteFormPage2 from './CreateSiteFormPage2'
 import CreateSiteFormPage3 from './CreateSiteFormPage3'
 import CreateSiteFormPage4 from './CreateSiteFormPage4'
 import CreateSiteFormPage5 from './CreateSiteFormPage5'
-import { setPage, nextPage, previousPage } from '../../../actions/createSiteActions'
 import getOptions from '../../../utils/getOptions'
 
 // http://redux-form.com/6.2.0/examples/wizard/
 class CreateSiteForm extends React.Component {
-  constructor() {
-    super()
-    this.nextPage = this.nextPage.bind(this)
-    this.previousPage = this.previousPage.bind(this)
-  }
-
-  componentWillMount() {
-    const { dispatch } = this.props
-    dispatch(setPage(0))
-  }
-
-  nextPage() {
-    const { dispatch } = this.props
-    dispatch(nextPage())
-  }
-
-  previousPage() {
-    const { dispatch } = this.props
-    dispatch(previousPage())
-  }
 
   render() {
     const {
       page,
       messages,
+      nextPage,
+      previousPage,
     } = this.props
 
     const { tripDayInfos, siteElements } = getOptions(messages, ['TripDayInfos', 'SiteElements'])
 
+    console.log(siteElements)
+
     let values
 
     // debug usage
-    if (this.props.createTripForm) {
-      values = this.props.createTripForm.values
+    if (this.props.createSiteForm) {
+      values = this.props.createSiteForm.values
     }
 
     return (
@@ -52,7 +35,7 @@ class CreateSiteForm extends React.Component {
         <pre>{JSON.stringify(values, null, 2)}</pre>
         {page === 0 &&
         <CreateSiteFormPage1
-          onSubmit={this.nextPage}
+          onSubmit={nextPage}
           {...this.props}
           tripDayInfos={tripDayInfos}
           siteElements={siteElements}
@@ -60,25 +43,29 @@ class CreateSiteForm extends React.Component {
         }
         {page === 1 &&
         <CreateSiteFormPage2
-          onSubmit={this.nextPage}
-          previousPage={this.previousPage}
-          {...this.props}/>
+          onSubmit={nextPage}
+          previousPage={previousPage}
+          {...this.props}
+        />
         }
         {page === 2 &&
         <CreateSiteFormPage3
-          onSubmit={this.nextPage}
-          previousPage={this.previousPage}
-          {...this.props}/>
+          onSubmit={nextPage}
+          previousPage={previousPage}
+          {...this.props}
+        />
         }
         {page === 3 &&
         <CreateSiteFormPage4
-          onSubmit={this.nextPage}
-          previousPage={this.previousPage}
-          {...this.props}/>
+          onSubmit={nextPage}
+          previousPage={previousPage}
+          {...this.props}
+        />
         }
         {page === 4 &&
         <CreateSiteFormPage5
-          {...this.props}/>
+          {...this.props}
+        />
         }
       </div>
     )
@@ -86,8 +73,7 @@ class CreateSiteForm extends React.Component {
 }
 
 export default connect(state => ({
-  apiEngine: state.apiEngine,
-  page: state.createSite.page,
-  createTripForm: state.form[FormNames.TRIP_CREATE_SITE],
-  messages: state.intl.messages,
+  apiEngine: state.global.apiEngine,
+  createSiteForm: state.form[FormNames.TRIP_CREATE_SITE],
+  messages: state.global.messages,
 }))(CreateSiteForm)
