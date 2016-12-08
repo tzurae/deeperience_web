@@ -10,6 +10,8 @@ import {
   BsFormFooter as FormFooter,
 } from '../../../fields/widgets'
 
+
+
 const CreateSiteFormPage2 = ({ handleSubmit, ...props }) => {
   const {
     pristine,
@@ -54,5 +56,6 @@ export default reduxForm({
   initialValues: {
     name: '',
     tags: [],
+    introduction: '<p><br></p>',
   },
 })(CreateSiteFormPage2)

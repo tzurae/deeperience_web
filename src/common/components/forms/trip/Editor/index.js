@@ -1,15 +1,17 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { change } from 'redux-form'
+import { change, Field, formValueSelector } from 'redux-form'
 import { stateToHTML } from 'draft-js-export-html'
 import { Editor, EditorState, RichUtils, Entity, AtomicBlockUtils } from 'draft-js'
+import { BsInput as Input } from '../../../fields/adapters'
+import FormButton from '../../../utils/FormButton'
+import userAPI from '../../../../api/user'
 
 class SiteEditor extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       editorState: EditorState.createEmpty(),
-      url: '',
     }
 
     this.focus = () => this.refs.editor.focus()
@@ -21,34 +23,14 @@ class SiteEditor extends React.Component {
     this.updateReduxForm = () => {
       const state = this.state.editorState.getCurrentContent()
       const htmlStr = stateToHTML(state)
-      this.props.dispatch(change('TRIP_CREATE_SITE', 'introduce', htmlStr))
+      this.props.dispatch(change('TRIP_CREATE_SITE', 'introduction', htmlStr))
     }
 
-    this.onImageUpload = (e) => this._onImageUpload(e)
     this.handleKeyCommand = (command) => this._handleKeyCommand(command)
-    this.onTab = (e) => this._onTab(e)
     this.toggleBlockType = (type) => this._toggleBlockType(type)
     this.toggleInlineStyle = (style) => this._toggleInlineStyle(style)
     this.addImage = (url) => this._addImage(url)
-    this.urlOnchange = (e) => this._urlOnchange(e)
-    this.addImageClick = (e) => this._addImageClick(e)
-  }
-
-  _addImageClick(e) {
-    e.preventDefault()
-    const url = this.state.url
-    this.addImage(url)
-    this.setState({ url: '' })
-  }
-
-  _urlOnchange(e) {
-    const url = e.target.value
-    this.setState({ url })
-  }
-
-  _onImageUpload(e) {
-    console.log(e.target.value)
-    console.log(e)
+    this.onTab = (e) => this._onTab(e)
   }
 
   _handleKeyCommand(command) {
@@ -114,18 +96,23 @@ class SiteEditor extends React.Component {
           editorState={editorState}
           onToggle={this.toggleInlineStyle}
           />
-        <input
-          onChange={this.urlOnchange}
-          value={this.state.url}
-          type="text"
-        />
-        {/*
-          <input type="file" onChange={(e) => {
-            console.log(e.target.value)
-          }} />
-        */}
-        <button onClick={this.addImageClick}> 插入圖片 </button>
+
+        <input type="file" onChange={(e) => {
+          let file = e.target.files[0]
+          let apiEngine = this.props.apiEngine
+          userAPI(apiEngine)
+            .uploadAvatar(file)
+            .then(json => {
+              let url = json.downloadURL
+              this.addImage(url)
+            })
+            .catch(err => {
+              console.log(err)
+            })
+        }} />
+
         <div className={className} onClick={this.focus}>
+
           <Editor
             blockRendererFn={mediaBlockRenderer}
             blockStyleFn={getBlockStyle}
@@ -255,8 +242,12 @@ const InlineStyleControls = (props) => {
   )
 }
 
+const mapStateToProps = (state) => ({
+  apiEngine: state.global.apiEngine
+})
+
 const mapDispatchToProps = (dispatch) => ({
   dispatch,
 })
 
-export default connect(null, mapDispatchToProps)(SiteEditor)
+export default connect(mapStateToProps, mapDispatchToProps)(SiteEditor)

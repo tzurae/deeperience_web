@@ -56,5 +56,6 @@ export default reduxForm({
   initialValues: {
     name: '',
     tags: [],
+    introduction: '<p><br></p>',
   },
 })(CreateSiteFormPage5)
