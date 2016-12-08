@@ -98,6 +98,7 @@ class LoginForm extends Component {
       .then((json) => {
         if (json.isAuth) {
           this.login(json).then(() => {
+            console.log('json is',json);
             // redirect to the origin path before logging in
             const { next } = this.props.routing.locationBeforeTransitions.query
             dispatch(push(next || '/'))

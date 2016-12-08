@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import Row from 'react-bootstrap/lib/Row'
 import Col from 'react-bootstrap/lib/Col'
 import PageLayout from '../../components/layouts/PageLayout'
@@ -11,23 +11,27 @@ const style = {
   },
 }
 
-const LoginPage = ({ location }) => (
-  <PageLayout src="/img/homepage/river_dark.jpg">
-    <Row>
-      <Col md={4} />
-      <Col md={4} />
-      <Col md={4} />
-    </Row>
-    <Row>
-      <Col md={4} />
-      <Col md={4}>
-        <div style={style.form}>
-           <LoginForm />
-        </div>
-      </Col>
-      <Col md={4} />
-    </Row>
-  </PageLayout>
-)
+class LoginPage extends Component {
+  render() {
+   return (
+     <PageLayout src="/img/homepage/river_dark.jpg">
+       <Row>
+         <Col md={4} />
+         <Col md={4} />
+         <Col md={4} />
+       </Row>
+       <Row>
+         <Col md={4} />
+         <Col md={4}>
+           <div style={style.form}>
+             <LoginForm />
+           </div>
+         </Col>
+         <Col md={4} />
+       </Row>
+     </PageLayout>
+   )
+  }
+}
 
 export default LoginPage

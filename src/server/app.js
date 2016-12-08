@@ -52,6 +52,7 @@ const appPromise = new Promise((resolve, reject) => {
       }
       middlewares({ app })
       routes({ app })
+
       // error handler for the current request
       app.use((err, req, res, next) => {
         console.error(err.stack)

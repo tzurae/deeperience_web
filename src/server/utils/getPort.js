@@ -5,5 +5,5 @@ export default () => {
   if (portIndex >= 0) {
     argPort = parseInt(args[portIndex + 1])
   }
-  return process.env.PORT || argPort || 3000
+  return process.env.PORT || argPort || 8080
 }
