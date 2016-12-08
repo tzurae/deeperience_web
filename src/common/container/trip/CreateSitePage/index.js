@@ -8,7 +8,6 @@ import PanelContainer from '../../../components/utils/PanelContainer'
 import { Panel1, Panel2 } from '../../../components/utils/Panel'
 import PhaseBranch from '../../../components/utils/PhaseBranch'
 import CreateSiteForm from '../../../components/forms/trip/CreateSiteForm'
-import tripAPI from '../../../api/trip'
 import * as siteActions from '../../../reducers/site/siteActions'
 import SubNavigation from '../../../components/utils/SubNavigation'
 
@@ -35,7 +34,7 @@ const mapDispatchToProps = dispatch => {
 }
 
 class CreateSitePage extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props)
     this.nodes = [
       'trip.createSite.title1',
@@ -59,7 +58,7 @@ class CreateSitePage extends React.Component {
     this.setState({ page: this.state.page - 1 })
   }
 
-  render(){
+  render() {
     const { page } = this.state
     return (
       <PageLayout

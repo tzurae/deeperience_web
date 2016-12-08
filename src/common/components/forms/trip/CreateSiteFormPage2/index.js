@@ -25,7 +25,7 @@ const CreateSiteFormPage2 = ({ handleSubmit, ...props }) => {
       defaultFieldDimensions={{ sm: 6 }}
       onSubmit={handleSubmit}
     >
-      <Field 
+      <Field
         name="editor"
         component={Editor}
         type="text"

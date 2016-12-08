@@ -59,7 +59,7 @@ export default {
   'login.password': '密碼',
   'login.rememberMe': '記住我',
   'login.ensurePassword': '確認密碼',
-  'login.facebook':'使用Facebook帳號登入',
+  'login.facebook': '使用Facebook帳號登入',
   'login.title': '完美客製化旅程，旅程規劃零負擔',
   'register.mailHasSent': '確認信已送出！',
   'register.facebook': '使用Facebook帳戶註冊',

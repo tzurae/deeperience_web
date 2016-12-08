@@ -48,7 +48,7 @@ const validate = (values) => {
     }
   }
 
-  if(!values.ensurePassword) {
+  if (!values.ensurePassword) {
     errors.ensurePassword = ' Required'
   } else {
     if (values.password && values.ensurePassword) {
@@ -58,10 +58,10 @@ const validate = (values) => {
     }
   }
 
-  if(!values.membershi)
-
-  if (!values.isAgreeTerms) {
-    errors.isAgreeTerms = 'Required'
+  if (!values.membershi)  {
+    if (!values.isAgreeTerms) {
+      errors.isAgreeTerms = 'Required'
+    }
   }
 
   if (configs.recaptcha && !values.recaptcha) {
@@ -114,8 +114,8 @@ const style = {
   button: {
     display: 'flex',
     justifyContent: 'center',
-    paddingTop:'10px',
-  }
+    paddingTop: '10px',
+  },
 }
 
 class RegisterForm extends Component {
@@ -125,7 +125,6 @@ class RegisterForm extends Component {
   }
 
   _handleSubmit(formData) {
-
     const { dispatch, apiEngine } = this.props
     return userAPI(apiEngine)
       .register(formData)
@@ -134,7 +133,7 @@ class RegisterForm extends Component {
         throw err
       })
       .then((json) => {
-        setTimeout(dispatch(push('/user/login')),5000);
+        setTimeout(dispatch(push('/user/login')), 5000)
       })
   }
 
@@ -200,12 +199,12 @@ class RegisterForm extends Component {
               component={DField}
               adapter={Checkbox}
               type="checkbox"
-              text={<Text id="register.hasRead" style={{color: 'white' }} isSpan={true}/>}
+              text={<Text id="register.hasRead" style={{ color: 'white' }} isSpan={true}/>}
             />
             <div style={style.button}>
               <Button
                 type="submit"
-                onClick={valid?this.props.openModal:null}
+                onClick={valid ? this.props.openModal : null}
                 disabled={pristine || !!asyncValidating || submitting || invalid}
                 style={style.submit}
               >

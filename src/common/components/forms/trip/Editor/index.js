@@ -1,24 +1,27 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { change, Field } from 'redux-form'
+import { change } from 'redux-form'
 import { stateToHTML } from 'draft-js-export-html'
-import classNames from 'classnames'
-import { BsInput as Input } from '../../../fields/adapters'
 import { Editor, EditorState, RichUtils, Entity, AtomicBlockUtils } from 'draft-js'
-import { BsField as FormField } from '../../../fields/widgets'
 
 class SiteEditor extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { editorState: EditorState.createEmpty() }
+    this.state = {
+      editorState: EditorState.createEmpty(),
+      url: '',
+    }
 
     this.focus = () => this.refs.editor.focus()
     this.onChange = (editorState) => {
-      this.setState({ editorState })
-      let state = editorState.getCurrentContent()
-      let htmlStr = stateToHTML(state)
+      this.setState({ editorState }, this.updateReduxForm)
+      // const url = 'http://i.imgur.com/Ceihz91.png'
+    }
+
+    this.updateReduxForm = () => {
+      const state = this.state.editorState.getCurrentContent()
+      const htmlStr = stateToHTML(state)
       this.props.dispatch(change('TRIP_CREATE_SITE', 'introduce', htmlStr))
-      // this.addImage()
     }
 
     this.onImageUpload = (e) => this._onImageUpload(e)
@@ -26,10 +29,24 @@ class SiteEditor extends React.Component {
     this.onTab = (e) => this._onTab(e)
     this.toggleBlockType = (type) => this._toggleBlockType(type)
     this.toggleInlineStyle = (style) => this._toggleInlineStyle(style)
-    this.addImage = () => this._addImage()
+    this.addImage = (url) => this._addImage(url)
+    this.urlOnchange = (e) => this._urlOnchange(e)
+    this.addImageClick = (e) => this._addImageClick(e)
   }
 
-  _onImageUpload(e){
+  _addImageClick(e) {
+    e.preventDefault()
+    const url = this.state.url
+    this.addImage(url)
+    this.setState({ url: '' })
+  }
+
+  _urlOnchange(e) {
+    const url = e.target.value
+    this.setState({ url })
+  }
+
+  _onImageUpload(e) {
     console.log(e.target.value)
     console.log(e)
   }
@@ -67,19 +84,11 @@ class SiteEditor extends React.Component {
     )
   }
 
-  _addImage() {
-    const urlValue = 'http://i.imgur.com/Ceihz91.png'
-    const urlType = 'image'
-    const { editorState } = this.state
-    const entityKey = Entity.create(urlType, 'IMMUTABLE', { src: urlValue })
-
-    this.setState({
-      editorState: AtomicBlockUtils.insertAtomicBlock(
-        editorState,
-        entityKey,
-        ' '
-      ),
-    })
+  _addImage(url) {
+    let { editorState } = this.state
+    const entityKey = Entity.create('image', 'IMMUTABLE', { src: url })
+    editorState = AtomicBlockUtils.insertAtomicBlock(editorState, entityKey, ' ')
+    this.setState({ editorState }, this.updateReduxForm)
   }
 
   render() {
@@ -105,6 +114,17 @@ class SiteEditor extends React.Component {
           editorState={editorState}
           onToggle={this.toggleInlineStyle}
           />
+        <input
+          onChange={this.urlOnchange}
+          value={this.state.url}
+          type="text"
+        />
+        {/*
+          <input type="file" onChange={(e) => {
+            console.log(e.target.value)
+          }} />
+        */}
+        <button onClick={this.addImageClick}> 插入圖片 </button>
         <div className={className} onClick={this.focus}>
           <Editor
             blockRendererFn={mediaBlockRenderer}
@@ -115,7 +135,7 @@ class SiteEditor extends React.Component {
             onTab={this.onTab}
             ref="editor"
             spellCheck={true}
-            />
+          />
         </div>
       </div>
     )
@@ -236,7 +256,7 @@ const InlineStyleControls = (props) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  dispatch
+  dispatch,
 })
 
 export default connect(null, mapDispatchToProps)(SiteEditor)

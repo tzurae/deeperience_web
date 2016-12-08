@@ -3,8 +3,8 @@ const {
 } = require('../../constants/ActionTypes').default
 
 export const createSiteError = (error) => {
-    return {
-        type: CREATE_SITE_ERROR,
-        payload: error,
-    }
+  return {
+    type: CREATE_SITE_ERROR,
+    payload: error,
+  }
 }
