@@ -1,15 +1,15 @@
 import React from 'react'
 import { reduxForm } from 'redux-form'
-import FormNames from '../../../constants/FormNames'
-import FormButton from '../../utils/FormButton'
-import validate from './createSiteValidate'
-import Text from '../../utils/Text'
+import FormNames from '../../../../constants/FormNames'
+import FormButton from '../../../utils/FormButton'
+import validate from '../createSiteValidate'
+import Text from '../../../utils/Text'
 import {
   BsForm as Form,
   BsFormFooter as FormFooter,
-} from '../../fields/widgets'
+} from '../../../fields/widgets'
 
-const CreateSiteFormPage3 = ({ handleSubmit, ...props }) => {
+const CreateSiteFormPage4 = ({ handleSubmit, ...props }) => {
   const {
     pristine,
     submitting,
@@ -34,7 +34,7 @@ const CreateSiteFormPage3 = ({ handleSubmit, ...props }) => {
           <Text id={'trip.createSite.form.previousStep'}/>
         </FormButton>
         <FormButton type="submit" disabled={pristine || submitting || invalid}>
-          <Text id={'trip.createSite.form.nextStep'}/>
+          <Text id={'trip.createSite.form.finish'}/>
         </FormButton>
       </FormFooter>
     </Form>
@@ -49,4 +49,4 @@ export default reduxForm({
     name: '',
     tags: [],
   },
-})(CreateSiteFormPage3)
+})(CreateSiteFormPage4)

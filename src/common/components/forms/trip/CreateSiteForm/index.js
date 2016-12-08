@@ -1,12 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import FormNames from '../../../constants/FormNames'
-import CreateSiteFormPage1 from './CreateSiteFormPage1'
-import CreateSiteFormPage2 from './CreateSiteFormPage2'
-import CreateSiteFormPage3 from './CreateSiteFormPage3'
-import CreateSiteFormPage4 from './CreateSiteFormPage4'
-import CreateSiteFormPage5 from './CreateSiteFormPage5'
-import getOptions from '../../../utils/getOptions'
+import FormNames from '../../../../constants/FormNames'
+import CreateSiteFormPage1 from '../CreateSiteFormPage1'
+import CreateSiteFormPage2 from '../CreateSiteFormPage2'
+import CreateSiteFormPage3 from '../CreateSiteFormPage3'
+import CreateSiteFormPage4 from '../CreateSiteFormPage4'
+import CreateSiteFormPage5 from '../CreateSiteFormPage5'
+import getOptions from '../../../../utils/getOptions'
 
 // http://redux-form.com/6.2.0/examples/wizard/
 class CreateSiteForm extends React.Component {

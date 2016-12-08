@@ -108,7 +108,7 @@ ul.navbar-nav > li.active > a {
 }
 
 .RichEditor-editor .public-DraftEditor-content {
-  min-height: 100px;
+  min-height: 500px;
 }
 
 .RichEditor-hidePlaceholder .public-DraftEditorPlaceholder-root {

@@ -2,10 +2,10 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { change, Field } from 'redux-form'
 import { stateToHTML } from 'draft-js-export-html'
-import { BsInput as Input } from '../../fields/adapters'
+import classNames from 'classnames'
+import { BsInput as Input } from '../../../fields/adapters'
 import { Editor, EditorState, RichUtils, Entity, AtomicBlockUtils } from 'draft-js'
-// import { Editor, EditorState, RichUtils, convertToRaw, Entity, AtomicBlockUtils } from 'draft-js'
-import { BsField as FormField } from '../../fields/widgets'
+import { BsField as FormField } from '../../../fields/widgets'
 
 class SiteEditor extends React.Component {
   constructor(props) {
@@ -18,8 +18,7 @@ class SiteEditor extends React.Component {
       let state = editorState.getCurrentContent()
       let htmlStr = stateToHTML(state)
       this.props.dispatch(change('TRIP_CREATE_SITE', 'introduce', htmlStr))
-            // this.addImage()
-
+      // this.addImage()
     }
 
     this.onImageUpload = (e) => this._onImageUpload(e)
@@ -52,20 +51,20 @@ class SiteEditor extends React.Component {
 
   _toggleBlockType(blockType) {
     this.onChange(
-            RichUtils.toggleBlockType(
-                this.state.editorState,
-                blockType
-            )
-        )
+      RichUtils.toggleBlockType(
+        this.state.editorState,
+          blockType
+      )
+    )
   }
 
   _toggleInlineStyle(inlineStyle) {
     this.onChange(
-            RichUtils.toggleInlineStyle(
-                this.state.editorState,
-                inlineStyle
-            )
-        )
+      RichUtils.toggleInlineStyle(
+        this.state.editorState,
+        inlineStyle
+      )
+    )
   }
 
   _addImage() {
@@ -76,18 +75,18 @@ class SiteEditor extends React.Component {
 
     this.setState({
       editorState: AtomicBlockUtils.insertAtomicBlock(
-                editorState,
-                entityKey,
-                ' '
-            ),
+        editorState,
+        entityKey,
+        ' '
+      ),
     })
   }
 
   render() {
     const { editorState } = this.state
 
-        // If the user changes block type before entering any text, we can
-        // either style the placeholder or hide it. Let's just hide it now.
+    // If the user changes block type before entering any text, we can
+    // either style the placeholder or hide it. Let's just hide it now.
     let className = 'RichEditor-editor'
     const contentState = editorState.getCurrentContent()
     if (!contentState.hasText()) {
@@ -97,30 +96,27 @@ class SiteEditor extends React.Component {
     }
 
     return (
-      <div>
-          <div className="RichEditor-root">
-            <input type="file" onChange={this.onImageUpload} name="test" />
-            <BlockStyleControls
-                editorState={editorState}
-                onToggle={this.toggleBlockType}
-                />
-            <InlineStyleControls
-                editorState={editorState}
-                onToggle={this.toggleInlineStyle}
-                />
-            <div className={className} onClick={this.focus}>
-                <Editor
-                    blockRendererFn={mediaBlockRenderer}
-                    blockStyleFn={getBlockStyle}
-                    editorState={editorState}
-                    handleKeyCommand={this.handleKeyCommand}
-                    onChange={this.onChange}
-                    onTab={this.onTab}
-                    ref="editor"
-                    spellCheck={true}
-                />
-            </div>
-          </div>
+      <div className="RichEditor-root">
+        <BlockStyleControls
+          editorState={editorState}
+          onToggle={this.toggleBlockType}
+          />
+        <InlineStyleControls
+          editorState={editorState}
+          onToggle={this.toggleInlineStyle}
+          />
+        <div className={className} onClick={this.focus}>
+          <Editor
+            blockRendererFn={mediaBlockRenderer}
+            blockStyleFn={getBlockStyle}
+            editorState={editorState}
+            handleKeyCommand={this.handleKeyCommand}
+            onChange={this.onChange}
+            onTab={this.onTab}
+            ref="editor"
+            spellCheck={true}
+            />
+        </div>
       </div>
     )
   }
@@ -181,61 +177,61 @@ class StyleButton extends React.Component {
     }
 
     return (
-            <span className={className} onMouseDown={this.onToggle}>
-                {this.props.label}
-            </span>
+      <span className={className} onMouseDown={this.onToggle}>
+        {this.props.label}
+      </span>
     )
   }
 }
 
 const BLOCK_TYPES = [
-    { label: '大標題', style: 'header-one' },
-    { label: '小標題', style: 'header-three' },
+  { label: '大標題', style: 'header-one' },
+  { label: '小標題', style: 'header-three' },
 ]
 
 const BlockStyleControls = (props) => {
   const { editorState } = props
   const selection = editorState.getSelection()
   const blockType = editorState
-        .getCurrentContent()
-        .getBlockForKey(selection.getStartKey())
-        .getType()
+    .getCurrentContent()
+    .getBlockForKey(selection.getStartKey())
+    .getType()
 
   return (
-        <div className="RichEditor-controls">
-            {BLOCK_TYPES.map((type) =>
-                <StyleButton
-                    key={type.label}
-                    active={type.style === blockType}
-                    label={type.label}
-                    onToggle={props.onToggle}
-                    style={type.style}
-                />
-            )}
-        </div>
+    <div className="RichEditor-controls">
+      {BLOCK_TYPES.map((type) =>
+        <StyleButton
+          key={type.label}
+          active={type.style === blockType}
+          label={type.label}
+          onToggle={props.onToggle}
+          style={type.style}
+          />
+      )}
+    </div>
   )
 }
 
 const INLINE_STYLES = [
-    { label: '粗體', style: 'BOLD' },
-    { label: '斜體', style: 'ITALIC' },
-    { label: '底線', style: 'UNDERLINE' },
+  { label: '粗體', style: 'BOLD' },
+  { label: '斜體', style: 'ITALIC' },
+  { label: '底線', style: 'UNDERLINE' },
 ]
 
 const InlineStyleControls = (props) => {
   const currentStyle = props.editorState.getCurrentInlineStyle()
   return (
-        <div className="RichEditor-controls">
-            {INLINE_STYLES.map(type =>
-                <StyleButton
-                    key={type.label}
-                    active={currentStyle.has(type.style)}
-                    label={type.label}
-                    onToggle={props.onToggle}
-                    style={type.style}
-                />
-            )}
-        </div>
+    <div className="RichEditor-controls">
+      {INLINE_STYLES.map(type =>
+        <StyleButton
+          key={type.label}
+          active={currentStyle.has(type.style)}
+          label={type.label}
+          onToggle={props.onToggle}
+          style={type.style}
+          />
+      )}
+    </div>
   )
 }
 

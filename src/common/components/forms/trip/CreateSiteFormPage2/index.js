@@ -1,14 +1,14 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
-import FormNames from '../../../constants/FormNames'
-import FormButton from '../../utils/FormButton'
-import validate from './createSiteValidate'
-import Text from '../../utils/Text'
-import Editor from './Editor'
+import FormNames from '../../../../constants/FormNames'
+import FormButton from '../../../utils/FormButton'
+import validate from '../createSiteValidate'
+import Text from '../../../utils/Text'
+import Editor from '../Editor'
 import {
   BsForm as Form,
   BsFormFooter as FormFooter,
-} from '../../fields/widgets'
+} from '../../../fields/widgets'
 
 const CreateSiteFormPage2 = ({ handleSubmit, ...props }) => {
   const {
