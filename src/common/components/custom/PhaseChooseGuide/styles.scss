@@ -15,16 +15,16 @@
 }
 
 .info-div {
-  @include flex-column;
+  @include flex-col;
   flex: 1;
   height: 100%;
   padding: 0 20px;
   letter-spacing: 1px;
 }
 
-.guideName {
+.guide-name {
   @include font-size-big;
-  @include flex-vert-end;
+  @include flex-row-end;
   flex: 1;
   color: $black;
 }
@@ -36,7 +36,7 @@
 }
 
 .star-div {
-  @include flex-vert-end;
+  @include flex-row-end;
   flex: 1;
   padding-bottom: 5px;
   color: $color-text-light;
@@ -59,7 +59,7 @@
 }
 
 .other-div {
-  @include flex-column;
+  @include flex-col;
   position: relative;
   justify-content: space-between;
   height: 100%;

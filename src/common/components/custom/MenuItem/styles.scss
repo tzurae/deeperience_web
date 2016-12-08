@@ -17,7 +17,7 @@
 }
 
 .info-div {
-  @include flex-column;
+  @include flex-col;
   flex: 1;
   height: 100%;
   padding: 10px 20px;
@@ -26,13 +26,13 @@
 
 .title {
   @include fontSize(18);
-  @include flex-vert-center;
+  @include flex-row-center;
   flex: 1;
   color: $black;
 }
 
 .guide-info {
-  @include flex-vert-center;
+  @include flex-row-center;
   flex: 1;
   color: $black;
 }

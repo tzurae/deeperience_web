@@ -38,7 +38,7 @@ class CreateSiteForm extends React.Component {
       messages,
     } = this.props
 
-    const { tripDayInfos, siteElements } = getOptions(messages.toJS(), ['TripDayInfos', 'SiteElements'])
+    const { TripDayInfos, SiteElements } = getOptions(messages.toJS(), ['TripDayInfos', 'SiteElements'])
 
     let values
 
@@ -54,8 +54,8 @@ class CreateSiteForm extends React.Component {
         <CreateSiteFormPage1
           onSubmit={this.nextPage}
           {...this.props}
-          tripDayInfos={tripDayInfos}
-          siteElements={siteElements}
+          tripDayInfos={TripDayInfos}
+          siteElements={SiteElements}
         />
         }
         {page === 1 &&

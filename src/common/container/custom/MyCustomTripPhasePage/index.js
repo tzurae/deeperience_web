@@ -7,20 +7,23 @@ import PageLayout from '../../../components/layouts/PageLayout'
 import PanelContainer from '../../../components/utils/PanelContainer'
 import { Panel2, PanelWithWord } from '../../../components/utils/Panel'
 import PhaseBranch from '../../../components/utils/PhaseBranch'
-import * as tripActions from '../../../reducers/trip/tripActions'
+import * as customActions from '../../../reducers/custom/customActions'
 import SubNavigation from '../../../components/utils/SubNavigation'
-import fakeData from './fakeData'
+import { chooseGuide, confirmGuide } from './fakeData'
 import PhaseChooseGuide from '../../../components/custom/PhaseChooseGuide'
+import PhaseGuideConfirm from '../../../components/custom/PhaseGuideConfirm'
 import IconRectBtn from '../../../components/utils/IconRectBtn'
+import { getValue } from '../../../utils/getI18nValue'
 import styles from './styles.scss'
 
 const actions = [
-  tripActions,
+  customActions,
 ]
 
 const mapStateToProps = state => {
   return {
     messages: state.global.messages,
+    page: state.custom.page,
   }
 }
 
@@ -40,10 +43,6 @@ class MyCustomTripPhasePage extends React.Component {
   constructor(props) {
     super(props)
 
-    // temp for quick demo
-    this.state = {
-      page: 1,
-    }
     this.nodes = [
       'trip.customize',
       'trip.customize.createDemand',
@@ -54,18 +53,41 @@ class MyCustomTripPhasePage extends React.Component {
       'trip.customize.balance',
       'trip.customize.travel',
     ]
+
     this.cb = [0, 1, 2, 3, 4, 5, 6, 7].map(page => () => this.setPage(page))
+    this.titleId = [
+      '',
+      'trip.customize.chooseGuide',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+    ]
+    this.commentId = [
+      '',
+      'trip.customize.chooseGuide.comment',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+    ]
   }
-  // tempeorary for quick demo
 
   setPage(page) {
-    this.setState({
-      page,
-    })
+    this.props.actions.customPhaseSetPage(page)
   }
 
   render() {
-    const { page } = this.state
+    const { page, messages } = this.props
+    const { Languages, TripLocations } = getValue(messages.toJS(), ['Languages', 'TripLocations'])
+
+    const country = TripLocations[`${confirmGuide.location.split('.')[0]}.countryLabel`]
+    const area = TripLocations[confirmGuide.location]
+
     return (
       <PageLayout
         subNav={
@@ -88,16 +110,26 @@ class MyCustomTripPhasePage extends React.Component {
           </Col>
           <Col md={7}>
             <PanelWithWord
-              title="trip.customize.chooseGuide"
-              comment="trip.customize.chooseGuide.comment"
+              title={this.titleId[page]}
+              comment={this.commentId[page]}
+              className={styles.mainPanel}
             >
-              {page === 1 && <PhaseChooseGuide guideData={fakeData}/>}
+              {page === 1 && <PhaseChooseGuide guideData={chooseGuide}/>}
               {page === 1 &&
               <IconRectBtn
                 name="check"
                 textId="trip.customize.chooseGuide.confirm"
                 className={styles.btnConfirm}
+                onClick={() => this.props.actions.customPhaseNextPage()}
               />
+              }
+              {page === 2 &&
+                <PhaseGuideConfirm
+                  guideData={confirmGuide}
+                  languages={confirmGuide.language.map(value => Languages[value])}
+                  country={country}
+                  area={area}
+                />
               }
             </PanelWithWord>
           </Col>

@@ -9,6 +9,7 @@ const PhaseChooseGuide = ({ guideData }) => {
     <div>
       {guideData.map((guide, index) => (
         <GuideItem
+          key={index}
           guideName={guide.guideName}
           star={guide.star}
           profession={guide.profession}

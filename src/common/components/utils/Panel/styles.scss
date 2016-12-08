@@ -51,6 +51,10 @@
 
 /* PanelWithWord */
 
+.panel-with-word {
+  padding: 20px 30px;
+}
+
 .underline-with-word {
   display: none;
 }
@@ -63,11 +67,11 @@
 }
 
 .content-div-with-word {
-  padding: 20px 30px;
+  margin: 20px 0;
 }
 
 .comment-with-word {
-  width: 60%;
+  width: 70%;
   margin: 0 auto;
   line-height: 22px;
   color: $black;

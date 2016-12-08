@@ -18,7 +18,7 @@ const Panel = ({
     <div className={classname(styles.container, className)}>
       <Text className={classname(styles.title, titleClass)} id={title}/>
       {isUnderline && <div className={classname(styles.underline, underlineClass)}/>}
-      {comment !== '' && <Text className={classname(styles.comment, commentClass)} id={comment}/>}
+      <Text className={classname(styles.comment, commentClass)} id={comment}/>
       <div className={classname(styles.contentDiv, contentDivClass)}>
         {children}
       </div>
@@ -27,7 +27,7 @@ const Panel = ({
 }
 
 Panel.propTypes = {
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
   titleClass: PropTypes.string,
   underlineClass: PropTypes.string,
   isUnderline: PropTypes.bool,

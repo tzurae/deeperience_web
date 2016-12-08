@@ -2,14 +2,9 @@ import { createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import { useRouterHistory, createMemoryHistory } from 'react-router'
 import { syncHistoryWithStore, routerMiddleware } from 'react-router-redux'
-import { rootReducer } from '../../common/reducers'
+import { rootReducer, getInitialState } from '../../common/reducers'
 import ApiEngine from '../../common/utils/ApiEngine'
 import { setApiEngine } from '../../common/reducers/global/globalActions'
-import GlobalInitialState from '../../common/reducers/global/globalInitialState'
-
-const getInitialState = () => ({
-  global: new GlobalInitialState(),
-})
 
 export default (req, res, next) => {
   // ref:
