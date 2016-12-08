@@ -21,6 +21,8 @@ import ApiEngine from '../common/utils/ApiEngine'
 import createLoggerMiddleware from 'redux-logger'
 import LoggerSettings from '../../configs/env/logger'
 import { composeWithDevTools } from 'redux-devtools-extension'
+import createSagaMiddleware from 'redux-saga'
+import rootSaga from '../common/lib/rootSaga'
 
 const logger = createLoggerMiddleware({
   collapsed: true,
@@ -38,10 +40,16 @@ const logger = createLoggerMiddleware({
   },
 })
 
+const sagaMiddleware = createSagaMiddleware()
+
 let middlewares = [
   routerMiddleware(browserHistory),
+  sagaMiddleware,
   thunk,
 ]
+
+// run the saga
+
 
 if (process.env.NODE_ENV !== 'production') {
   middlewares = [...middlewares, logger]
@@ -60,6 +68,8 @@ const store = createStore(
   composeWithDevTools(
   applyMiddleware(...middlewares))
 )
+
+store.runSaga = sagaMiddleware.run;
 
 const apiEngine = new ApiEngine()
 store.dispatch(setApiEngine(apiEngine))

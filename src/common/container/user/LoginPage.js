@@ -1,14 +1,22 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import Row from 'react-bootstrap/lib/Row'
 import Col from 'react-bootstrap/lib/Col'
+import * as authActions from '../../reducers/auth/authAction'
 import PageLayout from '../../components/layouts/PageLayout'
 import LoginForm from '../../components/forms/user/LoginForm'
-import Text from '../../components/utils/Text'
 
 const style = {
   form: {
     marginTop: '55px',
   },
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(authActions, dispatch)
+  }
 }
 
 class LoginPage extends Component {
@@ -24,7 +32,7 @@ class LoginPage extends Component {
          <Col md={4} />
          <Col md={4}>
            <div style={style.form}>
-             <LoginForm />
+             <LoginForm onButtonPress={this.props.actions.login} />
            </div>
          </Col>
          <Col md={4} />
@@ -34,4 +42,4 @@ class LoginPage extends Component {
   }
 }
 
-export default LoginPage
+export default connect(null, mapDispatchToProps)(LoginPage)

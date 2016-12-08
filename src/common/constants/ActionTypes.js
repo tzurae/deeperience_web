@@ -1,6 +1,16 @@
 import keyMirror from 'key-mirror'
 
 export default keyMirror({
+
+  LOGIN: null,
+  LOGIN_REQUEST: null,
+  LOGIN_SUCCESS: null,
+  LOGIN_FAILURE: null,
+
+  COOKIE_REQUEST: null,
+  COOKIE_SUCCESS: null,
+  COOKIE_FAILURE: null,
+
   SET_COOKIE: null,
 
   SET_API_ENGINE: null,
