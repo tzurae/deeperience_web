@@ -1,16 +1,15 @@
 import React from 'react'
 import { reduxForm } from 'redux-form'
-import FormNames from '../../../constants/FormNames'
-import FormButton from '../../utils/FormButton'
-import validate from './createSiteValidate'
-import Text from '../../utils/Text'
-import Editor from './Editor'
+import FormNames from '../../../../constants/FormNames'
+import FormButton from '../../../utils/FormButton'
+import validate from '../createSiteValidate'
+import Text from '../../../utils/Text'
 import {
   BsForm as Form,
   BsFormFooter as FormFooter,
-} from '../../fields/widgets'
+} from '../../../fields/widgets'
 
-const CreateSiteFormPage2 = ({ handleSubmit, ...props }) => {
+const CreateSiteFormPage4 = ({ handleSubmit, ...props }) => {
   const {
     pristine,
     submitting,
@@ -25,19 +24,7 @@ const CreateSiteFormPage2 = ({ handleSubmit, ...props }) => {
       defaultFieldDimensions={{ sm: 6 }}
       onSubmit={handleSubmit}
     >
-      <Editor />
 
-{/*
-
-      <Field
-        name="introduction"
-        component={FormField}
-        fieldDimensions={{ sm: 12 }}
-        adapter={Textarea}
-        rows="20"
-      />
-
-*/}
       <FormFooter
         labelDimensions={{ sm: 0 }}
         fieldDimensions={{ sm: 12 }}
@@ -47,7 +34,7 @@ const CreateSiteFormPage2 = ({ handleSubmit, ...props }) => {
           <Text id={'trip.createSite.form.previousStep'}/>
         </FormButton>
         <FormButton type="submit" disabled={pristine || submitting || invalid}>
-          <Text id={'trip.createSite.form.nextStep'}/>
+          <Text id={'trip.createSite.form.finish'}/>
         </FormButton>
       </FormFooter>
     </Form>
@@ -61,5 +48,6 @@ export default reduxForm({
   initialValues: {
     name: '',
     tags: [],
+    introduction: '<p><br></p>',
   },
-})(CreateSiteFormPage2)
+})(CreateSiteFormPage4)

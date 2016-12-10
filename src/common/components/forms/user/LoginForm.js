@@ -154,9 +154,9 @@ class LoginForm extends Component {
               component={DField}
               adapter={Checkbox}
               type="checkbox"
-              text={<Text id="login.rememberMe" style={{color: 'white'}} isSpan={true}/>}
+              text={<Text id="login.rememberMe" style={{ color: 'white' }} isSpan={true}/>}
             />
-            <div style={{ display:'flex', justifyContent:'center',paddingTop: '10px' }}>
+            <div style={{ display: 'flex', justifyContent: 'center', paddingTop: '10px' }}>
               <Button type="submit" disabled={pristine || submitting || invalid} style={style.submit}>
                 <Text id="nav.user.login" />
               </Button>

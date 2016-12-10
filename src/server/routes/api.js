@@ -128,7 +128,14 @@ export default ({ app }) => {
   app.get('/api/trips/own', authRequired, tripController.listOwnTrip) // todo
   app.post('/api/trips', authRequired, bodyParser.json, tripController.create) // todo
   app.put('/api/trips/:tripId', authRequired, bodyParser.json, tripController.update) // todo
-  app.delete('/api/trips/:tripId', authRequired, bodyParser.json, tripController.remove) // todo
+  app.delete('/api/trips/:tripId', authRequired, bodyParser.json, tripController.remove)
+
+  app.post('/api/trips/image',
+    authRequired,
+    fileUpload.disk({
+      destination: 'tmp/{userId}',
+    }).fields([{ name: 'img' }]),
+    tripController.uploadImage)
 
   // site
   app.get('/api/guideSites', authRequired, guideSiteController.list) // todo

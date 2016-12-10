@@ -1,15 +1,18 @@
 import React from 'react'
-import { reduxForm } from 'redux-form'
-import FormNames from '../../../constants/FormNames'
-import FormButton from '../../utils/FormButton'
-import validate from './createSiteValidate'
-import Text from '../../utils/Text'
+import { Field, reduxForm } from 'redux-form'
+import FormNames from '../../../../constants/FormNames'
+import FormButton from '../../../utils/FormButton'
+import validate from '../createSiteValidate'
+import Text from '../../../utils/Text'
+import Editor from '../../../Editor'
 import {
   BsForm as Form,
   BsFormFooter as FormFooter,
-} from '../../fields/widgets'
+} from '../../../fields/widgets'
 
-const CreateSiteFormPage3 = ({ handleSubmit, ...props }) => {
+
+
+const CreateSiteFormPage2 = ({ handleSubmit, ...props }) => {
   const {
     pristine,
     submitting,
@@ -24,6 +27,12 @@ const CreateSiteFormPage3 = ({ handleSubmit, ...props }) => {
       defaultFieldDimensions={{ sm: 6 }}
       onSubmit={handleSubmit}
     >
+      <Field
+        name="editor"
+        formName="TRIP_CREATE_SITE"
+        component={Editor}
+        type="text"
+      />
 
       <FormFooter
         labelDimensions={{ sm: 0 }}
@@ -48,5 +57,6 @@ export default reduxForm({
   initialValues: {
     name: '',
     tags: [],
+    introduction: '<p><br></p>',
   },
-})(CreateSiteFormPage3)
+})(CreateSiteFormPage2)

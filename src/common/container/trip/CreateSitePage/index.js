@@ -7,13 +7,12 @@ import PageLayout from '../../../components/layouts/PageLayout'
 import PanelContainer from '../../../components/utils/PanelContainer'
 import { Panel1, Panel2 } from '../../../components/utils/Panel'
 import PhaseBranch from '../../../components/utils/PhaseBranch'
-import CreateTripForm from '../../../components/forms/trip/CreateTripForm'
-import tripAPI from '../../../api/trip'
-import * as tripActions from '../../../reducers/trip/tripActions'
+import CreateSiteForm from '../../../components/forms/trip/CreateSiteForm'
+import * as siteActions from '../../../reducers/site/siteActions'
 import SubNavigation from '../../../components/utils/SubNavigation'
 
 const actions = [
-  tripActions,
+  siteActions,
 ]
 
 const mapStateToProps = state => {
@@ -34,20 +33,20 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-class CreateTripPage extends React.Component {
+class CreateSitePage extends React.Component {
   constructor(props) {
     super(props)
     this.nodes = [
-      'trip.createTrip.title1',
-      'trip.createTrip.title2',
-      'trip.createTrip.title3',
-      'trip.createTrip.title4',
-      'trip.createTrip.title5',
+      'trip.createSite.title1',
+      'trip.createSite.title2',
+      'trip.createSite.title3',
+      'trip.createSite.title4',
+      'trip.createSite.title5',
     ]
     this.nextPage = this.nextPage.bind(this)
     this.previousPage = this.previousPage.bind(this)
     this.state = {
-      page: 0,
+      page: 1,
     }
   }
 
@@ -59,26 +58,13 @@ class CreateTripPage extends React.Component {
     this.setState({ page: this.state.page - 1 })
   }
 
-  componentWillMount() {
-    if (process.env.BROWSER) {
-      tripAPI(this.props.apiEngine)
-        .listGuideSites()
-        .catch(err => {
-          throw err
-        })
-        .then(json => {
-          this.props.actions.setOwnSite(json)
-        })
-    }
-  }
-
   render() {
     const { page } = this.state
     return (
       <PageLayout
         subNav={
           <SubNavigation
-            activeTab={2}
+            activeTab={0}
             tabText={['nav.trip.createSite', 'nav.trip.manageSite', 'nav.trip.createTrip', 'nav.trip.manageTrip']}
             tabLink={['/trip/createSite', '#', '/trip/createTrip', '#']}
           />
@@ -86,7 +72,7 @@ class CreateTripPage extends React.Component {
       >
         <PanelContainer>
           <Col md={2}>
-            <Panel2 title="trip.createTrip">
+            <Panel2 title="nav.trip.createSite">
               <PhaseBranch
                 nodes={this.nodes}
                 active={page}
@@ -95,18 +81,18 @@ class CreateTripPage extends React.Component {
           </Col>
           <Col md={7}>
             <Panel1 title={this.nodes[page]}>
-              <CreateTripForm
+              <CreateSiteForm
                 page={page}
                 nextPage={this.nextPage}
                 previousPage={this.previousPage}
               />
             </Panel1>
           </Col>
-          <Col md={3}/>
+          <Col md={3} />
         </PanelContainer>
       </PageLayout>
     )
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreateTripPage)
+export default connect(mapStateToProps, mapDispatchToProps)(CreateSitePage)

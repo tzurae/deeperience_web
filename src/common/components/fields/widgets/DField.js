@@ -14,7 +14,7 @@ const style = {
     width: '100%',
     textAlign: 'center',
     paddingBottom: '10px',
-  }
+  },
 }
 
 const DField = ({ label, meta, adapter, ...rest }) => {

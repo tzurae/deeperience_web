@@ -7,7 +7,7 @@ import errors from './error/errorReducer'
 import pages from './page/pageReducer'
 import todos from './todo/todoReducer'
 import form from './form/formReducer'
-import createSite from './createSiteReducer'
+import site from './site/siteReducer'
 
 export const rootReducer = combineReducers({
   global,
@@ -18,5 +18,5 @@ export const rootReducer = combineReducers({
   todos,
   form, // must mount as `form` from redux-form's docs
   trip,
-  createSite,
+  site,
 })

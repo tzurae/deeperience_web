@@ -1,18 +1,18 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
-import FormNames from '../../../constants/FormNames'
-import FormButton from '../../utils/FormButton'
-import validate from './createSiteValidate'
-import Text from '../../utils/Text'
+import FormNames from '../../../../constants/FormNames'
+import FormButton from '../../../utils/FormButton'
+import validate from '../createSiteValidate'
+import Text from '../../../utils/Text'
 import {
   BsInput as Input,
   BsCheckboxList as CheckboxList,
-} from '../../fields/adapters'
+} from '../../../fields/adapters'
 import {
   BsForm as Form,
   BsFormFooter as FormFooter,
   BsField as FormField,
-} from '../../fields/widgets'
+} from '../../../fields/widgets'
 
 const CreateSiteFormPage1 = ({ handleSubmit, ...props }) => {
   const {
@@ -74,5 +74,6 @@ export default reduxForm({
   initialValues: {
     name: '',
     tags: [],
+    introduction: '<p><br></p>',
   },
 })(CreateSiteFormPage1)

@@ -1,15 +1,15 @@
 import React from 'react'
 import { Link } from 'react-router'
 import { reduxForm } from 'redux-form'
-import FormNames from '../../../constants/FormNames'
-import FormButton from '../../utils/FormButton'
-import validate from './createSiteValidate'
-import Text from '../../utils/Text'
-import styles from '../../../styles'
+import FormNames from '../../../../constants/FormNames'
+import FormButton from '../../../utils/FormButton'
+import validate from '../createSiteValidate'
+import Text from '../../../utils/Text'
+import styles from '../../../../styles'
 import {
   BsForm as Form,
   BsFormFooter as FormFooter,
-} from '../../fields/widgets'
+} from '../../../fields/widgets'
 
 const CreateSiteFormPage5 = ({ handleSubmit, ...props }) => {
   const {
@@ -56,5 +56,6 @@ export default reduxForm({
   initialValues: {
     name: '',
     tags: [],
+    introduction: '<p><br></p>',
   },
 })(CreateSiteFormPage5)

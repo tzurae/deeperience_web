@@ -20,22 +20,22 @@ const SocialAuthButtonList = ({ routing, login }) => {
         className="btn btn-block btn-social btn-facebook"
       >
         <span className="fa fa-facebook"></span>
-        <Text id='login.facebook'/>
+        <Text id="login.facebook"/>
       </a>
     </div>
     ) : (
       <div>
         <Head
           links={[
-          'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-social/5.0.0/bootstrap-social.min.css',
-        ]}
+            'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-social/5.0.0/bootstrap-social.min.css',
+          ]}
         />
         <a
           href={`/auth/facebook${search}`}
           className="btn btn-block btn-social btn-facebook"
         >
           <span className="fa fa-facebook"></span>
-          <Text id='register.facebook'/>
+          <Text id="register.facebook"/>
         </a>
       </div>
     )
