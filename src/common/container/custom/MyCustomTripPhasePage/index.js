@@ -64,7 +64,7 @@ class MyCustomTripPhasePage extends React.Component {
       '',
       '',
       'trip.customize.chooseDate',
-      '',
+      'trip.customize.finishConfirm',
       '',
       '',
     ]
@@ -74,7 +74,7 @@ class MyCustomTripPhasePage extends React.Component {
       '',
       '',
       'trip.customize.chooseDate.comment',
-      '',
+      'trip.customize.finishConfirm.comment',
       '',
       '',
     ]

@@ -11,12 +11,9 @@
 }
 
 .waiting-img {
-  width: 120px;
-  height: 120px;
+  @include bg-contain('custompage/waiting.png', 120px, 120px);
   margin: 0 auto 30px;
   border-radius: 60px;
-  background: #ffffff url(../../../../public/img/custompage/waiting.png) no-repeat center center;
-  background-size: contain;
 }
 
 .rank {
@@ -68,12 +65,9 @@
 }
 
 .avatar {
-  width: 60px;
-  height: 60px;
+  @include bg-contain('default-avatar.png', 60px, 60px);
   margin: auto 0;
   border-radius: 30px;
-  background: #ffffff url(../../../../public/img/avatar.jpg) no-repeat center center;
-  background-size: contain;
 }
 
 .small-info {

@@ -52,7 +52,7 @@ export default {
   'trip.customize.guideConfirm': '導遊確認',
   'trip.customize.deposit': '預付訂金',
   'trip.customize.chooseDate': '選擇時段',
-  'trip.customize.finishConfirm': '結束確認',
+  'trip.customize.finishConfirm': '完成確認',
   'trip.customize.balance': '完成付款',
   'trip.customize.travel': '出遊',
   'trip.customize.chooseGuide.comment': '請根據您選擇的導遊清單排定志願序' +
@@ -71,6 +71,7 @@ export default {
   'trip.customize.chooseDate.endTime': '結束時間',
   'trip.customize.chooseDate.createTime': '+ 建立時段',
   'trip.customize.chooseDate.confirm': '確定時段',
+  'trip.customize.finishConfirm.comment': '您好，請確認 完成視訊 或者 再約一次視訊 。',
   'trip.createSite.title1': '景點名稱',
   'trip.createSite.title2': '景點簡介',
   'trip.createSite.title3': '景點資訊',

@@ -5,6 +5,14 @@ import Col from 'react-bootstrap/lib/Col'
 
 const PhaseFinishConfirm = () => (
     <div className={styles.container}>
+      <div className={styles.choooseDiv}>
+        <div className={styles.imgAgain}/>
+
+      </div>
+      <div className={styles.choooseDiv}>
+        <div className={styles.imgOk}/>
+
+      </div>
     </div>
   )
 

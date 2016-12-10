@@ -47,11 +47,8 @@
 }
 
 .avatar {
-  width: 32px;
-  height: 32px;
+  @include bg-contain('default-avatar.png', 32px, 32px);
   border-radius: 16px;
-  background: #ffffff url(../../../../public/img/avatar.jpg) no-repeat center center;
-  background-size: contain;
 }
 
 .day-info {

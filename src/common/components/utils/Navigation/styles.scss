@@ -20,8 +20,6 @@
 }
 
 .avatar {
+  @include bg-contain('default-avatar.png', 24px, 24px);
   display: inline-block;
-  width: 24px;
-  height: 24px;
-  background: #ffffff url(../../../../public/img/default-avatar.png) no-repeat center center;
 }

@@ -54,12 +54,9 @@
 }
 
 .avatar {
-  width: 60px;
-  height: 60px;
+  @include bg-contain('default-avatar.png', 60px, 60px);
   margin: auto 0;
   border-radius: 30px;
-  background: #ffffff url(../../../../public/img/avatar.jpg) no-repeat center center;
-  background-size: contain;
 }
 
 .other-div {
