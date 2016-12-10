@@ -21,6 +21,11 @@ html a:hover {
 label {
   font-size: 15px;
   font-size: 0.9375rem;
+  font-weight: 700;
+}
+
+#root .form-horizontal .control-label {
+  padding-top: 0;
 }
 
 #root  label > input {

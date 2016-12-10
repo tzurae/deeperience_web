@@ -25,16 +25,14 @@
 }
 
 .footer {
-  margin-top: 30px;
+  margin-top: 80px;
+  text-align: center;
 }
 
 .btn-trash {
-  width: 30px;
-  height: 30px;
-  background-color: $silverChalice !important;
-}
-
-.btn-trash-icon {
+  @include fontSizeI(18);
+  width: 30px !important;
+  height: 30px !important;
   background-color: $silverChalice !important;
 }
 

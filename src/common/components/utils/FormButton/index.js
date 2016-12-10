@@ -1,30 +1,45 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
+import classname from 'classnames'
 import styles from './styles.scss'
+import Text from '../../utils/Text'
 
-const FormButton = ({ children, style, type, ...props }) => {
-  let className
+const FormButton = ({ className, style, type, textId, ...props }) => {
+  let defaultClass
 
   switch (type) {
     case 'button':
-      className = styles.btnButton
+      defaultClass = styles.btnButton
       break
+    case 'confirm':
     case 'submit':
-      className = styles.btnSubmit
+      defaultClass = styles.btnSubmit
       break
-    default:
-      className = styles.btnButton
+    case 'fb':
+      defaultClass = styles.btnFb
   }
 
   return (
     <button
-      className={className}
+      className={classname(defaultClass, className)}
       style={style}
       type={type}
       {...props}
     >
-      {children}
+      <Text id={textId}/>
     </button>
   )
+}
+
+FormButton.propTypes = {
+  type: PropTypes.string,
+  style: PropTypes.object,
+  textId: PropTypes.string,
+}
+
+FormButton.defaultProps = {
+  type: 'button',
+  style: {},
+  textId: '',
 }
 
 export default FormButton

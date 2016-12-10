@@ -40,9 +40,11 @@ const CreateSiteFormPage5 = ({ handleSubmit, ...props }) => {
         style={{ textAlign: 'center' }}
       >
         <Link to="/trip/manageSite">
-          <FormButton type="submit" disabled={pristine || invalid}>
-            <Text id={'nav.trip.manageSite'} />
-          </FormButton>
+          <FormButton
+            type="submit"
+            disabled={pristine || invalid}
+            textId="nav.trip.manageSite"
+          />
         </Link>
       </FormFooter>
     </Form>

@@ -76,7 +76,6 @@ const renderChooseDateTime = ({ fields, meta: { touched, error } }) => (
         <IconBtn
           name="trash-o"
           className={styles.btnTrash}
-          iconClass={styles.btnTrashIcon}
           onClick={() => fields.remove(index)}
         />
       </div>
@@ -110,7 +109,6 @@ const ChooseDateTimeForm = ({ handleSubmit, ...props }) => {
       <FormFooter
         labelDimensions={{ sm: 0 }}
         fieldDimensions={{ sm: 12 }}
-        style={{ textAlign: 'center', marginTop: '80px' }}
         className={styles.footer}
       >
         <IconRectBtn

@@ -14,7 +14,7 @@ import {
   BsForm as Form,
   DField,
 } from '../../fields/widgets'
-import Button from '../../utils/FormButton'
+import FormButton from '../../utils/FormButton'
 import SocialLoginList from '../../utils/SocialAuthButtonList'
 
 const style = {
@@ -31,14 +31,6 @@ const style = {
     borderBottom: '1px solid #797D80',
     marginBottom: '25px',
     paddingBottom: '10px',
-  },
-  submit: {
-    width: '7em',
-    color: 'white',
-    fontSize: '1.2em',
-    margin: '0',
-    borderRadius: '50px',
-    backgroundColor: '#FF864F',
   },
   register: {
     width: '7em',
@@ -157,9 +149,11 @@ class LoginForm extends Component {
               text={<Text id="login.rememberMe" style={{ color: 'white' }} isSpan={true}/>}
             />
             <div style={{ display: 'flex', justifyContent: 'center', paddingTop: '10px' }}>
-              <Button type="submit" disabled={pristine || submitting || invalid} style={style.submit}>
-                <Text id="nav.user.login" />
-              </Button>
+              <FormButton
+                type="submit"
+                disabled={pristine || submitting || invalid}
+                textId="nav.user.login"
+              />
             </div>
           </div>
         </Form>

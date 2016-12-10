@@ -3,7 +3,6 @@ import { reduxForm } from 'redux-form'
 import FormNames from '../../../constants/FormNames'
 import FormButton from '../../utils/FormButton'
 import validate from './createSiteValidate'
-import Text from '../../utils/Text'
 import {
   BsForm as Form,
   BsFormFooter as FormFooter,
@@ -30,12 +29,16 @@ const CreateSiteFormPage3 = ({ handleSubmit, ...props }) => {
         fieldDimensions={{ sm: 12 }}
         style={{ textAlign: 'center' }}
       >
-        <FormButton type="button" onClick={previousPage}>
-          <Text id={'trip.createSite.form.previousStep'}/>
-        </FormButton>
-        <FormButton type="submit" disabled={pristine || submitting || invalid}>
-          <Text id={'trip.createSite.form.nextStep'}/>
-        </FormButton>
+        <FormButton
+          type="button"
+          onClick={previousPage}
+          textId="common.previousStep"
+        />
+        <FormButton
+          type="submit"
+          disabled={pristine || submitting || invalid}
+          textId="common.nextStep"
+        />
       </FormFooter>
     </Form>
   )

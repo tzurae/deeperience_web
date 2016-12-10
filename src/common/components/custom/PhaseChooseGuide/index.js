@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 import styles from './styles.scss'
 import Text from '../../utils/Text'
 import StarList from '../../utils/StarList'
@@ -18,6 +18,14 @@ const PhaseChooseGuide = ({ guideData }) => {
       ))}
     </div>
   )
+}
+
+PhaseChooseGuide.propTypes = {
+  guideData: PropTypes.arrayOf(PropTypes.object),
+}
+
+PhaseChooseGuide.defaultProps = {
+  guideData: [],
 }
 
 const GuideItem = ({ guideName, star, index, profession }) => (
@@ -45,5 +53,19 @@ const GuideItem = ({ guideName, star, index, profession }) => (
     </div>
   </div>
 )
+
+GuideItem.propTypes = {
+  guideName: PropTypes.string,
+  star: PropTypes.number,
+  index: PropTypes.number,
+  profession: PropTypes.string,
+}
+
+PhaseChooseGuide.defaultProps = {
+  guideName: '',
+  star: 0,
+  index: 0,
+  profession: '',
+}
 
 export default PhaseChooseGuide

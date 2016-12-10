@@ -1,0 +1,42 @@
+@import '../../../styles/index';
+
+.container {
+  padding: 0 15px;
+  text-align: center;
+}
+
+.comment {
+  @include font-size-medium;
+  margin-bottom: 30px;
+}
+
+.postcard {
+  position: relative;
+  width: 100%;
+  height: 385px;
+  padding: 15px;
+  background-color: $linen;
+  box-shadow: 3px 3px 8px 0 #cccccc;
+}
+
+.postcard-title {
+  @include bg-contain('custompage/postcard-title.png', 260px, 70px);
+  position: relative;
+  top: -5px;
+  margin: 0 auto;
+}
+
+.postcard-stamp {
+  @include bg-contain('custompage/postcard-stamp.png', 160px, 100px);
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.postcard-pic {
+  @include bg-cover('homepage/night.jpg', 100%, 285px);
+}
+
+.btn-div {
+  margin-top: 50px;
+}

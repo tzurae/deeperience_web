@@ -12,4 +12,5 @@ export default keyMirror({
   TRIP_CREATE_TRIP: null,
   TRIP_CREATE_SITE: null,
   CUSTOM_VIDEO_TIME: null,
+  CUSTOM_ADVICE: null,
 })

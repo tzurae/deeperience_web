@@ -1,6 +1,6 @@
 import React from 'react'
 import classname from 'classnames'
-import Panel from './defaultPanel'
+import Panel from './DefaultPanel'
 import styles from './styles.scss'
 
 const PanelWithWord = ({ children, className, ...props }) => (

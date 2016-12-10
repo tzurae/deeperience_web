@@ -8,7 +8,7 @@ import userAPI from '../../api/user'
 import { pushErrors } from '../../reducers/error/errorActions'
 import PageLayout from '../../components/layouts/PageLayout'
 import toRefreshURL from '../../utils/toRefreshURL'
-import Text from '../../components/utils/Text.js'
+import Text from '../../components/utils/Text'
 import styles from '../../styles'
 
 const style = {

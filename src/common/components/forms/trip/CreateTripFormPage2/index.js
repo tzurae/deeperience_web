@@ -9,7 +9,6 @@ import * as reduxFormActions from '../../../../reducers/form/reduxFormActions'
 import FormNames from '../../../../constants/FormNames'
 import FormButton from '../../../utils/FormButton'
 import validate from '../createTripValidate'
-import Text from '../../../utils/Text'
 import styles from './styles.scss'
 import { calculateTripInfo } from '../createTripHelper'
 import tripAPI from '../../../../api/trip'
@@ -530,15 +529,17 @@ class CreateTripFormPage2 extends React.Component {
           }
         </div>
         <div className={styles.footer} style={{}}>
-          <FormButton type="button" onClick={previousPage}>
-            <Text id={'trip.createTrip.form.previousStep'}/>
-          </FormButton>
+          <FormButton
+            type="button"
+            onClick={previousPage}
+            textId="common.previousStep"
+          />
           <FormButton
             type="button"
             onClick={this.handleSubmit}
-            disabled={pristine || submitting || invalid || !this.validateForm(false)}>
-            <Text id={'trip.createTrip.form.nextStep'}/>
-          </FormButton>
+            disabled={pristine || submitting || invalid || !this.validateForm(false)}
+            textId="common.nextStep"
+          />
           <p
             className={styles.msgError}
             style={{ float: 'right' }}>

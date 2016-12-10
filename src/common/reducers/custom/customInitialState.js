@@ -1,7 +1,8 @@
 import { Record } from 'immutable'
 
 const InitialState = Record({
-  page: 5,
+  page: 1,
+  isAdviceModal: false,
 })
 
 export default InitialState

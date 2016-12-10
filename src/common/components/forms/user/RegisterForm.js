@@ -17,7 +17,7 @@ import {
 import configs from '../../../../../configs/project/client'
 import Text from '../../utils/Text'
 import SocialLoginList from '../../utils/SocialAuthButtonList'
-import Button from '../../utils/FormButton'
+import FormButton from '../../utils/FormButton'
 
 const validate = (values) => {
   const errors = {}
@@ -146,9 +146,10 @@ class RegisterForm extends Component {
       submitting,
       invalid,
       valid,
+      className,
     } = this.props
     return (
-      <div style={style.bg}>
+      <div className={className} style={style.bg}>
         <div style={style.title}>
           <Text id="nav.user.register" />
         </div>
@@ -201,14 +202,12 @@ class RegisterForm extends Component {
               text={<Text id="register.hasRead" style={{ color: 'white' }} isSpan={true}/>}
             />
             <div style={style.button}>
-              <Button
+              <FormButton
                 type="submit"
                 onClick={valid ? this.props.openModal : null}
                 disabled={pristine || !!asyncValidating || submitting || invalid}
-                style={style.submit}
-              >
-                <Text id="register.register" />
-              </Button>
+                textId="register.register"
+              />
             </div>
           </div>
         </Form>

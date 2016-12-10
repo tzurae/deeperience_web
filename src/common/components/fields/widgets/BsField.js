@@ -88,6 +88,7 @@ BsField.contextTypes = {
   defaultHorizontal: PropTypes.bool,
   defaultLabelDimensions: PropTypes.object,
   defaultFieldDimensions: PropTypes.object,
+  defaultShowLabel: PropTypes.bool,
 }
 
 BsField.defaultProps = {
