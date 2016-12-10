@@ -5,7 +5,8 @@
 import authSaga from '../reducers/auth/authSaga'
 
 export default function* saga() {
-  return [
+  console.log('sdfafkfaskfjlsa');
+  yield [
     ...authSaga,
   ]
 }

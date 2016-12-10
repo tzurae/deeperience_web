@@ -89,28 +89,28 @@ class LoginForm extends Component {
   _handleSubmit(formData) {
     // let { store } = this.context;
     const { dispatch, apiEngine, change, login } = this.props
-    return login(formData)
-    // return userAPI(apiEngine)
-    //   .login(formData)
-    //   .catch((err) => {
-    //     dispatch(pushErrors(err))
-    //     throw err
-    //   })
-    //   .then((json) => {
-    //     if (json.isAuth) {
-    //       this.login(json).then(() => {
-    //         console.log('json is',json);
-    //         // redirect to the origin path before logging in
-    //         const { next } = this.props.routing.locationBeforeTransitions.query
-    //         dispatch(push(next || '/'))
-    //       })
-    //     } else {
-    //       change('password', '')
-    //       throw new SubmissionError({
-    //         _error: 'Login failed. You may type wrong email or password.',
-    //       })
-    //     }
-    //   })
+    // return login(formData)
+    return userAPI(apiEngine)
+      .login(formData)
+      .catch((err) => {
+        dispatch(pushErrors(err))
+        throw err
+      })
+      .then((json) => {
+        if (json.isAuth) {
+          this.login(json).then(() => {
+            console.log('json is',json);
+            // redirect to the origin path before logging in
+            const { next } = this.props.routing.locationBeforeTransitions.query
+            dispatch(push(next || '/'))
+          })
+        } else {
+          change('password', '')
+          throw new SubmissionError({
+            _error: 'Login failed. You may type wrong email or password.',
+          })
+        }
+      })
   }
 
   render() {

@@ -12,18 +12,22 @@ const {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
-} = require('../../constants/ActionTypes')
+} = require('../../constants/ActionTypes').default
 
 export function* login() {
-  console.log('kfdjklfjklasfjklas');
+  try {
+    yield put(authActions.loginRequest)
 
+    const user = yield call
+  } catch(error) {
+    yield put(authActions.loginFailure)
+  }
 }
 
 
 export function* watchLogin () {
   while(true) {
     const { payload } = yield take(LOGIN)
-    console.log('payload is ',payload);
     yield fork(login, payload)
   }
 }

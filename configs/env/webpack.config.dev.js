@@ -59,7 +59,7 @@ module.exports = {
     },
       {
       test: webpackIsomorphicToolsPlugin.regular_expression('images'),
-      loader: 'url-loader?limit=10240',
+      loader: 'url-loader?limit=10240&name=[sha512:hash:base64:7]',
     }],
   },
   postcss: function() {

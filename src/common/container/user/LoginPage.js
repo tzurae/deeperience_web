@@ -32,7 +32,7 @@ class LoginPage extends Component {
          <Col md={4} />
          <Col md={4}>
            <div style={style.form}>
-             <LoginForm onButtonPress={this.props.actions.login} />
+             <LoginForm login={this.props.actions.login} />
            </div>
          </Col>
          <Col md={4} />
