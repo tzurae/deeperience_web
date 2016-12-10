@@ -1,4 +1,7 @@
-$image-path: '../../public/img' !default;
+@import './mixin-flex';
+
+// this path must related to the website root, not the project root!!!!
+$image-path: '/img' !default;
 
 @mixin clearfix {
   *zoom: 1;
@@ -82,19 +85,18 @@ $image-path: '../../public/img' !default;
   padding: 0;
 }
 
-@mixin flex-center {
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
+@mixin bg($img, $width, $height) {
+  width: $width;
+  height: $height;
+  background: transparent url(#{$image-path}/#{$img}) no-repeat center center;
 }
 
-@mixin flex-row {
-  display: flex;
-  flex-direction: row;
+@mixin bg-contain($img, $width: 100%, $height: 100%) {
+  @include bg($img, $width, $height);
+  background-size: contain;
 }
 
-@mixin flex-column {
-  display: flex;
-  flex-direction: column;
+@mixin bg-cover($img, $width: 100%, $height: 100%) {
+  @include bg($img, $width, $height);
+  background-size: cover;
 }

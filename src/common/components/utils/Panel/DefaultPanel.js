@@ -11,11 +11,14 @@ const Panel = ({
   children,
   contentDivClass,
   className,
+  comment,
+  commentClass,
 }) => {
   return (
     <div className={classname(styles.container, className)}>
       <Text className={classname(styles.title, titleClass)} id={title}/>
       {isUnderline && <div className={classname(styles.underline, underlineClass)}/>}
+      <Text className={classname(styles.comment, commentClass)} id={comment}/>
       <div className={classname(styles.contentDiv, contentDivClass)}>
         {children}
       </div>
@@ -30,6 +33,8 @@ Panel.propTypes = {
   isUnderline: PropTypes.bool,
   contentDivClass: PropTypes.string,
   className: PropTypes.string,
+  comment: PropTypes.string,
+  commentClass: PropTypes.string,
 }
 
 Panel.defaultProps = {
@@ -38,7 +43,9 @@ Panel.defaultProps = {
   underlineClass: '',
   isUnderline: true,
   contentDivClass: '',
-  className: null,
+  className: '',
+  comment: '',
+  commentClass: '',
 }
 
 export default Panel

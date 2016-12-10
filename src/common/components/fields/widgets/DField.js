@@ -19,7 +19,7 @@ const style = {
 
 const DField = ({ label, meta, adapter, ...rest }) => {
   const Adapter = adapter
-  const { touched, error, warning } = meta
+  const { touched, error } = meta
   const renderedFormControl = (
     <Adapter
       style={style.field}

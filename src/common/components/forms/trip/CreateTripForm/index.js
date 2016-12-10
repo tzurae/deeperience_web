@@ -39,12 +39,11 @@ class CreateTripForm extends React.Component {
       createTripForm,
     } = this.props
 
-    const { tripDayInfos, tripElements } = getOptions(messages.toJS(), ['TripDayInfos', 'TripElements'])
-    tripElements.splice(0, 1) // remove ANY
+    const { TripDayInfos, TripElements } = getOptions(messages.toJS(), ['TripDayInfos', 'TripElements'])
+    TripElements.splice(0, 1) // remove ANY
 
     let values
 
-    // debug usage
     if (createTripForm) {
       values = createTripForm.values
     }
@@ -56,8 +55,8 @@ class CreateTripForm extends React.Component {
         <CreateTripFormPage1
           onSubmit={nextPage}
           {...this.props}
-          tripDayInfos={tripDayInfos}
-          tripElements={tripElements}
+          tripDayInfos={TripDayInfos}
+          tripElements={TripElements}
         />
         }
         {page === 1 &&

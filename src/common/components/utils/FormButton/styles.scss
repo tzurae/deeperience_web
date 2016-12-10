@@ -5,20 +5,26 @@
   width: 100px;
   margin: 0 20px;
   padding: 8px 0;
+  letter-spacing: 2px;
   border: 2px solid $color-main;
   border-radius: 50px;
 }
 
 .btn-submit {
-  color: white;
-  background: $color-main;
-
   @extend .btn;
+  color: $white;
+  background: $color-main;
 }
 
 .btn-button {
-  color: $color-main;
-  background: white;
-
   @extend .btn;
+  color: $color-main;
+  background: transparent;
+}
+
+.btn-fb {
+  @extend .btn;
+  color: $white;
+  border-color: $chambray;
+  background-color: $chambray;
 }

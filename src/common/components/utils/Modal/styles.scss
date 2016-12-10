@@ -1,0 +1,67 @@
+@import '../../../styles/index';
+$dialog-width: 440px;
+
+// ------ defaultModel ------
+.modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100000;
+  width: 100%;
+  height: 100%;
+}
+
+.modal-active {
+  @extend .modal;
+}
+
+.modal-inactive {
+  @extend .modal;
+  display: none;
+}
+
+.dialog {
+  @include flex-col;
+  position: absolute;
+  top: 150px;
+  left: calc(50% - #{$dialog-width} / 2);
+  width: $dialog-width;
+  padding: 30px;
+  border-radius: 10px;
+  background-color: $white;
+}
+
+.dialog-title {
+  @include font-size-large;
+  font-weight: 900;
+  color: $black;
+  text-align: center;
+}
+
+.dialog-content {
+  flex: 1;
+  margin-top: 15px;
+}
+
+.btn-close {
+  @include font-size-big;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  color: $black !important;
+  background-color: transparent !important;
+}
+
+// ------ MsgModel ------
+
+.dialog-content-msg {
+  @include flex-col-around;
+  @include font-size-big;
+  @extend .dialog-content;
+  align-items: center;
+}
+
+.dialog-msg {
+  @extend .dialog;
+  height: 250px;
+}

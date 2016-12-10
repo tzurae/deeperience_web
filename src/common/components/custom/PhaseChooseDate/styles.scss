@@ -1,0 +1,17 @@
+@import '../../../styles/index';
+
+.container {
+  padding: 0 15px;
+  text-align: center;
+}
+
+.guide-info {
+  @include flex-col;
+  position: relative;
+  width: 100%;
+  margin-top: 20px;
+  padding: 20px;
+  border: 0;
+  background-color: $white;
+  box-shadow: 3px 3px 8px 0 #cccccc;
+}

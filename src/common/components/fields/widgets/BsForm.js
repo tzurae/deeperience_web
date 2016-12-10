@@ -7,12 +7,14 @@ class BsForm extends Component {
       defaultHorizontal,
       defaultLabelDimensions,
       defaultFieldDimensions,
+      defaultShowLabel,
     } = this.props
 
     return {
       defaultHorizontal,
       defaultLabelDimensions,
       defaultFieldDimensions,
+      defaultShowLabel,
     }
   }
 
@@ -20,7 +22,10 @@ class BsForm extends Component {
     const {
       /* eslint-disable */
       // consume props owned by BsForm
-      defaultHorizontal, defaultLabelDimensions, defaultFieldDimensions,
+      defaultHorizontal,
+      defaultLabelDimensions,
+      defaultFieldDimensions,
+      defaultShowLabel,
       /* eslint-enable */
       children,
       ...rest
@@ -38,12 +43,14 @@ BsForm.propTypes = {
   defaultHorizontal: PropTypes.bool,
   defaultLabelDimensions: PropTypes.object,
   defaultFieldDimensions: PropTypes.object,
+  defaultShowLabel: PropTypes.bool,
 }
 
 BsForm.childContextTypes = {
   defaultHorizontal: PropTypes.bool,
   defaultLabelDimensions: PropTypes.object,
   defaultFieldDimensions: PropTypes.object,
+  defaultShowLabel: PropTypes.bool,
 }
 
 BsForm.defaultProps = {
@@ -54,6 +61,7 @@ BsForm.defaultProps = {
   defaultFieldDimensions: {
     sm: 10,
   },
+  defaultShowLabel: true,
 }
 
 export default BsForm

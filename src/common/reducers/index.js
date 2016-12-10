@@ -8,6 +8,10 @@ import pages from './page/pageReducer'
 import todos from './todo/todoReducer'
 import form from './form/formReducer'
 import site from './site/siteReducer'
+import custom from './custom/customReducer'
+
+import GlobalInitialState from './global/globalInitialState'
+import CustomInitialState from './custom/customInitialState'
 
 export const rootReducer = combineReducers({
   global,
@@ -19,4 +23,10 @@ export const rootReducer = combineReducers({
   form, // must mount as `form` from redux-form's docs
   trip,
   site,
+  custom,
+})
+
+export const getInitialState = () => ({
+  global: new GlobalInitialState(),
+  custom: new CustomInitialState(),
 })

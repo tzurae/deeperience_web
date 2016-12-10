@@ -1,94 +1,120 @@
 import Options from '../i18n/zh-tw'
+/**
+ * ##
+ * @usage getting i18n value from messages to adapt options
+ * @param
+ *  messages: i18n object ( Immutable Map.toJS() )
+ *  options: array of string ['TripElements', 'SiteElements']
+ * @return
+ *  ex:
+ * {
+ *    TripElements: [
+ *      {
+ *        label: "TripElements.TOUR_WALK.label",
+ *        value: [{
+ *          label: "海邊",
+ *          value: "TripElements.TOUR_WALK.label",
+ *        }],
+ *      }
+ *    ],
+ *    TripDayInfos: [{
+ *      label: "半日遊",
+ *      value: "TripDayInfos.HALF_DAY",
+ *    },{
+ *      label: "一日遊",
+ *      value: "TripDayInfos.ONE_DAY",
+ *    }]
+ * }
+ */
 
 export const getOptions = (messages, options) => {
+  const optionArr1 = ['TripElements', 'SiteElements']
+  const optionArr2 = [
+    'CustomPhases', 'FoodElements', 'HotelTypes',
+    'Languages', 'TravelWays', 'TripDayInfos',
+  ]
   const option = {}
-  if (options.indexOf('TripDayInfos') !== -1) {
-    option.tripDayInfos =
+
+  optionArr1.forEach(tag => {
+    if (options.indexOf(tag) !== -1) {
+      const tmpObj = {}
+      option[tag] = []
       Object.keys(Options)
-        .filter(value => value.indexOf('TripDayInfos') === 0)
-        .map(value => ({
-          label: messages[value],
-          value,
-        }))
-  }
+        .filter(value => value.indexOf(tag) === 0)
+        .forEach(value => {
+          const arr = value.split('.')
 
-  if (options.indexOf('TripElements') !== -1) {
-    const tripElements = {}
-    option.tripElements = []
-
-    Object.keys(Options)
-      .filter(value => value.indexOf('TripElements') === 0)
-      .forEach(value => {
-        const arr = value.split('.')
-
-        if (!tripElements[arr[1]]) {
-          tripElements[arr[1]] = {
-            label: '',
-            value: [],
+          if (!tmpObj[arr[1]]) {
+            tmpObj[arr[1]] = {
+              label: '',
+              value: [],
+            }
           }
-        }
 
-        if (arr[2] === 'label') {
-          tripElements[arr[1]].label = value
-        } else {
-          tripElements[arr[1]].value.push({
+          if (arr[2] === 'label') {
+            tmpObj[arr[1]].label = value
+          } else {
+            tmpObj[arr[1]].value.push({
+              label: messages[value],
+              value,
+            })
+          }
+        })
+
+      for (const element in tmpObj) {
+        option[tag].push(tmpObj[element])
+      }
+    }
+  })
+
+  optionArr2.forEach(tag => {
+    if (options.indexOf(tag) !== -1) {
+      option[tag] =
+        Object.keys(Options)
+          .filter(value => value.indexOf(tag) === 0)
+          .map(value => ({
             label: messages[value],
             value,
-          })
-        }
-      })
-
-    for (const element in tripElements) {
-      option.tripElements.push(tripElements[element])
+          }))
     }
-  }
-
-  if (options.indexOf('SiteElements') !== -1) {
-    const siteElements = {}
-    option.siteElements = []
-
-    Object.keys(Options)
-      .filter(value => value.indexOf('SiteElements') === 0)
-      .forEach(value => {
-        const arr = value.split('.')
-
-        if (!siteElements[arr[1]]) {
-          siteElements[arr[1]] = {
-            label: '',
-            value: [],
-          }
-        }
-
-        if (arr[2] === 'label') {
-          siteElements[arr[1]].label = value
-        } else {
-          siteElements[arr[1]].value.push({
-            label: messages[value],
-            value,
-          })
-        }
-      })
-
-    for (const element in siteElements) {
-      option.siteElements.push(siteElements[element])
-    }
-  }
+  })
 
   return option
 }
 
+/**
+ * ##
+ * @usage getting i18n value from messages
+ * @param
+ *  messages: i18n object ( Immutable Map.toJS() )
+ *  options: array of string ['CustomPhases', 'TripDayInfos']
+ * @return
+ *  ex:
+ * {
+ *    TripDayInfos: {
+ *      "TripDayInfos.HALF_DAY": "半日遊",
+ *      "TripDayInfos.ONE_DAY": "一日遊",
+ *    }
+ * }
+ */
+
 export const getValue = (messages, options) => {
-  const i18nArr = ['CustomPhases', 'TripDayInfos']
+  const i18nArr = [
+    'CustomPhases', 'FoodElements', 'HotelTypes',
+    'Languages', 'TravelWays', 'TripDayInfos',
+    'SiteElements', 'TripElements', 'TripLocations',
+  ]
   const i18nValue = {}
-  i18nArr.forEach(i18nTag => {
-    if (options.indexOf(i18nTag) !== -1) {
-      i18nValue[i18nTag] = {}
+  i18nArr.forEach(tag => {
+    if (options.indexOf(tag) !== -1) {
+      i18nValue[tag] = {}
       Object.keys(Options)
-        .filter(value => value.indexOf(i18nTag) === 0)
+        .filter(value => value.indexOf(tag) === 0)
         .forEach(value => {
-          i18nValue[i18nTag][value.substring(i18nTag.length + 1)] = messages[value]
+          i18nValue[tag][value.substring(tag.length + 1)] = messages[value]
         })
     }
   })
+
   return i18nValue
 }

@@ -1,0 +1,35 @@
+@import '../../../styles/index';
+
+.container {
+  @include flex-row;
+  align-items: stretch;
+  padding: 0 15px;
+  text-align: center;
+}
+
+.choose-div {
+  @include flex-col-between;
+  flex: 1;
+  align-items: center;
+}
+
+.comment {
+  width: 90%;
+  margin: 30px 0;
+}
+
+.p-comment {
+  line-height: 25px;
+}
+
+.img-again {
+  @include bg-contain('custompage/zoom.png', 100px, 100px);
+}
+
+.img-ok {
+  @include bg-contain('custompage/finish.png', 100px, 100px);
+}
+
+.btn-again {
+  background-color: $color-zoom;
+}

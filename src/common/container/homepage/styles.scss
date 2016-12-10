@@ -1,42 +1,28 @@
 @import '../../styles/index';
-$fontFamily: monospace, serif, sans-serif, cursive, fantasy;
-
-@mixin center {
-  display: flex;
-  flex-direction: column;
-
-  align-items: center;
-  justify-content: flex-start;
-}
-
-@mixin jumbotron-font-color-family {
-  font-family: $fontFamily;
-  color: white;
-}
 
 .jumbotron {
-  @include center;
+  @include flex-col-center;
+  @include bg-cover('homepage/river_dark.jpg');
+  justify-content: flex-start;
   min-height: 100vh;
   margin-bottom: 0 !important; // react-boostrap default :50px
-  background: #ffffff url(../../../public/img/homepage/river_dark.jpg) no-repeat top center;
-  background-size: cover;
 }
 
 .company-name {
   @include fontSizeI(60);
-  @include jumbotron-font-color-family;
   padding-top: 35vh;
+  color: white;
 }
 
 .company-slogan {
   @include fontSize(20);
-  @include jumbotron-font-color-family;
   padding-bottom: 40px;
+  color: white;
 }
 
 .produce-trip {
-  @include jumbotron-font-color-family;
   padding-top: 13px;
+  color: white;
 }
 
 .produce-trip-button {
@@ -52,9 +38,9 @@ $fontFamily: monospace, serif, sans-serif, cursive, fantasy;
 }
 
 .product-feature-headline {
-  @include center;
+  @include flex-col-center;
+  justify-content: flex-start;
   padding-top: 5vh;
-  font-family: $fontFamily;
   font-size: 1.5vw;
   font-weight: bold;
 }
@@ -66,7 +52,8 @@ $fontFamily: monospace, serif, sans-serif, cursive, fantasy;
 }
 
 .feature {
-  @include center;
+  @include flex-col-center;
+  justify-content: flex-start;
   width: 20vw;
 }
 
@@ -95,8 +82,8 @@ $fontFamily: monospace, serif, sans-serif, cursive, fantasy;
 }
 
 .user-reviews {
+  @include bg-cover('homepage/night.jpg');
   min-height: 70vh;
-  background: #ffffff url(../../../public/img/homepage/night.jpg);
   background-size: 100%;
 }
 
@@ -109,8 +96,8 @@ $fontFamily: monospace, serif, sans-serif, cursive, fantasy;
 .posts {
   display: flex;
   flex-wrap: wrap;
-  padding: 30px;
   justify-content: center;
+  padding: 30px;
 }
 
 .post {

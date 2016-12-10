@@ -1,0 +1,94 @@
+@import '../../../styles/index';
+
+.container {
+  padding: 0 15px;
+  text-align: center;
+}
+
+.comment {
+  @include fontSize(18);
+  line-height: 30px;
+}
+
+.waiting-img {
+  @include bg-contain('custompage/waiting.png', 120px, 120px);
+  margin: 0 auto 30px;
+  border-radius: 60px;
+}
+
+.rank {
+  @include font-size-medium;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}
+
+.guide-info {
+  @include flex-col;
+  position: relative;
+  width: 100%;
+  margin-top: 20px;
+  padding: 20px;
+  border: 0;
+  background-color: $white;
+  box-shadow: 3px 3px 8px 0 #cccccc;
+}
+
+.guide-info1 {
+  @include flex-row;
+  width: 100%;
+}
+
+.guide-info1-left {
+  @include flex-col-end;
+  flex: 1;
+  margin: 0 10px;
+}
+
+.guide-info1-right {
+  @include flex-row-start;
+  flex: 1;
+  align-items: center;
+  margin: 0 10px;
+  text-align: left;
+}
+
+.guide-name {
+  @include font-size-large;
+  font-weight: bold;
+  line-height: 30px;
+}
+
+.profession {
+  @include fontSize(14);
+  line-height: 20px;
+}
+
+.avatar {
+  @include bg-contain('default-avatar.png', 60px, 60px);
+  margin: auto 0;
+  border-radius: 30px;
+}
+
+.small-info {
+}
+
+.guide-info2 {
+  margin: 30px 0;
+}
+
+.small-info-title {
+  @include fontSize(18);
+  font-weight: 900;
+  line-height: 25px;
+}
+
+.small-info-content {
+  @include fontSize(14);
+  line-height: 25px;
+}
+
+.self-intro {
+  padding: 0 10px 20px;
+  text-align: left;
+}

@@ -1,5 +1,5 @@
 import React from 'react'
-import Panel from './defaultPanel'
+import Panel from './DefaultPanel'
 import styles from './styles.scss'
 
 const Panel1 = ({ title, children, ...props }) => (

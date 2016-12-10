@@ -11,13 +11,17 @@
   box-shadow: 3px 3px 8px 0 #cccccc;
 }
 
+.btn:hover {
+  background-color: $alto;
+}
+
 .container {
   @include flex-row;
   height: 100%;
 }
 
 .info-div {
-  @include flex-column;
+  @include flex-col;
   flex: 1;
   height: 100%;
   padding: 10px 20px;
@@ -26,17 +30,15 @@
 
 .title {
   @include fontSize(18);
-  display: flex;
+  @include flex-row-center;
   flex: 1;
   color: $black;
-  align-items: center;
 }
 
 .guide-info {
-  display: flex;
+  @include flex-row-center;
   flex: 1;
   color: $black;
-  align-items: center;
 }
 
 .guide-name {
@@ -45,11 +47,8 @@
 }
 
 .avatar {
-  width: 32px;
-  height: 32px;
+  @include bg-contain('default-avatar.png', 32px, 32px);
   border-radius: 16px;
-  background: #ffffff url(../../../../public/img/avatar.jpg) no-repeat center center;
-  background-size: contain;
 }
 
 .day-info {
@@ -77,37 +76,31 @@
 }
 
 .phase-guide-confirm {
-  background-color: $color-phase-guide-confirm;
-
   @extend .phase;
+  background-color: $color-phase-guide-confirm;
 }
 
 .phase-deposit {
-  background-color: $color-phase-deposit;
-
   @extend .phase;
+  background-color: $color-phase-deposit;
 }
 
 .phase-time-confirm {
-  background-color: $color-phase-time-confirm;
-
   @extend .phase;
+  background-color: $color-phase-time-confirm;
 }
 
 .phase-video-wait {
-  background-color: $color-phase-video-wait;
-
   @extend .phase;
+  background-color: $color-phase-video-wait;
 }
 
 .phase-balance {
-  background-color: $color-phase-balance;
-
   @extend .phase;
+  background-color: $color-phase-balance;
 }
 
 .phase-buy {
-  background-color: $color-phase-buy;
-
   @extend .phase;
+  background-color: $color-phase-buy;
 }

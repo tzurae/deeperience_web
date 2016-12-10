@@ -59,9 +59,11 @@ const CreateSiteFormPage1 = ({ handleSubmit, ...props }) => {
         fieldDimensions={{ sm: 12 }}
         style={{ textAlign: 'center' }}
       >
-        <FormButton type="submit" disabled={pristine || submitting || invalid}>
-          <Text id={'trip.createSite.form.nextStep'}/>
-        </FormButton>
+        <FormButton
+          type="submit"
+          disabled={pristine || submitting || invalid}
+          textId="common.nextStep"
+        />
       </FormFooter>
     </Form>
   )

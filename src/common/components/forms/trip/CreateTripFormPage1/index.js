@@ -15,6 +15,25 @@ import {
   BsField as FormField,
 } from '../../../fields/widgets'
 
+const formProperties = {
+  form: FormNames.TRIP_CREATE_TRIP,
+  destroyOnUnmount: false,
+  validate,
+  initialValues: {
+    name: '',
+    tags: [],
+    dayInfo: 'TripDayInfos.HALF_DAY',
+    dailyTrips: [{
+      remind: '',
+      period: {
+        start: '08:00',
+        end: '21:00',
+      },
+    }],
+    uuid2data: {},
+  },
+}
+
 const CreateTripFormPage1 = ({ handleSubmit, ...props }) => {
   const {
     pristine,
@@ -77,29 +96,14 @@ const CreateTripFormPage1 = ({ handleSubmit, ...props }) => {
         fieldDimensions={{ sm: 12 }}
         style={{ textAlign: 'center' }}
       >
-        <FormButton type="submit" disabled={pristine || submitting || invalid}>
-          <Text id={'trip.createTrip.form.nextStep'}/>
-        </FormButton>
+        <FormButton
+          type="submit"
+          disabled={pristine || submitting || invalid}
+          textId="common.nextStep"
+        />
       </FormFooter>
     </Form>
   )
 }
 
-export default reduxForm({
-  form: FormNames.TRIP_CREATE_TRIP,
-  destroyOnUnmount: false,
-  validate,
-  initialValues: {
-    name: '',
-    tags: [],
-    dayInfo: 'TripDayInfos.HALF_DAY',
-    dailyTrips: [{
-      remind: '',
-      period: {
-        start: '08:00',
-        end: '21:00',
-      },
-    }],
-    uuid2data: {},
-  },
-})(CreateTripFormPage1)
+export default reduxForm(formProperties)(CreateTripFormPage1)

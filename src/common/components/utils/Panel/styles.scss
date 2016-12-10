@@ -9,7 +9,7 @@
 .container {
   margin-bottom: 20px;
   border-radius: 5px;
-  background-color: $white;
+  background-color: $color-panel-background;
 }
 
 .title {
@@ -21,6 +21,11 @@
 
 .content-div {
   padding: 20px 15px;
+}
+
+.comment {
+  @include fontSize(15);
+  color: $black;
 }
 
 /* Panel1 */
@@ -42,4 +47,34 @@
 
 .underline2 {
   background-color: $color-border;
+}
+
+/* PanelWithWord */
+
+.panel-with-word {
+  padding: 20px 30px;
+}
+
+.underline-with-word {
+  display: none;
+}
+
+.title-with-word {
+  @include fontSize(22);
+  padding: 20px 20px 15px;
+  color: $black;
+  text-align: center;
+}
+
+.content-div-with-word {
+  margin: 20px 0;
+}
+
+.comment-with-word {
+  width: 75%;
+  margin: 0 auto;
+  line-height: 22px;
+  color: $black;
+  text-align: center;
+  letter-spacing: 1px;
 }

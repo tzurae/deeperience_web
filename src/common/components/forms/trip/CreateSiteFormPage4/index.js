@@ -30,12 +30,16 @@ const CreateSiteFormPage4 = ({ handleSubmit, ...props }) => {
         fieldDimensions={{ sm: 12 }}
         style={{ textAlign: 'center' }}
       >
-        <FormButton type="button" onClick={previousPage}>
-          <Text id={'trip.createSite.form.previousStep'}/>
-        </FormButton>
-        <FormButton type="submit" disabled={pristine || submitting || invalid}>
-          <Text id={'trip.createSite.form.finish'}/>
-        </FormButton>
+        <FormButton
+          type="button"
+          onClick={previousPage}
+          textId="common.previousStep"
+        />
+        <FormButton
+          type="submit"
+          disabled={pristine || submitting || invalid}
+          textId="common.nextStep"
+        />
       </FormFooter>
     </Form>
   )

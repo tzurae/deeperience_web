@@ -1,0 +1,88 @@
+@import '../../../styles/index';
+
+.container {
+  @include flex-row;
+  width: 100%;
+  height: 100px;
+  margin: 10px 0;
+  padding: 15px 20px;
+  text-align: left;
+  border: 0;
+  background-color: $white;
+  box-shadow: 3px 3px 8px 0 #cccccc;
+  cursor: -webkit-grab;
+  user-select: none;
+}
+
+.container:hover {
+  background-color: $alto;
+}
+
+.info-div {
+  @include flex-col;
+  flex: 1;
+  height: 100%;
+  padding: 0 20px;
+  letter-spacing: 1px;
+}
+
+.guide-name {
+  @include font-size-big;
+  @include flex-row-end;
+  flex: 1;
+  color: $black;
+}
+
+.profession {
+  @include fontSize(14);
+  margin-left: 10px;
+  padding: 2px;
+}
+
+.star-div {
+  @include flex-row-end;
+  flex: 1;
+  padding-bottom: 5px;
+  color: $color-text-light;
+}
+
+.star-text {
+  @include fontSize(14);
+  position: relative;
+  top: -1px;
+  margin-right: 5px;
+}
+
+.avatar {
+  @include bg-contain('default-avatar.png', 60px, 60px);
+  margin: auto 0;
+  border-radius: 30px;
+}
+
+.other-div {
+  @include flex-col;
+  position: relative;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.rank {
+  @include font-size-medium;
+  font-weight: 900;
+  color: black;
+  text-align: right;
+}
+
+.detail {
+  @include fontSize(14);
+  @include flex-row;
+  justify-content: space-between;
+  width: 110px;
+  height: 34px;
+  padding: 5px 10px 5px 12px;
+  color: $white;
+  letter-spacing: 2px;
+  border: 0;
+  border-radius: 3px;
+  background-color: $color-main;
+}

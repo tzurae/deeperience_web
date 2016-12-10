@@ -15,11 +15,11 @@
 }
 
 .dropdown-text {
-  display: inline;
-
   @extend .text;
+  display: inline;
 }
 
 .avatar {
-  height: 18px;
+  @include bg-contain('default-avatar.png', 24px, 24px);
+  display: inline-block;
 }

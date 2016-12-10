@@ -15,13 +15,11 @@
 }
 
 .text-active {
-  color: $color-main;
-
   @extend .text;
+  color: $color-main;
 }
 
 .text-inactive {
-  color: $black;
-
   @extend .text;
+  color: $black;
 }

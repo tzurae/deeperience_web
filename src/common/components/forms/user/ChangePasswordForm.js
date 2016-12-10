@@ -150,7 +150,7 @@ class ChangePasswordForm extends Component {
         </Row>
         <FormFooter>
           <Button type="submit" disabled={pristine || submitting || invalid} style={style.submit}>
-            <Text id="register.sure" />
+            <Text id="common.confirm" />
             {submitting && (
               <i className="fa fa-spinner fa-spin" aria-hidden="true" />
             )}

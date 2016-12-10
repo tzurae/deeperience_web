@@ -9,7 +9,6 @@ import * as reduxFormActions from '../../../../reducers/form/reduxFormActions'
 import FormNames from '../../../../constants/FormNames'
 import FormButton from '../../../utils/FormButton'
 import validate from '../createTripValidate'
-import Text from '../../../utils/Text'
 import styles from './styles.scss'
 import { calculateTripInfo } from '../createTripHelper'
 import tripAPI from '../../../../api/trip'
@@ -30,18 +29,35 @@ const actions = [
   reduxFormActions,
 ]
 
-const mapStateToProps = state => {
-  return {
-    createTripForm: state.form[FormNames.TRIP_CREATE_TRIP],
-    apiEngine: state.global.apiEngine,
-    allSites: state.trip.ownSites,
-    tripInfo: state.trip.tripInfo,
-    routes: state.trip.routes,
-    startSites: state.trip.startSites,
-    uuid2data: state.trip.uuid2data,
-    error: state.trip.error,
-  }
+const formProperties = {
+  form: FormNames.TRIP_CREATE_TRIP,
+  destroyOnUnmount: false,
+  validate,
+  initialValues: {
+    name: '',
+    tags: [],
+    dayInfo: 'TripDayInfos.HALF_DAY',
+    dailyTrips: [{
+      remind: '',
+      period: {
+        start: '08:00',
+        end: '21:00',
+      },
+    }],
+    uuid2data: {},
+  },
 }
+
+const mapStateToProps = state => ({
+  createTripForm: state.form[FormNames.TRIP_CREATE_TRIP],
+  apiEngine: state.global.apiEngine,
+  allSites: state.trip.ownSites,
+  tripInfo: state.trip.tripInfo,
+  routes: state.trip.routes,
+  startSites: state.trip.startSites,
+  uuid2data: state.trip.uuid2data,
+  error: state.trip.error,
+})
 
 const mapDispatchToProps = dispatch => {
   const creators = Map()
@@ -513,15 +529,17 @@ class CreateTripFormPage2 extends React.Component {
           }
         </div>
         <div className={styles.footer} style={{}}>
-          <FormButton type="button" onClick={previousPage}>
-            <Text id={'trip.createTrip.form.previousStep'}/>
-          </FormButton>
+          <FormButton
+            type="button"
+            onClick={previousPage}
+            textId="common.previousStep"
+          />
           <FormButton
             type="button"
             onClick={this.handleSubmit}
-            disabled={pristine || submitting || invalid || !this.validateForm(false)}>
-            <Text id={'trip.createTrip.form.nextStep'}/>
-          </FormButton>
+            disabled={pristine || submitting || invalid || !this.validateForm(false)}
+            textId="common.nextStep"
+          />
           <p
             className={styles.msgError}
             style={{ float: 'right' }}>
@@ -608,7 +626,7 @@ const FloatSiteListItem = ({ site, onClick, ...props }) => {
   return (
     <div className={styles.floatSiteListItem} {...props}>
       <IconBtn
-        btnStyle={{ marginRight: '10px' }}
+        btnStyle={styles.floatSiteListItemIcon}
         name="check"
         onClick={() => onClick(site)}
       />
@@ -690,21 +708,4 @@ const FillDayInfo = (day, length) => {
       })
   )
 }
-export default reduxForm({
-  form: FormNames.TRIP_CREATE_TRIP,
-  destroyOnUnmount: false,
-  validate,
-  initialValues: {
-    name: '',
-    tags: [],
-    dayInfo: 'TripDayInfos.HALF_DAY',
-    dailyTrips: [{
-      remind: '',
-      period: {
-        start: '08:00',
-        end: '21:00',
-      },
-    }],
-    uuid2data: {},
-  },
-})(connect(mapStateToProps, mapDispatchToProps)(CreateTripFormPage2))
+export default reduxForm(formProperties)(connect(mapStateToProps, mapDispatchToProps)(CreateTripFormPage2))
