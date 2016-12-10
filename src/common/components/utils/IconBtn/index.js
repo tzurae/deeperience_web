@@ -1,19 +1,18 @@
 import React, { PropTypes } from 'react'
 import FontAwesome from 'react-fontawesome'
 import styles from './styles.scss'
-import classNames from 'classnames'
+import classname from 'classnames'
 
-const IconBtn = ({ name, text, onClick, bgColor, className, ...props }) => {
+const IconBtn = ({ name, onClick, className, iconClass, ...props }) => {
   return (
     <button
       onClick={onClick}
-      className={classNames(styles.btn, className)}
+      className={classname(styles.btn, className)}
       {...props}
     >
       <FontAwesome
         name={name}
-        style={{ backgroundColor: bgColor }}
-        className={styles.icon}
+        className={classname(styles.icon, iconClass)}
       />
     </button>
   )
@@ -22,15 +21,15 @@ const IconBtn = ({ name, text, onClick, bgColor, className, ...props }) => {
 IconBtn.proptypes = {
   name: PropTypes.string.isRequired,
   onClick: PropTypes.func,
-  bgColor: PropTypes.string,
   className: PropTypes.string,
+  iconClass: PropTypes.string,
 }
 
 IconBtn.defaultProps = {
   name: '',
   onClick: () => {},
-  bgColor: null,
   className: '',
+  iconClass: '',
 }
 
 export default IconBtn

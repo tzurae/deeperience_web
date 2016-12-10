@@ -1,12 +1,14 @@
 @import '../../../styles/index';
 
 .node-wrapper {
-  display: flex;
+  @include flex-center;
   flex-direction: row;
-  justify-content: center;
   align-items: flex-start;
-  align-content: center;
-  padding: 10px 0 10px 10px;
+  padding: 10px 0;
+}
+
+.node-label-div {
+  flex: 3;
 }
 
 .node-label {
@@ -22,6 +24,12 @@
 .node-label-inactive {
   @extend .node-label;
   color: $color-border;
+}
+
+.btn-div {
+  @include flex-col-end;
+  position: relative;
+  flex: 1;
 }
 
 .btn {
@@ -46,7 +54,27 @@
 .stick {
   position: absolute;
   top: 5px;
-  left: 5px;
+  right: 4.5px;
   width: 3px;
   background-color: $color-border;
+}
+
+.check {
+  @include font-size-big;
+  position: relative;
+  top: -2px;
+  left: -4px;
+  width: 12px;
+  height: 12px;
+  padding: 0;
+}
+
+.check-inactive {
+  @extend .check;
+  opacity: 0;
+}
+
+.check-active {
+  @extend .check;
+  color: $atlantis;
 }

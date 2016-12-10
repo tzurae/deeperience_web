@@ -1,11 +1,12 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
+import FontAwesome from 'react-fontawesome'
 import Text from '../Text'
 import styles from './styles.scss'
 
-const PhaseBranch = ({ nodes, active, cb }) => {
+const PhaseBranch = ({ nodes, active, done, cb }) => {
   return (
     <div className={styles.nodeWrapper}>
-      <div style={{ flex: 3, paddingRight: '15px' }}>
+      <div className={styles.nodeLabelDiv}>
         {nodes.map((node, index) => (
           <Text
             key={index}
@@ -17,7 +18,7 @@ const PhaseBranch = ({ nodes, active, cb }) => {
             />
         ))}
       </div>
-      <div style={{ flex: 1, position: 'relative' }}>
+      <div className={styles.btnDiv}>
         <div
           className={styles.stick}
           style={{ height: `${nodes.length * 50 - 50}px` }}
@@ -35,8 +36,36 @@ const PhaseBranch = ({ nodes, active, cb }) => {
           ))}
         </div>
       </div>
+      <div className={styles.btnDiv}>
+        <div style={{ position: 'absolute' }}>
+          {nodes.map((node, index) => (
+            <div
+              key={index}
+              style={{ height: index === nodes.length - 1 ? 20 : 50 }}>
+              <FontAwesome
+                name="check"
+                className={done[index] ? styles.checkActive : styles.checkInactive}
+              />
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   )
+}
+
+PhaseBranch.propTypes = {
+  nodes: PropTypes.arrayOf(PropTypes.string),
+  active: PropTypes.number,
+  done: PropTypes.arrayOf(PropTypes.bool),
+  cb: PropTypes.arrayOf(PropTypes.func),
+}
+
+PhaseBranch.defaultProps = {
+  nodes: [],
+  active: 0,
+  done: [],
+  cb: [],
 }
 
 export default PhaseBranch

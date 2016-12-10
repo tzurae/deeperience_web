@@ -24,7 +24,7 @@
 }
 
 .comment {
-  @include font-size-medium;
+  @include fontSize(15);
   color: $black;
 }
 
@@ -71,7 +71,7 @@
 }
 
 .comment-with-word {
-  width: 70%;
+  width: 75%;
   margin: 0 auto;
   line-height: 22px;
   color: $black;

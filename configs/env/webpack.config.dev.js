@@ -51,7 +51,7 @@ module.exports = {
       test: webpackIsomorphicToolsPlugin.regular_expression('cssModules'),
       loaders: [
         'style-loader',
-        'css-loader?modules&localIdentName=[name]_[local]_[hash:base64:3]&camelCase',
+        'css-loader?modules&localIdentName=[local]_[hash:base64:3]&camelCase',
         'postcss-loader',
         'sass-loader',
       ],

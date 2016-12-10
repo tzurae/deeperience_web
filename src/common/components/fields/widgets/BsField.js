@@ -7,10 +7,20 @@ import ControlLabel from 'react-bootstrap/lib/ControlLabel'
 import HelpBlock from 'react-bootstrap/lib/HelpBlock'
 
 const BsField = ({
-  horizontal, labelDimensions, fieldDimensions, showLabel, label, adapter,
-  meta, ...rest
+  horizontal,
+  labelDimensions,
+  fieldDimensions,
+  showLabel,
+  label,
+  adapter,
+  className,
+  meta,
+  ...rest
 }, {
-  defaultHorizontal, defaultLabelDimensions, defaultFieldDimensions,
+  defaultHorizontal,
+  defaultLabelDimensions,
+  defaultFieldDimensions,
+  defaultShowLabel,
 }) => {
   const isShowError = meta && meta.touched && meta.error
   const Adapter = adapter
@@ -21,9 +31,13 @@ const BsField = ({
   horizontal = (horizontal === undefined) ? defaultHorizontal : horizontal
   labelDimensions = assign({}, defaultLabelDimensions, labelDimensions || {})
   fieldDimensions = assign({}, defaultFieldDimensions, fieldDimensions || {})
+  showLabel = (showLabel === undefined) ? defaultShowLabel : showLabel
 
   return horizontal ? (
-    <BsFormGroup validationState={isShowError ? 'error' : undefined}>
+    <BsFormGroup
+      className={className}
+      validationState={isShowError ? 'error' : undefined}
+    >
       {showLabel && (
         <Col componentClass={ControlLabel} {...labelDimensions}>
           {label}
@@ -37,7 +51,10 @@ const BsField = ({
       </Col>
     </BsFormGroup>
   ) : (
-    <BsFormGroup validationState={isShowError ? 'error' : undefined}>
+    <BsFormGroup
+      className={className}
+      validationState={isShowError ? 'error' : undefined}
+    >
       {showLabel && (
         <Row>
           <Col componentClass={ControlLabel} {...labelDimensions}>
@@ -62,6 +79,9 @@ BsField.propTypes = {
   labelDimensions: PropTypes.object,
   fieldDimensions: PropTypes.object,
   showLabel: PropTypes.bool,
+  label: PropTypes.string,
+  adapter: PropTypes.func,
+  className: PropTypes.string,
 }
 
 BsField.contextTypes = {
@@ -71,8 +91,8 @@ BsField.contextTypes = {
 }
 
 BsField.defaultProps = {
-  showLabel: true,
   label: '',
+  className: '',
 }
 
 export default BsField

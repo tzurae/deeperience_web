@@ -44,7 +44,6 @@ class CreateTripForm extends React.Component {
 
     let values
 
-    // debug usage
     if (createTripForm) {
       values = createTripForm.values
     }

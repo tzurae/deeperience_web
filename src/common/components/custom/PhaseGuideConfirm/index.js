@@ -3,12 +3,14 @@ import Text from '../../utils/Text'
 import styles from './styles.scss'
 import Col from 'react-bootstrap/lib/Col'
 
-const PhaseGuideConfirm = ({ guideData, country, area, languages }) => (
+const PhaseGuideConfirm = ({ guideData, country, area, languages, rank }) => (
     <div className={styles.container}>
-      <div className={styles.imgTitle}/>
+      <div className={styles.waitingImg}/>
       <Text className={styles.comment} id="trip.customize.guideConfirm.comment1"/>
       <Text className={styles.comment} id="trip.customize.guideConfirm.comment2"/>
+      <Text className={styles.comment} id="trip.customize.guideConfirm.comment3"/>
       <div className={styles.guideInfo}>
+        <p className={styles.rank}>{`第 ${rank} 順位`}</p>
         <div className={styles.guideInfo1}>
           <div className={styles.guideInfo1Left}>
             <div className={styles.avatar}/>
@@ -44,6 +46,7 @@ PhaseGuideConfirm.propTypes = {
   country: PropTypes.string,
   area: PropTypes.string,
   languages: PropTypes.arrayOf(PropTypes.string),
+  rank: PropTypes.number,
 }
 
 PhaseGuideConfirm.defaultProps = {
@@ -51,6 +54,7 @@ PhaseGuideConfirm.defaultProps = {
   country: '',
   area: '',
   languages: [],
+  rank: 1,
 }
 
 export default PhaseGuideConfirm

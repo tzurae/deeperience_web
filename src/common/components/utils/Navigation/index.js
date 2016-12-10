@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import Grid from 'react-bootstrap/lib/Grid'
-import Image from 'react-bootstrap/lib/Image'
 import Roles from '../../../constants/Roles'
 import { updateLocale } from '../../../reducers/global/globalActions'
 import { pushErrors } from '../../../reducers/error/errorActions'
@@ -90,9 +89,12 @@ class Navigation extends Component {
                   !isAuth ?
                     <Text id="nav.user.profile" className={styles.dropdownText}/> :
                     user.avatarURL ? (
-                      <Image
+                      <div
                         className={styles.avatar}
-                        src={user.avatarURL} rounded
+                        style={{
+                          background: `#ffffff url(${user.avatarURL}) no-repeat center center`,
+                          backgroundSize: 'contain',
+                        }}
                       />
                     ) : (user.name || user.email)
                 }

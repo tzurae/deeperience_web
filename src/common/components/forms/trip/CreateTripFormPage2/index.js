@@ -30,18 +30,35 @@ const actions = [
   reduxFormActions,
 ]
 
-const mapStateToProps = state => {
-  return {
-    createTripForm: state.form[FormNames.TRIP_CREATE_TRIP],
-    apiEngine: state.global.apiEngine,
-    allSites: state.trip.ownSites,
-    tripInfo: state.trip.tripInfo,
-    routes: state.trip.routes,
-    startSites: state.trip.startSites,
-    uuid2data: state.trip.uuid2data,
-    error: state.trip.error,
-  }
+const formProperties = {
+  form: FormNames.TRIP_CREATE_TRIP,
+  destroyOnUnmount: false,
+  validate,
+  initialValues: {
+    name: '',
+    tags: [],
+    dayInfo: 'TripDayInfos.HALF_DAY',
+    dailyTrips: [{
+      remind: '',
+      period: {
+        start: '08:00',
+        end: '21:00',
+      },
+    }],
+    uuid2data: {},
+  },
 }
+
+const mapStateToProps = state => ({
+  createTripForm: state.form[FormNames.TRIP_CREATE_TRIP],
+  apiEngine: state.global.apiEngine,
+  allSites: state.trip.ownSites,
+  tripInfo: state.trip.tripInfo,
+  routes: state.trip.routes,
+  startSites: state.trip.startSites,
+  uuid2data: state.trip.uuid2data,
+  error: state.trip.error,
+})
 
 const mapDispatchToProps = dispatch => {
   const creators = Map()
@@ -690,21 +707,4 @@ const FillDayInfo = (day, length) => {
       })
   )
 }
-export default reduxForm({
-  form: FormNames.TRIP_CREATE_TRIP,
-  destroyOnUnmount: false,
-  validate,
-  initialValues: {
-    name: '',
-    tags: [],
-    dayInfo: 'TripDayInfos.HALF_DAY',
-    dailyTrips: [{
-      remind: '',
-      period: {
-        start: '08:00',
-        end: '21:00',
-      },
-    }],
-    uuid2data: {},
-  },
-})(connect(mapStateToProps, mapDispatchToProps)(CreateTripFormPage2))
+export default reduxForm(formProperties)(connect(mapStateToProps, mapDispatchToProps)(CreateTripFormPage2))

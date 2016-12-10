@@ -20,5 +20,8 @@
 }
 
 .avatar {
-  height: 18px;
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background: #ffffff url(../../../../public/img/default-avatar.png) no-repeat center center;
 }

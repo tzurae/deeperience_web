@@ -11,6 +11,10 @@
   box-shadow: 3px 3px 8px 0 #cccccc;
 }
 
+.btn:hover {
+  background-color: $alto;
+}
+
 .container {
   @include flex-row;
   height: 100%;

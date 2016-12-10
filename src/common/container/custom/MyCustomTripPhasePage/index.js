@@ -12,6 +12,9 @@ import SubNavigation from '../../../components/utils/SubNavigation'
 import { chooseGuide, confirmGuide } from './fakeData'
 import PhaseChooseGuide from '../../../components/custom/PhaseChooseGuide'
 import PhaseGuideConfirm from '../../../components/custom/PhaseGuideConfirm'
+import PhaseDeposit from '../../../components/custom/PhaseDeposit'
+import PhaseChooseDate from '../../../components/custom/PhaseChooseDate'
+import PhaseFinishConfirm from '../../../components/custom/PhaseFinishConfirm'
 import IconRectBtn from '../../../components/utils/IconRectBtn'
 import { getValue } from '../../../utils/getI18nValue'
 import styles from './styles.scss'
@@ -44,23 +47,23 @@ class MyCustomTripPhasePage extends React.Component {
     super(props)
 
     this.nodes = [
-      'trip.customize',
       'trip.customize.createDemand',
       'trip.customize.chooseGuide',
       'trip.customize.guideConfirm',
       'trip.customize.deposit',
-      'trip.customize.video',
+      'trip.customize.chooseDate',
+      'trip.customize.finishConfirm',
       'trip.customize.balance',
       'trip.customize.travel',
     ]
 
-    this.cb = [0, 1, 2, 3, 4, 5, 6, 7].map(page => () => this.setPage(page))
+    this.cb = [0, 1, 2, 3, 4, 5, 6, 7, 8].map(page => () => this.setPage(page))
     this.titleId = [
       '',
       'trip.customize.chooseGuide',
       '',
       '',
-      '',
+      'trip.customize.chooseDate',
       '',
       '',
       '',
@@ -70,11 +73,26 @@ class MyCustomTripPhasePage extends React.Component {
       'trip.customize.chooseGuide.comment',
       '',
       '',
-      '',
+      'trip.customize.chooseDate.comment',
       '',
       '',
       '',
     ]
+    this.done = [
+      true,
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+    ]
+    this.chooseDateFormSubmit = ::this.chooseDateFormSubmit
+  }
+
+  chooseDateFormSubmit() {
+    this.props.actions.customPhaseNextPage()
   }
 
   setPage(page) {
@@ -104,6 +122,7 @@ class MyCustomTripPhasePage extends React.Component {
               <PhaseBranch
                 nodes={this.nodes}
                 active={page}
+                done={this.done}
                 cb={this.cb}
               />
             </Panel2>
@@ -131,6 +150,9 @@ class MyCustomTripPhasePage extends React.Component {
                   area={area}
                 />
               }
+              {page === 3 && <PhaseDeposit/>}
+              {page === 4 && <PhaseChooseDate handleSubmit={this.chooseDateFormSubmit}/>}
+              {page === 5 && <PhaseFinishConfirm/>}
             </PanelWithWord>
           </Col>
           <Col md={3}/>

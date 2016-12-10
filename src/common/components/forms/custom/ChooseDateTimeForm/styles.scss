@@ -1,0 +1,43 @@
+@import '../../../../styles/index';
+
+.choose-item {
+  @include flex-row-center;
+  margin: 10px 0;
+}
+
+.choose-item-inner {
+  @include flex-row-center;
+  flex: 1;
+}
+
+.form-group {
+  margin: 0 !important;
+  padding: 0 5px !important;
+}
+
+.add-btn {
+  @include font-size-medium;
+  float: right;
+  margin-top: 20px;
+  color: $color-main;
+  border: 0;
+  background: transparent;
+}
+
+.footer {
+  margin-top: 30px;
+}
+
+.btn-trash {
+  width: 30px;
+  height: 30px;
+  background-color: $silverChalice !important;
+}
+
+.btn-trash-icon {
+  background-color: $silverChalice !important;
+}
+
+.btn-submit {
+  margin: 0 auto;
+}
