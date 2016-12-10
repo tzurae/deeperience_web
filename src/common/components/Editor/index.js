@@ -3,9 +3,9 @@ import { connect } from 'react-redux'
 import { change, Field, formValueSelector } from 'redux-form'
 import { stateToHTML } from 'draft-js-export-html'
 import { Editor, EditorState, RichUtils, Entity, AtomicBlockUtils } from 'draft-js'
-import { BsInput as Input } from '../../../fields/adapters'
-import FormButton from '../../../utils/FormButton'
-import userAPI from '../../../../api/user'
+import { BsInput as Input } from '../fields/adapters'
+import FormButton from '../utils/FormButton'
+import tripAPI from '../../api/trip'
 
 class SiteEditor extends React.Component {
   constructor(props) {
@@ -15,22 +15,33 @@ class SiteEditor extends React.Component {
     }
 
     this.focus = () => this.refs.editor.focus()
-    this.onChange = (editorState) => {
-      this.setState({ editorState }, this.updateReduxForm)
-      // const url = 'http://i.imgur.com/Ceihz91.png'
-    }
+    this.onChange = (editorState) => this.setState({ editorState }, this.updateReduxForm)
 
     this.updateReduxForm = () => {
       const state = this.state.editorState.getCurrentContent()
       const htmlStr = stateToHTML(state)
-      this.props.dispatch(change('TRIP_CREATE_SITE', 'introduction', htmlStr))
+      this.props.dispatch(change(this.props.formName, this.props.name, htmlStr))
     }
 
+    this.uploadImage = (file) => this._uploadImage(file)
     this.handleKeyCommand = (command) => this._handleKeyCommand(command)
     this.toggleBlockType = (type) => this._toggleBlockType(type)
     this.toggleInlineStyle = (style) => this._toggleInlineStyle(style)
     this.addImage = (url) => this._addImage(url)
     this.onTab = (e) => this._onTab(e)
+  }
+
+  _uploadImage(file) {
+    let apiEngine = this.props.apiEngine
+    tripAPI(apiEngine)
+      .uploadImage(file)
+      .then(json => {
+        let url = json.downloadURL
+        this.addImage(url)
+      })
+      .catch(err => {
+        console.log(err)
+      })
   }
 
   _handleKeyCommand(command) {
@@ -97,19 +108,22 @@ class SiteEditor extends React.Component {
           onToggle={this.toggleInlineStyle}
           />
 
-        <input type="file" onChange={(e) => {
-          let file = e.target.files[0]
-          let apiEngine = this.props.apiEngine
-          userAPI(apiEngine)
-            .uploadAvatar(file)
-            .then(json => {
-              let url = json.downloadURL
-              this.addImage(url)
-            })
-            .catch(err => {
-              console.log(err)
-            })
-        }} />
+        <span>
+          <label htmlFor="img-input" style={{cursor: 'pointer'}} >
+            <img src="/img/icon04.png" width="42" />
+          </label>
+          <input 
+            id="img-input"
+            name="img"
+            type="file"
+            accept="image/*"
+            style={{display: 'none'}}
+            onChange={(e) => {
+              let file = e.target.files[0]
+              this.uploadImage(file)
+            }
+          } />
+        </span>
 
         <div className={className} onClick={this.focus}>
 
@@ -157,7 +171,6 @@ function mediaBlockRenderer(block) {
       editable: false,
     }
   }
-
   return null
 }
 
@@ -246,8 +259,4 @@ const mapStateToProps = (state) => ({
   apiEngine: state.global.apiEngine
 })
 
-const mapDispatchToProps = (dispatch) => ({
-  dispatch,
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(SiteEditor)
+export default connect(mapStateToProps, null)(SiteEditor)

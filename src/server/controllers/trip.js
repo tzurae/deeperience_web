@@ -1,4 +1,7 @@
-import { handleDbError } from '../decorators/handleError'
+import path from 'path'
+import fs from 'fs'
+import mkdirp from 'mkdirp'
+import handleError, { handleDbError } from '../decorators/handleError'
 import Trip, { TripSchema } from '../models/Trip'
 import Site from '../models/Site'
 import User from '../models/User'
@@ -96,5 +99,24 @@ const attributes = getAttrFromSchema(TripSchema)
 
   remove(req, res) {
 
+  },
+
+  uploadImage(req, res) {
+    // use `req.file` to access the file
+    // and use `req.body` to access other fileds
+    const filename = (new Date()).getTime() + '.img'
+    const tmpPath = req.files.img[0].path
+    const targetDir = path.join(
+      __dirname, '../../public', 'users', req.user._id.toString(), 'img'
+    )
+    const targetPath = path.join(targetDir, filename)
+
+    mkdirp(targetDir, handleError(res)(() => {
+      fs.rename(tmpPath, targetPath, handleError(res)(() => {
+        res.json({
+          downloadURL: `/users/${req.user._id}/img/${filename}`,
+        })
+      }))
+    }))
   },
 }

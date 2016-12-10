@@ -4,7 +4,7 @@ import FormNames from '../../../../constants/FormNames'
 import FormButton from '../../../utils/FormButton'
 import validate from '../createSiteValidate'
 import Text from '../../../utils/Text'
-import Editor from '../Editor'
+import Editor from '../../../Editor'
 import {
   BsForm as Form,
   BsFormFooter as FormFooter,
@@ -29,6 +29,7 @@ const CreateSiteFormPage2 = ({ handleSubmit, ...props }) => {
     >
       <Field
         name="editor"
+        formName="TRIP_CREATE_SITE"
         component={Editor}
         type="text"
       />
