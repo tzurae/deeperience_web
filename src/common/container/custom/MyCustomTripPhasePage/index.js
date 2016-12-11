@@ -9,7 +9,7 @@ import PanelContainer from '../../../components/utils/PanelContainer'
 import { Panel2, PanelWithWord } from '../../../components/utils/Panel'
 import PhaseBranch from '../../../components/utils/PhaseBranch'
 import * as customActions from '../../../reducers/custom/customActions'
-import SubNavigation from '../../../components/utils/SubNavigation'
+import { CustomSubNav } from '../../../components/utils/SubNavigation'
 import PhaseChooseGuide from '../../../components/custom/PhaseChooseGuide'
 import PhaseGuideConfirm from '../../../components/custom/PhaseGuideConfirm'
 import PhaseDeposit from '../../../components/custom/PhaseDeposit'
@@ -120,15 +120,7 @@ class MyCustomTripPhasePage extends React.Component {
     const area = TripLocations[confirmGuide.location]
 
     return (
-      <PageLayout
-        subNav={
-          <SubNavigation
-            activeTab={1}
-            tabText={['nav.customize.customize', 'nav.customize.myCustomTrip']}
-            tabLink={['#', '/trip/myCustomTrip']}
-          />
-        }
-      >
+      <PageLayout subNav={<CustomSubNav activeTab={1}/>}>
         <Modal
           show={isAdviceModal}
           titleId="trip.customize.travel.advice"

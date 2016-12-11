@@ -7,6 +7,10 @@ import { BsInput as Input } from '../fields/adapters'
 import FormButton from '../utils/FormButton'
 import tripAPI from '../../api/trip'
 
+const mapStateToProps = (state) => ({
+  apiEngine: state.global.apiEngine,
+})
+
 class SiteEditor extends React.Component {
   constructor(props) {
     super(props)
@@ -32,11 +36,11 @@ class SiteEditor extends React.Component {
   }
 
   _uploadImage(file) {
-    let apiEngine = this.props.apiEngine
+    const apiEngine = this.props.apiEngine
     tripAPI(apiEngine)
       .uploadImage(file)
       .then(json => {
-        let url = json.downloadURL
+        const url = json.downloadURL
         this.addImage(url)
       })
       .catch(err => {
@@ -109,17 +113,17 @@ class SiteEditor extends React.Component {
           />
 
         <span>
-          <label htmlFor="img-input" style={{cursor: 'pointer'}} >
+          <label htmlFor="img-input" style={{ cursor: 'pointer' }} >
             <img src="/img/icon04.png" width="42" />
           </label>
-          <input 
+          <input
             id="img-input"
             name="img"
             type="file"
             accept="image/*"
-            style={{display: 'none'}}
+            style={{ display: 'none' }}
             onChange={(e) => {
-              let file = e.target.files[0]
+              const file = e.target.files[0]
               this.uploadImage(file)
             }
           } />
@@ -164,7 +168,7 @@ const Media = (props) => {
   return media
 }
 
-function mediaBlockRenderer(block) {
+const mediaBlockRenderer = block => {
   if (block.getType() === 'atomic') {
     return {
       component: Media,
@@ -174,7 +178,7 @@ function mediaBlockRenderer(block) {
   return null
 }
 
-function getBlockStyle(block) {
+const getBlockStyle = block => {
   switch (block.getType()) {
     case 'blockquote': return 'RichEditor-blockquote'
     default: return null
@@ -255,8 +259,4 @@ const InlineStyleControls = (props) => {
   )
 }
 
-const mapStateToProps = (state) => ({
-  apiEngine: state.global.apiEngine
-})
-
-export default connect(mapStateToProps, null)(SiteEditor)
+export default connect(mapStateToProps)(SiteEditor)

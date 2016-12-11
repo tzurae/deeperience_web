@@ -7,6 +7,15 @@ import PageLayout from '../../../components/layouts/PageLayout'
 import styles from '../../../styles'
 import Text from '../../../components/utils/Text'
 
+/*
+* 1. style 分離
+* 2. img 調整成 div image
+* 3. component 化
+* 4. 獨立出一個 layout
+* 5. 盡量使用現有的 component
+*
+* */
+
 const style = {
   title: {
     marginTop: '20px',
@@ -69,7 +78,7 @@ const TripArea = () => {
                 <div style={style.tripBlock}>
                     <img src="/img/icon02.png" width={imgSize} />
                     <p style={style.explain}><Text id="presentTrip.addTrip.explain" /></p>
-                    <Link to="/trip/createTrip">
+                    <Link to="/trip/create">
                         <button style={style.button}>
                             <Text id="presentTrip.addTrip" />
                         </button>
@@ -101,7 +110,7 @@ const Title = () => {
   )
 }
 
-const TripIntroPage = () => {
+const TripMenuPage = () => {
   return (
     <PageLayout>
       <Title />
@@ -118,4 +127,4 @@ const TripIntroPage = () => {
   )
 }
 
-export default TripIntroPage
+export default TripMenuPage

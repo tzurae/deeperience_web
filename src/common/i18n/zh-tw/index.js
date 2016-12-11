@@ -29,6 +29,7 @@ export default {
   'nav.trip.manageSite': '管理景點',
   'nav.trip.createTrip': '建立旅程',
   'nav.trip.manageTrip': '管理旅程',
+  'nav.trip.myOrder': '我的訂單',
   'page.first': '第一頁',
   'page.prev': '上一頁',
   'page.next': '下一頁',

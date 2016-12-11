@@ -79,7 +79,10 @@ BsField.propTypes = {
   labelDimensions: PropTypes.object,
   fieldDimensions: PropTypes.object,
   showLabel: PropTypes.bool,
-  label: PropTypes.string,
+  label: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.element, // Text
+  ]),
   adapter: PropTypes.func,
   className: PropTypes.string,
 }

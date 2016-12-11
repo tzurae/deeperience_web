@@ -9,7 +9,7 @@ import { Panel1, Panel2 } from '../../../components/utils/Panel'
 import PhaseBranch from '../../../components/utils/PhaseBranch'
 import CreateSiteForm from '../../../components/forms/trip/CreateSiteForm'
 import * as siteActions from '../../../reducers/site/siteActions'
-import SubNavigation from '../../../components/utils/SubNavigation'
+import { CreateSubNav } from '../../../components/utils/SubNavigation'
 
 const actions = [
   siteActions,
@@ -61,15 +61,7 @@ class CreateSitePage extends React.Component {
   render() {
     const { page } = this.state
     return (
-      <PageLayout
-        subNav={
-          <SubNavigation
-            activeTab={0}
-            tabText={['nav.trip.createSite', 'nav.trip.manageSite', 'nav.trip.createTrip', 'nav.trip.manageTrip']}
-            tabLink={['/trip/createSite', '#', '/trip/createTrip', '#']}
-          />
-        }
-      >
+      <PageLayout subNav={<CreateSubNav activeTab={0}/>}>
         <PanelContainer>
           <Col md={2}>
             <Panel2 title="nav.trip.createSite">

@@ -3,7 +3,6 @@ import { reduxForm } from 'redux-form'
 import FormNames from '../../../../constants/FormNames'
 import FormButton from '../../../utils/FormButton'
 import validate from '../createSiteValidate'
-import Text from '../../../utils/Text'
 import {
   BsForm as Form,
   BsFormFooter as FormFooter,

@@ -38,17 +38,6 @@ class Navigation extends Component {
           </Navbar.Header>
 
           <Navbar.Body>
-            {/*
-              <Navbar.Nav>
-                <NavLink to="/" onlyActiveOnIndex>
-                  <Text id="nav.home" />
-                </NavLink>
-                <NavLink to="/does/not/exist">
-                  404
-                </NavLink>
-              </Navbar.Nav>
-            */}
-
             <Navbar.Nav right>
               <Navbar.Dropdown
                 title={<Text id="nav.language" className={styles.dropdownText}/>}>
@@ -65,10 +54,10 @@ class Navigation extends Component {
               <Navbar.Dropdown
                 title={<Text id="nav.customize" className={styles.dropdownText}/>}
               >
-                <NavLink to="/trip/customize">
+                <NavLink to="/custom/create">
                   <Text id="nav.customize.customize"/>
                 </NavLink>
-                <NavLink to="/trip/myCustomTrip">
+                <NavLink to="/custom/list">
                   <Text id="nav.customize.myCustomTrip"/>
                 </NavLink>
               </Navbar.Dropdown>
@@ -76,11 +65,17 @@ class Navigation extends Component {
               <Navbar.Dropdown
                 title={<Text id="nav.trip" className={styles.dropdownText}/>}
               >
-                <NavLink to="/trip/createSite">
+                <NavLink to="/site/create">
                   <Text id="nav.trip.createSite"/>
                 </NavLink>
-                <NavLink to="/trip/createTrip">
+                <NavLink to="/site/manage">
+                  <Text id="nav.trip.manageSite"/>
+                </NavLink>
+                <NavLink to="/trip/create">
                   <Text id="nav.trip.createTrip"/>
+                </NavLink>
+                <NavLink to="/trip/manage">
+                  <Text id="nav.trip.manageTrip"/>
                 </NavLink>
               </Navbar.Dropdown>
 

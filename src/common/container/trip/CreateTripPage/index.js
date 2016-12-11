@@ -10,7 +10,7 @@ import PhaseBranch from '../../../components/utils/PhaseBranch'
 import CreateTripForm from '../../../components/forms/trip/CreateTripForm'
 import tripAPI from '../../../api/trip'
 import * as tripActions from '../../../reducers/trip/tripActions'
-import SubNavigation from '../../../components/utils/SubNavigation'
+import { CreateSubNav } from '../../../components/utils/SubNavigation'
 
 const actions = [
   tripActions,
@@ -75,15 +75,7 @@ class CreateTripPage extends React.Component {
   render() {
     const { page } = this.state
     return (
-      <PageLayout
-        subNav={
-          <SubNavigation
-            activeTab={2}
-            tabText={['nav.trip.createSite', 'nav.trip.manageSite', 'nav.trip.createTrip', 'nav.trip.manageTrip']}
-            tabLink={['/trip/createSite', '#', '/trip/createTrip', '#']}
-          />
-        }
-      >
+      <PageLayout subNav={<CreateSubNav activeTab={2}/>}>
         <PanelContainer>
           <Col md={2}>
             <Panel2 title="trip.createTrip">

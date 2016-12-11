@@ -104,7 +104,7 @@ const attributes = getAttrFromSchema(TripSchema)
   uploadImage(req, res) {
     // use `req.file` to access the file
     // and use `req.body` to access other fileds
-    const filename = (new Date()).getTime() + '.img'
+    const filename = `${(new Date()).getTime()}.img`
     const tmpPath = req.files.img[0].path
     const targetDir = path.join(
       __dirname, '../../public', 'users', req.user._id.toString(), 'img'

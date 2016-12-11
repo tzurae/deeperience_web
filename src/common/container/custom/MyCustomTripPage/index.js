@@ -7,7 +7,7 @@ import PageLayout from '../../../components/layouts/PageLayout'
 import PanelContainer from '../../../components/utils/PanelContainer'
 import { Panel1 } from '../../../components/utils/Panel'
 import * as tripActions from '../../../reducers/trip/tripActions'
-import SubNavigation from '../../../components/utils/SubNavigation'
+import { CustomSubNav } from '../../../components/utils/SubNavigation'
 import fakeData from './fakeData'
 import MenuItem from '../../../components/custom/MenuItem'
 import { getValue } from '../../../utils/getI18nValue'
@@ -51,15 +51,7 @@ class MyCustomTripPage extends React.Component {
     const { CustomPhases, TripDayInfos } = getValue(messages.toJS(), ['CustomPhases', 'TripDayInfos'])
 
     return (
-      <PageLayout
-        subNav={
-          <SubNavigation
-            activeTab={1}
-            tabText={['nav.customize.customize', 'nav.customize.myCustomTrip']}
-            tabLink={['#', '/trip/myCustomTrip']}
-          />
-        }
-      >
+      <PageLayout subNav={<CustomSubNav activeTab={1}/>}>
         <PanelContainer>
           <Col md={2}/>
           <Col md={7}>

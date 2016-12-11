@@ -9,8 +9,6 @@ import {
   BsFormFooter as FormFooter,
 } from '../../../fields/widgets'
 
-
-
 const CreateSiteFormPage2 = ({ handleSubmit, ...props }) => {
   const {
     pristine,

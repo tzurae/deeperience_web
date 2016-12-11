@@ -1,5 +1,5 @@
 export default (store) => ({
-  path: 'createSite',
+  path: 'manage',
   getComponent(nextState, cb) {
     require.ensure([], (require) => {
       cb(null, require('../../container/trip/CreateSitePage/').default)

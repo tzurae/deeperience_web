@@ -1,8 +1,8 @@
 export default (store) => ({
-  path: 'presentTrip',
+  path: 'list',
   getComponent(nextState, cb) {
     require.ensure([], (require) => {
-      cb(null, require('../../container/trip/PresentTrip/index').default)
+      cb(null, require('../../container/custom/MyCustomTripPage').default)
     })
   },
   onEnter: require('../../utils/authRequired').default(store),
