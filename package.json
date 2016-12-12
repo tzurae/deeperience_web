@@ -114,6 +114,7 @@
     "webpack-hot-middleware": "^2.6.0"
   },
   "dependencies": {
+    "aws-sdk": "^2.7.13",
     "body-parser": "^1.15.0",
     "classnames": "^2.2.3",
     "cookie": "^0.2.4",
