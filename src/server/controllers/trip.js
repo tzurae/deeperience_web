@@ -106,15 +106,16 @@ const attributes = getAttrFromSchema(TripSchema)
     // and use `req.body` to access other fields
     const filename = `${(new Date()).getTime()}.img`
     const tmpPath = req.files.img[0].path
+    const category = req.params.category
     const targetDir = path.join(
-      __dirname, '../../public', 'users', req.user._id.toString(), 'img'
+      __dirname, '../../public', 'users', req.user._id.toString(), 'img', category
     )
     const targetPath = path.join(targetDir, filename)
 
     mkdirp(targetDir, handleError(res)(() => {
       fs.rename(tmpPath, targetPath, handleError(res)(() => {
         res.json({
-          downloadURL: `/users/${req.user._id}/img/${filename}`,
+          downloadURL: `/users/${req.user._id}/img/${category}/${filename}`,
         })
       }))
     }))
