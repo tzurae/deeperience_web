@@ -8,6 +8,7 @@ import User from '../models/User'
 import filterAttribute from '../utils/filterAttribute'
 import getSaveObject from '../utils/getSaveObject'
 import getAttrFromSchema from '../utils/getAttrFromSchema'
+import uploadToS3 from '../utils/uploadToS3'
 
 const attributes = getAttrFromSchema(TripSchema)
 
@@ -104,20 +105,22 @@ const attributes = getAttrFromSchema(TripSchema)
   uploadImage(req, res) {
     // use `req.file` to access the file
     // and use `req.body` to access other fields
-    const filename = `${(new Date()).getTime()}.img`
+    const filename = `${(new Date()).getTime()}.png`
     const tmpPath = req.files.img[0].path
     const category = req.params.category
-    const targetDir = path.join(
-      __dirname, '../../public', 'users', req.user._id.toString(), 'img', category
-    )
-    const targetPath = path.join(targetDir, filename)
+    const remotePath = path.join('users', `${req.user._id}`, 'img', category, filename)
 
-    mkdirp(targetDir, handleError(res)(() => {
-      fs.rename(tmpPath, targetPath, handleError(res)(() => {
-        res.json({
-          downloadURL: `/users/${req.user._id}/img/${category}/${filename}`,
-        })
-      }))
-    }))
+    const UPLOAD_IMAGE = 'upload image'
+    console.time(UPLOAD_IMAGE)
+
+    uploadToS3({
+      path: tmpPath,
+      remotePath,
+    }).then(downloadURL => {
+      res.json({ downloadURL })
+      console.timeEnd(UPLOAD_IMAGE)
+      // remove temp file
+      fs.unlink(tmpPath)
+    })
   },
 }

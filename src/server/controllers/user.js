@@ -9,6 +9,7 @@ import User from '../models/User'
 import filterAttribute from '../utils/filterAttribute'
 import { loginUser } from '../../common/reducers/user/userActions'
 import { redirect } from '../../common/reducers/router/routerActions'
+import uploadToS3 from '../utils/uploadToS3'
 
 export default {
   list(req, res) {
@@ -233,19 +234,20 @@ export default {
   uploadAvatar(req, res) {
     // use `req.file` to access the avatar file
     // and use `req.body` to access other fileds
-    const { filename } = req.files.avatar[0]
     const tmpPath = req.files.avatar[0].path
-    const targetDir = path.join(
-      __dirname, '../../public', 'users', req.user._id.toString()
-    )
-    const targetPath = path.join(targetDir, filename)
+    const remotePath = path.join('users', `${req.user._id}`, 'avatar.png')
 
-    mkdirp(targetDir, handleError(res)(() => {
-      fs.rename(tmpPath, targetPath, handleError(res)(() => {
-        res.json({
-          downloadURL: `/users/${req.user._id}/${filename}`,
-        })
-      }))
-    }))
+    const UPLOAD_AVATAR = 'upload avatar'
+    console.time(UPLOAD_AVATAR)
+
+    uploadToS3({
+      path: tmpPath,
+      remotePath,
+    }).then(downloadURL => {
+      res.json({ downloadURL })
+      console.timeEnd(UPLOAD_AVATAR)
+      // remove temp file
+      fs.unlink(tmpPath)
+    })
   },
 }

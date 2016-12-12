@@ -4,26 +4,25 @@ import fs from 'fs'
 const credential = require('../../../configs/project/s3/credential')
 const s3 = new AWS.S3(credential)
 
-function uploadToS3({path, remotePath}){
-    var stream = fs.createReadStream(path)
+function uploadToS3({ path, remotePath }) {
+  const stream = fs.createReadStream(path)
 
-    var params = {
-        Bucket: 'deeperience-dev',
-        Key: remotePath,
-        Body: stream,
-        ACL: 'public-read',
-    }
+  const params = {
+    Bucket: 'deeperience-dev',
+    Key: remotePath,
+    Body: stream,
+    ACL: 'public-read',
+  }
 
-    return new Promise((resolve, reject) => {
-        s3.upload(params, (err, data) => {
-            if (err){
-                return reject(err)
-            }
+  return new Promise((resolve, reject) => {
+    s3.upload(params, (err, data) => {
+      if (err) {
+        return reject(err)
+      }
             // image url
-            return resolve(data.Location)
-        })
+      return resolve(data.Location)
     })
+  })
 }
-
 
 export default uploadToS3
