@@ -31,14 +31,6 @@ class EditForm extends Component {
     this.handleSubmit = this._handleSubmit.bind(this)
   }
 
-  _init(user) {
-    const { initialize } = this.props
-
-    initialize({
-      name: user.name,
-    })
-  }
-
   componentDidMount() {
     const { dispatch, apiEngine } = this.props
 
@@ -51,6 +43,14 @@ class EditForm extends Component {
       .then((json) => {
         this.init(json.user)
       })
+  }
+
+  _init(user) {
+    const { initialize } = this.props
+
+    initialize({
+      name: user.name,
+    })
   }
 
   _handleSubmit(formData) {

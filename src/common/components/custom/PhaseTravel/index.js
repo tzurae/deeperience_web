@@ -8,7 +8,7 @@ const PhaseTravel = ({ adviceFunc, fbShareFunc }) => (
     <div className={styles.container}>
       <Text
         className={styles.comment}
-        id="trip.customize.travel.comment"
+        id="customize.travel.comment"
       />
       <div className={styles.postcard}>
         <div className={styles.postcardTitle}/>
@@ -20,12 +20,12 @@ const PhaseTravel = ({ adviceFunc, fbShareFunc }) => (
           <FormButton textId="nav.customize.myCustomTrip"/>
         </Link>
         <FormButton
-          textId="trip.customize.travel.advice"
+          textId="customize.travel.advice"
           onClick={adviceFunc}
         />
         <FormButton
           type="fb"
-          textId="trip.customize.travel.fbShare"
+          textId="customize.travel.fbShare"
           onClick={fbShareFunc}
           className={styles.btnFb}
         />

@@ -1,0 +1,162 @@
+@import '../../../styles/index';
+
+.block {
+  padding: 15px;
+  text-align: center;
+}
+
+.title {
+  @include fontSize(22);
+  color: $color-main;
+}
+
+.container {
+  padding: 0 15px;
+  text-align: center;
+}
+
+.comment {
+  @include fontSize(18);
+  line-height: 30px;
+}
+
+.waiting-img {
+  @include bg-contain('custompage/waiting.png', 120px, 120px);
+  margin: 0 auto 30px;
+  border-radius: 60px;
+}
+
+.rank {
+  @include font-size-medium;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}
+
+.info {
+  @include flex-col;
+  position: relative;
+  width: 100%;
+  margin-top: 20px;
+  padding: 20px;
+  border: 0;
+  background-color: $white;
+  box-shadow: 3px 3px 8px 0 #cccccc;
+}
+
+.guide-info1 {
+  @include flex-row;
+  width: 100%;
+}
+
+.guide-info1-left {
+  @include flex-col-end;
+  flex: 1;
+  margin: 0 10px;
+}
+
+.guide-info1-right {
+  @include flex-row-start;
+  flex: 1;
+  align-items: center;
+  margin: 0 10px;
+  text-align: left;
+}
+
+.guide-name {
+  @include font-size-large;
+  font-weight: bold;
+  line-height: 30px;
+}
+
+.profession {
+  @include fontSize(14);
+  line-height: 20px;
+}
+
+.avatar {
+  @include bg-contain('default-avatar.png', 60px, 60px);
+  margin: auto 0;
+  border-radius: 30px;
+}
+
+.small-info {
+}
+
+.guide-info2 {
+  margin: 30px 0;
+}
+
+.small-info-title {
+  @include fontSize(18);
+  font-weight: 900;
+  line-height: 25px;
+}
+
+.small-info-content {
+  @include fontSize(14);
+  line-height: 25px;
+}
+
+.self-intro {
+  padding: 0 10px 20px;
+  text-align: left;
+}
+
+.option {
+  @include flex-row-start;
+  margin: 10px 0;
+  text-align: left;
+}
+
+.option-label {
+  color: $color-main;
+}
+
+.option-label1 {
+  @extend .option-label;
+  width: 90px;
+}
+
+.option-label2 {
+  @extend .option-label;
+  width: 150px;
+}
+
+.option-value {
+  @include flex-row;
+  flex-wrap: wrap;
+  flex: 1;
+}
+
+.option-value-element {
+  @extend .option-value;
+  position: relative;
+  top: -3px;
+}
+
+.element {
+  @include fontSize(14);
+  margin-right: 5px;
+  margin-bottom: 5px;
+  padding: 0 4px;
+  line-height: 22px;
+  border: solid $black 1px;
+  border-radius: 3px;
+}
+
+.blackline {
+  width: 100%;
+  height: 1px;
+  margin: 5px 0 10px;
+  background-color: $color-navbar;
+}
+
+.footer {
+  @include flex-center;
+  margin: 30px 0;
+}
+
+.footer-btn {
+  margin: 0 15px;
+}

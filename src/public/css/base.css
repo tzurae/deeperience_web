@@ -9,7 +9,7 @@ html, body {
   color: #333;
 }
 
-html a:hover {
+html a:hover, html a:focus {
   text-decoration: none;
 }
 

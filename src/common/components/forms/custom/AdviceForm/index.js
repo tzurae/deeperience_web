@@ -56,7 +56,7 @@ const AdviceForm = ({ handleSubmit, ...props }) => {
     >
       <Row className="form-group">
         <label className="col-sm-2 bs-label" style={{ textAlign: 'right' }}>
-          <Text isSpan={true} id="trip.customize.travel.advice.star"/>
+          <Text isSpan={true} id="customize.travel.advice.star"/>
         </label>
         <Col md={10}>
           <StarList
@@ -78,7 +78,7 @@ const AdviceForm = ({ handleSubmit, ...props }) => {
         className={styles.footer}
       >
         <IconRectBtn
-          textId="trip.customize.travel.advice.send"
+          textId="customize.travel.advice.send"
           name="send-o"
           type="submit"
           className={styles.btnSubmit}

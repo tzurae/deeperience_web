@@ -3,8 +3,8 @@ export default (store) => ({
   getChildRoutes(location, cb) {
     require.ensure([], (require) => {
       cb(null, [
-        // require('./list').default(store),
-        // require('./phase').default(store),
+        require('./list').default(store),
+        require('./phase').default(store),
       ])
     })
   },
