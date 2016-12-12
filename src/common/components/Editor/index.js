@@ -1,62 +1,49 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { change, Field, formValueSelector } from 'redux-form'
+import { change } from 'redux-form'
 import { stateToHTML } from 'draft-js-export-html'
 import { Editor, EditorState, RichUtils, Entity, AtomicBlockUtils } from 'draft-js'
-import { BsInput as Input } from '../fields/adapters'
-import FormButton from '../utils/FormButton'
 import tripAPI from '../../api/trip'
 
-class SiteEditor extends React.Component {
+class RichEditor extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       editorState: EditorState.createEmpty(),
     }
 
-    this.focus = () => this.refs.editor.focus()
+    // functions about changing state
+    this.updateReduxForm = () => this._updateReduxForm()
     this.onChange = (editorState) => this.setState({ editorState }, this.updateReduxForm)
-
-    this.updateReduxForm = () => {
-      const state = this.state.editorState.getCurrentContent()
-      const htmlStr = stateToHTML(state)
-      this.props.dispatch(change(this.props.formName, this.props.name, htmlStr))
-    }
-
     this.uploadImage = (file) => this._uploadImage(file)
-    this.handleKeyCommand = (command) => this._handleKeyCommand(command)
+    this.addImage = (url) => this._addImage(url)
+
+    // functions for editor
+    this.focus = () => this.refs.editor.focus()
     this.toggleBlockType = (type) => this._toggleBlockType(type)
     this.toggleInlineStyle = (style) => this._toggleInlineStyle(style)
-    this.addImage = (url) => this._addImage(url)
-    this.onTab = (e) => this._onTab(e)
   }
 
+  // copy html string to redux form state
+  _updateReduxForm() {
+    const state = this.state.editorState.getCurrentContent()
+    const htmlStr = stateToHTML(state)
+    this.props.dispatch(change(this.props.formName, this.props.name, htmlStr))
+  }
+
+  // upload image to server
   _uploadImage(file) {
-    let apiEngine = this.props.apiEngine
+    const apiEngine = this.props.apiEngine
     tripAPI(apiEngine)
       .uploadImage(file)
       .then(json => {
-        let url = json.downloadURL
+        // image url
+        const url = json.downloadURL
         this.addImage(url)
       })
       .catch(err => {
         console.log(err)
       })
-  }
-
-  _handleKeyCommand(command) {
-    const { editorState } = this.state
-    const newState = RichUtils.handleKeyCommand(editorState, command)
-    if (newState) {
-      this.onChange(newState)
-      return true
-    }
-    return false
-  }
-
-  _onTab(e) {
-    const maxDepth = 4
-    this.onChange(RichUtils.onTab(e, this.state.editorState, maxDepth))
   }
 
   _toggleBlockType(blockType) {
@@ -87,8 +74,7 @@ class SiteEditor extends React.Component {
   render() {
     const { editorState } = this.state
 
-    // If the user changes block type before entering any text, we can
-    // either style the placeholder or hide it. Let's just hide it now.
+    // Hide the placeholder if the user changes block type before entering any text
     let className = 'RichEditor-editor'
     const contentState = editorState.getCurrentContent()
     if (!contentState.hasText()) {
@@ -109,31 +95,28 @@ class SiteEditor extends React.Component {
           />
 
         <span>
-          <label htmlFor="img-input" style={{cursor: 'pointer'}} >
+          <label htmlFor="img-input" style={{ cursor: 'pointer' }} >
             <img src="/img/icon04.png" width="42" />
           </label>
-          <input 
+          <input
             id="img-input"
             name="img"
             type="file"
             accept="image/*"
-            style={{display: 'none'}}
+            style={{ display: 'none' }}
             onChange={(e) => {
-              let file = e.target.files[0]
+              const file = e.target.files[0]
               this.uploadImage(file)
             }
           } />
         </span>
 
         <div className={className} onClick={this.focus}>
-
           <Editor
             blockRendererFn={mediaBlockRenderer}
             blockStyleFn={getBlockStyle}
             editorState={editorState}
-            handleKeyCommand={this.handleKeyCommand}
             onChange={this.onChange}
-            onTab={this.onTab}
             ref="editor"
             spellCheck={true}
           />
@@ -153,6 +136,8 @@ const Media = (props) => {
   const type = entity.getType()
 
   let media
+  // We only use image currently
+  // but we may add audio or video in the future
   if (type === 'audio') {
     media = <Audio src={src} />
   } else if (type === 'image') {
@@ -256,7 +241,13 @@ const InlineStyleControls = (props) => {
 }
 
 const mapStateToProps = (state) => ({
-  apiEngine: state.global.apiEngine
+  apiEngine: state.global.apiEngine,
 })
 
-export default connect(mapStateToProps, null)(SiteEditor)
+RichEditor.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  formName: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+}
+
+export default connect(mapStateToProps)(RichEditor)
