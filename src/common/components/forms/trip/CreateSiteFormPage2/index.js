@@ -29,7 +29,7 @@ const CreateSiteFormPage2 = ({ handleSubmit, ...props }) => {
         name="introduction"
         formName="TRIP_CREATE_SITE"
         component={Editor}
-        path="/img/site"
+        category="createSite"
         type="text"
       />
 
