@@ -20,6 +20,7 @@ class RichEditor extends React.Component {
 
     // functions for editor
     this.focus = () => this.refs.editor.focus()
+    this.handleKeyCommand = (cmd) => this._handleKeyCommand(cmd)
     this.toggleBlockType = (type) => this._toggleBlockType(type)
     this.toggleInlineStyle = (style) => this._toggleInlineStyle(style)
   }
@@ -62,6 +63,16 @@ class RichEditor extends React.Component {
         inlineStyle
       )
     )
+  }
+
+  _handleKeyCommand(command) {
+    const { editorState } = this.state
+    const newState = RichUtils.handleKeyCommand(editorState, command)
+    if (newState) {
+      this.onChange(newState)
+      return true
+    }
+    return false
   }
 
   _addImage(url) {
@@ -107,6 +118,7 @@ class RichEditor extends React.Component {
             onChange={(e) => {
               const file = e.target.files[0]
               this.uploadImage(file)
+              e.target.value = ''
             }
           } />
         </span>
@@ -116,6 +128,7 @@ class RichEditor extends React.Component {
             blockRendererFn={mediaBlockRenderer}
             blockStyleFn={getBlockStyle}
             editorState={editorState}
+            handleKeyCommand={this.handleKeyCommand}
             onChange={this.onChange}
             ref="editor"
             spellCheck={true}
