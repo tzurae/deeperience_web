@@ -247,7 +247,7 @@ const mapStateToProps = (state) => ({
 RichEditor.propTypes = {
   dispatch: PropTypes.func.isRequired,
   formName: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
+  path: PropTypes.string.isRequired,
 }
 
 export default connect(mapStateToProps)(RichEditor)

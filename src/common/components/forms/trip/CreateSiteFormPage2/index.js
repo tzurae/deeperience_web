@@ -26,9 +26,10 @@ const CreateSiteFormPage2 = ({ handleSubmit, ...props }) => {
       onSubmit={handleSubmit}
     >
       <Field
-        name="editor"
+        name="introduction"
         formName="TRIP_CREATE_SITE"
         component={Editor}
+        path="/img/site"
         type="text"
       />
 
