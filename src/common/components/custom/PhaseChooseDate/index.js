@@ -9,20 +9,18 @@ const mapStateToProps = state => ({
   chooseDateForm: state.form[FormNames.CUSTOM_VIDEO_TIME],
 })
 
-class PhaseChooseDate extends React.Component {
-  render() {
-    const { chooseDateForm, handleSubmit } = this.props
+const PhaseChooseDate = () => {
+  const { chooseDateForm, handleSubmit } = this.props
 
-    let values
-    if (chooseDateForm) values = chooseDateForm.values
+  let values
+  if (chooseDateForm) values = chooseDateForm.values
 
-    return (
-      <div className={styles.container}>
-        {values && <pre style={{ textAlign: 'left' }}>{JSON.stringify(values, null, 2)}</pre>}
-        <ChooseDateTimeForm handleSubmit={handleSubmit}/>
-      </div>
-    )
-  }
+  return (
+    <div className={styles.container}>
+      {values && <pre style={{ textAlign: 'left' }}>{JSON.stringify(values, null, 2)}</pre>}
+      <ChooseDateTimeForm handleSubmit={handleSubmit}/>
+    </div>
+  )
 }
 
 PhaseChooseDate.propTypes = {

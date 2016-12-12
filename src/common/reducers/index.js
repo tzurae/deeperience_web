@@ -9,9 +9,11 @@ import todos from './todo/todoReducer'
 import form from './form/formReducer'
 import site from './site/siteReducer'
 import custom from './custom/customReducer'
+import order from './order/orderReducer'
 
 import GlobalInitialState from './global/globalInitialState'
 import CustomInitialState from './custom/customInitialState'
+import OrderInitialState from './order/orderInitialState'
 
 export const rootReducer = combineReducers({
   global,
@@ -24,9 +26,11 @@ export const rootReducer = combineReducers({
   trip,
   site,
   custom,
+  order,
 })
 
 export const getInitialState = () => ({
   global: new GlobalInitialState(),
   custom: new CustomInitialState(),
+  order: new OrderInitialState(),
 })

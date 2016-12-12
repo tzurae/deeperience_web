@@ -1,3 +1,4 @@
+/* eslint-disable react/prefer-stateless-function */
 import React from 'react'
 import { connect } from 'react-redux'
 import FormNames from '../../../../constants/FormNames'
@@ -7,6 +8,12 @@ import CreateSiteFormPage3 from '../CreateSiteFormPage3'
 import CreateSiteFormPage4 from '../CreateSiteFormPage4'
 import CreateSiteFormPage5 from '../CreateSiteFormPage5'
 import { getOptions } from '../../../../utils/getI18nValue'
+
+const mapStateToProps = state => ({
+  apiEngine: state.global.apiEngine,
+  createSiteForm: state.form[FormNames.TRIP_CREATE_SITE],
+  messages: state.global.messages,
+})
 
 // http://redux-form.com/6.2.0/examples/wizard/
 class CreateSiteForm extends React.Component {
@@ -70,8 +77,4 @@ class CreateSiteForm extends React.Component {
   }
 }
 
-export default connect(state => ({
-  apiEngine: state.global.apiEngine,
-  createSiteForm: state.form[FormNames.TRIP_CREATE_SITE],
-  messages: state.global.messages,
-}))(CreateSiteForm)
+export default connect(mapStateToProps)(CreateSiteForm)

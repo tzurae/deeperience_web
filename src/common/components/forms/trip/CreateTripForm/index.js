@@ -12,6 +12,7 @@
  * previousPage: 前一頁的 function
  *
  */
+/* eslint-disable react/prefer-stateless-function */
 import React from 'react'
 import { connect } from 'react-redux'
 import FormNames from '../../../../constants/FormNames'
@@ -20,12 +21,10 @@ import CreateTripFormPage2 from '../CreateTripFormPage2'
 import CreateTripFormPage3 from '../CreateTripFormPage3'
 import { getOptions } from '../../../../utils/getI18nValue'
 
-const mapStateToProps = state => {
-  return {
-    createTripForm: state.form[FormNames.TRIP_CREATE_TRIP],
-    messages: state.global.messages,
-  }
-}
+const mapStateToProps = state => ({
+  createTripForm: state.form[FormNames.TRIP_CREATE_TRIP],
+  messages: state.global.messages,
+})
 
 // http://redux-form.com/6.2.0/examples/wizard/
 class CreateTripForm extends React.Component {

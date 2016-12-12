@@ -51,14 +51,6 @@ class CreateTripPage extends React.Component {
     }
   }
 
-  nextPage() {
-    this.setState({ page: this.state.page + 1 })
-  }
-
-  previousPage() {
-    this.setState({ page: this.state.page - 1 })
-  }
-
   componentWillMount() {
     if (process.env.BROWSER) {
       tripAPI(this.props.apiEngine)
@@ -70,6 +62,14 @@ class CreateTripPage extends React.Component {
           this.props.actions.setOwnSite(json)
         })
     }
+  }
+
+  nextPage() {
+    this.setState({ page: this.state.page + 1 })
+  }
+
+  previousPage() {
+    this.setState({ page: this.state.page - 1 })
   }
 
   render() {

@@ -12,6 +12,7 @@ export default (store) => ({
         require('./user').default(store),
         require('./trip').default(store),
         require('./site').default(store),
+        require('./order').default(store),
         require('./custom').default(store),
         require('./demo').default(store),
         require('./notFound').default(store),

@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Map } from 'immutable'
 import Col from 'react-bootstrap/lib/Col'
+import deepCopy from 'deepcopy'
 import { chooseGuide, confirmGuide } from './fakeData'
 import PageLayout from '../../../components/layouts/PageLayout'
 import PanelContainer from '../../../components/utils/PanelContainer'
@@ -52,34 +53,34 @@ class MyCustomTripPhasePage extends React.Component {
     super(props)
 
     this.nodes = [
-      'trip.customize.createDemand',
-      'trip.customize.chooseGuide',
-      'trip.customize.guideConfirm',
-      'trip.customize.deposit',
-      'trip.customize.chooseDate',
-      'trip.customize.finishConfirm',
-      'trip.customize.balance',
-      'trip.customize.travel',
+      'customize.createDemand',
+      'customize.chooseGuide',
+      'customize.guideConfirm',
+      'customize.deposit',
+      'customize.chooseDate',
+      'customize.finishConfirm',
+      'customize.balance',
+      'customize.travel',
     ]
 
     this.cb = [0, 1, 2, 3, 4, 5, 6, 7, 8].map(page => () => this.setPage(page))
     this.titleId = [
       '',
-      'trip.customize.chooseGuide',
+      'customize.chooseGuide',
       '',
       '',
-      'trip.customize.chooseDate',
-      'trip.customize.finishConfirm',
+      'customize.chooseDate',
+      'customize.finishConfirm',
       '',
       '',
     ]
     this.commentId = [
       '',
-      'trip.customize.chooseGuide.comment',
+      'customize.chooseGuide.comment',
       '',
       '',
-      'trip.customize.chooseDate.comment',
-      'trip.customize.finishConfirm.comment',
+      'customize.chooseDate.comment',
+      'customize.finishConfirm.comment',
       '',
       '',
     ]
@@ -119,11 +120,15 @@ class MyCustomTripPhasePage extends React.Component {
     const country = TripLocations[`${confirmGuide.location.split('.')[0]}.countryLabel`]
     const area = TripLocations[confirmGuide.location]
 
+    // deep copy, to change the data
+    const cpGuide = deepCopy(confirmGuide)
+    cpGuide.language = cpGuide.language.map(value => Languages[value])
+
     return (
       <PageLayout subNav={<CustomSubNav activeTab={1}/>}>
         <Modal
           show={isAdviceModal}
-          titleId="trip.customize.travel.advice"
+          titleId="customize.travel.advice"
           onClose={::this.closeAdviceModal}
         >
           <AdviceForm/>
@@ -132,7 +137,7 @@ class MyCustomTripPhasePage extends React.Component {
           <Col md={2}>
             {
               page !== 7 &&
-              <Panel2 title="trip.customize">
+              <Panel2 title="customize">
                 <PhaseBranch
                   nodes={this.nodes}
                   active={page}
@@ -147,20 +152,20 @@ class MyCustomTripPhasePage extends React.Component {
               title={this.titleId[page]}
               comment={this.commentId[page]}
               className={page !== 7 ? styles.mainPanel : styles.finishPanel}
+              titleClass={styles.panelTitle}
             >
               {page === 1 && <PhaseChooseGuide guideData={chooseGuide}/>}
               {page === 1 &&
               <IconRectBtn
                 name="check"
-                textId="trip.customize.chooseGuide.confirm"
+                textId="customize.chooseGuide.confirm"
                 className={styles.btnConfirm}
                 onClick={() => this.props.actions.customPhaseNextPage()}
               />
               }
               {page === 2 &&
               <PhaseGuideConfirm
-                guideData={confirmGuide}
-                languages={confirmGuide.language.map(value => Languages[value])}
+                guideData={cpGuide}
                 country={country}
                 area={area}
               />

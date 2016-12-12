@@ -10,12 +10,12 @@ const PhaseFinishConfirm = ({ againFunc, finishFunc, amount }) => (
         <div className={styles.comment}>
           <Text
             className={styles.pComment}
-            id="trip.customize.finishConfirm.again.comment"
+            id="customize.finishConfirm.again.comment"
           />
         </div>
         <IconRectBtn
           name="video-camera"
-          textId="trip.customize.chooseDate"
+          textId="customize.chooseDate"
           className={styles.btnAgain}
           onClick={againFunc}
         />
@@ -25,10 +25,10 @@ const PhaseFinishConfirm = ({ againFunc, finishFunc, amount }) => (
         <div className={styles.comment}>
           <Text
             className={styles.pComment}
-            id="trip.customize.finishConfirm.ok.comment"
+            id="customize.finishConfirm.ok.comment"
           />
           <p className={styles.pComment}>
-            <Text id="trip.customize.finishConfirm.videoTime" isSpan={true}/>
+            <Text id="customize.finishConfirm.videoTime" isSpan={true}/>
             <span> 10 分 30 秒, </span>
             <Text id="common.amountAll" isSpan={true}/>
             <span>{` ${amount} `}</span>
@@ -37,7 +37,7 @@ const PhaseFinishConfirm = ({ againFunc, finishFunc, amount }) => (
         </div>
         <IconRectBtn
           name="check"
-          textId="trip.customize.balance"
+          textId="customize.balance"
           onClick={finishFunc}
         />
       </div>

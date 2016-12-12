@@ -77,6 +77,9 @@ class Navigation extends Component {
                 <NavLink to="/trip/manage">
                   <Text id="nav.trip.manageTrip"/>
                 </NavLink>
+                <NavLink to="/order/list">
+                  <Text id="nav.trip.myOrder"/>
+                </NavLink>
               </Navbar.Dropdown>
 
               <Navbar.Dropdown

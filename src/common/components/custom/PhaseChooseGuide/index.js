@@ -37,7 +37,7 @@ const GuideItem = ({ guideName, star, index, profession }) => (
         <span className={styles.profession}>{profession}</span>
       </h4>
       <div className={styles.starDiv}>
-        <Text className={styles.starText} id={'trip.customize.chooseGuide.star'}/>
+        <Text className={styles.starText} id={'customize.chooseGuide.star'}/>
         <StarList
           star={star}
           totalStar={5}
@@ -48,7 +48,7 @@ const GuideItem = ({ guideName, star, index, profession }) => (
       <h5 className={styles.rank}>{`第 ${index + 1} 志願`}</h5>
       <IconRectBtn
         name="bars"
-        textId="trip.customize.chooseGuide.detail"
+        textId="customize.chooseGuide.detail"
       />
     </div>
   </div>

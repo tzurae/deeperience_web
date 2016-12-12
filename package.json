@@ -117,6 +117,7 @@
     "body-parser": "^1.15.0",
     "classnames": "^2.2.3",
     "cookie": "^0.2.4",
+    "deepcopy": "^0.6.3",
     "draft-js": "^0.9.1",
     "draft-js-export-html": "^0.5.2",
     "es6-promise": "^3.1.2",

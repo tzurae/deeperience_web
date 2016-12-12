@@ -61,7 +61,7 @@ const renderChooseDateTime = ({ fields, meta: { touched, error } }) => (
             showLabel={false}
             adapter={Input}
             type="time"
-            placeholder={<Text id={'trip.customize.chooseDate.startTime'}/>}
+            placeholder={<Text id={'customize.chooseDate.startTime'}/>}
           />
           <Field
             className={classname(styles.formGroup, 'col-md-4')}
@@ -70,7 +70,7 @@ const renderChooseDateTime = ({ fields, meta: { touched, error } }) => (
             showLabel={false}
             adapter={Input}
             type="time"
-            placeholder={<Text id={'trip.customize.chooseDate.endTime'}/>}
+            placeholder={<Text id={'customize.chooseDate.endTime'}/>}
           />
         </div>
         <IconBtn
@@ -85,7 +85,7 @@ const renderChooseDateTime = ({ fields, meta: { touched, error } }) => (
       className={styles.addBtn}
       onClick={() => fields.push({})}
     >
-      <Text id="trip.customize.chooseDate.createTime"/>
+      <Text id="customize.chooseDate.createTime"/>
     </button>
   </div>
 )
@@ -112,7 +112,7 @@ const ChooseDateTimeForm = ({ handleSubmit, ...props }) => {
         className={styles.footer}
       >
         <IconRectBtn
-          textId="trip.customize.chooseDate.confirm"
+          textId="customize.chooseDate.confirm"
           name="check"
           type="submit"
           className={styles.btnSubmit}

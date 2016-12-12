@@ -48,4 +48,9 @@ export default keyMirror({
   CUSTOM_PHASE_SET_PAGE: null,
   CUSTOM_PHASE_OPEN_ADVICE_MODAL: null,
   CUSTOM_PHASE_CLOSE_ADVICE_MODAL: null,
+
+  // ------ order ------
+  ORDER_PHASE_NEXT_PAGE: null,
+  ORDER_PHASE_PREVIOUS_PAGE: null,
+  ORDER_PHASE_SET_PAGE: null,
 })
