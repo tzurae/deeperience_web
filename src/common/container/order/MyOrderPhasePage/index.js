@@ -12,6 +12,7 @@ import PhaseBranch from '../../../components/utils/PhaseBranch'
 import PhaseOutline from '../../../components/order/PhaseOutline'
 import PhaseDeposit from '../../../components/order/PhaseDeposit'
 import PhaseCustomize from '../../../components/order/PhaseCustomize'
+import PhaseBalance from '../../../components/order/PhaseBalance'
 import PhaseVideo from '../../../components/order/PhaseVideo'
 import * as orderActions from '../../../reducers/order/orderActions'
 import { CustomSubNav } from '../../../components/utils/SubNavigation'
@@ -61,8 +62,8 @@ class MyOrderPhasePage extends React.Component {
       '',
       'order.video',
       'order.customize.title',
-      '',
-      '',
+      'order.preview',
+      'order.recvBalance',
       '',
     ]
     this.commentId = [
@@ -135,7 +136,8 @@ class MyOrderPhasePage extends React.Component {
                 <PhaseBranch
                   nodes={this.nodes}
                   active={page}
-                  done={this.done}
+                  done={this.done
+                  }
                   cb={this.cb}
                 />
               </Panel2>
@@ -163,6 +165,7 @@ class MyOrderPhasePage extends React.Component {
               {page === 1 && <PhaseDeposit isfinish={false}/>}
               {page === 2 && <PhaseVideo ableTime={ableTime}/>}
               {page === 3 && <PhaseCustomize />}
+              {page === 5 && <PhaseBalance />}
             </PanelWithWord>
           </Col>
           <Col md={3}/>
