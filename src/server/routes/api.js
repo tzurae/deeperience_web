@@ -91,7 +91,6 @@ export default ({ app }) => {
     authRequired,
     fileUpload.disk({
       destination: 'tmp/{userId}',
-      filename: 'avatar.jpg',
     }).fields([{ name: 'avatar' }]),
     validate.form('user/AvatarForm'),
     userController.uploadAvatar)
@@ -136,7 +135,8 @@ export default ({ app }) => {
     fileUpload.disk({
       destination: 'tmp/{userId}',
     }).fields([{ name: 'img' }]),
-    tripController.uploadImage)
+    tripController.uploadImage
+    )
 
   // site
   app.get('/api/guideSites', authRequired, guideSiteController.list) // todo

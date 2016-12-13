@@ -9,6 +9,7 @@ const uploadToDisk = ({
   destination = initDestination,
   filename,
 }) => multer({
+  // upload to tmp directory
   storage: multer.diskStorage({
     destination: (req, file, cb) => {
       let customDest = destination
@@ -19,7 +20,7 @@ const uploadToDisk = ({
       mkdirp(dir, (err) => cb(err, dir))
     },
     filename: (req, file, cb) => {
-      cb(null, filename || `${file.fieldname}-${Date.now()}`)
+      cb(null, `${file.fieldname}-${Date.now()}`)
     },
   }),
 })
