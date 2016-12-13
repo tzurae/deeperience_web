@@ -11,6 +11,7 @@ import { Panel2, PanelWithWord } from '../../../components/utils/Panel'
 import PhaseBranch from '../../../components/utils/PhaseBranch'
 import PhaseOutline from '../../../components/order/PhaseOutline'
 import PhaseDeposit from '../../../components/order/PhaseDeposit'
+import PhaseCustomize from '../../../components/order/PhaseCustomize'
 import PhaseVideo from '../../../components/order/PhaseVideo'
 import * as orderActions from '../../../reducers/order/orderActions'
 import { CustomSubNav } from '../../../components/utils/SubNavigation'
@@ -48,7 +49,7 @@ class MyOrderPhasePage extends React.Component {
       'order.outline',
       'order.recvDeposit',
       'order.video',
-      'order.custom',
+      'order.customize',
       'order.preview',
       'order.recvBalance',
       'order.done',
@@ -59,7 +60,7 @@ class MyOrderPhasePage extends React.Component {
       '',
       '',
       'order.video',
-      '',
+      'order.customize.title',
       '',
       '',
       '',
@@ -161,6 +162,7 @@ class MyOrderPhasePage extends React.Component {
               }
               {page === 1 && <PhaseDeposit isfinish={false}/>}
               {page === 2 && <PhaseVideo ableTime={ableTime}/>}
+              {page === 3 && <PhaseCustomize />}
             </PanelWithWord>
           </Col>
           <Col md={3}/>
