@@ -61,3 +61,15 @@
   flex-direction: row;
   align-items: flex-end;
 }
+
+@mixin flex-row-between {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+@mixin flex-row-around {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}

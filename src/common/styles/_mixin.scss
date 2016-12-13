@@ -100,3 +100,9 @@ $image-path: '/img' !default;
   @include bg($img, $width, $height);
   background-size: cover;
 }
+
+@mixin no-focus() {
+  &:focus {
+    outline: 0;
+  }
+}

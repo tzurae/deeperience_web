@@ -1,0 +1,77 @@
+@import '../../../styles/index';
+
+.container {
+  @include flex-col-center;
+  width: 100%;
+  padding: 20px 60px;
+  border: 0;
+  background-color: $white;
+  box-shadow: 3px 3px 8px 0 #cccccc;
+}
+
+.pic {
+  height: 100px;
+}
+
+.pic-unfinish {
+  @include bg-contain("custompage/moneytransfer.png", 120px, 120px);
+  @extend .pic;
+}
+
+.pic-finish {
+  @include bg-contain("createsitepage/icon_finish.png", 120px, 120px);
+  @extend .pic;
+}
+
+.comment {
+  width: 70%;
+  margin-top: 30px;
+  line-height: 25px;
+  text-align: center;
+}
+
+.comment-finish {
+  @extend .comment;
+}
+
+.comment-unfinish {
+  @extend .comment;
+}
+
+.title {
+  margin-bottom: 20px;
+}
+
+.item {
+  @include flex-row-around;
+  @include no-focus;
+  width: 100%;
+  padding: 10px 40px;
+  border: 1px none $color-navbar;
+  border-bottom-style: solid;
+  background-color: transparent;
+}
+
+.item-active {
+  @extend .item;
+  color: $white;
+  background-color: $color-main-light;
+}
+
+.item-inactive {
+  @extend .item;
+}
+
+.item-date {
+  flex: 1;
+  text-align: left;
+}
+
+.footer {
+  @include flex-center;
+  margin: 30px 0 15px;
+}
+
+.footer-btn {
+  margin: 0 15px;
+}

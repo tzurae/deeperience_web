@@ -4,13 +4,15 @@ import { connect } from 'react-redux'
 import { Map } from 'immutable'
 import Col from 'react-bootstrap/lib/Col'
 import deepCopy from 'deepcopy'
-import { traveler, customData } from './fakeData'
+import { traveler, customData, ableTime } from './fakeData'
 import PageLayout from '../../../components/layouts/PageLayout'
 import PanelContainer from '../../../components/utils/PanelContainer'
 import { Panel2, PanelWithWord } from '../../../components/utils/Panel'
 import PhaseBranch from '../../../components/utils/PhaseBranch'
-import * as orderActions from '../../../reducers/order/orderActions'
 import PhaseOutline from '../../../components/order/PhaseOutline'
+import PhaseDeposit from '../../../components/order/PhaseDeposit'
+import PhaseVideo from '../../../components/order/PhaseVideo'
+import * as orderActions from '../../../reducers/order/orderActions'
 import { CustomSubNav } from '../../../components/utils/SubNavigation'
 import { getValue } from '../../../utils/getI18nValue'
 import styles from './styles.scss'
@@ -45,7 +47,7 @@ class MyOrderPhasePage extends React.Component {
     this.nodes = [
       'order.outline',
       'order.recvDeposit',
-      'order.guideConfirm',
+      'order.video',
       'order.custom',
       'order.preview',
       'order.recvBalance',
@@ -56,7 +58,7 @@ class MyOrderPhasePage extends React.Component {
     this.titleId = [
       '',
       '',
-      '',
+      'order.video',
       '',
       '',
       '',
@@ -65,7 +67,7 @@ class MyOrderPhasePage extends React.Component {
     this.commentId = [
       '',
       '',
-      '',
+      'order.video.comment',
       '',
       '',
       '',
@@ -122,7 +124,6 @@ class MyOrderPhasePage extends React.Component {
     cpCustom.hotelTypes = cpCustom.hotelTypes.map(value => HotelTypes[value])
     cpCustom.locations = cpCustom.locations.map(value => this.getCountryArea(TripLocations, value))
 
-    console.log(cpCustom)
     return (
       <PageLayout subNav={<CustomSubNav activeTab={1}/>}>
         <PanelContainer>
@@ -145,6 +146,8 @@ class MyOrderPhasePage extends React.Component {
               comment={this.commentId[page]}
               className={styles.mainPanel}
               contentDivClass={page === 0 && styles.doubleTitleContent}
+              titleClass={styles.panelTitle}
+              // because there are two titles in page0 and cannot fit the origin panelwithword title
             >
               {
                 page === 0 &&
@@ -156,6 +159,8 @@ class MyOrderPhasePage extends React.Component {
                   area={area}
                 />
               }
+              {page === 1 && <PhaseDeposit isfinish={false}/>}
+              {page === 2 && <PhaseVideo ableTime={ableTime}/>}
             </PanelWithWord>
           </Col>
           <Col md={3}/>
