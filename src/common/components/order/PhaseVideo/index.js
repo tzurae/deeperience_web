@@ -12,7 +12,6 @@ class PhaseVideo extends React.Component {
       activeArr: Array(...{ length: this.props.ableTime.length })
         .map(() => false),
     }
-    console.log(this.state.activeArr)
   }
 
   clickItem(index) {

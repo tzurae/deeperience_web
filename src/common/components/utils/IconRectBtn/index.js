@@ -11,18 +11,21 @@ const IconRectBtn = ({ name, textId, onClick, bgColor, className, ...props }) =>
       className={classNames(styles.btn, className)}
       {...props}
     >
-      <FontAwesome
-        name={name}
-        style={{ backgroundColor: bgColor || 'transparent' }}
-        className={styles.icon}
-      />
-      <Text id={textId}/>
+      {
+        name !== '' &&
+        <FontAwesome
+          name={name}
+          style={{ backgroundColor: bgColor || 'transparent' }}
+          className={styles.icon}
+        />
+      }
+      <Text className={styles.btnText} id={textId}/>
     </button>
   )
 }
 
 IconRectBtn.proptypes = {
-  name: PropTypes.string.isRequired,
+  name: PropTypes.string,
   textId: PropTypes.string.isRequired,
   onClick: PropTypes.func,
   bgColor: PropTypes.string,

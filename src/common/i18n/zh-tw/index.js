@@ -89,7 +89,7 @@ export default {
   'order.outline': '客製需求',
   'order.recvDeposit': '收取訂金',
   'order.video': '安排視訊',
-  'order.custom': '客製旅程',
+  'order.customize': '客製旅程',
   'order.preview': '預覽旅程',
   'order.recvBalance': '收取尾款',
   'order.done': '完成交易',
@@ -110,11 +110,19 @@ export default {
   'order.outline.disagree': '放棄規劃',
   'order.outline.agree': '同意規劃',
   'order.deposit.waitPay': '您好，目前正在等待顧客付款，' +
-  '當顧客付款並填選完視訊時段後，我們會自動通知您，請耐心等候！',
+  '當顧客付款並填選完視訊時段後，Deeperience 會自動通知您，請耐心等候！',
   'order.deposit.finishPay': '顧客已經付完款囉，請即刻挑選有空的視訊時段，' +
   '並為他們做初步的安排，讓顧客感受到賓至如歸的待遇！',
   'order.video.comment': '以上為旅客有空的視訊時間，請選定您想要與旅客視訊討論旅程的時間。',
   'order.video.ableTime': '旅客空閒時間',
+  'order.customize.title': '為旅客客製行程',
+  'order.customize.create': '建立旅程',
+  'order.customize.create.comment': '建立全新的旅程',
+  'order.customize.choose': '選取旅程',
+  'order.customize.choose.comment': '從先前建立的旅程進行修改',
+  'order.recvBalance.waitPay': '您好，目前正在等待顧客付尾款，' +
+  '當顧客付款完，Deeperience 會自動通知您，請耐心等候！',
+  'order.recvBalance.finishPay': '顧客已經付完款囉！',
 
   'trip.createSite.title1': '景點名稱',
   'trip.createSite.title2': '景點簡介',

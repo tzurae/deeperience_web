@@ -1,0 +1,33 @@
+@import '../../../styles/index';
+
+.container {
+  @include flex-row-center;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.option {
+  @include flex-col-center;
+  flex: 1;
+}
+
+.pic {
+  height: 100px;
+}
+
+.pic-create {
+  @include bg-contain("orderpage/create.png", 80px, 80px);
+  @extend .pic;
+}
+
+.pic-choose {
+  @include bg-contain("orderpage/choose.png", 80px, 80px);
+  @extend .pic;
+}
+
+.comment {
+  @include flex-center;
+  height: 70px;
+  line-height: 20px;
+  text-align: center;
+}
