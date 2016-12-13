@@ -111,7 +111,7 @@ class RichEditor extends React.Component {
 
         <span>
           <label htmlFor="img-input" style={{ cursor: 'pointer' }} >
-            <img src="/img/icon04.png" width="42" />
+            <img src="/img/createsitepage/icon04.png" width="42" />
           </label>
           <input
             id="img-input"

@@ -63,7 +63,7 @@ const TripArea = () => {
         <Row style={{ marginTop: '120px' }}>
             <Col md={4}>
                 <div style={style.tripBlock}>
-                    <img src="/img/icon01.png" width={imgSize} />
+                    <img src="/img/tripmenupage/icon01.png" width={imgSize} />
                     <p style={style.explain}><Text id="presentTrip.addSite.explain" /></p>
                     <button style={style.button}>
                         <Text id="presentTrip.addSite" />
@@ -76,7 +76,7 @@ const TripArea = () => {
                 style={{ borderRight: '2px solid #D4D4D4', borderLeft: '2px solid #D4D4D4' }}
             >
                 <div style={style.tripBlock}>
-                    <img src="/img/icon02.png" width={imgSize} />
+                    <img src="/img/tripmenupage/icon02.png" width={imgSize} />
                     <p style={style.explain}><Text id="presentTrip.addTrip.explain" /></p>
                     <Link to="/trip/create">
                         <button style={style.button}>
@@ -88,7 +88,7 @@ const TripArea = () => {
 
             <Col md={4}>
                 <div style={style.tripBlock}>
-                    <img src="/img/icon03.png" width={imgSize} />
+                    <img src="/img/tripmenupage/icon03.png" width={imgSize} />
                     <p style={style.explain}><Text id="presentTrip.manageTrip.explain" /></p>
                     <button style={style.button}>
                         <Text id="presentTrip.manageTrip" />
