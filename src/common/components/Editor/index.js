@@ -40,7 +40,7 @@ class RichEditor extends React.Component {
   _uploadImage(file) {
     const apiEngine = this.props.apiEngine
     tripAPI(apiEngine)
-      .uploadImage(file, this.props.category)
+      .uploadImage(file)
       .then(json => {
         // image url
         const url = json.downloadURL
@@ -260,7 +260,6 @@ const InlineStyleControls = (props) => {
 RichEditor.propTypes = {
   dispatch: PropTypes.func.isRequired,
   formName: PropTypes.string.isRequired,
-  category: PropTypes.string.isRequired,
 }
 
 export default connect(mapStateToProps)(RichEditor)
