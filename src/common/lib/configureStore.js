@@ -1,3 +1,4 @@
+// @flow
 import { createStore, applyMiddleware } from 'redux'
 import { fromJS } from 'immutable'
 import { routerMiddleware } from 'react-router-redux'
@@ -15,7 +16,7 @@ export default (initialState = {}, history) => {
 
   const logger = createLoggerMiddleware({
     collapsed: true,
-    stateTransformer: state => JSON.parse(JSON.stringify(state)),
+    stateTransformer: state => state.toJS(),
     predicate: (getState, action) => {
       let val = true
       LoggerSettings.remove.some(value => {
@@ -47,7 +48,7 @@ export default (initialState = {}, history) => {
 
   const store = createStore(
     rootReducer,
-    initialState,
+    fromJS(initialState),
     isDevNClientSide ? (
       composeWithDevTools(applyMiddleware(...middlewares))
     ) : (

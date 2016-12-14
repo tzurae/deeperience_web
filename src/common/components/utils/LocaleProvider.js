@@ -9,8 +9,8 @@ const actions = [globalActions]
 
 const mapStateToProps = state => {
   return {
-    locale: state.global.locale,
-    messages: state.global.messages,
+    locale: state.getIn(['global','locale']),
+    messages: state.getIn(['global','messages']),
   }
 }
 
@@ -40,8 +40,10 @@ class LocaleProvider extends Component {
 
   render() {
     const { children, locale, messages } = this.props
-    // hacky code don't know why intl didn't transfer to normal object
-    // and is still an immutable object
+
+    // if server-side render, message = object , see -> locale controller
+    // if client-side render, message = immutalbe,  see lib/configStore line:51
+    // react-intl only accpet plain object as argument, so need to transfer
     let message
     if (messages.toJS) message = messages.toJS()
     else message = messages

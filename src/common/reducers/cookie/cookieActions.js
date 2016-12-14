@@ -32,8 +32,8 @@ export const setCookies = (cookies) => {
     return Promise.all(
       Object
         .keys(cookies)
-        .map((name) => dispatch(setCookie(name, cookies[name])))
-    )
+        .map((name) => {
+        return dispatch(setCookie(name, cookies[name]))}))
   }
 }
 

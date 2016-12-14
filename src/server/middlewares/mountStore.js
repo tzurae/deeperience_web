@@ -1,8 +1,9 @@
 import { useRouterHistory, createMemoryHistory } from 'react-router'
-import { syncHistoryWithStore, routerMiddleware } from 'react-router-redux'
+import { syncHistoryWithStore } from 'react-router-redux'
 import ApiEngine from '../../common/utils/ApiEngine'
 import { setApiEngine } from '../../common/reducers/global/globalActions'
 import configureStore from '../../common/lib/configureStore'
+import Immutable from 'immutable'
 
 export default (req, res, next) => {
   // ref:
@@ -11,7 +12,11 @@ export default (req, res, next) => {
   //  - <https://github.com/reactjs/react-router-redux/blob/master/examples/server/server.js>
   const memoryHistory = useRouterHistory(createMemoryHistory)(req.url)
   const store = configureStore(undefined, memoryHistory)
-  const history = syncHistoryWithStore(memoryHistory, store)
+  const history = syncHistoryWithStore(memoryHistory, store, {
+    selectLocationState(state) {
+      return state.get('routing').toJS()
+    }
+  })
   req.store = store
   req.history = history
   const apiEngine = new ApiEngine(req)

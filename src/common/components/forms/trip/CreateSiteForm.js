@@ -6,7 +6,7 @@ import CreateSiteFormPage2 from './CreateSiteFormPage2'
 import CreateSiteFormPage3 from './CreateSiteFormPage3'
 import CreateSiteFormPage4 from './CreateSiteFormPage4'
 import CreateSiteFormPage5 from './CreateSiteFormPage5'
-import { setPage, nextPage, previousPage } from '../../../actions/createSiteActions'
+import { setPage, nextPage, previousPage } from '../../../reducers/site/createSiteActions'
 import getOptions from '../../../utils/getOptions'
 
 // http://redux-form.com/6.2.0/examples/wizard/

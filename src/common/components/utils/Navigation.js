@@ -12,6 +12,13 @@ import MenuItem from './MenuItem'
 import Text from './Text'
 import styles from '../../styles'
 
+const mapStateToProps = (state) => {
+  return {
+    isAuth: !!state.get(['cookies', 'token']),
+    user: (state.get(['cookies', 'user']) && JSON.parse(state.get(['cookies', 'user']))) || {},
+  }
+}
+
 const style = {
   nav: {
     backgroundColor: styles.color.navbarGrey,
@@ -142,9 +149,7 @@ Navigation.contextTypes = {
   store: React.PropTypes.object.isRequired,
 }
 
-export default connect(({ cookies: { token, user } }) => ({
-  isAuth: !!token,
-  user: (user && JSON.parse(user)) || {},
-}), null, null, {
+export default connect(mapStateToProps
+, null, null, {
   pure: false,
 })(Navigation)
