@@ -1,6 +1,5 @@
 import fs from 'fs'
 import path from 'path'
-import mkdirp from 'mkdirp'
 import assign from 'object-assign'
 import configs from '../../../configs/project/server'
 import Errors from '../../common/constants/Errors'
@@ -248,6 +247,8 @@ export default {
       console.timeEnd(UPLOAD_AVATAR)
       // remove temp file
       fs.unlink(tmpPath)
-    })
+    }).catch(handleError(res)(() => {
+      res.json({})
+    }))
   },
 }

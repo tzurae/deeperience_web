@@ -28,7 +28,6 @@ const CreateSiteFormPage2 = ({ handleSubmit, ...props }) => {
         name="introduction"
         formName="TRIP_CREATE_SITE"
         component={Editor}
-        category="createSite"
         type="text"
       />
 

@@ -1,6 +1,6 @@
 import path from 'path'
 import fs from 'fs'
-import mkdirp from 'mkdirp'
+import uuid from 'uuid'
 import handleError, { handleDbError } from '../decorators/handleError'
 import Trip, { TripSchema } from '../models/Trip'
 import Site from '../models/Site'
@@ -105,10 +105,9 @@ const attributes = getAttrFromSchema(TripSchema)
   uploadImage(req, res) {
     // use `req.file` to access the file
     // and use `req.body` to access other fields
-    const filename = `${(new Date()).getTime()}.png`
+    const filename = `${uuid()}.png`
     const tmpPath = req.files.img[0].path
-    const category = req.params.category
-    const remotePath = path.join('users', `${req.user._id}`, 'img', category, filename)
+    const remotePath = path.join('users', `${req.user._id}`, 'img', filename)
 
     const UPLOAD_IMAGE = 'upload image'
     console.time(UPLOAD_IMAGE)
@@ -121,6 +120,8 @@ const attributes = getAttrFromSchema(TripSchema)
       console.timeEnd(UPLOAD_IMAGE)
       // remove temp file
       fs.unlink(tmpPath)
-    })
+    }).catch(handleError(res)(() => {
+      res.json({})
+    }))
   },
 }
