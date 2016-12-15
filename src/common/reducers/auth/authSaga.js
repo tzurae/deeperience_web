@@ -6,7 +6,6 @@ import { call, fork, take, put } from 'redux-saga/effects'
 import * as authActions from './authAction'
 import userAPI from '../../api/user'
 
-
 const {
   LOGIN,
   LOGIN_REQUEST,
@@ -19,14 +18,13 @@ export function* login() {
     yield put(authActions.loginRequest)
 
     const user = yield call
-  } catch(error) {
+  } catch (error) {
     yield put(authActions.loginFailure)
   }
 }
 
-
-export function* watchLogin () {
-  while(true) {
+export function* watchLogin() {
+  while (true) {
     const { payload } = yield take(LOGIN)
     yield fork(login, payload)
   }

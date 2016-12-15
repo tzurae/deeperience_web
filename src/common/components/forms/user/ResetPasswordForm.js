@@ -16,7 +16,7 @@ import {
 
 const mapStateToProps = (state) => {
   return {
-    apiEngine: state.getIn(['global','apiEngine']),
+    apiEngine: state.getIn(['global', 'apiEngine']),
     routing: state.get('routing'),
   }
 }

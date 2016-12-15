@@ -5,12 +5,12 @@ import Text from '../utils/Text'
 
 const mapStateToProps = (state) => {
   return {
-    routing: state.get('routing')
+    routing: state.get('routing'),
   }
 }
 
 const SocialAuthButtonList = ({ routing, login }) => {
-  const next = routing.getIn(['locationBeforeTransitions','query']).toJS()
+  const next = routing.getIn(['locationBeforeTransitions', 'query']).toJS()
   const search = next ? `?next=${next}` : ''
 
   return (

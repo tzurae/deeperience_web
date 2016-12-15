@@ -21,7 +21,7 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case SET_PAGE:
       return
-        state.set([action.resourceName], action.page || defaultPage)
+      state.set([action.resourceName], action.page || defaultPage)
       // {
       //   ...state,
       //   [action.resourceName]: action.page || defaultPage,
@@ -29,7 +29,7 @@ export default (state = initialState, action) => {
     case SET_CURRENT_PAGE:
       // const page = state[action.resourceName]
       return
-        state.set([action.resourceName], action.currentPage)
+      state.set([action.resourceName], action.currentPage)
       // {
       //   ...state,
       //   [action.resourceName]: {

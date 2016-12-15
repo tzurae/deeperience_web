@@ -91,10 +91,10 @@ class LoginForm extends Component {
       })
       .then((json) => {
         if (json.isAuth) {
-          console.log('kdfsajlkfjkldsfjlkasfkjlasdjlfksadjklfj;aklsa', json);
+          console.log('kdfsajlkfjkldsfjlkasfkjlasdjlfksadjklfj;aklsa', json)
           this.login(json).then(() => {
             // redirect to the origin path before logging in
-            const next = this.props.routing.getIn(['locationBeforeTransitions','query']).toJS()
+            const next = this.props.routing.getIn(['locationBeforeTransitions', 'query']).toJS()
 
             dispatch(push(next || '/'))
           })
@@ -167,7 +167,7 @@ class LoginForm extends Component {
 };
 const mapStateToProps = (state) => {
   return {
-    apiEngine: state.getIn(['global','apiEngine']),
+    apiEngine: state.getIn(['global', 'apiEngine']),
     routing: state.get('routing'),
   }
 }

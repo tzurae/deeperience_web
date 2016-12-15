@@ -21,12 +21,12 @@ import FormButton from '../../utils/FormButton'
 
 const mapStateToProps = (state) => {
   return {
-    apiEngine: state.getIn(['global','apiEngine']),
+    apiEngine: state.getIn(['global', 'apiEngine']),
   }
 }
 
 const validate = (values) => {
-  console.log('values is',values);
+  console.log('values is', values)
   const errors = {}
 
   if (!values.get('email')) {
@@ -55,7 +55,7 @@ const validate = (values) => {
     }
   }
 
-  if(!values.get('ensurePassword')) {
+  if (!values.get('ensurePassword')) {
     errors.ensurePassword = ' Required'
   } else {
     if (values.get('password') && values.get('ensurePassword')) {
@@ -65,12 +65,11 @@ const validate = (values) => {
     }
   }
 
-  if(!values.get('membershi')) {
+  if (!values.get('membershi')) {
     if (!values.get('isAgreeTerms')) {
       errors.isAgreeTerms = 'Required'
     }
   }
-
 
   if (configs.recaptcha && !values.get('recaptcha')) {
     errors.recaptcha = 'Required'

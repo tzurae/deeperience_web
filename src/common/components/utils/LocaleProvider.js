@@ -9,8 +9,8 @@ const actions = [globalActions]
 
 const mapStateToProps = state => {
   return {
-    locale: state.getIn(['global','locale']),
-    messages: state.getIn(['global','messages']),
+    locale: state.getIn(['global', 'locale']),
+    messages: state.getIn(['global', 'messages']),
   }
 }
 

@@ -1,7 +1,7 @@
 import { List, Map } from 'immutable'
 const {
   PUSH_ERRORS,
-  REMOVE_ERROR
+  REMOVE_ERROR,
 } = require('../../constants/ActionTypes')
 
 const initialState = List()

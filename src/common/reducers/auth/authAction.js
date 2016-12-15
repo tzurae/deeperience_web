@@ -4,7 +4,7 @@
 */
 import { createAction } from 'redux-actions'
 
-//need to add the default behind require, or the result will be undefined
+// need to add the default behind require, or the result will be undefined
 const {
   LOGIN,
   LOGIN_REQUEST,

@@ -8,7 +8,7 @@ import isString from '../../utils/isString'
 
 const mapStateToProps = (state) => {
   return {
-    errors: state.get('errors')
+    errors: state.get('errors'),
   }
 }
 

@@ -10,7 +10,7 @@ import User from '../models/User'
 import 'babel-polyfill'
 
 const cookieExtractor = (req) => {
-  return req.store.getState().getIn(['cookies','token'])
+  return req.store.getState().getIn(['cookies', 'token'])
 }
 
 export default (req, res, next) => {

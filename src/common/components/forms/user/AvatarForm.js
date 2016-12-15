@@ -21,8 +21,8 @@ import Text from '../../utils/Text'
 
 const mapStateToProps = (state) => {
   return {
-    apiEngine: state.getIn(['global','apiEngine']),
-    user: (state.getIn(['cookies','user']) && JSON.parse(state.getIn(['cookies','user'])))|| {},
+    apiEngine: state.getIn(['global', 'apiEngine']),
+    user: (state.getIn(['cookies', 'user']) && JSON.parse(state.getIn(['cookies', 'user']))) || {},
   }
 }
 
@@ -54,7 +54,7 @@ const style = {
 export const validate = (values) => {
   const errors = {}
 
-  if (!values.get('avatar') || values.get(['avatar','length']) !== 1) {
+  if (!values.get('avatar') || values.get(['avatar', 'length']) !== 1) {
     errors.avatar = 'Required'
   } else {
     const { size, type, mimetype } = values.get('avatar[0]')
@@ -262,8 +262,6 @@ class AvatarForm extends Component {
     )
   }
 };
-
-
 
 export default reduxForm({
   form: FormNames.USER_AVATAR,

@@ -28,7 +28,7 @@ const apiEngine = new ApiEngine()
 
 store.dispatch(setApiEngine(apiEngine))
 
-const redirect = store.getState().getIn(['cookies','redirect'])
+const redirect = store.getState().getIn(['cookies', 'redirect'])
 
 if (redirect) {
   store.dispatch(push(redirect))
@@ -41,7 +41,7 @@ if (redirect) {
 const history = syncHistoryWithStore(browserHistory, store, {
   selectLocationState(state) {
     return state.get('routing').toJS()
-  }
+  },
 })
 const routes = getRoutes(store)
 match({

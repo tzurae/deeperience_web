@@ -5,8 +5,7 @@ import { updateLocale } from '../../common/reducers/global/globalActions'
 
 export default {
   user: (req, res, next) => {
-
-    const cookies = req.store.getState().get('cookies');
+    const cookies = req.store.getState().get('cookies')
 
     req.store.dispatch(loginUser({
       token: cookies.get('token'),
@@ -15,7 +14,7 @@ export default {
     next()
   },
   intl: wrapTimeout(3000)((req, res, next) => {
-    const cookieLocale = req.store.getState().getIn(['cookies','locale'])
+    const cookieLocale = req.store.getState().getIn(['cookies', 'locale'])
     let lang
     if (cookieLocale) {
       lang = cookieLocale

@@ -11,7 +11,6 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import LoggerSettings from '../../../configs/env/logger'
 
 export default (initialState = {}, history) => {
-
   const sagaMiddleware = createSagaMiddleware()
 
   const logger = createLoggerMiddleware({

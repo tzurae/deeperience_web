@@ -24,7 +24,7 @@ export default (state = initialState, action) => {
       // you need to transfer the value type, because the data you want to transmit
       // must be a simple string when using serialize of "cookie" package
       let value
-      if(typeof action.cookie.value === 'object') {
+      if (typeof action.cookie.value === 'object') {
         value = JSON.stringify(action.cookie.value)
       } else {
         value = action.cookie.value

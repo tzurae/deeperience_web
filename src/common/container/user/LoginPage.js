@@ -15,13 +15,13 @@ const style = {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(authActions, dispatch)
+    actions: bindActionCreators(authActions, dispatch),
   }
 }
 
 class LoginPage extends Component {
   render() {
-   return (
+    return (
      <PageLayout src="/img/homepage/river_dark.jpg">
        <Row>
          <Col md={4} />
@@ -38,7 +38,7 @@ class LoginPage extends Component {
          <Col md={4} />
        </Row>
      </PageLayout>
-   )
+    )
   }
 }
 

@@ -9,8 +9,8 @@ export default keyMirror({
   LOGIN_REQUEST: null,
   LOGIN_SUCCESS: null,
   LOGIN_FAILURE: null,
-    LOGIN_USER: null,
-    LOGOUT_USER: null,
+  LOGIN_USER: null,
+  LOGOUT_USER: null,
 
   // ------ cookie ------
   COOKIE_REQUEST: null,

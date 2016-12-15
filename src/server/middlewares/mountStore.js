@@ -15,7 +15,7 @@ export default (req, res, next) => {
   const history = syncHistoryWithStore(memoryHistory, store, {
     selectLocationState(state) {
       return state.get('routing').toJS()
-    }
+    },
   })
   req.store = store
   req.history = history
