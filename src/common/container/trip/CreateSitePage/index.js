@@ -18,7 +18,7 @@ const actions = [
 
 const mapStateToProps = state => {
   return {
-    apiEngine: state.global.apiEngine,
+    apiEngine: state.getIn(['global', 'apiEngine']),
     page: state.site.createPage.page,
     done: state.site.createPage.done,
   }

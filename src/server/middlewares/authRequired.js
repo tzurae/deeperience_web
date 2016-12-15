@@ -12,6 +12,8 @@ const authRequired = (req, res, next) => {
           res.pushError(Errors.USER_UNAUTHORIZED)
           return res.errors()
         }
+        console.log('asdasdas')
+        console.log(user)
         req.user = user
         next()
       })(info, user)

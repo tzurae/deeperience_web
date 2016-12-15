@@ -12,6 +12,7 @@ export default {
     if (env === 'development') {
       __webpackIsomorphicTools__.refresh()
     }
+    console.log('dkjfklsajfklaskflklsadfjkl');
     const routes = getRoutes(req.store)
     match({
       routes,

@@ -1,6 +1,6 @@
 // refer to https://github.com/reactjs/react-router/blob/master/examples%2Fauth-flow%2Fapp.js
 export default (store) => (nextState, replace) => {
-  const { token } = store.getState().cookies
+  const { token } = store.getState().get('cookies')
   if (!token) {
     replace({
       pathname: '/user/login',

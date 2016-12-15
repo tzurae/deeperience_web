@@ -51,3 +51,6 @@ yarn.lock
 
 # VSCode
 .vscode/
+
+# Port
+/src/server/utils/getPort.js

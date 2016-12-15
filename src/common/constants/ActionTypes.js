@@ -4,17 +4,19 @@ export default keyMirror({
   // ------ global ------
   SET_API_ENGINE: null,
 
-  // ------ cookie ------
-  SET_COOKIE: null,
-
-  // ------ todoaction ------
-  SET_TODO: null,
-  ADD_TODO: null,
-  REMOVE_TODO: null,
-
   // ------ user ------
-  LOGIN_USER: null,
-  LOGOUT_USER: null,
+  LOGIN: null,
+  LOGIN_REQUEST: null,
+  LOGIN_SUCCESS: null,
+  LOGIN_FAILURE: null,
+    LOGIN_USER: null,
+    LOGOUT_USER: null,
+
+  // ------ cookie ------
+  COOKIE_REQUEST: null,
+  COOKIE_SUCCESS: null,
+  COOKIE_FAILURE: null,
+  SET_COOKIE: null,
 
   // ------ intl ------
   UPDATE_LOCALE: null,

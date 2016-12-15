@@ -10,9 +10,9 @@ import CreateSiteFormPage5 from '../CreateSiteFormPage5'
 import { getOptions } from '../../../../utils/getI18nValue'
 
 const mapStateToProps = state => ({
-  apiEngine: state.global.apiEngine,
+  apiEngine: state.getIn(['global','apiEngine']),
   createSiteForm: state.form[FormNames.TRIP_CREATE_SITE],
-  messages: state.global.messages,
+  messages: state.getIn(['global', 'messages']),
 })
 
 // http://redux-form.com/6.2.0/examples/wizard/

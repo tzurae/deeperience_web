@@ -10,7 +10,7 @@ import User from '../models/User'
 import 'babel-polyfill'
 
 const cookieExtractor = (req) => {
-  return req.store.getState().cookies.token
+  return req.store.getState().getIn(['cookies','token'])
 }
 
 export default (req, res, next) => {
@@ -44,6 +44,7 @@ export default (req, res, next) => {
   }, (jwtPayload, done) => {
     // this callback is invoked only when jwt token is correctly decoded
     User.findById(jwtPayload._id, handleDbError(res)((user) => {
+      console.log(user)
       done(null, user)
     }))
   }))

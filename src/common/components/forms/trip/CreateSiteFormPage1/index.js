@@ -1,5 +1,5 @@
 import React from 'react'
-import { Field, reduxForm } from 'redux-form'
+import { Field, reduxForm } from 'redux-form/immutable'
 import FormNames from '../../../../constants/FormNames'
 import FormButton from '../../../utils/FormButton'
 import validate from '../createSiteValidate'

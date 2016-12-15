@@ -5,7 +5,6 @@ export const setCookie = (name, value, option) => {
   const options = assign({
     path: '/',
   }, option)
-
   return (dispatch, getState) => {
     return Promise
       .resolve(dispatch({
@@ -19,7 +18,7 @@ export const setCookie = (name, value, option) => {
       .then(() => {
         if (process.env.BROWSER) {
           document.cookie = cookie.serialize(
-            name, getState().cookies[name], options)
+            name, getState().getIn(['cookies', name]), options)
         }
         return Promise.resolve()
       })
@@ -31,8 +30,8 @@ export const setCookies = (cookies) => {
     return Promise.all(
       Object
         .keys(cookies)
-        .map((name) => dispatch(setCookie(name, cookies[name])))
-    )
+        .map((name) => {
+        return dispatch(setCookie(name, cookies[name]))}))
   }
 }
 

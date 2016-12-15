@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
-import { Field, reduxForm, SubmissionError } from 'redux-form'
+import { Field, reduxForm, SubmissionError } from 'redux-form/immutable'
 import Alert from 'react-bootstrap/lib/Alert'
 import FormNames from '../../../constants/FormNames'
 import userAPI from '../../../api/user'
@@ -50,14 +50,15 @@ const style = {
   },
 }
 
+// IMPORTANT: values is an Immutable.Map here!
 const validate = (values) => {
   const errors = {}
 
-  if (!values.email) {
+  if (!values.get('email')) {
     errors.email = 'Required'
   }
 
-  if (!values.password) {
+  if (!values.get('password')) {
     errors.password = 'Required'
   }
 
@@ -80,7 +81,8 @@ class LoginForm extends Component {
 
   _handleSubmit(formData) {
     // let { store } = this.context;
-    const { dispatch, apiEngine, change } = this.props
+    const { dispatch, apiEngine, change, login } = this.props
+    // return login(formData)
     return userAPI(apiEngine)
       .login(formData)
       .catch((err) => {
@@ -89,9 +91,11 @@ class LoginForm extends Component {
       })
       .then((json) => {
         if (json.isAuth) {
+          console.log('kdfsajlkfjkldsfjlkasfkjlasdjlfksadjklfj;aklsa', json);
           this.login(json).then(() => {
             // redirect to the origin path before logging in
-            const { next } = this.props.routing.locationBeforeTransitions.query
+            const next = this.props.routing.getIn(['locationBeforeTransitions','query']).toJS()
+
             dispatch(push(next || '/'))
           })
         } else {
@@ -161,11 +165,13 @@ class LoginForm extends Component {
     )
   }
 };
-
+const mapStateToProps = (state) => {
+  return {
+    apiEngine: state.getIn(['global','apiEngine']),
+    routing: state.get('routing'),
+  }
+}
 export default reduxForm({
   form: FormNames.USER_LOGIN,
   validate,
-})(connect(state => ({
-  apiEngine: state.global.apiEngine,
-  routing: state.routing,
-}))(LoginForm))
+})(connect(mapStateToProps)(LoginForm))

@@ -4,7 +4,7 @@ var WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
 var webpackIsomorphicToolsConfig = require('../project/webpack-isomorphic-tools-configuration');
 var babelConfig = require('./babel.config.dev.client');
 var postcssConfig = require('./postcss.config');
-// var babelpolyfill = require('babel-polyfill'); // for generator function usage
+var babelpolyfill = require('babel-polyfill'); // for generator function usage
 
 var webpackIsomorphicToolsPlugin =
   new WebpackIsomorphicToolsPlugin(webpackIsomorphicToolsConfig)
@@ -15,6 +15,7 @@ module.exports = {
   context: path.resolve(__dirname, '../../src'),
   devtool: 'cheap-module-eval-source-map',
   entry: [
+    'babel-polyfill',
     'eventsource-polyfill',
     'webpack-hot-middleware/client',
     path.join(__dirname, '../../src/client/index'),
@@ -58,7 +59,7 @@ module.exports = {
     },
       {
       test: webpackIsomorphicToolsPlugin.regular_expression('images'),
-      loader: 'url-loader?limit=10240',
+      loader: 'url-loader?limit=10240&name=[sha512:hash:base64:7]',
     }],
   },
   postcss: function() {

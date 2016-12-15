@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
-import { Field, reduxForm } from 'redux-form'
+import { Field, reduxForm } from 'redux-form/immutable'
 import Alert from 'react-bootstrap/lib/Alert'
 import Button from 'react-bootstrap/lib/Button'
 import FormNames from '../../constants/FormNames'

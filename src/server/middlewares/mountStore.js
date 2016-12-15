@@ -1,10 +1,9 @@
-import { createStore, applyMiddleware } from 'redux'
-import thunk from 'redux-thunk'
 import { useRouterHistory, createMemoryHistory } from 'react-router'
-import { syncHistoryWithStore, routerMiddleware } from 'react-router-redux'
-import { rootReducer, getInitialState } from '../../common/reducers'
+import { syncHistoryWithStore } from 'react-router-redux'
 import ApiEngine from '../../common/utils/ApiEngine'
 import { setApiEngine } from '../../common/reducers/global/globalActions'
+import configureStore from '../../common/lib/configureStore'
+import Immutable from 'immutable'
 
 export default (req, res, next) => {
   // ref:
@@ -12,15 +11,12 @@ export default (req, res, next) => {
   //  - <http://stackoverflow.com/questions/34821921/browserhistory-undefined-with-react-router-2-00-release-candidates>
   //  - <https://github.com/reactjs/react-router-redux/blob/master/examples/server/server.js>
   const memoryHistory = useRouterHistory(createMemoryHistory)(req.url)
-  const store = createStore(
-    rootReducer,
-    getInitialState(),
-    applyMiddleware(
-      routerMiddleware(memoryHistory),
-      thunk
-    )
-  )
-  const history = syncHistoryWithStore(memoryHistory, store)
+  const store = configureStore(undefined, memoryHistory)
+  const history = syncHistoryWithStore(memoryHistory, store, {
+    selectLocationState(state) {
+      return state.get('routing').toJS()
+    }
+  })
   req.store = store
   req.history = history
   const apiEngine = new ApiEngine(req)

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
-import { Field, reduxForm } from 'redux-form'
+import { Field, reduxForm } from 'redux-form/immutable'
 import Alert from 'react-bootstrap/lib/Alert'
 import validator from 'validator'
 import FormNames from '../../../constants/FormNames'
@@ -19,18 +19,25 @@ import Text from '../../utils/Text'
 import SocialLoginList from '../../utils/SocialAuthButtonList'
 import FormButton from '../../utils/FormButton'
 
+const mapStateToProps = (state) => {
+  return {
+    apiEngine: state.getIn(['global','apiEngine']),
+  }
+}
+
 const validate = (values) => {
+  console.log('values is',values);
   const errors = {}
 
-  if (!values.email) {
+  if (!values.get('email')) {
     errors.email = 'Required'
   } else {
-    if (!validator.isEmail(values.email)) {
+    if (!validator.isEmail(values.get('email'))) {
       errors.email = 'Not an email'
     }
   }
 
-  if (!values.name) {
+  if (!values.get('name')) {
     errors.name = 'Required'
   } else {
     const pattern = /^[a-zA-Z0-9]{6,15}$/g
@@ -39,7 +46,7 @@ const validate = (values) => {
     }
   }
 
-  if (!values.password) {
+  if (!values.get('password')) {
     errors.password = 'Required'
   } else {
     const pattern = /^(?=.*[0-9])(?=.*[a-zA-Z])[a-zA-Z0-9]{6,20}$/g
@@ -48,23 +55,24 @@ const validate = (values) => {
     }
   }
 
-  if (!values.ensurePassword) {
+  if(!values.get('ensurePassword')) {
     errors.ensurePassword = ' Required'
   } else {
-    if (values.password && values.ensurePassword) {
-      if (values.password !== values.ensurePassword) {
+    if (values.get('password') && values.get('ensurePassword')) {
+      if (values.get('password') !== values.get('ensurePassword')) {
         errors.ensurePassword = '確認密碼與密碼不相同'
       }
     }
   }
 
-  if (!values.membershi)  {
-    if (!values.isAgreeTerms) {
+  if(!values.get('membershi')) {
+    if (!values.get('isAgreeTerms')) {
       errors.isAgreeTerms = 'Required'
     }
   }
 
-  if (configs.recaptcha && !values.recaptcha) {
+
+  if (configs.recaptcha && !values.get('recaptcha')) {
     errors.recaptcha = 'Required'
   }
   return errors
@@ -228,6 +236,4 @@ export default reduxForm({
   validate,
   asyncValidate,
   asyncBlurFields: ['email'],
-})(connect(state => ({
-  apiEngine: state.global.apiEngine,
-}))(RegisterForm))
+})(connect(mapStateToProps)(RegisterForm))

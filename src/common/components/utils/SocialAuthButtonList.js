@@ -3,8 +3,14 @@ import { connect } from 'react-redux'
 import Head from '../utils/Head'
 import Text from '../utils/Text'
 
+const mapStateToProps = (state) => {
+  return {
+    routing: state.get('routing')
+  }
+}
+
 const SocialAuthButtonList = ({ routing, login }) => {
-  const { next } = routing.locationBeforeTransitions.query
+  const next = routing.getIn(['locationBeforeTransitions','query']).toJS()
   const search = next ? `?next=${next}` : ''
 
   return (
@@ -42,6 +48,4 @@ const SocialAuthButtonList = ({ routing, login }) => {
   )
 }
 
-export default connect(state => ({
-  routing: state.routing,
-}))(SocialAuthButtonList)
+export default connect(mapStateToProps)(SocialAuthButtonList)
