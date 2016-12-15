@@ -30,6 +30,7 @@
 }
 
 .site-div-msg {
+  @include fontSize(14);
   margin: 3px 0;
 }
 

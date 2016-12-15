@@ -4,6 +4,9 @@ const {
   SET_CREATE_TRIP_DATA,
   RESET_CREATE_TRIP_DATA,
   CREATE_TRIP_ERROR,
+  CREATE_TRIP_NEXT_PAGE,
+  CREATE_TRIP_PREVIOUS_PAGE,
+  CREATE_TRIP_SET_PAGE,
 } = require('../../constants/ActionTypes').default
 
 export const setOwnSite = (sites: any) => {
@@ -41,6 +44,27 @@ export const createTripError = (error: string) => {
     type: CREATE_TRIP_ERROR,
     payload: {
       error,
+    },
+  }
+}
+
+export const createTripNextPage = () => {
+  return {
+    type: CREATE_TRIP_NEXT_PAGE,
+  }
+}
+
+export const createTripPreviousPage = () => {
+  return {
+    type: CREATE_TRIP_PREVIOUS_PAGE,
+  }
+}
+
+export const createTripSetPage = (page: number) => {
+  return {
+    type: CREATE_TRIP_SET_PAGE,
+    payload: {
+      page,
     },
   }
 }

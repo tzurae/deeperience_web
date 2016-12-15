@@ -23,7 +23,7 @@ class RichEditor extends React.Component {
     this.addImage = (url) => this._addImage(url)
 
     // functions for editor
-    this.focus = () => this.refs.editor.focus()
+    this.focus = () => this.editor.focus()
     this.handleKeyCommand = (cmd) => this._handleKeyCommand(cmd)
     this.toggleBlockType = (type) => this._toggleBlockType(type)
     this.toggleInlineStyle = (style) => this._toggleInlineStyle(style)
@@ -134,7 +134,7 @@ class RichEditor extends React.Component {
             editorState={editorState}
             handleKeyCommand={this.handleKeyCommand}
             onChange={this.onChange}
-            ref="editor"
+            ref={ref => { this.editor = ref }}
             spellCheck={true}
           />
         </div>

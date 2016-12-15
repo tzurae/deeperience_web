@@ -599,7 +599,6 @@ const FloatList = ({ title, top, left, children, onClose, outterStyle, ...props 
         <IconBtn
           name="times"
           onClick={onClose}
-          bgColor="white"
           className={styles.floatSiteListIcon}
         />
       </div>
@@ -626,7 +625,7 @@ const FloatSiteListItem = ({ site, onClick, ...props }) => {
   return (
     <div className={styles.floatSiteListItem} {...props}>
       <IconBtn
-        btnStyle={styles.floatSiteListItemIcon}
+        className={styles.floatSiteListItemIcon}
         name="check"
         onClick={() => onClick(site)}
       />

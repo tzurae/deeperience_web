@@ -5,6 +5,9 @@ const {
   SET_CREATE_TRIP_DATA,
   RESET_CREATE_TRIP_DATA,
   CREATE_TRIP_ERROR,
+  CREATE_TRIP_NEXT_PAGE,
+  CREATE_TRIP_PREVIOUS_PAGE,
+  CREATE_TRIP_SET_PAGE,
 } = require('../../constants/ActionTypes').default
 
 const initialState = new InitialState()
@@ -48,6 +51,15 @@ export default (state = initialState, action) => {
     }
     case CREATE_TRIP_ERROR:
       return state.set('error', action.payload.error)
+
+    case CREATE_TRIP_NEXT_PAGE:
+      return state.setIn(['createPage', 'page'], state.getIn(['createPage', 'page']) + 1)
+
+    case CREATE_TRIP_PREVIOUS_PAGE:
+      return state.setIn(['createPage', 'page'], state.getIn(['createPage', 'page']) - 1)
+
+    case CREATE_TRIP_SET_PAGE:
+      return state.setIn(['createPage', 'page'], action.payload.page)
 
     default:
       return state

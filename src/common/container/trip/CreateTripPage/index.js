@@ -19,6 +19,7 @@ const actions = [
 const mapStateToProps = state => {
   return {
     apiEngine: state.global.apiEngine,
+    page: state.trip.createPage.page,
   }
 }
 
@@ -46,9 +47,6 @@ class CreateTripPage extends React.Component {
     ]
     this.nextPage = this.nextPage.bind(this)
     this.previousPage = this.previousPage.bind(this)
-    this.state = {
-      page: 0,
-    }
   }
 
   componentWillMount() {
@@ -65,15 +63,15 @@ class CreateTripPage extends React.Component {
   }
 
   nextPage() {
-    this.setState({ page: this.state.page + 1 })
+    this.props.actions.createTripNextPage()
   }
 
   previousPage() {
-    this.setState({ page: this.state.page - 1 })
+    this.props.actions.createTripPreviousPage()
   }
 
   render() {
-    const { page } = this.state
+    const { page } = this.props
     return (
       <PageLayout subNav={<CreateSubNav activeTab={2}/>}>
         <PanelContainer>
