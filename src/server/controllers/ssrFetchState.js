@@ -5,7 +5,10 @@ import { updateLocale } from '../../common/reducers/global/globalActions'
 
 export default {
   user: (req, res, next) => {
+
     const cookies = req.store.getState().get('cookies');
+    console.log('cookie',cookies);
+
     req.store.dispatch(loginUser({
       token: cookies.get('token'),
       data: cookies.get('user'),

@@ -14,8 +14,8 @@ import styles from '../../styles'
 
 const mapStateToProps = (state) => {
   return {
-    isAuth: !!state.get(['cookies', 'token']),
-    user: (state.get(['cookies', 'user']) && JSON.parse(state.get(['cookies', 'user']))) || {},
+    isAuth: !!state.getIn(['cookies', 'token']),
+    user: JSON.parse(state.getIn(['cookies', 'user'])) || {},
   }
 }
 
@@ -48,7 +48,6 @@ class Navigation extends Component {
   render() {
     const { isAuth, user } = this.props
     const isAdmin = (user.role === Roles.ADMIN)
-
     return (
       <Navbar staticTop style={style.nav}>
         <Grid>
@@ -149,7 +148,10 @@ Navigation.contextTypes = {
   store: React.PropTypes.object.isRequired,
 }
 
-export default connect(mapStateToProps
-, null, null, {
-  pure: false,
-})(Navigation)
+export default connect(
+  mapStateToProps,
+  null,
+  null,
+  { pure: false,}
+  )
+(Navigation)

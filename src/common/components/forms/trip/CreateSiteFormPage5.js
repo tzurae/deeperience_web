@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router'
-import { reduxForm } from 'redux-form'
+import { reduxForm } from 'redux-form/immutable'
 import FormNames from '../../../constants/FormNames'
 import FormButton from '../../utils/FormButton'
 import validate from './createSiteValidate'

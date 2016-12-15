@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Field, reduxForm } from 'redux-form'
+import { Field, reduxForm } from 'redux-form/immutable'
 import Row from 'react-bootstrap/lib/Row'
 import Col from 'react-bootstrap/lib/Col'
 import FormNames from '../../../constants/FormNames'
@@ -14,6 +14,13 @@ import { BsForm as Form } from '../../fields/widgets'
 import Head from '../../utils/Head'
 import toRefreshURL from '../../../utils/toRefreshURL'
 import Text from '../../utils/Text'
+
+const mapStateToProps = (state) => {
+  return {
+    apiEngine: state.getIn(['global','apiEngine']),
+    user: (state.getIn(['cookies','user']) && JSON.parse(state.getIn(['cookies','user'])))|| {},
+  }
+}
 
 const initialValues = {
   storage: 'local',
@@ -43,10 +50,10 @@ const style = {
 export const validate = (values) => {
   const errors = {}
 
-  if (!values.avatar || values.avatar.length !== 1) {
+  if (!values.get('avatar') || values.get(['avatar','length']) !== 1) {
     errors.avatar = 'Required'
   } else {
-    const { size, type, mimetype } = values.avatar[0]
+    const { size, type, mimetype } = values.get('avatar[0]')
     const { maxSize, validMIMETypes } = configs.fileUpload.avatar
 
     if (size > maxSize) {
@@ -247,11 +254,10 @@ class AvatarForm extends Component {
   }
 };
 
+
+
 export default reduxForm({
   form: FormNames.USER_AVATAR,
   initialValues,
   validate,
-})(connect(({ global: { apiEngine }, cookies: { user } }) => ({
-  apiEngine,
-  user: (user && JSON.parse(user)) || {},
-}))(AvatarForm))
+})(connect(mapStateToProps)(AvatarForm))

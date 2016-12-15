@@ -22,7 +22,6 @@ setupLocale()
 const logPageView = setupGA()
 
 const initialState = window.__INITIAL_STATE__
-
 const store = configureStore(initialState, browserHistory)
 
 const apiEngine = new ApiEngine()

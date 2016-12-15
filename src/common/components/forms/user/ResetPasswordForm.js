@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
-import { Field, reduxForm } from 'redux-form'
+import { Field, reduxForm } from 'redux-form/immutable'
 import Alert from 'react-bootstrap/lib/Alert'
 import Button from 'react-bootstrap/lib/Button'
 import FormNames from '../../../constants/FormNames'
@@ -14,21 +14,28 @@ import {
   BsField as FormField,
 } from '../../fields/widgets'
 
+const mapStateToProps = (state) => {
+  return {
+    apiEngine: state.getIn(['global','apiEngine']),
+    routing: state.get('routing'),
+  }
+}
+
 export const validate = (values) => {
   const errors = {}
 
   if (
-    values.newPasswordConfirm &&
-    values.newPassword !== values.newPasswordConfirm
+    values.get('newPasswordConfirm') &&
+    values.get('newPassword') !== values.get('newPasswordConfirm')
   ) {
     errors.newPassword = errors.newPasswordConfirm = 'Password Not Matched'
   }
 
-  if (!values.newPassword) {
+  if (!values.get('newPassword')) {
     errors.newPassword = 'Required'
   }
 
-  if (!values.newPasswordConfirm) {
+  if (!values.get('newPasswordConfirm')) {
     errors.newPasswordConfirm = 'Required'
   }
 
@@ -43,7 +50,7 @@ class ChangePasswordForm extends Component {
 
   _handleSubmit(formData) {
     const { dispatch, apiEngine, routing, initialize } = this.props
-    const location = routing.locationBeforeTransitions
+    const location = routing.get('locationBeforeTransitions').toJS()
 
     return userAPI(apiEngine)
       .resetPassword({
@@ -116,7 +123,4 @@ class ChangePasswordForm extends Component {
 export default reduxForm({
   form: FormNames.USER_RESET_PASSWORD,
   validate,
-})(connect(state => ({
-  apiEngine: state.global.apiEngine,
-  routing: state.routing,
-}))(ChangePasswordForm))
+})(connect(mapStateToProps)(ChangePasswordForm))
