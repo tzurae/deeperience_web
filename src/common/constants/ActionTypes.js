@@ -37,6 +37,7 @@ export default keyMirror({
   CREATE_TRIP_PREVIOUS_PAGE: null,
   CREATE_TRIP_SET_PAGE: null,
 
+  // ------ site ------
   CREATE_SITE_ERROR: null,
   CREATE_SITE_NEXT_PAGE: null,
   CREATE_SITE_PREVIOUS_PAGE: null,

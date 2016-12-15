@@ -10,6 +10,7 @@ import PhaseBranch from '../../../components/utils/PhaseBranch'
 import CreateSiteForm from '../../../components/forms/trip/CreateSiteForm'
 import * as siteActions from '../../../reducers/site/siteActions'
 import { CreateSubNav } from '../../../components/utils/SubNavigation'
+import { BranchTitle } from './assets'
 
 const actions = [
   siteActions,
@@ -18,6 +19,8 @@ const actions = [
 const mapStateToProps = state => {
   return {
     apiEngine: state.global.apiEngine,
+    page: state.site.createPage.page,
+    done: state.site.createPage.done,
   }
 }
 
@@ -34,49 +37,38 @@ const mapDispatchToProps = dispatch => {
 }
 
 class CreateSitePage extends React.Component {
-  constructor(props) {
-    super(props)
-    this.nodes = [
-      'trip.createSite.title1',
-      'trip.createSite.title2',
-      'trip.createSite.title3',
-      'trip.createSite.title4',
-      'trip.createSite.title5',
-    ]
-    this.nextPage = this.nextPage.bind(this)
-    this.previousPage = this.previousPage.bind(this)
-    this.state = {
-      page: 1,
-    }
-  }
-
   nextPage() {
-    this.setState({ page: this.state.page + 1 })
+    this.props.actions.createSiteNextPage()
   }
 
   previousPage() {
-    this.setState({ page: this.state.page - 1 })
+    this.props.actions.createSitePreviousPage()
   }
 
   render() {
-    const { page } = this.state
+    const {
+      page,
+      done,
+    } = this.props
+
     return (
       <PageLayout subNav={<CreateSubNav activeTab={0}/>}>
         <PanelContainer>
           <Col md={2}>
             <Panel2 title="nav.trip.createSite">
               <PhaseBranch
-                nodes={this.nodes}
+                done={done}
+                nodes={BranchTitle}
                 active={page}
               />
             </Panel2>
           </Col>
           <Col md={7}>
-            <Panel1 title={this.nodes[page]}>
+            <Panel1 title={BranchTitle[page]}>
               <CreateSiteForm
                 page={page}
-                nextPage={this.nextPage}
-                previousPage={this.previousPage}
+                nextPage={::this.nextPage}
+                previousPage={::this.previousPage}
               />
             </Panel1>
           </Col>

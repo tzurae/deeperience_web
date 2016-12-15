@@ -26,11 +26,12 @@ class CreateSiteForm extends React.Component {
       previousPage,
     } = this.props
 
-    const { tripDayInfos, siteElements } = getOptions(messages, ['TripDayInfos', 'SiteElements'])
+    const { TripDayInfos, TripElements } =
+      getOptions(messages.toJS(), ['TripDayInfos', 'TripElements'])
+    TripElements.splice(0, 1) // remove ANY
 
     let values
 
-    // debug usage
     if (this.props.createSiteForm) {
       values = this.props.createSiteForm.values
     }
@@ -42,8 +43,8 @@ class CreateSiteForm extends React.Component {
         <CreateSiteFormPage1
           onSubmit={nextPage}
           {...this.props}
-          tripDayInfos={tripDayInfos}
-          siteElements={siteElements}
+          tripDayInfos={TripDayInfos}
+          siteElements={TripElements}
         />
         }
         {page === 1 &&

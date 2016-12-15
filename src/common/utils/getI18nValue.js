@@ -13,16 +13,16 @@ import Options from '../i18n/zh-tw'
  *        label: "TripElements.TOUR_WALK.label",
  *        value: [{
  *          label: "海邊",
- *          value: "TripElements.TOUR_WALK.label",
+ *          value: "SEA",
  *        }],
  *      }
  *    ],
  *    TripDayInfos: [{
  *      label: "半日遊",
- *      value: "TripDayInfos.HALF_DAY",
+ *      value: "HALF_DAY",
  *    },{
  *      label: "一日遊",
- *      value: "TripDayInfos.ONE_DAY",
+ *      value: "ONE_DAY",
  *    }]
  * }
  */
@@ -56,7 +56,7 @@ export const getOptions = (messages, options) => {
           } else {
             tmpObj[arr[1]].value.push({
               label: messages[value],
-              value,
+              value: value.split('.')[2],
             })
           }
         })
@@ -74,7 +74,7 @@ export const getOptions = (messages, options) => {
           .filter(value => value.indexOf(tag) === 0)
           .map(value => ({
             label: messages[value],
-            value,
+            value: value.split('.')[1],
           }))
     }
   })
