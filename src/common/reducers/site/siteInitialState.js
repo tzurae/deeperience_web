@@ -1,12 +1,12 @@
-import { Record } from 'immutable'
+import { fromJS } from 'immutable'
 
-const CreatePage = Record({
+const CreatePage = fromJS({
   page: 0,
   done: new Array(...{ length: 5 }).map(() => false),
 })
 
-const InitialState = Record({
-  createPage: new CreatePage(),
+const InitialState = fromJS({
+  createPage: CreatePage,
   error: null,
 })
 

@@ -44,7 +44,6 @@ export default (req, res, next) => {
   }, (jwtPayload, done) => {
     // this callback is invoked only when jwt token is correctly decoded
     User.findById(jwtPayload._id, handleDbError(res)((user) => {
-      console.log(user)
       done(null, user)
     }))
   }))

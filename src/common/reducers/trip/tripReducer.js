@@ -1,4 +1,4 @@
-import InitialState from './tripInitialState'
+import initialState from './tripInitialState'
 import uuid from 'uuid'
 const {
   SET_OWN_SITE,
@@ -10,11 +10,7 @@ const {
   CREATE_TRIP_SET_PAGE,
 } = require('../../constants/ActionTypes').default
 
-const initialState = new InitialState()
-
 export default (state = initialState, action) => {
-  if (!(state instanceof InitialState)) return initialState.mergeDeep(state)
-
   switch (action.type) {
     case SET_OWN_SITE:
       return state.set('ownSites', action.payload.sites)

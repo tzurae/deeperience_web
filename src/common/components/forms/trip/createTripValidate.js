@@ -1,13 +1,13 @@
 export default values => {
   const errors = {}
 
-  if (!values.name) {
+  if (!values.get('name')) {
     errors.name = 'Required'
   }
-  if (!values.price) {
+  if (!values.get('price')) {
     errors.price = 'Required'
   }
-  if (values.tags.length === 0) {
+  if (values.getIn(['tags','length']) === 0) {
     errors.tags = 'Required at least one'
   }
 

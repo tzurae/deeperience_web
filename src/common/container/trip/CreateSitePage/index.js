@@ -28,6 +28,8 @@ const mapDispatchToProps = dispatch => {
     .filter(value => typeof value === 'function')
     .toObject()
 
+    console.log('creator',creators);
+    console.log('bindActionCreator',bindActionCreators(creators, dispatch));
   return {
     actions: bindActionCreators(creators, dispatch),
     dispatch,

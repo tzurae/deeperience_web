@@ -24,7 +24,7 @@ export const createSitePreviousPage = () => {
   }
 }
 
-export const createSiteSetPage = (page: number) => {
+export const createSiteSetPage = (page) => {
   return {
     type: CREATE_SITE_SET_PAGE,
     payload: {

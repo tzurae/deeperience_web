@@ -10,11 +10,13 @@ import CreateSiteFormPage5 from '../CreateSiteFormPage5'
 import { getOptions } from '../../../../utils/getI18nValue'
 
 const mapStateToProps = state => {
-  console.log(state)
+  const form = state.getIn(['form', FormNames.TRIP_CREATE_SITE])
+
   return {
     apiEngine: state.getIn(['global', 'apiEngine']),
-    createSiteForm: state.getIn(['form', [FormNames.TRIP_CREATE_SITE]]) || {},
-    messages: state.getIn(['global', 'messages']).toJS(),
+    createSiteForm: state.getIn(['form', FormNames.TRIP_CREATE_SITE]),
+    messages: state.getIn(['global', 'messages']),
+    values: form ? form.get('values') : {},
   }
 }
 
@@ -27,19 +29,12 @@ class CreateSiteForm extends React.Component {
       messages,
       nextPage,
       previousPage,
-      createSiteForm,
+      values,
     } = this.props
 
     const { TripDayInfos, TripElements } =
-      getOptions(messages, ['TripDayInfos', 'TripElements'])
+      getOptions(messages.toJS(), ['TripDayInfos', 'TripElements'])
     TripElements.splice(0, 1) // remove ANY
-
-    let values
-
-    if (this.props.createSiteForm) {
-      values = this.props.createSiteForm.values
-    }
-    console.log(createSiteForm)
 
     return (
       <div>

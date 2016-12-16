@@ -2,6 +2,7 @@ import React from 'react'
 import { Field, reduxForm } from 'redux-form/immutable'
 import FormNames from '../../../../constants/FormNames'
 import FormButton from '../../../utils/FormButton'
+import { Map } from 'immutable'
 import validate from '../createSiteValidate'
 import Text from '../../../utils/Text'
 import {
@@ -18,13 +19,12 @@ const FormProperties = {
   form: FormNames.TRIP_CREATE_SITE,
   destroyOnUnmount: false,     // <------ preserve form data
   validate,
-  initialValues: {
+  initialValues: Map({
     name: '',
     tags: [],
     introduction: '<p><br></p>',
-  },
+  }),
 }
-
 const CreateSiteFormPage1 = ({ handleSubmit, ...props }) => {
   const {
     pristine,
@@ -32,7 +32,6 @@ const CreateSiteFormPage1 = ({ handleSubmit, ...props }) => {
     invalid,
     siteElements,
   } = props
-  console.log(props)
 
   return (
     <Form

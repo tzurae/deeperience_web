@@ -3,6 +3,7 @@ import path from 'path'
 import express from 'express'
 import favicon from 'serve-favicon'
 import morgan from './morgan'
+import compression from 'compression'
 import passportInit from './passportInit'
 import mountStore from './mountStore'
 import mountHelper from './mountHelper'
@@ -23,6 +24,9 @@ export default ({ app }) => {
 
     app.use(require('webpack-hot-middleware')(compiler))
   }
+
+  // compress
+  app.use(compression())
 
   // favicon
   app.use(favicon(path.join(__dirname, '../../public/img/favicon.ico')))

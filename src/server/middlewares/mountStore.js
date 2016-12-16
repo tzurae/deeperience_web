@@ -12,6 +12,7 @@ export default (req, res, next) => {
   //  - <https://github.com/reactjs/react-router-redux/blob/master/examples/server/server.js>
   const memoryHistory = useRouterHistory(createMemoryHistory)(req.url)
   const store = configureStore(undefined, memoryHistory)
+
   const history = syncHistoryWithStore(memoryHistory, store, {
     selectLocationState(state) {
       return state.get('routing').toJS()

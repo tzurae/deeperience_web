@@ -112,6 +112,7 @@
     "aws-sdk": "^2.7.13",
     "body-parser": "^1.15.0",
     "classnames": "^2.2.3",
+    "compression": "^1.6.2",
     "cookie": "^0.2.4",
     "deepcopy": "^0.6.3",
     "draft-js": "^0.9.1",
