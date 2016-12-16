@@ -14,7 +14,7 @@ import classname from 'classnames'
 
 const mapStateToProps = state => {
   return {
-    isAuth: !!state.getIn(['cookies', 'token']),
+    isAuth: JSON.parse(state.getIn(['cookies', 'token'])),
     user: JSON.parse(state.getIn(['cookies', 'user'])) || {},
   }
 }
@@ -34,6 +34,9 @@ class Navigation extends Component {
   render() {
     const { isAuth, user } = this.props
     const isAdmin = (user.role === Roles.ADMIN)
+
+    console.log('isAuth type', typeof isAuth)
+
     return (
       <Navbar staticTop className={styles.nav}>
         <Grid>
@@ -134,6 +137,11 @@ class Navigation extends Component {
 
 Navigation.contextTypes = {
   store: React.PropTypes.object.isRequired,
+}
+
+Navigation.prostype = {
+  isAuth: React.PropTypes.object.isRequired,
+  user: React.PropTypes.object.isRequired,
 }
 
 export default connect(mapStateToProps, null, null, { pure: false })(Navigation)
