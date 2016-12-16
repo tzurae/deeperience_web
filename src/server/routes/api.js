@@ -15,6 +15,7 @@ import tripController from '../controllers/trip'
 import guideSiteController from '../controllers/guideSite'
 import googleSiteController from '../controllers/googleSite'
 import postController from '../controllers/post'
+import zoom from '../controllers/zoom'
 
 export default ({ app }) => {
   // user
@@ -142,6 +143,10 @@ export default ({ app }) => {
   app.post('/api/guideSites', authRequired, bodyParser.json, guideSiteController.create)
   app.put('/api/guideSites/:guideSiteId', authRequired, bodyParser.json, guideSiteController.update) // todo
   app.delete('/api/guideSites/:guideSiteId', authRequired, guideSiteController.remove) // todo
+
+  // zoom
+  app.get('/api/zoom', authRequired, zoom.create)
+  app.delete('/api/zoom/:meetingId', authRequired, bodyParser.json, zoom.end, zoom.delete)
 
   // GoogleSite
   app.post('/api/googleSites', authRequired, bodyParser.json, googleSiteController.create)
