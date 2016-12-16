@@ -41,33 +41,33 @@ const CreateSiteForm = ({ ...props }) => {
         onSubmit={nextPage}
         tripDayInfos={TripDayInfos}
         siteElements={TripElements}
-        {...this.props}
+        {...props}
       />
       }
       {page === 1 &&
       <CreateSiteFormPage2
         onSubmit={nextPage}
         previousPage={previousPage}
-        {...this.props}
+        {...props}
       />
       }
       {page === 2 &&
       <CreateSiteFormPage3
         onSubmit={nextPage}
         previousPage={previousPage}
-        {...this.props}
+        {...props}
       />
       }
       {page === 3 &&
       <CreateSiteFormPage4
         onSubmit={nextPage}
         previousPage={previousPage}
-        {...this.props}
+        {...props}
       />
       }
       {page === 4 &&
       <CreateSiteFormPage5
-        {...this.props}
+        {...props}
       />
       }
     </div>
