@@ -14,6 +14,17 @@ import {
   BsField as FormField,
 } from '../../../fields/widgets'
 
+const FormProperties = {
+  form: FormNames.TRIP_CREATE_SITE,
+  destroyOnUnmount: false,     // <------ preserve form data
+  validate,
+  initialValues: {
+    name: '',
+    tags: [],
+    introduction: '<p><br></p>',
+  },
+}
+
 const CreateSiteFormPage1 = ({ handleSubmit, ...props }) => {
   const {
     pristine,
@@ -21,6 +32,7 @@ const CreateSiteFormPage1 = ({ handleSubmit, ...props }) => {
     invalid,
     siteElements,
   } = props
+  console.log(props)
 
   return (
     <Form
@@ -69,13 +81,4 @@ const CreateSiteFormPage1 = ({ handleSubmit, ...props }) => {
   )
 }
 
-export default reduxForm({
-  form: FormNames.TRIP_CREATE_SITE,
-  destroyOnUnmount: false,     // <------ preserve form data
-  validate,
-  initialValues: {
-    name: '',
-    tags: [],
-    introduction: '<p><br></p>',
-  },
-})(CreateSiteFormPage1)
+export default reduxForm(FormProperties)(CreateSiteFormPage1)

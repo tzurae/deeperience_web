@@ -9,11 +9,14 @@ import CreateSiteFormPage4 from '../CreateSiteFormPage4'
 import CreateSiteFormPage5 from '../CreateSiteFormPage5'
 import { getOptions } from '../../../../utils/getI18nValue'
 
-const mapStateToProps = state => ({
-  apiEngine: state.getIn(['global', 'apiEngine']),
-  createSiteForm: state.form[FormNames.TRIP_CREATE_SITE],
-  messages: state.getIn(['global', 'messages']),
-})
+const mapStateToProps = state => {
+  console.log(state)
+  return {
+    apiEngine: state.getIn(['global', 'apiEngine']),
+    createSiteForm: state.getIn(['form', [FormNames.TRIP_CREATE_SITE]]) || {},
+    messages: state.getIn(['global', 'messages']).toJS(),
+  }
+}
 
 // http://redux-form.com/6.2.0/examples/wizard/
 class CreateSiteForm extends React.Component {
@@ -24,10 +27,11 @@ class CreateSiteForm extends React.Component {
       messages,
       nextPage,
       previousPage,
+      createSiteForm,
     } = this.props
 
     const { TripDayInfos, TripElements } =
-      getOptions(messages.toJS(), ['TripDayInfos', 'TripElements'])
+      getOptions(messages, ['TripDayInfos', 'TripElements'])
     TripElements.splice(0, 1) // remove ANY
 
     let values
@@ -35,6 +39,7 @@ class CreateSiteForm extends React.Component {
     if (this.props.createSiteForm) {
       values = this.props.createSiteForm.values
     }
+    console.log(createSiteForm)
 
     return (
       <div>

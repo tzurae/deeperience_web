@@ -1,4 +1,4 @@
-import InitialState from './siteInitialState'
+import Immutable from 'immutable'
 
 const {
   CREATE_SITE_ERROR,
@@ -7,11 +7,15 @@ const {
   CREATE_SITE_SET_PAGE,
 } = require('../../constants/ActionTypes').default
 
-const initialState = new InitialState()
+const initialState = Immutable.fromJS({
+  createPage: {
+    page: 0,
+    done: new Array(...{ length: 5 }).map(() => false),
+  },
+  error: null,
+})
 
 export default (state = initialState, action) => {
-  if (!(state instanceof InitialState)) return initialState.mergeDeep(state)
-
   switch (action.type) {
     case CREATE_SITE_ERROR:
       return state.set('error', action.payload)

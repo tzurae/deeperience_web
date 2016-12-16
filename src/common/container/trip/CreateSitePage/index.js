@@ -16,13 +16,11 @@ const actions = [
   siteActions,
 ]
 
-const mapStateToProps = state => {
-  return {
-    apiEngine: state.getIn(['global', 'apiEngine']),
-    page: state.site.createPage.page,
-    done: state.site.createPage.done,
-  }
-}
+const mapStateToProps = state => ({
+  apiEngine: state.getIn(['global', 'apiEngine']),
+  page: state.getIn(['site', 'createPage', 'page']),
+  done: state.getIn(['site', 'createPage', 'done']),
+})
 
 const mapDispatchToProps = dispatch => {
   const creators = Map()
