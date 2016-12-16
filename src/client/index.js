@@ -22,9 +22,6 @@ setupLocale()
 const logPageView = setupGA()
 
 const initialState = window.__INITIAL_STATE__
-console.log("=======================");
-console.log('init',initialState);
-console.log("=======================");
 const store = configureStore(initialState, browserHistory)
 
 console.log('after store',store.getState());

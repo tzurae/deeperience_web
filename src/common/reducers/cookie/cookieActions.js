@@ -39,6 +39,7 @@ export const setCookies = (cookies) => {
 export const removeCookie = (name) => {
   return (dispatch, getState) => {
     if (process.env.BROWSER) {
+      console.log("I'm comming");
       return dispatch(setCookie(name, '', {
         expires: new Date(1970, 1, 1, 0, 0, 1),
       }))

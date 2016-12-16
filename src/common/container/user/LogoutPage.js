@@ -4,6 +4,12 @@ import { push } from 'react-router-redux'
 import userAPI from '../../api/user'
 import { logoutUser } from '../../reducers/user/userActions'
 
+const mapStateToProps = (state) => {
+  return {
+    apiEngine: state.getIn(['global','apiEngine']),
+  }
+}
+
 class LogoutPage extends React.Component {
   componentWillMount() {
     const { dispatch, apiEngine } = this.props
@@ -23,6 +29,4 @@ class LogoutPage extends React.Component {
   }
 };
 
-export default connect(state => ({
-  apiEngine: state.global.apiEngine,
-}))(LogoutPage)
+export default connect(mapStateToProps)(LogoutPage)

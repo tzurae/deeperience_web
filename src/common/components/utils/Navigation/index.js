@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import Grid from 'react-bootstrap/lib/Grid'
@@ -13,8 +13,9 @@ import styles from './styles.scss'
 import classname from 'classnames'
 
 const mapStateToProps = state => {
+  console.log('state is', state);
   return {
-    isAuth: JSON.parse(state.getIn(['cookies', 'token'])),
+    isAuth: state.getIn(['cookies', 'token']),
     user: JSON.parse(state.getIn(['cookies', 'user'])) || {},
   }
 }
@@ -137,11 +138,6 @@ class Navigation extends Component {
 
 Navigation.contextTypes = {
   store: React.PropTypes.object.isRequired,
-}
-
-Navigation.prostype = {
-  isAuth: React.PropTypes.object.isRequired,
-  user: React.PropTypes.object.isRequired,
 }
 
 export default connect(mapStateToProps, null, null, { pure: false })(Navigation)

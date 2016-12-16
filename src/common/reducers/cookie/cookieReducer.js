@@ -8,7 +8,7 @@ const {
 const initialState = Immutable.fromJS({
   lang: null,
   user: null,
-  token: null,
+  token: '',
   redirect: null,
   locale: null,
 })
