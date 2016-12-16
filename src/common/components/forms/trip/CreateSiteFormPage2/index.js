@@ -1,9 +1,9 @@
 import React from 'react'
-import { reduxForm } from 'redux-form/immutable'
+import { Field, reduxForm } from 'redux-form/immutable'
+import FormProperties from '../siteFormProperties'
 import FormNames from '../../../../constants/FormNames'
 import FormButton from '../../../utils/FormButton'
-import validate from '../createSiteValidate'
-import Editor from '../../../Editor'
+import Editor from '../../../utils/Editor'
 import {
   BsForm as Form,
   BsFormFooter as FormFooter,
@@ -26,7 +26,7 @@ const CreateSiteFormPage2 = ({ handleSubmit, ...props }) => {
     >
       <Field
         name="introduction"
-        formName="TRIP_CREATE_SITE"
+        formName={FormNames.TRIP_CREATE_SITE}
         component={Editor}
         type="text"
       />
@@ -51,13 +51,4 @@ const CreateSiteFormPage2 = ({ handleSubmit, ...props }) => {
   )
 }
 
-export default reduxForm({
-  form: FormNames.TRIP_CREATE_SITE,
-  destroyOnUnmount: false,     // <------ preserve form data
-  validate,
-  initialValues: {
-    name: '',
-    tags: [],
-    introduction: '<p><br></p>',
-  },
-})(CreateSiteFormPage2)
+export default reduxForm(FormProperties)(CreateSiteFormPage2)

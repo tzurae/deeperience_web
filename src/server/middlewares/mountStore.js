@@ -3,7 +3,6 @@ import { syncHistoryWithStore } from 'react-router-redux'
 import ApiEngine from '../../common/utils/ApiEngine'
 import { setApiEngine } from '../../common/reducers/global/globalActions'
 import configureStore from '../../common/lib/configureStore'
-import Immutable from 'immutable'
 
 export default (req, res, next) => {
   // ref:

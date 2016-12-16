@@ -9,10 +9,10 @@ const {
 
 const initialState = Immutable.fromJS({
   createPage: {
-    page: 0,
+    page: 1,
     done: new Array(...{ length: 5 }).map(() => false),
   },
-  error: null,
+  error: '',
 })
 
 export default (state = initialState, action) => {

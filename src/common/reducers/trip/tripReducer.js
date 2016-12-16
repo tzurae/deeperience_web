@@ -1,4 +1,4 @@
-import initialState from './tripInitialState'
+import InitialState from './tripInitialState'
 import uuid from 'uuid'
 const {
   SET_OWN_SITE,

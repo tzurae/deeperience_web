@@ -1,4 +1,3 @@
-/* eslint-disable react/prefer-stateless-function */
 import React from 'react'
 import { connect } from 'react-redux'
 import FormNames from '../../../../constants/FormNames'
@@ -21,61 +20,58 @@ const mapStateToProps = state => {
 }
 
 // http://redux-form.com/6.2.0/examples/wizard/
-class CreateSiteForm extends React.Component {
+const CreateSiteForm = ({ ...props }) => {
+  const {
+    page,
+    messages,
+    nextPage,
+    previousPage,
+    values,
+  } = props
 
-  render() {
-    const {
-      page,
-      messages,
-      nextPage,
-      previousPage,
-      values,
-    } = this.props
+  const { TripDayInfos, TripElements } =
+    getOptions(messages, ['TripDayInfos', 'TripElements'])
+  TripElements.splice(0, 1) // remove ANY
 
-    const { TripDayInfos, TripElements } =
-      getOptions(messages.toJS(), ['TripDayInfos', 'TripElements'])
-    TripElements.splice(0, 1) // remove ANY
-
-    return (
-      <div>
-        <pre>{JSON.stringify(values, null, 2)}</pre>
-        {page === 0 &&
-        <CreateSiteFormPage1
-          onSubmit={nextPage}
-          {...this.props}
-          tripDayInfos={TripDayInfos}
-          siteElements={TripElements}
-        />
-        }
-        {page === 1 &&
-        <CreateSiteFormPage2
-          onSubmit={nextPage}
-          previousPage={previousPage}
-          {...this.props}
-        />
-        }
-        {page === 2 &&
-        <CreateSiteFormPage3
-          onSubmit={nextPage}
-          previousPage={previousPage}
-          {...this.props}
-        />
-        }
-        {page === 3 &&
-        <CreateSiteFormPage4
-          onSubmit={nextPage}
-          previousPage={previousPage}
-          {...this.props}
-        />
-        }
-        {page === 4 &&
-        <CreateSiteFormPage5
-          {...this.props}
-        />
-        }
-      </div>
-    )
-  }
+  return (
+    <div>
+      <pre>{JSON.stringify(values, null, 2)}</pre>
+      {page === 0 &&
+      <CreateSiteFormPage1
+        onSubmit={nextPage}
+        tripDayInfos={TripDayInfos}
+        siteElements={TripElements}
+        {...this.props}
+      />
+      }
+      {page === 1 &&
+      <CreateSiteFormPage2
+        onSubmit={nextPage}
+        previousPage={previousPage}
+        {...this.props}
+      />
+      }
+      {page === 2 &&
+      <CreateSiteFormPage3
+        onSubmit={nextPage}
+        previousPage={previousPage}
+        {...this.props}
+      />
+      }
+      {page === 3 &&
+      <CreateSiteFormPage4
+        onSubmit={nextPage}
+        previousPage={previousPage}
+        {...this.props}
+      />
+      }
+      {page === 4 &&
+      <CreateSiteFormPage5
+        {...this.props}
+      />
+      }
+    </div>
+  )
 }
 
 export default connect(mapStateToProps)(CreateSiteForm)

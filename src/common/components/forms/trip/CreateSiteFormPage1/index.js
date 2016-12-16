@@ -1,9 +1,7 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form/immutable'
-import FormNames from '../../../../constants/FormNames'
+import FormProperties from '../siteFormProperties'
 import FormButton from '../../../utils/FormButton'
-import { Map } from 'immutable'
-import validate from '../createSiteValidate'
 import Text from '../../../utils/Text'
 import {
   BsInput as Input,
@@ -15,16 +13,6 @@ import {
   BsField as FormField,
 } from '../../../fields/widgets'
 
-const FormProperties = {
-  form: FormNames.TRIP_CREATE_SITE,
-  destroyOnUnmount: false,     // <------ preserve form data
-  validate,
-  initialValues: Map({
-    name: '',
-    tags: [],
-    introduction: '<p><br></p>',
-  }),
-}
 const CreateSiteFormPage1 = ({ handleSubmit, ...props }) => {
   const {
     pristine,

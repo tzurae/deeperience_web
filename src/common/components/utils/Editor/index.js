@@ -1,13 +1,31 @@
 import React, { PropTypes } from 'react'
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { change } from 'redux-form'
+import { Map } from 'immutable'
 import { stateToHTML } from 'draft-js-export-html'
 import { Editor, EditorState, RichUtils, Entity, AtomicBlockUtils } from 'draft-js'
-import tripAPI from '../../api/trip'
+import * as reduxFormActions from '../../../reducers/form/reduxFormActions'
+import tripAPI from '../../../api/trip'
 
-const mapStateToProps = (state) => ({
-  apiEngine: state.global.apiEngine,
+const actions = [
+  reduxFormActions,
+]
+
+const mapStateToProps = state => ({
+  apiEngine: state.getIn(['global', 'apiEngine']),
 })
+
+const mapDispatchToProps = dispatch => {
+  const creators = Map()
+    .merge(...actions)
+    .filter(value => typeof value === 'function')
+    .toObject()
+
+  return {
+    actions: bindActionCreators(creators, dispatch),
+    dispatch,
+  }
+}
 
 class RichEditor extends React.Component {
   constructor(props) {
@@ -33,12 +51,12 @@ class RichEditor extends React.Component {
   _updateReduxForm() {
     const state = this.state.editorState.getCurrentContent()
     const htmlStr = stateToHTML(state)
-    this.props.dispatch(change(this.props.formName, this.props.name, htmlStr))
+    this.props.actions.change(this.props.formName, this.props.name, htmlStr)
   }
 
   // upload image to server
   _uploadImage(file) {
-    const apiEngine = this.props.apiEngine
+    const { apiEngine } = this.props
     tripAPI(apiEngine)
       .uploadImage(file)
       .then(json => {
@@ -258,8 +276,7 @@ const InlineStyleControls = (props) => {
 }
 
 RichEditor.propTypes = {
-  dispatch: PropTypes.func.isRequired,
   formName: PropTypes.string.isRequired,
 }
 
-export default connect(mapStateToProps)(RichEditor)
+export default connect(mapStateToProps, mapDispatchToProps)(RichEditor)
