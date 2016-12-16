@@ -1,11 +1,13 @@
-import { Record } from 'immutable'
+import { fromJS } from 'immutable'
 
-const CreatePage = Record({
-  page: 1,
-})
+// const CreatePage = fromJS({
+//   page: 1,
+// })
 
-const InitialState = Record({
-  createPage: new CreatePage(),
+const InitialState = fromJS({
+  createPage: {
+    page: 1,
+  },
   ownSites: [],
   tripInfo: [],
   routes: [],

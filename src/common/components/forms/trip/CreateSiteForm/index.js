@@ -9,11 +9,14 @@ import CreateSiteFormPage4 from '../CreateSiteFormPage4'
 import CreateSiteFormPage5 from '../CreateSiteFormPage5'
 import { getOptions } from '../../../../utils/getI18nValue'
 
-const mapStateToProps = state => ({
+const mapStateToProps = state => {
+  console.log("state",state);
+  return{
   apiEngine: state.getIn(['global', 'apiEngine']),
-  createSiteForm: state.form[FormNames.TRIP_CREATE_SITE],
+  createSiteForm: state.getIn(['form', FormNames.TRIP_CREATE_SITE]),
   messages: state.getIn(['global', 'messages']),
-})
+  }
+}
 
 // http://redux-form.com/6.2.0/examples/wizard/
 class CreateSiteForm extends React.Component {
@@ -33,7 +36,7 @@ class CreateSiteForm extends React.Component {
     let values
 
     if (this.props.createSiteForm) {
-      values = this.props.createSiteForm.values
+      values = this.props.createSiteForm.get('values')
     }
 
     return (

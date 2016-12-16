@@ -26,7 +26,6 @@ const mapStateToProps = (state) => {
 }
 
 const validate = (values) => {
-  console.log('values is', values)
   const errors = {}
 
   if (!values.get('email')) {

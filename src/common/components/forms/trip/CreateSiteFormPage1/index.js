@@ -2,7 +2,8 @@ import React from 'react'
 import { Field, reduxForm } from 'redux-form/immutable'
 import FormNames from '../../../../constants/FormNames'
 import FormButton from '../../../utils/FormButton'
-import validate from '../createSiteValidate'
+import { Map } from 'immutable'
+// import validate from '../createSiteValidate'
 import Text from '../../../utils/Text'
 import {
   BsInput as Input,
@@ -13,6 +14,23 @@ import {
   BsFormFooter as FormFooter,
   BsField as FormField,
 } from '../../../fields/widgets'
+
+const validate = (values)=> {
+
+  const errors = {}
+
+  if (!values.get('name')) {
+    errors.name = 'Required'
+  }
+  if (!values.get('price')) {
+    errors.price = 'Required'
+  }
+  if (values.getIn(['tags','length']) === 0) {
+    errors.tags = 'Required at least one'
+  }
+  return errors
+}
+
 
 const CreateSiteFormPage1 = ({ handleSubmit, ...props }) => {
   const {
@@ -71,11 +89,11 @@ const CreateSiteFormPage1 = ({ handleSubmit, ...props }) => {
 
 export default reduxForm({
   form: FormNames.TRIP_CREATE_SITE,
-  destroyOnUnmount: false,     // <------ preserve form data
   validate,
-  initialValues: {
+  destroyOnUnmount: false,     // <------ preserve form data
+  initialValues: Map({
     name: '',
     tags: [],
     introduction: '<p><br></p>',
-  },
+  }),
 })(CreateSiteFormPage1)

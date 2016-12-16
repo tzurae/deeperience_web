@@ -11,7 +11,7 @@
 //   arrayUnshift,
 //   autofill,
 // } from 'redux-form'
-import * as actions from 'redux-form'
+import * as actions from 'redux-form/immutable'
 
 export const {
   arrayInsert,

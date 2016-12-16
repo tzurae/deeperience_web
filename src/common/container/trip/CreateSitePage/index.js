@@ -19,8 +19,8 @@ const actions = [
 const mapStateToProps = state => {
   return {
     apiEngine: state.getIn(['global', 'apiEngine']),
-    page: state.site.createPage.page,
-    done: state.site.createPage.done,
+    page: state.getIn(['site','createPage','page']),
+    done: state.getIn(['site','createPage','done']),
   }
 }
 
@@ -30,6 +30,8 @@ const mapDispatchToProps = dispatch => {
     .filter(value => typeof value === 'function')
     .toObject()
 
+    console.log('creator',creators);
+    console.log('bindActionCreator',bindActionCreators(creators, dispatch));
   return {
     actions: bindActionCreators(creators, dispatch),
     dispatch,

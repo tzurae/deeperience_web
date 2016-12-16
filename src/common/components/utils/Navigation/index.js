@@ -12,10 +12,12 @@ import Text from '../Text'
 import styles from './styles.scss'
 import classname from 'classnames'
 
-const mapStateToProps = state => ({
-  isAuth: !!state.getIn(['cookies', 'token']),
-  user: JSON.parse(state.getIn(['cookies', 'user'])) || {},
-})
+const mapStateToProps = state => {
+  return {
+    isAuth: !!state.getIn(['cookies', 'token']),
+    user: JSON.parse(state.getIn(['cookies', 'user'])) || {},
+  }
+}
 
 class Navigation extends Component {
   _setLanguage(lang) {
