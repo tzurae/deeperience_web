@@ -10,5 +10,20 @@ export default {
     name: '',
     tags: [],
     introduction: '<p><br></p>',
+    mainSite: Map({
+      remind: '',
+      fee: '',
+      introduction: '<p><br></p>',
+      name: '',
+      googleInfo: Map({
+        name: '',
+        address: '',
+        website: '',
+        phone: '',
+        placeId: '',
+        position: null,
+        openPeriod: [],
+      }),
+    }),
   }),
 }

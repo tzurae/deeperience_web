@@ -28,6 +28,7 @@ const PhaseIntro = props => {
       defaultLabelDimensions={{ sm: 2 }}
       defaultFieldDimensions={{ sm: 6 }}
       onSubmit={handleSubmit}
+      preventEnter={true}
     >
       <Field
         name="introduction"

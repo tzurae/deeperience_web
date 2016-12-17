@@ -73,6 +73,11 @@ const CreateSiteForm = props => {
         onSubmit={nextPage}
         previousPage={previousPage}
         updateForm={props.actions.change}
+        markers={
+          values.getIn(['mainSite', 'googleInfo', 'position']) ?
+          [values.getIn(['mainSite', 'googleInfo', 'position'])] :
+          []
+        }
         {...props}
       />
       }

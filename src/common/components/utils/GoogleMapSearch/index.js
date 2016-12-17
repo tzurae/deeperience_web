@@ -10,8 +10,8 @@ class GoogleMapSearch extends React.Component {
     this.state = {
       bounds: null,
       center: {
-        lat: 47.6205588,
-        lng: -122.3212725,
+        lat: 24.7859146,
+        lng: 120.996735,
       },
     }
 
@@ -27,19 +27,39 @@ class GoogleMapSearch extends React.Component {
   }
 
   handlePlacesChanged() {
-    const places = this.searchBox.getPlaces()
+    const markers = this.searchBox.getPlaces()
 
-    // Add a marker for each place returned from search bar
-    const markers = places.map(place => ({
+    if (markers.length > 0) {
+      this.setState({
+        center: markers[0].geometry.location,
+      })
+      this.props.onChangeMarkers(this.convertPlace2Data(markers[0]))
+    }
+  }
+
+  convertPlace2Data(place) {
+    return {
+      name: place.name,
+      address: place.formatted_address,
+      website: place.website,
+      phone: place.international_phone_number,
+      placeId: place.place_id,
       position: place.geometry.location,
-    }))
-
-    // Set markers; set map center to first search result
-    const mapCenter = markers.length > 0 ? markers[0].position : this.state.center
-
-    this.setState({
-      center: mapCenter,
-    })
+      openPeriod: place.opening_hours ?
+        place.opening_hours.periods
+          .map(({ close, open }) => ({
+            close: {
+              time: close.time,
+              day: close.day,
+            },
+            open: {
+              time: open.time,
+              day: open.day,
+            },
+          })) :
+        null,
+      types: place.types,
+    }
   }
 
   render() {
@@ -49,9 +69,9 @@ class GoogleMapSearch extends React.Component {
           containerElement={<div style={{ height: '100%' }} />}
           mapElement={<div style={{ height: '100%' }} />}
           center={this.state.center}
-          onMapMounted={map => this.map = map}
+          onMapMounted={map => { this.map = map }}
           onBoundsChanged={this.handleBoundsChanged}
-          onSearchBoxMounted={searchBox => this.searchBox = searchBox}
+          onSearchBoxMounted={searchBox => { this.searchBox = searchBox }}
           bounds={this.state.bounds}
           onPlacesChanged={this.handlePlacesChanged}
           markers={this.props.markers}
@@ -71,9 +91,8 @@ const GoogleMapSearchHOR = withGoogleMap(props => (
     <SearchBox
       ref={props.onSearchBoxMounted}
       bounds={props.bounds}
-      controlPosition={google.maps.ControlPosition.TOP_LEFT}
       onPlacesChanged={props.onPlacesChanged}
-      inputPlaceholder="請輸入地點"
+      inputPlaceholder="Search..."
       inputClassName={styles.input}
     />
     {props.markers.map((marker, index) => (

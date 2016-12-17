@@ -14,4 +14,9 @@
   @include fontSize(15);
   margin-bottom: 10px;
   font-weight: 700;
+  text-align: right;
+}
+
+.form-group {
+  margin-bottom: 0 !important;
 }
