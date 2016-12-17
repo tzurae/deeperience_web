@@ -1,0 +1,11 @@
+@import '../../../../styles/index';
+
+.footer {
+  margin: 40px 0;
+}
+
+.option-label {
+  @include fontSize(15);
+  margin-bottom: 10px;
+  font-weight: 700;
+}

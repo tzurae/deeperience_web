@@ -1,34 +1,15 @@
 import React, { PropTypes } from 'react'
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { Map } from 'immutable'
 import FontAwesome from 'react-fontawesome'
 import classname from 'classnames'
 import { stateToHTML } from 'draft-js-export-html'
 import { Editor as DEditor, EditorState, RichUtils, Entity, AtomicBlockUtils } from 'draft-js'
-import * as reduxFormActions from '../../../reducers/form/reduxFormActions'
 import tripAPI from '../../../api/trip'
 import styles from './styles.scss'
-
-const actions = [
-  reduxFormActions,
-]
 
 const mapStateToProps = state => ({
   apiEngine: state.getIn(['global', 'apiEngine']),
 })
-
-const mapDispatchToProps = dispatch => {
-  const creators = Map()
-    .merge(...actions)
-    .filter(value => typeof value === 'function')
-    .toObject()
-
-  return {
-    actions: bindActionCreators(creators, dispatch),
-    dispatch,
-  }
-}
 
 class Editor extends React.Component {
   constructor(props) {
@@ -54,7 +35,7 @@ class Editor extends React.Component {
   _updateReduxForm() {
     const state = this.state.editorState.getCurrentContent()
     const htmlStr = stateToHTML(state)
-    // this.props.actions.change(this.props.formName, this.props.name, htmlStr)
+    this.props.update(htmlStr)
   }
 
   // upload image to server
@@ -111,14 +92,20 @@ class Editor extends React.Component {
     const { editorState } = this.state
 
     return (
-      <div className={styles.editorRoot}>
+      <div
+        className={styles.editorRoot}
+      >
         <Toolbar
           editorState={editorState}
           toggleBlock={this.toggleBlockType}
           toggleInline={this.toggleInlineStyle}
           uploadImage={this.uploadImage}
         />
-        <div className={styles.editorEditor} onClick={this.focus}>
+        <div
+          className={styles.editorEditor}
+          style={{ height: `${this.props.height}px` }}
+          onClick={this.focus}
+        >
           <DEditor
             blockRendererFn={mediaBlockRenderer}
             blockStyleFn={getBlockStyle}
@@ -135,7 +122,11 @@ class Editor extends React.Component {
 }
 
 Editor.propTypes = {
-  formName: PropTypes.string.isRequired,
+  height: PropTypes.number,
+}
+
+Editor.defaultProps = {
+  height: 500,
 }
 
 const Image = (props) => <img src={props.src} style={{ width: '100%' }} />
@@ -288,4 +279,4 @@ const FABtn = ({ label, active, style, onToggle, ...props }) => {
   )
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Editor)
+export default connect(mapStateToProps)(Editor)

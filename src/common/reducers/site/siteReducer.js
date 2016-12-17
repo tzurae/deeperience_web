@@ -9,8 +9,8 @@ const {
 
 const initialState = Immutable.fromJS({
   createPage: {
-    page: 1,
-    done: new Array(...{ length: 5 }).map(() => false),
+    page: 2,
+    done: new Array(...{ length: 6 }).map(() => false),
   },
   error: '',
 })

@@ -1,20 +1,26 @@
 import React from 'react'
-import { reduxForm } from 'redux-form/immutable'
+import { Field, reduxForm } from 'redux-form/immutable'
+import FormProperties from '../siteFormProperties'
 import FormNames from '../../../../constants/FormNames'
 import FormButton from '../../../utils/FormButton'
-import validate from '../createSiteValidate'
+import Editor from '../../../utils/Editor'
 import {
   BsForm as Form,
   BsFormFooter as FormFooter,
 } from '../../../fields/widgets'
+import styles from './styles.scss'
 
-const CreateSiteFormPage3 = ({ handleSubmit, ...props }) => {
+const PhaseIntro = props => {
   const {
     pristine,
     submitting,
     invalid,
     previousPage,
+    handleSubmit,
+    updateForm,
   } = props
+
+  const update = (str) => updateForm(FormNames.TRIP_CREATE_SITE, 'introduction', str)
 
   return (
     <Form
@@ -23,11 +29,15 @@ const CreateSiteFormPage3 = ({ handleSubmit, ...props }) => {
       defaultFieldDimensions={{ sm: 6 }}
       onSubmit={handleSubmit}
     >
-
+      <Field
+        name="introduction"
+        update={update}
+        component={Editor}
+      />
       <FormFooter
         labelDimensions={{ sm: 0 }}
         fieldDimensions={{ sm: 12 }}
-        style={{ textAlign: 'center' }}
+        className={styles.footer}
       >
         <FormButton
           type="button"
@@ -44,13 +54,4 @@ const CreateSiteFormPage3 = ({ handleSubmit, ...props }) => {
   )
 }
 
-export default reduxForm({
-  form: FormNames.TRIP_CREATE_SITE,
-  destroyOnUnmount: false,     // <------ preserve form data
-  validate,
-  initialValues: {
-    name: '',
-    tags: [],
-    introduction: '<p><br></p>',
-  },
-})(CreateSiteFormPage3)
+export default reduxForm(FormProperties)(PhaseIntro)

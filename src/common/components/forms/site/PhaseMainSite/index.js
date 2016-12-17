@@ -1,22 +1,33 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form/immutable'
+import GoogleMapSearch from '../../../utils/GoogleMapSearch'
 import FormProperties from '../siteFormProperties'
 import FormNames from '../../../../constants/FormNames'
 import FormButton from '../../../utils/FormButton'
 import Editor from '../../../utils/Editor'
+import Text from '../../../utils/Text'
+import {
+  BsInput as Input,
+} from '../../../fields/adapters'
 import {
   BsForm as Form,
   BsFormFooter as FormFooter,
+  BsField as FormField,
 } from '../../../fields/widgets'
 import styles from './styles.scss'
 
-const CreateSiteFormPage2 = ({ handleSubmit, ...props }) => {
+const PhaseMainSite = props => {
   const {
     pristine,
     submitting,
     invalid,
     previousPage,
+    handleSubmit,
+    updateForm,
   } = props
+
+  const update = (str) =>
+    updateForm(FormNames.TRIP_CREATE_SITE, 'mainSite.introduction', str)
 
   return (
     <Form
@@ -25,13 +36,37 @@ const CreateSiteFormPage2 = ({ handleSubmit, ...props }) => {
       defaultFieldDimensions={{ sm: 6 }}
       onSubmit={handleSubmit}
     >
-      <Field
-        name="introduction"
-        formName={FormNames.TRIP_CREATE_SITE}
-        component={Editor}
-        type="text"
+      <GoogleMapSearch
+        className={styles.googleMap}
+        markers={[]}
+        onChangeMarkers={() => {}}
       />
-
+      <Field
+        name="mainSite.fee"
+        component={FormField}
+        label={<Text id="trip.createSite.feeInfo"/>}
+        adapter={Input}
+        type="text"
+        placeholder=""
+      />
+      <Field
+        name="mainSite.remind"
+        component={FormField}
+        label={<Text id="trip.createSite.remind"/>}
+        adapter={Input}
+        type="text"
+        placeholder=""
+      />
+      <Text
+        className={styles.optionLabel}
+        id="trip.createSite.mainSite.intro"
+      />
+      <Field
+        name="mainSite.introduction"
+        update={update}
+        component={Editor}
+        height={300}
+      />
       <FormFooter
         labelDimensions={{ sm: 0 }}
         fieldDimensions={{ sm: 12 }}
@@ -52,4 +87,4 @@ const CreateSiteFormPage2 = ({ handleSubmit, ...props }) => {
   )
 }
 
-export default reduxForm(FormProperties)(CreateSiteFormPage2)
+export default reduxForm(FormProperties)(PhaseMainSite)
