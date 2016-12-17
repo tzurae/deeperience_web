@@ -9,6 +9,6 @@ export default {
   initialValues: Map({
     name: '',
     tags: [],
-    introduction: '<p><br></p>',
+    introduction: '<p></p>',
   }),
 }

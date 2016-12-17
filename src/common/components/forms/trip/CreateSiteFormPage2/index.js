@@ -8,6 +8,7 @@ import {
   BsForm as Form,
   BsFormFooter as FormFooter,
 } from '../../../fields/widgets'
+import styles from './styles.scss'
 
 const CreateSiteFormPage2 = ({ handleSubmit, ...props }) => {
   const {
@@ -34,7 +35,7 @@ const CreateSiteFormPage2 = ({ handleSubmit, ...props }) => {
       <FormFooter
         labelDimensions={{ sm: 0 }}
         fieldDimensions={{ sm: 12 }}
-        style={{ textAlign: 'center' }}
+        className={styles.footer}
       >
         <FormButton
           type="button"
