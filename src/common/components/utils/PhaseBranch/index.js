@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react'
+import ImPropTypes from 'react-immutable-proptypes'
 import FontAwesome from 'react-fontawesome'
 import Text from '../Text'
 import styles from './styles.scss'
@@ -57,7 +58,7 @@ const PhaseBranch = ({ nodes, active, done, cb }) => {
 PhaseBranch.propTypes = {
   nodes: PropTypes.arrayOf(PropTypes.string),
   active: PropTypes.number,
-  done: PropTypes.arrayOf(PropTypes.bool),
+  done: ImPropTypes.listOf(PropTypes.bool),
   cb: PropTypes.arrayOf(PropTypes.func),
 }
 

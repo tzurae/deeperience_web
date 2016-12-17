@@ -1,4 +1,8 @@
-import ActionTypes from '../../constants/ActionTypes'
+import { Map } from 'immutable'
+const {
+  SET_PAGE,
+  SET_CURRENT_PAGE,
+} = require('../../constants/ActionTypes').default
 
 const defaultPage = {
   skip: 0,
@@ -9,31 +13,31 @@ const defaultPage = {
   total: 1,
 }
 
-const initState = {
+const initialState = Map({
   default: defaultPage,
-}
+})
 
-export default (state = initState, action) => {
+export default (state = initialState, action) => {
   switch (action.type) {
-    case ActionTypes.SET_PAGE: {
-      return {
-        ...state,
-        [action.resourceName]: action.page || defaultPage,
-      }
-    }
-    case ActionTypes.SET_CURRENT_PAGE: {
-      const page = state[action.resourceName]
-
-      return {
-        ...state,
-        [action.resourceName]: {
-          ...page,
-          current: Number(action.currentPage),
-        },
-      }
-    }
-    default: {
+    case SET_PAGE:
+      return
+      state.set([action.resourceName], action.page || defaultPage)
+      // {
+      //   ...state,
+      //   [action.resourceName]: action.page || defaultPage,
+      // }
+    case SET_CURRENT_PAGE:
+      // const page = state[action.resourceName]
+      return
+      state.set([action.resourceName], action.currentPage)
+      // {
+      //   ...state,
+      //   [action.resourceName]: {
+      //     ...page,
+      //     current: Number(action.currentPage),
+      //   },
+      // }
+    default:
       return state
-    }
   }
 }

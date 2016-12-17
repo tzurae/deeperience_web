@@ -1,5 +1,6 @@
-import InitialState from './tripInitialState'
 import uuid from 'uuid'
+import { fromJS } from 'immutable'
+
 const {
   SET_OWN_SITE,
   SET_CREATE_TRIP_DATA,
@@ -10,11 +11,19 @@ const {
   CREATE_TRIP_SET_PAGE,
 } = require('../../constants/ActionTypes').default
 
-const initialState = new InitialState()
+const initialState = fromJS({
+  createPage: {
+    page: 1,
+  },
+  ownSites: [],
+  tripInfo: [],
+  routes: [],
+  startSites: [],
+  uuid2data: {},
+  error: null,
+})
 
 export default (state = initialState, action) => {
-  if (!(state instanceof InitialState)) return initialState.mergeDeep(state)
-
   switch (action.type) {
     case SET_OWN_SITE:
       return state.set('ownSites', action.payload.sites)
@@ -43,7 +52,7 @@ export default (state = initialState, action) => {
           gid: '',
         },
       }
-      return new InitialState().set('ownSites', state.get('ownSites'))
+      return initialState.set('ownSites', state.get('ownSites'))
         .set('tripInfo', tripInfo)
         .set('routes', routes)
         .set('startSites', startSites)

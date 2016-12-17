@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Field, reduxForm } from 'redux-form'
+import { Field, reduxForm } from 'redux-form/immutable'
 import Alert from 'react-bootstrap/lib/Alert'
 import Button from 'react-bootstrap/lib/Button'
 import FormNames from '../../../constants/FormNames'
@@ -14,10 +14,16 @@ import {
   BsField as FormField,
 } from '../../fields/widgets'
 
+const mapStateToProps = (state) => {
+  return {
+    apiEngine: state.getIn(['global', 'apiEngine']),
+  }
+}
+
 export const validate = (values) => {
   const errors = {}
 
-  if (!values.name) {
+  if (!values.get('name')) {
     errors.name = 'Required'
   }
 
@@ -109,6 +115,4 @@ class EditForm extends Component {
 export default reduxForm({
   form: FormNames.USER_EDIT,
   validate,
-})(connect(state => ({
-  apiEngine: state.global.apiEngine,
-}))(EditForm))
+})(connect(mapStateToProps)(EditForm))

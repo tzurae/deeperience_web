@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
-import { Field, reduxForm } from 'redux-form'
+import { Field, reduxForm } from 'redux-form/immutable'
 import Alert from 'react-bootstrap/lib/Alert'
 import Button from 'react-bootstrap/lib/Button'
 import FormNames from '../../../constants/FormNames'
@@ -17,14 +17,20 @@ import {
 } from '../../fields/widgets'
 import configs from '../../../../../configs/project/client'
 
+const mapStateToProps = (state) => {
+  return {
+    apiEngine: state.getIn(['global', 'apiEngine']),
+  }
+}
+
 export const validate = (values) => {
   const errors = {}
 
-  if (!values.email) {
+  if (!values.get('email')) {
     errors.email = 'Required'
   }
 
-  if (configs.recaptcha && !values.recaptcha) {
+  if (configs.recaptcha && !values.get('recaptcha')) {
     errors.recaptcha = 'Required'
   }
 
@@ -116,6 +122,4 @@ export default reduxForm({
   validate,
   asyncValidate,
   asyncBlurFields: ['email'],
-})(connect(state => ({
-  apiEngine: state.global.apiEngine,
-}))(ForgetPasswordForm))
+})(connect(mapStateToProps)(ForgetPasswordForm))

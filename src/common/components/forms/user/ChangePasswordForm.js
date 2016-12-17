@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Field, reduxForm, SubmissionError } from 'redux-form'
+import { Field, reduxForm, SubmissionError } from 'redux-form/immutable'
 import Alert from 'react-bootstrap/lib/Alert'
 import Button from 'react-bootstrap/lib/Button'
 import Row from 'react-bootstrap/lib/Row'
@@ -14,6 +14,12 @@ import {
   BsForm as Form,
   BsFormFooter as FormFooter,
 } from '../../fields/widgets'
+
+const mapStateToProps = (state) => {
+  return {
+    apiEngine: state.getIn(['global', 'apiEngine']),
+  }
+}
 
 const style = {
   div: {
@@ -41,25 +47,25 @@ export const validate = (values) => {
   const errors = {}
 
   if (
-    values.newPasswordConfirm &&
-    values.newPassword !== values.newPasswordConfirm
+    values.get('newPasswordConfirm') &&
+    values.get('newPassword') !== values.get('newPasswordConfirm')
   ) {
     errors.newPassword = errors.newPasswordConfirm = 'Password Not Matched'
   }
 
-  if (values.oldPassword === values.newPassword) {
+  if (values.get('oldPassword') === values.get('newPassword')) {
     errors.newPassword = 'Cannot be same as old password'
   }
 
-  if (!values.oldPassword) {
+  if (!values.get('oldPassword')) {
     errors.oldPassword = 'Required'
   }
 
-  if (!values.newPassword) {
+  if (!values.get('newPassword')) {
     errors.newPassword = 'Required'
   }
 
-  if (!values.newPasswordConfirm) {
+  if (!values.get('newPasswordConfirm')) {
     errors.newPasswordConfirm = 'Required'
   }
 
@@ -164,6 +170,4 @@ class ChangePasswordForm extends Component {
 export default reduxForm({
   form: FormNames.USER_CHANGE_PASSWORD,
   validate,
-})(connect(state => ({
-  apiEngine: state.global.apiEngine,
-}))(ChangePasswordForm))
+})(connect(mapStateToProps)(ChangePasswordForm))

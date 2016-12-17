@@ -12,6 +12,13 @@ import Text from '../Text'
 import styles from './styles.scss'
 import classname from 'classnames'
 
+const mapStateToProps = state => {
+  return {
+    isAuth: !!state.getIn(['cookies', 'token']),
+    user: JSON.parse(state.getIn(['cookies', 'user'])) || {},
+  }
+}
+
 class Navigation extends Component {
   _setLanguage(lang) {
     const { store } = this.context
@@ -27,7 +34,6 @@ class Navigation extends Component {
   render() {
     const { isAuth, user } = this.props
     const isAdmin = (user.role === Roles.ADMIN)
-
     return (
       <Navbar staticTop className={styles.nav}>
         <Grid>
@@ -130,9 +136,4 @@ Navigation.contextTypes = {
   store: React.PropTypes.object.isRequired,
 }
 
-export default connect(({ cookies: { token, user } }) => ({
-  isAuth: !!token,
-  user: (user && JSON.parse(user)) || {},
-}), null, null, {
-  pure: false,
-})(Navigation)
+export default connect(mapStateToProps, null, null, { pure: false })(Navigation)

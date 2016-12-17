@@ -1,16 +1,17 @@
-import { Map } from 'immutable'
-import InitialState from './globalInitialState'
+import Immutable, { Map } from 'immutable'
 
 const {
   SET_API_ENGINE,
   UPDATE_LOCALE,
 } = require('../../constants/ActionTypes').default
 
-const initialState = new InitialState()
+const initialState = Immutable.fromJS({
+  apiEngine: null,
+  locale: null, // intl locale
+  messages: null, // intl messages
+})
 
 export default (state = initialState, action) => {
-  if (!(state instanceof InitialState)) return initialState.mergeDeep(state)
-
   switch (action.type) {
     case SET_API_ENGINE:
       return state.set('apiEngine', action.apiEngine)

@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react'
 import { renderToString } from 'react-dom/server'
+import { APIKey } from '../../../configs/project/googleMap/credential'
 
 // jscs:disable
 const Html = ({ assets, children, initialState }) => (
@@ -45,6 +46,7 @@ const Html = ({ assets, children, initialState }) => (
       />
       <script src="https://code.jquery.com/jquery-2.2.3.min.js" />
       <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=Intl.~locale.en" />
+      <script src={`https://maps.googleapis.com/maps/api/js?key=${APIKey}&libraries=places`}/>
       {Object.keys(assets.javascript).map((script, i) =>
         <script key={i} src={assets.javascript[script]} />
       )}

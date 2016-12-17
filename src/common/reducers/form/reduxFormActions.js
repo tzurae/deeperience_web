@@ -1,16 +1,3 @@
-// import {
-//   arrayInsert,
-//   arrayMove,
-//   arrayPop,
-//   arrayPush,
-//   arrayRemove,
-//   arrayRemoveAll,
-//   arrayShift,
-//   arraySplice,
-//   arraySwap,
-//   arrayUnshift,
-//   autofill,
-// } from 'redux-form'
 import * as actions from 'redux-form'
 
 export const {

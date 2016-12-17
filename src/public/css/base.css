@@ -24,10 +24,6 @@ label {
   font-weight: 700;
 }
 
-#root .form-horizontal .control-label {
-  padding-top: 0;
-}
-
 #root  label > input {
   font-size: 18px;
   font-size: 1.125rem;

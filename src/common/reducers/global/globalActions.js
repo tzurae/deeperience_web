@@ -14,11 +14,11 @@ export const setApiEngine = apiEngine => {
 
 export const updateLocale = (targetLocale) => {
   return (dispatch, getState) => {
-    const currentLocale = getState().global.locale
+    const currentLocale = getState().getIn(['global', 'locale'])
     if (targetLocale === currentLocale) {
       return Promise.resolve()
     }
-    return localeAPI(getState().global.apiEngine)
+    return localeAPI(getState().getIn(['global', 'apiEngine']))
       .read(targetLocale)
       .then((json) => {
         dispatch(setCookie('locale', json.locale))
@@ -33,3 +33,4 @@ export const updateLocale = (targetLocale) => {
       })
   }
 }
+

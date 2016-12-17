@@ -1,28 +1,40 @@
-import ActionTypes from '../../constants/ActionTypes'
+import { List, Map } from 'immutable'
+const {
+  PUSH_ERRORS,
+  REMOVE_ERROR,
+} = require('../../constants/ActionTypes')
 
-const initState = []
+const initialState = List()
 
-export default (state = initState, action) => {
+export default (state = initialState, action) => {
   if (!action.errors) {
-    action.errors = []
+    action.errors = List([])
   }
   switch (action.type) {
-    case ActionTypes.PUSH_ERRORS: {
-      return [
-        ...state,
-        ...action.errors.map((error) => ({
-          id: Math.random(),
-          ...error,
-        })),
-      ]
-    }
-    case ActionTypes.REMOVE_ERROR: {
-      return [
-        ...state.filter(error => error.id !== action.id),
-      ]
-    }
-    default: {
+    case PUSH_ERRORS:
+      return action.errors.map((error) => {
+        state.push(
+          Map({
+            id: Math.random(),
+            errorMessage: error,
+          })
+        )
+      })
+    // return [
+    //   ...state,
+    //   ...action.errors.map((error) => ({
+    //     id: Math.random(),
+    //     ...error,
+    //   })),
+    // ]
+    case REMOVE_ERROR:
+      return
+      state.filter(error => error.id !== action.errors.id)
+    // [
+    //   ...state.filter(error => error.id !== action.id),
+    // ]
+    default:
       return state
-    }
+
   }
 }

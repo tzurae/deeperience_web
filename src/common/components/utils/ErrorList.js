@@ -6,6 +6,12 @@ import Table from 'react-bootstrap/lib/Table'
 import { removeError } from '../../reducers/error/errorActions'
 import isString from '../../utils/isString'
 
+const mapStateToProps = (state) => {
+  return {
+    errors: state.get('errors'),
+  }
+}
+
 function renderMetaContent(metaContent) {
   if (isString(metaContent)) {
     return metaContent
@@ -66,6 +72,4 @@ const ErrorList = ({ errors, dispatch }) => (
   </Grid>
 )
 
-export default connect(state => ({
-  errors: state.errors,
-}))(ErrorList)
+export default connect(mapStateToProps)(ErrorList)

@@ -10,7 +10,6 @@ import userController from '../controllers/user'
 import mailController from '../controllers/mail'
 import formValidationController from '../controllers/formValidation'
 import localeController from '../controllers/locale'
-import todoController from '../controllers/todo'
 import tripController from '../controllers/trip'
 import guideSiteController from '../controllers/guideSite'
 import googleSiteController from '../controllers/googleSite'
@@ -114,12 +113,6 @@ export default ({ app }) => {
 
   // locale
   app.get('/api/locales/:locale', localeController.show)
-
-  // todo
-  app.get('/api/todos', todoController.list)
-  app.post('/api/todos', bodyParser.json, todoController.create)
-  app.put('/api/todos/:id', bodyParser.json, todoController.update)
-  app.delete('/api/todos/:id', todoController.remove)
 
   // trip for customer
   app.get('/api/trips/buy', authRequired, tripController.listBuyTrip)
