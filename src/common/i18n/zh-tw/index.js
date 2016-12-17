@@ -136,6 +136,7 @@ export default {
   'trip.createSite.feeInfo': '價格資訊',
   'trip.createSite.remind': '小提醒',
   'trip.createSite.mainSite.intro': '主要景點介紹',
+  'trip.createSite.mainSite.mainSite': '主要景點名稱',
 
   'login.email': '信箱',
   'login.password': '密碼',

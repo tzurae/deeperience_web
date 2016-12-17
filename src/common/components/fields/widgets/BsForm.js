@@ -18,6 +18,14 @@ class BsForm extends Component {
     }
   }
 
+  handleKeyDown(e) {
+    if (this.props.preventEnter &&
+      e.key === 'Enter' &&
+      e.shiftKey === false) {
+      e.preventDefault()
+    }
+  }
+
   render() {
     const {
       /* eslint-disable */
@@ -26,13 +34,20 @@ class BsForm extends Component {
       defaultLabelDimensions,
       defaultFieldDimensions,
       defaultShowLabel,
+      preventEnter,
       /* eslint-enable */
       children,
+      onSubmit,
       ...rest
     } = this.props
 
     return (
-      <Form horizontal={defaultHorizontal} {...rest}>
+      <Form
+        horizontal={defaultHorizontal}
+        onSubmit={onSubmit}
+        onKeyDown={e => this.handleKeyDown(e, onSubmit)}
+        {...rest}
+      >
         {children}
       </Form>
     )
@@ -44,6 +59,7 @@ BsForm.propTypes = {
   defaultLabelDimensions: PropTypes.object,
   defaultFieldDimensions: PropTypes.object,
   defaultShowLabel: PropTypes.bool,
+  preventEnter: PropTypes.bool,
 }
 
 BsForm.childContextTypes = {
@@ -62,6 +78,7 @@ BsForm.defaultProps = {
     sm: 10,
   },
   defaultShowLabel: true,
+  preventEnter: false,
 }
 
 export default BsForm
