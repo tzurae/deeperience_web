@@ -5,12 +5,14 @@ const {
   CREATE_SITE_NEXT_PAGE,
   CREATE_SITE_PREVIOUS_PAGE,
   CREATE_SITE_SET_PAGE,
+  CREATE_SITE_SET_SUBSITE_ACTIVE,
 } = require('../../constants/ActionTypes').default
 
 const initialState = Immutable.fromJS({
   createPage: {
-    page: 2,
+    page: 3,
     done: new Array(...{ length: 6 }).map(() => false),
+    subsiteActiveArr: [],
   },
   error: '',
 })
@@ -28,6 +30,9 @@ export default (state = initialState, action) => {
 
     case CREATE_SITE_SET_PAGE:
       return state.setIn(['createPage', 'page'], action.payload.page)
+
+    case CREATE_SITE_SET_SUBSITE_ACTIVE:
+      return state.setIn(['createPage', 'subsiteActiveArr'], action.payload.arr)
 
     default:
       return state

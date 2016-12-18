@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 import { withGoogleMap, GoogleMap, Marker } from 'react-google-maps/lib'
 import SearchBox from 'react-google-maps/lib/places/SearchBox'
 import styles from './styles.scss'
@@ -81,6 +81,12 @@ class GoogleMapSearch extends React.Component {
   }
 }
 
+GoogleMapSearch.propTypes = {
+  className: PropTypes.string,
+  // markers: PropTypes.array.isRequired,
+  onChangeMarkers: PropTypes.func.isRequired,
+}
+
 const GoogleMapSearchHOR = withGoogleMap(props => (
   <GoogleMap
     ref={props.onMapMounted}
@@ -90,6 +96,7 @@ const GoogleMapSearchHOR = withGoogleMap(props => (
   >
     <SearchBox
       ref={props.onSearchBoxMounted}
+      controlPosition={1} // google.maps.ControlPosition.TOP_LEFT
       bounds={props.bounds}
       onPlacesChanged={props.onPlacesChanged}
       inputPlaceholder="Search..."

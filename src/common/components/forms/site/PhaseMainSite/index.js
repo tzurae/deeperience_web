@@ -76,7 +76,7 @@ const PhaseMainSite = props => {
         placeholder=""
       />
       <div className={cx('form-group', styles.formGroup)}>
-        <Col md={3}>
+        <Col sm={3}>
           <Text
             className={styles.optionLabel}
             id="trip.createSite.mainSite.intro"
