@@ -1,0 +1,43 @@
+@import '../../../../styles/index';
+
+.footer {
+  margin: 40px 0;
+}
+
+.option-label {
+  @include fontSize(15);
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.title-div {
+  @include flex-row-between;
+  margin-bottom: 10px;
+  padding: 5px 20px;
+  border-left: 5px $color-main solid;
+  background-color: $white;
+  cursor: pointer;
+}
+
+.title-div-title {
+  @include flex-center;
+  color: $color-main;
+}
+
+.btn-trash {
+  @include fontSizeI(18);
+  width: 30px !important;
+  height: 30px !important;
+  color: $color-main;
+  background-color: transparent !important;
+}
+
+.add-btn {
+  @include font-size-medium;
+  @include no-focus;
+  float: right;
+  margin-top: 20px;
+  color: $color-main;
+  border: 0;
+  background: transparent;
+}

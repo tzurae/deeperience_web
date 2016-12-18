@@ -11,6 +11,10 @@ export const SiteSchema = new mongoose.Schema({
   },
   fee: String,
   remind: String,
+  name: {
+    type: String,
+    required: true,
+  },
 }, {
   versionKey: false,
   timestamps: {

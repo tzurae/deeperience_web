@@ -3,6 +3,7 @@ import PhaseName from '../PhaseName'
 import PhaseIntro from '../PhaseIntro'
 import PhaseMainSite from '../PhaseMainSite'
 import PhaseSubSite from '../PhaseSubSite'
+import PhaseOtherInfo from '../PhaseOtherInfo'
 import { getOptions } from '../../../../utils/getI18nValue'
 
 // http://redux-form.com/6.2.0/examples/wizard/
@@ -24,9 +25,9 @@ const CreateSiteForm = props => {
 
   const subsiteMarkers =
     values.get('subSites') ?
-    values.get('subSites')
-      .filter(value => value.get('googleInfo'))
-      .map(value => value.getIn(['googleInfo', 'position'])) : []
+      values.get('subSites')
+        .filter(value => value.get('googleInfo'))
+        .map(value => value.getIn(['googleInfo', 'position'])) : []
 
   return (
     <div>
@@ -68,6 +69,13 @@ const CreateSiteForm = props => {
         markers={subsiteMarkers}
         subsiteActive={subsiteActive}
         updateSubsiteActive={updateSubsiteActive}
+        {...props}
+      />
+      }
+      {page === 4 &&
+      <PhaseOtherInfo
+        onSubmit={nextPage}
+        previousPage={previousPage}
         {...props}
       />
       }
