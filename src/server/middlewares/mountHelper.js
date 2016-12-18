@@ -13,7 +13,7 @@ export default (req, res, next) => {
   res.errors = (errors) => {
     req.store.dispatch(pushErrors(errors))
     res.json({
-      errors: req.store.getState().errors.map((error) => {
+      errors: req.store.getState().get('errors').map((error) => {
         delete error.id
         return {
           ...error,

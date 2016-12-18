@@ -11,8 +11,7 @@ import mailController from '../controllers/mail'
 import formValidationController from '../controllers/formValidation'
 import localeController from '../controllers/locale'
 import tripController from '../controllers/trip'
-import guideSiteController from '../controllers/guideSite'
-import googleSiteController from '../controllers/googleSite'
+import siteController from '../controllers/guideSite'
 import postController from '../controllers/post'
 
 export default ({ app }) => {
@@ -131,13 +130,10 @@ export default ({ app }) => {
     )
 
   // site
-  app.get('/api/guideSites', authRequired, guideSiteController.list) // todo
-  app.post('/api/guideSites', authRequired, bodyParser.json, guideSiteController.create)
-  app.put('/api/guideSites/:guideSiteId', authRequired, bodyParser.json, guideSiteController.update) // todo
-  app.delete('/api/guideSites/:guideSiteId', authRequired, guideSiteController.remove) // todo
-
-  // GoogleSite
-  app.post('/api/googleSites', authRequired, bodyParser.json, googleSiteController.create)
+  app.get('/api/sites', authRequired, siteController.list) // todo
+  app.post('/api/sites', authRequired, bodyParser.json, siteController.create)
+  app.put('/api/sites/:siteId', authRequired, bodyParser.json, siteController.update) // todo
+  app.delete('/api/sites/:siteId', authRequired, siteController.remove) // todo
 
   // post
   app.get('/api/posts/', authRequired, postController.list) // todo
