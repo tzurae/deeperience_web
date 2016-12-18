@@ -3,24 +3,34 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Map } from 'immutable'
 import Col from 'react-bootstrap/lib/Col'
+import FormNames from '../../../constants/FormNames'
 import PageLayout from '../../../components/layouts/PageLayout'
 import PanelContainer from '../../../components/utils/PanelContainer'
 import { Panel1, Panel2 } from '../../../components/utils/Panel'
 import PhaseBranch from '../../../components/utils/PhaseBranch'
 import CreateSiteForm from '../../../components/forms/site/CreateSiteForm'
+import * as reduxFormActions from '../../../reducers/form/reduxFormActions'
 import * as siteActions from '../../../reducers/site/siteActions'
 import { CreateSubNav } from '../../../components/utils/SubNavigation'
 import { BranchTitle } from './assets'
 
 const actions = [
+  reduxFormActions,
   siteActions,
 ]
 
-const mapStateToProps = state => ({
-  apiEngine: state.getIn(['global', 'apiEngine']),
-  page: state.getIn(['site', 'createPage', 'page']),
-  done: state.getIn(['site', 'createPage', 'done']),
-})
+const mapStateToProps = state => {
+  const form = state.getIn(['form', FormNames.TRIP_CREATE_SITE])
+
+  return {
+    apiEngine: state.getIn(['global', 'apiEngine']),
+    messages: state.getIn(['global', 'messages']),
+    page: state.getIn(['site', 'createPage', 'page']),
+    done: state.getIn(['site', 'createPage', 'done']),
+    values: form ? form.get('values') : Map({}),
+    subsiteActive: state.getIn(['site', 'createPage', 'subsiteActiveArr']),
+  }
+}
 
 const mapDispatchToProps = dispatch => {
   const creators = Map()
@@ -30,7 +40,6 @@ const mapDispatchToProps = dispatch => {
 
   return {
     actions: bindActionCreators(creators, dispatch),
-    dispatch,
   }
 }
 
@@ -46,7 +55,10 @@ class CreateSitePage extends React.Component {
   render() {
     const {
       page,
+      messages,
       done,
+      values,
+      subsiteActive,
     } = this.props
 
     return (
@@ -67,6 +79,11 @@ class CreateSitePage extends React.Component {
                 page={page}
                 nextPage={::this.nextPage}
                 previousPage={::this.previousPage}
+                messages={messages}
+                values={values}
+                subsiteActive={subsiteActive}
+                updateSubsiteActive={this.props.actions.createSiteSetSubsiteActive}
+                updateForm={this.props.actions.change}
               />
             </Panel1>
           </Col>
