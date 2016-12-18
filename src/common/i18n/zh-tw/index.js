@@ -140,6 +140,11 @@ export default {
   'trip.createSite.subSite.intro': '周邊景點介紹',
   'trip.createSite.subSite.subSite': '周邊景點名稱',
   'trip.createSite.subSite.add': '+ 新增周邊景點',
+  'trip.createSite.otherInfo.fee': '價格資訊',
+  'trip.createSite.otherInfo.recentActivity': '近期活動',
+  'trip.createSite.otherInfo.recentActivity.date': '日期和時間',
+  'trip.createSite.otherInfo.recentActivity.content': '內容',
+  'trip.createSite.otherInfo.recentActivity.add': '新增近期活動',
 
   'login.email': '信箱',
   'login.password': '密碼',
