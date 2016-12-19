@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react'
 import ImPropTypes from 'react-immutable-proptypes'
+import { List } from 'immutable'
 import FontAwesome from 'react-fontawesome'
 import Text from '../Text'
 import styles from './styles.scss'
@@ -65,7 +66,7 @@ PhaseBranch.propTypes = {
 PhaseBranch.defaultProps = {
   nodes: [],
   active: 0,
-  done: [],
+  done: List([]),
   cb: [],
 }
 

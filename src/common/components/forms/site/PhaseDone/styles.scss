@@ -6,7 +6,8 @@
 }
 
 .img-done {
-  @include bg-contain('createsitepage/icon_finish.png', 150px, 150px) margin: 0 auto 30px;
+  @include bg-contain('createsitepage/icon_finish.png', 150px, 150px);
+  margin: 0 auto 30px;
 }
 
 .comment {

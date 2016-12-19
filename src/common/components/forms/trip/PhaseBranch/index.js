@@ -6,10 +6,9 @@ import { Field, reduxForm } from 'redux-form/immutable'
 import uuid from 'uuid'
 import * as tripActions from '../../../../reducers/trip/tripActions'
 import * as reduxFormActions from '../../../../reducers/form/reduxFormActions'
+import FormProperties from '../tripFormProperties'
 import FormNames from '../../../../constants/FormNames'
 import FormButton from '../../../utils/FormButton'
-import validate from '../createTripValidate'
-import styles from './styles.scss'
 import { calculateTripInfo } from '../createTripHelper'
 import tripAPI from '../../../../api/trip'
 import Navbar from '../../../utils/BsNavbar'
@@ -23,30 +22,12 @@ import {
   BsForm as Form,
   BsField as FormField,
 } from '../../../fields/widgets'
+import styles from './styles.scss'
 
 const actions = [
   tripActions,
   reduxFormActions,
 ]
-
-const formProperties = {
-  form: FormNames.TRIP_CREATE_TRIP,
-  destroyOnUnmount: false,
-  validate,
-  initialValues: {
-    name: '',
-    tags: [],
-    dayInfo: 'TripDayInfos.HALF_DAY',
-    dailyTrips: [{
-      remind: '',
-      period: {
-        start: '08:00',
-        end: '21:00',
-      },
-    }],
-    uuid2data: {},
-  },
-}
 
 const mapStateToProps = state => ({
   createTripForm: state.form[FormNames.TRIP_CREATE_TRIP],
@@ -67,7 +48,6 @@ const mapDispatchToProps = dispatch => {
 
   return {
     actions: bindActionCreators(creators, dispatch),
-    dispatch,
   }
 }
 
@@ -75,7 +55,7 @@ const siteDivWidth = 150
 const siteDivHeight = 100
 const scrollbarShift = -6
 
-class CreateTripFormPage2 extends React.Component {
+class PhaseBranch extends React.Component {
   constructor(props) {
     super(props)
     this.props.actions.resetCreateTripData()
@@ -91,8 +71,8 @@ class CreateTripFormPage2 extends React.Component {
       totalDay: 1,
       submitError: '',
     }
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.validateForm = this.validateForm.bind(this)
+    this.handleSubmit = ::this.handleSubmit
+    this.validateForm = ::this.validateForm
   }
 
   componentWillMount() {
@@ -707,4 +687,4 @@ const FillDayInfo = (day, length) => {
       })
   )
 }
-export default reduxForm(formProperties)(connect(mapStateToProps, mapDispatchToProps)(CreateTripFormPage2))
+export default reduxForm(FormProperties)(connect(mapStateToProps, mapDispatchToProps)(PhaseBranch))

@@ -44,64 +44,63 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-class CreateSitePage extends React.Component {
-  nextPage() {
-    this.props.actions.createSiteSetDone(
-      this.props.done.map((value, index) => index === this.props.page ? true : value)
+const CreateSitePage = props => {
+  const {
+    apiEngine,
+    page,
+    messages,
+    done,
+    values,
+    subsiteActive,
+    actions,
+  } = props
+
+  const nextPage = () => {
+    actions.createSiteSetDone(
+      done.map((value, index) => index === page ? true : value)
     )
-    this.props.actions.createSiteNextPage()
+    actions.createSiteNextPage()
   }
 
-  previousPage() {
-    this.props.actions.createSitePreviousPage()
+  const previousPage = () => {
+    actions.createSitePreviousPage()
   }
 
-  render() {
-    const {
-      apiEngine,
-      page,
-      messages,
-      done,
-      values,
-      subsiteActive,
-    } = this.props
-
-    return (
-      <PageLayout subNav={<CreateSubNav activeTab={0}/>}>
-        <PanelContainer>
-          <Col md={2}>
-            <Panel2 title="nav.trip.createSite">
-              <PhaseBranch
-                done={done}
-                nodes={BranchTitle}
-                active={page}
-              />
-            </Panel2>
-          </Col>
-          <Col md={7}>
-            <Panel1
-              title={BranchTitle[page]}
-              underlineClass={page === 5 && styles.none}
-              titleClass={page === 5 && styles.none}
-            >
-              <CreateSiteForm
-                apiEngine={apiEngine}
-                page={page}
-                nextPage={::this.nextPage}
-                previousPage={::this.previousPage}
-                messages={messages}
-                values={values}
-                subsiteActive={subsiteActive}
-                updateSubsiteActive={this.props.actions.createSiteSetSubsiteActive}
-                updateForm={this.props.actions.change}
-              />
-            </Panel1>
-          </Col>
-          <Col md={3} />
-        </PanelContainer>
-      </PageLayout>
-    )
-  }
+  return (
+    <PageLayout subNav={<CreateSubNav activeTab={0}/>}>
+      <PanelContainer>
+        <Col md={2}>
+          <Panel2 title="nav.trip.createSite">
+            <PhaseBranch
+              done={done}
+              nodes={BranchTitle}
+              active={page}
+            />
+          </Panel2>
+        </Col>
+        <Col md={7}>
+          <Panel1
+            title={BranchTitle[page]}
+            underlineClass={page === 5 && styles.none}
+            titleClass={page === 5 && styles.none}
+          >
+            <CreateSiteForm
+              apiEngine={apiEngine}
+              page={page}
+              nextPage={nextPage}
+              previousPage={previousPage}
+              messages={messages}
+              values={values}
+              subsiteActive={subsiteActive}
+              updateSubsiteActive={actions.createSiteSetSubsiteActive}
+              updateForm={actions.change}
+            />
+          </Panel1>
+        </Col>
+        <Col md={3} />
+      </PanelContainer>
+    </PageLayout>
+  )
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateSitePage)

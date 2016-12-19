@@ -1,5 +1,5 @@
 import uuid from 'uuid'
-import { fromJS } from 'immutable'
+import { fromJS, List } from 'immutable'
 
 const {
   SET_OWN_SITE,
@@ -9,18 +9,20 @@ const {
   CREATE_TRIP_NEXT_PAGE,
   CREATE_TRIP_PREVIOUS_PAGE,
   CREATE_TRIP_SET_PAGE,
+  CREATE_TRIP_SET_DONE,
 } = require('../../constants/ActionTypes').default
 
 const initialState = fromJS({
   createPage: {
-    page: 1,
+    page: 0,
+    done: new Array(...{ length: 5 }).map(() => false),
   },
   ownSites: [],
   tripInfo: [],
   routes: [],
   startSites: [],
   uuid2data: {},
-  error: null,
+  error: '',
 })
 
 export default (state = initialState, action) => {
@@ -69,6 +71,9 @@ export default (state = initialState, action) => {
 
     case CREATE_TRIP_SET_PAGE:
       return state.setIn(['createPage', 'page'], action.payload.page)
+
+    case CREATE_TRIP_SET_DONE:
+      return state.setIn(['createPage', 'done'], action.payload.done)
 
     default:
       return state

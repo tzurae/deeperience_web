@@ -13,12 +13,13 @@ import {
   BsField as FormField,
 } from '../../../fields/widgets'
 
-const PhaseName = ({ handleSubmit, ...props }) => {
+const PhaseName = props => {
   const {
     pristine,
     submitting,
     invalid,
     siteElements,
+    handleSubmit,
   } = props
 
   return (
