@@ -13,7 +13,7 @@ import {
   BsField as FormField,
 } from '../../../fields/widgets'
 
-const CreateSiteFormPage1 = ({ handleSubmit, ...props }) => {
+const PhaseName = ({ handleSubmit, ...props }) => {
   const {
     pristine,
     submitting,
@@ -27,14 +27,15 @@ const CreateSiteFormPage1 = ({ handleSubmit, ...props }) => {
       defaultLabelDimensions={{ sm: 2 }}
       defaultFieldDimensions={{ sm: 6 }}
       onSubmit={handleSubmit}
+      preventEnter={true}
     >
       <Field
         name="name"
         component={FormField}
-        label={<Text id={'trip.createSite.form.name'}/>}
+        label={<Text id="trip.createSite.form.name"/>}
         adapter={Input}
         type="text"
-        placeholder="Text"
+        placeholder=""
       />
       {
         siteElements.map(element =>
@@ -68,4 +69,4 @@ const CreateSiteFormPage1 = ({ handleSubmit, ...props }) => {
   )
 }
 
-export default reduxForm(FormProperties)(CreateSiteFormPage1)
+export default reduxForm(FormProperties)(PhaseName)

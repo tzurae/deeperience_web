@@ -1,15 +1,11 @@
 import React, { PropTypes } from 'react'
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { Map } from 'immutable'
+import FontAwesome from 'react-fontawesome'
+import classname from 'classnames'
 import { stateToHTML } from 'draft-js-export-html'
-import { Editor, EditorState, RichUtils, Entity, AtomicBlockUtils } from 'draft-js'
-import * as reduxFormActions from '../../../reducers/form/reduxFormActions'
+import { Editor as DEditor, EditorState, RichUtils, Entity, AtomicBlockUtils } from 'draft-js'
 import tripAPI from '../../../api/trip'
-
-const actions = [
-  reduxFormActions,
-]
+import styles from './styles.scss'
 
 let dispatchTimer = null
 
@@ -17,19 +13,7 @@ const mapStateToProps = state => ({
   apiEngine: state.getIn(['global', 'apiEngine']),
 })
 
-const mapDispatchToProps = dispatch => {
-  const creators = Map()
-    .merge(...actions)
-    .filter(value => typeof value === 'function')
-    .toObject()
-
-  return {
-    actions: bindActionCreators(creators, dispatch),
-    dispatch,
-  }
-}
-
-class RichEditor extends React.Component {
+class Editor extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -57,7 +41,7 @@ class RichEditor extends React.Component {
     dispatchTimer = setTimeout(() => {
       const state = this.state.editorState.getCurrentContent()
       const htmlStr = stateToHTML(state)
-      this.props.actions.change(this.props.formName, this.props.name, htmlStr)
+      this.props.update(htmlStr)
     }, 500)
   }
 
@@ -114,46 +98,22 @@ class RichEditor extends React.Component {
   render() {
     const { editorState } = this.state
 
-    // Hide the placeholder if the user changes block type before entering any text
-    let className = 'RichEditor-editor'
-    const contentState = editorState.getCurrentContent()
-    if (!contentState.hasText()) {
-      if (contentState.getBlockMap().first().getType() !== 'unstyled') {
-        className += ' RichEditor-hidePlaceholder'
-      }
-    }
-
     return (
-      <div className="RichEditor-root">
-        <BlockStyleControls
+      <div
+        className={styles.editorRoot}
+      >
+        <Toolbar
           editorState={editorState}
-          onToggle={this.toggleBlockType}
-          />
-        <InlineStyleControls
-          editorState={editorState}
-          onToggle={this.toggleInlineStyle}
-          />
-
-        <span>
-          <label htmlFor="img-input" style={{ cursor: 'pointer' }} >
-            <img src="/img/createsitepage/icon04.png" width="42" />
-          </label>
-          <input
-            id="img-input"
-            name="img"
-            type="file"
-            accept="image/*"
-            style={{ display: 'none' }}
-            onChange={(e) => {
-              const file = e.target.files[0]
-              this.uploadImage(file)
-              e.target.value = ''
-            }
-          } />
-        </span>
-
-        <div className={className} onClick={this.focus}>
-          <Editor
+          toggleBlock={this.toggleBlockType}
+          toggleInline={this.toggleInlineStyle}
+          uploadImage={this.uploadImage}
+        />
+        <div
+          className={styles.editorEditor}
+          style={{ height: `${this.props.height}px` }}
+          onClick={this.focus}
+        >
+          <DEditor
             blockRendererFn={mediaBlockRenderer}
             blockStyleFn={getBlockStyle}
             editorState={editorState}
@@ -168,9 +128,15 @@ class RichEditor extends React.Component {
   }
 }
 
-const Image = (props) => {
-  return <img src={props.src} style={{ width: '100%' }} />
+Editor.propTypes = {
+  height: PropTypes.number,
 }
+
+Editor.defaultProps = {
+  height: 500,
+}
+
+const Image = (props) => <img src={props.src} style={{ width: '100%' }} />
 
 const Media = (props) => {
   const entity = Entity.get(props.block.getEntityAt(0))
@@ -202,88 +168,122 @@ const mediaBlockRenderer = block => {
 }
 
 const getBlockStyle = block => {
+  const styleArr = [styles.styleBlockDefault]
   switch (block.getType()) {
-    case 'blockquote': return 'RichEditor-blockquote'
-    default: return null
+    case 'header-six':
+      styleArr.push(styles.styleImgQuote)
+      break
   }
+  return classname(...styleArr)
 }
 
-class StyleButton extends React.Component {
-  constructor() {
-    super()
-    this.onToggle = (e) => {
-      e.preventDefault()
-      this.props.onToggle(this.props.style)
-    }
-  }
+const Toolbar = ({ editorState, toggleBlock, toggleInline, uploadImage }) => {
+  const fontSize = [ // block styles
+    { label: '大', style: 'header-one' },
+    { label: '中', style: 'header-three' },
+    { label: '小', style: 'header-five' },
+  ]
 
-  render() {
-    let className = 'RichEditor-styleButton'
-    if (this.props.active) {
-      className += ' RichEditor-activeButton'
-    }
+  const textStyle = [ // inline styles
+    { label: 'bold', style: 'BOLD' },
+    { label: 'italic', style: 'ITALIC' },
+    { label: 'underline', style: 'UNDERLINE' },
+  ]
 
-    return (
-      <span className={className} onMouseDown={this.onToggle}>
-        {this.props.label}
-      </span>
-    )
-  }
-}
+  const pic = [
+    { label: 'pencil', style: 'header-six' },
+  ]
 
-const BLOCK_TYPES = [
-  { label: '大標題', style: 'header-one' },
-  { label: '小標題', style: 'header-three' },
-]
-
-const BlockStyleControls = (props) => {
-  const { editorState } = props
-  const selection = editorState.getSelection()
+  // block
   const blockType = editorState
     .getCurrentContent()
-    .getBlockForKey(selection.getStartKey())
+    .getBlockForKey(editorState.getSelection().getStartKey())
     .getType()
 
+  // inline
+  const currentStyle = editorState.getCurrentInlineStyle()
+
   return (
-    <div className="RichEditor-controls">
-      {BLOCK_TYPES.map((type) =>
-        <StyleButton
+    <div className={styles.toolbar}>
+      {fontSize.map((type) =>
+        <LabelBtn
           key={type.label}
           active={type.style === blockType}
           label={type.label}
-          onToggle={props.onToggle}
+          onToggle={toggleBlock}
           style={type.style}
-          />
+        />
       )}
-    </div>
-  )
-}
-
-const INLINE_STYLES = [
-  { label: '粗體', style: 'BOLD' },
-  { label: '斜體', style: 'ITALIC' },
-  { label: '底線', style: 'UNDERLINE' },
-]
-
-const InlineStyleControls = (props) => {
-  const currentStyle = props.editorState.getCurrentInlineStyle()
-  return (
-    <div className="RichEditor-controls">
-      {INLINE_STYLES.map(type =>
-        <StyleButton
+      <span className={styles.blockLine}/>
+      {textStyle.map(type =>
+        <FABtn
           key={type.label}
           active={currentStyle.has(type.style)}
           label={type.label}
-          onToggle={props.onToggle}
+          onToggle={toggleInline}
           style={type.style}
-          />
+        />
+      )}
+      <span className={styles.blockLine}/>
+      <label htmlFor="img-input" className={styles.btnPhoto}>
+        <FontAwesome
+          name="photo"
+        />
+      </label>
+      <input
+        id="img-input"
+        name="img"
+        type="file"
+        accept="image/*"
+        style={{ display: 'none' }}
+        onChange={e => {
+          uploadImage(e.target.files[0])
+          e.target.value = ''
+        }}
+      />
+      {pic.map((type) =>
+        <FABtn
+          key={type.label}
+          active={type.style === blockType}
+          label={type.label}
+          onToggle={toggleBlock}
+          style={type.style}
+        />
       )}
     </div>
   )
 }
 
-RichEditor.propTypes = {
-  formName: PropTypes.string.isRequired,
+const LabelBtn = ({ label, style, active, onToggle }) => {
+  return (
+    <span
+      className={classname(active ? styles.btnActive : styles.btnInactive, styles.btnLabel)}
+      onMouseDown={
+        e => {
+          e.preventDefault()
+          onToggle(style)
+        }
+      }
+    >
+      {label}
+    </span>
+  )
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(RichEditor)
+const FABtn = ({ label, active, style, onToggle, ...props }) => {
+  return (
+    <FontAwesome
+      name={label}
+      className={classname(active ? styles.btnActive : styles.btnInactive, styles.btnFa)}
+      onMouseDown={
+        e => {
+          e.preventDefault()
+          onToggle(style)
+        }
+      }
+      {...props}
+    />
+  )
+}
+
+export default connect(mapStateToProps)(Editor)

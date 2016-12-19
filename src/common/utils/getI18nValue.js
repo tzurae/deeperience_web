@@ -13,7 +13,7 @@ import Options from '../i18n/zh-tw'
  *        label: "TripElements.TOUR_WALK.label",
  *        value: [{
  *          label: "海邊",
- *          value: "SEA",
+ *          value: "TOUR_WALK.SEA",
  *        }],
  *      }
  *    ],
@@ -56,7 +56,7 @@ export const getOptions = (messages, options) => {
           } else {
             tmpObj[arr[1]].value.push({
               label: messages.get(value),
-              value: value.split('.')[2],
+              value: `${value.split('.')[1]}.${value.split('.')[2]}`,
             })
           }
         })

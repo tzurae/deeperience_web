@@ -145,6 +145,7 @@
     "react-dom": "^15.0.2",
     "react-fontawesome": "^1.4.0",
     "react-ga": "^2.1.2",
+    "react-google-maps": "^6.0.1",
     "react-google-recaptcha": "^0.5.4",
     "react-helmet": "^3.0.2",
     "react-immutable-proptypes": "^2.1.0",

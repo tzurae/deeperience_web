@@ -44,6 +44,7 @@ export default keyMirror({
   CREATE_SITE_NEXT_PAGE: null,
   CREATE_SITE_PREVIOUS_PAGE: null,
   CREATE_SITE_SET_PAGE: null,
+  CREATE_SITE_SET_SUBSITE_ACTIVE: null,
 
   // ------ custom ------
   CUSTOM_PHASE_NEXT_PAGE: null,

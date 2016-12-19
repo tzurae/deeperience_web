@@ -3,6 +3,7 @@ const {
   CREATE_SITE_NEXT_PAGE,
   CREATE_SITE_PREVIOUS_PAGE,
   CREATE_SITE_SET_PAGE,
+  CREATE_SITE_SET_SUBSITE_ACTIVE,
 } = require('../../constants/ActionTypes').default
 
 export const createSiteError = (error) => {
@@ -29,6 +30,15 @@ export const createSiteSetPage = (page) => {
     type: CREATE_SITE_SET_PAGE,
     payload: {
       page,
+    },
+  }
+}
+
+export const createSiteSetSubsiteActive = (arr) => {
+  return {
+    type: CREATE_SITE_SET_SUBSITE_ACTIVE,
+    payload: {
+      arr,
     },
   }
 }
