@@ -4,6 +4,7 @@ import PhaseIntro from '../PhaseIntro'
 import PhaseMainSite from '../PhaseMainSite'
 import PhaseSubSite from '../PhaseSubSite'
 import PhaseOtherInfo from '../PhaseOtherInfo'
+import PhaseDone from '../PhaseDone'
 import { getOptions } from '../../../../utils/getI18nValue'
 import SiteAPI from '../../../../api/site'
 
@@ -87,6 +88,7 @@ const CreateSiteForm = props => {
         {...props}
       />
       }
+      {page === 5 && <PhaseDone/>}
     </div>
   )
 }

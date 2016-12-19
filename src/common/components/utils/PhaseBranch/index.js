@@ -45,7 +45,7 @@ const PhaseBranch = ({ nodes, active, done, cb }) => {
               style={{ height: index === nodes.length - 1 ? 20 : 50 }}>
               <FontAwesome
                 name="check"
-                className={done[index] ? styles.checkActive : styles.checkInactive}
+                className={done.get(index) ? styles.checkActive : styles.checkInactive}
               />
             </div>
           ))}
