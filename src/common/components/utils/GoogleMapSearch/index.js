@@ -45,19 +45,21 @@ class GoogleMapSearch extends React.Component {
       phone: place.international_phone_number,
       placeId: place.place_id,
       position: place.geometry.location,
-      openPeriod: place.opening_hours ?
-        place.opening_hours.periods
-          .map(({ close, open }) => ({
-            close: {
-              time: close.time,
-              day: close.day,
-            },
-            open: {
-              time: open.time,
-              day: open.day,
-            },
-          })) :
-        null,
+      openPeriod:
+        place.opening_hours &&
+        place.opening_hours.periods  ?
+          place.opening_hours.periods
+            .map(({ close, open }) => ({
+              close: {
+                time: close.time,
+                day: close.day,
+              },
+              open: {
+                time: open.time,
+                day: open.day,
+              },
+            })) :
+          null,
       types: place.types,
     }
   }

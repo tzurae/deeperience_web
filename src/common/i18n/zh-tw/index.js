@@ -144,7 +144,7 @@ export default {
   'trip.createSite.otherInfo.recentActivity': '近期活動',
   'trip.createSite.otherInfo.recentActivity.date': '日期和時間',
   'trip.createSite.otherInfo.recentActivity.content': '內容',
-  'trip.createSite.otherInfo.recentActivity.add': '新增近期活動',
+  'trip.createSite.otherInfo.recentActivity.add': '+ 新增近期活動',
 
   'login.email': '信箱',
   'login.password': '密碼',

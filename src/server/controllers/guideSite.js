@@ -48,12 +48,18 @@ export default {
         updatedAt: new Date(),
         createdAt: new Date(),
       })
-
-      guideSite.save(handleDbError(res)((guideSite) => {
+      guideSite.save((guideSite) => {
         res.json({
-          guideSite,
+          ok: !guideSite,
         })
-      }))
+      })
+
+      // don't know why errors can't pop out, not fixed yet
+      // guideSite.save(handleDbError(res)((guideSite) => {
+      //   res.json({
+      //     guideSite,
+      //   })
+      // }))
     })
   },
 
