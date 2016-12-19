@@ -10,11 +10,11 @@ export const GuideSiteSchema = new mongoose.Schema({
   },
   name: {
     type: String,
-    default: '',
+    required: true,
   },
   introduction: {
     type: String,
-    default: '',
+    required: true,
   },
   audioURL: String,
   tags: [{
@@ -27,7 +27,10 @@ export const GuideSiteSchema = new mongoose.Schema({
     date: { type: String, required: true },
     content: { type: String, required: true },
   }],
-  mainSite: SiteSchema,
+  mainSite: {
+    type: SiteSchema,
+    required: true,
+  },
   subSites: [SiteSchema],
 }, {
   versionKey: false,

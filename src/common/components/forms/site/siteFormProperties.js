@@ -1,4 +1,4 @@
-import { Map } from 'immutable'
+import { Map, List } from 'immutable'
 import FormNames from '../../../constants/FormNames'
 import validate from './createSiteValidate'
 
@@ -25,5 +25,6 @@ export default {
         openPeriod: [],
       }),
     }),
+    subSites: List([]),
   }),
 }
