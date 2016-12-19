@@ -1,6 +1,5 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Field } from 'redux-form/immutable'
 import Editor from '../../../utils/Editor'
 import FormNames from '../../../../constants/FormNames'
 import CreateSiteFormPage1 from '../CreateSiteFormPage1'
@@ -40,7 +39,7 @@ const CreateSiteForm = ({ ...props }) => {
 
       <pre>{JSON.stringify(values, null, 2)}</pre>
 
-      <div style={{display: page === 1 ? 'block' : 'none' }}>
+      <div style={{ display: page === 1 ? 'block' : 'none' }}>
         <Editor
           name="introduction"
           formName={FormNames.TRIP_CREATE_SITE}

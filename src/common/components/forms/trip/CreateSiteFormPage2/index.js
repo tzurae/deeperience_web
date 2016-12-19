@@ -1,9 +1,7 @@
 import React from 'react'
-import { Field, reduxForm } from 'redux-form/immutable'
+import { reduxForm } from 'redux-form/immutable'
 import FormProperties from '../siteFormProperties'
-import FormNames from '../../../../constants/FormNames'
 import FormButton from '../../../utils/FormButton'
-import Editor from '../../../utils/Editor'
 import {
   BsForm as Form,
   BsFormFooter as FormFooter,

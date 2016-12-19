@@ -11,6 +11,8 @@ const actions = [
   reduxFormActions,
 ]
 
+let dispatchTimer = null
+
 const mapStateToProps = state => ({
   apiEngine: state.getIn(['global', 'apiEngine']),
 })
@@ -49,9 +51,14 @@ class RichEditor extends React.Component {
 
   // copy html string to redux form state
   _updateReduxForm() {
-    const state = this.state.editorState.getCurrentContent()
-    const htmlStr = stateToHTML(state)
-    this.props.actions.change(this.props.formName, this.props.name, htmlStr)
+    if (dispatchTimer) {
+      clearTimeout(dispatchTimer)
+    }
+    dispatchTimer = setTimeout(() => {
+      const state = this.state.editorState.getCurrentContent()
+      const htmlStr = stateToHTML(state)
+      this.props.actions.change(this.props.formName, this.props.name, htmlStr)
+    }, 500)
   }
 
   // upload image to server
