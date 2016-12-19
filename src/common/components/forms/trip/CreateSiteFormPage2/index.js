@@ -24,12 +24,6 @@ const CreateSiteFormPage2 = ({ handleSubmit, ...props }) => {
       defaultFieldDimensions={{ sm: 6 }}
       onSubmit={handleSubmit}
     >
-      <Field
-        name="introduction"
-        formName={FormNames.TRIP_CREATE_SITE}
-        component={Editor}
-        type="text"
-      />
 
       <FormFooter
         labelDimensions={{ sm: 0 }}
