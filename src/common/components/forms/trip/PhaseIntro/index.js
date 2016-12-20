@@ -1,8 +1,7 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form/immutable'
-import FormNames from '../../../../constants/FormNames'
+import FormProperties from '../tripFormProperties'
 import FormButton from '../../../utils/FormButton'
-import validate from '../createTripValidate'
 import Text from '../../../utils/Text'
 import {
   BsInput as Input,
@@ -15,32 +14,14 @@ import {
   BsField as FormField,
 } from '../../../fields/widgets'
 
-const formProperties = {
-  form: FormNames.TRIP_CREATE_TRIP,
-  destroyOnUnmount: false,
-  validate,
-  initialValues: {
-    name: '',
-    tags: [],
-    dayInfo: 'TripDayInfos.HALF_DAY',
-    dailyTrips: [{
-      remind: '',
-      period: {
-        start: '08:00',
-        end: '21:00',
-      },
-    }],
-    uuid2data: {},
-  },
-}
-
-const CreateTripFormPage1 = ({ handleSubmit, ...props }) => {
+const PhaseIntro = props => {
   const {
     pristine,
     submitting,
     invalid,
     tripDayInfos,
     tripElements,
+    handleSubmit,
   } = props
 
   return (
@@ -49,6 +30,7 @@ const CreateTripFormPage1 = ({ handleSubmit, ...props }) => {
       defaultLabelDimensions={{ sm: 2 }}
       defaultFieldDimensions={{ sm: 6 }}
       onSubmit={handleSubmit}
+      preventEnter={true}
     >
       <Field
         name="name"
@@ -56,7 +38,7 @@ const CreateTripFormPage1 = ({ handleSubmit, ...props }) => {
         label={<Text id={'trip.createTrip.form.name'}/>}
         adapter={Input}
         type="text"
-        placeholder="Text"
+        placeholder=""
       />
       <Field
         name="price"
@@ -64,7 +46,7 @@ const CreateTripFormPage1 = ({ handleSubmit, ...props }) => {
         label={<Text id={'trip.createTrip.form.price'}/>}
         adapter={Input}
         type="number"
-        placeholder="Number"
+        placeholder=""
       />
       <Field
         name="dayInfo"
@@ -106,4 +88,4 @@ const CreateTripFormPage1 = ({ handleSubmit, ...props }) => {
   )
 }
 
-export default reduxForm(formProperties)(CreateTripFormPage1)
+export default reduxForm(FormProperties)(PhaseIntro)

@@ -1,0 +1,21 @@
+@import '../../../../styles/index';
+
+.container {
+  @include flex-col-center;
+  padding: 20px;
+}
+
+.img-done {
+  @include bg-contain('createsitepage/icon_finish.png', 150px, 150px);
+  margin: 0 auto 30px;
+}
+
+.comment {
+  @include font-size-medium;
+  margin-bottom: 30px;
+}
+
+.btn {
+  width: auto;
+  padding: 8px 20px;
+}

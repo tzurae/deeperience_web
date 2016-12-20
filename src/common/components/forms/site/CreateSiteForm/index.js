@@ -4,6 +4,7 @@ import PhaseIntro from '../PhaseIntro'
 import PhaseMainSite from '../PhaseMainSite'
 import PhaseSubSite from '../PhaseSubSite'
 import PhaseOtherInfo from '../PhaseOtherInfo'
+import PhaseDone from '../PhaseDone'
 import { getOptions } from '../../../../utils/getI18nValue'
 import SiteAPI from '../../../../api/site'
 
@@ -14,11 +15,7 @@ const CreateSiteForm = props => {
     page,
     messages,
     nextPage,
-    previousPage,
     values,
-    updateForm,
-    subsiteActive,
-    updateSubsiteActive,
   } = props
 
   const { TripDayInfos, TripElements } =
@@ -45,16 +42,12 @@ const CreateSiteForm = props => {
       {page === 1 &&
       <PhaseIntro
         onSubmit={nextPage}
-        previousPage={previousPage}
-        updateForm={updateForm}
         {...props}
       />
       }
       {page === 2 &&
       <PhaseMainSite
         onSubmit={nextPage}
-        previousPage={previousPage}
-        updateForm={updateForm}
         markers={
           values.getIn(['mainSite', 'googleInfo', 'position']) ?
           [values.getIn(['mainSite', 'googleInfo', 'position'])] :
@@ -66,27 +59,26 @@ const CreateSiteForm = props => {
       {page === 3 &&
       <PhaseSubSite
         onSubmit={nextPage}
-        previousPage={previousPage}
-        updateForm={updateForm}
         markers={subsiteMarkers}
-        subsiteActive={subsiteActive}
-        updateSubsiteActive={updateSubsiteActive}
         {...props}
       />
       }
       {page === 4 &&
       <PhaseOtherInfo
         onSubmit={data => {
+          console.log('asdas')
+          console.log(data)
           SiteAPI(apiEngine)
           .createSite(data.toJS())
           .then(json => {
+            console.log(json)
             if (json.ok) nextPage()
           })
         }}
-        previousPage={previousPage}
         {...props}
       />
       }
+      {page === 5 && <PhaseDone/>}
     </div>
   )
 }

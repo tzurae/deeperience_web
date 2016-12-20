@@ -14,65 +14,45 @@
  */
 /* eslint-disable react/prefer-stateless-function */
 import React from 'react'
-import { connect } from 'react-redux'
-import FormNames from '../../../../constants/FormNames'
-import CreateTripFormPage1 from '../CreateTripFormPage1'
-import CreateTripFormPage2 from '../CreateTripFormPage2'
-import CreateTripFormPage3 from '../CreateTripFormPage3'
+import PhaseIntro from '../PhaseIntro'
+import PhaseTripBranch from '../PhaseTripBranch'
 import { getOptions } from '../../../../utils/getI18nValue'
 
-const mapStateToProps = state => ({
-  createTripForm: state.form[FormNames.TRIP_CREATE_TRIP],
-  messages: state.global.messages,
-})
-
 // http://redux-form.com/6.2.0/examples/wizard/
-class CreateTripForm extends React.Component {
+const CreateTripForm = props => {
+  const {
+    // apiEngine,
+    page,
+    messages,
+    nextPage,
+    values,
+  } = props
 
-  render() {
-    const {
-      page,
-      messages,
-      nextPage,
-      previousPage,
-      createTripForm,
-    } = this.props
+  const { TripDayInfos, TripElements } = getOptions(messages, ['TripDayInfos', 'TripElements'])
+  TripElements.splice(0, 1) // remove ANY
 
-    const { TripDayInfos, TripElements } = getOptions(messages.toJS(), ['TripDayInfos', 'TripElements'])
-    TripElements.splice(0, 1) // remove ANY
-
-    let values
-
-    if (createTripForm) {
-      values = createTripForm.values
-    }
-
-    return (
-      <div>
-        {page === 0 && <pre>{JSON.stringify(values, null, 2)}</pre>}
-        {page === 0 &&
-        <CreateTripFormPage1
-          onSubmit={nextPage}
-          {...this.props}
-          tripDayInfos={TripDayInfos}
-          tripElements={TripElements}
-        />
-        }
-        {page === 1 &&
-        <CreateTripFormPage2
-          nextPage={nextPage}
-          previousPage={previousPage}
-          {...this.props}/>
-        }
-        {page === 2 &&
-        <CreateTripFormPage3
-          onSubmit={nextPage}
-          previousPage={previousPage}
-          {...this.props}/>
-        }
-      </div>
-    )
-  }
+  return (
+    <div>
+      <p>Form Value</p>
+      <pre>{JSON.stringify(values.toJS(), null, 2)}</pre>
+      {page === 0 &&
+      <PhaseIntro
+        onSubmit={nextPage}
+        tripDayInfos={TripDayInfos}
+        tripElements={TripElements}
+        {...props}
+      />
+      }
+      {page === 1 &&
+      <PhaseTripBranch
+        onSubmit={nextPage}
+        formValue={values} // ????? don't know why 'values' can't be passed in
+        {...props}
+      />
+      }
+      {page === 2 && <div/>}
+    </div>
+  )
 }
 
-export default connect(mapStateToProps)(CreateTripForm)
+export default CreateTripForm

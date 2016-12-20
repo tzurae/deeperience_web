@@ -13,6 +13,7 @@ import * as reduxFormActions from '../../../reducers/form/reduxFormActions'
 import * as siteActions from '../../../reducers/site/siteActions'
 import { CreateSubNav } from '../../../components/utils/SubNavigation'
 import { BranchTitle } from './assets'
+import styles from './styles.scss'
 
 const actions = [
   reduxFormActions,
@@ -43,57 +44,55 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-class CreateSitePage extends React.Component {
-  nextPage() {
-    this.props.actions.createSiteNextPage()
-  }
+const CreateSitePage = props => {
+  const {
+    page,
+    done,
+    actions,
+  } = props
 
-  previousPage() {
-    this.props.actions.createSitePreviousPage()
-  }
-
-  render() {
-    const {
-      apiEngine,
-      page,
-      messages,
-      done,
-      values,
-      subsiteActive,
-    } = this.props
-
-    return (
-      <PageLayout subNav={<CreateSubNav activeTab={0}/>}>
-        <PanelContainer>
-          <Col md={2}>
-            <Panel2 title="nav.trip.createSite">
-              <PhaseBranch
-                done={done}
-                nodes={BranchTitle}
-                active={page}
-              />
-            </Panel2>
-          </Col>
-          <Col md={7}>
-            <Panel1 title={BranchTitle[page]}>
-              <CreateSiteForm
-                apiEngine={apiEngine}
-                page={page}
-                nextPage={::this.nextPage}
-                previousPage={::this.previousPage}
-                messages={messages}
-                values={values}
-                subsiteActive={subsiteActive}
-                updateSubsiteActive={this.props.actions.createSiteSetSubsiteActive}
-                updateForm={this.props.actions.change}
-              />
-            </Panel1>
-          </Col>
-          <Col md={3} />
-        </PanelContainer>
-      </PageLayout>
+  const nextPage = () => {
+    actions.createSiteSetDone(
+      done.map((value, index) => index === page ? true : value)
     )
+    actions.createSiteNextPage()
   }
+
+  const previousPage = () => {
+    actions.createSitePreviousPage()
+  }
+
+  return (
+    <PageLayout subNav={<CreateSubNav activeTab={0}/>}>
+      <PanelContainer>
+        <Col md={2}>
+          <Panel2 title="nav.trip.createSite">
+            <PhaseBranch
+              done={done}
+              nodes={BranchTitle}
+              active={page}
+            />
+          </Panel2>
+        </Col>
+        <Col md={7}>
+          <Panel1
+            title={BranchTitle[page]}
+            underlineClass={page === 5 && styles.none}
+            titleClass={page === 5 && styles.none}
+          >
+            <CreateSiteForm
+              updateSubsiteActive={actions.createSiteSetSubsiteActive}
+              updateForm={actions.change}
+              nextPage={nextPage}
+              previousPage={previousPage}
+              {...props}
+            />
+          </Panel1>
+        </Col>
+        <Col md={3} />
+      </PanelContainer>
+    </PageLayout>
+  )
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateSitePage)

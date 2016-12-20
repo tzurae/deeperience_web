@@ -110,7 +110,7 @@ const PhaseOtherInfo = props => {
         <FormButton
           type="submit"
           disabled={pristine || submitting || invalid}
-          textId="common.nextStep"
+          textId="trip.createSite"
         />
       </FormFooter>
     </Form>

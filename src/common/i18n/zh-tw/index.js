@@ -40,11 +40,11 @@ export default {
   'page.last': '最後一頁',
 
   'trip.createTrip': '建立旅程',
-  'trip.createTrip.title1': '旅程簡介',
-  'trip.createTrip.title2': '景點規劃',
-  'trip.createTrip.title3': '封面圖片',
-  'trip.createTrip.title4': '預覽',
-  'trip.createTrip.title5': '完成',
+  'trip.createTrip.intro': '旅程簡介',
+  'trip.createTrip.branch': '景點規劃',
+  'trip.createTrip.image': '封面圖片',
+  'trip.createTrip.preview': '預覽',
+  'trip.createTrip.finish': '完成',
   'trip.createTrip.help': '貼心小建議',
   'trip.createTrip.mySite': '我的景點',
   'trip.createTrip.form.name': '旅程名稱',
@@ -124,6 +124,7 @@ export default {
   '當顧客付款完，Deeperience 會自動通知您，請耐心等候！',
   'order.recvBalance.finishPay': '顧客已經付完款囉！',
 
+  'trip.createSite': '建立景點',
   'trip.createSite.name': '景點名稱',
   'trip.createSite.intro': '景點總覽',
   'trip.createSite.mainSite': '主要景點',
@@ -145,6 +146,8 @@ export default {
   'trip.createSite.otherInfo.recentActivity.date': '日期和時間',
   'trip.createSite.otherInfo.recentActivity.content': '內容',
   'trip.createSite.otherInfo.recentActivity.add': '+ 新增近期活動',
+  'trip.createSite.done.comment': '恭喜！您已建立完成您的專屬行程',
+  'trip.createSite.done.manage': '管理景點',
 
   'login.email': '信箱',
   'login.password': '密碼',

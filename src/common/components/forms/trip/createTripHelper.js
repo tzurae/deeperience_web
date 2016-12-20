@@ -1,7 +1,16 @@
-
+import { fromJS } from 'immutable'
 import _ from 'underscore'
 
 export function calculateTripInfo(routes, startSites, allSites, uuid2data) {
+  // temporary hacky code
+
+  routes = routes.toJS()
+  startSites = startSites.toJS()
+  allSites = allSites.toJS()
+  uuid2data = uuid2data.toJS()
+
+  // temporary hacky code
+
   const allInfo = [] // array by day
   startSites.forEach((startSiteuuid, dayIndex) => {  // can have many days
     // frontQueue: {uuid: node uuid, xpos, ypos}
@@ -77,5 +86,10 @@ export function calculateTripInfo(routes, startSites, allSites, uuid2data) {
     })
     allInfo.push({ ylayer, sites, routes: dailyRoutes })
   })
-  return allInfo
+
+  // temporary hacky code
+
+  return fromJS(allInfo)
+
+  // temporary hacky code
 }

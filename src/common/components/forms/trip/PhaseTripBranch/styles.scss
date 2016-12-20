@@ -25,8 +25,10 @@
 }
 
 .site-div-btn {
+  @include font-size-big;
   display: inline-block;
   margin: 0 3px;
+  color: $color-main !important;
 }
 
 .site-div-msg {
@@ -71,6 +73,11 @@
   padding: 5px;
   border: 1px none $color-border;
   border-bottom-style: solid;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $alto;
+  }
 }
 
 .float-site-list-item-name {
@@ -80,6 +87,7 @@
 .float-site-list-item-icon {
   @include font-size-medium;
   margin-right: 10px;
+  color: $color-main !important;
 }
 
 .float-site-list-title-div {
@@ -117,7 +125,14 @@
 
 .day-div-btn {
   display: inline-block;
-  margin: 0 6px;
+  margin: 0 8px;
+  color: $color-main;
+  border: solid 2px $color-main;
+  border-radius: 20px;
+}
+
+.day-div-btn-div {
+  margin: 0 10px;
 }
 
 .footer {
@@ -136,5 +151,5 @@
 }
 
 .choose-day-div {
-  @include flex-row;
+  @include flex-row-center;
 }
