@@ -1,4 +1,4 @@
-import { Map, List } from 'immutable'
+import { fromJS } from 'immutable'
 import FormNames from '../../../constants/FormNames'
 import validate from './createTripValidate'
 
@@ -6,7 +6,7 @@ export default {
   form: FormNames.TRIP_CREATE_TRIP,
   destroyOnUnmount: false,
   validate,
-  initialValues: Map({
+  initialValues: fromJS({
     name: '',
     tags: [],
     dayInfo: 'TripDayInfos.HALF_DAY',

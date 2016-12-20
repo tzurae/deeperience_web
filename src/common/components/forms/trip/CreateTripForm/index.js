@@ -15,18 +15,16 @@
 /* eslint-disable react/prefer-stateless-function */
 import React from 'react'
 import PhaseIntro from '../PhaseIntro'
-import PhaseBranch from '../PhaseBranch'
-import CreateTripFormPage3 from '../CreateTripFormPage3'
+import PhaseTripBranch from '../PhaseTripBranch'
 import { getOptions } from '../../../../utils/getI18nValue'
 
 // http://redux-form.com/6.2.0/examples/wizard/
 const CreateTripForm = props => {
   const {
-    apiEngine,
+    // apiEngine,
     page,
     messages,
     nextPage,
-    previousPage,
     values,
   } = props
 
@@ -35,6 +33,7 @@ const CreateTripForm = props => {
 
   return (
     <div>
+      <p>Form Value</p>
       <pre>{JSON.stringify(values.toJS(), null, 2)}</pre>
       {page === 0 &&
       <PhaseIntro
@@ -45,22 +44,15 @@ const CreateTripForm = props => {
       />
       }
       {page === 1 &&
-      <PhaseBranch
+      <PhaseTripBranch
         onSubmit={nextPage}
-        previousPage={previousPage}
+        formValue={values} // ????? don't know why 'values' can't be passed in
         {...props}
       />
       }
+      {page === 2 && <div/>}
     </div>
   )
 }
-
-// {page === 2 &&
-// <CreateTripFormPage3
-//   onSubmit={nextPage}
-//   previousPage={previousPage}
-//   {...props}
-// />
-// }
 
 export default CreateTripForm

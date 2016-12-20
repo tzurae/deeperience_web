@@ -11,7 +11,7 @@ const {
 
 const initialState = Immutable.fromJS({
   createPage: {
-    page: 5,
+    page: 0,
     done: new Array(...{ length: 6 }).map(() => false),
     subsiteActiveArr: [],
   },

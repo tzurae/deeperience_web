@@ -46,12 +46,8 @@ const mapDispatchToProps = dispatch => {
 
 const CreateSitePage = props => {
   const {
-    apiEngine,
     page,
-    messages,
     done,
-    values,
-    subsiteActive,
     actions,
   } = props
 
@@ -85,15 +81,11 @@ const CreateSitePage = props => {
             titleClass={page === 5 && styles.none}
           >
             <CreateSiteForm
-              apiEngine={apiEngine}
-              page={page}
-              nextPage={nextPage}
-              previousPage={previousPage}
-              messages={messages}
-              values={values}
-              subsiteActive={subsiteActive}
               updateSubsiteActive={actions.createSiteSetSubsiteActive}
               updateForm={actions.change}
+              nextPage={nextPage}
+              previousPage={previousPage}
+              {...props}
             />
           </Panel1>
         </Col>

@@ -34,13 +34,17 @@ export default keyMirror({
   SET_CREATE_TRIP_DATA: null,
   RESET_CREATE_TRIP_DATA: null,
 
-  CREATE_TRIP_ERROR: null,
+  CREATE_TRIP_BRANCH_ERROR: null,
   CREATE_TRIP_NEXT_PAGE: null,
   CREATE_TRIP_PREVIOUS_PAGE: null,
   CREATE_TRIP_SET_PAGE: null,
   CREATE_TRIP_SET_DONE: null,
+  CREATE_TRIP_SET_SUBMIT_ERROR: null,
+  CREATE_TRIP_SET_SHOW_DAY: null,
+  CREATE_TRIP_SET_TOTAL_DAY: null,
+  CREATE_TRIP_SET_FLOAT_WINDOW: null,
 
-  // ------ site ------
+  // ------ site ------
   CREATE_SITE_ERROR: null,
   CREATE_SITE_NEXT_PAGE: null,
   CREATE_SITE_PREVIOUS_PAGE: null,
