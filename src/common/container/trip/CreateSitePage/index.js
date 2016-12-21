@@ -13,6 +13,7 @@ import * as reduxFormActions from '../../../reducers/form/reduxFormActions'
 import * as siteActions from '../../../reducers/site/siteActions'
 import { CreateSubNav } from '../../../components/utils/SubNavigation'
 import { BranchTitle } from './assets'
+import styles from './styles.scss'
 
 const actions = [
   reduxFormActions,
@@ -45,6 +46,9 @@ const mapDispatchToProps = dispatch => {
 
 class CreateSitePage extends React.Component {
   nextPage() {
+    this.props.actions.createSiteSetDone(
+      this.props.done.map((value, index) => index === this.props.page ? true : value)
+    )
     this.props.actions.createSiteNextPage()
   }
 
@@ -75,7 +79,11 @@ class CreateSitePage extends React.Component {
             </Panel2>
           </Col>
           <Col md={7}>
-            <Panel1 title={BranchTitle[page]}>
+            <Panel1
+              title={BranchTitle[page]}
+              underlineClass={page === 5 && styles.none}
+              titleClass={page === 5 && styles.none}
+            >
               <CreateSiteForm
                 apiEngine={apiEngine}
                 page={page}

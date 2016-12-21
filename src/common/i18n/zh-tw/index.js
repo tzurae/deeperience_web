@@ -124,6 +124,7 @@ export default {
   '當顧客付款完，Deeperience 會自動通知您，請耐心等候！',
   'order.recvBalance.finishPay': '顧客已經付完款囉！',
 
+  'trip.createSite': '建立景點',
   'trip.createSite.name': '景點名稱',
   'trip.createSite.intro': '景點總覽',
   'trip.createSite.mainSite': '主要景點',
@@ -145,6 +146,8 @@ export default {
   'trip.createSite.otherInfo.recentActivity.date': '日期和時間',
   'trip.createSite.otherInfo.recentActivity.content': '內容',
   'trip.createSite.otherInfo.recentActivity.add': '+ 新增近期活動',
+  'trip.createSite.done.comment': '恭喜！您已建立完成您的專屬行程',
+  'trip.createSite.done.manage': '管理景點',
 
   'login.email': '信箱',
   'login.password': '密碼',
