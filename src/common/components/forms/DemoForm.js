@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { fromJS } from 'immutable'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import { Field, reduxForm } from 'redux-form/immutable'
@@ -30,7 +31,7 @@ import {
 const validate = (values) => {
   const errors = {}
 
-  if (!values.someText) {
+  if (!values.get('someText')) {
     errors.someText = 'Required'
   }
 
@@ -40,22 +41,11 @@ const validate = (values) => {
 class DemoForm extends Component {
   constructor() {
     super()
-    this.handleSubmit = this._handleSubmit.bind(this)
+    this.handleSubmit = ::this._handleSubmit
   }
 
   _handleSubmit(formData) {
     console.log('formData', formData)
-    // let { dispatch, apiEngine } = this.props;
-    //
-    // return someAPI(apiEngine)
-    //   .doSomething(formData)
-    //   .catch((err) => {
-    //     dispatch(pushErrors(err));
-    //     throw err;
-    //   })
-    //   .then((json) => {
-    //     console.log('json', json);
-    //   });
   }
 
   render() {
@@ -66,8 +56,10 @@ class DemoForm extends Component {
       pristine,
       submitting,
       invalid,
-      demoForm: { values },
+      demoForm,
     } = this.props
+
+    const values = demoForm.get('values')
 
     return (
       <Form
@@ -86,7 +78,7 @@ class DemoForm extends Component {
           File object is not going to show here.
           Please submit the form and check the console.
         </Alert>
-        <pre>{JSON.stringify(values, null, 2)}</pre>
+        <pre>{JSON.stringify(values.toJS(), null, 2)}</pre>
         <Field
           name="someText"
           component={FormField}
@@ -166,7 +158,7 @@ class DemoForm extends Component {
           adapter={Plaintext}
           text={
             'range slider value is ' +
-            `${values.someRangeSlider.min} ~ ${values.someRangeSlider.max}`
+            `${values.getIn(['someRangeSlider', 'min'])} ~ ${values.getIn(['someRangeSlider', 'max'])}`
           }
         />
         <Field
@@ -286,14 +278,14 @@ class DemoForm extends Component {
 export default reduxForm({
   form: FormNames.DEMO,
   validate,
-  initialValues: {
+  initialValues: fromJS({
     somePassword: 'xxxxxxxxxx',
     someRangeSlider: {
       min: 10,
       max: 30,
     },
-  },
+  }),
 })(connect(state => ({
-  apiEngine: state.global.apiEngine,
-  demoForm: state.form[FormNames.DEMO],
+  apiEngine: state.getIn(['global', 'apiEngine']),
+  demoForm: state.getIn(['form', FormNames.DEMO]),
 }))(DemoForm))
