@@ -28,6 +28,8 @@ const PhaseMainSite = props => {
     handleSubmit,
     updateForm,
     markers,
+    mainSiteEditorContent,
+    updateMainSiteEditor,
   } = props
 
   const updateIntro = str =>
@@ -85,8 +87,10 @@ const PhaseMainSite = props => {
       </div>
       <Field
         name="mainSite.introduction"
-        update={updateIntro}
         component={Editor}
+        updateEditor={updateMainSiteEditor}
+        update={updateIntro}
+        content={mainSiteEditorContent}
         height={300}
       />
       <FormFooter

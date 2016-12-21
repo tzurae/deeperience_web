@@ -30,6 +30,8 @@ const mapStateToProps = state => {
     done: state.getIn(['site', 'createPage', 'done']),
     values: form ? form.get('values') : Map({}),
     subsiteActive: state.getIn(['site', 'createPage', 'subsiteActiveArr']),
+    introEditorContent: state.getIn(['site', 'createPage', 'introEditorContent']),
+    mainSiteEditorContent: state.getIn(['site', 'createPage', 'mainSiteEditorContent']),
   }
 }
 
@@ -85,6 +87,8 @@ const CreateSitePage = props => {
               updateForm={actions.change}
               nextPage={nextPage}
               previousPage={previousPage}
+              updateIntroEditor={actions.createSiteUpdateIntroEditor}
+              updateMainSiteEditor={actions.createSiteUpdateMainSiteEditor}
               {...props}
             />
           </Panel1>
