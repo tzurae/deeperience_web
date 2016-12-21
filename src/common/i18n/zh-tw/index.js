@@ -42,7 +42,7 @@ export default {
   'trip.createTrip': '建立旅程',
   'trip.createTrip.intro': '旅程簡介',
   'trip.createTrip.branch': '景點規劃',
-  'trip.createTrip.image': '封面圖片',
+  'trip.createTrip.image': '圖片',
   'trip.createTrip.preview': '預覽',
   'trip.createTrip.finish': '完成',
   'trip.createTrip.help': '貼心小建議',
@@ -50,6 +50,7 @@ export default {
   'trip.createTrip.form.name': '旅程名稱',
   'trip.createTrip.form.price': '服務費',
   'trip.createTrip.form.dayInfo': '天數',
+  'trip.createTrip.image.cover': '封面圖片',
 
   customize: '客製旅程',
   'customize.createDemand': '建立需求',

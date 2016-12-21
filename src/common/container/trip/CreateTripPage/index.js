@@ -57,12 +57,12 @@ const mapDispatchToProps = dispatch => {
 class CreateTripPage extends React.Component {
   constructor(props) {
     super(props)
-    this.props.actions.resetCreateTripData()
     this.nextPage = ::this.nextPage
     this.previousPage = ::this.previousPage
   }
 
   componentWillMount() {
+    this.props.actions.resetCreateTripData()
     if (process.env.BROWSER) {
       tripAPI(this.props.apiEngine)
         .listGuideSites()

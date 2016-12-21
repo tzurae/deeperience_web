@@ -16,6 +16,7 @@
 import React from 'react'
 import PhaseIntro from '../PhaseIntro'
 import PhaseTripBranch from '../PhaseTripBranch'
+import PhasePic from '../PhasePic'
 import { getOptions } from '../../../../utils/getI18nValue'
 
 // http://redux-form.com/6.2.0/examples/wizard/
@@ -50,7 +51,11 @@ const CreateTripForm = props => {
         {...props}
       />
       }
-      {page === 2 && <div/>}
+      {page === 2 &&
+      <PhasePic
+        {...props}
+      />
+      }
     </div>
   )
 }
