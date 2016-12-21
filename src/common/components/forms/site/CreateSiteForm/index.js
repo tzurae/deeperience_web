@@ -22,6 +22,10 @@ const CreateSiteForm = props => {
     updateForm,
     subsiteActive,
     updateSubsiteActive,
+    introEditorContent,
+    updateIntroEditor,
+    mainSiteEditorContent,
+    updateMainSiteEditor,
   } = props
 
   const { TripDayInfos, TripElements } =
@@ -34,15 +38,9 @@ const CreateSiteForm = props => {
         .filter(value => value.get('googleInfo'))
         .map(value => value.getIn(['googleInfo', 'position'])) : []
 
-  const update = (str) => updateForm(FormNames.TRIP_CREATE_SITE, 'introduction', str)
-
   return (
     <div>
       <pre>{JSON.stringify(values.toJS(), null, 2)}</pre>
-
-      <div style={{ display: page === 1 ? 'block' : 'none' }}>
-        <Editor update={update} />
-      </div>
 
       {page === 0 &&
       <PhaseName
@@ -53,18 +51,22 @@ const CreateSiteForm = props => {
       />
       }
       {page === 1 &&
-      <PhaseIntro
-        onSubmit={nextPage}
-        previousPage={previousPage}
-        updateForm={updateForm}
-        {...props}
-      />
+       <PhaseIntro
+         onSubmit={nextPage}
+         previousPage={previousPage}
+         updateForm={updateForm}
+         introEditorContent={introEditorContent}
+         updateIntroEditor={updateIntroEditor}
+         {...props}
+       />
       }
       {page === 2 &&
       <PhaseMainSite
         onSubmit={nextPage}
         previousPage={previousPage}
         updateForm={updateForm}
+        mainSiteEditorContent={mainSiteEditorContent}
+        updateMainSiteEditor={updateMainSiteEditor}
         markers={
           values.getIn(['mainSite', 'googleInfo', 'position']) ?
           [values.getIn(['mainSite', 'googleInfo', 'position'])] :

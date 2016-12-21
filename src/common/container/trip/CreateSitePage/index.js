@@ -30,6 +30,8 @@ const mapStateToProps = state => {
     done: state.getIn(['site', 'createPage', 'done']),
     values: form ? form.get('values') : Map({}),
     subsiteActive: state.getIn(['site', 'createPage', 'subsiteActiveArr']),
+    introEditorContent: state.getIn(['site', 'createPage', 'introEditorContent']),
+    mainSiteEditorContent: state.getIn(['site', 'createPage', 'mainSiteEditorContent']),
   }
 }
 
@@ -64,6 +66,8 @@ class CreateSitePage extends React.Component {
       done,
       values,
       subsiteActive,
+      introEditorContent,
+      mainSiteEditorContent,
     } = this.props
 
     return (
@@ -94,6 +98,10 @@ class CreateSitePage extends React.Component {
                 subsiteActive={subsiteActive}
                 updateSubsiteActive={this.props.actions.createSiteSetSubsiteActive}
                 updateForm={this.props.actions.change}
+                introEditorContent={introEditorContent}
+                updateIntroEditor={this.props.actions.createSiteUpdateIntroEditor}
+                mainSiteEditorContent={mainSiteEditorContent}
+                updateMainSiteEditor={this.props.actions.createSiteUpdateMainSiteEditor}
               />
             </Panel1>
           </Col>

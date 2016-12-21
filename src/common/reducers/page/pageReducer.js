@@ -20,16 +20,14 @@ const initialState = Map({
 export default (state = initialState, action) => {
   switch (action.type) {
     case SET_PAGE:
-      return
-      state.set([action.resourceName], action.page || defaultPage)
+      return state.set([action.resourceName], action.page || defaultPage)
       // {
       //   ...state,
       //   [action.resourceName]: action.page || defaultPage,
       // }
     case SET_CURRENT_PAGE:
       // const page = state[action.resourceName]
-      return
-      state.set([action.resourceName], action.currentPage)
+      return state.set([action.resourceName], action.currentPage)
       // {
       //   ...state,
       //   [action.resourceName]: {

@@ -1,4 +1,5 @@
 import Immutable from 'immutable'
+import { EditorState } from 'draft-js'
 
 const {
   CREATE_SITE_ERROR,
@@ -7,13 +8,17 @@ const {
   CREATE_SITE_SET_PAGE,
   CREATE_SITE_SET_SUBSITE_ACTIVE,
   CREATE_SITE_SET_DONE,
+  CREATE_SITE_UPDATE_INTRO_EDITOR,
+  CREATE_SITE_UPDATE_MAIN_SITE_EDITOR,
 } = require('../../constants/ActionTypes').default
 
 const initialState = Immutable.fromJS({
   createPage: {
-    page: 5,
+    page: 0,
     done: new Array(...{ length: 6 }).map(() => false),
     subsiteActiveArr: [],
+    introEditorContent: EditorState.createEmpty().getCurrentContent().toJS(),
+    mainSiteEditorContent: EditorState.createEmpty().getCurrentContent().toJS(),
   },
   error: '',
 })
@@ -37,6 +42,12 @@ export default (state = initialState, action) => {
 
     case CREATE_SITE_SET_DONE:
       return state.setIn(['createPage', 'done'], action.payload.done)
+
+    case CREATE_SITE_UPDATE_INTRO_EDITOR:
+      return state.setIn(['createPage', 'introEditorContent'], action.payload.nextContent)
+
+    case CREATE_SITE_UPDATE_MAIN_SITE_EDITOR:
+      return state.setIn(['createPage', 'mainSiteEditorContent'], action.payload.nextContent)
 
     default:
       return state

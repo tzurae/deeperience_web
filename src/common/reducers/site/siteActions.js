@@ -5,6 +5,8 @@ const {
   CREATE_SITE_SET_PAGE,
   CREATE_SITE_SET_SUBSITE_ACTIVE,
   CREATE_SITE_SET_DONE,
+  CREATE_SITE_UPDATE_INTRO_EDITOR,
+  CREATE_SITE_UPDATE_MAIN_SITE_EDITOR,
 } = require('../../constants/ActionTypes').default
 
 export const createSiteError = error => ({
@@ -29,16 +31,36 @@ export const createSiteSetPage = page => ({
   },
 })
 
-export const createSiteSetSubsiteActive = arr => ({
-  type: CREATE_SITE_SET_SUBSITE_ACTIVE,
-  payload: {
-    arr,
-  },
-})
-
 export const createSiteSetDone = done => ({
   type: CREATE_SITE_SET_DONE,
   payload: {
     done,
   },
 })
+
+export const createSiteSetSubsiteActive = (arr) => {
+  return {
+    type: CREATE_SITE_SET_SUBSITE_ACTIVE,
+    payload: {
+      arr,
+    },
+  }
+}
+
+export const createSiteUpdateIntroEditor = (nextContent) => {
+  return {
+    type: CREATE_SITE_UPDATE_INTRO_EDITOR,
+    payload: {
+      nextContent,
+    },
+  }
+}
+
+export const createSiteUpdateMainSiteEditor = (nextContent) => {
+  return {
+    type: CREATE_SITE_UPDATE_MAIN_SITE_EDITOR,
+    payload: {
+      nextContent,
+    },
+  }
+}

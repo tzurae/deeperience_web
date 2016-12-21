@@ -46,6 +46,8 @@ export default keyMirror({
   CREATE_SITE_SET_PAGE: null,
   CREATE_SITE_SET_SUBSITE_ACTIVE: null,
   CREATE_SITE_SET_DONE: null,
+  CREATE_SITE_UPDATE_INTRO_EDITOR: null,
+  CREATE_SITE_UPDATE_MAIN_SITE_EDITOR: null,
 
   // ------ custom ------
   CUSTOM_PHASE_NEXT_PAGE: null,

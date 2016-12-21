@@ -121,7 +121,7 @@ export default ({ app }) => {
   app.put('/api/trips/:tripId', authRequired, bodyParser.json, tripController.update) // todo
   app.delete('/api/trips/:tripId', authRequired, bodyParser.json, tripController.remove)
 
-  app.post('/api/trips/image',
+  app.post('/api/upload/image',
     authRequired,
     fileUpload.disk({
       destination: 'tmp/{userId}',

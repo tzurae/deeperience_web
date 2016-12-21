@@ -1,7 +1,10 @@
 import React from 'react'
 import { reduxForm } from 'redux-form/immutable'
+import { Field } from 'redux-form'
+import FormNames from '../../../../constants/FormNames'
 import FormProperties from '../siteFormProperties'
 import FormButton from '../../../utils/FormButton'
+import Editor from '../../../utils/Editor'
 import {
   BsForm as Form,
   BsFormFooter as FormFooter,
@@ -15,7 +18,12 @@ const PhaseIntro = props => {
     invalid,
     previousPage,
     handleSubmit,
+    updateForm,
+    updateIntroEditor,
+    introEditorContent,
   } = props
+
+  const updateIntro = str => updateForm(FormNames.TRIP_CREATE_SITE, 'introduction', str)
 
   return (
     <Form
@@ -25,6 +33,13 @@ const PhaseIntro = props => {
       onSubmit={handleSubmit}
       preventEnter={true}
     >
+      <Field
+        name="introduction"
+        component={Editor}
+        updateEditor={updateIntroEditor}
+        update={updateIntro}
+        content={introEditorContent}
+      />
       <FormFooter
         labelDimensions={{ sm: 0 }}
         fieldDimensions={{ sm: 12 }}

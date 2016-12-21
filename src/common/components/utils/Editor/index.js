@@ -3,21 +3,35 @@ import { connect } from 'react-redux'
 import FontAwesome from 'react-fontawesome'
 import classname from 'classnames'
 import { stateToHTML } from 'draft-js-export-html'
-import { Editor as DEditor, EditorState, RichUtils, Entity, AtomicBlockUtils } from 'draft-js'
-import tripAPI from '../../../api/trip'
+import { Editor as DEditor, RichUtils, Entity, AtomicBlockUtils, EditorState } from 'draft-js'
+import uploadAPI from '../../../api/upload'
+import generateEditorState from './generateEditorState'
 import styles from './styles.scss'
-
-let dispatchTimer = null
 
 const mapStateToProps = state => ({
   apiEngine: state.getIn(['global', 'apiEngine']),
 })
 
+let dispatchTimer = null
+
 class Editor extends React.Component {
   constructor(props) {
     super(props)
+
+    let plainContent = this.props.content
+
+    // if plainContent not exist, initial it
+    if(!plainContent){
+      plainContent = EditorState.createEmpty().getCurrentContent()
+    }
+
+    // turn to plain object
+    if(plainContent.toJS){
+      plainContent = plainContent.toJS()
+    }
+
     this.state = {
-      editorState: EditorState.createEmpty(),
+      editorState: generateEditorState(plainContent),
     }
 
     // functions about changing state
@@ -39,8 +53,11 @@ class Editor extends React.Component {
       clearTimeout(dispatchTimer)
     }
     dispatchTimer = setTimeout(() => {
-      const state = this.state.editorState.getCurrentContent()
-      const htmlStr = stateToHTML(state)
+      const contentState = this.state.editorState.getCurrentContent()
+      const htmlStr = stateToHTML(contentState)
+      if(this.props.updateEditor){
+        this.props.updateEditor(contentState.toJS())
+      }
       this.props.update(htmlStr)
     }, 500)
   }
@@ -48,7 +65,7 @@ class Editor extends React.Component {
   // upload image to server
   _uploadImage(file) {
     const { apiEngine } = this.props
-    tripAPI(apiEngine)
+    uploadAPI(apiEngine)
       .uploadImage(file)
       .then(json => {
         // image url
