@@ -16,11 +16,6 @@ const CreateSiteForm = props => {
     messages,
     nextPage,
     values,
-    updateForm,
-    introEditorContent,
-    updateIntroEditor,
-    mainSiteEditorContent,
-    updateMainSiteEditor,
   } = props
 
   const { TripDayInfos, TripElements } =
@@ -48,20 +43,12 @@ const CreateSiteForm = props => {
       {page === 1 &&
        <PhaseIntro
          onSubmit={nextPage}
-         previousPage={previousPage}
-         updateForm={updateForm}
-         introEditorContent={introEditorContent}
-         updateIntroEditor={updateIntroEditor}
          {...props}
        />
       }
       {page === 2 &&
       <PhaseMainSite
         onSubmit={nextPage}
-        previousPage={previousPage}
-        updateForm={updateForm}
-        mainSiteEditorContent={mainSiteEditorContent}
-        updateMainSiteEditor={updateMainSiteEditor}
         markers={
           values.getIn(['mainSite', 'googleInfo', 'position']) ?
           [values.getIn(['mainSite', 'googleInfo', 'position'])] :

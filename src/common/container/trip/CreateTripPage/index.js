@@ -59,6 +59,7 @@ class CreateTripPage extends React.Component {
     super(props)
     this.nextPage = ::this.nextPage
     this.previousPage = ::this.previousPage
+    this.updateForm = ::this.updateForm
   }
 
   componentWillMount() {
@@ -91,6 +92,10 @@ class CreateTripPage extends React.Component {
     this.props.actions.createTripPreviousPage()
   }
 
+  updateForm(name, data) {
+    return this.props.actions.change(FormNames.TRIP_CREATE_TRIP, name, data)
+  }
+
   render() {
     const {
       page,
@@ -114,6 +119,7 @@ class CreateTripPage extends React.Component {
               <CreateTripForm
                 nextPage={this.nextPage}
                 previousPage={this.previousPage}
+                updateForm={this.updateForm}
                 {...this.props}
               />
             </Panel1>

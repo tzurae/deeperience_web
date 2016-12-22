@@ -36,7 +36,7 @@ export default {
             handleDbError(res)(({ _id }) => resolve(_id))
           )
       ))
-    ).then((raw) => {
+    ).then(raw => {
       guideSite.mainSite.googleInfo = raw[0]
       guideSite.subSites = guideSite.subSites.map((value, index) => ({
         ...value,

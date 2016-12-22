@@ -43,6 +43,8 @@ export default keyMirror({
   CREATE_TRIP_SET_SHOW_DAY: null,
   CREATE_TRIP_SET_TOTAL_DAY: null,
   CREATE_TRIP_SET_FLOAT_WINDOW: null,
+  CREATE_TRIP_SET_COVER_PIC: null,
+  CREATE_TRIP_SET_TREE_PIC: null,
 
   // ------ site ------
   CREATE_SITE_ERROR: null,

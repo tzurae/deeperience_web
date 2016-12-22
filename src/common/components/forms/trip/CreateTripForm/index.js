@@ -12,17 +12,17 @@
  * previousPage: 前一頁的 function
  *
  */
-/* eslint-disable react/prefer-stateless-function */
 import React from 'react'
 import PhaseIntro from '../PhaseIntro'
 import PhaseTripBranch from '../PhaseTripBranch'
 import PhasePic from '../PhasePic'
+import PhasePreview from '../PhasePreview'
+import PhaseDone from '../PhaseDone'
 import { getOptions } from '../../../../utils/getI18nValue'
 
 // http://redux-form.com/6.2.0/examples/wizard/
 const CreateTripForm = props => {
   const {
-    // apiEngine,
     page,
     messages,
     nextPage,
@@ -53,6 +53,19 @@ const CreateTripForm = props => {
       }
       {page === 2 &&
       <PhasePic
+        formValue={values}
+        {...props}
+      />
+      }
+      {page === 3 &&
+      <PhasePreview
+        formValue={values}
+        {...props}
+      />
+      }
+      {page === 4 &&
+      <PhaseDone
+        formValue={values}
         {...props}
       />
       }

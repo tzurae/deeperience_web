@@ -12,6 +12,8 @@ const {
   CREATE_TRIP_SET_SHOW_DAY,
   CREATE_TRIP_SET_TOTAL_DAY,
   CREATE_TRIP_SET_FLOAT_WINDOW,
+  CREATE_TRIP_SET_COVER_PIC,
+  CREATE_TRIP_SET_TREE_PIC,
 } = require('../../constants/ActionTypes').default
 
 export const setOwnSite = (sites: any) => ({
@@ -92,5 +94,19 @@ export const createTripSetFloatWindow = floatWindow => ({
   type: CREATE_TRIP_SET_FLOAT_WINDOW,
   payload: {
     floatWindow,
+  },
+})
+
+export const createTripSetCoverPic = (img :string) => ({
+  type: CREATE_TRIP_SET_COVER_PIC,
+  payload: {
+    img,
+  },
+})
+
+export const createTripSetTreePic = imgs => ({
+  type: CREATE_TRIP_SET_TREE_PIC,
+  payload: {
+    imgs,
   },
 })
