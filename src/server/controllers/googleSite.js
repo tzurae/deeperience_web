@@ -17,7 +17,7 @@ export default {
     })
 
     googleSite.save(
-      handleDbError(res)((googleSite) => {
+      handleDbError(res)(googleSite => {
         res.json({
           googleSite,
         })

@@ -67,8 +67,6 @@ const CreateSiteForm = props => {
       {page === 4 &&
       <PhaseOtherInfo
         onSubmit={data => {
-          console.log('asdas')
-          console.log(data)
           SiteAPI(apiEngine)
           .createSite(data.toJS())
           .then(json => {

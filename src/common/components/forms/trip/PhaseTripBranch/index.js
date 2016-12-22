@@ -77,7 +77,7 @@ const PhaseTripBranch = props => {
           })
         }
 
-        actions.arraySplice(FormNames.TRIP_CREATE_TRIP, 'dailyTrips', index, 1, {
+        actions.arraySplice(FormNames.TRIP_CREATE_TRIP, 'dailyTrips', index, 1, fromJS({
           ...trip.toJS(),
           startSite: startSites.get(index),
           routes: routes.get(index),
@@ -88,6 +88,7 @@ const PhaseTripBranch = props => {
             endTime: time.getIn([key, 'endTime']),
           })),
         })
+        )
       })
       nextPage()
     }
@@ -163,13 +164,14 @@ const PhaseTripBranch = props => {
     const newStartSites = startSites.push(newuuid)
     const newRoutes = routes.push(List([]))
 
-    actions.arrayPush(FormNames.TRIP_CREATE_TRIP, 'dailyTrips', {
+    actions.arrayPush(FormNames.TRIP_CREATE_TRIP, 'dailyTrips', fromJS({
       remind: '',
       period: {
         start: '08:00',
         end: '21:00',
       },
     })
+    )
 
     actions.createTripSetTotalDay(totalDay + 1)
     actions.setCreateTripData({

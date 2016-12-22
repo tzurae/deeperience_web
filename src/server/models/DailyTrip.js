@@ -4,12 +4,8 @@ import { TimeSchema } from './Time'
 export const DailyTripSchema = new mongoose.Schema({
   treePic: String,
   startSite: {
-    departedAt: TimeSchema,
-    from: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'GuideSite',
-      required: true,
-    },
+    type: String,
+    required: true,
   },
   remind: String,
   period: {
@@ -17,25 +13,27 @@ export const DailyTripSchema = new mongoose.Schema({
     end: TimeSchema,
   },
   routes: [{
-    depart: {
-      type: TimeSchema,
-      required: true,
-    },
     from: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'GuideSite',
-      required: true,
-    },
-    nextStopDepart: {
-      type: TimeSchema,
+      type: String,
       required: true,
     },
     to: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'GuideSite',
+      type: String,
       required: true,
     },
     remind: String,
+  }],
+  uuid2data: [{
+    uuid: {
+      type: String,
+      required: true,
+    },
+    gid: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'GuideSite',
+    },
+    startTime: String,
+    endTime: String,
   }],
 }, {
   versionKey: false,

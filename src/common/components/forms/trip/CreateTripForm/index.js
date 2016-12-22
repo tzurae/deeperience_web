@@ -18,11 +18,13 @@ import PhaseTripBranch from '../PhaseTripBranch'
 import PhasePic from '../PhasePic'
 import PhasePreview from '../PhasePreview'
 import PhaseDone from '../PhaseDone'
+import TripAPI from '../../../../api/trip'
 import { getOptions } from '../../../../utils/getI18nValue'
 
 // http://redux-form.com/6.2.0/examples/wizard/
 const CreateTripForm = props => {
   const {
+    apiEngine,
     page,
     messages,
     nextPage,
@@ -32,6 +34,7 @@ const CreateTripForm = props => {
   const { TripDayInfos, TripElements } = getOptions(messages, ['TripDayInfos', 'TripElements'])
   TripElements.splice(0, 1) // remove ANY
 
+  console.log(TripDayInfos)
   return (
     <div>
       <p>Form Value</p>
@@ -60,7 +63,18 @@ const CreateTripForm = props => {
       }
       {page === 3 &&
       <PhasePreview
-        onSubmit={nextPage}
+        onSubmit={data => {
+          /* eslint-disable */
+          let { uuid2data, ...send } = data.toJS()
+          /* eslint-enable */
+
+          TripAPI(apiEngine)
+            .createTrip(send)
+            .then(json => {
+              console.log(json)
+              if (!json.errors) nextPage()
+            })
+        }}
         formValue={values}
         {...props}
       />

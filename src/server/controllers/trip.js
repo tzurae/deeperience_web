@@ -1,36 +1,30 @@
-import path from 'path'
-import fs from 'fs'
-import uuid from 'uuid'
-import handleError, { handleDbError } from '../decorators/handleError'
+import { handleDbError } from '../decorators/handleError'
 import Trip, { TripSchema } from '../models/Trip'
 import Site from '../models/Site'
 import User from '../models/User'
 import filterAttribute from '../utils/filterAttribute'
 import getSaveObject from '../utils/getSaveObject'
 import getAttrFromSchema from '../utils/getAttrFromSchema'
-import uploadToS3 from '../utils/uploadToS3'
 
 const attributes = getAttrFromSchema(TripSchema)
 
 ;export default {
   create(req, res) {
-    let trip = {}
-    attributes.forEach(attr => {
-      trip[attr] = req.body[attr]
-    })
+    let trip = {
+      ...filterAttribute(req.body, attributes),
+      guide: req.user._id,
+    }
+
     trip = Trip({
       ...trip,
       updatedAt: new Date(),
       createdAt: new Date(),
     })
 
-    User.update(
-      { _id: req.user._id },
-      { $addToSet: { ownTrip: trip } },
-      handleDbError(res)((raw) => {
+    trip.save(
+      handleDbError(res)(trip => {
         res.json({
-          finish: raw.ok === 1,
-          modify: raw.nModified === 1,
+          trip,
         })
       })
     )
@@ -100,28 +94,5 @@ const attributes = getAttrFromSchema(TripSchema)
 
   remove(req, res) {
 
-  },
-
-  uploadImage(req, res) {
-    // use `req.file` to access the file
-    // and use `req.body` to access other fields
-    const filename = `${uuid()}.png`
-    const tmpPath = req.files.img[0].path
-    const remotePath = path.join('users', `${req.user._id}`, 'img', filename)
-
-    const UPLOAD_IMAGE = 'upload image'
-    console.time(UPLOAD_IMAGE)
-
-    uploadToS3({
-      path: tmpPath,
-      remotePath,
-    }).then(downloadURL => {
-      res.json({ downloadURL })
-      console.timeEnd(UPLOAD_IMAGE)
-      // remove temp file
-      fs.unlink(tmpPath)
-    }).catch(handleError(res)(() => {
-      res.json({})
-    }))
   },
 }

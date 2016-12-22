@@ -1,7 +1,7 @@
 import { fromJS } from 'immutable'
 import _ from 'underscore'
 
-export function calculateTripInfo(routes, startSites, allSites, uuid2data) {
+export const calculateTripInfo = (routes, startSites, allSites, uuid2data) => {
   // temporary hacky code
 
   routes = routes.toJS()

@@ -12,7 +12,7 @@ export const TripSchema = new mongoose.Schema({
   },
   name: {
     type: String,
-    default: '',
+    required: true,
   },
   allSites: {
     type: [{
@@ -31,7 +31,10 @@ export const TripSchema = new mongoose.Schema({
     enum: Object.keys(TripDayInfos),
     required: true,
   },
-  coverPic: String,
+  coverPic: {
+    type: String,
+    required: true,
+  },
   tags: {
     type: [{
       type: String,

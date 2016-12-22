@@ -64,21 +64,19 @@ class CreateTripPage extends React.Component {
 
   componentWillMount() {
     this.props.actions.resetCreateTripData()
-    if (process.env.BROWSER) {
-      tripAPI(this.props.apiEngine)
-        .listGuideSites()
-        .catch(err => {
-          throw err
+    tripAPI(this.props.apiEngine)
+      .listGuideSites()
+      .catch(err => {
+        throw err
+      })
+      .then(json => fromJS(json))
+      .then(json => {
+        const { routes, startSites, uuid2data } = this.props
+        this.props.actions.setOwnSite(json)
+        this.props.actions.setCreateTripData({
+          tripInfo: calculateTripInfo(routes, startSites, json, uuid2data),
         })
-        .then(json => fromJS(json))
-        .then(json => {
-          const { routes, startSites, uuid2data } = this.props
-          this.props.actions.setOwnSite(json)
-          this.props.actions.setCreateTripData({
-            tripInfo: calculateTripInfo(routes, startSites, json, uuid2data),
-          })
-        })
-    }
+      })
   }
 
   nextPage() {
