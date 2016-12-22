@@ -1,8 +1,8 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form/immutable'
 import FormProperties from '../tripFormProperties'
-import FormButton from '../../../utils/FormButton'
 import Text from '../../../utils/Text'
+import FormFooter from '../../../utils/FormFooter'
 import {
   BsInput as Input,
   BsSelect as Select,
@@ -10,7 +10,6 @@ import {
 } from '../../../fields/adapters'
 import {
   BsForm as Form,
-  BsFormFooter as FormFooter,
   BsField as FormField,
 } from '../../../fields/widgets'
 
@@ -74,16 +73,10 @@ const PhaseIntro = props => {
         )
       }
       <FormFooter
-        labelDimensions={{ sm: 0 }}
-        fieldDimensions={{ sm: 12 }}
-        style={{ textAlign: 'center' }}
-      >
-        <FormButton
-          type="submit"
-          disabled={pristine || submitting || invalid}
-          textId="common.nextStep"
-        />
-      </FormFooter>
+        type={['submit']}
+        disabled={[pristine || submitting || invalid]}
+        textId={['common.nextStep']}
+      />
     </Form>
   )
 }

@@ -53,22 +53,19 @@ const CreateTripForm = props => {
       }
       {page === 2 &&
       <PhasePic
+        onSubmit={nextPage}
         formValue={values}
         {...props}
       />
       }
       {page === 3 &&
       <PhasePreview
+        onSubmit={nextPage}
         formValue={values}
         {...props}
       />
       }
-      {page === 4 &&
-      <PhaseDone
-        formValue={values}
-        {...props}
-      />
-      }
+      {page === 4 && <PhaseDone/>}
     </div>
   )
 }

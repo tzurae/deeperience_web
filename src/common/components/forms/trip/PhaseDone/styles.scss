@@ -1,42 +1,21 @@
 @import '../../../../styles/index';
 
-.title {
-  margin-bottom: 15px;
-  padding: 5px 20px;
-  color: $color-main;
-  text-align: left;
-  border-left: 5px $color-main solid;
-  background-color: $white;
+.container {
+  @include flex-col-center;
+  padding: 20px;
 }
 
-.gallery {
-  @include flex-row;
-  margin-bottom: 20px;
+.img-done {
+  @include bg-contain('createsitepage/icon_finish.png', 150px, 150px);
+  margin: 0 auto 30px;
 }
 
-.add-cover-pic {
-  @include flex-center;
-  overflow: hidden;
-  width: 140px;
-  height: 105px;
-  margin: 0 5px;
-  color: $color-main;
-
-  &:hover {
-    background-color: $white;
-  }
+.comment {
+  @include font-size-medium;
+  margin-bottom: 30px;
 }
 
-.pic {
-  width: 100%;
-}
-
-.add-cover-pic-btn {
-  @extend .add-cover-pic;
-  border: 2px $alto solid;
-  cursor: pointer;
-
-  &:hover {
-    background-color: $alto;
-  }
+.btn {
+  width: auto;
+  padding: 8px 20px;
 }

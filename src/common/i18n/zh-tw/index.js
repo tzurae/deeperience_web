@@ -44,7 +44,7 @@ export default {
   'trip.createTrip.branch': '景點規劃',
   'trip.createTrip.image': '上傳圖片',
   'trip.createTrip.preview': '預覽',
-  'trip.createTrip.finish': '完成',
+  'trip.createTrip.done': '完成',
   'trip.createTrip.help': '貼心小建議',
   'trip.createTrip.mySite': '我的景點',
   'trip.createTrip.form.name': '旅程名稱',
@@ -54,6 +54,8 @@ export default {
   'trip.createTrip.image.treePic': '旅程背景圖片',
   'trip.createTrip.image.addPic': '+ 新增圖片',
   'trip.createTrip.image.changePic': '變更圖片',
+  'trip.createTrip.done.comment': '恭喜！您已建立完成您的行程',
+  'trip.createTrip.done.manage': '管理行程',
 
   customize: '客製旅程',
   'customize.createDemand': '建立需求',
@@ -150,7 +152,7 @@ export default {
   'trip.createSite.otherInfo.recentActivity.date': '日期和時間',
   'trip.createSite.otherInfo.recentActivity.content': '內容',
   'trip.createSite.otherInfo.recentActivity.add': '+ 新增近期活動',
-  'trip.createSite.done.comment': '恭喜！您已建立完成您的專屬行程',
+  'trip.createSite.done.comment': '恭喜！您已建立完成您的行程',
   'trip.createSite.done.manage': '管理景點',
 
   'login.email': '信箱',

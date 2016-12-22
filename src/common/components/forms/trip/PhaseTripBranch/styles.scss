@@ -20,8 +20,10 @@
 
 .msg-error {
   @include font-size-medium;
-  margin: -5px 0 15px 0;
+  width: 100%;
+  margin: 0 0 15px;
   color: $red;
+  text-align: right;
 }
 
 .site-div-btn {
@@ -136,7 +138,7 @@
 }
 
 .footer {
-  @include flex-center;
+  @include flex-col-center;
   margin: 20px 0 0;
 }
 

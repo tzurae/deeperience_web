@@ -1,18 +1,16 @@
 import React, { PropTypes } from 'react'
 import { reduxForm } from 'redux-form/immutable'
 import FormProperties from '../tripFormProperties'
-import FormButton from '../../../utils/FormButton'
+import FormFooter from '../../../utils/FormFooter'
 import Text from '../../../utils/Text'
 import uploadAPI from '../../../../api/upload'
-import {
-  BsForm as Form,
-  BsFormFooter as FormFooter,
-} from '../../../fields/widgets'
+import { BsForm as Form } from '../../../fields/widgets'
 import styles from './styles.scss'
 
 const PhasePic = props => {
   const {
     updateForm,
+    previousPage,
     formValue,
     apiEngine,
     pristine,
@@ -71,16 +69,11 @@ const PhasePic = props => {
           ))
       }
       <FormFooter
-        labelDimensions={{ sm: 0 }}
-        fieldDimensions={{ sm: 12 }}
-        style={{ textAlign: 'center' }}
-      >
-        <FormButton
-          type="submit"
-          disabled={pristine || submitting || invalid}
-          textId="common.nextStep"
-        />
-      </FormFooter>
+        type={['button', 'submit']}
+        onClick={[previousPage, null]}
+        disabled={[false, pristine || submitting || invalid]}
+        textId={['common.previousStep', 'common.nextStep']}
+      />
     </Form>
   )
 }

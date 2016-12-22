@@ -20,7 +20,7 @@ const {
 
 const initialState = fromJS({
   createPage: {
-    page: 2,
+    page: 1,
     done: new Array(...{ length: 5 }).map(() => false),
     tripInfo: [],
     routes: [],

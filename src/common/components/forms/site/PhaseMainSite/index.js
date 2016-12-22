@@ -4,9 +4,9 @@ import { fromJS } from 'immutable'
 import Col from 'react-bootstrap/lib/Col'
 import cx from 'classnames'
 import GoogleMapSearch from '../../../utils/GoogleMapSearch'
+import FormFooter from '../../../utils/FormFooter'
 import FormProperties from '../siteFormProperties'
 import FormNames from '../../../../constants/FormNames'
-import FormButton from '../../../utils/FormButton'
 import Editor from '../../../utils/Editor'
 import Text from '../../../utils/Text'
 import {
@@ -14,7 +14,6 @@ import {
 } from '../../../fields/adapters'
 import {
   BsForm as Form,
-  BsFormFooter as FormFooter,
   BsField as FormField,
 } from '../../../fields/widgets'
 import styles from './styles.scss'
@@ -94,21 +93,12 @@ const PhaseMainSite = props => {
         height={300}
       />
       <FormFooter
-        labelDimensions={{ sm: 0 }}
-        fieldDimensions={{ sm: 12 }}
+        type={['button', 'submit']}
+        onClick={[previousPage, null]}
+        disabled={[false, pristine || submitting || invalid]}
+        textId={['common.previousStep', 'common.nextStep']}
         className={styles.footer}
-      >
-        <FormButton
-          type="button"
-          onClick={previousPage}
-          textId="common.previousStep"
-        />
-        <FormButton
-          type="submit"
-          disabled={pristine || submitting || invalid}
-          textId="common.nextStep"
-        />
-      </FormFooter>
+      />
     </Form>
   )
 }

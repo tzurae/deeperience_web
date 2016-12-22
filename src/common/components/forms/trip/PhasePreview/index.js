@@ -1,8 +1,19 @@
 import React from 'react'
+import FormFooter from '../../../utils/FormFooter'
 
-const PhasePreview = () => {
+const PhasePreview = props => {
+  const {
+    nextPage,
+    previousPage,
+  } = props
+
   return (
-    <div/>
+    <FormFooter
+      type={['button', 'confirm']}
+      onClick={[previousPage, nextPage]}
+      disabled={[null, null]}
+      textId={['common.previousStep', 'common.nextStep']}
+    />
   )
 }
 

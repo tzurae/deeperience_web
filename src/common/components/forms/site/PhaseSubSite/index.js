@@ -6,16 +6,13 @@ import cx from 'classnames'
 import GoogleMapSearch from '../../../utils/GoogleMapSearch'
 import FormProperties from '../siteFormProperties'
 import FormNames from '../../../../constants/FormNames'
-import FormButton from '../../../utils/FormButton'
+import FormFooter from '../../../utils/FormFooter'
 import Editor from '../../../utils/Editor'
 import Text from '../../../utils/Text'
 import IconBtn from '../../../utils/IconBtn'
-import {
-  BsInput as Input,
-} from '../../../fields/adapters'
+import { BsInput as Input } from '../../../fields/adapters'
 import {
   BsForm as Form,
-  BsFormFooter as FormFooter,
   BsField as FormField,
 } from '../../../fields/widgets'
 import styles from './styles.scss'
@@ -176,21 +173,12 @@ const PhaseSubSite = props => {
         updateSubsite={updateSubsiteActive}
       />
       <FormFooter
-        labelDimensions={{ sm: 0 }}
-        fieldDimensions={{ sm: 12 }}
+        type={['button', 'submit']}
+        onClick={[previousPage, null]}
+        disabled={[false, pristine || submitting || invalid]}
+        textId={['common.previousStep', 'common.nextStep']}
         className={styles.footer}
-      >
-        <FormButton
-          type="button"
-          onClick={previousPage}
-          textId="common.previousStep"
-        />
-        <FormButton
-          type="submit"
-          disabled={pristine || submitting || invalid}
-          textId="common.nextStep"
-        />
-      </FormFooter>
+      />
     </Form>
   )
 }

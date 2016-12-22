@@ -1,0 +1,6 @@
+@import '../../../styles/index.scss';
+
+.container {
+  @include flex-center;
+  margin: 10px 0 15px;
+}

@@ -4,11 +4,11 @@ import { Field, reduxForm } from 'redux-form/immutable'
 import uuid from 'uuid'
 import FormProperties from '../tripFormProperties'
 import FormNames from '../../../../constants/FormNames'
-import FormButton from '../../../utils/FormButton'
 import { calculateTripInfo } from '../createTripHelper'
 import Navbar from '../../../utils/BsNavbar'
 import MenuItem from '../../../utils/MenuItem'
 import IconBtn from '../../../utils/IconBtn'
+import FormFooter from '../../../utils/FormFooter'
 import {
   BsTextarea as Textarea,
   BsInput as Input,
@@ -563,8 +563,8 @@ const FloatSiteListItem = ({ site, onClick, ...props }) => (
   </div>
 )
 
-const FloatInfo = ({ uuid, ...props }) => {
-  return (<FloatList outterStyle={{ overflow: 'hidden' }} {...props}>
+const FloatInfo = ({ uuid, ...props }) => (
+  <FloatList outterStyle={{ overflow: 'hidden' }} {...props}>
     <Form
       defaultHorizontal={true}
       defaultLabelDimensions={{ sm: 2 }}
@@ -589,21 +589,15 @@ const FloatInfo = ({ uuid, ...props }) => {
       />
     </Form>
   </FloatList>
-  )
-}
+)
 
 const Footer = ({ disabled, previousPage, handleSubmit, submitError }) => (
   <div className={styles.footer}>
-    <FormButton
-      type="button"
-      onClick={previousPage}
-      textId="common.previousStep"
-    />
-    <FormButton
-      type="submit"
-      onClick={handleSubmit}
-      disabled={disabled}
-      textId="common.nextStep"
+    <FormFooter
+      type={['button', 'submit']}
+      onClick={[previousPage, handleSubmit]}
+      disabled={[null, disabled]}
+      textId={['common.previousStep', 'common.nextStep']}
     />
     <p className={styles.msgError} style={{ float: 'right' }}>{submitError}</p>
   </div>
