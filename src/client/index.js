@@ -24,8 +24,6 @@ const logPageView = setupGA()
 const initialState = window.__INITIAL_STATE__
 const store = configureStore(initialState, browserHistory)
 
-console.log('after store',store.getState());
-
 const apiEngine = new ApiEngine()
 
 store.dispatch(setApiEngine(apiEngine))

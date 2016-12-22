@@ -68,35 +68,35 @@ export default {
   },
 
   login(req, res) {
-    User.findOne({
-      'email.value': req.body.email,
-    }, handleDbError(res)((user) => {
-      if (!user) {
-        res.json({
-          isAuth: false,
-        })
-      } else {
-        user.auth(req.body.password, handleDbError(res)((isAuth) => {
-          if (isAuth) {
-            const token = user.toAuthenticationToken()
-            user.lastLoggedInAt = new Date()
-            user.save(handleDbError(res)((user) => {
+    User
+      .findOne({'email.value': req.body.email})
+      .select('-social')
+      .exec(handleDbError(res)((user)=> {
+        if(!user) {
+          res.json({
+            isAuth: false,
+          })
+        } else {
+          user.auth(req.body.password, handleDbError(res)((isAuth) => {
+            if (isAuth) {
+              const token = user.toAuthenticationToken()
+              user.lastLoggedInAt = new Date()
+              user.save(handleDbError(res)((user) => {
+                res.json({
+                  isAuth: true,
+                  token,
+                  user,
+                })
+              }))
+            } else {
               res.json({
-                isAuth: true,
-                token,
-                user,
+                isAuth: false,
               })
-            }))
-          } else {
-            res.json({
-              isAuth: false,
-            })
-          }
-        }))
-      }
-    }))
+            }
+          }))
+        }
+      }))
   },
-
   setNonce: (nonceKey) => (req, res, next) => {
     User.findOne({
       'email.value': req.body.email,
@@ -153,8 +153,11 @@ export default {
   },
 
   logout(req, res) {
+    console.log('Im coming');
     req.logout()
-    res.json({})
+    res.json({
+      isLogout: true,
+    })
   },
 
   show(req, res) {

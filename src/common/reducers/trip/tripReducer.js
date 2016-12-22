@@ -14,7 +14,6 @@ const {
 
 export default (state = initialState, action) => {
   // if (!(state instanceof initialState)) return initialState.mergeDeep(state)
-  console.log('action is', action.type);
   switch (action.type) {
     case SET_OWN_SITE:
       return state.set('ownSites', action.payload.sites)

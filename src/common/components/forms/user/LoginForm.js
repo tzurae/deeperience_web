@@ -1,12 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { push } from 'react-router-redux'
 import { Field, reduxForm, SubmissionError } from 'redux-form/immutable'
 import Alert from 'react-bootstrap/lib/Alert'
 import FormNames from '../../../constants/FormNames'
-import userAPI from '../../../api/user'
-import { pushErrors } from '../../../reducers/error/errorActions'
-import { loginUser } from '../../../reducers/user/userActions'
 import Text from '../../utils/Text'
 import styles from '../../../styles'
 import { BsInput as Input, BsCheckbox as Checkbox } from '../../fields/adapters'
@@ -16,6 +12,13 @@ import {
 } from '../../fields/widgets'
 import FormButton from '../../utils/FormButton'
 import SocialLoginList from '../../utils/SocialAuthButtonList'
+import { selectSomethingFromGlobal, selectSomethingFromRouting } from '../../../lib/selector'
+import { createStructuredSelector } from 'reselect';
+
+const mapStateToProps = createStructuredSelector({
+  apiEngine: selectSomethingFromGlobal('apiEngine'),
+  locationBeforeTransitions: selectSomethingFromRouting('locationBeforeTransitions')
+})
 
 const style = {
   bg: {
@@ -66,46 +69,6 @@ const validate = (values) => {
 }
 
 class LoginForm extends Component {
-  constructor(props) {
-    super(props)
-    this.login = this._login.bind(this)
-    this.handleSubmit = this._handleSubmit.bind(this)
-  }
-
-  _login(json) {
-    return this.props.dispatch(loginUser({
-      token: json.token,
-      data: json.user,
-    }))
-  }
-
-  _handleSubmit(formData) {
-    // let { store } = this.context;
-    const { dispatch, apiEngine, change, login } = this.props
-    // return login(formData)
-    return userAPI(apiEngine)
-      .login(formData)
-      .catch((err) => {
-        dispatch(pushErrors(err))
-        throw err
-      })
-      .then((json) => {
-        if (json.isAuth) {
-          console.log('kdfsajlkfjkldsfjlkasfkjlasdjlfksadjklfj;aklsa', json)
-          this.login(json).then(() => {
-            // redirect to the origin path before logging in
-            const next = this.props.routing.getIn(['locationBeforeTransitions', 'query']).toJS()
-
-            dispatch(push(next || '/'))
-          })
-        } else {
-          change('password', '')
-          throw new SubmissionError({
-            _error: 'Login failed. You may type wrong email or password.',
-          })
-        }
-      })
-  }
 
   render() {
     const {
@@ -115,6 +78,7 @@ class LoginForm extends Component {
       pristine,
       submitting,
       invalid,
+      login,
     } = this.props
 
     return (
@@ -122,7 +86,7 @@ class LoginForm extends Component {
         <div style={style.title}>
           <Text id="nav.user.login"/>
         </div>
-        <Form onSubmit={handleSubmit(this.handleSubmit)}>
+        <Form onSubmit={handleSubmit(login)}>
           <div style={{ padding: '0 40px' }}>
             {submitFailed && error && (<Alert bsStyle="danger">{error}</Alert>)}
             <SocialLoginList login/>
@@ -165,12 +129,7 @@ class LoginForm extends Component {
     )
   }
 };
-const mapStateToProps = (state) => {
-  return {
-    apiEngine: state.getIn(['global', 'apiEngine']),
-    routing: state.get('routing'),
-  }
-}
+
 export default reduxForm({
   form: FormNames.USER_LOGIN,
   validate,

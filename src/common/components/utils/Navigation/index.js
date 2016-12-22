@@ -11,14 +11,13 @@ import MenuItem from '../MenuItem'
 import Text from '../Text'
 import styles from './styles.scss'
 import classname from 'classnames'
+import { selectSomethingFromCookies, selectAuthState } from '../../../lib/selector'
+import { createStructuredSelector } from 'reselect';
 
-const mapStateToProps = state => {
-  console.log('state is', state);
-  return {
-    isAuth: state.getIn(['cookies', 'token']),
-    user: JSON.parse(state.getIn(['cookies', 'user'])) || {},
-  }
-}
+const mapStateToProps = createStructuredSelector({
+  isAuth: selectAuthState(),
+  user: selectSomethingFromCookies('user')
+})
 
 class Navigation extends Component {
   _setLanguage(lang) {
@@ -35,8 +34,6 @@ class Navigation extends Component {
   render() {
     const { isAuth, user } = this.props
     const isAdmin = (user.role === Roles.ADMIN)
-
-    console.log('isAuth type', typeof isAuth)
 
     return (
       <Navbar staticTop className={styles.nav}>
@@ -95,16 +92,17 @@ class Navigation extends Component {
               <Navbar.Dropdown
                 title={
                   !isAuth ?
-                    <Text id="nav.user.profile" className={styles.dropdownText}/> :
-                    user.avatarURL ? (
+                    <Text id="nav.user.profile" className={styles.dropdownText}/>
+                     :
+                    user.get('avatarURL') ? (
                       <div
                         className={styles.avatar}
                         style={{
-                          background: `#ffffff url(${user.avatarURL}) no-repeat center center`,
+                          background: `#ffffff url(${user.get('avatarURL')}) no-repeat center center`,
                           backgroundSize: 'contain',
                         }}
                       />
-                    ) : (user.name || user.email)
+                    ) : (user.get('name') || user.get('email'))
                 }
               >
                 {!isAuth &&

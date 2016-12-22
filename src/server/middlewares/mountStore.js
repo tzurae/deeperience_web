@@ -3,7 +3,6 @@ import { syncHistoryWithStore } from 'react-router-redux'
 import ApiEngine from '../../common/utils/ApiEngine'
 import { setApiEngine } from '../../common/reducers/global/globalActions'
 import configureStore from '../../common/lib/configureStore'
-import Immutable from 'immutable'
 
 export default (req, res, next) => {
   // ref:
@@ -12,8 +11,6 @@ export default (req, res, next) => {
   //  - <https://github.com/reactjs/react-router-redux/blob/master/examples/server/server.js>
   const memoryHistory = useRouterHistory(createMemoryHistory)(req.url)
   const store = configureStore(undefined, memoryHistory)
-
-  console.log('mountStore--store.getState()',store.getState());
 
   const history = syncHistoryWithStore(memoryHistory, store, {
     selectLocationState(state) {

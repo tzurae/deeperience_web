@@ -1,27 +1,32 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { push } from 'react-router-redux'
+import { bindActionCreators } from 'redux'
 import userAPI from '../../api/user'
-import { logoutUser } from '../../reducers/user/userActions'
+import * as authAction from '../../reducers/auth/authAction'
+import { createStructuredSelector } from 'reselect';
+import { selectSomethingFromGlobal } from '../../lib/selector'
 
-const mapStateToProps = (state) => {
+const mapStateToProps = createStructuredSelector({
+  apiEngine: selectSomethingFromGlobal('apiEngine')
+})
+
+const mapDispatchToProps = dispatch => {
   return {
-    apiEngine: state.getIn(['global','apiEngine']),
+    actions: bindActionCreators(authAction, dispatch)
   }
 }
 
 class LogoutPage extends React.Component {
-  componentWillMount() {
-    const { dispatch, apiEngine } = this.props
 
+  componentWillMount() {
+    const { actions, apiEngine } = this.props
     userAPI(apiEngine)
       .logout()
       .catch((err) => {
         alert('Logout user fail')
         throw err
       })
-      .then((json) => dispatch(logoutUser()))
-      .then(() => dispatch(push('/')))
+      .then(() => actions.logout())
   }
 
   render() {
@@ -29,4 +34,4 @@ class LogoutPage extends React.Component {
   }
 };
 
-export default connect(mapStateToProps)(LogoutPage)
+export default connect(mapStateToProps, mapDispatchToProps)(LogoutPage)

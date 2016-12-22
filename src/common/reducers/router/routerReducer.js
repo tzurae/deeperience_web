@@ -8,8 +8,6 @@ const initialState = fromJS({
 
 export default createReducer(initialState, {
   [LOCATION_CHANGE](state, action) {
-    console.log('state is', state);
-    console.log('action.payload', action.payload);
     return state.merge({
       locationBeforeTransitions: action.payload,
     })

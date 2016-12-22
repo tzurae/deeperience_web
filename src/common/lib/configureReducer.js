@@ -1,9 +1,11 @@
-import Immutubale, { Map, List } from 'immutable'
+import Immutable from 'immutable'
 
-const configureReducer = (initialState, handlers) => (state = initialState, action) => {
+const configureReducer = (initialState, handlers) => (state = initialState, action= {}) => {
   // is Immutalbe? transfer it if state is not immutable
-  if (!Map.isMap(state) && !List.isList(state)) {
-    state = Immutubale.fromJS(state)
+  // we chose Immutable.Iterable.isIterable() to check if the Immutalbe type is correct or not
+  // becasue all collections in Immutable.js, like Map and List, use Iterable as a base class.
+  if (!Immutable.Iterable.isIterable(state)) {
+    state = Immutable.fromJS(state)
   }
 
   const handler = handlers[action.type]
@@ -14,10 +16,9 @@ const configureReducer = (initialState, handlers) => (state = initialState, acti
 
   state = handler(state, action)
 
-  if (!Map.isMap(state) && !List.isList(state)) {
+  if (!Immutable.Iterable.isIterable(state)) {
     throw new TypeError('Reducer must return Immutable object')
   }
-
   return state
 }
 

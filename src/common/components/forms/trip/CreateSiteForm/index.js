@@ -10,7 +10,6 @@ import CreateSiteFormPage5 from '../CreateSiteFormPage5'
 import { getOptions } from '../../../../utils/getI18nValue'
 
 const mapStateToProps = state => {
-  console.log("state",state);
   return{
   apiEngine: state.getIn(['global', 'apiEngine']),
   createSiteForm: state.getIn(['form', FormNames.TRIP_CREATE_SITE]),

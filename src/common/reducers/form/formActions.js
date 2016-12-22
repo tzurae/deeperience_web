@@ -3,7 +3,7 @@ import { pushErrors } from '../error/errorActions'
 
 export const validateForm = (formName, fieldName, value) => {
   return (dispatch, getState) => {
-    return formAPI(getState().global.apiEngine)
+    return formAPI(getState().getIn(['global', 'apiEngine'])
       .form(formName)
       .field(fieldName, value)
       .validate()
@@ -13,5 +13,6 @@ export const validateForm = (formName, fieldName, value) => {
         validationError[fieldName] = 'Unable to validate'
         throw validationError
       })
+    )
   }
 }
