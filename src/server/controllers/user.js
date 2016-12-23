@@ -6,9 +6,10 @@ import Errors from '../../common/constants/Errors'
 import handleError, { handleDbError } from '../decorators/handleError'
 import User from '../models/User'
 import filterAttribute from '../utils/filterAttribute'
-import { loginUser } from '../../common/reducers/user/userActions'
 import { redirect } from '../../common/reducers/router/routerActions'
 import uploadToS3 from '../utils/uploadToS3'
+import { setCookie } from '../../common/reducers/cookie/cookieActions'
+import { Map } from 'immutable'
 
 export default {
   list(req, res) {
@@ -118,20 +119,18 @@ export default {
 
     user.lastLoggedInAt = new Date()
     user.save(handleDbError(res)(() => {
-      req.store
-        .dispatch(loginUser({
+      req.store.dispatch(setCookie({
           token,
-          data: user,
-        }))
-        .then(() => {
-          const { token, user } = req.store.getState().cookies
-          const state = JSON.parse(req.query.state)
-
-          res.cookie('token', token)
-          res.cookie('user', user)
-          req.store.dispatch(redirect(state.next || '/'))
-          return next()
+          user,
         })
+      )
+      console.log('req.store.state', req.store.getState().get('cookies'));
+      // const { token, user } = req.store.getState().get('cookies').toJS()
+      // const state = JSON.parse(req.query.state)
+      // res.cookie('token', token)
+      // res.cookie('user', user)
+      req.store.dispatch(redirect('/'))
+      return next()
     }))
   },
 
@@ -153,7 +152,6 @@ export default {
   },
 
   logout(req, res) {
-    console.log('Im coming');
     req.logout()
     res.json({
       isLogout: true,

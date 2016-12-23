@@ -1,3 +1,5 @@
+// prevent SQL injection that inject different attribute
+
 export default (obj, allowedAttributes) => {
   const resultObj = {}
   Object

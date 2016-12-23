@@ -7,10 +7,14 @@ export const SiteSchema = new mongoose.Schema({
   },
   introduction: {
     type: String,
-    default: '',
+    required: true,
   },
   fee: String,
   remind: String,
+  name: {
+    type: String,
+    required: true,
+  },
 }, {
   versionKey: false,
   timestamps: {

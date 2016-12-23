@@ -1,28 +1,66 @@
 import { handleDbError } from '../decorators/handleError'
 import GuideSite, { GuideSiteSchema } from '../models/GuideSite'
+import GoogleSite, { GoogleSiteSchema } from '../models/GoogleSite'
 import getAttrFromSchema from '../utils/getAttrFromSchema'
+import filterAttribute from '../utils/filterAttribute'
 
-const attributes = getAttrFromSchema(GuideSiteSchema)
+// prevent SQL injection that inject different attribute
+const guideAttr = getAttrFromSchema(GuideSiteSchema)
+const googleAttr = getAttrFromSchema(GoogleSiteSchema)
 
 export default {
   create(req, res) {
-    let guideSite = {}
-    attributes.forEach(attr => {
-      guideSite[attr] = req.body[attr]
-    })
-    guideSite = GuideSite({
-      ...guideSite,
-      updatedAt: new Date(),
-      createdAt: new Date(),
-    })
+    // guide must be after filterAttribute as to cover the origin attribute
+    let guideSite = {
+      ...filterAttribute(req.body, guideAttr),
+      guide: req.user._id,
+    }
 
-    guideSite.save(
-      handleDbError(res)((guideSite) => {
+    // googleSite update or save
+
+    // get all placeid from googleSite
+    const googlesite =
+      [guideSite.mainSite]
+        .concat(guideSite.subSites)
+        .map(({ googleInfo }) => filterAttribute(googleInfo, googleAttr))
+    const googleIdArr = googlesite.map(({ placeId }) => placeId)
+
+    // update all googleSite
+    Promise.all(googleIdArr.map(
+      (id, index) => new Promise(
+        (resolve, reject) =>
+          GoogleSite.findOneAndUpdate(
+            { placeId: id },
+            { $set: googlesite[index] },
+            { upsert: true },
+            handleDbError(res)(({ _id }) => resolve(_id))
+          )
+      ))
+    ).then((raw) => {
+      guideSite.mainSite.googleInfo = raw[0]
+      guideSite.subSites = guideSite.subSites.map((value, index) => ({
+        ...value,
+        googleInfo: raw[index + 1],
+      }))
+
+      guideSite = GuideSite({
+        ...guideSite,
+        updatedAt: new Date(),
+        createdAt: new Date(),
+      })
+      guideSite.save((guideSite) => {
         res.json({
-          guideSite,
+          ok: !guideSite,
         })
       })
-    )
+
+      // don't know why errors can't pop out, not fixed yet
+      // guideSite.save(handleDbError(res)((guideSite) => {
+      //   res.json({
+      //     guideSite,
+      //   })
+      // }))
+    })
   },
 
   update(req, res) {

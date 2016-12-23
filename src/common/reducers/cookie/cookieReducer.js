@@ -1,4 +1,3 @@
-// import cookie from 'cookie'
 import cookie from 'js-cookie'
 import { fromJS } from 'immutable'
 import createReducer from '../../lib/configureReducer'
@@ -22,6 +21,7 @@ const initialState = fromJS({
   token: '',
   redirect: '',
   locale: '',
+  messages: {},
 })
 
 export default createReducer(initialState, {
@@ -52,39 +52,3 @@ export default createReducer(initialState, {
   [REMOVE_COOKIE_FAILURE](state, action){return state},
 })
 
-
-
-
-// if (process.env.BROWSER) {
-//   initialState.set(cookie.parse(document.cookie))
-//   // initCookies = cookie.parse(document.cookie)
-// }
-//
-// export default (state = initialState, action) => {
-//   switch (action.type) {
-//     case SET_COOKIE:
-//       // you need to transfer the value type, because the data you want to transmit
-//       // must be a simple string when using serialize of "cookie" package
-//       let value
-//       if (typeof action.cookie.value === 'object') {
-//         value = JSON.stringify(action.cookie.value)
-//       } else {
-//         value = action.cookie.value
-//       }
-//       return state.set(action.cookie.name, value)
-//       // const cookiePair = {}
-//       // let value = action.cookie.value
-//       // if (typeof action.cookie.value === 'string') {
-//       //   value = action.cookie.value
-//       // } else if (typeof action.cookie.value === 'object') {
-//       //   value = JSON.stringify(action.cookie.value)
-//       // }
-//       // cookiePair[action.cookie.name] = value
-//       // return {
-//       //   ...state,
-//       //   ...cookiePair,
-//       // }
-//     default:
-//       return state
-//   }
-// }

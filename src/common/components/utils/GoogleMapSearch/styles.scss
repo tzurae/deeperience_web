@@ -1,0 +1,19 @@
+@import '../../../styles/index';
+
+.input {
+  @include fontSize(14);
+  position: absolute;
+  top: auto !important;
+  bottom: 30px !important;
+  left: 80px !important;
+  box-sizing: border-box;
+  width: 350px;
+  height: 40px;
+  margin-top: 27px;
+  padding: 0 12px;
+  text-overflow: ellipsis;
+  border: 1px solid transparent;
+  border-radius: 1px;
+  outline: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}

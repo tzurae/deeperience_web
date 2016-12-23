@@ -20,6 +20,15 @@ const {
   GET_DATA_FROM_API_SERVER_SUCCESS,
   GET_DATA_FROM_API_SERVER_FAILURE,
 
+  SET_DATA_FROM_API_SERVER_REQUEST,
+  SET_DATA_FROM_API_SERVER_SUCCESS,
+  SET_DATA_FROM_API_SERVER_FAILURE,
+
+  // REGISTER,
+  // REGISTER_REQUEST,
+  // REGISTER_SUCCESS,
+  // REGISTER_FAILURE,
+
 } = require('../../constants/ActionTypes').default
 
 export const login         = createAction(LOGIN)
@@ -35,3 +44,12 @@ export const logoutFailure = createAction(LOGOUT_FAILURE)
 export const getDataFromApiServerRequest = createAction(GET_DATA_FROM_API_SERVER_REQUEST)
 export const getDataFromApiServerSuccess = createAction(GET_DATA_FROM_API_SERVER_SUCCESS)
 export const getDataFromApiServerFailure = createAction(GET_DATA_FROM_API_SERVER_FAILURE)
+
+export const setDataFromApiServerRequest = createAction(SET_DATA_FROM_API_SERVER_REQUEST)
+export const setDataFromApiServerSuccess = createAction(SET_DATA_FROM_API_SERVER_SUCCESS)
+export const setDataFromApiServerFailure = createAction(SET_DATA_FROM_API_SERVER_FAILURE)
+
+// export const register = createAction(REGISTER)
+// export const registerRequest = createAction(REGISTER_REQUEST)
+// export const registerSuccess = createAction(REGISTER_SUCCESS)
+// export const registerFailure = createAction(REGISTER_FAILURE)

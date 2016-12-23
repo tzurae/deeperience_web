@@ -17,6 +17,7 @@
 
 .add-btn {
   @include font-size-medium;
+  @include no-focus;
   float: right;
   margin-top: 20px;
   color: $color-main;

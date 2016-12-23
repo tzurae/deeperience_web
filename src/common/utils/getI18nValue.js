@@ -3,7 +3,7 @@ import Options from '../i18n/zh-tw'
  * ##
  * @usage getting i18n value from messages to adapt options
  * @param
- *  messages: i18n object ( Immutable Map.toJS() )
+ *  messages: i18n object ( Immutable Map )
  *  options: array of string ['TripElements', 'SiteElements']
  * @return
  *  ex:
@@ -13,7 +13,7 @@ import Options from '../i18n/zh-tw'
  *        label: "TripElements.TOUR_WALK.label",
  *        value: [{
  *          label: "海邊",
- *          value: "SEA",
+ *          value: "TOUR_WALK.SEA",
  *        }],
  *      }
  *    ],
@@ -55,8 +55,8 @@ export const getOptions = (messages, options) => {
             tmpObj[arr[1]].label = value
           } else {
             tmpObj[arr[1]].value.push({
-              label: messages[value],
-              value: value.split('.')[2],
+              label: messages.get(value),
+              value: `${value.split('.')[1]}.${value.split('.')[2]}`,
             })
           }
         })
@@ -73,7 +73,7 @@ export const getOptions = (messages, options) => {
         Object.keys(Options)
           .filter(value => value.indexOf(tag) === 0)
           .map(value => ({
-            label: messages[value],
+            label: messages.get(value),
             value: value.split('.')[1],
           }))
     }
@@ -86,7 +86,7 @@ export const getOptions = (messages, options) => {
  * ##
  * @usage getting i18n value from messages
  * @param
- *  messages: i18n object ( Immutable Map.toJS() )
+ *  messages: i18n object ( Immutable Map )
  *  options: array of string ['CustomPhases', 'TripDayInfos']
  * @return
  *  ex:
@@ -111,7 +111,7 @@ export const getValue = (messages, options) => {
       Object.keys(Options)
         .filter(value => value.indexOf(tag) === 0)
         .forEach(value => {
-          i18nValue[tag][value.substring(tag.length + 1)] = messages[value]
+          i18nValue[tag][value.substring(tag.length + 1)] = messages.get(value)
         })
     }
   })

@@ -48,9 +48,6 @@ match({
   history,
   routes,
 }, (error, redirectLocation, renderProps) => {
-  if (error) {
-    console.log(error)
-  }
   render(
     <Provider store={store}>
       <LocaleProvider>

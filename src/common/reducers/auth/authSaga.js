@@ -12,6 +12,7 @@ import { push } from 'react-router-redux'
 const {
   LOGIN,
   LOGOUT,
+  REGISTER,
 } = require('../../constants/ActionTypes').default
 
 const apiEngine = new ApiEngine()
@@ -21,12 +22,6 @@ function loginAndGetUserData(userData) {
     .login(userData)
     .then(json => json)
 }
-
-// function logout() {
-//   return userAPI(apiEngine)
-//     .logout()
-//     .then(json => json)
-// }
 
 function* login(payload) {
   try {
@@ -56,6 +51,20 @@ function* logout() {
   }
 }
 
+// function* register() {
+//   try {
+//     yield put(authActions.registerRequest())
+//     yield put(authActions.setDataFromApiServerRequest())
+//
+//     yield put(cookieActions.removeCookie())
+//     yield put(authActions.logoutSuccess())
+//     yield put(push('/'))
+//   } catch (error) {
+//     yield put(authActions.logoutFailure())
+//   }
+// }
+
+
 // ---------WATCH START------------
 
 function* watchLogin() {
@@ -66,12 +75,22 @@ function* watchLogin() {
 }
 
 function* watchLogout() {
-  while( yield take(LOGOUT) ) {
+  while(true) {
+    yield take(LOGOUT)
     yield fork(logout)
   }
 }
 
+// function* watchRegister() {
+//   while( true ) {
+//     const { payload } = yield take(REGISTER)
+//     yield fork(register, payload)
+//   }
+// }
+
+
 export default [
   fork(watchLogin),
   fork(watchLogout),
+  // fork(watchRegister),
 ]

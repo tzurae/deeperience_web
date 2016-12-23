@@ -1,0 +1,83 @@
+@import '../../../styles/index';
+
+.editor-root {
+  padding: 10px 15px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  background: #ffffff;
+}
+
+.editor-editor {
+  margin-top: 10px;
+  font-size: 16px;
+  border-top: 1px solid #ddd;
+  cursor: text;
+}
+
+.toolbar {
+  @include flex-row-center;
+  width: 100%;
+  margin-bottom: 5px;
+  font-size: 14px;
+  text-align: center;
+  user-select: none;
+}
+
+.btn-photo {
+  @include flex-center;
+  width: 18px;
+  height: 18px;
+  margin: 0 5px;
+  color: #999999;
+  cursor: pointer;
+}
+
+.btn-fa {
+  @include fontSize(14);
+
+  &:before {
+    vertical-align: middle;
+  }
+}
+
+.btn-label {
+}
+
+.btn {
+  @include no-focus;
+  @include flex-center;
+  width: 18px;
+  height: 18px;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.btn-active {
+  @extend .btn;
+  color: $dodgerBlue !important;
+}
+
+.btn-inactive {
+  @extend .btn;
+  color: $dustyGray !important;
+}
+
+.block-line {
+  width: 1px;
+  height: 20px;
+  margin: 0 5px;
+  background-color: $dustyGray;
+}
+
+// block and inline style
+
+.style-block-default {
+}
+
+.style-img-quote {
+  @include fontSize(14);
+  margin-top: 5px;
+  font-style: italic;
+  color: $dustyGray;
+  text-align: center;
+}

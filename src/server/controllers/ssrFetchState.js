@@ -7,7 +7,6 @@ export default {
   user: (req, res, next) => {
     if(!req.store.getState().getIn(['cookies','user']).isEmpty()) {
       req.store.dispatch(loginSuccess())
-      next()
     }
     next()
   },

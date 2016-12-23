@@ -18,14 +18,15 @@ import configs from '../../../../../configs/project/client'
 import Text from '../../utils/Text'
 import SocialLoginList from '../../utils/SocialAuthButtonList'
 import FormButton from '../../utils/FormButton'
+import { selectSomethingFromGlobal } from '../../../lib/selector'
+import { createStructuredSelector } from 'reselect';
 
-const mapStateToProps = (state) => {
-  return {
-    apiEngine: state.getIn(['global', 'apiEngine']),
-  }
-}
+const mapStateToProps = createStructuredSelector({
+  apiEngine: selectSomethingFromGlobal('apiEngine')
+})
 
 const validate = (values) => {
+
   const errors = {}
 
   if (!values.get('email')) {
@@ -49,7 +50,7 @@ const validate = (values) => {
     errors.password = 'Required'
   } else {
     const pattern = /^(?=.*[0-9])(?=.*[a-zA-Z])[a-zA-Z0-9]{6,20}$/g
-    if (!pattern.test(values.password)) {
+    if (!pattern.test(values.get('password'))) {
       errors.password = '請輸入6至20碼英文大小寫與數字組合'
     }
   }
@@ -76,16 +77,16 @@ const validate = (values) => {
   return errors
 }
 
-const asyncValidate = (values, dispatch) => {
-  return dispatch(validateForm(FormNames.USER_REGISTER, 'email', values.email))
-    .then((json) => {
-      const validationError = {}
-      if (!json.isPassed) {
-        validationError.email = json.message
-        throw validationError
-      }
-    })
-}
+// const asyncValidate = (values, dispatch) => {
+//   return dispatch(validateForm(FormNames.USER_REGISTER, 'email', values.email))
+//     .then((json) => {
+//       const validationError = {}
+//       if (!json.isPassed) {
+//         validationError.email = json.message
+//         throw validationError
+//       }
+//     })
+// }
 
 const style = {
   bg: {
@@ -225,13 +226,7 @@ class RegisterForm extends Component {
 
 export default reduxForm({
   form: FormNames.USER_REGISTER,
-  initialValues: {
-    slide: {
-      min: 30,
-      max: 40,
-    },
-  },
   validate,
-  asyncValidate,
+  // asyncValidate,
   asyncBlurFields: ['email'],
 })(connect(mapStateToProps)(RegisterForm))

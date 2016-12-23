@@ -1,14 +1,21 @@
 import React, { PropTypes } from 'react'
-import classname from 'classnames'
+import cx from 'classnames'
 import Panel from './DefaultPanel'
 import styles from './styles.scss'
 
-const PanelWithWord = ({ children, className, contentDivClass, titleClass, ...props }) => (
+const PanelWithWord = ({
+  className,
+  children,
+  contentDivClass,
+  titleClass,
+  underlineClass,
+  ...props
+}) => (
   <Panel
-    className={classname(styles.panelWithWord, className)}
-    underlineClass={styles.underlineWithWord}
-    titleClass={classname(styles.titleWithWord, titleClass)}
-    contentDivClass={classname(styles.contentDivWithWord, contentDivClass)}
+    className={cx(styles.panelWithWord, className)}
+    underlineClass={cx(styles.underlineWithWord, underlineClass)}
+    titleClass={cx(styles.titleWithWord, titleClass)}
+    contentDivClass={cx(styles.contentDivWithWord, contentDivClass)}
     commentClass={styles.commentWithWord}
     {...props}
   >
@@ -17,13 +24,17 @@ const PanelWithWord = ({ children, className, contentDivClass, titleClass, ...pr
 )
 
 PanelWithWord.PropTypes = {
+  className: PropTypes.string,
   contentDivClass: PropTypes.string,
   titleClass: PropTypes.string,
+  underlineClass: PropTypes.string,
 }
 
 PanelWithWord.defaultProps = {
+  className: '',
   contentDivClass: '',
   titleClass: '',
+  underlineClass: '',
 }
 
 export default PanelWithWord
