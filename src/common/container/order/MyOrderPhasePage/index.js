@@ -1,9 +1,9 @@
 import React from 'react'
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { Map } from 'immutable'
+import { fromJS } from 'immutable'
 import Col from 'react-bootstrap/lib/Col'
 import deepCopy from 'deepcopy'
+import mapDispatchToProps from '../../../lib/mapDispatchToProps'
 import { traveler, customData, ableTime } from './fakeData'
 import PageLayout from '../../../components/layouts/PageLayout'
 import PanelContainer from '../../../components/utils/PanelContainer'
@@ -15,32 +15,17 @@ import PhaseCustomize from '../../../components/order/PhaseCustomize'
 import PhaseBalance from '../../../components/order/PhaseBalance'
 import PhaseVideo from '../../../components/order/PhaseVideo'
 import * as orderActions from '../../../reducers/order/orderActions'
-import { CustomSubNav } from '../../../components/utils/SubNavigation'
+import { CreateSubNav } from '../../../components/utils/SubNavigation'
 import { getValue } from '../../../utils/getI18nValue'
 import styles from './styles.scss'
 
-const actions = [
-  orderActions,
-]
-
-const mapStateToProps = state => {
-  return {
-    messages: state.global.messages,
-    page: state.order.page,
-  }
-}
-
-const mapDispatchToProps = dispatch => {
-  const creators = Map()
-    .merge(...actions)
-    .filter(value => typeof value === 'function')
-    .toObject()
-
-  return {
-    actions: bindActionCreators(creators, dispatch),
-    dispatch,
-  }
-}
+@connect(
+  state => ({
+    messages: state.getIn(['global', 'messages']),
+    page: state.getIn(['order', 'page']),
+  }),
+  mapDispatchToProps([orderActions])
+)
 
 class MyOrderPhasePage extends React.Component {
   constructor(props) {
@@ -75,7 +60,7 @@ class MyOrderPhasePage extends React.Component {
       '',
       '',
     ]
-    this.done = [
+    this.done = fromJS([
       true,
       true,
       false,
@@ -83,7 +68,7 @@ class MyOrderPhasePage extends React.Component {
       false,
       false,
       false,
-    ]
+    ])
   }
 
   setPage(page) {
@@ -107,7 +92,7 @@ class MyOrderPhasePage extends React.Component {
       FoodElements,
       HotelTypes,
     } = getValue(
-      messages.toJS(),
+      messages,
       ['Languages',
         'TripLocations',
         'TripElements',
@@ -127,7 +112,7 @@ class MyOrderPhasePage extends React.Component {
     cpCustom.locations = cpCustom.locations.map(value => this.getCountryArea(TripLocations, value))
 
     return (
-      <PageLayout subNav={<CustomSubNav activeTab={1}/>}>
+      <PageLayout subNav={<CreateSubNav activeTab={4}/>}>
         <PanelContainer>
           <Col md={2}>
             {
@@ -136,8 +121,7 @@ class MyOrderPhasePage extends React.Component {
                 <PhaseBranch
                   nodes={this.nodes}
                   active={page}
-                  done={this.done
-                  }
+                  done={this.done}
                   cb={this.cb}
                 />
               </Panel2>
@@ -175,4 +159,4 @@ class MyOrderPhasePage extends React.Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MyOrderPhasePage)
+export default MyOrderPhasePage

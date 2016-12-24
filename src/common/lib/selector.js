@@ -13,7 +13,7 @@ const selectRouter = () => (state) => state.get('routing')
 
 const selectFromCookies = (property) => createDeepEqualSelector(
   selectCookies(),
-  (cookiesState) => cookiesState.get(property)
+  cookiesState => cookiesState.get(property)
 )
 
 const selectAuthState  = () => createDeepEqualSelector(

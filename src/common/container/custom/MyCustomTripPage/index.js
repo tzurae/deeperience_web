@@ -1,8 +1,7 @@
 import React from 'react'
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { Map } from 'immutable'
 import Col from 'react-bootstrap/lib/Col'
+import mapDispatchToProps from '../../../lib/mapDispatchToProps'
 import PageLayout from '../../../components/layouts/PageLayout'
 import PanelContainer from '../../../components/utils/PanelContainer'
 import { Panel1 } from '../../../components/utils/Panel'
@@ -12,27 +11,12 @@ import fakeData from './fakeData'
 import MenuItem from '../../../components/custom/MenuItem'
 import { getValue } from '../../../utils/getI18nValue'
 
-const actions = [
-  tripActions,
-]
-
-const mapStateToProps = state => {
-  return {
-    messages: state.global.messages,
-  }
-}
-
-const mapDispatchToProps = dispatch => {
-  const creators = Map()
-    .merge(...actions)
-    .filter(value => typeof value === 'function')
-    .toObject()
-
-  return {
-    actions: bindActionCreators(creators, dispatch),
-    dispatch,
-  }
-}
+@connect(
+  state => ({
+    messages: state.getIn(['global', 'messages']),
+  }),
+  mapDispatchToProps([tripActions])
+)
 
 class MyCustomTripPage extends React.Component {
   constructor(props) {
@@ -48,7 +32,7 @@ class MyCustomTripPage extends React.Component {
     const {
       messages,
     } = this.props
-    const { CustomPhases, TripDayInfos } = getValue(messages.toJS(), ['CustomPhases', 'TripDayInfos'])
+    const { CustomPhases, TripDayInfos } = getValue(messages, ['CustomPhases', 'TripDayInfos'])
 
     return (
       <PageLayout subNav={<CustomSubNav activeTab={1}/>}>
@@ -78,4 +62,4 @@ class MyCustomTripPage extends React.Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MyCustomTripPage)
+export default MyCustomTripPage
