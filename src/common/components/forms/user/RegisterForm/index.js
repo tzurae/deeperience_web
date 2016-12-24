@@ -4,25 +4,30 @@ import { push } from 'react-router-redux'
 import { Field, reduxForm } from 'redux-form/immutable'
 import Alert from 'react-bootstrap/lib/Alert'
 import validator from 'validator'
-import FormNames from '../../../constants/FormNames'
-import userAPI from '../../../api/user'
-import { validateForm } from '../../../reducers/form/formActions'
-import { pushErrors } from '../../../reducers/error/errorActions'
-import { BsInput as Input, BsCheckbox as Checkbox } from '../../fields/adapters'
-import styles from '../../../styles'
-import {
-  BsForm as Form,
-  DField,
-} from '../../fields/widgets'
-import configs from '../../../../../configs/project/client'
-import Text from '../../utils/Text'
-import SocialLoginList from '../../utils/SocialAuthButtonList'
-import FormButton from '../../utils/FormButton'
+import cx from 'classnames'
+import FormNames from '../../../../constants/FormNames'
+import userAPI from '../../../../api/user'
+import { validateForm } from '../../../../reducers/form/formActions'
+import { pushErrors } from '../../../../reducers/error/errorActions'
+import { BsInput as Input, BsCheckbox as Checkbox } from '../../../fields/adapters'
+import { BsForm as Form, DField } from '../../../fields/widgets'
+import configs from '../../../../../../configs/project/client'
+import Text from '../../../utils/Text'
+import SocialLoginList from '../../../utils/SocialAuthButtonList/index'
+import FormButton from '../../../utils/FormButton'
+import { selectFromGlobal } from '../../../../lib/selector'
+import { createStructuredSelector } from 'reselect'
+import styles from './styles.scss'
 
-const mapStateToProps = (state) => {
-  return {
-    apiEngine: state.getIn(['global', 'apiEngine']),
-  }
+const mapStateToProps = createStructuredSelector({
+  apiEngine: selectFromGlobal('apiEngine'),
+})
+
+const FormProperties = {
+  form: FormNames.USER_REGISTER,
+  validate,
+  // asyncValidate,
+  asyncBlurFields: ['email'],
 }
 
 const validate = (values) => {
@@ -49,7 +54,7 @@ const validate = (values) => {
     errors.password = 'Required'
   } else {
     const pattern = /^(?=.*[0-9])(?=.*[a-zA-Z])[a-zA-Z0-9]{6,20}$/g
-    if (!pattern.test(values.password)) {
+    if (!pattern.test(values.get('password'))) {
       errors.password = '請輸入6至20碼英文大小寫與數字組合'
     }
   }
@@ -76,53 +81,16 @@ const validate = (values) => {
   return errors
 }
 
-const asyncValidate = (values, dispatch) => {
-  return dispatch(validateForm(FormNames.USER_REGISTER, 'email', values.email))
-    .then((json) => {
-      const validationError = {}
-      if (!json.isPassed) {
-        validationError.email = json.message
-        throw validationError
-      }
-    })
-}
-
-const style = {
-  bg: {
-    paddingTop: '10px',
-    paddingBottom: '10px',
-    borderRadius: '20px',
-    backgroundColor: 'rgba(34, 34, 34, 0.55)',
-  },
-  title: {
-    color: 'white',
-    fontSize: '20px',
-    textAlign: 'center',
-    borderBottom: '1px solid #797D80',
-    marginBottom: '25px',
-    paddingBottom: '10px',
-  },
-  submit: {
-    width: '8em',
-    color: 'white',
-    fontSize: '1.2em',
-    borderRadius: '50px',
-    backgroundColor: '#FF864F',
-  },
-  label: {
-    color: 'white',
-    fontSize: styles.font.medium,
-  },
-  field: {
-    marginTop: '5px',
-    marginBottom: '15px',
-  },
-  button: {
-    display: 'flex',
-    justifyContent: 'center',
-    paddingTop: '10px',
-  },
-}
+// const asyncValidate = (values, dispatch) => {
+//   return dispatch(validateForm(FormNames.USER_REGISTER, 'email', values.email))
+//     .then((json) => {
+//       const validationError = {}
+//       if (!json.isPassed) {
+//         validationError.email = json.message
+//         throw validationError
+//       }
+//     })
+// }
 
 class RegisterForm extends Component {
   constructor(props) {
@@ -156,50 +124,49 @@ class RegisterForm extends Component {
       className,
     } = this.props
     return (
-      <div className={className} style={style.bg}>
-        <div style={style.title}>
+      <div className={cx(className, styles.bg)}>
+        <div className={styles.title} >
           <Text id="nav.user.register" />
         </div>
-        <Form horizontal onSubmit={handleSubmit(this.handleSubmit)} style={{ margin: '0 30px' }}>
+        <div className={styles.content}>
+        <Form
+          horizontal
+          defaultLabelDimensions={{ sm: 12 }}
+          onSubmit={handleSubmit(this.handleSubmit)}
+        >
           {submitFailed && error && (<Alert bsStyle="danger">{error}</Alert>)}
-          <div style={{ padding: '0 11px' }}>
             <SocialLoginList/>
-            <hr />
-            <Text id="user.name" style={style.label} />
             <Field
               name="name"
+              label={<Text id="user.name" isSpan={true}/>}
               component={DField}
               adapter={Input}
               type="text"
-              placeholder="Name"
-              style={style.field}
+              placeholder="暱稱"
             />
-            <Text id="login.email" style={style.label} />
             <Field
               name="email"
+              label={<Text id="login.email" isSpan={true}/>}
               component={DField}
               adapter={Input}
               type="text"
-              placeholder="Email"
-              style={style.field}
+              placeholder="信箱"
             />
-            <Text id="login.password" style={style.label} />
             <Field
               name="password"
+              label={<Text id="login.password" isSpan={true}/>}
               component={DField}
               adapter={Input}
               type="password"
-              placeholder="Password"
-              style={style.field}
+              placeholder="密碼"
             />
-            <Text id="login.ensurePassword" style={style.label} />
             <Field
               name="ensurePassword"
+              label={<Text id="login.ensurePassword" isSpan={true}/>}
               component={DField}
               adapter={Input}
               type="password"
-              placeholder="Repeat Password"
-              style={style.field}
+              placeholder="重複密碼"
             />
             <Field
               name="memberShip"
@@ -208,7 +175,7 @@ class RegisterForm extends Component {
               type="checkbox"
               text={<Text id="register.hasRead" style={{ color: 'white' }} isSpan={true}/>}
             />
-            <div style={style.button}>
+            <div className={styles.footer}>
               <FormButton
                 type="submit"
                 onClick={valid ? this.props.openModal : null}
@@ -216,22 +183,11 @@ class RegisterForm extends Component {
                 textId="register.register"
               />
             </div>
-          </div>
         </Form>
+        </div>
       </div>
     )
   }
 };
 
-export default reduxForm({
-  form: FormNames.USER_REGISTER,
-  initialValues: {
-    slide: {
-      min: 30,
-      max: 40,
-    },
-  },
-  validate,
-  asyncValidate,
-  asyncBlurFields: ['email'],
-})(connect(mapStateToProps)(RegisterForm))
+export default reduxForm(FormProperties)(connect(mapStateToProps)(RegisterForm))

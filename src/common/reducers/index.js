@@ -9,8 +9,10 @@ import form from './form/formReducer'
 import site from './site/siteReducer'
 import custom from './custom/customReducer'
 import order from './order/orderReducer'
+import auth from './auth/authReducer'
 
 export const rootReducer = combineReducers({
+  auth,
   global,
   routing,
   cookies,

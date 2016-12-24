@@ -1,13 +1,11 @@
-import cookie from 'cookie'
-import { setCookies } from '../../common/reducers/cookie/cookieActions'
+import { setCookie } from '../../common/reducers/cookie/cookieActions'
 
 export default (req, res, next) => {
-  if (req.headers.cookie !== undefined) {
-    const c = cookie.parse(req.headers.cookie)
-
-    req.store.dispatch(setCookies(c)).then(() => {
-      next()
-    })
+  if (req.cookies.token !== undefined && req.cookies.token !== '') {
+    console.log('req.cookies', req.cookies)
+    req.cookies.user = JSON.parse(req.cookies.user)
+    req.store.dispatch(setCookie(req.cookies))
+    next()
   } else {
     next()
   }

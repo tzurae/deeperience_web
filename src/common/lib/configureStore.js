@@ -1,6 +1,6 @@
 // @flow
 import { createStore, applyMiddleware } from 'redux'
-import { fromJS } from 'immutable'
+import Immutable from 'immutable'
 import { routerMiddleware } from 'react-router-redux'
 import createSagaMiddleware from 'redux-saga'
 import createLoggerMiddleware from 'redux-logger'
@@ -12,10 +12,19 @@ import LoggerSettings from '../../../configs/env/logger'
 
 export default (initialState = {}, history) => {
   const sagaMiddleware = createSagaMiddleware()
-
   const logger = createLoggerMiddleware({
     collapsed: true,
-    stateTransformer: state => state.toJS(),
+    stateTransformer: (state) => {
+      const newState = {}
+      for (const i of Object.keys(state)) {
+        if (Immutable.Iterable.isIterable(state[i])) {
+          newState[i] = state[i].toJS()
+        } else {
+          newState[i] = state[i]
+        }
+      };
+      return newState
+    },
     predicate: (getState, action) => {
       let val = true
       LoggerSettings.remove.some(value => {
@@ -47,7 +56,7 @@ export default (initialState = {}, history) => {
 
   const store = createStore(
     rootReducer,
-    fromJS(initialState),
+    Immutable.fromJS(initialState),
     isDevNClientSide ? (
       composeWithDevTools(applyMiddleware(...middlewares))
     ) : (

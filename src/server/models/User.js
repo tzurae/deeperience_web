@@ -54,7 +54,6 @@ const UserSchema = new mongoose.Schema({
         likes: Array,
         friends: Array,
       },
-      linkedin: Object,
     },
   },
   nonce: {

@@ -1,0 +1,24 @@
+@import '../../../../styles/index';
+
+.container {
+  @include font-size-medium;
+  margin: 20px 0 10px;
+  color: $white;
+}
+
+.label-div {
+  @include flex-row-between;
+  margin: 10px 0;
+}
+
+.label {
+  @include font-size-medium;
+  color: $white;
+  letter-spacing: 2px;
+}
+
+.error {
+  color: $red;
+  text-align: center;
+}
+

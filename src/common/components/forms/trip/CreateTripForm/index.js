@@ -67,7 +67,7 @@ const CreateTripForm = props => {
           let { uuid2data, ...send } = data.toJS()
           /* eslint-enable */
 
-          propa.actions.createTrip(send)
+          props.actions.createTrip(send)
 
           TripAPI(apiEngine)
             .createTrip(send)

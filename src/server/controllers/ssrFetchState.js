@@ -1,16 +1,13 @@
 import Errors from '../../common/constants/Errors'
 import wrapTimeout from '../decorators/wrapTimeout'
-import { loginUser } from '../../common/reducers/user/userActions'
 import { updateLocale } from '../../common/reducers/global/globalActions'
+import { loginSuccess } from '../../common/reducers/auth/authAction'
 
 export default {
   user: (req, res, next) => {
-    const cookies = req.store.getState().get('cookies')
-
-    req.store.dispatch(loginUser({
-      token: cookies.get('token'),
-      data: cookies.get('user'),
-    }))
+    if (!req.store.getState().getIn(['cookies', 'user']).isEmpty()) {
+      req.store.dispatch(loginSuccess())
+    }
     next()
   },
   intl: wrapTimeout(3000)((req, res, next) => {
@@ -21,7 +18,6 @@ export default {
     } else {
       lang = req.acceptsLanguages('en-us', 'zh-tw')
     }
-
     req.store
       .dispatch(updateLocale(lang))
       .then(() => {

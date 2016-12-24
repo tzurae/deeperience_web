@@ -6,9 +6,10 @@ import Errors from '../../common/constants/Errors'
 import handleError, { handleDbError } from '../decorators/handleError'
 import User from '../models/User'
 import filterAttribute from '../utils/filterAttribute'
-import { loginUser } from '../../common/reducers/user/userActions'
 import { redirect } from '../../common/reducers/router/routerActions'
 import uploadToS3 from '../utils/uploadToS3'
+import { setCookie } from '../../common/reducers/cookie/cookieActions'
+import { Map } from 'immutable'
 
 export default {
   list(req, res) {
@@ -68,35 +69,35 @@ export default {
   },
 
   login(req, res) {
-    User.findOne({
-      'email.value': req.body.email,
-    }, handleDbError(res)((user) => {
-      if (!user) {
-        res.json({
-          isAuth: false,
-        })
-      } else {
-        user.auth(req.body.password, handleDbError(res)((isAuth) => {
-          if (isAuth) {
-            const token = user.toAuthenticationToken()
-            user.lastLoggedInAt = new Date()
-            user.save(handleDbError(res)((user) => {
+    User
+      .findOne({ 'email.value': req.body.email })
+      .select('-social')
+      .exec(handleDbError(res)((user) => {
+        if (!user) {
+          res.json({
+            isAuth: false,
+          })
+        } else {
+          user.auth(req.body.password, handleDbError(res)((isAuth) => {
+            if (isAuth) {
+              const token = user.toAuthenticationToken()
+              user.lastLoggedInAt = new Date()
+              user.save(handleDbError(res)((user) => {
+                res.json({
+                  isAuth: true,
+                  token,
+                  user,
+                })
+              }))
+            } else {
               res.json({
-                isAuth: true,
-                token,
-                user,
+                isAuth: false,
               })
-            }))
-          } else {
-            res.json({
-              isAuth: false,
-            })
-          }
-        }))
-      }
-    }))
+            }
+          }))
+        }
+      }))
   },
-
   setNonce: (nonceKey) => (req, res, next) => {
     User.findOne({
       'email.value': req.body.email,
@@ -118,20 +119,17 @@ export default {
 
     user.lastLoggedInAt = new Date()
     user.save(handleDbError(res)(() => {
-      req.store
-        .dispatch(loginUser({
-          token,
-          data: user,
-        }))
-        .then(() => {
-          const { token, user } = req.store.getState().cookies
-          const state = JSON.parse(req.query.state)
-
-          res.cookie('token', token)
-          res.cookie('user', user)
-          req.store.dispatch(redirect(state.next || '/'))
-          return next()
-        })
+      req.store.dispatch(setCookie({
+        token,
+        user,
+      })
+      )
+      // const { token, user } = req.store.getState().get('cookies').toJS()
+      // const state = JSON.parse(req.query.state)
+      // res.cookie('token', token)
+      // res.cookie('user', user)
+      req.store.dispatch(redirect('/'))
+      return next()
     }))
   },
 
@@ -154,7 +152,9 @@ export default {
 
   logout(req, res) {
     req.logout()
-    res.json({})
+    res.json({
+      isLogout: true,
+    })
   },
 
   show(req, res) {

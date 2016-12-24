@@ -1,8 +1,15 @@
 import keyMirror from 'key-mirror'
 
 export default keyMirror({
+
   // ------ global ------
   SET_API_ENGINE: null,
+
+  // -------Back-end ------
+
+  GET_DATA_FROM_API_SERVER_REQUEST: null,
+  GET_DATA_FROM_API_SERVER_SUCCESS: null,
+  GET_DATA_FROM_API_SERVER_FAILURE: null,
 
   // ------ user ------
   LOGIN: null,
@@ -12,11 +19,27 @@ export default keyMirror({
   LOGIN_USER: null,
   LOGOUT_USER: null,
 
+  LOGOUT: null,
+  LOGOUT_REQUEST: null,
+  LOGOUT_SUCCESS: null,
+  LOGOUT_FAILURE: null,
+
+  REGISTER: null,
+  REGISTER_REQUEST: null,
+  REGISTER_SUCCESS: null,
+  REGISTER_FAILURE: null,
+
   // ------ cookie ------
-  COOKIE_REQUEST: null,
-  COOKIE_SUCCESS: null,
-  COOKIE_FAILURE: null,
+
   SET_COOKIE: null,
+  SET_COOKIE_REQUEST: null,
+  SET_COOKIE_SUCCESS: null,
+  SET_COOKIE_FAILURE: null,
+
+  REMOVE_COOKIE: null,
+  REMOVE_COOKIE_REQUEST: null,
+  REMOVE_COOKIE_SUCCESS: null,
+  REMOVE_COOKIE_FAILURE: null,
 
   // ------ intl ------
   UPDATE_LOCALE: null,

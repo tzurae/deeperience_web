@@ -8,6 +8,7 @@ import passportInit from './passportInit'
 import mountStore from './mountStore'
 import mountHelper from './mountHelper'
 import initCookie from './initCookie'
+import cookieParser from 'cookie-parser'
 
 export default ({ app }) => {
   // inject livereload feature
@@ -44,9 +45,11 @@ export default ({ app }) => {
   // mount custom helpers
   app.use(mountHelper)
 
+  // cookie-parser
+  app.use(cookieParser())
+
   // initialize cookie
   app.use(initCookie)
 
-  // setup passport
   app.use(passportInit)
 }
