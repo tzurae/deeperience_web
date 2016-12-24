@@ -2,6 +2,7 @@
 
 .container {
   @include flex-row;
+  @include hover-normal;
   width: 100%;
   height: 100px;
   margin: 10px 0;
@@ -12,10 +13,6 @@
   box-shadow: 3px 3px 8px 0 #cccccc;
   cursor: -webkit-grab;
   user-select: none;
-}
-
-.container:hover {
-  background-color: $alto;
 }
 
 .info-div {

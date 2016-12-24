@@ -34,7 +34,6 @@ const CreateTripForm = props => {
   const { TripDayInfos, TripElements } = getOptions(messages, ['TripDayInfos', 'TripElements'])
   TripElements.splice(0, 1) // remove ANY
 
-  console.log(TripDayInfos)
   return (
     <div>
       <p>Form Value</p>
@@ -67,6 +66,8 @@ const CreateTripForm = props => {
           /* eslint-disable */
           let { uuid2data, ...send } = data.toJS()
           /* eslint-enable */
+
+          propa.actions.createTrip(send)
 
           TripAPI(apiEngine)
             .createTrip(send)

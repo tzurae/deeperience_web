@@ -64,6 +64,7 @@
 }
 
 .float-site-list-item {
+  @include hover-normal;
   display: flex;
   overflow-x: hidden;
   flex-direction: row;
@@ -76,10 +77,6 @@
   border: 1px none $color-border;
   border-bottom-style: solid;
   cursor: pointer;
-
-  &:hover {
-    background-color: $alto;
-  }
 }
 
 .float-site-list-item-name {

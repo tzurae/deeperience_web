@@ -46,15 +46,12 @@
 
 .title-div {
   @include flex-row-between;
+  @include hover-normal;
   margin-bottom: 10px;
   padding: 5px 20px;
   border-left: 5px $color-main solid;
   background-color: $white;
   cursor: pointer;
-
-  &:hover {
-    background-color: $alto;
-  }
 }
 
 .title-div-title {

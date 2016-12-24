@@ -16,15 +16,12 @@
 
 .add-cover-pic {
   @include flex-center;
+  @include hover-normal;
   overflow: hidden;
   width: 140px;
   height: 105px;
   margin: 0 5px;
   color: $color-main;
-
-  &:hover {
-    background-color: $white;
-  }
 }
 
 .pic {
@@ -37,6 +34,6 @@
   cursor: pointer;
 
   &:hover {
-    background-color: $alto;
+    background-color: $color-hover;
   }
 }
