@@ -1,18 +1,16 @@
 import React, { PropTypes } from 'react'
-import { connect } from 'react-redux'
 import FontAwesome from 'react-fontawesome'
 import classname from 'classnames'
 import { stateToHTML } from 'draft-js-export-html'
 import { Editor as DEditor, RichUtils, Entity, AtomicBlockUtils, EditorState } from 'draft-js'
 import uploadAPI from '../../../api/upload'
 import generateEditorState from './generateEditorState'
+import ApiEngine from '../../../utils/ApiEngine'
 import styles from './styles.scss'
 
-const mapStateToProps = state => ({
-  apiEngine: state.getIn(['global', 'apiEngine']),
-})
-
 let dispatchTimer = null
+
+const apiEngine = new ApiEngine()
 
 class Editor extends React.Component {
   constructor(props) {
@@ -64,7 +62,6 @@ class Editor extends React.Component {
 
   // upload image to server
   _uploadImage(file) {
-    const { apiEngine } = this.props
     uploadAPI(apiEngine)
       .uploadImage(file)
       .then(json => {
@@ -303,4 +300,4 @@ const FABtn = ({ label, active, style, onToggle, ...props }) => {
   )
 }
 
-export default connect(mapStateToProps)(Editor)
+export default Editor

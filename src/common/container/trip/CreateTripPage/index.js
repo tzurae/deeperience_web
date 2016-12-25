@@ -1,8 +1,8 @@
 import React from 'react'
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { Map, fromJS } from 'immutable'
+import { Map } from 'immutable'
 import Col from 'react-bootstrap/lib/Col'
+import mapDispatchToProps from '../../../lib/mapDispatchToProps'
 import * as tripActions from '../../../reducers/trip/tripActions'
 import * as reduxFormActions from '../../../reducers/form/reduxFormActions'
 import FormNames from '../../../constants/FormNames'
@@ -13,46 +13,30 @@ import PhaseBranch from '../../../components/utils/PhaseBranch'
 import CreateTripForm from '../../../components/forms/trip/CreateTripForm'
 import { BranchTitle } from './assets'
 import { CreateSubNav } from '../../../components/utils/SubNavigation'
-import { calculateTripInfo } from '../../../components/forms/trip/createTripHelper'
-import tripAPI from '../../../api/trip'
 
-const actions = [
-  tripActions,
-  reduxFormActions,
-]
+@connect(
+  state => {
+    const form = state.getIn(['form', FormNames.TRIP_CREATE_TRIP])
 
-const mapStateToProps = state => {
-  const form = state.getIn(['form', FormNames.TRIP_CREATE_TRIP])
-
-  return {
-    apiEngine: state.getIn(['global', 'apiEngine']),
-    messages: state.getIn(['global', 'messages']),
-    page: state.getIn(['trip', 'createPage', 'page']),
-    done: state.getIn(['trip', 'createPage', 'done']),
-    values: form ? form.get('values') : Map({}),
-    allSites: state.getIn(['trip', 'ownSites']),
-    tripInfo: state.getIn(['trip', 'createPage', 'tripInfo']),
-    routes: state.getIn(['trip', 'createPage', 'routes']),
-    startSites: state.getIn(['trip', 'createPage', 'startSites']),
-    uuid2data: state.getIn(['trip', 'createPage', 'uuid2data']),
-    branchError: state.getIn(['trip', 'createPage', 'branchError']),
-    submitError: state.getIn(['trip', 'createPage', 'submitError']),
-    totalDay: state.getIn(['trip', 'createPage', 'totalDay']),
-    showDay: state.getIn(['trip', 'createPage', 'showDay']),
-    floatWindow: state.getIn(['trip', 'createPage', 'floatWindow']),
-  }
-}
-
-const mapDispatchToProps = dispatch => {
-  const creators = Map()
-    .merge(...actions)
-    .filter(value => typeof value === 'function')
-    .toObject()
-
-  return {
-    actions: bindActionCreators(creators, dispatch),
-  }
-}
+    return {
+      messages: state.getIn(['global', 'messages']),
+      page: state.getIn(['trip', 'createPage', 'page']),
+      done: state.getIn(['trip', 'createPage', 'done']),
+      values: form ? form.get('values') : Map({}),
+      allSites: state.getIn(['trip', 'ownSites']),
+      tripInfo: state.getIn(['trip', 'createPage', 'tripInfo']),
+      routes: state.getIn(['trip', 'createPage', 'routes']),
+      startSites: state.getIn(['trip', 'createPage', 'startSites']),
+      uuid2data: state.getIn(['trip', 'createPage', 'uuid2data']),
+      branchError: state.getIn(['trip', 'createPage', 'branchError']),
+      submitError: state.getIn(['trip', 'createPage', 'submitError']),
+      totalDay: state.getIn(['trip', 'createPage', 'totalDay']),
+      showDay: state.getIn(['trip', 'createPage', 'showDay']),
+      floatWindow: state.getIn(['trip', 'createPage', 'floatWindow']),
+    }
+  },
+  mapDispatchToProps([tripActions, reduxFormActions])
+)
 
 class CreateTripPage extends React.Component {
   constructor(props) {
@@ -64,19 +48,7 @@ class CreateTripPage extends React.Component {
 
   componentWillMount() {
     this.props.actions.resetCreateTripData()
-    tripAPI(this.props.apiEngine)
-      .listGuideSites()
-      .catch(err => {
-        throw err
-      })
-      .then(json => fromJS(json))
-      .then(json => {
-        const { routes, startSites, uuid2data } = this.props
-        this.props.actions.setOwnSite(json)
-        this.props.actions.setCreateTripData({
-          tripInfo: calculateTripInfo(routes, startSites, json, uuid2data),
-        })
-      })
+    this.props.actions.listGuideSites()
   }
 
   nextPage() {
@@ -129,4 +101,4 @@ class CreateTripPage extends React.Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreateTripPage)
+export default CreateTripPage

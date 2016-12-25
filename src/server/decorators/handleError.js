@@ -10,8 +10,6 @@ const getErrorHandler = (errorTypes) => (res) => (fn) => (err, ...result) => {
       switch (errorType) {
         case ErrorTypes.ODM_OPERATION: {
           if (err.name === 'ValidationError') {
-            console.log('asdasd')
-            console.log(Errors.ODM_VALIDATION)
             res.pushError(Errors.ODM_VALIDATION, err)
             return res.errors()
           }

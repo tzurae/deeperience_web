@@ -14,9 +14,8 @@ export default (req, res, next) => {
     req.store.dispatch(pushErrors(errors))
     res.json({
       errors: req.store.getState().get('errors').map((error) => {
-        delete error.id
         return {
-          ...error,
+          ...error.toJS(),
           meta: {
             path: req.path,
             ...error.meta,

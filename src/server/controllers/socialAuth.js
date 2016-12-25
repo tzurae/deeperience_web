@@ -12,7 +12,7 @@ export default {
   initFacebook: (req, res, next) => {
     passport.authenticate('facebook', {
       scope: ['public_profile', 'email', 'user_friends', 'user_birthday', 'user_likes'],
-      state: JSON.stringify({next: req.query.next}),
+      state: JSON.stringify({ next: req.query.next }),
     })(req, res, next)
   },
   createUser: (req, res, next) => {

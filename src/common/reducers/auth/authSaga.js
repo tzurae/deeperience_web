@@ -17,7 +17,7 @@ const {
 
 const apiEngine = new ApiEngine()
 
-function loginAndGetUserData(userData) {
+function loginAPI(userData) {
   return userAPI(apiEngine)
     .login(userData)
     .then(json => json)
@@ -27,7 +27,7 @@ function* login(payload) {
   try {
     yield put(authActions.loginRequest())
     yield put(authActions.getDataFromApiServerRequest())
-    const { isAuth, token, user } = yield call(loginAndGetUserData, payload)
+    const { isAuth, token, user } = yield call(loginAPI, payload)
     if (isAuth) {
       yield put(authActions.getDataFromApiServerSuccess())
       yield put(cookieActions.setCookie({ token, user }))

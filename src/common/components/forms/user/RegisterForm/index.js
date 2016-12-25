@@ -7,7 +7,6 @@ import validator from 'validator'
 import cx from 'classnames'
 import FormNames from '../../../../constants/FormNames'
 import userAPI from '../../../../api/user'
-import { validateForm } from '../../../../reducers/form/formActions'
 import { pushErrors } from '../../../../reducers/error/errorActions'
 import { BsInput as Input, BsCheckbox as Checkbox } from '../../../fields/adapters'
 import { BsForm as Form, DField } from '../../../fields/widgets'
@@ -22,13 +21,6 @@ import styles from './styles.scss'
 const mapStateToProps = createStructuredSelector({
   apiEngine: selectFromGlobal('apiEngine'),
 })
-
-const FormProperties = {
-  form: FormNames.USER_REGISTER,
-  validate,
-  // asyncValidate,
-  asyncBlurFields: ['email'],
-}
 
 const validate = (values) => {
   const errors = {}
@@ -81,16 +73,11 @@ const validate = (values) => {
   return errors
 }
 
-// const asyncValidate = (values, dispatch) => {
-//   return dispatch(validateForm(FormNames.USER_REGISTER, 'email', values.email))
-//     .then((json) => {
-//       const validationError = {}
-//       if (!json.isPassed) {
-//         validationError.email = json.message
-//         throw validationError
-//       }
-//     })
-// }
+const FormProperties = {
+  form: FormNames.USER_REGISTER,
+  validate,
+  asyncBlurFields: ['email'],
+}
 
 class RegisterForm extends Component {
   constructor(props) {
@@ -125,16 +112,16 @@ class RegisterForm extends Component {
     } = this.props
     return (
       <div className={cx(className, styles.bg)}>
-        <div className={styles.title} >
-          <Text id="nav.user.register" />
+        <div className={styles.title}>
+          <Text id="nav.user.register"/>
         </div>
         <div className={styles.content}>
-        <Form
-          horizontal
-          defaultLabelDimensions={{ sm: 12 }}
-          onSubmit={handleSubmit(this.handleSubmit)}
-        >
-          {submitFailed && error && (<Alert bsStyle="danger">{error}</Alert>)}
+          <Form
+            horizontal
+            defaultLabelDimensions={{ sm: 12 }}
+            onSubmit={handleSubmit(this.handleSubmit)}
+          >
+            {submitFailed && error && (<Alert bsStyle="danger">{error}</Alert>)}
             <SocialLoginList/>
             <Field
               name="name"
@@ -183,7 +170,7 @@ class RegisterForm extends Component {
                 textId="register.register"
               />
             </div>
-        </Form>
+          </Form>
         </div>
       </div>
     )

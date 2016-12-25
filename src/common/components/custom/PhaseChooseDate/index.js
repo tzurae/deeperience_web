@@ -1,23 +1,16 @@
 import React, { PropTypes } from 'react'
-import { connect } from 'react-redux'
-import FormNames from '../../../constants/FormNames'
 import ChooseDateTimeForm from '../../forms/custom/ChooseDateTimeForm'
 import styles from './styles.scss'
 
-const mapStateToProps = state => ({
-  state,
-  chooseDateForm: state.form[FormNames.CUSTOM_VIDEO_TIME],
-})
-
-const PhaseChooseDate = () => {
-  const { chooseDateForm, handleSubmit } = this.props
+const PhaseChooseDate = props => {
+  const { chooseDateForm, handleSubmit } = props
 
   let values
-  if (chooseDateForm) values = chooseDateForm.values
+  if (chooseDateForm) values = chooseDateForm.get('values')
 
   return (
     <div className={styles.container}>
-      {values && <pre style={{ textAlign: 'left' }}>{JSON.stringify(values, null, 2)}</pre>}
+      {values && <pre style={{ textAlign: 'left' }}>{JSON.stringify(values.toJS(), null, 2)}</pre>}
       <ChooseDateTimeForm handleSubmit={handleSubmit}/>
     </div>
   )
@@ -31,4 +24,4 @@ PhaseChooseDate.defaultProps = {
   handleSubmit: () => {},
 }
 
-export default connect(mapStateToProps)(PhaseChooseDate)
+export default PhaseChooseDate

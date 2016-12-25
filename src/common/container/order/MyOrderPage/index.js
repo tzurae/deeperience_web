@@ -4,16 +4,16 @@ import Col from 'react-bootstrap/lib/Col'
 import PageLayout from '../../../components/layouts/PageLayout'
 import PanelContainer from '../../../components/utils/PanelContainer'
 import { Panel1 } from '../../../components/utils/Panel'
-import { CustomSubNav } from '../../../components/utils/SubNavigation'
+import { CreateSubNav } from '../../../components/utils/SubNavigation'
 import fakeData from './fakeData'
 import MenuItem from '../../../components/order/MenuItem'
 import { getValue } from '../../../utils/getI18nValue'
 
-const mapStateToProps = state => {
-  return {
-    messages: state.global.messages,
-  }
-}
+@connect(
+  state => ({
+    messages: state.getIn(['global', 'messages']),
+  })
+)
 
 class MyOrderPage extends React.Component {
   constructor(props) {
@@ -29,10 +29,10 @@ class MyOrderPage extends React.Component {
     const {
       messages,
     } = this.props
-    const { CustomPhases, TripDayInfos } = getValue(messages.toJS(), ['CustomPhases', 'TripDayInfos'])
+    const { CustomPhases, TripDayInfos } = getValue(messages, ['CustomPhases', 'TripDayInfos'])
 
     return (
-      <PageLayout subNav={<CustomSubNav activeTab={1}/>}>
+      <PageLayout subNav={<CreateSubNav activeTab={4}/>}>
         <PanelContainer>
           <Col md={2}/>
           <Col md={7}>
@@ -60,4 +60,4 @@ class MyOrderPage extends React.Component {
   }
 }
 
-export default connect(mapStateToProps)(MyOrderPage)
+export default MyOrderPage

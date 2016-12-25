@@ -1,6 +1,7 @@
 import React from 'react'
-import { Field, FieldArray, reduxForm } from 'redux-form'
-import classname from 'classnames'
+import { Field, FieldArray, reduxForm } from 'redux-form/immutable'
+import { fromJS } from 'immutable'
+import cx from 'classnames'
 import FormNames from '../../../../constants/FormNames'
 import IconRectBtn from '../../../utils/IconRectBtn'
 import Text from '../../../utils/Text'
@@ -32,9 +33,9 @@ const formProperties = {
   form: FormNames.CUSTOM_VIDEO_TIME,
   destroyOnUnmount: false,
   validate,
-  initialValues: {
+  initialValues: fromJS({
     chooseDateTime: [{}],
-  },
+  }),
 }
 
 const renderChooseDateTime = ({ fields, meta: { touched, error } }) => (
@@ -46,7 +47,7 @@ const renderChooseDateTime = ({ fields, meta: { touched, error } }) => (
       >
         <div className={styles.chooseItemInner}>
           <Field
-            className={classname(styles.formGroup, 'col-md-4')}
+            className={cx(styles.formGroup, 'col-md-4')}
             name={`${member}.date`}
             component={FormField}
             showLabel={false}
@@ -55,7 +56,7 @@ const renderChooseDateTime = ({ fields, meta: { touched, error } }) => (
             placeholder="Date"
           />
           <Field
-            className={classname(styles.formGroup, 'col-md-4')}
+            className={cx(styles.formGroup, 'col-md-4')}
             name={`${member}.startTime`}
             component={FormField}
             showLabel={false}
@@ -64,7 +65,7 @@ const renderChooseDateTime = ({ fields, meta: { touched, error } }) => (
             placeholder={<Text id={'customize.chooseDate.startTime'}/>}
           />
           <Field
-            className={classname(styles.formGroup, 'col-md-4')}
+            className={cx(styles.formGroup, 'col-md-4')}
             name={`${member}.endTime`}
             component={FormField}
             showLabel={false}
@@ -76,7 +77,10 @@ const renderChooseDateTime = ({ fields, meta: { touched, error } }) => (
         <IconBtn
           name="trash-o"
           className={styles.btnTrash}
-          onClick={() => fields.remove(index)}
+          onClick={e => {
+            e.preventDefault()
+            fields.remove(index)
+          }}
         />
       </div>
     )}

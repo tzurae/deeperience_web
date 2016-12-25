@@ -1,5 +1,5 @@
 import { fromJS } from 'immutable'
-import cookie from 'cookie'
+// import cookie from 'cookie'
 import createReducer from '../../lib/configureReducer'
 
 const {

@@ -1,5 +1,6 @@
 import React from 'react'
-import { Field, reduxForm } from 'redux-form'
+import { Field, reduxForm } from 'redux-form/immutable'
+import { fromJS } from 'immutable'
 import Col from 'react-bootstrap/lib/Col'
 import Row from 'react-bootstrap/lib/Row'
 import FormNames from '../../../../constants/FormNames'
@@ -33,10 +34,10 @@ const formProperties = {
   form: FormNames.CUSTOM_ADVICE,
   destroyOnUnmount: false,
   validate,
-  initialValues: {
+  initialValues: fromJS({
     star: 5,
     advice: '',
-  },
+  }),
 }
 
 const AdviceForm = ({ handleSubmit, ...props }) => {

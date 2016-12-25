@@ -1,7 +1,7 @@
 @import '../../../../styles/index';
 
 .footer {
-  margin: 40px 0;
+  margin: 60px 0 30px;
 }
 
 .option-label {
@@ -36,7 +36,6 @@
   @include font-size-medium;
   @include no-focus;
   float: right;
-  margin-top: 20px;
   color: $color-main;
   border: 0;
   background: transparent;

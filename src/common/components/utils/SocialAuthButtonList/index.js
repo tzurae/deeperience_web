@@ -14,7 +14,7 @@ const SocialAuthButtonList = ({ routing, login }) => {
   // url : object
   const url = routing.getIn(['locationBeforeTransitions', 'query']).toJS()
   let search
-  if(_.isEmpty(url)) {
+  if (_.isEmpty(url)) {
     search = ''
   } else {
     search = `?next=${url.next}`
