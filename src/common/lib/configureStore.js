@@ -1,4 +1,3 @@
-// @flow
 import { createStore, applyMiddleware } from 'redux'
 import Immutable from 'immutable'
 import { routerMiddleware } from 'react-router-redux'

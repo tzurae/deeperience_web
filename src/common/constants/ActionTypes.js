@@ -53,9 +53,13 @@ export default keyMirror({
   SET_CURRENT_PAGE: null,
 
   // ------ trip ------
-  SET_OWN_SITE: null,
   SET_CREATE_TRIP_DATA: null,
   RESET_CREATE_TRIP_DATA: null,
+
+  LIST_GUIDE_SITES: null,
+  LIST_GUIDE_SITES_REQUEST: null,
+  LIST_GUIDE_SITES_SUCCESS: null,
+  LIST_GUIDE_SITES_FAILURE: null,
 
   CREATE_TRIP: null,
   CREATE_TRIP_REQUEST: null,
@@ -74,6 +78,11 @@ export default keyMirror({
   CREATE_TRIP_SET_TREE_PIC: null,
 
   // ------ site ------
+  CREATE_SITE: null,
+  CREATE_SITE_REQUEST: null,
+  CREATE_SITE_SUCCESS: null,
+  CREATE_SITE_FAILURE: null,
+
   CREATE_SITE_ERROR: null,
   CREATE_SITE_NEXT_PAGE: null,
   CREATE_SITE_PREVIOUS_PAGE: null,

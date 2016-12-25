@@ -1,8 +1,11 @@
 // @flow
 const {
-  SET_OWN_SITE,
   SET_CREATE_TRIP_DATA,
   RESET_CREATE_TRIP_DATA,
+  LIST_GUIDE_SITES,
+  LIST_GUIDE_SITES_REQUEST,
+  LIST_GUIDE_SITES_SUCCESS,
+  LIST_GUIDE_SITES_FAILURE,
   CREATE_TRIP,
   CREATE_TRIP_REQUEST,
   CREATE_TRIP_SUCCESS,
@@ -19,13 +22,6 @@ const {
   CREATE_TRIP_SET_COVER_PIC,
   CREATE_TRIP_SET_TREE_PIC,
 } = require('../../constants/ActionTypes').default
-
-export const setOwnSite = (sites: any) => ({
-  type: SET_OWN_SITE,
-  payload: {
-    sites,
-  },
-})
 
 type tripType = {
   tripInfo: any,
@@ -44,6 +40,25 @@ export const resetCreateTripData = () => ({
   type: RESET_CREATE_TRIP_DATA,
 })
 
+export const listGuideSites = () => ({
+  type: LIST_GUIDE_SITES,
+})
+export const listGuideSitesRequest = () => ({
+  type: LIST_GUIDE_SITES_REQUEST,
+})
+export const listGuideSitesSuccess = (sites: any) => ({
+  type: LIST_GUIDE_SITES_SUCCESS,
+  payload: {
+    sites,
+  },
+})
+export const listGuideSitesFailure = (error: any) => ({
+  type: LIST_GUIDE_SITES_FAILURE,
+  payload: {
+    error,
+  },
+})
+
 export const createTrip = (trip:any) => ({
   type: CREATE_TRIP,
   payload: {
@@ -51,7 +66,7 @@ export const createTrip = (trip:any) => ({
   },
 })
 
-export const createTripRequest = (trip:any) => ({
+export const createTripRequest = () => ({
   type: CREATE_TRIP_REQUEST,
 })
 

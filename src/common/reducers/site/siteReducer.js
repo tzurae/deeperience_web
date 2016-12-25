@@ -2,6 +2,9 @@ import Immutable from 'immutable'
 import { EditorState } from 'draft-js'
 
 const {
+  CREATE_SITE_REQUEST,
+  CREATE_SITE_SUCCESS,
+  CREATE_SITE_FAILURE,
   CREATE_SITE_ERROR,
   CREATE_SITE_NEXT_PAGE,
   CREATE_SITE_PREVIOUS_PAGE,
@@ -25,6 +28,11 @@ const initialState = Immutable.fromJS({
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case CREATE_SITE_REQUEST:
+    case CREATE_SITE_SUCCESS:
+    case CREATE_SITE_FAILURE:
+      return state
+
     case CREATE_SITE_ERROR:
       return state.set('error', action.payload.error)
 

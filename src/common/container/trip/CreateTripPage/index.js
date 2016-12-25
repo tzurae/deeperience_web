@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { fromJS } from 'immutable'
+import { Map } from 'immutable'
 import Col from 'react-bootstrap/lib/Col'
 import mapDispatchToProps from '../../../lib/mapDispatchToProps'
 import * as tripActions from '../../../reducers/trip/tripActions'
@@ -13,15 +13,12 @@ import PhaseBranch from '../../../components/utils/PhaseBranch'
 import CreateTripForm from '../../../components/forms/trip/CreateTripForm'
 import { BranchTitle } from './assets'
 import { CreateSubNav } from '../../../components/utils/SubNavigation'
-import { calculateTripInfo } from '../../../components/forms/trip/createTripHelper'
-import tripAPI from '../../../api/trip'
 
 @connect(
   state => {
     const form = state.getIn(['form', FormNames.TRIP_CREATE_TRIP])
 
     return {
-      apiEngine: state.getIn(['global', 'apiEngine']),
       messages: state.getIn(['global', 'messages']),
       page: state.getIn(['trip', 'createPage', 'page']),
       done: state.getIn(['trip', 'createPage', 'done']),
@@ -51,19 +48,7 @@ class CreateTripPage extends React.Component {
 
   componentWillMount() {
     this.props.actions.resetCreateTripData()
-    tripAPI(this.props.apiEngine)
-      .listGuideSites()
-      .catch(err => {
-        throw err
-      })
-      .then(json => fromJS(json))
-      .then(json => {
-        const { routes, startSites, uuid2data } = this.props
-        this.props.actions.setOwnSite(json)
-        this.props.actions.setCreateTripData({
-          tripInfo: calculateTripInfo(routes, startSites, json, uuid2data),
-        })
-      })
+    this.props.actions.listGuideSites()
   }
 
   nextPage() {

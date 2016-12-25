@@ -6,16 +6,14 @@ import PhaseSubSite from '../PhaseSubSite'
 import PhaseOtherInfo from '../PhaseOtherInfo'
 import PhaseDone from '../PhaseDone'
 import { getOptions } from '../../../../utils/getI18nValue'
-import SiteAPI from '../../../../api/site'
 
 // http://redux-form.com/6.2.0/examples/wizard/
 const CreateSiteForm = props => {
   const {
-    apiEngine,
     page,
     messages,
     nextPage,
-    values,
+    formValue,
   } = props
 
   const { TripDayInfos, TripElements } =
@@ -23,15 +21,14 @@ const CreateSiteForm = props => {
   TripElements.splice(0, 1) // remove ANY
 
   const subsiteMarkers =
-    values.get('subSites') ?
-      values.get('subSites')
+    formValue.get('subSites') ?
+      formValue.get('subSites')
         .filter(value => value.get('googleInfo'))
         .map(value => value.getIn(['googleInfo', 'position'])) : []
 
   return (
     <div>
-      <pre>{JSON.stringify(values.toJS(), null, 2)}</pre>
-
+      <pre>{JSON.stringify(formValue.toJS(), null, 2)}</pre>
       {page === 0 &&
       <PhaseName
         onSubmit={nextPage}
@@ -50,8 +47,8 @@ const CreateSiteForm = props => {
       <PhaseMainSite
         onSubmit={nextPage}
         markers={
-          values.getIn(['mainSite', 'googleInfo', 'position']) ?
-          [values.getIn(['mainSite', 'googleInfo', 'position'])] :
+          formValue.getIn(['mainSite', 'googleInfo', 'position']) ?
+          [formValue.getIn(['mainSite', 'googleInfo', 'position'])] :
           []
         }
         {...props}
@@ -66,14 +63,7 @@ const CreateSiteForm = props => {
       }
       {page === 4 &&
       <PhaseOtherInfo
-        onSubmit={data => {
-          SiteAPI(apiEngine)
-          .createSite(data.toJS())
-          .then(json => {
-            console.log(json)
-            if (json.ok) nextPage()
-          })
-        }}
+        onSubmit={data => props.actions.createSite(data.toJS())}
         {...props}
       />
       }

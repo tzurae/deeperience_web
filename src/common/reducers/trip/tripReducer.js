@@ -1,10 +1,18 @@
 import uuid from 'uuid'
 import { fromJS } from 'immutable'
+import { calculateTripInfo } from '../../components/forms/trip/createTripHelper'
 
 const {
-  SET_OWN_SITE,
   SET_CREATE_TRIP_DATA,
   RESET_CREATE_TRIP_DATA,
+
+  LIST_GUIDE_SITES_REQUEST,
+  LIST_GUIDE_SITES_SUCCESS,
+  LIST_GUIDE_SITES_FAILURE,
+
+  CREATE_TRIP_REQUEST,
+  CREATE_TRIP_SUCCESS,
+  CREATE_TRIP_FAILURE,
   CREATE_TRIP_BRANCH_ERROR,
   CREATE_TRIP_NEXT_PAGE,
   CREATE_TRIP_PREVIOUS_PAGE,
@@ -45,9 +53,6 @@ const initialState = fromJS({
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case SET_OWN_SITE:
-      return state.set('ownSites', action.payload.sites)
-
     case SET_CREATE_TRIP_DATA:
       return state
         .setIn(['createPage', 'routes'],
@@ -86,6 +91,25 @@ export default (state = initialState, action) => {
           },
         }))
     }
+
+    case LIST_GUIDE_SITES_REQUEST:
+    case LIST_GUIDE_SITES_FAILURE:
+      return state
+
+    case LIST_GUIDE_SITES_SUCCESS:
+      const { sites } = action.payload
+      const routes = state.getIn(['createPage', 'routes'])
+      const startSites = state.getIn(['createPage', 'startSites'])
+      const uuid2data = state.getIn(['createPage', 'uuid2data'])
+
+      return state.set('ownSites', sites)
+                  .set('tripInfo', calculateTripInfo(routes, startSites, sites, uuid2data))
+
+    case CREATE_TRIP_REQUEST:
+    case CREATE_TRIP_SUCCESS:
+    case CREATE_TRIP_FAILURE:
+      return state
+
     case CREATE_TRIP_BRANCH_ERROR:
       return state.setIn(['createPage', 'branchError'], action.payload.branchError)
 
