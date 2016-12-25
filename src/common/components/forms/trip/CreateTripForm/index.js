@@ -12,16 +12,19 @@
  * previousPage: 前一頁的 function
  *
  */
-/* eslint-disable react/prefer-stateless-function */
 import React from 'react'
 import PhaseIntro from '../PhaseIntro'
 import PhaseTripBranch from '../PhaseTripBranch'
+import PhasePic from '../PhasePic'
+import PhasePreview from '../PhasePreview'
+import PhaseDone from '../PhaseDone'
+import TripAPI from '../../../../api/trip'
 import { getOptions } from '../../../../utils/getI18nValue'
 
 // http://redux-form.com/6.2.0/examples/wizard/
 const CreateTripForm = props => {
   const {
-    // apiEngine,
+    apiEngine,
     page,
     messages,
     nextPage,
@@ -50,7 +53,34 @@ const CreateTripForm = props => {
         {...props}
       />
       }
-      {page === 2 && <div/>}
+      {page === 2 &&
+      <PhasePic
+        onSubmit={nextPage}
+        formValue={values}
+        {...props}
+      />
+      }
+      {page === 3 &&
+      <PhasePreview
+        onSubmit={data => {
+          /* eslint-disable */
+          let { uuid2data, ...send } = data.toJS()
+          /* eslint-enable */
+
+          props.actions.createTrip(send)
+
+          TripAPI(apiEngine)
+            .createTrip(send)
+            .then(json => {
+              console.log(json)
+              if (!json.errors) nextPage()
+            })
+        }}
+        formValue={values}
+        {...props}
+      />
+      }
+      {page === 4 && <PhaseDone/>}
     </div>
   )
 }

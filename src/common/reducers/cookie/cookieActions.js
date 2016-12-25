@@ -25,4 +25,3 @@ export const removeCookieRequest = createAction(REMOVE_COOKIE_REQUEST)
 export const removeCookieSuccess = createAction(REMOVE_COOKIE_SUCCESS)
 export const removeCookieFailure = createAction(REMOVE_COOKIE_FAILURE)
 
-

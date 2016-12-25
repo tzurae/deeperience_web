@@ -9,7 +9,7 @@ export default {
   initialValues: fromJS({
     name: '',
     tags: [],
-    dayInfo: 'TripDayInfos.HALF_DAY',
+    dayInfo: 'HALF_DAY',
     dailyTrips: [{
       remind: '',
       period: {

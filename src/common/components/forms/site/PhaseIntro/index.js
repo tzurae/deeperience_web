@@ -3,12 +3,9 @@ import { reduxForm } from 'redux-form/immutable'
 import { Field } from 'redux-form'
 import FormNames from '../../../../constants/FormNames'
 import FormProperties from '../siteFormProperties'
-import FormButton from '../../../utils/FormButton'
+import FormFooter from '../../../utils/FormFooter'
 import Editor from '../../../utils/Editor'
-import {
-  BsForm as Form,
-  BsFormFooter as FormFooter,
-} from '../../../fields/widgets'
+import { BsForm as Form } from '../../../fields/widgets'
 import styles from './styles.scss'
 
 const PhaseIntro = props => {
@@ -41,21 +38,12 @@ const PhaseIntro = props => {
         content={introEditorContent}
       />
       <FormFooter
-        labelDimensions={{ sm: 0 }}
-        fieldDimensions={{ sm: 12 }}
+        type={['button', 'submit']}
+        onClick={[previousPage, null]}
+        disabled={[false, pristine || submitting || invalid]}
+        textId={['common.previousStep', 'common.nextStep']}
         className={styles.footer}
-      >
-        <FormButton
-          type="button"
-          onClick={previousPage}
-          textId="common.previousStep"
-        />
-        <FormButton
-          type="submit"
-          disabled={pristine || submitting || invalid}
-          textId="common.nextStep"
-        />
-      </FormFooter>
+      />
     </Form>
   )
 }

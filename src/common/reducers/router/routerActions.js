@@ -3,7 +3,7 @@ import { setCookie } from '../cookie/cookieActions'
 
 export const redirect = (path) => {
   return (dispatch) => {
-    setCookie({'redirect': path})
+    setCookie({ redirect: path })
     dispatch(push(path))
   }
 }

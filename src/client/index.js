@@ -2,10 +2,7 @@ import React from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 import { match, Router, browserHistory } from 'react-router'
-import {
-  syncHistoryWithStore,
-  push,
-} from 'react-router-redux'
+import { syncHistoryWithStore, push } from 'react-router-redux'
 import LocaleProvider from '../common/components/utils/LocaleProvider'
 import getRoutes from '../common/routes'
 import setupLocale from './setupLocale'

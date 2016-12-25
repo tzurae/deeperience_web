@@ -45,12 +45,11 @@ export default ({ app }) => {
   // mount custom helpers
   app.use(mountHelper)
 
-  //cookie-parser
+  // cookie-parser
   app.use(cookieParser())
 
   // initialize cookie
   app.use(initCookie)
 
   app.use(passportInit)
-
 }

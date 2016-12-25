@@ -11,7 +11,7 @@ const selectAuth = () => (state) => state.get('auth')
 const selectGlobal = () => (state) => state.get('global')
 const selectRouter = () => (state) => state.get('routing')
 
-const selectSomethingFromCookies = (property) => createDeepEqualSelector(
+const selectFromCookies = (property) => createDeepEqualSelector(
   selectCookies(),
   (cookiesState) => cookiesState.get(property)
 )
@@ -21,19 +21,19 @@ const selectAuthState  = () => createDeepEqualSelector(
   authState => authState.get('isAuth')
 )
 
-const selectSomethingFromGlobal = (property) => createDeepEqualSelector(
+const selectFromGlobal = (property) => createDeepEqualSelector(
   selectGlobal(),
   globalState => globalState.get(property)
 )
 
-const selectSomethingFromRouting = (property) => createDeepEqualSelector(
+const selectFromRouting = (property) => createDeepEqualSelector(
   selectRouter(),
   routerState => routerState.get(property)
 )
 
 export {
-  selectSomethingFromGlobal,
-  selectSomethingFromRouting,
-  selectSomethingFromCookies,
+  selectFromGlobal,
+  selectFromRouting,
+  selectFromCookies,
   selectAuthState,
 }

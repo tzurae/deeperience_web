@@ -25,30 +25,30 @@ const initialState = fromJS({
 })
 
 export default createReducer(initialState, {
-  [SET_COOKIE](state, action){return state},
-  [SET_COOKIE_REQUEST] (state, action) {
-    if(process.env.BROWSER) {
+  [SET_COOKIE](state, action) { return state },
+  [SET_COOKIE_REQUEST](state, action) {
+    if (process.env.BROWSER) {
       Object.keys(action.payload).map(cookieEle => {
-        //js-cookie will automatically transfer object to string using JSON.stringify
+        // js-cookie will automatically transfer object to string using JSON.stringify
         document.cookie = cookie.set(cookieEle, action.payload[cookieEle])
-        }
+      }
       )
     }
     return state.merge(action.payload)
   },
-  [SET_COOKIE_SUCCESS](state, action){return state},
-  [SET_COOKIE_FAILURE](state, action){return state},
-  [REMOVE_COOKIE](state, action){return state},
-  [REMOVE_COOKIE_REQUEST] (state, action) {
-    if(process.env.BROWSER) {
-      document.cookie.split(";").forEach(
-        function(c) {
-          document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
-        });
+  [SET_COOKIE_SUCCESS](state, action) { return state },
+  [SET_COOKIE_FAILURE](state, action) { return state },
+  [REMOVE_COOKIE](state, action) { return state },
+  [REMOVE_COOKIE_REQUEST](state, action) {
+    if (process.env.BROWSER) {
+      document.cookie.split(';').forEach(
+        (c) => {
+          document.cookie = c.replace(/^ +/, '').replace(/=.*/, `=;expires=${new Date().toUTCString()};path=/`)
+        })
     }
     return state.merge(initialState)
   },
-  [REMOVE_COOKIE_SUCCESS](state, action){return state},
-  [REMOVE_COOKIE_FAILURE](state, action){return state},
+  [REMOVE_COOKIE_SUCCESS](state, action) { return state },
+  [REMOVE_COOKIE_FAILURE](state, action) { return state },
 })
 

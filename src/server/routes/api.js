@@ -13,7 +13,8 @@ import localeController from '../controllers/locale'
 import tripController from '../controllers/trip'
 import siteController from '../controllers/guideSite'
 import postController from '../controllers/post'
-import zoom from '../controllers/zoom'
+import uploadController from '../controllers/upload'
+import zoomController from '../controllers/zoom'
 
 export default ({ app }) => {
   // user
@@ -118,21 +119,21 @@ export default ({ app }) => {
 
   // trip for guide
   app.get('/api/trips/own', authRequired, tripController.listOwnTrip) // todo
-  app.post('/api/trips', authRequired, bodyParser.json, tripController.create) // todo
+  app.post('/api/trips', authRequired, bodyParser.json, tripController.create)
   app.put('/api/trips/:tripId', authRequired, bodyParser.json, tripController.update) // todo
-  app.delete('/api/trips/:tripId', authRequired, bodyParser.json, tripController.remove)
+  app.delete('/api/trips/:tripId', authRequired, bodyParser.json, tripController.remove) // todo
 
   app.post('/api/upload/image',
     authRequired,
     fileUpload.disk({
       destination: 'tmp/{userId}',
     }).fields([{ name: 'img' }]),
-    tripController.uploadImage
+    uploadController.uploadImage
     )
 
   // zoom
-  app.get('/api/zoom', authRequired, zoom.create)
-  app.delete('/api/zoom/:meetingId', authRequired, bodyParser.json, zoom.end, zoom.delete)
+  app.get('/api/zoom', authRequired, zoomController.create)
+  app.delete('/api/zoom/:meetingId', authRequired, bodyParser.json, zoomController.end, zoomController.delete)
 
   // site
   app.get('/api/sites', authRequired, siteController.list) // todo

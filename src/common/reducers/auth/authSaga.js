@@ -28,7 +28,7 @@ function* login(payload) {
     yield put(authActions.loginRequest())
     yield put(authActions.getDataFromApiServerRequest())
     const { isAuth, token, user } = yield call(loginAndGetUserData, payload)
-    if(isAuth) {
+    if (isAuth) {
       yield put(authActions.getDataFromApiServerSuccess())
       yield put(cookieActions.setCookie({ token, user }))
       yield put(authActions.loginSuccess())
@@ -64,7 +64,6 @@ function* logout() {
 //   }
 // }
 
-
 // ---------WATCH START------------
 
 function* watchLogin() {
@@ -75,7 +74,7 @@ function* watchLogin() {
 }
 
 function* watchLogout() {
-  while(true) {
+  while (true) {
     yield take(LOGOUT)
     yield fork(logout)
   }
@@ -87,7 +86,6 @@ function* watchLogout() {
 //     yield fork(register, payload)
 //   }
 // }
-
 
 export default [
   fork(watchLogin),

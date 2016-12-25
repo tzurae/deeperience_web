@@ -3,16 +3,16 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import userAPI from '../../api/user'
 import * as authAction from '../../reducers/auth/authAction'
-import { createStructuredSelector } from 'reselect';
-import { selectSomethingFromGlobal } from '../../lib/selector'
+import { createStructuredSelector } from 'reselect'
+import { selectFromGlobal } from '../../lib/selector'
 
 const mapStateToProps = createStructuredSelector({
-  apiEngine: selectSomethingFromGlobal('apiEngine')
+  apiEngine: selectFromGlobal('apiEngine'),
 })
 
 const mapDispatchToProps = dispatch => {
   return {
-    actions: bindActionCreators(authAction, dispatch)
+    actions: bindActionCreators(authAction, dispatch),
   }
 }
 

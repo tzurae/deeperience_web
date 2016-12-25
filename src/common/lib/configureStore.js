@@ -15,15 +15,15 @@ export default (initialState = {}, history) => {
   const logger = createLoggerMiddleware({
     collapsed: true,
     stateTransformer: (state) => {
-      let newState = {};
-      for (let i of Object.keys(state)) {
+      const newState = {}
+      for (const i of Object.keys(state)) {
         if (Immutable.Iterable.isIterable(state[i])) {
-          newState[i] = state[i].toJS();
+          newState[i] = state[i].toJS()
         } else {
-          newState[i] = state[i];
+          newState[i] = state[i]
         }
       };
-      return newState;
+      return newState
     },
     predicate: (getState, action) => {
       let val = true

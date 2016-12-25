@@ -21,12 +21,12 @@ class Editor extends React.Component {
     let plainContent = this.props.content
 
     // if plainContent not exist, initial it
-    if(!plainContent){
+    if (!plainContent) {
       plainContent = EditorState.createEmpty().getCurrentContent()
     }
 
     // turn to plain object
-    if(plainContent.toJS){
+    if (plainContent.toJS) {
       plainContent = plainContent.toJS()
     }
 
@@ -55,7 +55,7 @@ class Editor extends React.Component {
     dispatchTimer = setTimeout(() => {
       const contentState = this.state.editorState.getCurrentContent()
       const htmlStr = stateToHTML(contentState)
-      if(this.props.updateEditor){
+      if (this.props.updateEditor) {
         this.props.updateEditor(contentState.toJS())
       }
       this.props.update(htmlStr)

@@ -21,7 +21,7 @@ export const updateLocale = (targetLocale) => {
     return localeAPI(getState().getIn(['global', 'apiEngine']))
       .read(targetLocale)
       .then((json) => {
-        dispatch(setCookie({locale: json.locale}))
+        dispatch(setCookie({ locale: json.locale }))
         dispatch({
           type: UPDATE_LOCALE,
           locale: json.locale,

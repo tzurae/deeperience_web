@@ -3,6 +3,10 @@ const {
   SET_OWN_SITE,
   SET_CREATE_TRIP_DATA,
   RESET_CREATE_TRIP_DATA,
+  CREATE_TRIP,
+  CREATE_TRIP_REQUEST,
+  CREATE_TRIP_SUCCESS,
+  CREATE_TRIP_FAILURE,
   CREATE_TRIP_BRANCH_ERROR,
   CREATE_TRIP_NEXT_PAGE,
   CREATE_TRIP_PREVIOUS_PAGE,
@@ -12,6 +16,8 @@ const {
   CREATE_TRIP_SET_SHOW_DAY,
   CREATE_TRIP_SET_TOTAL_DAY,
   CREATE_TRIP_SET_FLOAT_WINDOW,
+  CREATE_TRIP_SET_COVER_PIC,
+  CREATE_TRIP_SET_TREE_PIC,
 } = require('../../constants/ActionTypes').default
 
 export const setOwnSite = (sites: any) => ({
@@ -36,6 +42,28 @@ export const setCreateTripData = (data: tripType) => ({
 
 export const resetCreateTripData = () => ({
   type: RESET_CREATE_TRIP_DATA,
+})
+
+export const createTrip = (trip:any) => ({
+  type: CREATE_TRIP,
+  payload: {
+    trip,
+  },
+})
+
+export const createTripRequest = (trip:any) => ({
+  type: CREATE_TRIP_REQUEST,
+})
+
+export const createTripSuccess = () => ({
+  type: CREATE_TRIP_SUCCESS,
+})
+
+export const createTripFailure = (error: any) => ({
+  type: CREATE_TRIP_FAILURE,
+  payload: {
+    error,
+  },
 })
 
 export const createTripBranchError = (branchError: string) => ({
@@ -94,3 +122,18 @@ export const createTripSetFloatWindow = floatWindow => ({
     floatWindow,
   },
 })
+
+export const createTripSetCoverPic = (img :string) => ({
+  type: CREATE_TRIP_SET_COVER_PIC,
+  payload: {
+    img,
+  },
+})
+
+export const createTripSetTreePic = imgs => ({
+  type: CREATE_TRIP_SET_TREE_PIC,
+  payload: {
+    imgs,
+  },
+})
+

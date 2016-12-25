@@ -1,6 +1,6 @@
 import Immutable from 'immutable'
 
-const configureReducer = (initialState, handlers) => (state = initialState, action= {}) => {
+const configureReducer = (initialState, handlers) => (state = initialState, action = {}) => {
   // is Immutalbe? transfer it if state is not immutable
   // we chose Immutable.Iterable.isIterable() to check if the Immutalbe type is correct or not
   // becasue all collections in Immutable.js, like Map and List, use Iterable as a base class.

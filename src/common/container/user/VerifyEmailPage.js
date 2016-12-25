@@ -5,11 +5,11 @@ import Alert from 'react-bootstrap/lib/Alert'
 import userAPI from '../../api/user'
 import { pushErrors } from '../../reducers/error/errorActions'
 import PageLayout from '../../components/layouts/PageLayout'
-import { selectSomethingFromGlobal } from '../../lib/selector'
+import { selectFromGlobal } from '../../lib/selector'
 import { createStructuredSelector } from 'reselect'
 
 const mapStateToProps = createStructuredSelector({
-  apiEngine: selectSomethingFromGlobal('apiEngine'),
+  apiEngine: selectFromGlobal('apiEngine'),
 })
 
 class VerificationPage extends React.Component {

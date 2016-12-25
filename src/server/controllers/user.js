@@ -69,10 +69,10 @@ export default {
 
   login(req, res) {
     User
-      .findOne({'email.value': req.body.email})
+      .findOne({ 'email.value': req.body.email })
       .select('-social')
-      .exec(handleDbError(res)((user)=> {
-        if(!user) {
+      .exec(handleDbError(res)((user) => {
+        if (!user) {
           res.json({
             isAuth: false,
           })
@@ -119,9 +119,9 @@ export default {
     user.lastLoggedInAt = new Date()
     user.save(handleDbError(res)(() => {
       req.store.dispatch(setCookie({
-          token,
-          user,
-        })
+        token,
+        user,
+      })
       )
     }))
     res.cookie('token', token)

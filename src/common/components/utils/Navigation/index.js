@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import Grid from 'react-bootstrap/lib/Grid'
@@ -10,16 +10,16 @@ import NavLink from '../NavLink'
 import MenuItem from '../MenuItem'
 import Text from '../Text'
 import styles from './styles.scss'
-import classname from 'classnames'
-import { selectSomethingFromCookies, selectAuthState } from '../../../lib/selector'
-import { createStructuredSelector } from 'reselect';
+import cx from 'classnames'
+import { selectFromCookies, selectAuthState } from '../../../lib/selector'
+import { createStructuredSelector } from 'reselect'
 
 const mapStateToProps = createStructuredSelector({
   isAuth: selectAuthState(),
-  user: selectSomethingFromCookies('user')
+  user: selectFromCookies('user'),
 })
 
-class Navigation extends Component {
+class Navigation extends React.Component {
   _setLanguage(lang) {
     const { store } = this.context
     store
@@ -39,7 +39,7 @@ class Navigation extends Component {
       <Navbar staticTop className={styles.nav}>
         <Grid>
           <Navbar.Header className={styles.header}>
-            <Link className={classname('navbar-brand', styles.text)} to="/">
+            <Link className={cx('navbar-brand', styles.text)} to="/">
               Deeperience
             </Link>
           </Navbar.Header>
@@ -92,8 +92,7 @@ class Navigation extends Component {
               <Navbar.Dropdown
                 title={
                   !isAuth ?
-                    <Text id="nav.user.profile" className={styles.dropdownText}/>
-                     :
+                    <Text id="nav.user.profile" className={styles.dropdownText}/> :
                     user.get('avatarURL') ? (
                       <div
                         className={styles.avatar}

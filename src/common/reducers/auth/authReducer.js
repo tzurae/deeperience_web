@@ -13,20 +13,20 @@ const {
   LOGIN_SUCCESS,
 } = require('../../constants/ActionTypes').default
 
-let initialState = fromJS({
+const initialState = fromJS({
   isAuth: false,
 })
 
 export default createReducer(initialState, {
-  [LOGIN](state, action){return state},
-  [LOGIN_REQUEST](state, action){return state},
-  [LOGIN_SUCCESS](state, action){
+  [LOGIN](state, action) { return state },
+  [LOGIN_REQUEST](state, action) { return state },
+  [LOGIN_SUCCESS](state, action) {
     return state.set('isAuth', true)
   },
-  [LOGOUT](state, action){return state},
-  [LOGOUT_REQUEST](state, action){return state},
-  [LOGOUT_SUCCESS] (state, action) {
+  [LOGOUT](state, action) { return state },
+  [LOGOUT_REQUEST](state, action) { return state },
+  [LOGOUT_SUCCESS](state, action) {
     return state.set('isAuth', false)
   },
-  [LOGOUT_FAILURE] (state, action) {return state},
+  [LOGOUT_FAILURE](state, action) { return state },
 })

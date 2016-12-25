@@ -57,27 +57,26 @@ const mapDispatchToProps = dispatch => {
 class CreateTripPage extends React.Component {
   constructor(props) {
     super(props)
-    this.props.actions.resetCreateTripData()
     this.nextPage = ::this.nextPage
     this.previousPage = ::this.previousPage
+    this.updateForm = ::this.updateForm
   }
 
   componentWillMount() {
-    if (process.env.BROWSER) {
-      tripAPI(this.props.apiEngine)
-        .listGuideSites()
-        .catch(err => {
-          throw err
+    this.props.actions.resetCreateTripData()
+    tripAPI(this.props.apiEngine)
+      .listGuideSites()
+      .catch(err => {
+        throw err
+      })
+      .then(json => fromJS(json))
+      .then(json => {
+        const { routes, startSites, uuid2data } = this.props
+        this.props.actions.setOwnSite(json)
+        this.props.actions.setCreateTripData({
+          tripInfo: calculateTripInfo(routes, startSites, json, uuid2data),
         })
-        .then(json => fromJS(json))
-        .then(json => {
-          const { routes, startSites, uuid2data } = this.props
-          this.props.actions.setOwnSite(json)
-          this.props.actions.setCreateTripData({
-            tripInfo: calculateTripInfo(routes, startSites, json, uuid2data),
-          })
-        })
-    }
+      })
   }
 
   nextPage() {
@@ -89,6 +88,10 @@ class CreateTripPage extends React.Component {
 
   previousPage() {
     this.props.actions.createTripPreviousPage()
+  }
+
+  updateForm(name, data) {
+    return this.props.actions.change(FormNames.TRIP_CREATE_TRIP, name, data)
   }
 
   render() {
@@ -114,6 +117,7 @@ class CreateTripPage extends React.Component {
               <CreateTripForm
                 nextPage={this.nextPage}
                 previousPage={this.previousPage}
+                updateForm={this.updateForm}
                 {...this.props}
               />
             </Panel1>

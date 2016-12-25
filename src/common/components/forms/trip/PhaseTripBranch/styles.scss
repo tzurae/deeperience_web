@@ -20,8 +20,10 @@
 
 .msg-error {
   @include font-size-medium;
-  margin: -5px 0 15px 0;
+  width: 100%;
+  margin: 0 0 15px;
   color: $red;
+  text-align: right;
 }
 
 .site-div-btn {
@@ -62,6 +64,7 @@
 }
 
 .float-site-list-item {
+  @include hover-normal;
   display: flex;
   overflow-x: hidden;
   flex-direction: row;
@@ -74,10 +77,6 @@
   border: 1px none $color-border;
   border-bottom-style: solid;
   cursor: pointer;
-
-  &:hover {
-    background-color: $alto;
-  }
 }
 
 .float-site-list-item-name {
@@ -136,7 +135,7 @@
 }
 
 .footer {
-  @include flex-center;
+  @include flex-col-center;
   margin: 20px 0 0;
 }
 

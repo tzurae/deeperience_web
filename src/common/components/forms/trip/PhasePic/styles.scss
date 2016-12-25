@@ -1,0 +1,39 @@
+@import '../../../../styles/index';
+
+.title {
+  margin-bottom: 15px;
+  padding: 5px 20px;
+  color: $color-main;
+  text-align: left;
+  border-left: 5px $color-main solid;
+  background-color: $white;
+}
+
+.gallery {
+  @include flex-row;
+  margin-bottom: 20px;
+}
+
+.add-cover-pic {
+  @include flex-center;
+  @include hover-normal;
+  overflow: hidden;
+  width: 140px;
+  height: 105px;
+  margin: 0 5px;
+  color: $color-main;
+}
+
+.pic {
+  width: 100%;
+}
+
+.add-cover-pic-btn {
+  @extend .add-cover-pic;
+  border: 2px $alto solid;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $color-hover;
+  }
+}

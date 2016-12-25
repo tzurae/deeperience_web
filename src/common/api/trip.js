@@ -1,6 +1,4 @@
 export default (apiEngine) => ({
+  createTrip: trip => apiEngine.post('/api/trips', { data: trip }),
   listGuideSites: () => apiEngine.get('/api/sites'),
-  uploadImage: (img) => apiEngine.post('/api/trips/image',
-    { files: { img } }
-  ),
 })

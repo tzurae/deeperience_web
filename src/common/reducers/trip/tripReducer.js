@@ -14,11 +14,13 @@ const {
   CREATE_TRIP_SET_SHOW_DAY,
   CREATE_TRIP_SET_TOTAL_DAY,
   CREATE_TRIP_SET_FLOAT_WINDOW,
+  CREATE_TRIP_SET_COVER_PIC,
+  CREATE_TRIP_SET_TREE_PIC,
 } = require('../../constants/ActionTypes').default
 
 const initialState = fromJS({
   createPage: {
-    page: 0,
+    page: 1,
     done: new Array(...{ length: 5 }).map(() => false),
     tripInfo: [],
     routes: [],
@@ -35,6 +37,8 @@ const initialState = fromJS({
     },
     totalDay: 1, // 總天數
     submitError: '', //
+    coverPic: '',
+    treePic: [],
   },
   ownSites: [], // 所有自己設計擁有的 site
 })
@@ -112,6 +116,12 @@ export default (state = initialState, action) => {
           floatWindow: action.payload.floatWindow,
         },
       }))
+
+    case CREATE_TRIP_SET_COVER_PIC:
+      return state.setIn(['createPage', 'coverPic'], action.payload.img)
+
+    case CREATE_TRIP_SET_TREE_PIC:
+      return state.setIn(['createPage', 'treePic'], action.payload.imgs)
 
     default:
       return state

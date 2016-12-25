@@ -57,6 +57,10 @@ export default keyMirror({
   SET_CREATE_TRIP_DATA: null,
   RESET_CREATE_TRIP_DATA: null,
 
+  CREATE_TRIP: null,
+  CREATE_TRIP_REQUEST: null,
+  CREATE_TRIP_SUCCESS: null,
+  CREATE_TRIP_FAILURE: null,
   CREATE_TRIP_BRANCH_ERROR: null,
   CREATE_TRIP_NEXT_PAGE: null,
   CREATE_TRIP_PREVIOUS_PAGE: null,
@@ -66,6 +70,8 @@ export default keyMirror({
   CREATE_TRIP_SET_SHOW_DAY: null,
   CREATE_TRIP_SET_TOTAL_DAY: null,
   CREATE_TRIP_SET_FLOAT_WINDOW: null,
+  CREATE_TRIP_SET_COVER_PIC: null,
+  CREATE_TRIP_SET_TREE_PIC: null,
 
   // ------ site ------
   CREATE_SITE_ERROR: null,
