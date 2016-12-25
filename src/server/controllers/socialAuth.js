@@ -9,20 +9,12 @@ export default {
       'of config file `configs/project/server.js`'
     )
   },
-  initFacebook: (req, res, next) => (
+  initFacebook: (req, res, next) => {
     passport.authenticate('facebook', {
       scope: ['public_profile', 'email', 'user_friends', 'user_birthday', 'user_likes'],
-      state: JSON.stringify({ next: req.query.next }),
+      state: JSON.stringify({next: req.query.next}),
     })(req, res, next)
-  ),
-  initLinkedin: (req, res, next) => (
-    passport.authenticate('linkedin', {
-      state: JSON.stringify({
-        next: req.query.next,
-        random: Math.random(),
-      }),
-    })(req, res, next)
-  ),
+  },
   createUser: (req, res, next) => {
     const {
       friends,

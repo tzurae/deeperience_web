@@ -6,12 +6,11 @@ import Errors from '../../common/constants/Errors'
 import handleError, { handleDbError } from '../decorators/handleError'
 import User from '../models/User'
 import filterAttribute from '../utils/filterAttribute'
-import { redirect } from '../../common/reducers/router/routerActions'
 import uploadToS3 from '../utils/uploadToS3'
 import { setCookie } from '../../common/reducers/cookie/cookieActions'
-import { Map } from 'immutable'
 
 export default {
+
   list(req, res) {
     User.paginate({ page: req.query.page }, handleDbError(res)((page) => {
       User
@@ -98,6 +97,7 @@ export default {
         }
       }))
   },
+
   setNonce: (nonceKey) => (req, res, next) => {
     User.findOne({
       'email.value': req.body.email,
@@ -116,7 +116,6 @@ export default {
       return next()
     }
     const token = user.toAuthenticationToken()
-
     user.lastLoggedInAt = new Date()
     user.save(handleDbError(res)(() => {
       req.store.dispatch(setCookie({
@@ -124,14 +123,11 @@ export default {
           user,
         })
       )
-      console.log('req.store.state', req.store.getState().get('cookies'));
-      // const { token, user } = req.store.getState().get('cookies').toJS()
-      // const state = JSON.parse(req.query.state)
-      // res.cookie('token', token)
-      // res.cookie('user', user)
-      req.store.dispatch(redirect('/'))
-      return next()
     }))
+    res.cookie('token', token)
+    res.cookie('user', JSON.stringify(user))
+    res.redirect('/')
+    return next()
   },
 
   socialLoginPhone(req, res) {

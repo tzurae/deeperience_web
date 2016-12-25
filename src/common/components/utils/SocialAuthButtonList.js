@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import Head from '../utils/Head'
 import Text from '../utils/Text'
+import _ from 'lodash'
 
 const mapStateToProps = (state) => {
   return {
@@ -10,9 +11,13 @@ const mapStateToProps = (state) => {
 }
 
 const SocialAuthButtonList = ({ routing, login }) => {
-  const next = routing.getIn(['locationBeforeTransitions', 'query']).toJS()
-  const search = next ? `?next=${next}` : ''
-
+  const url = routing.getIn(['locationBeforeTransitions', 'query']).toJS()
+  let search
+  if(_.isEmpty(url)) {
+    search = ''
+  } else {
+    search = `?next=${url.next}`
+  }
   return (
     login ? (
     <div>
@@ -22,7 +27,7 @@ const SocialAuthButtonList = ({ routing, login }) => {
         ]}
       />
       <a
-        href={`/auth/facebook${search}`}
+        href={'/auth/facebook'}
         className="btn btn-block btn-social btn-facebook"
       >
         <span className="fa fa-facebook"></span>
@@ -37,7 +42,7 @@ const SocialAuthButtonList = ({ routing, login }) => {
           ]}
         />
         <a
-          href={`/auth/facebook${search}`}
+          href={'/auth/facebook'}
           className="btn btn-block btn-social btn-facebook"
         >
           <span className="fa fa-facebook"></span>

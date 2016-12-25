@@ -5,7 +5,7 @@ import { loginSuccess } from '../../common/reducers/auth/authAction'
 
 export default {
   user: (req, res, next) => {
-    if(!req.store.getState().getIn(['cookies','user']).isEmpty()) {
+    if(req.store.getState().getIn(['cookies','token'])!== "") {
       req.store.dispatch(loginSuccess())
     }
     next()

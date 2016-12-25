@@ -1,7 +1,6 @@
 import passport from 'passport'
 import { Strategy as JwtStrategy } from 'passport-jwt'
 import { Strategy as FacebookStrategy } from 'passport-facebook'
-import { Strategy as OAuthLinkedinStrategy } from 'passport-linkedin-oauth2'
 import configs from '../../../configs/project/server'
 import { redirect } from '../../common/reducers/router/routerActions'
 import Errors from '../../common/constants/Errors'
@@ -22,7 +21,10 @@ export default (req, res, next) => {
       req.store.dispatch(redirect('/user/login'))
       return next()
     }
-    User.findOne({ 'email.value': email }, (err, user) => {
+    User
+      .findOne({ 'email.value': email })
+      .select('-social')
+      .exec((err, user) => {
       if (err) {
         return cb(err)
       }
@@ -100,8 +102,9 @@ export default (req, res, next) => {
               })
             })
             const data = await Promise.all([likesPromise, friendsPromise, birthdayPromise])
-            user.social.profile.facebook.likes = data[0]
-            user.social.profile.facebook.friends = data[1]
+            // need to be commented or cookie won't be set because of the length of the data
+            // user.social.profile.facebook.likes = data[0]
+            // user.social.profile.facebook.friends = data[1]
             user.birthday.day = Number(data[2].birthday.substr(3, 2))
             user.birthday.month = Number(data[2].birthday.substr(0, 2))
             user.birthday.year = Number(data[2].birthday.substr(6, 4))
@@ -110,26 +113,6 @@ export default (req, res, next) => {
 
           getAllFbData()
         }))
-    }))
-  }
-
-  if (configs.passportStrategy.linkedin) {
-    passport.use(new OAuthLinkedinStrategy({
-      ...configs.passportStrategy.linkedin.default,
-      ...configs.passportStrategy.linkedin[process.env.NODE_ENV],
-    }, (req, accessToken, refreshToken, profile, done) => {
-      findOrCreateUser(
-        'linkedin',
-        profile._json.emailAddress,
-        handleDbError(res)((user) => {
-          // map `linkedin-specific` profile fields to our custom profile fields
-          user.social.profile.linkedin = profile._json
-          user.email.value = user.email.value || profile._json.emailAddress
-          user.name = user.name || profile._json.formattedName
-          user.avatarURL = user.avatarURL || profile._json.pictureUrl
-          done(null, user)
-        })
-      )
     }))
   }
 

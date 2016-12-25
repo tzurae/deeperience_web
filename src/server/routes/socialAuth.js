@@ -3,6 +3,7 @@ import socialAuthController from '../controllers/socialAuth'
 import userController from '../controllers/user'
 import configs from '../../../configs/project/server'
 import bodyParser from '../middlewares/bodyParser'
+import passport from 'passport'
 
 export default ({ app }) => {
   // facebook
@@ -12,6 +13,12 @@ export default ({ app }) => {
       passportAuth('facebook'),
       userController.socialLogin
     )
+    // app.get('/auth/facebook/callback',
+    //   passport.authenticate('facebook', { failureRedirect: '/login', session: false,}),
+    //   function (req, res) {
+    //   res.redirect('/')
+    //   }
+    // )
     app.post('/auth/facebook/phone',
       bodyParser.json,
       socialAuthController.createUser,
