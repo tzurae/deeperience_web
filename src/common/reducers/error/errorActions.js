@@ -1,26 +1,31 @@
+// @flow
 import Errors from '../../constants/Errors'
 const {
   PUSH_ERRORS,
   REMOVE_ERROR,
-} = require('../../constants/ActionTypes')
+} = require('../../constants/ActionTypes').default
 
 export const pushError = (error, meta) => {
   return {
     type: PUSH_ERRORS,
-    errors: [{
-      ...error,
-      meta,
-    }],
+    payload: {
+      errors: [{
+        ...error,
+        meta,
+      }],
+    },
   }
 }
 
-export const pushErrors = (errors) => {
+export const pushErrors = (errors: Array<Object>) => {
   if (errors && errors.length === undefined) {
     return pushError(Errors.UNKNOWN_EXCEPTION, errors)
   }
   return {
     type: PUSH_ERRORS,
-    errors,
+    payload: {
+      errors,
+    },
   }
 }
 

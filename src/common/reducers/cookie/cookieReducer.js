@@ -51,4 +51,3 @@ export default createReducer(initialState, {
   [REMOVE_COOKIE_SUCCESS](state, action) { return state },
   [REMOVE_COOKIE_FAILURE](state, action) { return state },
 })
-

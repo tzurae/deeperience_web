@@ -1,40 +1,28 @@
-import { List, Map } from 'immutable'
+import { Map, fromJS } from 'immutable'
+import createReducer from '../../lib/configureReducer'
 const {
   PUSH_ERRORS,
   REMOVE_ERROR,
-} = require('../../constants/ActionTypes')
+} = require('../../constants/ActionTypes').default
 
-const initialState = List()
+const initialState = fromJS([])
 
-export default (state = initialState, action) => {
-  if (!action.errors) {
-    action.errors = List([])
-  }
-  switch (action.type) {
-    case PUSH_ERRORS:
-      return action.errors.map((error) => {
-        state.push(
-          Map({
-            id: Math.random(),
-            errorMessage: error,
-          })
-        )
-      })
-    // return [
-    //   ...state,
-    //   ...action.errors.map((error) => ({
-    //     id: Math.random(),
-    //     ...error,
-    //   })),
-    // ]
-    case REMOVE_ERROR:
-      return
-      state.filter(error => error.id !== action.errors.id)
-    // [
-    //   ...state.filter(error => error.id !== action.id),
-    // ]
-    default:
-      return state
+export default createReducer(initialState, {
+  [PUSH_ERRORS](state, action) {
+    if (!action.payload.errors) return state
 
-  }
-}
+    let newState = state
+    action.payload.errors.forEach(error => {
+      newState = newState.push(
+        Map({
+          id: Math.random(),
+          errorMessage: error,
+        })
+      )
+    })
+    return newState
+  },
+  [REMOVE_ERROR](state, action) {
+    return state.filter(error => error.get('id') !== action.errors.id)
+  },
+})

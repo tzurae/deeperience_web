@@ -6,13 +6,13 @@ import Text from '../../../utils/Text'
 import uploadAPI from '../../../../api/upload'
 import { BsForm as Form } from '../../../fields/widgets'
 import styles from './styles.scss'
+import APIEngine from '../../../../utils/ApiEngine'
 
 const PhasePic = props => {
   const {
     updateForm,
     previousPage,
     formValue,
-    apiEngine,
     pristine,
     submitting,
     invalid,
@@ -21,7 +21,7 @@ const PhasePic = props => {
 
   // upload image to server
   const uploadImage = (file, name) => {
-    uploadAPI(apiEngine)
+    uploadAPI(new APIEngine())
       .uploadImage(file)
       .then(json => {
         const url = json.downloadURL
