@@ -29,7 +29,7 @@ const {
 
 const initialState = fromJS({
   createPage: {
-    page: 1,
+    page: 0,
     done: new Array(...{ length: 5 }).map(() => false),
     tripInfo: [],
     routes: [],

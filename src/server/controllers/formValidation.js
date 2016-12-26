@@ -11,7 +11,7 @@ export default {
         if (user) {
           res.json({
             isPassed: false,
-            message: 'The email is already registered',
+            message: '信箱已經註冊了',
           })
         } else {
           res.json({

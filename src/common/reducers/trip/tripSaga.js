@@ -1,5 +1,6 @@
 import { call, fork, take, put } from 'redux-saga/effects'
 import { fromJS } from 'immutable'
+import tripAPI from '../../api/trip'
 import ApiEngine from '../../utils/ApiEngine'
 import {
   createTripRequest,
@@ -10,7 +11,6 @@ import {
   listGuideSitesSuccess,
   listGuideSitesFailure,
 } from './tripActions'
-import tripAPI from '../../api/trip'
 const {
   CREATE_TRIP,
   LIST_GUIDE_SITES,

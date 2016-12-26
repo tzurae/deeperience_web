@@ -4,12 +4,7 @@ export default keyMirror({
 
   // ------ global ------
   SET_API_ENGINE: null,
-
-  // -------Back-end ------
-
-  GET_DATA_FROM_API_SERVER_REQUEST: null,
-  GET_DATA_FROM_API_SERVER_SUCCESS: null,
-  GET_DATA_FROM_API_SERVER_FAILURE: null,
+  UPDATE_LOCALE: null,
 
   // ------ user ------
   LOGIN: null,
@@ -29,8 +24,10 @@ export default keyMirror({
   REGISTER_SUCCESS: null,
   REGISTER_FAILURE: null,
 
-  // ------ cookie ------
+  OPEN_REGISTER_VERIFY_MODAL: null,
+  CLOSE_REGISTER_VERIFY_MODAL: null,
 
+  // ------ cookie ------
   SET_COOKIE: null,
   SET_COOKIE_REQUEST: null,
   SET_COOKIE_SUCCESS: null,
@@ -40,9 +37,6 @@ export default keyMirror({
   REMOVE_COOKIE_REQUEST: null,
   REMOVE_COOKIE_SUCCESS: null,
   REMOVE_COOKIE_FAILURE: null,
-
-  // ------ intl ------
-  UPDATE_LOCALE: null,
 
   // ------ error ------
   PUSH_ERRORS: null,

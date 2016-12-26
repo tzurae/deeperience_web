@@ -103,3 +103,10 @@ ul.navbar-nav > li.active > a {
 }
 
 /* Editor */
+
+/* BsForm */
+#root .help-block {
+  color: red;
+}
+/* BsForm */
+

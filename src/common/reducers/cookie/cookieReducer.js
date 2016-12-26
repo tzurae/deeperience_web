@@ -28,7 +28,7 @@ export default createReducer(initialState, {
   [SET_COOKIE](state, action) { return state },
   [SET_COOKIE_REQUEST](state, action) {
     if (process.env.BROWSER) {
-      Object.keys(action.payload).foeEach(cookieEle => {
+      Object.keys(action.payload).forEach(cookieEle => {
         // js-cookie will automatically transfer object to string using JSON.stringify
         document.cookie = cookie.set(cookieEle, action.payload[cookieEle])
       })

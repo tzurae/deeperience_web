@@ -103,7 +103,7 @@ export const createTripSetPage = (page: number) => ({
   },
 })
 
-export const createTripSetDone = done => ({
+export const createTripSetDone = (done: Array<boolean>) => ({
   type: CREATE_TRIP_SET_DONE,
   payload: {
     done,
