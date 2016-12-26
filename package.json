@@ -152,8 +152,6 @@
     "react-helmet": "^3.0.2",
     "react-immutable-proptypes": "^2.1.0",
     "react-intl": "^2.1.2",
-    "react-native": "^0.31.0",
-    "react-native-router-flux": "^3.34.0",
     "react-redux": "^4.4.5",
     "react-router": "^2.3.0",
     "react-router-active-component": "^4.0.0",
