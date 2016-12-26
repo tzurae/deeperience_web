@@ -9,7 +9,6 @@ import zoom from './zoom'
 import sites from './sites'
 
 export default ({ app }) => {
-
   app.use('/api/users', users)
   app.use('/api/customize', customize)
   app.use('/api/forms', forms)
@@ -19,5 +18,4 @@ export default ({ app }) => {
   app.use('/api/posts', posts)
   app.use('/api/zoom', zoom)
   app.use('/api/sites', sites)
-
 }

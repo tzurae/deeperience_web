@@ -227,19 +227,39 @@ export default {
     }))
   },
 
-  getCustomizePhase(req, res){
+  getCustomizePhase(req, res) {
 
   },
 
-  nextCustomizePhase(req, res){
+  nextCustomizePhase(req, res) {
 
   },
 
-  getRankList(req, res){
+  getRankList(req, res) {
 
   },
 
-  createRankList(req, res){
+  createRankList(req, res) {
+
+  },
+
+  agreePlan(req, res) {
+
+  },
+
+  getVideoTime(req, res) {
+
+  },
+
+  createVideoTime(req, res) {
+
+  },
+
+  acceptVideoTime(req, res) {
+
+  },
+
+  sendEvaluation(req, res) {
 
   },
 

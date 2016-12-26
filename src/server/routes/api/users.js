@@ -17,10 +17,6 @@ users.get('/',
   userController.list
 )
 users.post('/',
-  function(req, res, next){
-    console.log('123')
-    next()
-  },
   bodyParser.json,
   validate.recaptcha,
   userController.create,

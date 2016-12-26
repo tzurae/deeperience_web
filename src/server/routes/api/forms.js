@@ -5,7 +5,6 @@ import formValidationController from '../../controllers/formValidation'
 
 const forms = express.Router()
 
-
 forms.post(`/${FormNames.USER_REGISTER}/fields/email/validation`,
     bodyParser.json,
     formValidationController[FormNames.USER_REGISTER].email
