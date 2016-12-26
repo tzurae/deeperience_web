@@ -227,6 +227,22 @@ export default {
     }))
   },
 
+  getCustomizePhase(req, res){
+
+  },
+
+  nextCustomizePhase(req, res){
+
+  },
+
+  getRankList(req, res){
+
+  },
+
+  createRankList(req, res){
+
+  },
+
   uploadAvatar(req, res) {
     // use `req.file` to access the avatar file
     // and use `req.body` to access other fileds
