@@ -227,6 +227,42 @@ export default {
     }))
   },
 
+  getCustomizePhase(req, res) {
+
+  },
+
+  nextCustomizePhase(req, res) {
+
+  },
+
+  getRankList(req, res) {
+
+  },
+
+  createRankList(req, res) {
+
+  },
+
+  agreePlan(req, res) {
+
+  },
+
+  getVideoTime(req, res) {
+
+  },
+
+  createVideoTime(req, res) {
+
+  },
+
+  acceptVideoTime(req, res) {
+
+  },
+
+  sendEvaluation(req, res) {
+
+  },
+
   uploadAvatar(req, res) {
     // use `req.file` to access the avatar file
     // and use `req.body` to access other fileds
