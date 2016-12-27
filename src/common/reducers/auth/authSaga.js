@@ -2,6 +2,7 @@
  * ## Edit by: Rae
  * ## Time: 2016/12/08
  */
+import 'babel-polyfill'
 import { call, fork, take, put } from 'redux-saga/effects'
 import { push } from 'react-router-redux'
 import { fetchErrorCode } from '../../lib/fetchError'

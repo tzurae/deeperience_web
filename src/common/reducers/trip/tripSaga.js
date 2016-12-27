@@ -1,3 +1,4 @@
+import 'babel-polyfill'
 import { call, fork, take, put } from 'redux-saga/effects'
 import { fromJS } from 'immutable'
 import tripAPI from '../../api/trip'

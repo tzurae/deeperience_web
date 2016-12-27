@@ -1,3 +1,4 @@
+import 'babel-polyfill'
 import { fork, take, put, select } from 'redux-saga/effects'
 import * as cookieAction from './cookieActions'
 import { selectFromCookies } from '../../lib/selector'

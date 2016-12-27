@@ -1,3 +1,4 @@
+import 'babel-polyfill'
 import passport from 'passport'
 import { Strategy as JwtStrategy } from 'passport-jwt'
 import { Strategy as FacebookStrategy } from 'passport-facebook'
@@ -6,7 +7,6 @@ import { redirect } from '../../common/reducers/router/routerActions'
 import Errors from '../../common/constants/Errors'
 import { handleDbError } from '../decorators/handleError'
 import User from '../models/User'
-import 'babel-polyfill'
 
 const cookieExtractor = (req) => {
   return req.store.getState().getIn(['cookies', 'token'])
