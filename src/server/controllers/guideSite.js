@@ -33,10 +33,14 @@ export default {
             { placeId: id },
             { $set: googlesite[index] },
             { upsert: true },
-            handleDbError(res)(({ _id }) => resolve(_id))
+            handleDbError(res)(({ _id }) => {
+              console.log(_id)
+              return resolve(_id)
+            })
           )
       ))
     ).then(raw => {
+      console.log('raw', raw)
       guideSite.mainSite.googleInfo = raw[0]
       guideSite.subSites = guideSite.subSites.map((value, index) => ({
         ...value,
