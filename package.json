@@ -18,6 +18,10 @@
     "start": "node --require babel-register build/server/server.js",
     "pm2": "node ./build/server/pm2Entry.js"
   },
+  "engines": {
+    "node": "6.9.2",
+    "npm": "3.10.8"
+  },
   "pre-commit": [
     "stylelint",
     "eslint",

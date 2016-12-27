@@ -3,6 +3,7 @@ var webpack = require('webpack');
 var WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
 var webpackIsomorphicToolsConfig = require('../project/webpack-isomorphic-tools-configuration');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var postcssConfig = require('./postcss.config');
 var babelConfig = require('./babel.config.prod');
 
 var webpackIsomorphicToolsPlugin =
@@ -55,12 +56,21 @@ module.exports = {
     }, {
       test: webpackIsomorphicToolsPlugin.regular_expression('cssModules'),
       loader: ExtractTextPlugin.extract(
-        'style',
-        'css?modules&localIdentName=[name]_[local]_[hash:base64:3]!sass?outputStyle=expanded&sourceMap=true&sourceMapContents=true'
-      ),
+        'style-loader',
+        ['css-loader?modules&localIdentName=[local]_[hash:base64:3]&camelCase',
+        'postcss-loader',
+        'sass-loader']
+      )
+      // loader: ExtractTextPlugin.extract(
+      //   'style',
+      //   'css?modules&localIdentName=[local]_[hash:base64:3]&camelCase!postcss!sass?outputStyle=expanded&sourceMap=true&sourceMapContents=true'
+      // ),
     }, {
       test: webpackIsomorphicToolsPlugin.regular_expression('images'),
       loader: 'url-loader?limit=10240',
     }],
   },
+  postcss: function() {
+    return postcssConfig;
+  }
 };
