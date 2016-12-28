@@ -25,19 +25,19 @@ export default (req, res, next) => {
       .findOne({ 'email.value': email })
       .select('-social')
       .exec((err, user) => {
-      if (err) {
-        return cb(err)
-      }
-      if (!user) {
-        user = new User({
-          avatarURL: '', // overwrite default avatar
-        })
-      }
-      if (!user.social.profile[schemaProfileKey].main) {
-        user.social.profile[schemaProfileKey].main = {}
-      }
-      return cb(null, user)
-    })
+        if (err) {
+          return cb(err)
+        }
+        if (!user) {
+          user = new User({
+            avatarURL: '', // overwrite default avatar
+          })
+        }
+        if (!user.social.profile[schemaProfileKey].main) {
+          user.social.profile[schemaProfileKey].main = {}
+        }
+        return cb(null, user)
+      })
   }
 
   passport.use(new JwtStrategy({

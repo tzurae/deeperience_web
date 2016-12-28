@@ -5,7 +5,7 @@ export default (obj, condition) => {
   Object.assign(
     {},
     ...Object.keys(obj)
-      .filter( key => condition(obj[key]))
-      .map( key => ({ [key]: obj[key] }) )
+      .filter(key => condition(obj[key]))
+      .map(key => ({ [key]: obj[key] }))
   )
 }
