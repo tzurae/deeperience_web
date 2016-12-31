@@ -20,12 +20,6 @@ const CreateSiteForm = props => {
     getOptions(messages, ['TripDayInfos', 'TripElements'])
   TripElements.splice(0, 1) // remove ANY
 
-  const subsiteMarkers =
-    formValue.get('subSites') ?
-      formValue.get('subSites')
-        .filter(value => value.get('googleInfo'))
-        .map(value => value.getIn(['googleInfo', 'position'])) : []
-
   return (
     <div>
       <pre>{JSON.stringify(formValue.toJS(), null, 2)}</pre>
@@ -37,30 +31,9 @@ const CreateSiteForm = props => {
         {...props}
       />
       }
-      {page === 1 &&
-       <PhaseIntro
-         onSubmit={nextPage}
-         {...props}
-       />
-      }
-      {page === 2 &&
-      <PhaseMainSite
-        onSubmit={nextPage}
-        markers={
-          formValue.getIn(['mainSite', 'googleInfo', 'position']) ?
-          [formValue.getIn(['mainSite', 'googleInfo', 'position'])] :
-          []
-        }
-        {...props}
-      />
-      }
-      {page === 3 &&
-      <PhaseSubSite
-        onSubmit={nextPage}
-        markers={subsiteMarkers}
-        {...props}
-      />
-      }
+      {page === 1 && <PhaseIntro onSubmit={nextPage} {...props}/>}
+      {page === 2 && <PhaseMainSite onSubmit={nextPage} {...props}/>}
+      {page === 3 && <PhaseSubSite onSubmit={nextPage} {...props}/>}
       {page === 4 &&
       <PhaseOtherInfo
         onSubmit={data => props.actions.createSite(data.toJS())}

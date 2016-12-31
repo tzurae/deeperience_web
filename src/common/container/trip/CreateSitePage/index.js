@@ -23,7 +23,7 @@ import styles from './styles.scss'
       messages: state.getIn(['global', 'messages']),
       page: state.getIn(['site', 'createPage', 'page']),
       done: state.getIn(['site', 'createPage', 'done']),
-      values: form ? form.get('values') : Map({}),
+      formValue: form ? form.get('values') : Map({}),
       subsiteActive: state.getIn(['site', 'createPage', 'subsiteActiveArr']),
       introEditorContent: state.getIn(['site', 'createPage', 'introEditorContent']),
       mainSiteEditorContent: state.getIn(['site', 'createPage', 'mainSiteEditorContent']),
@@ -55,7 +55,6 @@ class CreateSitePage extends React.Component {
       page,
       done,
       actions,
-      values,
     } = this.props
     return (
       <PageLayout subNav={<CreateSubNav activeTab={0}/>}>
@@ -82,7 +81,6 @@ class CreateSitePage extends React.Component {
                 previousPage={this.previousPage}
                 updateIntroEditor={actions.createSiteUpdateIntroEditor}
                 updateMainSiteEditor={actions.createSiteUpdateMainSiteEditor}
-                formValue={values}
                 {...this.props}
               />
             </Panel1>

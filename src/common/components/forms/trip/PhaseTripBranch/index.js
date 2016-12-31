@@ -287,16 +287,23 @@ const PhaseTripBranch = props => {
     actions.createTripSetFloatWindow({ floatInfoShow: false })
   }
 
+  // add picture remind
+  const addRemind = (uuid) => () => {
+    actions.createTripSetFloatWindow({
+      uuid,
+    })
+  }
+
   return (
     <div>
       <p>Start Sites</p>
-      <pre>{JSON.stringify(startSites, null, 2)}</pre>
-      <p>routes</p>
-      <pre>{JSON.stringify(routes, null, 2)}</pre>
-      <p>uuid2data</p>
-      <pre>{JSON.stringify(uuid2data, null, 2)}</pre>
-      <p>tripInfo</p>
-      <pre>{JSON.stringify(tripInfo, null, 2)}</pre>
+      {/* <pre>{JSON.stringify(startSites, null, 2)}</pre>*/}
+      {/* <p>routes</p>*/}
+      {/* <pre>{JSON.stringify(routes, null, 2)}</pre>*/}
+      {/* <p>uuid2data</p>*/}
+      {/* <pre>{JSON.stringify(uuid2data, null, 2)}</pre>*/}
+      {/* <p>tripInfo</p>*/}
+      {/* <pre>{JSON.stringify(tripInfo, null, 2)}</pre>*/}
       <p className={styles.msgError}>{branchError}</p>
       <ChooseDayDiv
         addDay={addDay}
@@ -395,6 +402,7 @@ const PhaseTripBranch = props => {
                           site={site}
                           startTime={uuidData && uuidData.get('startTime') || ''}
                           endTime={uuidData && uuidData.get('endTime') || ''}
+                          addRemind={addRemind(site.get('uuid'))}
                           addSiteInfo={addSiteInfoClick(site.get('uuid'), top, floatListLeft)}
                           addSite={addGuideSiteClick(site.get('uuid'), top, floatListLeft)}
                           addChildSite={addChildSite(site.get('uuid'), showDay)}
@@ -498,7 +506,8 @@ const FillDayInfoForm = ({ day, length }) => (
 
 const SiteDiv = ({
   top, left, site, startTime, endTime,
-  addSiteInfo, addSite, addChildSite, deleteSite, ...props
+  addRemind, addSiteInfo, addSite,
+  addChildSite, deleteSite, ...props
 }) => {
   return (
     <div
@@ -515,7 +524,8 @@ const SiteDiv = ({
       <p className={styles.siteDivMsg}>{`始：${startTime}`}</p>
       <p className={styles.siteDivMsg}>{`離：${endTime}`}</p>
       <div className={styles.siteDivBtnDiv}>
-        <IconBtn className={styles.siteDivBtn} name="pencil" onClick={addSiteInfo}/>
+        <IconBtn className={styles.siteDivBtn} name="file-image-o" onClick={addRemind}/>
+        <IconBtn className={styles.siteDivBtn} name="clock-o" onClick={addSiteInfo}/>
         <IconBtn className={styles.siteDivBtn} name="map-marker" onClick={addSite}/>
         <IconBtn className={styles.siteDivBtn} name="plus" onClick={addChildSite}/>
         <IconBtn className={styles.siteDivBtn} name="times" onClick={deleteSite}/>

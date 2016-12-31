@@ -29,7 +29,7 @@ const {
 
 const initialState = fromJS({
   createPage: {
-    page: 0,
+    page: 1,
     done: new Array(...{ length: 5 }).map(() => false),
     tripInfo: [],
     routes: [],
@@ -40,7 +40,7 @@ const initialState = fromJS({
     floatWindow: { // 浮動視窗
       top: 0,
       left: 500,
-      uuid: '',
+      uuid: '', // 顯示的是哪一個景點
       floatListShow: false,
       floatInfoShow: false,
     },
@@ -105,7 +105,10 @@ export default createReducer(initialState, {
   },
 
   [CREATE_TRIP_REQUEST](state, action) { return state },
-  [CREATE_TRIP_SUCCESS](state, action) { return state },
+  [CREATE_TRIP_SUCCESS](state, action) {
+    return state.setIn(['createPage', 'done'],
+      state.getIn(['createPage', 'done']).map(() => true))
+  },
   [CREATE_TRIP_FAILURE](state, action) { return state },
 
   [CREATE_TRIP_BRANCH_ERROR](state, action) {

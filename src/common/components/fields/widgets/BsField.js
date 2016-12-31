@@ -14,6 +14,7 @@ const BsField = ({
   label,
   adapter,
   className,
+  fieldClass,
   meta,
   ...rest
 }, {
@@ -25,7 +26,7 @@ const BsField = ({
   const isShowError = meta && meta.touched && meta.error
   const Adapter = adapter
   const renderedFormControl = (
-    <Adapter {...rest} />
+    <Adapter className={fieldClass} {...rest} />
   )
 
   horizontal = (horizontal === undefined) ? defaultHorizontal : horizontal
@@ -85,6 +86,7 @@ BsField.propTypes = {
   ]),
   adapter: PropTypes.func,
   className: PropTypes.string,
+  fieldClass: PropTypes.string,
 }
 
 BsField.contextTypes = {
@@ -97,6 +99,7 @@ BsField.contextTypes = {
 BsField.defaultProps = {
   label: '',
   className: '',
+  fieldClass: '',
 }
 
 export default BsField

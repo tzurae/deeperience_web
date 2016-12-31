@@ -1,16 +1,17 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Map } from 'immutable'
+import { Map, fromJS } from 'immutable'
 import Col from 'react-bootstrap/lib/Col'
 import mapDispatchToProps from '../../../lib/mapDispatchToProps'
 import * as tripActions from '../../../reducers/trip/tripActions'
 import * as reduxFormActions from '../../../reducers/form/reduxFormActions'
 import FormNames from '../../../constants/FormNames'
+import CreateTripForm from '../../../components/forms/trip/CreateTripForm'
 import PageLayout from '../../../components/layouts/PageLayout'
 import PanelContainer from '../../../components/utils/PanelContainer'
-import { Panel1, Panel2 } from '../../../components/utils/Panel'
 import PhaseBranch from '../../../components/utils/PhaseBranch'
-import CreateTripForm from '../../../components/forms/trip/CreateTripForm'
+import AddRemind from '../../../components/forms/trip/AddRemind'
+import { Panel1, Panel2 } from '../../../components/utils/Panel'
 import { BranchTitle } from './assets'
 import { CreateSubNav } from '../../../components/utils/SubNavigation'
 
@@ -22,7 +23,7 @@ import { CreateSubNav } from '../../../components/utils/SubNavigation'
       messages: state.getIn(['global', 'messages']),
       page: state.getIn(['trip', 'createPage', 'page']),
       done: state.getIn(['trip', 'createPage', 'done']),
-      values: form ? form.get('values') : Map({}),
+      formValue: form ? form.get('values') : Map({}),
       allSites: state.getIn(['trip', 'ownSites']),
       tripInfo: state.getIn(['trip', 'createPage', 'tripInfo']),
       routes: state.getIn(['trip', 'createPage', 'routes']),
@@ -33,6 +34,7 @@ import { CreateSubNav } from '../../../components/utils/SubNavigation'
       totalDay: state.getIn(['trip', 'createPage', 'totalDay']),
       showDay: state.getIn(['trip', 'createPage', 'showDay']),
       floatWindow: state.getIn(['trip', 'createPage', 'floatWindow']),
+      focusSiteUuid: state.getIn(['trip', 'createPage', 'floatWindow', 'uuid']),
     }
   },
   mapDispatchToProps([tripActions, reduxFormActions])
@@ -44,6 +46,9 @@ class CreateTripPage extends React.Component {
     this.nextPage = ::this.nextPage
     this.previousPage = ::this.previousPage
     this.updateForm = ::this.updateForm
+    this.updateRemind = ::this.updateRemind
+    this.addRemind = ::this.addRemind
+    this.removeRemind = ::this.removeRemind
   }
 
   componentWillMount() {
@@ -66,11 +71,52 @@ class CreateTripPage extends React.Component {
     return this.props.actions.change(FormNames.TRIP_CREATE_TRIP, name, data)
   }
 
+  updateRemind(index, words, url) {
+    this.props.actions.arraySplice(
+      FormNames.TRIP_CREATE_TRIP,
+      `uuid2data.${this.props.focusSiteUuid}.reminds`,
+      index,
+      1,
+      fromJS({
+        pic: url,
+        words,
+      })
+    )
+  }
+
+  addRemind(url) {
+    this.props.actions.arrayPush(
+      FormNames.TRIP_CREATE_TRIP,
+      `uuid2data.${this.props.focusSiteUuid}.reminds`,
+      fromJS({
+        pic: url,
+        words: '',
+      })
+    )
+  }
+
+  removeRemind(index) {
+    this.props.actions.arraySplice(
+      FormNames.TRIP_CREATE_TRIP,
+      `uuid2data.${this.props.focusSiteUuid}.reminds`,
+      index,
+      1
+    )
+  }
+
   render() {
     const {
       page,
       done,
+      focusSiteUuid,
+      formValue,
     } = this.props
+
+    const reminds = formValue.getIn(['uuid2data', focusSiteUuid]) ?
+      formValue.getIn(['uuid2data', focusSiteUuid, 'reminds']) : fromJS([])
+
+    // console.log(focusSiteUuid)
+    // console.log(reminds)
 
     return (
       <PageLayout subNav={<CreateSubNav activeTab={2}/>}>
@@ -94,7 +140,17 @@ class CreateTripPage extends React.Component {
               />
             </Panel1>
           </Col>
-          <Col md={3}/>
+          <Col md={3}>
+            <Panel2 title="trip.createTrip.branch.remind">
+              <AddRemind
+                addRemind={this.addRemind}
+                updateRemind={this.updateRemind}
+                removeRemind={this.removeRemind}
+                reminds={reminds}
+                uuid={focusSiteUuid}
+              />
+            </Panel2>
+          </Col>
         </PanelContainer>
       </PageLayout>
     )

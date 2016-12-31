@@ -1,0 +1,10 @@
+@import '../../../../styles/index';
+
+.container {
+  @include flex-col-center;
+}
+
+.gallery {
+  width: 180px !important;
+  height: 135px !important;
+}

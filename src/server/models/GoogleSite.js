@@ -1,4 +1,5 @@
 import mongoose from 'mongoose'
+import URL from './plugins/URLType'
 
 export const GoogleSiteSchema = new mongoose.Schema({
   name: {
@@ -9,7 +10,7 @@ export const GoogleSiteSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  website: String,
+  website: URL,
   phone: String,
   placeId: {
     type: String,

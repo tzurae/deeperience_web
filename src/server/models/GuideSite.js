@@ -2,11 +2,13 @@ import mongoose from 'mongoose'
 import { SiteSchema } from './Site'
 import TripElements from '../../common/i18n/zh-tw/TripElements'
 import flattenMessages from '../../common/i18n/utils/flattenMessages'
+import URL from './plugins/URLType'
 
 export const GuideSiteSchema = new mongoose.Schema({
   guide: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
+    required: true,
   },
   name: {
     type: String,
@@ -14,13 +16,11 @@ export const GuideSiteSchema = new mongoose.Schema({
   },
   introduction: {
     type: String,
-    required: true,
   },
-  audioURL: String,
+  audioURL: URL,
   tags: [{
     type: String,
     enum: Object.keys(flattenMessages(TripElements)),
-    required: true,
   }],
   fee: String,
   recentActivity: [{
@@ -32,6 +32,10 @@ export const GuideSiteSchema = new mongoose.Schema({
     required: true,
   },
   subSites: [SiteSchema],
+  reminds: [{
+    pic: String,
+    words: String,
+  }],
 }, {
   versionKey: false,
   timestamps: {

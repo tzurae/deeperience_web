@@ -1,8 +1,9 @@
 import mongoose from 'mongoose'
 import { TimeSchema } from './Time'
+import URL from './plugins/URLType'
 
 export const DailyTripSchema = new mongoose.Schema({
-  treePic: String,
+  treePic: URL,
   startSite: {
     type: String,
     required: true,

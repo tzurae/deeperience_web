@@ -1,4 +1,4 @@
-import { Map, List } from 'immutable'
+import { fromJS } from 'immutable'
 import FormNames from '../../../constants/FormNames'
 import validate from './createSiteValidate'
 
@@ -6,16 +6,16 @@ export default {
   form: FormNames.TRIP_CREATE_SITE,
   destroyOnUnmount: false,     // <------ preserve form data
   validate,
-  initialValues: Map({
+  initialValues: fromJS({
     name: '',
     tags: [],
     introduction: '<p><br></p>',
-    mainSite: Map({
+    mainSite: {
       remind: '',
       fee: '',
       introduction: '<p><br></p>',
       name: '',
-      googleInfo: Map({
+      googleInfo: {
         name: '',
         address: '',
         website: '',
@@ -23,8 +23,8 @@ export default {
         placeId: '',
         position: null,
         openPeriod: [],
-      }),
-    }),
-    subSites: List([]),
+      },
+    },
+    subSites: [],
   }),
 }

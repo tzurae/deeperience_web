@@ -1,0 +1,112 @@
+@import '../../../styles/index';
+
+.pic-div {
+  @include flex-col-center;
+  position: relative;
+  overflow: hidden;
+  width: 140px;
+  height: 105px;
+  color: $color-main;
+  border: solid 1px $alto;
+}
+
+.pic {
+  width: 100%;
+}
+
+.filter {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+  background-color: transparent;
+  transition-duration: 0.3s;
+  opacity: 0;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+    transition-duration: 0.3s;
+    opacity: 1;
+  }
+}
+
+.iconbtn-remove {
+  @include font-size-medium;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  color: $white;
+  background: transparent;
+  cursor: pointer;
+  user-select: none;
+}
+
+.iconbtn-div {
+  @include flex-row-end;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+  width: 100%;
+  height: 46px;
+  padding: 8px 5px;
+}
+
+.iconbtn {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 30px;
+  height: 30px;
+  margin: 0 5px;
+  color: $white;
+  border-radius: 100%;
+  background: $color-main-light;
+  cursor: pointer;
+  user-select: none;
+
+  &:hover {
+    color: $alto;
+    background: $color-main;
+  }
+}
+
+.iconbtn-pencil {
+  @extend .iconbtn;
+}
+
+.iconbtn-camera {
+  @extend .iconbtn;
+}
+
+.textarea-div {
+  @include flex-col;
+  display: flex;
+  height: 100%;
+  border: none 1px $alto;
+}
+
+.iconbtn-close-textarea {
+  @include font-size-medium;
+  @include flex-center;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 100;
+  width: 22px;
+  height: 22px;
+  color: $silverChalice;
+  background: $white;
+  cursor: pointer;
+}
+
+.textarea {
+  @include no-focus;
+  flex: 1;
+  padding-left: 5px;
+  color: initial;
+  border: none !important;
+  box-shadow: none !important;
+}

@@ -1,5 +1,5 @@
 import { fromJS } from 'immutable'
-import _ from 'underscore'
+import _ from 'lodash'
 
 export const calculateTripInfo = (routes, startSites, allSites, uuid2data) => {
   // temporary hacky code

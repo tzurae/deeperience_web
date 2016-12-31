@@ -7,7 +7,7 @@ import rootSaga from './rootSaga'
 import { rootReducer } from '../reducers'
 import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
-import LoggerSettings from '../../../configs/env/logger'
+import LoggerSettings from '../../../configs/project/logger/logger'
 
 export default (initialState = {}, history) => {
   const sagaMiddleware = createSagaMiddleware()

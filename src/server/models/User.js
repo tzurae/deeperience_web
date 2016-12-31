@@ -44,7 +44,7 @@ const UserSchema = new mongoose.Schema({
     default: Roles.USER,
   },
   avatarURL: {
-    type: String,
+    type: String, // URL, not changed yet since default is not a url type
     default: '/img/default-avatar.png',
   },
   social: {
