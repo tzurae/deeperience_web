@@ -1,9 +1,9 @@
 import { createSelectorCreator, defaultMemoize } from 'reselect'
-import isEqual from 'lodash.isEqual'
+import _ from 'lodash'
 
 const createDeepEqualSelector = createSelectorCreator(
   defaultMemoize,
-  isEqual,
+  _.isEqual,
 )
 
 const selectCookies = () => (state) => state.get('cookies')

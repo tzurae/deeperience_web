@@ -47,7 +47,9 @@ class Navigation extends React.Component {
           <Navbar.Body>
             <Navbar.Nav right>
               <Navbar.Dropdown
-                title={<Text id="nav.language" className={styles.dropdownText}/>}>
+                title={<Text id="nav.language" className={styles.dropdownText}/>}
+                avatar={false}
+              >
                 <MenuItem
                   title="English"
                   onClick={this._setLanguage.bind(this, 'en-us')}
@@ -60,6 +62,7 @@ class Navigation extends React.Component {
 
               <Navbar.Dropdown
                 title={<Text id="nav.customize" className={styles.dropdownText}/>}
+                avatar={false}
               >
                 <NavLink to="/custom/create">
                   <Text id="nav.customize.customize"/>
@@ -71,6 +74,7 @@ class Navigation extends React.Component {
 
               <Navbar.Dropdown
                 title={<Text id="nav.trip" className={styles.dropdownText}/>}
+                avatar={false}
               >
                 <NavLink to="/site/create">
                   <Text id="nav.trip.createSite"/>
@@ -96,13 +100,10 @@ class Navigation extends React.Component {
                     user.get('avatarURL') ? (
                       <div
                         className={styles.avatar}
-                        style={{
-                          background: `#ffffff url(${user.get('avatarURL')}) no-repeat center center`,
-                          backgroundSize: 'contain',
-                        }}
                       />
                     ) : (user.get('name') || user.get('email'))
                 }
+                avatar={true}
               >
                 {!isAuth &&
                   <NavLink to="/user/login">

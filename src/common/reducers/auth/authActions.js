@@ -6,6 +6,7 @@ import { createAction } from 'redux-actions'
 
 // need to add the default behind require, or the result will be undefined
 const {
+
   LOGIN,
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
@@ -23,6 +24,7 @@ const {
 
   OPEN_REGISTER_VERIFY_MODAL,
   CLOSE_REGISTER_VERIFY_MODAL,
+
 } = require('../../constants/ActionTypes').default
 
 export const login         = createAction(LOGIN)

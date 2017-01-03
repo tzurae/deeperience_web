@@ -1,11 +1,11 @@
-var path = require('path');
+require("babel-polyfill")
 var webpack = require('webpack');
+var path = require('path');
 var WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
 var webpackIsomorphicToolsConfig = require('../project/webpack-isomorphic-tools-configuration');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var postcssConfig = require('./postcss.config');
 var babelConfig = require('./babel.config.prod');
-// require('babel-polyfill'); // for generator function usage, don't know why couldn't work
 
 var webpackIsomorphicToolsPlugin =
   new WebpackIsomorphicToolsPlugin(webpackIsomorphicToolsConfig);
@@ -15,7 +15,7 @@ module.exports = {
   context: path.resolve(__dirname, '../../src'),
   // devtool: 'source-map',
   entry: [
-    // 'babel-polyfill', //don't know why couldn't work
+    'babel-polyfill',
     path.join(__dirname, '../../src/client/index'),
   ],
   output: {
@@ -51,7 +51,7 @@ module.exports = {
   ],
   module: {
     loaders: [{
-      test: /\.jsx?$/,
+      test: /\.js$/,
       include: path.join(__dirname, '../../src'),
       loader: 'babel',
       query: babelConfig,
