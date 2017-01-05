@@ -8,6 +8,7 @@ import userAPI from '../../../api/user'
 import { pushErrors } from '../../../reducers/error/errorActions'
 import { setCookies } from '../../../reducers/cookie/cookieActions'
 import { BsInput as Input } from '../../fields/adapters'
+import Text from '../../utils/Text'
 import {
   BsForm as Form,
   BsFormFooter as FormFooter,
@@ -53,9 +54,10 @@ class EditForm extends Component {
 
   _init(user) {
     const { initialize } = this.props
-
     initialize({
       name: user.name,
+      cellPhone: user.cellPhone,
+      email: user.email.value,
     })
   }
 
@@ -88,20 +90,49 @@ class EditForm extends Component {
     } = this.props
 
     return (
-      <Form onSubmit={handleSubmit(this.handleSubmit)}>
+      <Form
+        onSubmit={handleSubmit(this.handleSubmit)}>
         {submitSucceeded && (<Alert bsStyle="success">Profile Saved</Alert>)}
         {submitFailed && error && (<Alert bsStyle="danger">{error}</Alert>)}
         <Field
           name="name"
           component={FormField}
-          label="Name"
+          adapterStyle={{width:'95%'}}
+          label={<Text id="user.name"/>}
           adapter={Input}
           type="text"
           placeholder="Name"
         />
-        <FormFooter>
+        <Field
+          name="cellPhone"
+          component={FormField}
+          adapterStyle={{width:'95%'}}
+          label={<Text id="memberCenter.cellPhone"/>}
+          adapter={Input}
+          type="text"
+          placeholder="手機號碼"
+        />
+        <Field
+          name="email"
+          component={FormField}
+          adapterStyle={{width:'95%'}}
+          label={<Text id="login.email"/>}
+          adapter={Input}
+          type="text"
+          placeholder="信箱"
+        />
+        <Field
+          name="avatar"
+          component={FormField}
+          adapterStyle={{width:'95%'}}
+          label={<Text id="memberCenter.avatar"/>}
+          adapter={Input}
+          type="file"
+          placeholder={<Text id="memberCenter.avatar"/>}
+        />
+        <FormFooter horizontal={false} style={{textAlign:'center'}}>
           <Button type="submit" disabled={pristine || submitting || invalid}>
-            Save
+            Update
             {submitting && (
               <i className="fa fa-spinner fa-spin" aria-hidden="true" />
             )}

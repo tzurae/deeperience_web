@@ -97,6 +97,9 @@ const UserSchema = new mongoose.Schema({
     month: Number,
     day: Number,
   },
+  cellPhone: {
+    type: Number,
+  }
 }, {
   versionKey: false,
   timestamps: {

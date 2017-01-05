@@ -18,17 +18,13 @@ import {
   BsFormFooter as FormFooter,
 } from '../../fields/widgets'
 import Text from '../../utils/Text'
+import { selectFromCookies, selectFromGlobal } from '../../../lib/selector'
+import { createStructuredSelector } from 'reselect'
 
-const mapStateToProps = (state) => {
-  return {
-    apiEngine: state.getIn(['global', 'apiEngine']),
-    user: (state.getIn(['cookies', 'user']) && JSON.parse(state.getIn(['cookies', 'user']))) || {},
-  }
-}
-
-const initialValues = {
-  storage: 'local',
-}
+const mapStateToProps = createStructuredSelector({
+  user: selectFromCookies('user'),
+  apiEngine: selectFromGlobal('apiEngine'),
+})
 
 const style = {
   div: {
@@ -265,6 +261,5 @@ class AvatarForm extends Component {
 
 export default reduxForm({
   form: FormNames.USER_AVATAR,
-  initialValues,
   validate,
 })(connect(mapStateToProps)(AvatarForm))

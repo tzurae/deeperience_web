@@ -14,6 +14,8 @@ import * as siteActions from '../../../reducers/site/siteActions'
 import { CreateSubNav } from '../../../components/utils/SubNavigation'
 import { BranchTitle } from './assets'
 import styles from './styles.scss'
+import SubNav from '../../../components/utils/SubNavigation/DefaultSubNav'
+import * as tabActions from '../../../reducers/tab/tabAction'
 
 @connect(
   state => {
@@ -27,9 +29,12 @@ import styles from './styles.scss'
       subsiteActive: state.getIn(['site', 'createPage', 'subsiteActiveArr']),
       introEditorContent: state.getIn(['site', 'createPage', 'introEditorContent']),
       mainSiteEditorContent: state.getIn(['site', 'createPage', 'mainSiteEditorContent']),
+      tabActive: state.getIn(['tab', 'CreateSite', 'active']),
+      tabText: state.getIn(['tab', 'CreateSite','tabText']),
+      tabLink: state.getIn(['tab', 'CreateSite','tabLink']),
     }
   },
-  mapDispatchToProps([siteActions, reduxFormActions])
+  mapDispatchToProps([siteActions, reduxFormActions, tabActions])
 )
 
 class CreateSitePage extends React.Component {
@@ -50,15 +55,25 @@ class CreateSitePage extends React.Component {
     this.props.actions.createSitePreviousPage()
   }
 
+  componentWillMount() {
+    this.props.actions.tabChange(0);
+  }
+
   render() {
     const {
       page,
       done,
       actions,
       values,
+      tabActive,
+      tabText,
+      tabLink,
     } = this.props
+    console.log('tabActive is', tabActive);
+    console.log("tabText is", tabText);
+    console.log('tabLink is ',tabLink);
     return (
-      <PageLayout subNav={<CreateSubNav activeTab={0}/>}>
+      <PageLayout subNav={<SubNav activeTab={tabActive} tabText={tabText} tabLink={tabLink}/>}>
         <PanelContainer>
           <Col md={2}>
             <Panel2 title="nav.trip.createSite">

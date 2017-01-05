@@ -21,6 +21,7 @@ import Navbar from '../BsNavbar'
 import NavLink from '../NavLink'
 import Text from '../Text'
 import styles from './styles.scss'
+import { tabChange } from '../../../reducers/tab/tabAction'
 
 const SubNavigation = ({ activeTab, tabText, tabLink }) => (
   <Navbar staticTop className={styles.nav}>
@@ -29,17 +30,19 @@ const SubNavigation = ({ activeTab, tabText, tabLink }) => (
         <Navbar.Nav className={styles.header}>
           <Navbar.Nav>
             {
-              tabText.map((text, index) => (
-                <NavLink
-                  key={index}
-                  to={tabLink[index]}
-                  onlyActiveOnIndex
-                >
-                  <Text
-                    className={activeTab === index ? styles.textActive : styles.textInactive}
-                    id={text}/>
-                </NavLink>
-              ))
+              tabText.map((text, index) => {
+                return (
+                  <NavLink
+                    key={index}
+                    to={tabLink.get(index)}
+                    onlyActiveOnIndex
+                  >
+                    <Text
+                      className={activeTab === index ? styles.textActive : styles.textInactive}
+                      id={text}/>
+                  </NavLink>
+                )
+              })
             }
           </Navbar.Nav>
         </Navbar.Nav>
@@ -48,16 +51,20 @@ const SubNavigation = ({ activeTab, tabText, tabLink }) => (
   </Navbar>
 )
 
-SubNavigation.propTypes = {
-  activeTab: PropTypes.number,
-  tabText: PropTypes.arrayOf(PropTypes.string),
-  tabLink: PropTypes.arrayOf(PropTypes.string),
-}
+// because tabText and tabLink is a type of Immutable
+// so if wanna use PropTypes to validate it , you need to install
+// immutalbe Proptypes Packages
 
-SubNavigation.defaultProps = {
-  activeTab: 0,
-  tabText: [],
-  tabLink: [],
-}
+// SubNavigation.propTypes = {
+//   activeTab: PropTypes.number,
+//   tabText: PropTypes.arrayOf(PropTypes.string),
+//   tabLink: PropTypes.arrayOf(PropTypes.string),
+// }
+//
+// SubNavigation.defaultProps = {
+//   activeTab: 0,
+//   tabText: [],
+//   tabLink: [],
+// }
 
 export default SubNavigation

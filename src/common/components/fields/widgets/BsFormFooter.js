@@ -35,7 +35,7 @@ const BsFormFooter = ({
       </Col>
     </BsFormGroup>
   ) : (
-    <BsFormGroup className={className}>
+    <BsFormGroup className={className} style={style}>
       {children}
     </BsFormGroup>
   )

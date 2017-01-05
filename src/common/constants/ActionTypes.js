@@ -2,6 +2,9 @@ import keyMirror from 'key-mirror'
 
 export default keyMirror({
 
+  // ------- tab --------
+  TAB_CHANGE: null,
+
   // ------ global ------
   SET_API_ENGINE: null,
   UPDATE_LOCALE: null,

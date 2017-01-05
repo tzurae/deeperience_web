@@ -187,6 +187,10 @@ export default {
   'memberCenter.ensurePassword': '確認密碼',
   'memberCenter.look': '查看',
   'memberCenter.editPersonalProfile': '編輯個人頁面',
+  'memberCenter.cellPhone': '手機',
+  "memberCenter.sex": '性別',
+  "memberCenter.male": '男',
+  "memberCenter.female": '女',
 
   'company.name': 'DEEPERIENCE',
   'company.slogan': '完美客製化旅程，旅程規劃零負擔',

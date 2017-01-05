@@ -5,7 +5,6 @@ const BsRadio = ({ input, options, ...rest }) => (
   <span>
     {options.map((option, index) => (
       <div
-        className="radio"
         key={option.value}
         {...rest}
       >

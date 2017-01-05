@@ -103,7 +103,7 @@ class Navigation extends React.Component {
                       />
                     ) : (user.get('name') || user.get('email'))
                 }
-                avatar={true}
+                avatar={isAuth? true: false}
               >
                 {!isAuth &&
                   <NavLink to="/user/login">

@@ -15,6 +15,8 @@ const BsField = ({
   adapter,
   className,
   meta,
+  adapterClassName,
+  adapterStyle,
   ...rest
 }, {
   defaultHorizontal,
@@ -25,7 +27,7 @@ const BsField = ({
   const isShowError = meta && meta.touched && meta.error
   const Adapter = adapter
   const renderedFormControl = (
-    <Adapter {...rest} />
+    <Adapter className={adapterClassName} style={adapterStyle} {...rest} />
   )
 
   horizontal = (horizontal === undefined) ? defaultHorizontal : horizontal
