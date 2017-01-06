@@ -141,9 +141,7 @@ Block.propTypes = {
   title: PropTypes.string,
 }
 
-const Element = ({ text }) => (
-  <Text className={styles.element} id={text}/>
-)
+const Element = ({ text }) => <Text className={styles.element} id={text}/>
 
 Element.propTypes = {
   text: PropTypes.string,

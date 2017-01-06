@@ -24,11 +24,17 @@
 }
 
 .checkbox {
-  color: $white;
+  margin: 0 0 15px !important;
+  padding: 0 5px !important;
+  color: $white !important;
 }
 
 .footer {
   @include flex-center;
   width: 100%;
   padding: 10px 0;
+}
+
+.error {
+  color: $red;
 }

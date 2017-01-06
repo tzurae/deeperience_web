@@ -4,14 +4,16 @@ import serverConfigs from '../../../configs/project/server'
 import clientConfigs from '../../../configs/project/client'
 import { handleDbError } from '../decorators/handleError'
 import User from '../models/User'
+import { fromJS } from 'immutable'
 
 export default {
   form: (formPath, onlyFields = []) => (req, res, next) => {
     const { validate } = require(`../../common/components/forms/${formPath}`)
-    let errors = validate({
+
+    let errors = validate(fromJS({
       ...req.body,
       ...req.files,
-    })
+    }))
 
     if (onlyFields.length > 0) {
       const newErrors = {}

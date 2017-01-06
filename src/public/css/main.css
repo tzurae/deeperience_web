@@ -57,6 +57,19 @@ ul.navbar-nav > li.active > a {
   color: white !important;
 }
 
+/* copy from boostrap's setting */
+.caret-avatar{
+  color: white ;
+  display: inline-block;
+  width: 0;
+  height: 15px;
+  margin-left: 2px;
+  vertical-align: middle;
+  border-top: 4px dashed;
+  border-right: 4px solid transparent;
+  border-left: 4px solid transparent;
+}
+
 .navbar-nav>.open>a {
   background: transparent !important;
 }
@@ -103,3 +116,10 @@ ul.navbar-nav > li.active > a {
 }
 
 /* Editor */
+
+/* BsForm */
+#root .help-block {
+  color: red;
+}
+/* BsForm */
+

@@ -58,9 +58,9 @@ function renderMeta(meta) {
 
 const ErrorList = ({ errors, dispatch }) => (
   <Grid>
-    {errors.map((error) => (
+    {errors.map((error, index) => (
       <Alert
-        key={error.id}
+        key={index}
         bsStyle="danger"
         onDismiss={() => dispatch(removeError(error.id))}
       >

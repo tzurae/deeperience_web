@@ -1,9 +1,10 @@
 import React from 'react'
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { Map } from 'immutable'
+import { fromJS } from 'immutable'
 import Col from 'react-bootstrap/lib/Col'
 import deepCopy from 'deepcopy'
+import FormNames from '../../../constants/FormNames'
+import mapDispatchToProps from '../../../lib/mapDispatchToProps'
 import { chooseGuide, confirmGuide } from './fakeData'
 import PageLayout from '../../../components/layouts/PageLayout'
 import PanelContainer from '../../../components/utils/PanelContainer'
@@ -24,29 +25,15 @@ import { getValue } from '../../../utils/getI18nValue'
 import AdviceForm from '../../../components/forms/custom/AdviceForm'
 import styles from './styles.scss'
 
-const actions = [
-  customActions,
-]
-
-const mapStateToProps = state => {
-  return {
-    messages: state.global.messages,
-    page: state.custom.page,
-    isAdviceModal: state.custom.isAdviceModal,
-  }
-}
-
-const mapDispatchToProps = dispatch => {
-  const creators = Map()
-    .merge(...actions)
-    .filter(value => typeof value === 'function')
-    .toObject()
-
-  return {
-    actions: bindActionCreators(creators, dispatch),
-    dispatch,
-  }
-}
+@connect(
+  state => ({
+    messages: state.getIn(['global', 'messages']),
+    page: state.getIn(['custom', 'page']),
+    isAdviceModal: state.getIn(['custom', 'isAdviceModal']),
+    chooseDateForm: state.getIn(['form', FormNames.CUSTOM_VIDEO_TIME]),
+  }),
+  mapDispatchToProps([customActions])
+)
 
 class MyCustomTripPhasePage extends React.Component {
   constructor(props) {
@@ -84,7 +71,7 @@ class MyCustomTripPhasePage extends React.Component {
       '',
       '',
     ]
-    this.done = [
+    this.done = fromJS([
       true,
       true,
       false,
@@ -93,7 +80,7 @@ class MyCustomTripPhasePage extends React.Component {
       false,
       false,
       false,
-    ]
+    ])
     this.chooseDateFormSubmit = ::this.chooseDateFormSubmit
   }
 
@@ -114,8 +101,8 @@ class MyCustomTripPhasePage extends React.Component {
   }
 
   render() {
-    const { page, messages, isAdviceModal } = this.props
-    const { Languages, TripLocations } = getValue(messages.toJS(), ['Languages', 'TripLocations'])
+    const { page, messages, isAdviceModal, chooseDateForm } = this.props
+    const { Languages, TripLocations } = getValue(messages, ['Languages', 'TripLocations'])
 
     const country = TripLocations[`${confirmGuide.location.split('.')[0]}.countryLabel`]
     const area = TripLocations[confirmGuide.location]
@@ -171,7 +158,12 @@ class MyCustomTripPhasePage extends React.Component {
               />
               }
               {page === 3 && <PhaseDeposit/>}
-              {page === 4 && <PhaseChooseDate handleSubmit={this.chooseDateFormSubmit}/>}
+              {page === 4 &&
+              <PhaseChooseDate
+                chooseDateForm={chooseDateForm}
+                handleSubmit={this.chooseDateFormSubmit}
+              />
+              }
               {page === 5 &&
               <PhaseFinishConfirm
                 againFunc={this.props.actions.customPhasePreviousPage}
@@ -194,4 +186,4 @@ class MyCustomTripPhasePage extends React.Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MyCustomTripPhasePage)
+export default MyCustomTripPhasePage

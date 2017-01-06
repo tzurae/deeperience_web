@@ -165,6 +165,9 @@ export default {
     const modifiedUser = filterAttribute(req.body, [
       'name',
       'avatarURL',
+      'cellPhone',
+      'password',
+      'sex',
     ])
 
     assign(user, modifiedUser)
@@ -225,6 +228,42 @@ export default {
         user,
       })
     }))
+  },
+
+  getCustomizePhase(req, res) {
+
+  },
+
+  nextCustomizePhase(req, res) {
+
+  },
+
+  getRankList(req, res) {
+
+  },
+
+  createRankList(req, res) {
+
+  },
+
+  agreePlan(req, res) {
+
+  },
+
+  getVideoTime(req, res) {
+
+  },
+
+  createVideoTime(req, res) {
+
+  },
+
+  acceptVideoTime(req, res) {
+
+  },
+
+  sendEvaluation(req, res) {
+
   },
 
   uploadAvatar(req, res) {

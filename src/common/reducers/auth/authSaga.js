@@ -3,11 +3,27 @@
  * ## Time: 2016/12/08
  */
 import { call, fork, take, put } from 'redux-saga/effects'
-import * as authActions from './authAction'
-import * as cookieActions from '../cookie/cookieActions'
+import { push } from 'react-router-redux'
+import { fetchErrorCode } from '../../lib/fetchError'
 import userAPI from '../../api/user'
 import ApiEngine from '../../utils/ApiEngine'
-import { push } from 'react-router-redux'
+import {
+  loginRequest,
+  loginSuccess,
+  loginFailure,
+  logoutRequest,
+  logoutSuccess,
+  logoutFailure,
+  registerRequest,
+  registerSuccess,
+  registerFailure,
+  openRegisterVerifyModal,
+} from './authActions'
+
+import {
+  setCookie,
+  removeCookie,
+} from '../cookie/cookieActions'
 
 const {
   LOGIN,
@@ -17,52 +33,68 @@ const {
 
 const apiEngine = new ApiEngine()
 
-function loginAndGetUserData(userData) {
+const loginAPI = userData => {
   return userAPI(apiEngine)
     .login(userData)
     .then(json => json)
 }
 
+const logoutAPI = () => {
+  return userAPI(apiEngine)
+    .logout()
+    .then(json => json)
+}
+
+const registerAPI = formData => {
+  return userAPI(apiEngine)
+    .register(formData)
+    .then(json => json)
+}
+
 function* login(payload) {
   try {
-    yield put(authActions.loginRequest())
-    yield put(authActions.getDataFromApiServerRequest())
-    const { isAuth, token, user } = yield call(loginAndGetUserData, payload)
-    if (isAuth) {
-      yield put(authActions.getDataFromApiServerSuccess())
-      yield put(cookieActions.setCookie({ token, user }))
-      yield put(authActions.loginSuccess())
+    yield put(loginRequest())
+    const { isAuth, token, user, errors } = yield call(loginAPI, payload)
+    if (!errors && isAuth) {
+      yield put(setCookie({ token, user }))
+      yield put(loginSuccess())
       yield put(push('/'))
+    } else if (!isAuth) {
+      yield put(loginFailure(['WRONG_EMAIL_PASSWORD'])) // i18n id
+    } else {
+      yield put(loginFailure(errors))
     }
   } catch (error) {
-    yield put(authActions.getDataFromApiServerFailure())
-    yield put(authActions.loginFailure())
+    yield put(loginFailure(fetchErrorCode(error)))
   }
 }
 
 function* logout() {
   try {
-    yield put(authActions.logoutRequest())
-    yield put(cookieActions.removeCookie())
-    yield put(authActions.logoutSuccess())
-    yield put(push('/'))
+    yield put(logoutRequest())
+    const { isLogout, errors } = yield call(logoutAPI)
+    if (!errors && isLogout) {
+      yield put(removeCookie())
+      yield put(logoutSuccess())
+      yield put(push('/'))
+    }
   } catch (error) {
-    yield put(authActions.logoutFailure())
+    yield put(logoutFailure(fetchErrorCode(error)))
   }
 }
 
-// function* register() {
-//   try {
-//     yield put(authActions.registerRequest())
-//     yield put(authActions.setDataFromApiServerRequest())
-//
-//     yield put(cookieActions.removeCookie())
-//     yield put(authActions.logoutSuccess())
-//     yield put(push('/'))
-//   } catch (error) {
-//     yield put(authActions.logoutFailure())
-//   }
-// }
+function* register(payload) {
+  try {
+    yield put(registerRequest())
+    const { email, user, errors } = yield call(registerAPI, payload)
+    if (!errors && email && user) {
+      yield put(registerSuccess())
+      yield put(openRegisterVerifyModal())
+    }
+  } catch (error) {
+    yield put(registerFailure(fetchErrorCode(error)))
+  }
+}
 
 // ---------WATCH START------------
 
@@ -80,15 +112,15 @@ function* watchLogout() {
   }
 }
 
-// function* watchRegister() {
-//   while( true ) {
-//     const { payload } = yield take(REGISTER)
-//     yield fork(register, payload)
-//   }
-// }
+function* watchRegister() {
+  while (true) {
+    const { payload } = yield take(REGISTER)
+    yield fork(register, payload)
+  }
+}
 
 export default [
   fork(watchLogin),
   fork(watchLogout),
-  // fork(watchRegister),
+  fork(watchRegister),
 ]

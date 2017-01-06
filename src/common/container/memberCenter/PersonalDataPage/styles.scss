@@ -1,0 +1,22 @@
+@import '../../../styles/index';
+
+.avatar {
+  width: 100%;
+  height: auto;
+  border-radius: 50%;
+}
+
+.panel1 {
+  padding-left: 0;
+}
+
+.hr {
+  height: 1px !important;
+  background-color: $color-main !important;
+}
+
+.header {
+  @include font-size-big;
+  padding-top: 10px;
+  color: $color-main;
+}

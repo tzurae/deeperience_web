@@ -161,6 +161,7 @@ export default {
   'login.ensurePassword': '確認密碼',
   'login.facebook': '使用Facebook帳號登入',
   'login.title': '完美客製化旅程，旅程規劃零負擔',
+  'login.failure': '帳號或密碼錯誤',
 
   'register.mailHasSent': '確認信已送出！',
   'register.facebook': '使用Facebook帳戶註冊',
@@ -168,6 +169,7 @@ export default {
   'register.hasRead': '註冊會員表示您同意遵守服務條款',
   'register.memberShip': '服務條款',
   'register.register': '註冊',
+  'register.email.existed': '帳號已經註冊',
 
   'user.name': '暱稱',
 
@@ -185,6 +187,14 @@ export default {
   'memberCenter.ensurePassword': '確認密碼',
   'memberCenter.look': '查看',
   'memberCenter.editPersonalProfile': '編輯個人頁面',
+  'memberCenter.cellPhone': '手機',
+  'memberCenter.sex': '性別',
+  'memberCenter.male': '男',
+  'memberCenter.female': '女',
+  'memberCenter.personaltripHobbit': '旅程喜好',
+  'memberCenter.tripHistory': '旅遊歷史清單',
+  'memberCenter.editIntro': '編輯自介',
+  'memberCenter.update': '確定更新',
 
   'company.name': 'DEEPERIENCE',
   'company.slogan': '完美客製化旅程，旅程規劃零負擔',

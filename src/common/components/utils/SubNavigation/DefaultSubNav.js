@@ -29,17 +29,19 @@ const SubNavigation = ({ activeTab, tabText, tabLink }) => (
         <Navbar.Nav className={styles.header}>
           <Navbar.Nav>
             {
-              tabText.map((text, index) => (
-                <NavLink
-                  key={index}
-                  to={tabLink[index]}
-                  onlyActiveOnIndex
-                >
-                  <Text
-                    className={activeTab === index ? styles.textActive : styles.textInactive}
-                    id={text}/>
-                </NavLink>
-              ))
+              tabText.map((text, index) => {
+                return (
+                  <NavLink
+                    key={index}
+                    to={tabLink[index]}
+                    onlyActiveOnIndex
+                  >
+                    <Text
+                      className={activeTab === index ? styles.textActive : styles.textInactive}
+                      id={text}/>
+                  </NavLink>
+                )
+              })
             }
           </Navbar.Nav>
         </Navbar.Nav>

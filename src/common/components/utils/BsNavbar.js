@@ -69,7 +69,7 @@ const Nav = ({ right, children, ...rest }) => {
   )
 }
 
-const Dropdown = ({ title, children, style, ...props }) => (
+const Dropdown = ({ title, children, avatar, style, ...props }) => (
   <li className="dropdown" style={style} {...props}>
     <a
       href="#"
@@ -79,8 +79,8 @@ const Dropdown = ({ title, children, style, ...props }) => (
       aria-haspopup="true"
       aria-expanded="false"
     >
-      {title}
-      <span className="caret"/>
+    {title}
+    <span className={avatar ? 'caret-avatar' : 'caret'}/>
     </a>
     <ul className="dropdown-menu">
       {children}

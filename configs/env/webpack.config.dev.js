@@ -66,7 +66,3 @@ module.exports = {
     return postcssConfig;
   }
 };
-
-function loader(loaderName, loaderQuery) {
-  return loaderName + (loaderQuery ? ('?' + JSON.stringify(loaderQuery)) : '');
-}

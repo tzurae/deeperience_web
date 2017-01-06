@@ -1,19 +1,20 @@
 import { createSelectorCreator, defaultMemoize } from 'reselect'
-import isEqual from 'lodash.isEqual'
+import _ from 'lodash'
 
 const createDeepEqualSelector = createSelectorCreator(
   defaultMemoize,
-  isEqual,
+  _.isEqual,
 )
 
 const selectCookies = () => (state) => state.get('cookies')
 const selectAuth = () => (state) => state.get('auth')
 const selectGlobal = () => (state) => state.get('global')
 const selectRouter = () => (state) => state.get('routing')
+const selectTab = () => (state) => state.get('tab')
 
 const selectFromCookies = (property) => createDeepEqualSelector(
   selectCookies(),
-  (cookiesState) => cookiesState.get(property)
+  cookiesState => cookiesState.get(property)
 )
 
 const selectAuthState  = () => createDeepEqualSelector(
@@ -31,9 +32,15 @@ const selectFromRouting = (property) => createDeepEqualSelector(
   routerState => routerState.get(property)
 )
 
+const selectFromTab = (property) => createDeepEqualSelector(
+  selectTab(),
+  tabState => tabState.get(property)
+)
+
 export {
   selectFromGlobal,
   selectFromRouting,
   selectFromCookies,
   selectAuthState,
+  selectFromTab,
 }

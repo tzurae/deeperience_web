@@ -29,10 +29,11 @@ var paths = {
   scripts: './src/server/**/*.js',
   reacts: './src/common/**/*.js',
   componentStyles: [
-    './src/common/components/**/*.scss',
-    './src/common/components/**/*.less',
-    './src/common/components/**/*.styl',
-    './src/common/components/**/*.css',
+    './src/common/**/*.scss',
+    // './src/common/components/**/*.less',
+    // './src/common/components/**/*.styl',
+    // './src/common/components/**/*.css',
+    // './src/common/container/**/*.scss',
   ],
   statics: './src/public/**/*',
   nodemonWatchIgnore: [
@@ -117,7 +118,7 @@ gulp.task('copy', function() {
     .pipe(gulp.dest(path.join(paths.targetDir, 'public')));
   var componentStyleTask = gulp
     .src(paths.componentStyles)
-    .pipe(gulp.dest(path.join(paths.targetDir, 'common/components')));
+    .pipe(gulp.dest(path.join(paths.targetDir, 'common')));
   return mergeStream(staticTask, componentStyleTask);
 });
 

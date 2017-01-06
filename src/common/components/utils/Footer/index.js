@@ -1,6 +1,6 @@
 import React from 'react'
-import Text from './Text'
-import styles from '../../styles'
+import Text from '../Text'
+import styles from '../../../styles'
 import Row from 'react-bootstrap/lib/Row'
 import Col from 'react-bootstrap/lib/Col'
 

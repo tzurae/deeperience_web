@@ -1,10 +1,13 @@
 import React, { PropTypes } from 'react'
-import CheckBox from 'react-bootstrap/lib/Checkbox'
+import CheckBox from '../bases/Checkbox'
 
-const BsCheckbox = ({ input, text, ...rest }) => (
-  <CheckBox>
-    {text}
-  </CheckBox>
+const BsCheckbox = ({ input, text, className, ...rest }) => (
+  <CheckBox
+    className={className}
+    input={input}
+    {...rest}
+    text={text}
+  />
 )
 
 BsCheckbox.propTypes = {

@@ -1,0 +1,36 @@
+@import '../../../styles/index';
+
+@keyframes bouncedelay {
+  0%, 80%, 100% {
+    transform: scale(0);
+  }
+
+  40% {
+    transform: scale(1);
+  }
+}
+
+.div {
+  @include flex-row-between;
+}
+
+.dot {
+  border-radius: 100%;
+  background-color: $white;
+  user-select: none;
+  animation: bouncedelay 1.3s infinite ease-in-out both;
+}
+
+.one {
+  @extend .dot;
+  animation-delay: -0.32s;
+}
+
+.two {
+  @extend .dot;
+  animation-delay: -0.16s;
+}
+
+.three {
+  @extend .dot;
+}

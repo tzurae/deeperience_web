@@ -1,7 +1,7 @@
 import Errors from '../../common/constants/Errors'
 import wrapTimeout from '../decorators/wrapTimeout'
 import { updateLocale } from '../../common/reducers/global/globalActions'
-import { loginSuccess } from '../../common/reducers/auth/authAction'
+import { loginSuccess } from '../../common/reducers/auth/authActions'
 
 export default {
   user: (req, res, next) => {
