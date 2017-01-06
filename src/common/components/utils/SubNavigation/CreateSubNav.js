@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 import SubNavigation from './DefaultSubNav'
 
-const CreateSubNav = ({ activeTab, }) => (
+const CreateSubNav = ({ activeTab }) => (
   <SubNavigation
     activeTab={activeTab}
     tabText={[

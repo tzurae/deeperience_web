@@ -165,6 +165,9 @@ export default {
     const modifiedUser = filterAttribute(req.body, [
       'name',
       'avatarURL',
+      'cellPhone',
+      'password',
+      'sex',
     ])
 
     assign(user, modifiedUser)

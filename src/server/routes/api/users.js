@@ -61,7 +61,7 @@ users.get('/me', authRequired, userController.show)
 users.put('/me',
   authRequired,
   bodyParser.json,
-  validate.form('user/EditForm'),
+  validate.form('user/PersonalDataForm'),
   userController.update
 )
 users.put('/me/avatarURL',

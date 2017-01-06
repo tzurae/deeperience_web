@@ -10,10 +10,8 @@ import site from './site/siteReducer'
 import custom from './custom/customReducer'
 import order from './order/orderReducer'
 import auth from './auth/authReducer'
-import tab from './tab/tabReducer'
 
 export const rootReducer = combineReducers({
-  tab,
   auth,
   global,
   routing,

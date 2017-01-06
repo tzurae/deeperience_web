@@ -6,8 +6,8 @@ import Button from 'react-bootstrap/lib/Button'
 import FormNames from '../../../constants/FormNames'
 import userAPI from '../../../api/user'
 import { pushErrors } from '../../../reducers/error/errorActions'
-import { setCookies } from '../../../reducers/cookie/cookieActions'
-import { BsInput as Input } from '../../fields/adapters'
+import { setCookie } from '../../../reducers/cookie/cookieActions'
+import { BsInput as Input, BsSelect as Select } from '../../fields/adapters'
 import Text from '../../utils/Text'
 import {
   BsForm as Form,
@@ -28,10 +28,17 @@ export const validate = (values) => {
     errors.name = 'Required'
   }
 
+  if (
+    values.get('newPasswordConfirm') &&
+    values.get('newPassword') !== values.get('newPasswordConfirm')
+  ) {
+    errors.newPassword = errors.newPasswordConfirm = 'Password Not Matched'
+  }
+
   return errors
 }
 
-class EditForm extends Component {
+class PersonalDataForm extends Component {
   constructor(props) {
     super(props)
     this.init = this._init.bind(this)
@@ -72,7 +79,7 @@ class EditForm extends Component {
       })
       .then((json) => {
         this.init(json.user)
-        dispatch(setCookies({
+        dispatch(setCookie({
           user: json.user,
         }))
       })
@@ -87,6 +94,8 @@ class EditForm extends Component {
       pristine,
       submitting,
       invalid,
+      underlineClass,
+      headerClass,
     } = this.props
 
     return (
@@ -122,6 +131,20 @@ class EditForm extends Component {
           placeholder="信箱"
         />
         <Field
+          name="sex"
+          component={FormField}
+          adapterStyle={{width:'95%'}}
+          label={<Text id="memberCenter.sex"/>}
+          adapter={Select}
+          options={[{
+            label: '男',
+            value: 'male',
+          },{
+            label: '女',
+            value: 'female',
+          }]}
+        />
+        <Field
           name="avatar"
           component={FormField}
           adapterStyle={{width:'95%'}}
@@ -129,6 +152,26 @@ class EditForm extends Component {
           adapter={Input}
           type="file"
           placeholder={<Text id="memberCenter.avatar"/>}
+        />
+        <p className={headerClass}>{<Text id="memberCenter.editPassword" isSpan={true}/>}</p>
+        <hr className={underlineClass}/>
+        <Field
+          name="newPassword"
+          component={FormField}
+          label={<Text id="memberCenter.newPassword"/>}
+          adapter={Input}
+          type="password"
+          disabled={submitSucceeded}
+          placeholder="新密碼"
+        />
+        <Field
+          name="newPasswordConfirm"
+          component={FormField}
+          label={<Text id="memberCenter.ensurePassword"/>}
+          adapter={Input}
+          type="password"
+          disabled={submitSucceeded}
+          placeholder="請再輸入一次新密碼"
         />
         <FormFooter horizontal={false} style={{textAlign:'center'}}>
           <Button type="submit" disabled={pristine || submitting || invalid}>
@@ -144,6 +187,6 @@ class EditForm extends Component {
 };
 
 export default reduxForm({
-  form: FormNames.USER_EDIT,
+  form: FormNames.USER_DATA,
   validate,
-})(connect(mapStateToProps)(EditForm))
+})(connect(mapStateToProps)(PersonalDataForm))

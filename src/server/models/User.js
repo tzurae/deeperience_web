@@ -21,6 +21,11 @@ const hashPassword = (rawPassword = '') => {
 
 const UserSchema = new mongoose.Schema({
   name: String,
+  sex: {
+    type: String,
+    enum: ['male', 'female'],
+    default: 'male',
+  },
   email: {
     value: {
       type: String,
@@ -98,7 +103,7 @@ const UserSchema = new mongoose.Schema({
     day: Number,
   },
   cellPhone: {
-    type: Number,
+    type: String,
   }
 }, {
   versionKey: false,

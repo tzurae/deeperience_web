@@ -21,7 +21,6 @@ import Navbar from '../BsNavbar'
 import NavLink from '../NavLink'
 import Text from '../Text'
 import styles from './styles.scss'
-import { tabChange } from '../../../reducers/tab/tabAction'
 
 const SubNavigation = ({ activeTab, tabText, tabLink }) => (
   <Navbar staticTop className={styles.nav}>
@@ -34,7 +33,7 @@ const SubNavigation = ({ activeTab, tabText, tabLink }) => (
                 return (
                   <NavLink
                     key={index}
-                    to={tabLink.get(index)}
+                    to={tabLink[index]}
                     onlyActiveOnIndex
                   >
                     <Text
@@ -51,20 +50,16 @@ const SubNavigation = ({ activeTab, tabText, tabLink }) => (
   </Navbar>
 )
 
-// because tabText and tabLink is a type of Immutable
-// so if wanna use PropTypes to validate it , you need to install
-// immutalbe Proptypes Packages
+SubNavigation.propTypes = {
+  activeTab: PropTypes.number,
+  tabText: PropTypes.arrayOf(PropTypes.string),
+  tabLink: PropTypes.arrayOf(PropTypes.string),
+}
 
-// SubNavigation.propTypes = {
-//   activeTab: PropTypes.number,
-//   tabText: PropTypes.arrayOf(PropTypes.string),
-//   tabLink: PropTypes.arrayOf(PropTypes.string),
-// }
-//
-// SubNavigation.defaultProps = {
-//   activeTab: 0,
-//   tabText: [],
-//   tabLink: [],
-// }
+SubNavigation.defaultProps = {
+  activeTab: 0,
+  tabText: [],
+  tabLink: [],
+}
 
 export default SubNavigation

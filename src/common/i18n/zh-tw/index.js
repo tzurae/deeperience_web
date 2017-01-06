@@ -191,6 +191,9 @@ export default {
   "memberCenter.sex": '性別',
   "memberCenter.male": '男',
   "memberCenter.female": '女',
+  "memberCenter.personaltripHobbit": '旅程喜好',
+  "memberCenter.tripHistory": "旅遊歷史清單",
+  "memberCenter.editIntro": "編輯自介",
 
   'company.name': 'DEEPERIENCE',
   'company.slogan': '完美客製化旅程，旅程規劃零負擔',

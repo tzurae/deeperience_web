@@ -13,7 +13,6 @@ import PhaseBranch from '../../../components/utils/PhaseBranch'
 import CreateTripForm from '../../../components/forms/trip/CreateTripForm'
 import { BranchTitle } from './assets'
 import { CreateSubNav } from '../../../components/utils/SubNavigation'
-import SubNav from '../../../components/utils/SubNavigation/DefaultSubNav'
 
 @connect(
   state => {
@@ -34,9 +33,6 @@ import SubNav from '../../../components/utils/SubNavigation/DefaultSubNav'
       totalDay: state.getIn(['trip', 'createPage', 'totalDay']),
       showDay: state.getIn(['trip', 'createPage', 'showDay']),
       floatWindow: state.getIn(['trip', 'createPage', 'floatWindow']),
-      tabActive: state.getIn(['tab', 'CreateSite', 'active']),
-      tabText: state.getIn(['tab', 'CreateSite','tabText']),
-      tabLink: state.getIn(['tab', 'CreateSite','tabLink']),
     }
   },
   mapDispatchToProps([tripActions, reduxFormActions])
