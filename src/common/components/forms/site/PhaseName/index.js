@@ -40,8 +40,8 @@ const PhaseName = props => {
       {
         siteElements.map(element =>
           <Field
-            fieldDimensions={{ sm: 10 }}
             key={element.label}
+            fieldDimensions={{ sm: 10 }}
             name="tags"
             component={FormField}
             label={<Text id={element.label}/>}

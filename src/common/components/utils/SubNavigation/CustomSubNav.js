@@ -5,7 +5,7 @@ const CustomSubNav = ({ activeTab }) => (
   <SubNavigation
     activeTab={activeTab}
     tabText={['nav.customize.customize', 'nav.customize.myCustomTrip']}
-    tabLink={['#', '/custom/list']}
+    tabLink={['/custom/create', '/custom/list']}
   />
 )
 

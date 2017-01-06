@@ -32,15 +32,15 @@ export default {
           GoogleSite.findOneAndUpdate(
             { placeId: id },
             { $set: googlesite[index] },
-            { upsert: true },
+            { upsert: true, new: true },
             handleDbError(res)(({ _id }) => resolve(_id))
           )
       ))
-    ).then(raw => {
-      guideSite.mainSite.googleInfo = raw[0]
+    ).then(_idArr => {
+      guideSite.mainSite.googleInfo = _idArr[0]
       guideSite.subSites = guideSite.subSites.map((value, index) => ({
         ...value,
-        googleInfo: raw[index + 1],
+        googleInfo: _idArr[index + 1],
       }))
 
       guideSite = GuideSite({
@@ -53,13 +53,6 @@ export default {
           guideSite,
         })
       }))
-
-      // don't know why errors can't pop out, not fixed yet
-      // guideSite.save(handleDbError(res)((guideSite) => {
-      //   res.json({
-      //     guideSite,
-      //   })
-      // }))
     })
   },
 

@@ -53,13 +53,13 @@
 @mixin flex-row-start {
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
+  justify-content: flex-start;
 }
 
 @mixin flex-row-end {
   display: flex;
   flex-direction: row;
-  align-items: flex-end;
+  justify-content: flex-end;
 }
 
 @mixin flex-row-between {

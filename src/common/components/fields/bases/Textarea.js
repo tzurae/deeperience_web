@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 
-const Textarea = ({ input, ...rest }) => (
+const Textarea = ({ input, meta, ...rest }) => (
   <textarea
     {...input}
     {...rest}

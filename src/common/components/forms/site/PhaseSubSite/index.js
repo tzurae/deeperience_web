@@ -103,18 +103,20 @@ const renderChooseSubsite = ({
           </div>
         </div>
       )}
-      <button
-        type="button"
-        className={styles.addBtn}
-        onClick={e => {
+      <div className={styles.btnDiv}>
+        <button
+          type="button"
+          className={styles.addBtn}
+          onClick={e => {
           // prevent the event from bubbling, and go to the next page
-          e.preventDefault()
-          fields.push(Map({}))
-          updateSubsite(activeArr.map(() => false).concat([true]))
-        }}
-      >
-        <Text id="trip.createSite.subSite.add"/>
-      </button>
+            e.preventDefault()
+            fields.push(Map({}))
+            updateSubsite(activeArr.map(() => false).concat([true]))
+          }}
+        >
+          <Text id="trip.createSite.subSite.add"/>
+        </button>
+      </div>
     </div>
   )
 }
@@ -127,13 +129,19 @@ const PhaseSubSite = props => {
     previousPage,
     handleSubmit,
     updateForm,
-    markers, // plain object
-    subsiteActive, // immutable list
+    formValue,
+    subsiteActive,
     updateSubsiteActive,
   } = props
 
   const updateIntro = index => str =>
     updateForm(FormNames.TRIP_CREATE_SITE, `subSites[${index}].introduction`, str)
+
+  const markers = formValue.get('subSites')
+    .filter(value => value.get('googleInfo'))
+    .map(value => ({
+      position: value.getIn(['googleInfo', 'position']),
+    }))
 
   let activeIndex
 
@@ -160,11 +168,14 @@ const PhaseSubSite = props => {
       onSubmit={handleSubmit}
       preventEnter={true}
     >
-      <GoogleMapSearch
-        className={styles.googleMap}
-        markers={markers.map(pos => ({ position: pos }))}
-        onChangeMarkers={updateMarker}
-      />
+      {
+        formValue.get('subSites').size > 0 &&
+        <GoogleMapSearch
+          className={styles.googleMap}
+          markers={markers}
+          onChangeMarkers={updateMarker}
+        />
+      }
       <FieldArray
         name="subSites"
         component={renderChooseSubsite}

@@ -26,7 +26,7 @@ const CreateTripForm = props => {
     page,
     messages,
     nextPage,
-    values,
+    formValue,
   } = props
 
   const { TripDayInfos, TripElements } = getOptions(messages, ['TripDayInfos', 'TripElements'])
@@ -35,7 +35,7 @@ const CreateTripForm = props => {
   return (
     <div>
       <p>Form Value</p>
-      <pre>{JSON.stringify(values.toJS(), null, 2)}</pre>
+      <pre>{JSON.stringify(formValue.toJS(), null, 2)}</pre>
       {page === 0 &&
       <PhaseIntro
         onSubmit={nextPage}
@@ -44,20 +44,8 @@ const CreateTripForm = props => {
         {...props}
       />
       }
-      {page === 1 &&
-      <PhaseTripBranch
-        onSubmit={nextPage}
-        formValue={values} // ????? don't know why 'values' can't be passed in
-        {...props}
-      />
-      }
-      {page === 2 &&
-      <PhasePic
-        onSubmit={nextPage}
-        formValue={values}
-        {...props}
-      />
-      }
+      {page === 1 && <PhaseTripBranch onSubmit={nextPage} {...props}/>}
+      {page === 2 && <PhasePic onSubmit={nextPage} {...props}/>}
       {page === 3 &&
       <PhasePreview
         onSubmit={data => {
@@ -66,7 +54,6 @@ const CreateTripForm = props => {
           /* eslint-enable */
           props.actions.createTrip(send)
         }}
-        formValue={values}
         {...props}
       />
       }

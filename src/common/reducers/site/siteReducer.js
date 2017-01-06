@@ -1,5 +1,6 @@
 import Immutable from 'immutable'
 import { EditorState } from 'draft-js'
+import createReducer from '../../lib/configureReducer'
 
 const {
   CREATE_SITE_REQUEST,
@@ -26,38 +27,35 @@ const initialState = Immutable.fromJS({
   error: '',
 })
 
-export default (state = initialState, action) => {
-  switch (action.type) {
-    case CREATE_SITE_REQUEST:
-    case CREATE_SITE_SUCCESS:
-    case CREATE_SITE_FAILURE:
-      return state
-
-    case CREATE_SITE_ERROR:
-      return state.set('error', action.payload.error)
-
-    case CREATE_SITE_NEXT_PAGE:
-      return state.setIn(['createPage', 'page'], state.getIn(['createPage', 'page']) + 1)
-
-    case CREATE_SITE_PREVIOUS_PAGE:
-      return state.setIn(['createPage', 'page'], state.getIn(['createPage', 'page']) - 1)
-
-    case CREATE_SITE_SET_PAGE:
-      return state.setIn(['createPage', 'page'], action.payload.page)
-
-    case CREATE_SITE_SET_SUBSITE_ACTIVE:
-      return state.setIn(['createPage', 'subsiteActiveArr'], action.payload.arr)
-
-    case CREATE_SITE_SET_DONE:
-      return state.setIn(['createPage', 'done'], action.payload.done)
-
-    case CREATE_SITE_UPDATE_INTRO_EDITOR:
-      return state.setIn(['createPage', 'introEditorContent'], action.payload.nextContent)
-
-    case CREATE_SITE_UPDATE_MAIN_SITE_EDITOR:
-      return state.setIn(['createPage', 'mainSiteEditorContent'], action.payload.nextContent)
-
-    default:
-      return state
-  }
-}
+export default createReducer(initialState, {
+  [CREATE_SITE_REQUEST](state, action) { return state },
+  [CREATE_SITE_SUCCESS](state, action) {
+    return state.setIn(['createPage', 'done'],
+      state.getIn(['createPage', 'done']).map(() => true))
+  },
+  [CREATE_SITE_FAILURE](state, action) { return state },
+  [CREATE_SITE_ERROR](state, action) {
+    return state.set('error', action.payload.error)
+  },
+  [CREATE_SITE_NEXT_PAGE](state, action)  {
+    return state.setIn(['createPage', 'page'], state.getIn(['createPage', 'page']) + 1)
+  },
+  [CREATE_SITE_PREVIOUS_PAGE](state, action)  {
+    return state.setIn(['createPage', 'page'], state.getIn(['createPage', 'page']) - 1)
+  },
+  [CREATE_SITE_SET_PAGE](state, action)  {
+    return state.setIn(['createPage', 'page'], action.payload.page)
+  },
+  [CREATE_SITE_SET_SUBSITE_ACTIVE](state, action)  {
+    return state.setIn(['createPage', 'subsiteActiveArr'], action.payload.arr)
+  },
+  [CREATE_SITE_SET_DONE](state, action)  {
+    return state.setIn(['createPage', 'done'], action.payload.done)
+  },
+  [CREATE_SITE_UPDATE_INTRO_EDITOR](state, action)  {
+    return state.setIn(['createPage', 'introEditorContent'], action.payload.nextContent)
+  },
+  [CREATE_SITE_UPDATE_MAIN_SITE_EDITOR](state, action) {
+    return state.setIn(['createPage', 'mainSiteEditorContent'], action.payload.nextContent)
+  },
+})

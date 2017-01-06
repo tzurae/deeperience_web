@@ -14,6 +14,7 @@ const BsField = ({
   label,
   adapter,
   className,
+  fieldClass,
   meta,
   adapterClassName,
   adapterStyle,
@@ -87,6 +88,7 @@ BsField.propTypes = {
   ]),
   adapter: PropTypes.func,
   className: PropTypes.string,
+  fieldClass: PropTypes.string,
 }
 
 BsField.contextTypes = {
@@ -99,6 +101,7 @@ BsField.contextTypes = {
 BsField.defaultProps = {
   label: '',
   className: '',
+  fieldClass: '',
 }
 
 export default BsField

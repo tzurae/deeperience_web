@@ -26,7 +26,7 @@ const PhaseMainSite = props => {
     previousPage,
     handleSubmit,
     updateForm,
-    markers,
+    formValue,
     mainSiteEditorContent,
     updateMainSiteEditor,
   } = props
@@ -39,6 +39,10 @@ const PhaseMainSite = props => {
     updateForm(FormNames.TRIP_CREATE_SITE, 'mainSite.googleInfo', fromJS(obj))
   }
 
+  const markers =
+    [formValue.getIn(['mainSite', 'googleInfo', 'position'])]
+      .map(pos => ({ position: pos }))
+
   return (
     <Form
       defaultHorizontal={true}
@@ -49,7 +53,7 @@ const PhaseMainSite = props => {
     >
       <GoogleMapSearch
         className={styles.googleMap}
-        markers={markers.map(pos => ({ position: pos }))}
+        markers={markers}
         onChangeMarkers={updateMarker}
       />
       <Field
