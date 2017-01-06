@@ -104,7 +104,8 @@ const UserSchema = new mongoose.Schema({
   },
   cellPhone: {
     type: String,
-  }
+    required: false,
+  },
 }, {
   versionKey: false,
   timestamps: {

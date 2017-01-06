@@ -106,7 +106,7 @@ class PersonalDataForm extends Component {
         <Field
           name="name"
           component={FormField}
-          adapterStyle={{width:'95%'}}
+          adapterStyle={{ width: '95%' }}
           label={<Text id="user.name"/>}
           adapter={Input}
           type="text"
@@ -115,7 +115,7 @@ class PersonalDataForm extends Component {
         <Field
           name="cellPhone"
           component={FormField}
-          adapterStyle={{width:'95%'}}
+          adapterStyle={{ width: '95%' }}
           label={<Text id="memberCenter.cellPhone"/>}
           adapter={Input}
           type="text"
@@ -124,7 +124,7 @@ class PersonalDataForm extends Component {
         <Field
           name="email"
           component={FormField}
-          adapterStyle={{width:'95%'}}
+          adapterStyle={{ width: '95%' }}
           label={<Text id="login.email"/>}
           adapter={Input}
           type="text"
@@ -133,13 +133,13 @@ class PersonalDataForm extends Component {
         <Field
           name="sex"
           component={FormField}
-          adapterStyle={{width:'95%'}}
+          adapterStyle={{ width: '95%' }}
           label={<Text id="memberCenter.sex"/>}
           adapter={Select}
           options={[{
             label: '男',
             value: 'male',
-          },{
+          }, {
             label: '女',
             value: 'female',
           }]}
@@ -147,13 +147,15 @@ class PersonalDataForm extends Component {
         <Field
           name="avatar"
           component={FormField}
-          adapterStyle={{width:'95%'}}
+          adapterStyle={{ width: '95%' }}
           label={<Text id="memberCenter.avatar"/>}
           adapter={Input}
           type="file"
           placeholder={<Text id="memberCenter.avatar"/>}
         />
-        <p className={headerClass}>{<Text id="memberCenter.editPassword" isSpan={true}/>}</p>
+        <p className={headerClass}>
+          <Text id="memberCenter.editPassword" isSpan={true}/>
+        </p>
         <hr className={underlineClass}/>
         <Field
           name="newPassword"
@@ -173,9 +175,9 @@ class PersonalDataForm extends Component {
           disabled={submitSucceeded}
           placeholder="請再輸入一次新密碼"
         />
-        <FormFooter horizontal={false} style={{textAlign:'center'}}>
+        <FormFooter horizontal={false} style={{ textAlign: 'center' }}>
           <Button type="submit" disabled={pristine || submitting || invalid}>
-            Update
+            <Text id="memberCenter.update" />
             {submitting && (
               <i className="fa fa-spinner fa-spin" aria-hidden="true" />
             )}
@@ -184,7 +186,7 @@ class PersonalDataForm extends Component {
       </Form>
     )
   }
-};
+}
 
 export default reduxForm({
   form: FormNames.USER_DATA,

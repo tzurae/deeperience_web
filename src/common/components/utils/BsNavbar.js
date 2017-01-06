@@ -80,7 +80,7 @@ const Dropdown = ({ title, children, avatar, style, ...props }) => (
       aria-expanded="false"
     >
     {title}
-    <span className={avatar? "caret-avatar" : "caret"}/>
+    <span className={avatar ? 'caret-avatar' : 'caret'}/>
     </a>
     <ul className="dropdown-menu">
       {children}

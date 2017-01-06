@@ -14,7 +14,7 @@ const mapStateToProps = createStructuredSelector({
   user: selectFromCookies('user'),
 })
 
-class ShowPage extends Component {
+class PersonalDataPage extends Component {
   render() {
     const { user } = this.props
     return (
@@ -46,4 +46,4 @@ class ShowPage extends Component {
   }
 }
 
-export default connect(mapStateToProps)(ShowPage)
+export default connect(mapStateToProps)(PersonalDataPage)
