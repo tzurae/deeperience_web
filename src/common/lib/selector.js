@@ -6,11 +6,11 @@ const createDeepEqualSelector = createSelectorCreator(
   _.isEqual,
 )
 
-const selectCookies = () => (state) => state.get('cookies')
-const selectAuth = () => (state) => state.get('auth')
-const selectGlobal = () => (state) => state.get('global')
-const selectRouter = () => (state) => state.get('routing')
-const selectTab = () => (state) => state.get('tab')
+const selectCookies = () => state => state.get('cookies')
+const selectAuth = () => state => state.get('auth')
+const selectGlobal = () => state => state.get('global')
+const selectRouter = () => state => state.get('routing')
+const selectTab = () => state => state.get('tab')
 
 const selectFromCookies = (property) => createDeepEqualSelector(
   selectCookies(),

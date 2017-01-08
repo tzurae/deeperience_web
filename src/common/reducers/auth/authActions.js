@@ -25,6 +25,8 @@ const {
   OPEN_REGISTER_VERIFY_MODAL,
   CLOSE_REGISTER_VERIFY_MODAL,
 
+  SET_USER,
+  REMOVE_USER,
 } = require('../../constants/ActionTypes').default
 
 export const login         = createAction(LOGIN)
@@ -44,3 +46,6 @@ export const registerFailure = createAction(REGISTER_FAILURE)
 
 export const openRegisterVerifyModal = createAction(OPEN_REGISTER_VERIFY_MODAL)
 export const closeRegisterVerifyModal = createAction(CLOSE_REGISTER_VERIFY_MODAL)
+
+export const setUser = createAction(SET_USER)
+export const removeUser = createAction(REMOVE_USER)

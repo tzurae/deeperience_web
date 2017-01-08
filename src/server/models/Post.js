@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
 import { RangeSchema } from './Range'
 import HotelTypes from '../../common/i18n/zh-tw/HotelTypes'
-import TripElements from '../../common/i18n/zh-tw/TripElements'
+// import TripElements from '../../common/i18n/zh-tw/TripElements'
 import FoodElements from '../../common/i18n/zh-tw/FoodElements'
 import TravelWays from '../../common/i18n/zh-tw/TravelWays'
 import TripLocations from '../../common/i18n/zh-tw/TripLocations'
@@ -23,7 +23,7 @@ const PostSchema = new mongoose.Schema({
   tripElement: {
     value: [{
       type: String,
-      enum: Object.keys(flattenMessages(TripElements)),
+      // enum: Object.keys(flattenMessages(TripElements)), // todo
     }],
     other: String,
   },

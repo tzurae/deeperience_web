@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { Field, reduxForm } from 'redux-form/immutable'
 import Alert from 'react-bootstrap/lib/Alert'
 import Button from 'react-bootstrap/lib/Button'
 import FormNames from '../../../constants/FormNames'
-import userAPI from '../../../api/user'
-import { pushErrors } from '../../../reducers/error/errorActions'
+// import userAPI from '../../../api/user'
+// import { pushErrors } from '../../../reducers/error/errorActions'
 import { BsInput as Input, BsSelect as Select } from '../../fields/adapters'
 import Text from '../../utils/Text'
 import {
@@ -12,7 +13,6 @@ import {
   BsFormFooter as FormFooter,
   BsField as FormField,
 } from '../../fields/widgets'
-import APIEngine from '../../../utils/ApiEngine'
 
 export const validate = values => {
   const errors = {}
@@ -40,41 +40,57 @@ const adapterStyle = {
   width: '95%',
 }
 
-class PersonalDataForm extends Component {
+@connect(
+  state => ({
+    apiEngine: state.getIn(['global', 'apiEngine']),
+  })
+)
+
+class GuideIntroForm extends Component {
   constructor(props) {
     super(props)
     this.init = ::this._init
     this.handleSubmit = ::this._handleSubmit
   }
 
-  componentDidMount() {
-    this.init(this.props.user)
-  }
+  // componentDidMount() {
+  //   const { dispatch, apiEngine } = this.props
+  //
+  //   userAPI(apiEngine)
+  //     .read()
+  //     .catch((err) => {
+  //       dispatch(pushErrors(err))
+  //       throw err
+  //     })
+  //     .then((json) => {
+  //       this.init(json.user)
+  //     })
+  // }
 
-  _init(user) {
-    const { initialize } = this.props
-    initialize({
-      name: user.get('name'),
-      cellPhone: user.get('cellPhone'),
-      email: {
-        value: user.getIn(['email', 'value']),
-      },
-    })
-  }
+  // _init(user) {
+  //   this.props.initialize({
+  //     name: user.name,
+  //     cellPhone: user.cellPhone,
+  //     email: user.email.value,
+  //   })
+  // }
 
-  _handleSubmit(formData) {
-    const { dispatch } = this.props
-
-    return userAPI(new APIEngine())
-      .update(formData)
-      .catch((err) => {
-        dispatch(pushErrors(err))
-        throw err
-      })
-      .then(json => {
-        this.init(json.user)
-      })
-  }
+  // _handleSubmit(formData) {
+  //   const { dispatch, apiEngine } = this.props
+  //
+  //   return userAPI(apiEngine)
+  //     .update(formData)
+  //     .catch((err) => {
+  //       dispatch(pushErrors(err))
+  //       throw err
+  //     })
+  //     .then((json) => {
+  //       this.init(json.user)
+  //       dispatch(setCookie({
+  //         user: json.user,
+  //       }))
+  //     })
+  // }
 
   render() {
     const {
@@ -113,7 +129,7 @@ class PersonalDataForm extends Component {
           placeholder="手機號碼"
         />
         <Field
-          name="email.value"
+          name="email"
           component={FormField}
           adapterStyle={adapterStyle}
           label={<Text id="login.email"/>}
@@ -177,4 +193,4 @@ class PersonalDataForm extends Component {
   }
 }
 
-export default reduxForm(formProperties)(PersonalDataForm)
+export default reduxForm(formProperties)(GuideIntroForm)

@@ -45,7 +45,7 @@ export default (req, res, next) => {
     secretOrKey: configs.jwt.authentication.secret,
   }, (jwtPayload, done) => {
     // this callback is invoked only when jwt token is correctly decoded
-    User.findById(jwtPayload._id, handleDbError(res)((user) => {
+    User.findById(jwtPayload._id, handleDbError(res)(user => {
       done(null, user)
     }))
   }))

@@ -1,7 +1,7 @@
 import keyMirror from 'key-mirror'
 
 export default keyMirror({
-  // end user
+  // normal user
   USER: null,
   // system administrator
   ADMIN: null,

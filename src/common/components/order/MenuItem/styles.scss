@@ -9,7 +9,7 @@
   text-align: left;
   border: 0;
   background-color: $white;
-  box-shadow: 3px 3px 8px 0 #cccccc;
+  box-shadow: 3px 3px 8px 0 $silver;
 }
 
 .container {
@@ -77,7 +77,7 @@
   right: 0;
   width: 100%;
   padding: 8px;
-  color: #f0f0f0;
+  color: $gallery;
   letter-spacing: 2px;
 }
 

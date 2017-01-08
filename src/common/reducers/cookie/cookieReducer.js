@@ -17,11 +17,9 @@ const {
 
 const initialState = fromJS({
   lang: '',
-  user: {},
   token: '',
   redirect: '',
   locale: '',
-  messages: {},
 })
 
 export default createReducer(initialState, {

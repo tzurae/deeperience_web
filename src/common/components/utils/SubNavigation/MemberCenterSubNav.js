@@ -6,13 +6,13 @@ const MemberCenterNav = ({ activeTab }) =>
     activeTab={activeTab}
     tabText={[
       'memberCenter.personalData',
+      'memberCenter.guideIntro',
       'memberCenter.personaltripHobbit',
       'memberCenter.tripHistory',
-      'memberCenter.editIntro',
     ]}
     tabLink={[
       '/user/me',
-      '#',
+      '/user/guide',
       '#',
       '#',
     ]}

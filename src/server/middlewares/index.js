@@ -1,14 +1,14 @@
-import env from '../utils/env'
+import cookieParser from 'cookie-parser'
+import compression from 'compression'
 import path from 'path'
 import express from 'express'
 import favicon from 'serve-favicon'
+import env from '../utils/env'
 import morgan from './morgan'
-import compression from 'compression'
 import passportInit from './passportInit'
 import mountStore from './mountStore'
 import mountHelper from './mountHelper'
 import initCookie from './initCookie'
-import cookieParser from 'cookie-parser'
 
 export default ({ app }) => {
   // inject livereload feature

@@ -3,14 +3,14 @@
 .editor-root {
   padding: 10px 15px;
   font-size: 14px;
-  border: 1px solid #ddd;
-  background: #ffffff;
+  border: 1px solid $alto;
+  background: $white;
 }
 
 .editor-editor {
   margin-top: 10px;
   font-size: 16px;
-  border-top: 1px solid #ddd;
+  border-top: 1px solid $alto;
   cursor: text;
 }
 
@@ -28,7 +28,7 @@
   width: 18px;
   height: 18px;
   margin: 0 5px;
-  color: #999999;
+  color: $dustyGray;
   cursor: pointer;
 }
 

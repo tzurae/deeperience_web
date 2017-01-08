@@ -1,8 +1,8 @@
 export default (store) => ({
-  path: 'me',
+  path: 'guide',
   getComponent(nextState, cb) {
     require.ensure([], (require) => {
-      cb(null, require('../../container/memberCenter/PersonalDataPage').default)
+      cb(null, require('../../container/memberCenter/GuideIntroPage').default)
     })
   },
   onEnter: require('../../utils/authRequired').default(store),

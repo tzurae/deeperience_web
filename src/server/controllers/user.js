@@ -10,7 +10,6 @@ import uploadToS3 from '../utils/uploadToS3'
 import { setCookie } from '../../common/reducers/cookie/cookieActions'
 
 export default {
-
   list(req, res) {
     User.paginate({ page: req.query.page }, handleDbError(res)((page) => {
       User
@@ -81,7 +80,7 @@ export default {
             if (isAuth) {
               const token = user.toAuthenticationToken()
               user.lastLoggedInAt = new Date()
-              user.save(handleDbError(res)((user) => {
+              user.save(handleDbError(res)(user => {
                 res.json({
                   isAuth: true,
                   token,
@@ -168,9 +167,13 @@ export default {
       'cellPhone',
       'password',
       'sex',
+      'email',
     ])
 
     assign(user, modifiedUser)
+    // console.log(req.body)
+    // console.log(modifiedUser)
+    // console.log(user)
     user.save(handleDbError(res)((user) => {
       res.json({
         originAttributes: req.body,

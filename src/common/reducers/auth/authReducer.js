@@ -19,9 +19,13 @@ const {
 
   OPEN_REGISTER_VERIFY_MODAL,
   CLOSE_REGISTER_VERIFY_MODAL,
+
+  SET_USER,
+  REMOVE_USER,
 } = require('../../constants/ActionTypes').default
 
 const initialState = fromJS({
+  user: {},
   isAuth: false,
   verifyModal: false,
   loginError: [],
@@ -63,5 +67,11 @@ export default createReducer(initialState, {
   },
   [CLOSE_REGISTER_VERIFY_MODAL](state, action) {
     return state.set('verifyModal', false)
+  },
+  [SET_USER](state, action) {
+    return state.set('user', fromJS(action.payload))
+  },
+  [REMOVE_USER](state, action) {
+    return state.set('user', fromJS({}))
   },
 })

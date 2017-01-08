@@ -9,6 +9,7 @@ export default (store) => ({
         require('./forgetPassword').default(store),
         require('./logout').default(store),
         require('./me').default(store),
+        require('./guide').default(store),
       ])
     })
   },

@@ -6,7 +6,7 @@
   padding: 20px 60px;
   border: 0;
   background-color: $white;
-  box-shadow: 3px 3px 8px 0 #cccccc;
+  box-shadow: 3px 3px 8px 0 $silver;
 }
 
 .pic {
@@ -14,12 +14,12 @@
 }
 
 .pic-unfinish {
-  @include bg-contain("custompage/moneytransfer.png", 120px, 120px);
+  @include bg-contain('custompage/moneytransfer.png', 120px, 120px);
   @extend .pic;
 }
 
 .pic-finish {
-  @include bg-contain("createsitepage/icon_finish.png", 120px, 120px);
+  @include bg-contain('createsitepage/icon_finish.png', 120px, 120px);
   @extend .pic;
 }
 

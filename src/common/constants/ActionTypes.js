@@ -30,6 +30,9 @@ export default keyMirror({
   OPEN_REGISTER_VERIFY_MODAL: null,
   CLOSE_REGISTER_VERIFY_MODAL: null,
 
+  SET_USER: null,
+  REMOVE_USER: null,
+
   // ------ cookie ------
   SET_COOKIE: null,
   SET_COOKIE_REQUEST: null,

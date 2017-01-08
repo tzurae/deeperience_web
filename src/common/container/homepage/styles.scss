@@ -11,18 +11,18 @@
 .company-name {
   @include fontSizeI(60);
   padding-top: 35vh;
-  color: white;
+  color: $white;
 }
 
 .company-slogan {
   @include fontSize(20);
   padding-bottom: 40px;
-  color: white;
+  color: $white;
 }
 
 .produce-trip {
   padding-top: 13px;
-  color: white;
+  color: $white;
 }
 
 .produce-trip-button {

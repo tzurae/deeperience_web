@@ -1,9 +1,12 @@
 import crypto from 'crypto'
 import mongoose from 'mongoose'
 import jwt from 'jsonwebtoken'
+import URL from './plugins/URLType'
 import configs from '../../../configs/project/server'
 import Roles from '../../common/constants/Roles'
-import { Languages, Levels } from '../../common/i18n/zh-tw/Languages'
+import { Languages, Levels as LanguageLevels } from '../../common/i18n/zh-tw/Languages'
+import AbleArea from '../../common/i18n/zh-tw/AbleArea'
+import { GuideTripElements, Levels as GuideTripElementLevels } from '../../common/i18n/zh-tw/GuideTripElements'
 import paginatePlugin from './plugins/paginate'
 
 const hashPassword = (rawPassword = '') => {
@@ -72,9 +75,22 @@ const UserSchema = new mongoose.Schema({
   }],
   verifiedGuide: Boolean,
   selfInfo: {
-    vocation: String,
-    selfIntro: String,
-    hobby: String,
+    website: {
+      type: URL,
+      required: false,
+    },
+    vocation: {
+      type: String,
+      required: false,
+    },
+    selfIntro: {
+      type: String,
+      required: false,
+    },
+    hobby: {
+      type: String,
+      required: false,
+    },
     location: {
       country: String, // TODO make tags
       province: String, // TODO
@@ -85,10 +101,12 @@ const UserSchema = new mongoose.Schema({
         languageName: {
           type: String,
           enum: Object.keys(Languages),
+          required: true,
         },
         level: {
           type: String,
-          enum: Object.keys(Levels),
+          enum: Object.keys(LanguageLevels),
+          required: true,
         },
       }],
       default: [{
@@ -96,11 +114,52 @@ const UserSchema = new mongoose.Schema({
         level: 'MEDIUM',
       }],
     },
+    ableArea: [{
+      type: String,
+      enum: Object.keys(AbleArea),
+    }],
+    element: [{
+      type: {
+        type: String,
+        enum: Object.keys(GuideTripElements),
+        required: true,
+      },
+      level: {
+        type: String,
+        enum: Object.keys(GuideTripElementLevels),
+        required: true,
+      },
+    }],
+    picIntro: [{
+      picture: {
+        type: URL,
+        required: true,
+      },
+      words: {
+        type: String,
+        required: true,
+      },
+    }],
   },
   birthday: {
-    year: Number,
-    month: Number,
-    day: Number,
+    year: {
+      type: Number,
+      checkRequired: value => Number.isInteger(value) && value >= 1901 && value <= new Date().getFullYear(),
+      default: 1901,
+      required: true,
+    },
+    month: { // 0 ~ 11 // same as js new Date()
+      type: Number,
+      checkRequired: value => Number.isInteger(value) && value >= 0 && value <= 11,
+      default: 0,
+      required: true,
+    },
+    day: { // 1 ~ 31
+      type: Number,
+      checkRequired: value => Number.isInteger(value) && value >= 1 && value <= 31,
+      default: 1,
+      required: true,
+    },
   },
   cellPhone: {
     type: String,
@@ -158,6 +217,9 @@ UserSchema.methods.toAuthenticationToken = function(cb) {
 UserSchema.methods.toJSON = function() {
   const obj = this.toObject()
   delete obj.password
+  delete obj.nonce
+  delete obj.createdAt
+  delete obj.social
   return obj
 }
 

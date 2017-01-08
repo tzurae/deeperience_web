@@ -9,12 +9,12 @@
 }
 
 .pic-unfinish {
-  @include bg-contain("custompage/moneytransfer.png", 120px, 120px);
+  @include bg-contain('custompage/moneytransfer.png', 120px, 120px);
   @extend .pic;
 }
 
 .pic-finish {
-  @include bg-contain("createsitepage/icon_finish.png", 120px, 120px);
+  @include bg-contain('createsitepage/icon_finish.png', 120px, 120px);
   @extend .pic;
 }
 

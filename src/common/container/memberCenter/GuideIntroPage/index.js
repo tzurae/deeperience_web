@@ -5,27 +5,33 @@ import PageLayout from '../../../components/layouts/PageLayout'
 import styles from './styles.scss'
 import { Panel1, Panel2 } from '../../../components/utils/Panel'
 import PanelContainer from '../../../components/utils/PanelContainer'
-import PersonalDataForm from '../../../components/forms/user/PersonalDataForm'
+import GuideIntroForm from '../../../components/forms/user/GuideIntroForm'
 import MemberCenterSubNav from '../../../components/utils/SubNavigation/MemberCenterSubNav'
 
 @connect(
   state => ({
-    user: state.getIn(['auth', 'user']),
-  }),
+    avatar: state.getIn(['cookies', 'user', 'avatarURL']),
+    selfInfo: state.getIn(['cookies', 'user', 'selfInfo']),
+  })
 )
 
-class PersonalDataPage extends Component {
+class GuideIntroPage extends Component {
+
   render() {
-    const { user } = this.props
+    const {
+      avatar,
+      selfInfo,
+    } = this.props
+
     return (
-      <PageLayout subNav={<MemberCenterSubNav activeTab={0}/>}>
+      <PageLayout subNav={<MemberCenterSubNav activeTab={1}/>}>
         <PanelContainer>
           <Col md={3}>
             <Panel2
               title="memberCenter.avatar"
               underlineClass={styles.hr}
             >
-              <img src={user.get('avatarURL')} className={styles.avatar}/>
+              <img src={avatar} className={styles.avatar}/>
             </Panel2>
           </Col>
           <Col md={8}>
@@ -33,11 +39,7 @@ class PersonalDataPage extends Component {
               title="memberCenter.personalData"
               underlineClass={styles.hr}
             >
-              <PersonalDataForm
-                underlineClass={styles.hr}
-                headerClass={styles.header}
-                user={user}
-              />
+              <GuideIntroForm selfInfo={selfInfo}/>
             </Panel1>
           </Col>
           <Col md={1}/>
@@ -47,4 +49,4 @@ class PersonalDataPage extends Component {
   }
 }
 
-export default PersonalDataPage
+export default GuideIntroPage

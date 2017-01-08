@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import Grid from 'react-bootstrap/lib/Grid'
+import cx from 'classnames'
 import Roles from '../../../constants/Roles'
 import { updateLocale } from '../../../reducers/global/globalActions'
 import { pushErrors } from '../../../reducers/error/errorActions'
@@ -10,14 +11,16 @@ import NavLink from '../NavLink'
 import MenuItem from '../MenuItem'
 import Text from '../Text'
 import styles from './styles.scss'
-import cx from 'classnames'
-import { selectFromCookies, selectAuthState } from '../../../lib/selector'
-import { createStructuredSelector } from 'reselect'
 
-const mapStateToProps = createStructuredSelector({
-  isAuth: selectAuthState(),
-  user: selectFromCookies('user'),
-})
+@connect(
+  state => ({
+    isAuth: state.getIn(['auth', 'isAuth']),
+    user: state.getIn(['auth', 'user']),
+  }),
+  null,
+  null,
+  { pure: false }
+)
 
 class Navigation extends React.Component {
   _setLanguage(lang) {
@@ -33,7 +36,7 @@ class Navigation extends React.Component {
 
   render() {
     const { isAuth, user } = this.props
-    const isAdmin = (user.role === Roles.ADMIN)
+    const isAdmin = (user.get('role') === Roles.ADMIN)
 
     return (
       <Navbar staticTop className={styles.nav}>
@@ -97,11 +100,9 @@ class Navigation extends React.Component {
                 title={
                   !isAuth ?
                     <Text id="nav.user.profile" className={styles.dropdownText}/> :
-                    user.get('avatarURL') ? (
-                      <div
-                        className={styles.avatar}
-                      />
-                    ) : (user.get('name') || user.get('email'))
+                    user.get('avatarURL') ?
+                      <div className={styles.avatar}/> :
+                    (user.get('name') || user.get('email'))
                 }
                 avatar={isAuth}
               >
@@ -132,10 +133,10 @@ class Navigation extends React.Component {
       </Navbar>
     )
   }
-};
+}
 
 Navigation.contextTypes = {
   store: React.PropTypes.object.isRequired,
 }
 
-export default connect(mapStateToProps, null, null, { pure: false })(Navigation)
+export default Navigation

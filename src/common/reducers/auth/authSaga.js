@@ -18,6 +18,8 @@ import {
   registerSuccess,
   registerFailure,
   openRegisterVerifyModal,
+  setUser,
+  removeUser,
 } from './authActions'
 
 import {
@@ -56,7 +58,8 @@ function* login(payload) {
     yield put(loginRequest())
     const { isAuth, token, user, errors } = yield call(loginAPI, payload)
     if (!errors && isAuth) {
-      yield put(setCookie({ token, user }))
+      yield put(setCookie({ token }))
+      yield put(setUser(user))
       yield put(loginSuccess())
       yield put(push('/'))
     } else if (!isAuth) {
@@ -75,6 +78,7 @@ function* logout() {
     const { isLogout, errors } = yield call(logoutAPI)
     if (!errors && isLogout) {
       yield put(removeCookie())
+      yield put(removeUser())
       yield put(logoutSuccess())
       yield put(push('/'))
     }

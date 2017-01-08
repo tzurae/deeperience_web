@@ -19,7 +19,6 @@ export default (req, res, next) => {
   })
   req.store = store
   req.history = history
-  const apiEngine = new ApiEngine(req)
-  req.store.dispatch(setApiEngine(apiEngine))
+  req.store.dispatch(setApiEngine(new ApiEngine(req)))
   next()
 }

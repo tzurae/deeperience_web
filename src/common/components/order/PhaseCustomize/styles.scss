@@ -16,12 +16,12 @@
 }
 
 .pic-create {
-  @include bg-contain("orderpage/create.png", 80px, 80px);
+  @include bg-contain('orderpage/create.png', 80px, 80px);
   @extend .pic;
 }
 
 .pic-choose {
-  @include bg-contain("orderpage/choose.png", 80px, 80px);
+  @include bg-contain('orderpage/choose.png', 80px, 80px);
   @extend .pic;
 }
 

@@ -1,5 +1,6 @@
 import HotelTypes from './HotelTypes'
 import TripElements from './TripElements'
+import { GuideTripElements, Levels as GuideTripElementLevels } from './GuideTripElements'
 import FoodElements from './FoodElements'
 import TravelWays from './TravelWays'
 import TripLocations from './TripLocations'
@@ -195,7 +196,7 @@ export default {
   'memberCenter.female': '女',
   'memberCenter.personaltripHobbit': '旅程喜好',
   'memberCenter.tripHistory': '旅遊歷史清單',
-  'memberCenter.editIntro': '編輯自介',
+  'memberCenter.guideIntro': '導遊自介',
   'memberCenter.update': '確定更新',
 
   'company.name': 'DEEPERIENCE',
@@ -260,5 +261,7 @@ export default {
   ...flattenMessages(Languages, 'Languages'),
   ...flattenMessages(Levels, 'Levels'),
   ...flattenMessages(CustomPhases, 'CustomPhases'),
+  ...flattenMessages(GuideTripElements, 'GuideTripElements'),
+  ...flattenMessages(GuideTripElementLevels, 'GuideTripElements.Levels'),
 }
 

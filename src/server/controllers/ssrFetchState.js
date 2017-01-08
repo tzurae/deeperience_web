@@ -1,14 +1,29 @@
+import passport from 'passport'
+import handleError, { handlePassportError } from '../decorators/handleError'
 import Errors from '../../common/constants/Errors'
 import wrapTimeout from '../decorators/wrapTimeout'
 import { updateLocale } from '../../common/reducers/global/globalActions'
-import { loginSuccess } from '../../common/reducers/auth/authActions'
+import { loginSuccess, setUser } from '../../common/reducers/auth/authActions'
 
 export default {
   user: (req, res, next) => {
     if (req.store.getState().getIn(['cookies', 'token']) !== '') {
-      req.store.dispatch(loginSuccess())
+      passport.authenticate(
+        'jwt',
+        { session: false },
+        handleError(res)((user, info) => {
+          handlePassportError(res)((user) => {
+            if (user) {
+              req.store.dispatch(setUser(user))
+              req.store.dispatch(loginSuccess())
+            }
+            next()
+          })(info, user)
+        })
+      )(req, res, next)
+    } else {
+      next()
     }
-    next()
   },
   intl: wrapTimeout(3000)((req, res, next) => {
     const cookieLocale = req.store.getState().getIn(['cookies', 'locale'])

@@ -15,7 +15,6 @@ import FormButton from '../../../utils/FormButton'
 import styles from './styles.scss'
 
 const validate = values => {
-  console.log(values)
   const errors = {}
 
   if (!values.get('email')) {
@@ -53,8 +52,6 @@ const validate = values => {
       }
     }
   }
-
-  console.log(values.get('membership'))
 
   if (!values.get('membership')) {
     errors.membership = '請同意'
